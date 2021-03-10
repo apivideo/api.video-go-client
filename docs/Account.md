@@ -30,12 +30,14 @@ import (
 )
 
 func main() {
-
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
 
+    
     res, err := client.Account.Get()
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Account.Get``: %v\n", err)
     }
@@ -50,21 +52,11 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetRequest struct via the builder pattern
 
 
 ### Return type
 
 [**Account**](account.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

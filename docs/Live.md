@@ -34,13 +34,15 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream that you want to remove.
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
+    
+    err := client.Live.Delete(liveStreamId)
 
-    res, err := client.Live.Delete(liveStreamId)
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Live.Delete``: %v\n", err)
     }
@@ -52,30 +54,18 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **liveStreamId** | **string** | The unique ID for the live stream that you want to remove. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
 ### Return type
 
  (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -104,13 +94,15 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique identifier for the live stream you want to delete. 
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
-
+    
     res, err := client.Live.DeleteThumbnail(liveStreamId)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Live.DeleteThumbnail``: %v\n", err)
     }
@@ -124,30 +116,18 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **liveStreamId** | **string** | The unique identifier for the live stream you want to delete.  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteThumbnailRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
 ### Return type
 
 [**LiveStream**](live-stream.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -177,18 +157,21 @@ import (
 )
 
 func main() {
-    streamKey := "30087931-229e-42cf-b5f9-e91bcc1f7332" // string | The unique stream key that allows you to stream videos.
-    name := "My Video" // string | You can filter live streams by their name or a part of their name.
-    sortBy := "createdAt" // string | Allowed: createdAt, publishedAt, name. createdAt - the time a livestream was created using the specified streamKey. publishedAt - the time a livestream was published using the specified streamKey. name - the name of the livestream. If you choose one of the time based options, the time is presented in ISO-8601 format.
-    sortOrder := "desc" // string | Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. For title, it is 0-9 and A-Z ascending and Z-A, 9-0 descending.
-    currentPage := int32(2) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
-    pageSize := int32(30) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
-
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    req := apivideosdk.LiveApiListRequest{}
+    
+    req.StreamKey("30087931-229e-42cf-b5f9-e91bcc1f7332") // string | The unique stream key that allows you to stream videos.
+    req.Name("My Video") // string | You can filter live streams by their name or a part of their name.
+    req.SortBy("createdAt") // string | Allowed: createdAt, publishedAt, name. createdAt - the time a livestream was created using the specified streamKey. publishedAt - the time a livestream was published using the specified streamKey. name - the name of the livestream. If you choose one of the time based options, the time is presented in ISO-8601 format.
+    req.SortOrder("desc") // string | Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. For title, it is 0-9 and A-Z ascending and Z-A, 9-0 descending.
+    req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
+    req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
-    res, err := client.Live.List()
+    res, err := client.Live.List(req)
+    
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Live.List``: %v\n", err)
     }
@@ -203,30 +186,20 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **streamKey** | **string** | The unique stream key that allows you to stream videos. | 
- **name** | **string** | You can filter live streams by their name or a part of their name. | 
- **sortBy** | **string** | Allowed: createdAt, publishedAt, name. createdAt - the time a livestream was created using the specified streamKey. publishedAt - the time a livestream was published using the specified streamKey. name - the name of the livestream. If you choose one of the time based options, the time is presented in ISO-8601 format. | 
- **sortOrder** | **string** | Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. For title, it is 0-9 and A-Z ascending and Z-A, 9-0 descending. | 
- **currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
- **pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
+**streamKey** | **string** | The unique stream key that allows you to stream videos. | 
+**name** | **string** | You can filter live streams by their name or a part of their name. | 
+**sortBy** | **string** | Allowed: createdAt, publishedAt, name. createdAt - the time a livestream was created using the specified streamKey. publishedAt - the time a livestream was published using the specified streamKey. name - the name of the livestream. If you choose one of the time based options, the time is presented in ISO-8601 format. | 
+**sortOrder** | **string** | Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. For title, it is 0-9 and A-Z ascending and Z-A, 9-0 descending. | 
+**currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
+**pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
 
 ### Return type
 
 [**LiveStreamListResponse**](live-stream-list-response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -255,13 +228,15 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream you want to watch.
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
-
+    
     res, err := client.Live.Get(liveStreamId)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Live.Get``: %v\n", err)
     }
@@ -275,30 +250,18 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **liveStreamId** | **string** | The unique ID for the live stream you want to watch. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
 ### Return type
 
 [**LiveStream**](live-stream.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -327,14 +290,16 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
     liveStreamUpdatePayload := *apivideosdk.NewLiveStreamUpdatePayload() // LiveStreamUpdatePayload | 
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
-
+    
     res, err := client.Live.Update(liveStreamId, liveStreamUpdatePayload)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Live.Update``: %v\n", err)
     }
@@ -348,31 +313,19 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **liveStreamId** | **string** | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **liveStreamUpdatePayload** | [**LiveStreamUpdatePayload**](LiveStreamUpdatePayload.md) |  | 
+**liveStreamUpdatePayload** | [**LiveStreamUpdatePayload**](LiveStreamUpdatePayload.md) |  | 
 
 ### Return type
 
 [**LiveStream**](live-stream.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -401,13 +354,15 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     liveStreamCreatePayload := *apivideosdk.NewLiveStreamCreatePayload("My Live Stream Video") // LiveStreamCreatePayload | 
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
-
+    
     res, err := client.Live.Create(liveStreamCreatePayload)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Live.Create``: %v\n", err)
     }
@@ -422,25 +377,15 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **liveStreamCreatePayload** | [**LiveStreamCreatePayload**](LiveStreamCreatePayload.md) |  | 
+**liveStreamCreatePayload** | [**LiveStreamCreatePayload**](LiveStreamCreatePayload.md) |  | 
 
 ### Return type
 
 [**LiveStream**](live-stream.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -449,8 +394,9 @@ Name | Type | Description  | Notes
 
 ## UploadThumbnail
 
-> UploadThumbnail(liveStreamId string, file *os.File) (*LiveStream, error)
+> UploadThumbnailFile(liveStreamId string, file *os.File) (*LiveStream, error)
 
+> UploadThumbnail(liveStreamId string, fileName string, fileReader io.Reader)
 
 Upload a thumbnail
 
@@ -469,14 +415,19 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     liveStreamId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique ID for the live stream you want to upload.
     file := os.NewFile(1234, "some_file") // *os.File | The image to be added as a thumbnail.
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
+    
+    res, err := client.Live.UploadThumbnailFile(liveStreamId, file)
 
-    res, err := client.Live.UploadThumbnail(liveStreamId, file)
+    // you can also use a Reader instead of a File:
+    // client.Live.UploadThumbnail(liveStreamId, fileName, fileReader)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Live.UploadThumbnail``: %v\n", err)
     }
@@ -490,31 +441,19 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **liveStreamId** | **string** | The unique ID for the live stream you want to upload. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUploadThumbnailRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **file** | ***os.File** | The image to be added as a thumbnail. | 
+**file** | ***os.File** | The image to be added as a thumbnail. | 
 
 ### Return type
 
 [**LiveStream**](live-stream.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

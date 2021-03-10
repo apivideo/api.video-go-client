@@ -12,7 +12,7 @@ go get github.com/apivideo/go-api-client
 ```
 
 
-## Quick Start
+## Getting Started
 
 For a more advanced usage you can checkout the rest of the documentation in the [docs directory](/docs)
 
@@ -20,27 +20,26 @@ For a more advanced usage you can checkout the rest of the documentation in the 
 package main
 
 import (
-	"fmt"
-	"os"
-
+    "fmt"
+    "os"
     apivideosdk "github.com/apivideo/go-api-client"
 )
 
 func main() {
     //Connect to production environment
-    client := apivideosdk.NewClient(os.Getenv("API_VIDEO_KEY"))
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
 
-    //Alternatively, connect to the sandbox environment for testing
-    client := apivideosdk.NewSandboxClient(os.Getenv("API_VIDEO_SANDBOX_KEY"))
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+
 
     //List Videos
     //First create the url options for searching
-    opts := &apivideosdk.VideoOpts{
-        CurrentPage: 1,
-        PageSize: 25,
-        SortBy:    "publishedAt",
-        SortOrder: "desc",
-    }
+    opts := apivideosdk.VideosApiListRequest{}.
+        CurrentPage(1).
+        PageSize(25).
+        SortBy("publishedAt").
+        SortOrder("desc")
 
     //Then call the List endpoint with the options
     result, err := client.Videos.List(opts)
@@ -50,85 +49,226 @@ func main() {
     }
 
     for _, video := range result.Data {
-        fmt.Printf("%s\n", video.VideoID)
-        fmt.Printf("%s\n", video.Title)
+        fmt.Printf("%s\n", *video.VideoId)
+        fmt.Printf("%s\n", *video.Title)
     }
+
 
     //Upload a video
     //First create a container
-    videoRequest := &apivideosdk.VideoRequest{
-        Title: "My video title",
-    }
-    newVideo, err := client.Videos.Create(videoRequest)
+    create, err := client.Videos.Create(apivideosdk.VideoCreatePayload{Title: "My video title"})
+
     if err != nil {
         fmt.Println(err)
     }
 
-    //Then upload your video to the container with the videoID
-    uploadedVideo, err := client.Videos.Upload(newVideo.VideoID, "path/to/video.mp4")
+    //Then open the video file
+    videoFile, err := os.Open("path/to/video.mp4")
+
     if err != nil {
         fmt.Println(err)
     }
+
+    //Finally upload your video to the container with the videoId
+    uploadedVideo, err := client.Videos.UploadFile(*create.VideoId, videoFile)
+
+    if err != nil {
+        fmt.Println(err)
+    }
+
 
     //And get the assets
-    fmt.Printf("%s\n", uploadedVideo.Assets.Hls)
-    fmt.Printf("%s\n", uploadedVideo.Assets.Iframe)
+    fmt.Printf("%s\n", *uploadedVideo.Assets.Hls)
+    fmt.Printf("%s\n", *uploadedVideo.Assets.Iframe)
 }
 ```
+
 
 ## Documentation for API Endpoints
 
 All URIs are relative to *https://ws.api.video*
 
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-*Account* | [**Get**](docs/Account.md#getaccount) | **Get** /account | Show account
-*Authentication* | [**Authenticate**](docs/Authentication.md#postauthapikey) | **Post** /auth/api-key | Authenticate
-*Authentication* | [**Refresh**](docs/Authentication.md#postauthrefresh) | **Post** /auth/refresh | Refresh token
-*Captions* | [**Delete**](docs/Captions.md#deletevideosvideoidcaptionslanguage) | **Delete** /videos/{videoId}/captions/{language} | Delete a caption
-*Captions* | [**List**](docs/Captions.md#getvideosvideoidcaptions) | **Get** /videos/{videoId}/captions | List video captions
-*Captions* | [**Get**](docs/Captions.md#getvideosvideoidcaptionslanguage) | **Get** /videos/{videoId}/captions/{language} | Show a caption
-*Captions* | [**Update**](docs/Captions.md#patchvideosvideoidcaptionslanguage) | **Patch** /videos/{videoId}/captions/{language} | Update caption
-*Captions* | [**Upload**](docs/Captions.md#postvideosvideoidcaptionslanguage) | **Post** /videos/{videoId}/captions/{language} | Upload a caption
-*Chapters* | [**Delete**](docs/Chapters.md#deletevideosvideoidchapterslanguage) | **Delete** /videos/{videoId}/chapters/{language} | Delete a chapter
-*Chapters* | [**List**](docs/Chapters.md#getvideosvideoidchapters) | **Get** /videos/{videoId}/chapters | List video chapters
-*Chapters* | [**Get**](docs/Chapters.md#getvideosvideoidchapterslanguage) | **Get** /videos/{videoId}/chapters/{language} | Show a chapter
-*Chapters* | [**Upload**](docs/Chapters.md#postvideosvideoidchapterslanguage) | **Post** /videos/{videoId}/chapters/{language} | Upload a chapter
-*Live* | [**Delete**](docs/Live.md#deletelivestreamslivestreamid) | **Delete** /live-streams/{liveStreamId} | Delete a live stream
-*Live* | [**DeleteThumbnail**](docs/Live.md#deletelivestreamslivestreamidthumbnail) | **Delete** /live-streams/{liveStreamId}/thumbnail | Delete a thumbnail
-*Live* | [**List**](docs/Live.md#getlivestreams) | **Get** /live-streams | List all live streams
-*Live* | [**Get**](docs/Live.md#getlivestreamslivestreamid) | **Get** /live-streams/{liveStreamId} | Show live stream
-*Live* | [**Update**](docs/Live.md#patchlivestreamslivestreamid) | **Patch** /live-streams/{liveStreamId} | Update a live stream
-*Live* | [**Create**](docs/Live.md#postlivestreams) | **Post** /live-streams | Create live stream
-*Live* | [**UploadThumbnail**](docs/Live.md#postlivestreamslivestreamidthumbnail) | **Post** /live-streams/{liveStreamId}/thumbnail | Upload a thumbnail
-*Players* | [**Delete**](docs/Players.md#deleteplayersplayerid) | **Delete** /players/{playerId} | Delete a player
-*Players* | [**DeleteLogo**](docs/Players.md#deleteplayersplayeridlogo) | **Delete** /players/{playerId}/logo | Delete logo
-*Players* | [**List**](docs/Players.md#getplayers) | **Get** /players | List all players
-*Players* | [**Get**](docs/Players.md#getplayersplayerid) | **Get** /players/{playerId} | Show a player
-*Players* | [**Update**](docs/Players.md#patchplayersplayerid) | **Patch** /players/{playerId} | Update a player
-*Players* | [**Create**](docs/Players.md#postplayers) | **Post** /players | Create a player
-*Players* | [**UploadLogo**](docs/Players.md#postplayersplayeridlogo) | **Post** /players/{playerId}/logo | Upload a logo
-*RawStatistics* | [**GetLiveStreamAnalytics**](docs/RawStatistics.md#getanalyticslivestreamslivestreamid) | **Get** /analytics/live-streams/{liveStreamId} | List live stream player sessions
-*RawStatistics* | [**ListPlayerSessionEvents**](docs/RawStatistics.md#getanalyticssessionssessionidevents) | **Get** /analytics/sessions/{sessionId}/events | List player session events
-*RawStatistics* | [**ListSessions**](docs/RawStatistics.md#getanalyticsvideosvideoid) | **Get** /analytics/videos/{videoId} | List video player sessions
-*Videos* | [**Delete**](docs/Videos.md#deletevideo) | **Delete** /videos/{videoId} | Delete a video
-*Videos* | [**Get**](docs/Videos.md#getvideo) | **Get** /videos/{videoId} | Show a video
-*Videos* | [**GetVideoStatus**](docs/Videos.md#getvideostatus) | **Get** /videos/{videoId}/status | Show video status
-*Videos* | [**List**](docs/Videos.md#listvideos) | **Get** /videos | List all videos
-*Videos* | [**Update**](docs/Videos.md#patchvideo) | **Patch** /videos/{videoId} | Update a video
-*Videos* | [**PickThumbnail**](docs/Videos.md#patchvideosvideoidthumbnail) | **Patch** /videos/{videoId}/thumbnail | Pick a thumbnail
-*Videos* | [**Create**](docs/Videos.md#postvideo) | **Post** /videos | Create a video
-*Videos* | [**Upload**](docs/Videos.md#postvideosvideoidsource) | **Post** /videos/{videoId}/source | Upload a video
-*Videos* | [**UploadThumbnail**](docs/Videos.md#postvideosvideoidthumbnail) | **Post** /videos/{videoId}/thumbnail | Upload a thumbnail
-*VideosDelegatedUpload* | [**DeleteToken**](docs/VideosDelegatedUpload.md#deleteuploadtokensuploadtoken) | **Delete** /upload-tokens/{uploadToken} | Delete an upload token
-*VideosDelegatedUpload* | [**ListTokens**](docs/VideosDelegatedUpload.md#getuploadtokens) | **Get** /upload-tokens | List all active upload tokens.
-*VideosDelegatedUpload* | [**GetToken**](docs/VideosDelegatedUpload.md#getuploadtokensuploadtoken) | **Get** /upload-tokens/{uploadToken} | Show upload token
-*VideosDelegatedUpload* | [**Upload**](docs/VideosDelegatedUpload.md#postupload) | **Post** /upload | Upload with an upload token
-*VideosDelegatedUpload* | [**CreateToken**](docs/VideosDelegatedUpload.md#postuploadtokens) | **Post** /upload-tokens | Generate an upload token
-*Webhooks* | [**Delete**](docs/Webhooks.md#deletewebhook) | **Delete** /webhooks/{webhookId} | Delete a Webhook
-*Webhooks* | [**Get**](docs/Webhooks.md#getwebhook) | **Get** /webhooks/{webhookId} | Show Webhook details
-*Webhooks* | [**List**](docs/Webhooks.md#listwebhooks) | **Get** /webhooks | List all webhooks
-*Webhooks* | [**Create**](docs/Webhooks.md#postwebhooks) | **Post** /webhooks | Create Webhook
+
+### Account API
+
+
+#### Retrieve an instance of the Account API:
+```golang
+client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
+accountApi := client.Account
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+**(deprecated)** [**Get**](docs/Account.md#Get) | **Get** /account | Show account
+
+
+### Captions API
+
+
+#### Retrieve an instance of the Captions API:
+```golang
+client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
+captionsApi := client.Captions
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**Delete**](docs/Captions.md#Delete) | **Delete** /videos/{videoId}/captions/{language} | Delete a caption
+[**List**](docs/Captions.md#List) | **Get** /videos/{videoId}/captions | List video captions
+[**Get**](docs/Captions.md#Get) | **Get** /videos/{videoId}/captions/{language} | Show a caption
+[**Update**](docs/Captions.md#Update) | **Patch** /videos/{videoId}/captions/{language} | Update caption
+[**Upload**](docs/Captions.md#Upload) | **Post** /videos/{videoId}/captions/{language} | Upload a caption
+
+
+### Chapters API
+
+
+#### Retrieve an instance of the Chapters API:
+```golang
+client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
+chaptersApi := client.Chapters
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**Delete**](docs/Chapters.md#Delete) | **Delete** /videos/{videoId}/chapters/{language} | Delete a chapter
+[**List**](docs/Chapters.md#List) | **Get** /videos/{videoId}/chapters | List video chapters
+[**Get**](docs/Chapters.md#Get) | **Get** /videos/{videoId}/chapters/{language} | Show a chapter
+[**Upload**](docs/Chapters.md#Upload) | **Post** /videos/{videoId}/chapters/{language} | Upload a chapter
+
+
+### Live API
+
+
+#### Retrieve an instance of the Live API:
+```golang
+client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
+liveApi := client.Live
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**Delete**](docs/Live.md#Delete) | **Delete** /live-streams/{liveStreamId} | Delete a live stream
+[**DeleteThumbnail**](docs/Live.md#DeleteThumbnail) | **Delete** /live-streams/{liveStreamId}/thumbnail | Delete a thumbnail
+[**List**](docs/Live.md#List) | **Get** /live-streams | List all live streams
+[**Get**](docs/Live.md#Get) | **Get** /live-streams/{liveStreamId} | Show live stream
+[**Update**](docs/Live.md#Update) | **Patch** /live-streams/{liveStreamId} | Update a live stream
+[**Create**](docs/Live.md#Create) | **Post** /live-streams | Create live stream
+[**UploadThumbnail**](docs/Live.md#UploadThumbnail) | **Post** /live-streams/{liveStreamId}/thumbnail | Upload a thumbnail
+
+
+### Players API
+
+
+#### Retrieve an instance of the Players API:
+```golang
+client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
+playersApi := client.Players
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**Delete**](docs/Players.md#Delete) | **Delete** /players/{playerId} | Delete a player
+[**DeleteLogo**](docs/Players.md#DeleteLogo) | **Delete** /players/{playerId}/logo | Delete logo
+[**List**](docs/Players.md#List) | **Get** /players | List all players
+[**Get**](docs/Players.md#Get) | **Get** /players/{playerId} | Show a player
+[**Update**](docs/Players.md#Update) | **Patch** /players/{playerId} | Update a player
+[**Create**](docs/Players.md#Create) | **Post** /players | Create a player
+[**UploadLogo**](docs/Players.md#UploadLogo) | **Post** /players/{playerId}/logo | Upload a logo
+
+
+### RawStatistics API
+
+
+#### Retrieve an instance of the RawStatistics API:
+```golang
+client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
+rawStatisticsApi := client.RawStatistics
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**GetLiveStreamAnalytics**](docs/RawStatistics.md#GetLiveStreamAnalytics) | **Get** /analytics/live-streams/{liveStreamId} | List live stream player sessions
+[**ListPlayerSessionEvents**](docs/RawStatistics.md#ListPlayerSessionEvents) | **Get** /analytics/sessions/{sessionId}/events | List player session events
+[**ListSessions**](docs/RawStatistics.md#ListSessions) | **Get** /analytics/videos/{videoId} | List video player sessions
+
+
+### Videos API
+
+
+#### Retrieve an instance of the Videos API:
+```golang
+client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
+videosApi := client.Videos
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**Delete**](docs/Videos.md#Delete) | **Delete** /videos/{videoId} | Delete a video
+[**Get**](docs/Videos.md#Get) | **Get** /videos/{videoId} | Show a video
+[**GetVideoStatus**](docs/Videos.md#GetVideoStatus) | **Get** /videos/{videoId}/status | Show video status
+[**List**](docs/Videos.md#List) | **Get** /videos | List all videos
+[**Update**](docs/Videos.md#Update) | **Patch** /videos/{videoId} | Update a video
+[**PickThumbnail**](docs/Videos.md#PickThumbnail) | **Patch** /videos/{videoId}/thumbnail | Pick a thumbnail
+[**Create**](docs/Videos.md#Create) | **Post** /videos | Create a video
+[**Upload**](docs/Videos.md#Upload) | **Post** /videos/{videoId}/source | Upload a video
+[**UploadThumbnail**](docs/Videos.md#UploadThumbnail) | **Post** /videos/{videoId}/thumbnail | Upload a thumbnail
+
+
+### VideosDelegatedUpload API
+
+
+#### Retrieve an instance of the VideosDelegatedUpload API:
+```golang
+client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
+videosDelegatedUploadApi := client.VideosDelegatedUpload
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**DeleteToken**](docs/VideosDelegatedUpload.md#DeleteToken) | **Delete** /upload-tokens/{uploadToken} | Delete an upload token
+[**ListTokens**](docs/VideosDelegatedUpload.md#ListTokens) | **Get** /upload-tokens | List all active upload tokens.
+[**GetToken**](docs/VideosDelegatedUpload.md#GetToken) | **Get** /upload-tokens/{uploadToken} | Show upload token
+[**Upload**](docs/VideosDelegatedUpload.md#Upload) | **Post** /upload | Upload with an upload token
+[**CreateToken**](docs/VideosDelegatedUpload.md#CreateToken) | **Post** /upload-tokens | Generate an upload token
+
+
+### Webhooks API
+
+
+#### Retrieve an instance of the Webhooks API:
+```golang
+client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
+webhooksApi := client.Webhooks
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**Delete**](docs/Webhooks.md#Delete) | **Delete** /webhooks/{webhookId} | Delete a Webhook
+[**Get**](docs/Webhooks.md#Get) | **Get** /webhooks/{webhookId} | Show Webhook details
+[**List**](docs/Webhooks.md#List) | **Get** /webhooks | List all webhooks
+[**Create**](docs/Webhooks.md#Create) | **Post** /webhooks | Create Webhook
+
+
 
 
 ## Documentation For Models

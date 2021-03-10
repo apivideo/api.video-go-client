@@ -38,13 +38,15 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The video ID for the video you want to delete.
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
+    
+    err := client.Videos.Delete(videoId)
 
-    res, err := client.Videos.Delete(videoId)
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Videos.Delete``: %v\n", err)
     }
@@ -56,30 +58,18 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **videoId** | **string** | The video ID for the video you want to delete. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
 ### Return type
 
  (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -108,13 +98,15 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     videoId := "videoId_example" // string | The unique identifier for the video you want details about.
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
-
+    
     res, err := client.Videos.Get(videoId)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Videos.Get``: %v\n", err)
     }
@@ -128,30 +120,18 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **videoId** | **string** | The unique identifier for the video you want details about. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
 ### Return type
 
 [**Video**](video.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -180,13 +160,15 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique identifier for the video you want the status for.
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
-
+    
     res, err := client.Videos.GetVideoStatus(videoId)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Videos.GetVideoStatus``: %v\n", err)
     }
@@ -200,30 +182,18 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **videoId** | **string** | The unique identifier for the video you want the status for. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetVideoStatusRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
 ### Return type
 
 [**Videostatus**](videostatus.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -253,21 +223,24 @@ import (
 )
 
 func main() {
-    title := "My Video.mp4" // string | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles.
-    tags := []string{"Inner_example"} // []string | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
-    metadata := []apivideosdk.Metadata{*apivideosdk.NewMetadata()} // []Metadata | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter.
-    description := "New Zealand" // string | If you described a video with a term or sentence, you can add it here to return videos containing this string.
-    liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here.
-    sortBy := "publishedAt" // string | Allowed: publishedAt, title. You can search by the time videos were published at, or by title.
-    sortOrder := "asc" // string | Allowed: asc, desc. asc is ascending and sorts from A to Z. desc is descending and sorts from Z to A.
-    currentPage := int32(2) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
-    pageSize := int32(30) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
-
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    req := apivideosdk.VideosApiListRequest{}
+    
+    req.Title("My Video.mp4") // string | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles.
+    req.Tags([]string{"Inner_example"}) // []string | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
+    req.Metadata([]apivideosdk.Metadata{*apivideosdk.NewMetadata()}) // []Metadata | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter.
+    req.Description("New Zealand") // string | If you described a video with a term or sentence, you can add it here to return videos containing this string.
+    req.LiveStreamId("li400mYKSgQ6xs7taUeSaEKr") // string | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here.
+    req.SortBy("publishedAt") // string | Allowed: publishedAt, title. You can search by the time videos were published at, or by title.
+    req.SortOrder("asc") // string | Allowed: asc, desc. asc is ascending and sorts from A to Z. desc is descending and sorts from Z to A.
+    req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
+    req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
-    res, err := client.Videos.List()
+    res, err := client.Videos.List(req)
+    
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Videos.List``: %v\n", err)
     }
@@ -282,33 +255,23 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **title** | **string** | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles. | 
- **tags** | **[]string** | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned. | 
- **metadata** | [**[]Metadata**](metadata.md) | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. | 
- **description** | **string** | If you described a video with a term or sentence, you can add it here to return videos containing this string. | 
- **liveStreamId** | **string** | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here. | 
- **sortBy** | **string** | Allowed: publishedAt, title. You can search by the time videos were published at, or by title. | 
- **sortOrder** | **string** | Allowed: asc, desc. asc is ascending and sorts from A to Z. desc is descending and sorts from Z to A. | 
- **currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
- **pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
+**title** | **string** | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles. | 
+**tags** | **[]string** | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned. | 
+**metadata** | [**[]Metadata**](metadata.md) | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. | 
+**description** | **string** | If you described a video with a term or sentence, you can add it here to return videos containing this string. | 
+**liveStreamId** | **string** | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here. | 
+**sortBy** | **string** | Allowed: publishedAt, title. You can search by the time videos were published at, or by title. | 
+**sortOrder** | **string** | Allowed: asc, desc. asc is ascending and sorts from A to Z. desc is descending and sorts from Z to A. | 
+**currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
+**pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
 
 ### Return type
 
 [**VideosListResponse**](videos-list-response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -337,14 +300,16 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The video ID for the video you want to delete.
     videoUpdatePayload := *apivideosdk.NewVideoUpdatePayload() // VideoUpdatePayload | 
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
-
+    
     res, err := client.Videos.Update(videoId, videoUpdatePayload)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Videos.Update``: %v\n", err)
     }
@@ -358,31 +323,19 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **videoId** | **string** | The video ID for the video you want to delete. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **videoUpdatePayload** | [**VideoUpdatePayload**](VideoUpdatePayload.md) |  | 
+**videoUpdatePayload** | [**VideoUpdatePayload**](VideoUpdatePayload.md) |  | 
 
 ### Return type
 
 [**Video**](video.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -411,14 +364,16 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
     videoThumbnailPickPayload := *apivideosdk.NewVideoThumbnailPickPayload("Timecode_example") // VideoThumbnailPickPayload | 
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
-
+    
     res, err := client.Videos.PickThumbnail(videoId, videoThumbnailPickPayload)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Videos.PickThumbnail``: %v\n", err)
     }
@@ -432,31 +387,19 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **videoId** | **string** | Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPickThumbnailRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **videoThumbnailPickPayload** | [**VideoThumbnailPickPayload**](VideoThumbnailPickPayload.md) |  | 
+**videoThumbnailPickPayload** | [**VideoThumbnailPickPayload**](VideoThumbnailPickPayload.md) |  | 
 
 ### Return type
 
 [**Video**](video.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -485,13 +428,15 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     videoCreatePayload := *apivideosdk.NewVideoCreatePayload("Maths video") // VideoCreatePayload | video to create
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
-
+    
     res, err := client.Videos.Create(videoCreatePayload)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Videos.Create``: %v\n", err)
     }
@@ -506,25 +451,15 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **videoCreatePayload** | [**VideoCreatePayload**](VideoCreatePayload.md) | video to create | 
+**videoCreatePayload** | [**VideoCreatePayload**](VideoCreatePayload.md) | video to create | 
 
 ### Return type
 
 [**Video**](video.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -533,8 +468,9 @@ Name | Type | Description  | Notes
 
 ## Upload
 
-> Upload(videoId string, file *os.File) (*Video, error)
+> UploadFile(videoId string, file *os.File) (*Video, error)
 
+> Upload(videoId string, fileName string, fileReader io.Reader, fileSize int64)
 
 Upload a video
 
@@ -553,14 +489,19 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | Enter the videoId you want to use to upload your video.
     file := os.NewFile(1234, "some_file") // *os.File | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \\\"/videos\\\" endpoint and add the \\\"source\\\" parameter when you create a new video.
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
+    
+    res, err := client.Videos.UploadFile(videoId, file)
 
-    res, err := client.Videos.Upload(videoId, file)
+    // you can also use a Reader instead of a File:
+    // client.Videos.Upload(videoId, fileName, fileReader, fileSize)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Videos.Upload``: %v\n", err)
     }
@@ -574,31 +515,19 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **videoId** | **string** | Enter the videoId you want to use to upload your video. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUploadRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **file** | ***os.File** | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \\\&quot;/videos\\\&quot; endpoint and add the \\\&quot;source\\\&quot; parameter when you create a new video. | 
+**file** | ***os.File** | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \\\&quot;/videos\\\&quot; endpoint and add the \\\&quot;source\\\&quot; parameter when you create a new video. | 
 
 ### Return type
 
 [**Video**](video.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -607,8 +536,9 @@ Name | Type | Description  | Notes
 
 ## UploadThumbnail
 
-> UploadThumbnail(videoId string, file *os.File) (*Video, error)
+> UploadThumbnailFile(videoId string, file *os.File) (*Video, error)
 
+> UploadThumbnail(videoId string, fileName string, fileReader io.Reader)
 
 Upload a thumbnail
 
@@ -627,14 +557,19 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     videoId := "videoId_example" // string | Unique identifier of the chosen video 
     file := os.NewFile(1234, "some_file") // *os.File | The image to be added as a thumbnail.
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
+    
+    res, err := client.Videos.UploadThumbnailFile(videoId, file)
 
-    res, err := client.Videos.UploadThumbnail(videoId, file)
+    // you can also use a Reader instead of a File:
+    // client.Videos.UploadThumbnail(videoId, fileName, fileReader)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Videos.UploadThumbnail``: %v\n", err)
     }
@@ -648,31 +583,19 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **videoId** | **string** | Unique identifier of the chosen video  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUploadThumbnailRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **file** | ***os.File** | The image to be added as a thumbnail. | 
+**file** | ***os.File** | The image to be added as a thumbnail. | 
 
 ### Return type
 
 [**Video**](video.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

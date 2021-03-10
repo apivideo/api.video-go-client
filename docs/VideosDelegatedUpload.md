@@ -34,13 +34,15 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     uploadToken := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the upload token you want to delete. Deleting a token will make it so the token can no longer be used for authentication.
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
+    
+    err := client.VideosDelegatedUpload.DeleteToken(uploadToken)
 
-    res, err := client.VideosDelegatedUpload.DeleteToken(uploadToken)
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `VideosDelegatedUpload.DeleteToken``: %v\n", err)
     }
@@ -52,30 +54,18 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **uploadToken** | **string** | The unique identifier for the upload token you want to delete. Deleting a token will make it so the token can no longer be used for authentication. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteTokenRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
 ### Return type
 
  (empty response body)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -105,16 +95,19 @@ import (
 )
 
 func main() {
-    sortBy := "ttl" // string | Allowed: createdAt, ttl. You can use these to sort by when a token was created, or how much longer the token will be active (ttl - time to live). Date and time is presented in ISO-8601 format.
-    sortOrder := "asc" // string | Allowed: asc, desc. Ascending is 0-9 or A-Z. Descending is 9-0 or Z-A.
-    currentPage := int32(2) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
-    pageSize := int32(30) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
-
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    req := apivideosdk.VideosDelegatedUploadApiListTokensRequest{}
+    
+    req.SortBy("ttl") // string | Allowed: createdAt, ttl. You can use these to sort by when a token was created, or how much longer the token will be active (ttl - time to live). Date and time is presented in ISO-8601 format.
+    req.SortOrder("asc") // string | Allowed: asc, desc. Ascending is 0-9 or A-Z. Descending is 9-0 or Z-A.
+    req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
+    req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
-    res, err := client.VideosDelegatedUpload.ListTokens()
+    res, err := client.VideosDelegatedUpload.ListTokens(req)
+    
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `VideosDelegatedUpload.ListTokens``: %v\n", err)
     }
@@ -129,28 +122,18 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiListTokensRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sortBy** | **string** | Allowed: createdAt, ttl. You can use these to sort by when a token was created, or how much longer the token will be active (ttl - time to live). Date and time is presented in ISO-8601 format. | 
- **sortOrder** | **string** | Allowed: asc, desc. Ascending is 0-9 or A-Z. Descending is 9-0 or Z-A. | 
- **currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
- **pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
+**sortBy** | **string** | Allowed: createdAt, ttl. You can use these to sort by when a token was created, or how much longer the token will be active (ttl - time to live). Date and time is presented in ISO-8601 format. | 
+**sortOrder** | **string** | Allowed: asc, desc. Ascending is 0-9 or A-Z. Descending is 9-0 or Z-A. | 
+**currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
+**pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
 
 ### Return type
 
 [**TokenListResponse**](token-list-response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -179,13 +162,15 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     uploadToken := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the token you want information about.
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
-
+    
     res, err := client.VideosDelegatedUpload.GetToken(uploadToken)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `VideosDelegatedUpload.GetToken``: %v\n", err)
     }
@@ -199,30 +184,18 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **uploadToken** | **string** | The unique identifier for the token you want information about. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetTokenRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
 ### Return type
 
 [**UploadToken**](upload-token.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -231,8 +204,9 @@ Name | Type | Description  | Notes
 
 ## Upload
 
-> Upload(token string, file *os.File) (*Video, error)
+> UploadFile(token string, file *os.File) (*Video, error)
 
+> Upload(token string, fileName string, fileReader io.Reader, fileSize int64)
 
 Upload with an upload token
 
@@ -251,14 +225,19 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     token := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the token you want to use to upload a video.
     file := os.NewFile(1234, "some_file") // *os.File | The path to the video you want to upload.
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
+    
+    res, err := client.VideosDelegatedUpload.UploadFile(token, file)
 
-    res, err := client.VideosDelegatedUpload.Upload(token, file)
+    // you can also use a Reader instead of a File:
+    // client.VideosDelegatedUpload.Upload(token, fileName, fileReader, fileSize)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `VideosDelegatedUpload.Upload``: %v\n", err)
     }
@@ -273,26 +252,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUploadRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **token** | **string** | The unique identifier for the token you want to use to upload a video. | 
- **file** | ***os.File** | The path to the video you want to upload. | 
+**token** | **string** | The unique identifier for the token you want to use to upload a video. | 
+**file** | ***os.File** | The path to the video you want to upload. | 
 
 ### Return type
 
 [**Video**](video.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: multipart/form-data
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -321,13 +290,15 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     tokenCreatePayload := *apivideosdk.NewTokenCreatePayload() // TokenCreatePayload | 
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
-
+    
     res, err := client.VideosDelegatedUpload.CreateToken(tokenCreatePayload)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `VideosDelegatedUpload.CreateToken``: %v\n", err)
     }
@@ -342,25 +313,15 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateTokenRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **tokenCreatePayload** | [**TokenCreatePayload**](TokenCreatePayload.md) |  | 
+**tokenCreatePayload** | [**TokenCreatePayload**](TokenCreatePayload.md) |  | 
 
 ### Return type
 
 [**UploadToken**](upload-token.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

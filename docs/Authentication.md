@@ -31,13 +31,15 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     authenticatePayload := *apivideosdk.NewAuthenticatePayload("ApiKey_example") // AuthenticatePayload | 
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
-
+    
     res, err := client.Authentication.Authenticate(authenticatePayload)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Authentication.Authenticate``: %v\n", err)
     }
@@ -52,25 +54,15 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiAuthenticateRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authenticatePayload** | [**AuthenticatePayload**](AuthenticatePayload.md) |  | 
+**authenticatePayload** | [**AuthenticatePayload**](AuthenticatePayload.md) |  | 
 
 ### Return type
 
 [**AccessToken**](access-token.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -99,13 +91,15 @@ import (
 )
 
 func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
     refreshTokenPayload := *apivideosdk.NewRefreshTokenPayload("RefreshToken_example") // RefreshTokenPayload | 
 
-    client := apivideosdk.NewClient("YOUR_API_TOKEN")
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.NewSandboxClient("YOU_SANDBOX_API_TOKEN")
-
+    
     res, err := client.Authentication.Refresh(refreshTokenPayload)
+
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Authentication.Refresh``: %v\n", err)
     }
@@ -120,25 +114,15 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiRefreshRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **refreshTokenPayload** | [**RefreshTokenPayload**](RefreshTokenPayload.md) |  | 
+**refreshTokenPayload** | [**RefreshTokenPayload**](RefreshTokenPayload.md) |  | 
 
 ### Return type
 
 [**AccessToken**](access-token.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
