@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **PlayerId** | Pointer to **string** | The unique identification number for your video player. | [optional] 
 **Tags** | Pointer to **[]string** | A list of tags you want to use to describe your video. | [optional] 
 **Metadata** | Pointer to [**[]Metadata**](Metadata.md) | A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. You can also just use the pairs as another way to tag and categorize your videos. | [optional] 
-**PublishedAt** | Pointer to **time.Time** | The API uses ISO-8601 format for time, and includes 3 places for milliseconds. | [optional] 
+**PublishedAt** | Pointer to **string** | The API uses ISO-8601 format for time, and includes 3 places for milliseconds. | [optional] 
 
 ## Methods
 
@@ -256,20 +256,20 @@ HasMetadata returns a boolean if a field has been set.
 
 ### GetPublishedAt
 
-`func (o *VideoCreatePayload) GetPublishedAt() time.Time`
+`func (o *VideoCreatePayload) GetPublishedAt() string`
 
 GetPublishedAt returns the PublishedAt field if non-nil, zero value otherwise.
 
 ### GetPublishedAtOk
 
-`func (o *VideoCreatePayload) GetPublishedAtOk() (*time.Time, bool)`
+`func (o *VideoCreatePayload) GetPublishedAtOk() (*string, bool)`
 
 GetPublishedAtOk returns a tuple with the PublishedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPublishedAt
 
-`func (o *VideoCreatePayload) SetPublishedAt(v time.Time)`
+`func (o *VideoCreatePayload) SetPublishedAt(v string)`
 
 SetPublishedAt sets PublishedAt field to given value.
 

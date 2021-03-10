@@ -19,8 +19,8 @@ Name | Type | Description | Notes
 **HideTitle** | Pointer to **bool** | enable/disable title. Default: false | [optional] [default to false]
 **ForceLoop** | Pointer to **bool** | enable/disable looping. Default: false | [optional] [default to false]
 **PlayerId** | Pointer to **string** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** | When the player was created, presented in ISO-8601 format. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | When the player was last updated, presented in ISO-8601 format. | [optional] 
+**CreatedAt** | Pointer to **string** | When the player was created, presented in ISO-8601 format. | [optional] 
+**UpdatedAt** | Pointer to **string** | When the player was last updated, presented in ISO-8601 format. | [optional] 
 **ShapeMargin** | Pointer to **int32** | Deprecated | [optional] 
 **ShapeRadius** | Pointer to **int32** | Deprecated | [optional] 
 **ShapeAspect** | Pointer to **string** | Deprecated | [optional] 
@@ -425,20 +425,20 @@ HasPlayerId returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
-`func (o *Player) GetCreatedAt() time.Time`
+`func (o *Player) GetCreatedAt() string`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *Player) GetCreatedAtOk() (*time.Time, bool)`
+`func (o *Player) GetCreatedAtOk() (*string, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *Player) SetCreatedAt(v time.Time)`
+`func (o *Player) SetCreatedAt(v string)`
 
 SetCreatedAt sets CreatedAt field to given value.
 
@@ -450,20 +450,20 @@ HasCreatedAt returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 
-`func (o *Player) GetUpdatedAt() time.Time`
+`func (o *Player) GetUpdatedAt() string`
 
 GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
 
 ### GetUpdatedAtOk
 
-`func (o *Player) GetUpdatedAtOk() (*time.Time, bool)`
+`func (o *Player) GetUpdatedAtOk() (*string, bool)`
 
 GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpdatedAt
 
-`func (o *Player) SetUpdatedAt(v time.Time)`
+`func (o *Player) SetUpdatedAt(v string)`
 
 SetUpdatedAt sets UpdatedAt field to given value.
 

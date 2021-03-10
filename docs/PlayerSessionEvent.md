@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | Possible values are: ready, play, pause, resume, seek.backward, seek.forward, end | [optional] 
-**EmittedAt** | Pointer to **time.Time** | When an event occurred, presented in ISO-8601 format. | [optional] 
+**EmittedAt** | Pointer to **string** | When an event occurred, presented in ISO-8601 format. | [optional] 
 **At** | Pointer to **int32** |  | [optional] 
 **From** | Pointer to **int32** |  | [optional] 
 **To** | Pointer to **int32** |  | [optional] 
@@ -56,20 +56,20 @@ HasType returns a boolean if a field has been set.
 
 ### GetEmittedAt
 
-`func (o *PlayerSessionEvent) GetEmittedAt() time.Time`
+`func (o *PlayerSessionEvent) GetEmittedAt() string`
 
 GetEmittedAt returns the EmittedAt field if non-nil, zero value otherwise.
 
 ### GetEmittedAtOk
 
-`func (o *PlayerSessionEvent) GetEmittedAtOk() (*time.Time, bool)`
+`func (o *PlayerSessionEvent) GetEmittedAtOk() (*string, bool)`
 
 GetEmittedAtOk returns a tuple with the EmittedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEmittedAt
 
-`func (o *PlayerSessionEvent) SetEmittedAt(v time.Time)`
+`func (o *PlayerSessionEvent) SetEmittedAt(v string)`
 
 SetEmittedAt sets EmittedAt field to given value.
 

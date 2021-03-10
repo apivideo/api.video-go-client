@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Token** | Pointer to **string** | The unique identifier for the token you will use to authenticate an upload. | [optional] 
 **Ttl** | Pointer to **int32** | Time-to-live - how long the upload token is valid for. | [optional] 
-**CreatedAt** | Pointer to **time.Time** | When the token was created, displayed in ISO-8601 format. | [optional] 
-**ExpiresAt** | Pointer to **time.Time** | When the token expires, displayed in ISO-8601 format. | [optional] 
+**CreatedAt** | Pointer to **string** | When the token was created, displayed in ISO-8601 format. | [optional] 
+**ExpiresAt** | Pointer to **string** | When the token expires, displayed in ISO-8601 format. | [optional] 
 
 ## Methods
 
@@ -80,20 +80,20 @@ HasTtl returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
-`func (o *UploadToken) GetCreatedAt() time.Time`
+`func (o *UploadToken) GetCreatedAt() string`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *UploadToken) GetCreatedAtOk() (*time.Time, bool)`
+`func (o *UploadToken) GetCreatedAtOk() (*string, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *UploadToken) SetCreatedAt(v time.Time)`
+`func (o *UploadToken) SetCreatedAt(v string)`
 
 SetCreatedAt sets CreatedAt field to given value.
 
@@ -105,20 +105,20 @@ HasCreatedAt returns a boolean if a field has been set.
 
 ### GetExpiresAt
 
-`func (o *UploadToken) GetExpiresAt() time.Time`
+`func (o *UploadToken) GetExpiresAt() string`
 
 GetExpiresAt returns the ExpiresAt field if non-nil, zero value otherwise.
 
 ### GetExpiresAtOk
 
-`func (o *UploadToken) GetExpiresAtOk() (*time.Time, bool)`
+`func (o *UploadToken) GetExpiresAtOk() (*string, bool)`
 
 GetExpiresAtOk returns a tuple with the ExpiresAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpiresAt
 
-`func (o *UploadToken) SetExpiresAt(v time.Time)`
+`func (o *UploadToken) SetExpiresAt(v string)`
 
 SetExpiresAt sets ExpiresAt field to given value.
 

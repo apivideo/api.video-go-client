@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **WebhookId** | Pointer to **string** | Unique identifier of the webhook | [optional] 
-**CreatedAt** | Pointer to **time.Time** | When an webhook was created, presented in ISO-8601 format. | [optional] 
+**CreatedAt** | Pointer to **string** | When an webhook was created, presented in ISO-8601 format. | [optional] 
 **Events** | Pointer to **[]string** | A list of events that will trigger the webhook. | [optional] 
 **Url** | Pointer to **string** | URL of the webhook | [optional] 
 
@@ -55,20 +55,20 @@ HasWebhookId returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
-`func (o *Webhook) GetCreatedAt() time.Time`
+`func (o *Webhook) GetCreatedAt() string`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *Webhook) GetCreatedAtOk() (*time.Time, bool)`
+`func (o *Webhook) GetCreatedAtOk() (*string, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *Webhook) SetCreatedAt(v time.Time)`
+`func (o *Webhook) SetCreatedAt(v string)`
 
 SetCreatedAt sets CreatedAt field to given value.
 

@@ -8,7 +8,7 @@ This documentation helps you use the corresponding Golang client.
 
 ## Installation
 ```bash
-go get github.com/apivideo/go-sdk
+go get github.com/apivideo/go-api-client
 ```
 
 
@@ -23,7 +23,7 @@ import (
 	"fmt"
 	"os"
 
-	apivideosdk "github.com/apivideo/go-sdk"
+    apivideosdk "github.com/apivideo/go-api-client"
 )
 
 func main() {
@@ -199,41 +199,5 @@ Class | Method | HTTP request | Description
  - [Webhook](docs/Webhook.md)
  - [WebhooksCreatePayload](docs/WebhooksCreatePayload.md)
  - [WebhooksListResponse](docs/WebhooksListResponse.md)
-
-
-## Documentation For Authorization
-
-
-
-### bearerAuth
-
-- **Type**: HTTP Bearer token authentication
-
-Example
-
-```golang
-auth := context.WithValue(context.Background(), sw.ContextAccessToken, "BEARERTOKENSTRING")
-r, err := client.Service.Operation(auth, args)
-```
-
-
-## Documentation for Utility Methods
-
-Due to the fact that model structure members are all pointers, this package contains
-a number of utility functions to easily obtain pointers to values of basic types.
-Each of these functions takes a value of the given basic type and returns a pointer to it:
-
-* `PtrBool`
-* `PtrInt`
-* `PtrInt32`
-* `PtrInt64`
-* `PtrFloat`
-* `PtrFloat32`
-* `PtrFloat64`
-* `PtrString`
-* `PtrTime`
-
-## Author
-
 
 

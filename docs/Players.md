@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ## DeleteLogo
 
-> DeleteLogo(playerId string) (*map[string]interface{}, error)
+> DeleteLogo(playerId string) (error)
 
 
 Delete logo
@@ -114,8 +114,6 @@ func main() {
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Players.DeleteLogo``: %v\n", err)
     }
-    // response from `DeleteLogo`: map[string]interface{}
-    fmt.Fprintf(os.Stdout, "Response from `Players.DeleteLogo`: %v\n", res)
 }
 ```
 
@@ -138,7 +136,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**map[string]interface{}**
+ (empty response body)
 
 ### Authorization
 

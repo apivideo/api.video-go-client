@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Title** | Pointer to **string** | The title of the video content.  | [optional] 
 **Description** | Pointer to **string** | A description for the video content.  | [optional] 
 **PublishedAt** | Pointer to **string** | The date and time the API created the video. Date and time are provided using ISO-8601 UTC format. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | The date and time the video was updated. Date and time are provided using ISO-8601 UTC format. | [optional] 
+**UpdatedAt** | Pointer to **string** | The date and time the video was updated. Date and time are provided using ISO-8601 UTC format. | [optional] 
 **Tags** | Pointer to **[]interface{}** | One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.   | [optional] 
 **Metadata** | Pointer to [**[]Metadata**](Metadata.md) | Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.   | [optional] 
 **Source** | Pointer to [**VideoSource**](videoSource.md) |  | [optional] 
@@ -139,20 +139,20 @@ HasPublishedAt returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 
-`func (o *Video) GetUpdatedAt() time.Time`
+`func (o *Video) GetUpdatedAt() string`
 
 GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
 
 ### GetUpdatedAtOk
 
-`func (o *Video) GetUpdatedAtOk() (*time.Time, bool)`
+`func (o *Video) GetUpdatedAtOk() (*string, bool)`
 
 GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpdatedAt
 
-`func (o *Video) SetUpdatedAt(v time.Time)`
+`func (o *Video) SetUpdatedAt(v string)`
 
 SetUpdatedAt sets UpdatedAt field to given value.
 

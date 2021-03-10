@@ -255,7 +255,7 @@ import (
 func main() {
     title := "My Video.mp4" // string | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles.
     tags := []string{"Inner_example"} // []string | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
-    metadata := []string{"Inner_example"} // []string | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter.
+    metadata := []apivideosdk.Metadata{*apivideosdk.NewMetadata()} // []Metadata | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter.
     description := "New Zealand" // string | If you described a video with a term or sentence, you can add it here to return videos containing this string.
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here.
     sortBy := "publishedAt" // string | Allowed: publishedAt, title. You can search by the time videos were published at, or by title.
@@ -289,7 +289,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **title** | **string** | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles. | 
  **tags** | **[]string** | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned. | 
- **metadata** | **[]string** | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. | 
+ **metadata** | [**[]Metadata**](metadata.md) | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. | 
  **description** | **string** | If you described a video with a term or sentence, you can add it here to return videos containing this string. | 
  **liveStreamId** | **string** | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here. | 
  **sortBy** | **string** | Allowed: publishedAt, title. You can search by the time videos were published at, or by title. | 

@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **SessionId** | Pointer to **string** | A unique identifier for your session. You can use this to track what happens during a specific session. | [optional] 
-**LoadedAt** | Pointer to **time.Time** | When the session started, with the date and time presented in ISO-8601 format. | [optional] 
-**EndedAt** | Pointer to **time.Time** | When the session ended, with the date and time presented in ISO-8601 format. | [optional] 
+**LoadedAt** | Pointer to **string** | When the session started, with the date and time presented in ISO-8601 format. | [optional] 
+**EndedAt** | Pointer to **string** | When the session ended, with the date and time presented in ISO-8601 format. | [optional] 
 
 ## Methods
 
@@ -54,20 +54,20 @@ HasSessionId returns a boolean if a field has been set.
 
 ### GetLoadedAt
 
-`func (o *LiveStreamSessionSession) GetLoadedAt() time.Time`
+`func (o *LiveStreamSessionSession) GetLoadedAt() string`
 
 GetLoadedAt returns the LoadedAt field if non-nil, zero value otherwise.
 
 ### GetLoadedAtOk
 
-`func (o *LiveStreamSessionSession) GetLoadedAtOk() (*time.Time, bool)`
+`func (o *LiveStreamSessionSession) GetLoadedAtOk() (*string, bool)`
 
 GetLoadedAtOk returns a tuple with the LoadedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLoadedAt
 
-`func (o *LiveStreamSessionSession) SetLoadedAt(v time.Time)`
+`func (o *LiveStreamSessionSession) SetLoadedAt(v string)`
 
 SetLoadedAt sets LoadedAt field to given value.
 
@@ -79,20 +79,20 @@ HasLoadedAt returns a boolean if a field has been set.
 
 ### GetEndedAt
 
-`func (o *LiveStreamSessionSession) GetEndedAt() time.Time`
+`func (o *LiveStreamSessionSession) GetEndedAt() string`
 
 GetEndedAt returns the EndedAt field if non-nil, zero value otherwise.
 
 ### GetEndedAtOk
 
-`func (o *LiveStreamSessionSession) GetEndedAtOk() (*time.Time, bool)`
+`func (o *LiveStreamSessionSession) GetEndedAtOk() (*string, bool)`
 
 GetEndedAtOk returns a tuple with the EndedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEndedAt
 
-`func (o *LiveStreamSessionSession) SetEndedAt(v time.Time)`
+`func (o *LiveStreamSessionSession) SetEndedAt(v string)`
 
 SetEndedAt sets EndedAt field to given value.
 

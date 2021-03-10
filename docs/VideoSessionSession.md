@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **SessionId** | Pointer to **string** | The unique identifier for the session that you can use to track what happens during it. | [optional] 
-**LoadedAt** | Pointer to **time.Time** | When the video session started, presented in ISO-8601 format. | [optional] 
-**EndedAt** | Pointer to **time.Time** | When the video session ended, presented in ISO-8601 format. | [optional] 
+**LoadedAt** | Pointer to **string** | When the video session started, presented in ISO-8601 format. | [optional] 
+**EndedAt** | Pointer to **string** | When the video session ended, presented in ISO-8601 format. | [optional] 
 
 ## Methods
 
@@ -54,20 +54,20 @@ HasSessionId returns a boolean if a field has been set.
 
 ### GetLoadedAt
 
-`func (o *VideoSessionSession) GetLoadedAt() time.Time`
+`func (o *VideoSessionSession) GetLoadedAt() string`
 
 GetLoadedAt returns the LoadedAt field if non-nil, zero value otherwise.
 
 ### GetLoadedAtOk
 
-`func (o *VideoSessionSession) GetLoadedAtOk() (*time.Time, bool)`
+`func (o *VideoSessionSession) GetLoadedAtOk() (*string, bool)`
 
 GetLoadedAtOk returns a tuple with the LoadedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLoadedAt
 
-`func (o *VideoSessionSession) SetLoadedAt(v time.Time)`
+`func (o *VideoSessionSession) SetLoadedAt(v string)`
 
 SetLoadedAt sets LoadedAt field to given value.
 
@@ -79,20 +79,20 @@ HasLoadedAt returns a boolean if a field has been set.
 
 ### GetEndedAt
 
-`func (o *VideoSessionSession) GetEndedAt() time.Time`
+`func (o *VideoSessionSession) GetEndedAt() string`
 
 GetEndedAt returns the EndedAt field if non-nil, zero value otherwise.
 
 ### GetEndedAtOk
 
-`func (o *VideoSessionSession) GetEndedAtOk() (*time.Time, bool)`
+`func (o *VideoSessionSession) GetEndedAtOk() (*string, bool)`
 
 GetEndedAtOk returns a tuple with the EndedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEndedAt
 
-`func (o *VideoSessionSession) SetEndedAt(v time.Time)`
+`func (o *VideoSessionSession) SetEndedAt(v string)`
 
 SetEndedAt sets EndedAt field to given value.
 
