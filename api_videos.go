@@ -12,10 +12,12 @@ package apivideosdk
 
 import (
 	"context"
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
 	"os"
+	"reflect"
 	"strings"
 )
 
@@ -27,7 +29,7 @@ var (
 type VideosApiListRequest struct {
 	title        *string
 	tags         *[]string
-	metadata     *[]Metadata
+	metadata     *map[string]string
 	description  *string
 	liveStreamId *string
 	sortBy       *string
@@ -44,7 +46,7 @@ func (r VideosApiListRequest) Tags(tags []string) VideosApiListRequest {
 	r.tags = &tags
 	return r
 }
-func (r VideosApiListRequest) Metadata(metadata []Metadata) VideosApiListRequest {
+func (r VideosApiListRequest) Metadata(metadata map[string]string) VideosApiListRequest {
 	r.metadata = &metadata
 	return r
 }
@@ -91,13 +93,13 @@ type VideosServiceI interface {
 
 	Get(videoId string) (*Video, error)
 	/*
-	 * GetVideoStatus Show video status
+	 * GetStatus Show video status
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId The unique identifier for the video you want the status for.
-	 * @return VideosApiGetVideoStatusRequest
+	 * @return VideosApiGetStatusRequest
 	 */
 
-	GetVideoStatus(videoId string) (*Videostatus, error)
+	GetStatus(videoId string) (*Videostatus, error)
 	/*
 	 * List List all videos
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -122,6 +124,19 @@ type VideosServiceI interface {
 	 */
 
 	PickThumbnail(videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
+	/*
+	 * UploadWithUploadToken Upload with an upload token
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return VideosApiUploadWithUploadTokenRequest
+	 */
+	UploadWithUploadToken(token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+
+	/*
+	 * UploadWithUploadToken Upload with an upload token
+
+	 * @return VideosApiUploadWithUploadTokenRequest
+	 */
+	UploadWithUploadTokenFile(token string, file *os.File) (*Video, error)
 	/*
 	 * Create Create a video
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -231,16 +246,16 @@ func (s *VideosService) Get(videoId string) (*Video, error) {
 }
 
 /*
- * GetVideoStatus Show video status
+ * GetStatus Show video status
  * This API provides upload status & encoding status to determine when the video is uploaded or ready to playback.
 
 Once encoding is completed, the response also lists the available stream qualities.
 
  * @param videoId The unique identifier for the video you want the status for.
- * @return VideosApiGetVideoStatusRequest
+ * @return VideosApiGetStatusRequest
 */
 
-func (s *VideosService) GetVideoStatus(videoId string) (*Videostatus, error) {
+func (s *VideosService) GetStatus(videoId string) (*Videostatus, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos/{videoId}/status"
@@ -283,12 +298,20 @@ func (s *VideosService) List(r VideosApiListRequest) (*VideosListResponse, error
 		localVarQueryParams.Add("title", parameterToString(*r.title, ""))
 	}
 	if r.tags != nil {
-		localVarQueryParams.Add("tags", parameterToString(*r.tags, "csv"))
+		t := *r.tags
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("tags", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("tags", parameterToString(t, "multi"))
+		}
 	}
 	if r.metadata != nil {
 		if r.metadata != nil && len(*r.metadata) > 0 {
-			for _, v := range *r.metadata {
-				localVarQueryParams.Add(fmt.Sprintf("metadata[%s]", *v.Key), *(v.Value))
+			for k, v := range *r.metadata {
+				localVarQueryParams.Add(fmt.Sprintf("metadata[%s]", k), v)
 			}
 		}
 	}
@@ -391,6 +414,148 @@ func (s *VideosService) PickThumbnail(videoId string, videoThumbnailPickPayload 
 
 	if err != nil {
 		return nil, err
+	}
+
+	return res, nil
+
+}
+
+/*
+ * UploadWithUploadToken Upload with an upload token
+ * When given a token, anyone can upload a file to the URI `https://ws.api.video/upload?token=<tokenId>`.
+
+Example with cURL:
+
+```curl
+$ curl  --request POST --url 'https://ws.api.video/upload?token=toXXX'
+ --header 'content-type: multipart/form-data'
+ -F file=@video.mp4
+```
+
+Or in an HTML form, with a little JavaScript to convert the form into JSON:
+```html
+<!--form for user interaction-->
+<form name="videoUploadForm" >
+  <label for=video>Video:</label>
+  <input type=file name=source/><br/>
+  <input value="Submit" type="submit">
+</form>
+<div></div>
+<!--JS takes the form data
+    uses FormData to turn the response into JSON.
+    then uses POST to upload the video file.
+    Update the token parameter in the url to your upload token.
+    -->
+<script>
+   var form = document.forms.namedItem("videoUploadForm");
+   form.addEventListener('submit', function(ev) {
+	 ev.preventDefault();
+     var oOutput = document.querySelector("div"),
+         oData = new FormData(form);
+     var oReq = new XMLHttpRequest();
+
+     oReq.open("POST", "https://ws.api.video/upload?token=toXXX", true);
+     oReq.send(oData);
+	 oReq.onload = function(oEvent) {
+       if (oReq.status ==201) {
+         oOutput.innerHTML = "Your video is uploaded!<br/>"  + oReq.response;
+       } else {
+         oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
+       }
+     };
+   }, false);
+</script>
+```
+
+
+### Dealing with large files
+
+We have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
+
+ * @return VideosApiUploadWithUploadTokenRequest
+*/
+
+func (s *VideosService) UploadWithUploadTokenFile(token string, file *os.File) (*Video, error) {
+	fileInfo, _ := file.Stat()
+	fileSize := fileInfo.Size()
+
+	return s.UploadWithUploadToken(token, file.Name(), io.Reader(file), fileSize)
+}
+
+/*
+ * UploadWithUploadToken Upload with an upload token
+ * When given a token, anyone can upload a file to the URI `https://ws.api.video/upload?token=<tokenId>`.
+
+Example with cURL:
+
+```curl
+$ curl  --request POST --url 'https://ws.api.video/upload?token=toXXX'
+ --header 'content-type: multipart/form-data'
+ -F file=@video.mp4
+```
+
+Or in an HTML form, with a little JavaScript to convert the form into JSON:
+```html
+<!--form for user interaction-->
+<form name="videoUploadForm" >
+  <label for=video>Video:</label>
+  <input type=file name=source/><br/>
+  <input value="Submit" type="submit">
+</form>
+<div></div>
+<!--JS takes the form data
+    uses FormData to turn the response into JSON.
+    then uses POST to upload the video file.
+    Update the token parameter in the url to your upload token.
+    -->
+<script>
+   var form = document.forms.namedItem("videoUploadForm");
+   form.addEventListener('submit', function(ev) {
+	 ev.preventDefault();
+     var oOutput = document.querySelector("div"),
+         oData = new FormData(form);
+     var oReq = new XMLHttpRequest();
+
+     oReq.open("POST", "https://ws.api.video/upload?token=toXXX", true);
+     oReq.send(oData);
+	 oReq.onload = function(oEvent) {
+       if (oReq.status ==201) {
+         oOutput.innerHTML = "Your video is uploaded!<br/>"  + oReq.response;
+       } else {
+         oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
+       }
+     };
+   }, false);
+</script>
+```
+
+
+### Dealing with large files
+
+We have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
+
+ * @return VideosApiUploadWithUploadTokenRequest
+*/
+func (s *VideosService) UploadWithUploadToken(token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	localVarPath := "/upload"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := make(map[string]string)
+
+	requests, err := s.client.prepareRangeRequests(localVarPath, fileName, fileReader, fileSize, localVarHeaderParams, localVarQueryParams, localVarFormParams)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res := new(Video)
+	for _, req := range requests {
+		_, err = s.client.do(req, res)
+
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return res, nil

@@ -4,15 +4,15 @@ All URIs are relative to *https://ws.api.video*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetLiveStreamAnalytics**](RawStatistics.md#GetLiveStreamAnalytics) | **Get** /analytics/live-streams/{liveStreamId} | List live stream player sessions
-[**ListPlayerSessionEvents**](RawStatistics.md#ListPlayerSessionEvents) | **Get** /analytics/sessions/{sessionId}/events | List player session events
-[**ListSessions**](RawStatistics.md#ListSessions) | **Get** /analytics/videos/{videoId} | List video player sessions
+[**ListLiveStreamSessions**](RawStatistics.md#ListLiveStreamSessions) | **Get** /analytics/live-streams/{liveStreamId} | List live stream player sessions
+[**ListSessionEvents**](RawStatistics.md#ListSessionEvents) | **Get** /analytics/sessions/{sessionId}/events | List player session events
+[**ListVideoSessions**](RawStatistics.md#ListVideoSessions) | **Get** /analytics/videos/{videoId} | List video player sessions
 
 
 
-## GetLiveStreamAnalytics
+## ListLiveStreamSessions
 
-> GetLiveStreamAnalytics(liveStreamId string, r RawStatisticsApiGetLiveStreamAnalyticsRequest) (*RawStatisticsListLiveStreamAnalyticsResponse, error)
+> ListLiveStreamSessions(liveStreamId string, r RawStatisticsApiListLiveStreamSessionsRequest) (*RawStatisticsListLiveStreamAnalyticsResponse, error)
 
 
 
@@ -34,21 +34,21 @@ func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
-    req := apivideosdk.RawStatisticsApiGetLiveStreamAnalyticsRequest{}
+    req := apivideosdk.RawStatisticsApiListLiveStreamSessionsRequest{}
     
     req.LiveStreamId("vi4k0jvEUuaTdRAEjQ4Jfrgz") // string | The unique identifier for the live stream you want to retrieve analytics for.
     req.Period("2019-01-01") // string | Period must have one of the following formats:   - For a day : \"2018-01-01\", - For a week: \"2018-W01\",  - For a month: \"2018-01\" - For a year: \"2018\"  For a range period:  -  Date range: \"2018-01-01/2018-01-15\" 
     req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
     req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
-    res, err := client.RawStatistics.GetLiveStreamAnalytics(liveStreamId string, req)
+    res, err := client.RawStatistics.ListLiveStreamSessions(liveStreamId string, req)
     
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RawStatistics.GetLiveStreamAnalytics``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `RawStatistics.ListLiveStreamSessions``: %v\n", err)
     }
-    // response from `GetLiveStreamAnalytics`: RawStatisticsListLiveStreamAnalyticsResponse
-    fmt.Fprintf(os.Stdout, "Response from `RawStatistics.GetLiveStreamAnalytics`: %v\n", res)
+    // response from `ListLiveStreamSessions`: RawStatisticsListLiveStreamAnalyticsResponse
+    fmt.Fprintf(os.Stdout, "Response from `RawStatistics.ListLiveStreamSessions`: %v\n", res)
 }
 ```
 
@@ -78,9 +78,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListPlayerSessionEvents
+## ListSessionEvents
 
-> ListPlayerSessionEvents(sessionId string, r RawStatisticsApiListPlayerSessionEventsRequest) (*RawStatisticsListPlayerSessionEventsResponse, error)
+> ListSessionEvents(sessionId string, r RawStatisticsApiListSessionEventsRequest) (*RawStatisticsListPlayerSessionEventsResponse, error)
 
 
 
@@ -104,20 +104,20 @@ func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
-    req := apivideosdk.RawStatisticsApiListPlayerSessionEventsRequest{}
+    req := apivideosdk.RawStatisticsApiListSessionEventsRequest{}
     
     req.SessionId("psEmFwGQUAXR2lFHj5nDOpy") // string | A unique identifier you can use to reference and track a session with.
     req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
     req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
-    res, err := client.RawStatistics.ListPlayerSessionEvents(sessionId string, req)
+    res, err := client.RawStatistics.ListSessionEvents(sessionId string, req)
     
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RawStatistics.ListPlayerSessionEvents``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `RawStatistics.ListSessionEvents``: %v\n", err)
     }
-    // response from `ListPlayerSessionEvents`: RawStatisticsListPlayerSessionEventsResponse
-    fmt.Fprintf(os.Stdout, "Response from `RawStatistics.ListPlayerSessionEvents`: %v\n", res)
+    // response from `ListSessionEvents`: RawStatisticsListPlayerSessionEventsResponse
+    fmt.Fprintf(os.Stdout, "Response from `RawStatistics.ListSessionEvents`: %v\n", res)
 }
 ```
 
@@ -146,9 +146,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## ListSessions
+## ListVideoSessions
 
-> ListSessions(videoId string, r RawStatisticsApiListSessionsRequest) (*RawStatisticsListSessionsResponse, error)
+> ListVideoSessions(videoId string, r RawStatisticsApiListVideoSessionsRequest) (*RawStatisticsListSessionsResponse, error)
 
 
 
@@ -172,7 +172,7 @@ func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
-    req := apivideosdk.RawStatisticsApiListSessionsRequest{}
+    req := apivideosdk.RawStatisticsApiListVideoSessionsRequest{}
     
     req.VideoId("vi4k0jvEUuaTdRAEjQ4Prklg") // string | The unique identifier for the video you want to retrieve session information for.
     req.Period("period_example") // string | Period must have one of the following formats:   - For a day : 2018-01-01, - For a week: 2018-W01,  - For a month: 2018-01 - For a year: 2018  For a range period:  -  Date range: 2018-01-01/2018-01-15 
@@ -180,14 +180,14 @@ func main() {
     req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
     req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
-    res, err := client.RawStatistics.ListSessions(videoId string, req)
+    res, err := client.RawStatistics.ListVideoSessions(videoId string, req)
     
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RawStatistics.ListSessions``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `RawStatistics.ListVideoSessions``: %v\n", err)
     }
-    // response from `ListSessions`: RawStatisticsListSessionsResponse
-    fmt.Fprintf(os.Stdout, "Response from `RawStatistics.ListSessions`: %v\n", res)
+    // response from `ListVideoSessions`: RawStatisticsListSessionsResponse
+    fmt.Fprintf(os.Stdout, "Response from `RawStatistics.ListVideoSessions`: %v\n", res)
 }
 ```
 

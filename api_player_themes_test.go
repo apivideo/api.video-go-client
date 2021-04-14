@@ -159,7 +159,7 @@ func TestPlayers_Get(t *testing.T) {
 		fmt.Fprint(w, playerJSONResponses[0])
 	})
 
-	player, err := client.Players.Get("pt3Lony8J6NozV71Yxn8KVFn")
+	player, err := client.PlayerThemes.Get("pt3Lony8J6NozV71Yxn8KVFn")
 	if err != nil {
 		t.Errorf("Players.Get error: %v", err)
 	}
@@ -191,9 +191,9 @@ func TestPlayers_List(t *testing.T) {
 		fmt.Fprint(w, JSONResp)
 	})
 
-	opts := new(PlayersApiListRequest).CurrentPage(1).PageSize(25)
+	opts := new(PlayerThemesApiListRequest).CurrentPage(1).PageSize(25)
 
-	players, err := client.Players.List(opts)
+	players, err := client.PlayerThemes.List(opts)
 	if err != nil {
 		t.Errorf("Players.List error: %v", err)
 	}
@@ -239,7 +239,7 @@ func TestPlayers_Create(t *testing.T) {
 		fmt.Fprint(w, playerJSONResponses[0])
 	})
 
-	player, err := client.Players.Create(playerCreationPayload)
+	player, err := client.PlayerThemes.Create(playerCreationPayload)
 	if err != nil {
 		t.Errorf("Players.Create error: %v", err)
 	}
@@ -283,7 +283,7 @@ func TestPlayers_Update(t *testing.T) {
 		fmt.Fprint(w, playerJSONResponses[0])
 	})
 
-	player, err := client.Players.Update("pt3Lony8J6NozV71Yxn8KVFn", playerUpdatePayload)
+	player, err := client.PlayerThemes.Update("pt3Lony8J6NozV71Yxn8KVFn", playerUpdatePayload)
 	if err != nil {
 		t.Errorf("Players.Update error: %v", err)
 	}
@@ -301,7 +301,7 @@ func TestPlayers_Delete(t *testing.T) {
 		testMethod(t, r, http.MethodDelete)
 	})
 
-	err := client.Players.Delete("pt3Lony8J6NozV71Yxn8KVFn")
+	err := client.PlayerThemes.Delete("pt3Lony8J6NozV71Yxn8KVFn")
 	if err != nil {
 		t.Errorf("Players.Delete error: %v", err)
 	}
@@ -318,7 +318,7 @@ func TestPlayers_UploadLogo(t *testing.T) {
 	file := createTempFile("test.logo", 1024*1024)
 	defer os.Remove(file.Name())
 
-	player, err := client.Players.UploadLogoFile("pt3Lony8J6NozV71Yxn8KVFn", file, "https://api.video")
+	player, err := client.PlayerThemes.UploadLogoFile("pt3Lony8J6NozV71Yxn8KVFn", file, "https://api.video")
 	if err != nil {
 		t.Errorf("Captions.Upload error: %v", err)
 	}
@@ -336,7 +336,7 @@ func TestPlayers_DeleteLogo(t *testing.T) {
 		testMethod(t, r, http.MethodDelete)
 	})
 
-	err := client.Players.DeleteLogo("pt3Lony8J6NozV71Yxn8KVFn")
+	err := client.PlayerThemes.DeleteLogo("pt3Lony8J6NozV71Yxn8KVFn")
 
 	if err != nil {
 		t.Errorf("Players.DeleteLogo error: %v", err)

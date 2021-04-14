@@ -355,7 +355,7 @@ func TestVideos_List(t *testing.T) {
 			"pageSize":       []string{"25"},
 			"sortBy":         []string{"publishedAt"},
 			"sortOrder":      []string{"desc"},
-			"tags":           []string{"tag1,tag2"},
+			"tags":           []string{"tag1", "tag2"},
 			"metadata[key]":  []string{"value"},
 			"metadata[key2]": []string{"value2"},
 		}
@@ -372,7 +372,7 @@ func TestVideos_List(t *testing.T) {
 		SortBy("publishedAt").
 		SortOrder("desc").
 		Tags([]string{"tag1", "tag2"}).
-		Metadata([]Metadata{{Key: PtrString("key"), Value: PtrString("value")}, {Key: PtrString("key2"), Value: PtrString("value2")}}))
+		Metadata(map[string]string{"key": "value", "key2": "value2"}))
 
 	if err != nil {
 		t.Errorf("Videos.List error: %v", err)
@@ -403,7 +403,7 @@ func TestVideos_ListUpdatedAt(t *testing.T) {
 			"pageSize":       []string{"25"},
 			"sortBy":         []string{"updatedAt"},
 			"sortOrder":      []string{"desc"},
-			"tags":           []string{"tag1,tag2"},
+			"tags":           []string{"tag1", "tag2"},
 			"metadata[key]":  []string{"value"},
 			"metadata[key2]": []string{"value2"},
 		}
@@ -419,7 +419,7 @@ func TestVideos_ListUpdatedAt(t *testing.T) {
 		SortBy("updatedAt").
 		SortOrder("desc").
 		Tags([]string{"tag1", "tag2"}).
-		Metadata([]Metadata{{Key: PtrString("key"), Value: PtrString("value")}, {Key: PtrString("key2"), Value: PtrString("value2")}}))
+		Metadata(map[string]string{"key": "value", "key2": "value2"}))
 
 	if err != nil {
 		t.Errorf("Videos.List error: %v", err)
@@ -613,7 +613,7 @@ func TestVideos_Status(t *testing.T) {
 		fmt.Fprint(w, videoStatusJSONResponse)
 	})
 
-	status, err := client.Videos.GetVideoStatus("vi4k0jvEUuaTdRAEjQ4Jfagz")
+	status, err := client.Videos.GetStatus("vi4k0jvEUuaTdRAEjQ4Jfagz")
 	if err != nil {
 		t.Errorf("Videos.Status error: %v", err)
 	}

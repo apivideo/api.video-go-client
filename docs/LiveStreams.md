@@ -1,16 +1,16 @@
-# \Live
+# \LiveStreams
 
 All URIs are relative to *https://ws.api.video*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Delete**](Live.md#Delete) | **Delete** /live-streams/{liveStreamId} | Delete a live stream
-[**DeleteThumbnail**](Live.md#DeleteThumbnail) | **Delete** /live-streams/{liveStreamId}/thumbnail | Delete a thumbnail
-[**List**](Live.md#List) | **Get** /live-streams | List all live streams
-[**Get**](Live.md#Get) | **Get** /live-streams/{liveStreamId} | Show live stream
-[**Update**](Live.md#Update) | **Patch** /live-streams/{liveStreamId} | Update a live stream
-[**Create**](Live.md#Create) | **Post** /live-streams | Create live stream
-[**UploadThumbnail**](Live.md#UploadThumbnail) | **Post** /live-streams/{liveStreamId}/thumbnail | Upload a thumbnail
+[**Delete**](LiveStreams.md#Delete) | **Delete** /live-streams/{liveStreamId} | Delete a live stream
+[**DeleteThumbnail**](LiveStreams.md#DeleteThumbnail) | **Delete** /live-streams/{liveStreamId}/thumbnail | Delete a thumbnail
+[**List**](LiveStreams.md#List) | **Get** /live-streams | List all live streams
+[**Get**](LiveStreams.md#Get) | **Get** /live-streams/{liveStreamId} | Show live stream
+[**Update**](LiveStreams.md#Update) | **Patch** /live-streams/{liveStreamId} | Update a live stream
+[**Create**](LiveStreams.md#Create) | **Post** /live-streams | Create live stream
+[**UploadThumbnail**](LiveStreams.md#UploadThumbnail) | **Post** /live-streams/{liveStreamId}/thumbnail | Upload a thumbnail
 
 
 
@@ -41,10 +41,10 @@ func main() {
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream that you want to remove.
 
     
-    err := client.Live.Delete(liveStreamId)
+    err := client.LiveStreams.Delete(liveStreamId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Live.Delete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Delete``: %v\n", err)
     }
 }
 ```
@@ -101,13 +101,13 @@ func main() {
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique identifier for the live stream you want to delete. 
 
     
-    res, err := client.Live.DeleteThumbnail(liveStreamId)
+    res, err := client.LiveStreams.DeleteThumbnail(liveStreamId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Live.DeleteThumbnail``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.DeleteThumbnail``: %v\n", err)
     }
     // response from `DeleteThumbnail`: LiveStream
-    fmt.Fprintf(os.Stdout, "Response from `Live.DeleteThumbnail`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.DeleteThumbnail`: %v\n", res)
 }
 ```
 
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 
 ## List
 
-> List(r LiveApiListRequest) (*LiveStreamListResponse, error)
+> List(r LiveStreamsApiListRequest) (*LiveStreamListResponse, error)
 
 
 
@@ -160,7 +160,7 @@ func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
-    req := apivideosdk.LiveApiListRequest{}
+    req := apivideosdk.LiveStreamsApiListRequest{}
     
     req.StreamKey("30087931-229e-42cf-b5f9-e91bcc1f7332") // string | The unique stream key that allows you to stream videos.
     req.Name("My Video") // string | You can filter live streams by their name or a part of their name.
@@ -169,14 +169,14 @@ func main() {
     req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
     req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
-    res, err := client.Live.List(req)
+    res, err := client.LiveStreams.List(req)
     
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Live.List``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.List``: %v\n", err)
     }
     // response from `List`: LiveStreamListResponse
-    fmt.Fprintf(os.Stdout, "Response from `Live.List`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.List`: %v\n", res)
 }
 ```
 
@@ -235,13 +235,13 @@ func main() {
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream you want to watch.
 
     
-    res, err := client.Live.Get(liveStreamId)
+    res, err := client.LiveStreams.Get(liveStreamId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Live.Get``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Get``: %v\n", err)
     }
     // response from `Get`: LiveStream
-    fmt.Fprintf(os.Stdout, "Response from `Live.Get`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Get`: %v\n", res)
 }
 ```
 
@@ -298,13 +298,13 @@ func main() {
     liveStreamUpdatePayload := *apivideosdk.NewLiveStreamUpdatePayload() // LiveStreamUpdatePayload | 
 
     
-    res, err := client.Live.Update(liveStreamId, liveStreamUpdatePayload)
+    res, err := client.LiveStreams.Update(liveStreamId, liveStreamUpdatePayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Live.Update``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Update``: %v\n", err)
     }
     // response from `Update`: LiveStream
-    fmt.Fprintf(os.Stdout, "Response from `Live.Update`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Update`: %v\n", res)
 }
 ```
 
@@ -361,13 +361,13 @@ func main() {
     liveStreamCreatePayload := *apivideosdk.NewLiveStreamCreatePayload("My Live Stream Video") // LiveStreamCreatePayload | 
 
     
-    res, err := client.Live.Create(liveStreamCreatePayload)
+    res, err := client.LiveStreams.Create(liveStreamCreatePayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Live.Create``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Create``: %v\n", err)
     }
     // response from `Create`: LiveStream
-    fmt.Fprintf(os.Stdout, "Response from `Live.Create`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Create`: %v\n", res)
 }
 ```
 
@@ -423,16 +423,16 @@ func main() {
     file := os.NewFile(1234, "some_file") // *os.File | The image to be added as a thumbnail.
 
     
-    res, err := client.Live.UploadThumbnailFile(liveStreamId, file)
+    res, err := client.LiveStreams.UploadThumbnailFile(liveStreamId, file)
 
     // you can also use a Reader instead of a File:
-    // client.Live.UploadThumbnail(liveStreamId, fileName, fileReader)
+    // client.LiveStreams.UploadThumbnail(liveStreamId, fileName, fileReader)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Live.UploadThumbnail``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.UploadThumbnail``: %v\n", err)
     }
     // response from `UploadThumbnail`: LiveStream
-    fmt.Fprintf(os.Stdout, "Response from `Live.UploadThumbnail`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.UploadThumbnail`: %v\n", res)
 }
 ```
 

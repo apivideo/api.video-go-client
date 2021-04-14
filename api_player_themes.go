@@ -24,36 +24,36 @@ var (
 	_ context.Context
 )
 
-type PlayersApiListRequest struct {
+type PlayerThemesApiListRequest struct {
 	sortBy      *string
 	sortOrder   *string
 	currentPage *int32
 	pageSize    *int32
 }
 
-func (r PlayersApiListRequest) SortBy(sortBy string) PlayersApiListRequest {
+func (r PlayerThemesApiListRequest) SortBy(sortBy string) PlayerThemesApiListRequest {
 	r.sortBy = &sortBy
 	return r
 }
-func (r PlayersApiListRequest) SortOrder(sortOrder string) PlayersApiListRequest {
+func (r PlayerThemesApiListRequest) SortOrder(sortOrder string) PlayerThemesApiListRequest {
 	r.sortOrder = &sortOrder
 	return r
 }
-func (r PlayersApiListRequest) CurrentPage(currentPage int32) PlayersApiListRequest {
+func (r PlayerThemesApiListRequest) CurrentPage(currentPage int32) PlayerThemesApiListRequest {
 	r.currentPage = &currentPage
 	return r
 }
-func (r PlayersApiListRequest) PageSize(pageSize int32) PlayersApiListRequest {
+func (r PlayerThemesApiListRequest) PageSize(pageSize int32) PlayerThemesApiListRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-type PlayersServiceI interface {
+type PlayerThemesServiceI interface {
 	/*
 	 * Delete Delete a player
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param playerId The unique identifier for the player you want to delete.
-	 * @return PlayersApiDeleteRequest
+	 * @return PlayerThemesApiDeleteRequest
 	 */
 
 	Delete(playerId string) error
@@ -61,23 +61,23 @@ type PlayersServiceI interface {
 	 * DeleteLogo Delete logo
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param playerId The unique identifier for the player.
-	 * @return PlayersApiDeleteLogoRequest
+	 * @return PlayerThemesApiDeleteLogoRequest
 	 */
 
 	DeleteLogo(playerId string) error
 	/*
 	 * List List all players
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @return PlayersApiListRequest
+	 * @return PlayerThemesApiListRequest
 	 */
 
-	List(r PlayersApiListRequest) (*PlayersListResponse, error)
+	List(r PlayerThemesApiListRequest) (*PlayersListResponse, error)
 
 	/*
 	 * Get Show a player
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param playerId The unique identifier for the player you want to retrieve.
-	 * @return PlayersApiGetRequest
+	 * @return PlayerThemesApiGetRequest
 	 */
 
 	Get(playerId string) (*Player, error)
@@ -85,14 +85,14 @@ type PlayersServiceI interface {
 	 * Update Update a player
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param playerId The unique identifier for the player.
-	 * @return PlayersApiUpdateRequest
+	 * @return PlayerThemesApiUpdateRequest
 	 */
 
 	Update(playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error)
 	/*
 	 * Create Create a player
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @return PlayersApiCreateRequest
+	 * @return PlayerThemesApiCreateRequest
 	 */
 
 	Create(playerCreationPayload PlayerCreationPayload) (*Player, error)
@@ -100,21 +100,21 @@ type PlayersServiceI interface {
 	 * UploadLogo Upload a logo
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param playerId The unique identifier for the player.
-	 * @return PlayersApiUploadLogoRequest
+	 * @return PlayerThemesApiUploadLogoRequest
 	 */
 	UploadLogo(playerId string, link string, fileName string, fileReader io.Reader) (*Player, error)
 
 	/*
 	 * UploadLogo Upload a logo
 	 * @param playerId The unique identifier for the player.
-	 * @return PlayersApiUploadLogoRequest
+	 * @return PlayerThemesApiUploadLogoRequest
 	 */
 	UploadLogoFile(playerId string, file *os.File, link string) (*Player, error)
 }
 
-// PlayersService communicating with the Players
+// PlayerThemesService communicating with the PlayerThemes
 // endpoints of the api.video API
-type PlayersService struct {
+type PlayerThemesService struct {
 	client *Client
 }
 
@@ -123,10 +123,10 @@ type PlayersService struct {
  * Delete a player if you no longer need it. You can delete any player that you have the player ID for.
 
  * @param playerId The unique identifier for the player you want to delete.
- * @return PlayersApiDeleteRequest
+ * @return PlayerThemesApiDeleteRequest
  */
 
-func (s *PlayersService) Delete(playerId string) error {
+func (s *PlayerThemesService) Delete(playerId string) error {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players/{playerId}"
@@ -154,10 +154,10 @@ func (s *PlayersService) Delete(playerId string) error {
  * DeleteLogo Delete logo
 
  * @param playerId The unique identifier for the player.
- * @return PlayersApiDeleteLogoRequest
+ * @return PlayerThemesApiDeleteLogoRequest
  */
 
-func (s *PlayersService) DeleteLogo(playerId string) error {
+func (s *PlayerThemesService) DeleteLogo(playerId string) error {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players/{playerId}/logo"
@@ -185,10 +185,10 @@ func (s *PlayersService) DeleteLogo(playerId string) error {
  * List List all players
  * Retrieve a list of all the players you created, as well as details about each one.
 
- * @return PlayersApiListRequest
+ * @return PlayerThemesApiListRequest
  */
 
-func (s *PlayersService) List(r PlayersApiListRequest) (*PlayersListResponse, error) {
+func (s *PlayerThemesService) List(r PlayerThemesApiListRequest) (*PlayersListResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players"
@@ -229,10 +229,10 @@ func (s *PlayersService) List(r PlayersApiListRequest) (*PlayersListResponse, er
  * Use a player ID to retrieve details about the player and display it for viewers.
 
  * @param playerId The unique identifier for the player you want to retrieve.
- * @return PlayersApiGetRequest
+ * @return PlayerThemesApiGetRequest
  */
 
-func (s *PlayersService) Get(playerId string) (*Player, error) {
+func (s *PlayerThemesService) Get(playerId string) (*Player, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players/{playerId}"
@@ -262,10 +262,10 @@ func (s *PlayersService) Get(playerId string) (*Player, error) {
  * Use a player ID to update specific details for a player. NOTE: It may take up to 10 min before the new player configuration is available from our CDN.
 
  * @param playerId The unique identifier for the player.
- * @return PlayersApiUpdateRequest
+ * @return PlayerThemesApiUpdateRequest
  */
 
-func (s *PlayersService) Update(playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error) {
+func (s *PlayerThemesService) Update(playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players/{playerId}"
@@ -296,10 +296,10 @@ func (s *PlayersService) Update(playerId string, playerUpdatePayload PlayerUpdat
  * Create Create a player
  * Create a player for your video, and customise it.
 
- * @return PlayersApiCreateRequest
+ * @return PlayerThemesApiCreateRequest
  */
 
-func (s *PlayersService) Create(playerCreationPayload PlayerCreationPayload) (*Player, error) {
+func (s *PlayerThemesService) Create(playerCreationPayload PlayerCreationPayload) (*Player, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players"
@@ -331,10 +331,10 @@ func (s *PlayersService) Create(playerCreationPayload PlayerCreationPayload) (*P
 It will be scaled down to 30px height and converted to PNG to be displayed in the player.
 
  * @param playerId The unique identifier for the player.
- * @return PlayersApiUploadLogoRequest
+ * @return PlayerThemesApiUploadLogoRequest
 */
 
-func (s *PlayersService) UploadLogoFile(playerId string, file *os.File, link string) (*Player, error) {
+func (s *PlayerThemesService) UploadLogoFile(playerId string, file *os.File, link string) (*Player, error) {
 	return s.UploadLogo(playerId, link, file.Name(), io.Reader(file))
 }
 
@@ -344,9 +344,9 @@ func (s *PlayersService) UploadLogoFile(playerId string, file *os.File, link str
 It will be scaled down to 30px height and converted to PNG to be displayed in the player.
 
  * @param playerId The unique identifier for the player.
- * @return PlayersApiUploadLogoRequest
+ * @return PlayerThemesApiUploadLogoRequest
 */
-func (s *PlayersService) UploadLogo(playerId string, link string, fileName string, fileReader io.Reader) (*Player, error) {
+func (s *PlayerThemesService) UploadLogo(playerId string, link string, fileName string, fileReader io.Reader) (*Player, error) {
 	localVarPath := "/players/{playerId}/logo"
 	localVarPath = strings.Replace(localVarPath, "{"+"playerId"+"}", url.PathEscape(parameterToString(playerId, "")), -1)
 

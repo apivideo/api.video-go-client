@@ -6,10 +6,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Delete**](Videos.md#Delete) | **Delete** /videos/{videoId} | Delete a video
 [**Get**](Videos.md#Get) | **Get** /videos/{videoId} | Show a video
-[**GetVideoStatus**](Videos.md#GetVideoStatus) | **Get** /videos/{videoId}/status | Show video status
+[**GetStatus**](Videos.md#GetStatus) | **Get** /videos/{videoId}/status | Show video status
 [**List**](Videos.md#List) | **Get** /videos | List all videos
 [**Update**](Videos.md#Update) | **Patch** /videos/{videoId} | Update a video
 [**PickThumbnail**](Videos.md#PickThumbnail) | **Patch** /videos/{videoId}/thumbnail | Pick a thumbnail
+[**UploadWithUploadToken**](Videos.md#UploadWithUploadToken) | **Post** /upload | Upload with an upload token
 [**Create**](Videos.md#Create) | **Post** /videos | Create a video
 [**Upload**](Videos.md#Upload) | **Post** /videos/{videoId}/source | Upload a video
 [**UploadThumbnail**](Videos.md#UploadThumbnail) | **Post** /videos/{videoId}/thumbnail | Upload a thumbnail
@@ -138,9 +139,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetVideoStatus
+## GetStatus
 
-> GetVideoStatus(videoId string) (*Videostatus, error)
+> GetStatus(videoId string) (*Videostatus, error)
 
 
 Show video status
@@ -167,13 +168,13 @@ func main() {
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique identifier for the video you want the status for.
 
     
-    res, err := client.Videos.GetVideoStatus(videoId)
+    res, err := client.Videos.GetStatus(videoId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.GetVideoStatus``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.GetStatus``: %v\n", err)
     }
-    // response from `GetVideoStatus`: Videostatus
-    fmt.Fprintf(os.Stdout, "Response from `Videos.GetVideoStatus`: %v\n", res)
+    // response from `GetStatus`: Videostatus
+    fmt.Fprintf(os.Stdout, "Response from `Videos.GetStatus`: %v\n", res)
 }
 ```
 
@@ -230,7 +231,7 @@ func main() {
     
     req.Title("My Video.mp4") // string | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles.
     req.Tags([]string{"Inner_example"}) // []string | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
-    req.Metadata([]apivideosdk.Metadata{*apivideosdk.NewMetadata()}) // []Metadata | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter.
+    req.Metadata(map[string]string{"key": "Inner_example"}) // map[string]string | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter.
     req.Description("New Zealand") // string | If you described a video with a term or sentence, you can add it here to return videos containing this string.
     req.LiveStreamId("li400mYKSgQ6xs7taUeSaEKr") // string | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here.
     req.SortBy("publishedAt") // string | Allowed: publishedAt, title. You can search by the time videos were published at, or by title.
@@ -261,7 +262,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **title** | **string** | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles. | 
 **tags** | **[]string** | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned. | 
-**metadata** | [**[]Metadata**](metadata.md) | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. | 
+**metadata** | **map[string]string** | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. | 
 **description** | **string** | If you described a video with a term or sentence, you can add it here to return videos containing this string. | 
 **liveStreamId** | **string** | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here. | 
 **sortBy** | **string** | Allowed: publishedAt, title. You can search by the time videos were published at, or by title. | 
@@ -396,6 +397,72 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **videoThumbnailPickPayload** | [**VideoThumbnailPickPayload**](VideoThumbnailPickPayload.md) |  | 
+
+### Return type
+
+[**Video**](video.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UploadWithUploadToken
+
+> UploadWithUploadTokenFile(token string, file *os.File) (*Video, error)
+
+> UploadWithUploadToken(token string, fileName string, fileReader io.Reader, fileSize int64)
+
+Upload with an upload token
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/go-api-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+        
+    token := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the token you want to use to upload a video.
+    file := os.NewFile(1234, "some_file") // *os.File | The path to the video you want to upload.
+
+    
+    res, err := client.Videos.UploadWithUploadTokenFile(token, file)
+
+    // you can also use a Reader instead of a File:
+    // client.Videos.UploadWithUploadToken(token, fileName, fileReader, fileSize)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.UploadWithUploadToken``: %v\n", err)
+    }
+    // response from `UploadWithUploadToken`: Video
+    fmt.Fprintf(os.Stdout, "Response from `Videos.UploadWithUploadToken`: %v\n", res)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**token** | **string** | The unique identifier for the token you want to use to upload a video. | 
+**file** | ***os.File** | The path to the video you want to upload. | 
 
 ### Return type
 

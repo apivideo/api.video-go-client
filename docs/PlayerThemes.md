@@ -1,16 +1,16 @@
-# \Players
+# \PlayerThemes
 
 All URIs are relative to *https://ws.api.video*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Delete**](Players.md#Delete) | **Delete** /players/{playerId} | Delete a player
-[**DeleteLogo**](Players.md#DeleteLogo) | **Delete** /players/{playerId}/logo | Delete logo
-[**List**](Players.md#List) | **Get** /players | List all players
-[**Get**](Players.md#Get) | **Get** /players/{playerId} | Show a player
-[**Update**](Players.md#Update) | **Patch** /players/{playerId} | Update a player
-[**Create**](Players.md#Create) | **Post** /players | Create a player
-[**UploadLogo**](Players.md#UploadLogo) | **Post** /players/{playerId}/logo | Upload a logo
+[**Delete**](PlayerThemes.md#Delete) | **Delete** /players/{playerId} | Delete a player
+[**DeleteLogo**](PlayerThemes.md#DeleteLogo) | **Delete** /players/{playerId}/logo | Delete logo
+[**List**](PlayerThemes.md#List) | **Get** /players | List all players
+[**Get**](PlayerThemes.md#Get) | **Get** /players/{playerId} | Show a player
+[**Update**](PlayerThemes.md#Update) | **Patch** /players/{playerId} | Update a player
+[**Create**](PlayerThemes.md#Create) | **Post** /players | Create a player
+[**UploadLogo**](PlayerThemes.md#UploadLogo) | **Post** /players/{playerId}/logo | Upload a logo
 
 
 
@@ -43,10 +43,10 @@ func main() {
     playerId := "pl45d5vFFGrfdsdsd156dGhh" // string | The unique identifier for the player you want to delete.
 
     
-    err := client.Players.Delete(playerId)
+    err := client.PlayerThemes.Delete(playerId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Players.Delete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Delete``: %v\n", err)
     }
 }
 ```
@@ -101,10 +101,10 @@ func main() {
     playerId := "pl14Db6oMJRH6SRVoOwORacK" // string | The unique identifier for the player.
 
     
-    err := client.Players.DeleteLogo(playerId)
+    err := client.PlayerThemes.DeleteLogo(playerId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Players.DeleteLogo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.DeleteLogo``: %v\n", err)
     }
 }
 ```
@@ -134,7 +134,7 @@ Name | Type | Description  | Notes
 
 ## List
 
-> List(r PlayersApiListRequest) (*PlayersListResponse, error)
+> List(r PlayerThemesApiListRequest) (*PlayersListResponse, error)
 
 
 
@@ -158,21 +158,21 @@ func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
-    req := apivideosdk.PlayersApiListRequest{}
+    req := apivideosdk.PlayerThemesApiListRequest{}
     
     req.SortBy("createdAt") // string | createdAt is the time the player was created. updatedAt is the time the player was last updated. The time is presented in ISO-8601 format.
     req.SortOrder("asc") // string | Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones.
     req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
     req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
-    res, err := client.Players.List(req)
+    res, err := client.PlayerThemes.List(req)
     
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Players.List``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.List``: %v\n", err)
     }
     // response from `List`: PlayersListResponse
-    fmt.Fprintf(os.Stdout, "Response from `Players.List`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.List`: %v\n", res)
 }
 ```
 
@@ -229,13 +229,13 @@ func main() {
     playerId := "pl45d5vFFGrfdsdsd156dGhh" // string | The unique identifier for the player you want to retrieve. 
 
     
-    res, err := client.Players.Get(playerId)
+    res, err := client.PlayerThemes.Get(playerId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Players.Get``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Get``: %v\n", err)
     }
     // response from `Get`: Player
-    fmt.Fprintf(os.Stdout, "Response from `Players.Get`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Get`: %v\n", res)
 }
 ```
 
@@ -292,13 +292,13 @@ func main() {
     playerUpdatePayload := *apivideosdk.NewPlayerUpdatePayload() // PlayerUpdatePayload | 
 
     
-    res, err := client.Players.Update(playerId, playerUpdatePayload)
+    res, err := client.PlayerThemes.Update(playerId, playerUpdatePayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Players.Update``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Update``: %v\n", err)
     }
     // response from `Update`: Player
-    fmt.Fprintf(os.Stdout, "Response from `Players.Update`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Update`: %v\n", res)
 }
 ```
 
@@ -355,13 +355,13 @@ func main() {
     playerCreationPayload := *apivideosdk.NewPlayerCreationPayload() // PlayerCreationPayload | 
 
     
-    res, err := client.Players.Create(playerCreationPayload)
+    res, err := client.PlayerThemes.Create(playerCreationPayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Players.Create``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Create``: %v\n", err)
     }
     // response from `Create`: Player
-    fmt.Fprintf(os.Stdout, "Response from `Players.Create`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Create`: %v\n", res)
 }
 ```
 
@@ -418,16 +418,16 @@ func main() {
     link := "link_example" // string | The path to the file you want to upload and use as a logo.
 
     
-    res, err := client.Players.UploadLogoFile(playerId, file, link)
+    res, err := client.PlayerThemes.UploadLogoFile(playerId, file, link)
 
     // you can also use a Reader instead of a File:
-    // client.Players.UploadLogo(playerId, link, fileName, fileReader)
+    // client.PlayerThemes.UploadLogo(playerId, link, fileName, fileReader)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Players.UploadLogo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.UploadLogo``: %v\n", err)
     }
     // response from `UploadLogo`: Player
-    fmt.Fprintf(os.Stdout, "Response from `Players.UploadLogo`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.UploadLogo`: %v\n", res)
 }
 ```
 

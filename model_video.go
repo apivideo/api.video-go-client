@@ -18,6 +18,8 @@ import (
 type Video struct {
 	// The unique identifier of the video object.
 	VideoId *string `json:"videoId,omitempty"`
+	// When an webhook was created, presented in ISO-8601 format.
+	CreatedAt *string `json:"createdAt,omitempty"`
 	// The title of the video content.
 	Title *string `json:"title,omitempty"`
 	// A description for the video content.
@@ -89,6 +91,38 @@ func (o *Video) HasVideoId() bool {
 // SetVideoId gets a reference to the given string and assigns it to the VideoId field.
 func (o *Video) SetVideoId(v string) {
 	o.VideoId = &v
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *Video) GetCreatedAt() string {
+	if o == nil || o.CreatedAt == nil {
+		var ret string
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Video) GetCreatedAtOk() (*string, bool) {
+	if o == nil || o.CreatedAt == nil {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *Video) HasCreatedAt() bool {
+	if o != nil && o.CreatedAt != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
+func (o *Video) SetCreatedAt(v string) {
+	o.CreatedAt = &v
 }
 
 // GetTitle returns the Title field value if set, zero value otherwise.

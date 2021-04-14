@@ -83,26 +83,9 @@ func main() {
 }
 ```
 
-
 ## Documentation for API Endpoints
 
 All URIs are relative to *https://ws.api.video*
-
-
-### Account API
-
-
-#### Retrieve an instance of the Account API:
-```golang
-client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
-accountApi := client.Account
-```
-
-#### Endpoints
-
-Method | HTTP request | Description
-------------- | ------------- | -------------
-**(deprecated)** [**Get**](docs/Account.md#Get) | **Get** /account | Show account
 
 
 ### Captions API
@@ -144,48 +127,48 @@ Method | HTTP request | Description
 [**Upload**](docs/Chapters.md#Upload) | **Post** /videos/{videoId}/chapters/{language} | Upload a chapter
 
 
-### Live API
+### LiveStreams API
 
 
-#### Retrieve an instance of the Live API:
+#### Retrieve an instance of the LiveStreams API:
 ```golang
 client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
-liveApi := client.Live
+liveStreamsApi := client.LiveStreams
 ```
 
 #### Endpoints
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Delete**](docs/Live.md#Delete) | **Delete** /live-streams/{liveStreamId} | Delete a live stream
-[**DeleteThumbnail**](docs/Live.md#DeleteThumbnail) | **Delete** /live-streams/{liveStreamId}/thumbnail | Delete a thumbnail
-[**List**](docs/Live.md#List) | **Get** /live-streams | List all live streams
-[**Get**](docs/Live.md#Get) | **Get** /live-streams/{liveStreamId} | Show live stream
-[**Update**](docs/Live.md#Update) | **Patch** /live-streams/{liveStreamId} | Update a live stream
-[**Create**](docs/Live.md#Create) | **Post** /live-streams | Create live stream
-[**UploadThumbnail**](docs/Live.md#UploadThumbnail) | **Post** /live-streams/{liveStreamId}/thumbnail | Upload a thumbnail
+[**Delete**](docs/LiveStreams.md#Delete) | **Delete** /live-streams/{liveStreamId} | Delete a live stream
+[**DeleteThumbnail**](docs/LiveStreams.md#DeleteThumbnail) | **Delete** /live-streams/{liveStreamId}/thumbnail | Delete a thumbnail
+[**List**](docs/LiveStreams.md#List) | **Get** /live-streams | List all live streams
+[**Get**](docs/LiveStreams.md#Get) | **Get** /live-streams/{liveStreamId} | Show live stream
+[**Update**](docs/LiveStreams.md#Update) | **Patch** /live-streams/{liveStreamId} | Update a live stream
+[**Create**](docs/LiveStreams.md#Create) | **Post** /live-streams | Create live stream
+[**UploadThumbnail**](docs/LiveStreams.md#UploadThumbnail) | **Post** /live-streams/{liveStreamId}/thumbnail | Upload a thumbnail
 
 
-### Players API
+### PlayerThemes API
 
 
-#### Retrieve an instance of the Players API:
+#### Retrieve an instance of the PlayerThemes API:
 ```golang
 client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
-playersApi := client.Players
+playerThemesApi := client.PlayerThemes
 ```
 
 #### Endpoints
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Delete**](docs/Players.md#Delete) | **Delete** /players/{playerId} | Delete a player
-[**DeleteLogo**](docs/Players.md#DeleteLogo) | **Delete** /players/{playerId}/logo | Delete logo
-[**List**](docs/Players.md#List) | **Get** /players | List all players
-[**Get**](docs/Players.md#Get) | **Get** /players/{playerId} | Show a player
-[**Update**](docs/Players.md#Update) | **Patch** /players/{playerId} | Update a player
-[**Create**](docs/Players.md#Create) | **Post** /players | Create a player
-[**UploadLogo**](docs/Players.md#UploadLogo) | **Post** /players/{playerId}/logo | Upload a logo
+[**Delete**](docs/PlayerThemes.md#Delete) | **Delete** /players/{playerId} | Delete a player
+[**DeleteLogo**](docs/PlayerThemes.md#DeleteLogo) | **Delete** /players/{playerId}/logo | Delete logo
+[**List**](docs/PlayerThemes.md#List) | **Get** /players | List all players
+[**Get**](docs/PlayerThemes.md#Get) | **Get** /players/{playerId} | Show a player
+[**Update**](docs/PlayerThemes.md#Update) | **Patch** /players/{playerId} | Update a player
+[**Create**](docs/PlayerThemes.md#Create) | **Post** /players | Create a player
+[**UploadLogo**](docs/PlayerThemes.md#UploadLogo) | **Post** /players/{playerId}/logo | Upload a logo
 
 
 ### RawStatistics API
@@ -201,9 +184,28 @@ rawStatisticsApi := client.RawStatistics
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetLiveStreamAnalytics**](docs/RawStatistics.md#GetLiveStreamAnalytics) | **Get** /analytics/live-streams/{liveStreamId} | List live stream player sessions
-[**ListPlayerSessionEvents**](docs/RawStatistics.md#ListPlayerSessionEvents) | **Get** /analytics/sessions/{sessionId}/events | List player session events
-[**ListSessions**](docs/RawStatistics.md#ListSessions) | **Get** /analytics/videos/{videoId} | List video player sessions
+[**ListLiveStreamSessions**](docs/RawStatistics.md#ListLiveStreamSessions) | **Get** /analytics/live-streams/{liveStreamId} | List live stream player sessions
+[**ListSessionEvents**](docs/RawStatistics.md#ListSessionEvents) | **Get** /analytics/sessions/{sessionId}/events | List player session events
+[**ListVideoSessions**](docs/RawStatistics.md#ListVideoSessions) | **Get** /analytics/videos/{videoId} | List video player sessions
+
+
+### UploadTokens API
+
+
+#### Retrieve an instance of the UploadTokens API:
+```golang
+client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
+uploadTokensApi := client.UploadTokens
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**DeleteToken**](docs/UploadTokens.md#DeleteToken) | **Delete** /upload-tokens/{uploadToken} | Delete an upload token
+[**List**](docs/UploadTokens.md#List) | **Get** /upload-tokens | List all active upload tokens.
+[**GetToken**](docs/UploadTokens.md#GetToken) | **Get** /upload-tokens/{uploadToken} | Show upload token
+[**CreateToken**](docs/UploadTokens.md#CreateToken) | **Post** /upload-tokens | Generate an upload token
 
 
 ### Videos API
@@ -221,33 +223,14 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Delete**](docs/Videos.md#Delete) | **Delete** /videos/{videoId} | Delete a video
 [**Get**](docs/Videos.md#Get) | **Get** /videos/{videoId} | Show a video
-[**GetVideoStatus**](docs/Videos.md#GetVideoStatus) | **Get** /videos/{videoId}/status | Show video status
+[**GetStatus**](docs/Videos.md#GetStatus) | **Get** /videos/{videoId}/status | Show video status
 [**List**](docs/Videos.md#List) | **Get** /videos | List all videos
 [**Update**](docs/Videos.md#Update) | **Patch** /videos/{videoId} | Update a video
 [**PickThumbnail**](docs/Videos.md#PickThumbnail) | **Patch** /videos/{videoId}/thumbnail | Pick a thumbnail
+[**UploadWithUploadToken**](docs/Videos.md#UploadWithUploadToken) | **Post** /upload | Upload with an upload token
 [**Create**](docs/Videos.md#Create) | **Post** /videos | Create a video
 [**Upload**](docs/Videos.md#Upload) | **Post** /videos/{videoId}/source | Upload a video
 [**UploadThumbnail**](docs/Videos.md#UploadThumbnail) | **Post** /videos/{videoId}/thumbnail | Upload a thumbnail
-
-
-### VideosDelegatedUpload API
-
-
-#### Retrieve an instance of the VideosDelegatedUpload API:
-```golang
-client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
-videosDelegatedUploadApi := client.VideosDelegatedUpload
-```
-
-#### Endpoints
-
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**DeleteToken**](docs/VideosDelegatedUpload.md#DeleteToken) | **Delete** /upload-tokens/{uploadToken} | Delete an upload token
-[**ListTokens**](docs/VideosDelegatedUpload.md#ListTokens) | **Get** /upload-tokens | List all active upload tokens.
-[**GetToken**](docs/VideosDelegatedUpload.md#GetToken) | **Get** /upload-tokens/{uploadToken} | Show upload token
-[**Upload**](docs/VideosDelegatedUpload.md#Upload) | **Post** /upload | Upload with an upload token
-[**CreateToken**](docs/VideosDelegatedUpload.md#CreateToken) | **Post** /upload-tokens | Generate an upload token
 
 
 ### Webhooks API

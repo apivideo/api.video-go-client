@@ -98,7 +98,7 @@ func TestLivestreams_Get(t *testing.T) {
 		fmt.Fprint(w, liveJSONResponses[0])
 	})
 
-	live, err := client.Live.Get("li2FgWk8CyBKFIGyDK1SimnL")
+	live, err := client.LiveStreams.Get("li2FgWk8CyBKFIGyDK1SimnL")
 	if err != nil {
 		t.Errorf("Livestreams.Get error: %v", err)
 	}
@@ -130,9 +130,9 @@ func TestLivestreams_List(t *testing.T) {
 		fmt.Fprint(w, JSONResp)
 	})
 
-	opts := new(LiveApiListRequest).CurrentPage(1).PageSize(25)
+	opts := new(LiveStreamsApiListRequest).CurrentPage(1).PageSize(25)
 
-	livestreams, err := client.Live.List(opts)
+	livestreams, err := client.LiveStreams.List(opts)
 	if err != nil {
 		t.Errorf("Livestreams.List error: %v", err)
 	}
@@ -168,7 +168,7 @@ func TestLivestreams_Create(t *testing.T) {
 		fmt.Fprint(w, liveJSONResponses[0])
 	})
 
-	livestream, err := client.Live.Create(liveStreamCreatePayload)
+	livestream, err := client.LiveStreams.Create(liveStreamCreatePayload)
 	if err != nil {
 		t.Errorf("Livestreams.Create error: %v", err)
 	}
@@ -201,7 +201,7 @@ func TestLivestreams_Update(t *testing.T) {
 		fmt.Fprint(w, liveJSONResponses[0])
 	})
 
-	livestream, err := client.Live.Update("li2FgWk8CyBKFIGyDK1SimnL", liveStreamUpdatePayload)
+	livestream, err := client.LiveStreams.Update("li2FgWk8CyBKFIGyDK1SimnL", liveStreamUpdatePayload)
 	if err != nil {
 		t.Errorf("Livestreams.Update error: %v", err)
 	}
@@ -220,7 +220,7 @@ func TestLivestreams_Delete(t *testing.T) {
 		testMethod(t, r, http.MethodDelete)
 	})
 
-	err := client.Live.Delete("li2FgWk8CyBKFIGyDK1SimnL")
+	err := client.LiveStreams.Delete("li2FgWk8CyBKFIGyDK1SimnL")
 	if err != nil {
 		t.Errorf("Livestreams.Delete error: %v", err)
 	}
@@ -238,7 +238,7 @@ func TestLivestreams_UploadThumbnail(t *testing.T) {
 	file := createTempFile("test.thumbnail", 1024*1024)
 	defer os.Remove(file.Name())
 
-	livestream, err := client.Live.UploadThumbnailFile("li2FgWk8CyBKFIGyDK1SimnL", file)
+	livestream, err := client.LiveStreams.UploadThumbnailFile("li2FgWk8CyBKFIGyDK1SimnL", file)
 	if err != nil {
 		t.Errorf("Livestreams.UploadThumbnail error: %v", err)
 	}
@@ -257,7 +257,7 @@ func TestLivestreams_DeleteThumbnail(t *testing.T) {
 		fmt.Fprint(w, liveJSONResponses[0])
 	})
 
-	livestream, err := client.Live.DeleteThumbnail("li2FgWk8CyBKFIGyDK1SimnL")
+	livestream, err := client.LiveStreams.DeleteThumbnail("li2FgWk8CyBKFIGyDK1SimnL")
 	if err != nil {
 		t.Errorf("Livestreams.DeleteThumbnail error: %v", err)
 	}

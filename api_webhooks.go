@@ -188,7 +188,7 @@ func (s *WebhooksService) List(r WebhooksApiListRequest) (*WebhooksListResponse,
 
 /*
  * Create Create Webhook
- * Webhooks can push notifications to your server, rather than polling api.video for changes
+ * Webhooks can push notifications to your server, rather than polling api.video for changes. We currently offer one event, the ```video.encoding.quality.completed``` event.  When a new video is uploaded into your account, it will be encoded into several different HLS sizes/bitrates.  When each version is encoded, your webhook will get a notification.  It will look like ```{ \"type\": \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\", \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"720p\"} ```. This request says that the 720p HLS encoding was completed.
 
  * @return WebhooksApiCreateRequest
  */

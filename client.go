@@ -22,16 +22,15 @@ type Client struct {
 	chunkSize  int64
 	Token      *Token
 
-	Account               AccountServiceI
-	Authentication        AuthenticationServiceI
-	Captions              CaptionsServiceI
-	Chapters              ChaptersServiceI
-	Live                  LiveServiceI
-	Players               PlayersServiceI
-	RawStatistics         RawStatisticsServiceI
-	Videos                VideosServiceI
-	VideosDelegatedUpload VideosDelegatedUploadServiceI
-	Webhooks              WebhooksServiceI
+	Authentication AuthenticationServiceI
+	Captions       CaptionsServiceI
+	Chapters       ChaptersServiceI
+	LiveStreams    LiveStreamsServiceI
+	PlayerThemes   PlayerThemesServiceI
+	RawStatistics  RawStatisticsServiceI
+	UploadTokens   UploadTokensServiceI
+	Videos         VideosServiceI
+	Webhooks       WebhooksServiceI
 }
 
 // Token contains token for connecting to the api.video API
@@ -115,15 +114,14 @@ func (cb *clientBuilder) Build() *Client {
 		chunkSize:  cb.uploadChunkSize,
 	}
 
-	c.Account = &AccountService{client: c}
 	c.Authentication = &AuthenticationService{client: c}
 	c.Captions = &CaptionsService{client: c}
 	c.Chapters = &ChaptersService{client: c}
-	c.Live = &LiveService{client: c}
-	c.Players = &PlayersService{client: c}
+	c.LiveStreams = &LiveStreamsService{client: c}
+	c.PlayerThemes = &PlayerThemesService{client: c}
 	c.RawStatistics = &RawStatisticsService{client: c}
+	c.UploadTokens = &UploadTokensService{client: c}
 	c.Videos = &VideosService{client: c}
-	c.VideosDelegatedUpload = &VideosDelegatedUploadService{client: c}
 	c.Webhooks = &WebhooksService{client: c}
 
 	return c

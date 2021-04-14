@@ -23,90 +23,90 @@ var (
 	_ context.Context
 )
 
-type RawStatisticsApiGetLiveStreamAnalyticsRequest struct {
+type RawStatisticsApiListLiveStreamSessionsRequest struct {
 	period      *string
 	currentPage *int32
 	pageSize    *int32
 }
 
-func (r RawStatisticsApiGetLiveStreamAnalyticsRequest) Period(period string) RawStatisticsApiGetLiveStreamAnalyticsRequest {
+func (r RawStatisticsApiListLiveStreamSessionsRequest) Period(period string) RawStatisticsApiListLiveStreamSessionsRequest {
 	r.period = &period
 	return r
 }
-func (r RawStatisticsApiGetLiveStreamAnalyticsRequest) CurrentPage(currentPage int32) RawStatisticsApiGetLiveStreamAnalyticsRequest {
+func (r RawStatisticsApiListLiveStreamSessionsRequest) CurrentPage(currentPage int32) RawStatisticsApiListLiveStreamSessionsRequest {
 	r.currentPage = &currentPage
 	return r
 }
-func (r RawStatisticsApiGetLiveStreamAnalyticsRequest) PageSize(pageSize int32) RawStatisticsApiGetLiveStreamAnalyticsRequest {
+func (r RawStatisticsApiListLiveStreamSessionsRequest) PageSize(pageSize int32) RawStatisticsApiListLiveStreamSessionsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-type RawStatisticsApiListPlayerSessionEventsRequest struct {
+type RawStatisticsApiListSessionEventsRequest struct {
 	currentPage *int32
 	pageSize    *int32
 }
 
-func (r RawStatisticsApiListPlayerSessionEventsRequest) CurrentPage(currentPage int32) RawStatisticsApiListPlayerSessionEventsRequest {
+func (r RawStatisticsApiListSessionEventsRequest) CurrentPage(currentPage int32) RawStatisticsApiListSessionEventsRequest {
 	r.currentPage = &currentPage
 	return r
 }
-func (r RawStatisticsApiListPlayerSessionEventsRequest) PageSize(pageSize int32) RawStatisticsApiListPlayerSessionEventsRequest {
+func (r RawStatisticsApiListSessionEventsRequest) PageSize(pageSize int32) RawStatisticsApiListSessionEventsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-type RawStatisticsApiListSessionsRequest struct {
+type RawStatisticsApiListVideoSessionsRequest struct {
 	period      *string
 	metadata    *[]string
 	currentPage *int32
 	pageSize    *int32
 }
 
-func (r RawStatisticsApiListSessionsRequest) Period(period string) RawStatisticsApiListSessionsRequest {
+func (r RawStatisticsApiListVideoSessionsRequest) Period(period string) RawStatisticsApiListVideoSessionsRequest {
 	r.period = &period
 	return r
 }
-func (r RawStatisticsApiListSessionsRequest) Metadata(metadata []string) RawStatisticsApiListSessionsRequest {
+func (r RawStatisticsApiListVideoSessionsRequest) Metadata(metadata []string) RawStatisticsApiListVideoSessionsRequest {
 	r.metadata = &metadata
 	return r
 }
-func (r RawStatisticsApiListSessionsRequest) CurrentPage(currentPage int32) RawStatisticsApiListSessionsRequest {
+func (r RawStatisticsApiListVideoSessionsRequest) CurrentPage(currentPage int32) RawStatisticsApiListVideoSessionsRequest {
 	r.currentPage = &currentPage
 	return r
 }
-func (r RawStatisticsApiListSessionsRequest) PageSize(pageSize int32) RawStatisticsApiListSessionsRequest {
+func (r RawStatisticsApiListVideoSessionsRequest) PageSize(pageSize int32) RawStatisticsApiListVideoSessionsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 type RawStatisticsServiceI interface {
 	/*
-	 * GetLiveStreamAnalytics List live stream player sessions
+	 * ListLiveStreamSessions List live stream player sessions
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param liveStreamId The unique identifier for the live stream you want to retrieve analytics for.
-	 * @return RawStatisticsApiGetLiveStreamAnalyticsRequest
+	 * @return RawStatisticsApiListLiveStreamSessionsRequest
 	 */
 
-	GetLiveStreamAnalytics(liveStreamId string, r RawStatisticsApiGetLiveStreamAnalyticsRequest) (*RawStatisticsListLiveStreamAnalyticsResponse, error)
+	ListLiveStreamSessions(liveStreamId string, r RawStatisticsApiListLiveStreamSessionsRequest) (*RawStatisticsListLiveStreamAnalyticsResponse, error)
 
 	/*
-	 * ListPlayerSessionEvents List player session events
+	 * ListSessionEvents List player session events
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param sessionId A unique identifier you can use to reference and track a session with.
-	 * @return RawStatisticsApiListPlayerSessionEventsRequest
+	 * @return RawStatisticsApiListSessionEventsRequest
 	 */
 
-	ListPlayerSessionEvents(sessionId string, r RawStatisticsApiListPlayerSessionEventsRequest) (*RawStatisticsListPlayerSessionEventsResponse, error)
+	ListSessionEvents(sessionId string, r RawStatisticsApiListSessionEventsRequest) (*RawStatisticsListPlayerSessionEventsResponse, error)
 
 	/*
-	 * ListSessions List video player sessions
+	 * ListVideoSessions List video player sessions
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId The unique identifier for the video you want to retrieve session information for.
-	 * @return RawStatisticsApiListSessionsRequest
+	 * @return RawStatisticsApiListVideoSessionsRequest
 	 */
 
-	ListSessions(videoId string, r RawStatisticsApiListSessionsRequest) (*RawStatisticsListSessionsResponse, error)
+	ListVideoSessions(videoId string, r RawStatisticsApiListVideoSessionsRequest) (*RawStatisticsListSessionsResponse, error)
 }
 
 // RawStatisticsService communicating with the RawStatistics
@@ -116,13 +116,13 @@ type RawStatisticsService struct {
 }
 
 /*
- * GetLiveStreamAnalytics List live stream player sessions
+ * ListLiveStreamSessions List live stream player sessions
 
  * @param liveStreamId The unique identifier for the live stream you want to retrieve analytics for.
- * @return RawStatisticsApiGetLiveStreamAnalyticsRequest
+ * @return RawStatisticsApiListLiveStreamSessionsRequest
  */
 
-func (s *RawStatisticsService) GetLiveStreamAnalytics(liveStreamId string, r RawStatisticsApiGetLiveStreamAnalyticsRequest) (*RawStatisticsListLiveStreamAnalyticsResponse, error) {
+func (s *RawStatisticsService) ListLiveStreamSessions(liveStreamId string, r RawStatisticsApiListLiveStreamSessionsRequest) (*RawStatisticsListLiveStreamAnalyticsResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/analytics/live-streams/{liveStreamId}"
@@ -157,14 +157,14 @@ func (s *RawStatisticsService) GetLiveStreamAnalytics(liveStreamId string, r Raw
 }
 
 /*
- * ListPlayerSessionEvents List player session events
+ * ListSessionEvents List player session events
  * Useful to track and measure video's engagement.
 
  * @param sessionId A unique identifier you can use to reference and track a session with.
- * @return RawStatisticsApiListPlayerSessionEventsRequest
+ * @return RawStatisticsApiListSessionEventsRequest
  */
 
-func (s *RawStatisticsService) ListPlayerSessionEvents(sessionId string, r RawStatisticsApiListPlayerSessionEventsRequest) (*RawStatisticsListPlayerSessionEventsResponse, error) {
+func (s *RawStatisticsService) ListSessionEvents(sessionId string, r RawStatisticsApiListSessionEventsRequest) (*RawStatisticsListPlayerSessionEventsResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/analytics/sessions/{sessionId}/events"
@@ -196,14 +196,14 @@ func (s *RawStatisticsService) ListPlayerSessionEvents(sessionId string, r RawSt
 }
 
 /*
- * ListSessions List video player sessions
+ * ListVideoSessions List video player sessions
  * Retrieve all available user sessions for a specific video.
 
  * @param videoId The unique identifier for the video you want to retrieve session information for.
- * @return RawStatisticsApiListSessionsRequest
+ * @return RawStatisticsApiListVideoSessionsRequest
  */
 
-func (s *RawStatisticsService) ListSessions(videoId string, r RawStatisticsApiListSessionsRequest) (*RawStatisticsListSessionsResponse, error) {
+func (s *RawStatisticsService) ListVideoSessions(videoId string, r RawStatisticsApiListVideoSessionsRequest) (*RawStatisticsListSessionsResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/analytics/videos/{videoId}"
