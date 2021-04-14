@@ -19,7 +19,7 @@ import (
 type Client struct {
 	BaseURL    *url.URL
 	APIKey     string
-	httpClient *http.Client
+	httpClient *Doer
 	chunkSize  int64
 	Token      *Token
 
@@ -69,10 +69,15 @@ const (
 	defaultChunkSize      = 128 * 1024 * 1024
 )
 
+type Doer interface {
+	Do(*http.Request) (*http.Response, error)
+}
+
 type clientBuilder struct {
 	apiKey          string
 	baseURL         string
 	uploadChunkSize int64
+	httpClient      *Doer
 }
 
 func (cb *clientBuilder) BaseUrl(url string) *clientBuilder {
@@ -87,6 +92,11 @@ func (cb *clientBuilder) ApiKey(key string) *clientBuilder {
 
 func (cb *clientBuilder) UploadChunkSize(size int64) *clientBuilder {
 	cb.uploadChunkSize = size
+	return cb
+}
+
+func (cb *clientBuilder) HttpClient(httpClient *Doer) *clientBuilder {
+	cb.httpClient = httpClient
 	return cb
 }
 
@@ -108,10 +118,15 @@ func (cb *clientBuilder) Build() *Client {
 
 	baseURL, _ := url.Parse(cb.baseURL)
 
+	httpClient := *cb.httpClient
+	if httpClient == nil {
+		httpClient = http.DefaultClient
+	}
+
 	c := &Client{
 		BaseURL:    baseURL,
 		APIKey:     cb.apiKey,
-		httpClient: http.DefaultClient,
+		httpClient: &httpClient,
 		chunkSize:  cb.uploadChunkSize,
 	}
 
@@ -314,7 +329,8 @@ func (c *Client) prepareUploadRequest(
 }
 
 func (c *Client) do(req *http.Request, v interface{}) (*http.Response, error) {
-	resp, err := c.httpClient.Do(req)
+	cl := *c.httpClient
+	resp, err := cl.Do(req)
 	if err != nil {
 		return nil, err
 	}
@@ -346,8 +362,24 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 		payload := map[string]string{"apiKey": c.APIKey}
 
 		buf := new(bytes.Buffer)
-		json.NewEncoder(buf).Encode(payload)
-		resp, err := c.httpClient.Post(u.String(), "application/json", buf)
+		err = json.NewEncoder(buf).Encode(payload)
+
+		if err != nil {
+			return nil, err
+		}
+
+		req, err := http.NewRequest("PSOT", u.String(), buf)
+
+		if err != nil {
+			return nil, err
+		}
+
+		req.Header.Set("Accept", "application/json")
+		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("User-Agent", "api.video SDK (go; v:1.0)")
+
+		cl := *c.httpClient
+		resp, err := cl.Do(req)
 
 		if err != nil {
 			return nil, err
