@@ -78,12 +78,29 @@ func (r VideosApiListRequest) PageSize(pageSize int32) VideosApiListRequest {
 type VideosServiceI interface {
 	/*
 	 * Delete Delete a video
-	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId The video ID for the video you want to delete.
 	 * @return VideosApiDeleteRequest
 	 */
 
 	Delete(videoId string) error
+
+	/*
+	 * Delete Delete a video
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param videoId The video ID for the video you want to delete.
+	 * @return VideosApiDeleteRequest
+	 */
+
+	DeleteWithContext(ctx context.Context, videoId string) error
+
+	/*
+	 * Get Show a video
+	 * @param videoId The unique identifier for the video you want details about.
+	 * @return VideosApiGetRequest
+	 */
+
+	Get(videoId string) (*Video, error)
+
 	/*
 	 * Get Show a video
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -91,7 +108,16 @@ type VideosServiceI interface {
 	 * @return VideosApiGetRequest
 	 */
 
-	Get(videoId string) (*Video, error)
+	GetWithContext(ctx context.Context, videoId string) (*Video, error)
+
+	/*
+	 * GetStatus Show video status
+	 * @param videoId The unique identifier for the video you want the status for.
+	 * @return VideosApiGetStatusRequest
+	 */
+
+	GetStatus(videoId string) (*Videostatus, error)
+
 	/*
 	 * GetStatus Show video status
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -99,14 +125,30 @@ type VideosServiceI interface {
 	 * @return VideosApiGetStatusRequest
 	 */
 
-	GetStatus(videoId string) (*Videostatus, error)
+	GetStatusWithContext(ctx context.Context, videoId string) (*Videostatus, error)
+
+	/*
+	 * List List all videos
+	 * @return VideosApiListRequest
+	 */
+
+	List(r VideosApiListRequest) (*VideosListResponse, error)
+
 	/*
 	 * List List all videos
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return VideosApiListRequest
 	 */
 
-	List(r VideosApiListRequest) (*VideosListResponse, error)
+	ListWithContext(ctx context.Context, r VideosApiListRequest) (*VideosListResponse, error)
+
+	/*
+	 * Update Update a video
+	 * @param videoId The video ID for the video you want to delete.
+	 * @return VideosApiUpdateRequest
+	 */
+
+	Update(videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error)
 
 	/*
 	 * Update Update a video
@@ -115,7 +157,16 @@ type VideosServiceI interface {
 	 * @return VideosApiUpdateRequest
 	 */
 
-	Update(videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error)
+	UpdateWithContext(ctx context.Context, videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error)
+
+	/*
+	 * PickThumbnail Pick a thumbnail
+	 * @param videoId Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
+	 * @return VideosApiPickThumbnailRequest
+	 */
+
+	PickThumbnail(videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
+
 	/*
 	 * PickThumbnail Pick a thumbnail
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -123,34 +174,60 @@ type VideosServiceI interface {
 	 * @return VideosApiPickThumbnailRequest
 	 */
 
-	PickThumbnail(videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
+	PickThumbnailWithContext(ctx context.Context, videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
+
+	/*
+	 * UploadWithUploadToken Upload with an upload token
+	 * @return VideosApiUploadWithUploadTokenRequest
+	 */
+	UploadWithUploadToken(token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
 	/*
 	 * UploadWithUploadToken Upload with an upload token
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return VideosApiUploadWithUploadTokenRequest
 	 */
-	UploadWithUploadToken(token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+	UploadWithUploadTokenWithContext(ctx context.Context, token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
 
 	/*
 	 * UploadWithUploadToken Upload with an upload token
-
 	 * @return VideosApiUploadWithUploadTokenRequest
 	 */
 	UploadWithUploadTokenFile(token string, file *os.File) (*Video, error)
+
+	/*
+	 * UploadWithUploadToken Upload with an upload token
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return VideosApiUploadWithUploadTokenRequest
+	 */
+	UploadWithUploadTokenFileWithContext(ctx context.Context, token string, file *os.File) (*Video, error)
+	/*
+	 * Create Create a video
+	 * @return VideosApiCreateRequest
+	 */
+
+	Create(videoCreatePayload VideoCreatePayload) (*Video, error)
+
 	/*
 	 * Create Create a video
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return VideosApiCreateRequest
 	 */
 
-	Create(videoCreatePayload VideoCreatePayload) (*Video, error)
+	CreateWithContext(ctx context.Context, videoCreatePayload VideoCreatePayload) (*Video, error)
+
+	/*
+	 * Upload Upload a video
+	 * @param videoId Enter the videoId you want to use to upload your video.
+	 * @return VideosApiUploadRequest
+	 */
+	Upload(videoId string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
 	/*
 	 * Upload Upload a video
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId Enter the videoId you want to use to upload your video.
 	 * @return VideosApiUploadRequest
 	 */
-	Upload(videoId string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+	UploadWithContext(ctx context.Context, videoId string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
 
 	/*
 	 * Upload Upload a video
@@ -158,13 +235,27 @@ type VideosServiceI interface {
 	 * @return VideosApiUploadRequest
 	 */
 	UploadFile(videoId string, file *os.File) (*Video, error)
+
+	/*
+	 * Upload Upload a video
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param videoId Enter the videoId you want to use to upload your video.
+	 * @return VideosApiUploadRequest
+	 */
+	UploadFileWithContext(ctx context.Context, videoId string, file *os.File) (*Video, error)
+	/*
+	 * UploadThumbnail Upload a thumbnail
+	 * @param videoId Unique identifier of the chosen video
+	 * @return VideosApiUploadThumbnailRequest
+	 */
+	UploadThumbnail(videoId string, fileName string, fileReader io.Reader) (*Video, error)
 	/*
 	 * UploadThumbnail Upload a thumbnail
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId Unique identifier of the chosen video
 	 * @return VideosApiUploadThumbnailRequest
 	 */
-	UploadThumbnail(videoId string, fileName string, fileReader io.Reader) (*Video, error)
+	UploadThumbnailWithContext(ctx context.Context, videoId string, fileName string, fileReader io.Reader) (*Video, error)
 
 	/*
 	 * UploadThumbnail Upload a thumbnail
@@ -172,6 +263,14 @@ type VideosServiceI interface {
 	 * @return VideosApiUploadThumbnailRequest
 	 */
 	UploadThumbnailFile(videoId string, file *os.File) (*Video, error)
+
+	/*
+	 * UploadThumbnail Upload a thumbnail
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param videoId Unique identifier of the chosen video
+	 * @return VideosApiUploadThumbnailRequest
+	 */
+	UploadThumbnailFileWithContext(ctx context.Context, videoId string, file *os.File) (*Video, error)
 }
 
 // VideosService communicating with the Videos
@@ -189,6 +288,20 @@ type VideosService struct {
  */
 
 func (s *VideosService) Delete(videoId string) error {
+
+	return s.DeleteWithContext(context.Background(), videoId)
+
+}
+
+/*
+ * Delete Delete a video
+ * If you do not need a video any longer, you can send a request to delete it. All you need is the videoId.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId The video ID for the video you want to delete.
+ * @return VideosApiDeleteRequest
+ */
+
+func (s *VideosService) DeleteWithContext(ctx context.Context, videoId string) error {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos/{videoId}"
@@ -197,7 +310,7 @@ func (s *VideosService) Delete(videoId string) error {
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	req, err := s.client.prepareRequest(http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return err
 	}
@@ -221,6 +334,20 @@ func (s *VideosService) Delete(videoId string) error {
  */
 
 func (s *VideosService) Get(videoId string) (*Video, error) {
+
+	return s.GetWithContext(context.Background(), videoId)
+
+}
+
+/*
+ * Get Show a video
+ * This call provides the same JSON information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId The unique identifier for the video you want details about.
+ * @return VideosApiGetRequest
+ */
+
+func (s *VideosService) GetWithContext(ctx context.Context, videoId string) (*Video, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos/{videoId}"
@@ -229,7 +356,7 @@ func (s *VideosService) Get(videoId string) (*Video, error) {
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -256,6 +383,22 @@ Once encoding is completed, the response also lists the available stream qualiti
 */
 
 func (s *VideosService) GetStatus(videoId string) (*Videostatus, error) {
+
+	return s.GetStatusWithContext(context.Background(), videoId)
+
+}
+
+/*
+ * GetStatus Show video status
+ * This API provides upload status & encoding status to determine when the video is uploaded or ready to playback.
+
+Once encoding is completed, the response also lists the available stream qualities.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId The unique identifier for the video you want the status for.
+ * @return VideosApiGetStatusRequest
+*/
+
+func (s *VideosService) GetStatusWithContext(ctx context.Context, videoId string) (*Videostatus, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos/{videoId}/status"
@@ -264,7 +407,7 @@ func (s *VideosService) GetStatus(videoId string) (*Videostatus, error) {
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -288,6 +431,19 @@ func (s *VideosService) GetStatus(videoId string) (*Videostatus, error) {
  */
 
 func (s *VideosService) List(r VideosApiListRequest) (*VideosListResponse, error) {
+
+	return s.ListWithContext(context.Background(), r)
+
+}
+
+/*
+ * List List all videos
+ * Requests to this endpoint return a list of your videos (with all their details). With no parameters added to this query, the API returns all videos. You can filter what videos the API returns using the parameters described below.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return VideosApiListRequest
+ */
+
+func (s *VideosService) ListWithContext(ctx context.Context, r VideosApiListRequest) (*VideosListResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos"
@@ -334,7 +490,7 @@ func (s *VideosService) List(r VideosApiListRequest) (*VideosListResponse, error
 		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
 	}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -359,6 +515,20 @@ func (s *VideosService) List(r VideosApiListRequest) (*VideosListResponse, error
  */
 
 func (s *VideosService) Update(videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error) {
+
+	return s.UpdateWithContext(context.Background(), videoId, videoUpdatePayload)
+
+}
+
+/*
+ * Update Update a video
+ * Use this endpoint to update the parameters associated with your video. The video you are updating is determined by the video ID you provide in the path. For each parameter you want to update, include the update in the request body. NOTE: If you are updating an array, you must provide the entire array as what you provide here overwrites what is in the system rather than appending to it.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId The video ID for the video you want to delete.
+ * @return VideosApiUpdateRequest
+ */
+
+func (s *VideosService) UpdateWithContext(ctx context.Context, videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos/{videoId}"
@@ -369,7 +539,7 @@ func (s *VideosService) Update(videoId string, videoUpdatePayload VideoUpdatePay
 	// body params
 	localVarPostBody = videoUpdatePayload
 
-	req, err := s.client.prepareRequest(http.MethodPatch, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodPatch, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -394,6 +564,20 @@ func (s *VideosService) Update(videoId string, videoUpdatePayload VideoUpdatePay
  */
 
 func (s *VideosService) PickThumbnail(videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error) {
+
+	return s.PickThumbnailWithContext(context.Background(), videoId, videoThumbnailPickPayload)
+
+}
+
+/*
+ * PickThumbnail Pick a thumbnail
+ * Pick a thumbnail from the given time code. If you'd like to upload an image for your thumbnail, use the [Upload a Thumbnail](https://docs.api.video/reference#post_videos-videoid-thumbnail) endpoint. There may be a short delay for the thumbnail to update.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
+ * @return VideosApiPickThumbnailRequest
+ */
+
+func (s *VideosService) PickThumbnailWithContext(ctx context.Context, videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos/{videoId}/thumbnail"
@@ -404,7 +588,7 @@ func (s *VideosService) PickThumbnail(videoId string, videoThumbnailPickPayload 
 	// body params
 	localVarPostBody = videoThumbnailPickPayload
 
-	req, err := s.client.prepareRequest(http.MethodPatch, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodPatch, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -476,10 +660,69 @@ We have created a <a href='https://api.video/blog/tutorials/uploading-large-file
 */
 
 func (s *VideosService) UploadWithUploadTokenFile(token string, file *os.File) (*Video, error) {
+	return s.UploadWithUploadTokenFileWithContext(context.Background(), token, file)
+}
+
+/*
+ * UploadWithUploadToken Upload with an upload token
+ * When given a token, anyone can upload a file to the URI `https://ws.api.video/upload?token=<tokenId>`.
+
+Example with cURL:
+
+```curl
+$ curl  --request POST --url 'https://ws.api.video/upload?token=toXXX'
+ --header 'content-type: multipart/form-data'
+ -F file=@video.mp4
+```
+
+Or in an HTML form, with a little JavaScript to convert the form into JSON:
+```html
+<!--form for user interaction-->
+<form name="videoUploadForm" >
+  <label for=video>Video:</label>
+  <input type=file name=source/><br/>
+  <input value="Submit" type="submit">
+</form>
+<div></div>
+<!--JS takes the form data
+    uses FormData to turn the response into JSON.
+    then uses POST to upload the video file.
+    Update the token parameter in the url to your upload token.
+    -->
+<script>
+   var form = document.forms.namedItem("videoUploadForm");
+   form.addEventListener('submit', function(ev) {
+	 ev.preventDefault();
+     var oOutput = document.querySelector("div"),
+         oData = new FormData(form);
+     var oReq = new XMLHttpRequest();
+
+     oReq.open("POST", "https://ws.api.video/upload?token=toXXX", true);
+     oReq.send(oData);
+	 oReq.onload = function(oEvent) {
+       if (oReq.status ==201) {
+         oOutput.innerHTML = "Your video is uploaded!<br/>"  + oReq.response;
+       } else {
+         oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
+       }
+     };
+   }, false);
+</script>
+```
+
+
+### Dealing with large files
+
+We have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return VideosApiUploadWithUploadTokenRequest
+*/
+
+func (s *VideosService) UploadWithUploadTokenFileWithContext(ctx context.Context, token string, file *os.File) (*Video, error) {
 	fileInfo, _ := file.Stat()
 	fileSize := fileInfo.Size()
 
-	return s.UploadWithUploadToken(token, file.Name(), io.Reader(file), fileSize)
+	return s.UploadWithUploadTokenWithContext(ctx, token, file.Name(), io.Reader(file), fileSize)
 }
 
 /*
@@ -537,13 +780,71 @@ We have created a <a href='https://api.video/blog/tutorials/uploading-large-file
  * @return VideosApiUploadWithUploadTokenRequest
 */
 func (s *VideosService) UploadWithUploadToken(token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadWithUploadTokenWithContext(context.Background(), token, fileName, fileReader, fileSize)
+}
+
+/*
+ * UploadWithUploadToken Upload with an upload token
+ * When given a token, anyone can upload a file to the URI `https://ws.api.video/upload?token=<tokenId>`.
+
+Example with cURL:
+
+```curl
+$ curl  --request POST --url 'https://ws.api.video/upload?token=toXXX'
+ --header 'content-type: multipart/form-data'
+ -F file=@video.mp4
+```
+
+Or in an HTML form, with a little JavaScript to convert the form into JSON:
+```html
+<!--form for user interaction-->
+<form name="videoUploadForm" >
+  <label for=video>Video:</label>
+  <input type=file name=source/><br/>
+  <input value="Submit" type="submit">
+</form>
+<div></div>
+<!--JS takes the form data
+    uses FormData to turn the response into JSON.
+    then uses POST to upload the video file.
+    Update the token parameter in the url to your upload token.
+    -->
+<script>
+   var form = document.forms.namedItem("videoUploadForm");
+   form.addEventListener('submit', function(ev) {
+	 ev.preventDefault();
+     var oOutput = document.querySelector("div"),
+         oData = new FormData(form);
+     var oReq = new XMLHttpRequest();
+
+     oReq.open("POST", "https://ws.api.video/upload?token=toXXX", true);
+     oReq.send(oData);
+	 oReq.onload = function(oEvent) {
+       if (oReq.status ==201) {
+         oOutput.innerHTML = "Your video is uploaded!<br/>"  + oReq.response;
+       } else {
+         oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
+       }
+     };
+   }, false);
+</script>
+```
+
+
+### Dealing with large files
+
+We have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return VideosApiUploadWithUploadTokenRequest
+*/
+func (s *VideosService) UploadWithUploadTokenWithContext(ctx context.Context, token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
 	localVarPath := "/upload"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := make(map[string]string)
 
-	requests, err := s.client.prepareRangeRequests(localVarPath, fileName, fileReader, fileSize, localVarHeaderParams, localVarQueryParams, localVarFormParams)
+	requests, err := s.client.prepareRangeRequests(ctx, localVarPath, fileName, fileReader, fileSize, localVarHeaderParams, localVarQueryParams, localVarFormParams)
 
 	if err != nil {
 		return nil, err
@@ -599,6 +900,48 @@ In this case, the service will respond `202 Accepted` and download the video asy
 */
 
 func (s *VideosService) Create(videoCreatePayload VideoCreatePayload) (*Video, error) {
+
+	return s.CreateWithContext(context.Background(), videoCreatePayload)
+
+}
+
+/*
+ * Create Create a video
+ * To create a video, you create its metadata first, before adding the video file (exception - when using an existing HTTP source).
+
+Videos are public by default. Mp4 encoded versions are created at the highest quality (max 1080p) by default.
+ ```shell
+$ curl https://ws.api.video/videos \
+-H 'Authorization: Bearer {access_token} \
+-d '{"title":"My video",
+     "description":"so many details",
+     "mp4Support":true
+}'
+```
+
+### Creating a hosted video
+
+You can also create a video directly from one hosted on a third-party server by giving its URI in `source` parameter:
+
+```shell
+$ curl https://ws.api.video/videos \
+-H 'Authorization: Bearer {access_token} \
+-d '{"source":"http://uri/to/video.mp4", "title":"My video"}'
+```
+
+In this case, the service will respond `202 Accepted` and download the video asynchronously.
+
+ We have tutorials on:
+* [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
+* [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
+* [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
+* [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
+
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return VideosApiCreateRequest
+*/
+
+func (s *VideosService) CreateWithContext(ctx context.Context, videoCreatePayload VideoCreatePayload) (*Video, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos"
@@ -608,7 +951,7 @@ func (s *VideosService) Create(videoCreatePayload VideoCreatePayload) (*Video, e
 	// body params
 	localVarPostBody = videoCreatePayload
 
-	req, err := s.client.prepareRequest(http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -639,10 +982,28 @@ curl https://ws.api.video/videos/{videoId}/source \
 */
 
 func (s *VideosService) UploadFile(videoId string, file *os.File) (*Video, error) {
+	return s.UploadFileWithContext(context.Background(), videoId, file)
+}
+
+/*
+ * Upload Upload a video
+ * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+
+```bash
+curl https://ws.api.video/videos/{videoId}/source \
+  -H 'Authorization: Bearer {access_token}' \
+  -F file=@/path/to/video.mp4
+  ```
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId Enter the videoId you want to use to upload your video.
+ * @return VideosApiUploadRequest
+*/
+
+func (s *VideosService) UploadFileWithContext(ctx context.Context, videoId string, file *os.File) (*Video, error) {
 	fileInfo, _ := file.Stat()
 	fileSize := fileInfo.Size()
 
-	return s.Upload(videoId, file.Name(), io.Reader(file), fileSize)
+	return s.UploadWithContext(ctx, videoId, file.Name(), io.Reader(file), fileSize)
 }
 
 /*
@@ -659,6 +1020,23 @@ curl https://ws.api.video/videos/{videoId}/source \
  * @return VideosApiUploadRequest
 */
 func (s *VideosService) Upload(videoId string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadWithContext(context.Background(), videoId, fileName, fileReader, fileSize)
+}
+
+/*
+ * Upload Upload a video
+ * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+
+```bash
+curl https://ws.api.video/videos/{videoId}/source \
+  -H 'Authorization: Bearer {access_token}' \
+  -F file=@/path/to/video.mp4
+  ```
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId Enter the videoId you want to use to upload your video.
+ * @return VideosApiUploadRequest
+*/
+func (s *VideosService) UploadWithContext(ctx context.Context, videoId string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
 	localVarPath := "/videos/{videoId}/source"
 	localVarPath = strings.Replace(localVarPath, "{"+"videoId"+"}", url.PathEscape(parameterToString(videoId, "")), -1)
 
@@ -666,7 +1044,7 @@ func (s *VideosService) Upload(videoId string, fileName string, fileReader io.Re
 	localVarQueryParams := url.Values{}
 	localVarFormParams := make(map[string]string)
 
-	requests, err := s.client.prepareRangeRequests(localVarPath, fileName, fileReader, fileSize, localVarHeaderParams, localVarQueryParams, localVarFormParams)
+	requests, err := s.client.prepareRangeRequests(ctx, localVarPath, fileName, fileReader, fileSize, localVarHeaderParams, localVarQueryParams, localVarFormParams)
 
 	if err != nil {
 		return nil, err
@@ -694,7 +1072,19 @@ func (s *VideosService) Upload(videoId string, fileName string, fileReader io.Re
  */
 
 func (s *VideosService) UploadThumbnailFile(videoId string, file *os.File) (*Video, error) {
-	return s.UploadThumbnail(videoId, file.Name(), io.Reader(file))
+	return s.UploadThumbnailFileWithContext(context.Background(), videoId, file)
+}
+
+/*
+ * UploadThumbnail Upload a thumbnail
+ * In creating a thumbnail, you may either upload an image, or you can pick a time in the video to be used as thumbnail. This endpoint is for uploading an image. Use [Pick a Thumbnail](https://docs.api.video/reference#patch_videos-videoid-thumbnail) to pick a time in the video. There may be a short delay before the new thumbnail is delivered to our CDN.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId Unique identifier of the chosen video
+ * @return VideosApiUploadThumbnailRequest
+ */
+
+func (s *VideosService) UploadThumbnailFileWithContext(ctx context.Context, videoId string, file *os.File) (*Video, error) {
+	return s.UploadThumbnailWithContext(ctx, videoId, file.Name(), io.Reader(file))
 }
 
 /*
@@ -705,6 +1095,17 @@ func (s *VideosService) UploadThumbnailFile(videoId string, file *os.File) (*Vid
  * @return VideosApiUploadThumbnailRequest
  */
 func (s *VideosService) UploadThumbnail(videoId string, fileName string, fileReader io.Reader) (*Video, error) {
+	return s.UploadThumbnailWithContext(context.Background(), videoId, fileName, fileReader)
+}
+
+/*
+ * UploadThumbnail Upload a thumbnail
+ * In creating a thumbnail, you may either upload an image, or you can pick a time in the video to be used as thumbnail. This endpoint is for uploading an image. Use [Pick a Thumbnail](https://docs.api.video/reference#patch_videos-videoid-thumbnail) to pick a time in the video. There may be a short delay before the new thumbnail is delivered to our CDN.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId Unique identifier of the chosen video
+ * @return VideosApiUploadThumbnailRequest
+ */
+func (s *VideosService) UploadThumbnailWithContext(ctx context.Context, videoId string, fileName string, fileReader io.Reader) (*Video, error) {
 	localVarPath := "/videos/{videoId}/thumbnail"
 	localVarPath = strings.Replace(localVarPath, "{"+"videoId"+"}", url.PathEscape(parameterToString(videoId, "")), -1)
 
@@ -712,7 +1113,7 @@ func (s *VideosService) UploadThumbnail(videoId string, fileName string, fileRea
 	localVarQueryParams := url.Values{}
 	localVarFormParams := make(map[string]string)
 
-	req, err := s.client.prepareUploadRequest(localVarPath, fileName, fileReader, localVarHeaderParams, localVarQueryParams, localVarFormParams)
+	req, err := s.client.prepareUploadRequest(ctx, localVarPath, fileName, fileReader, localVarHeaderParams, localVarQueryParams, localVarFormParams)
 
 	if err != nil {
 		return nil, err

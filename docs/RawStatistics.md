@@ -15,6 +15,9 @@ Method | HTTP request | Description
 > ListLiveStreamSessions(liveStreamId string, r RawStatisticsApiListLiveStreamSessionsRequest) (*RawStatisticsListLiveStreamAnalyticsResponse, error)
 
 
+> ListLiveStreamSessionsWithContext(ctx context.Context, liveStreamId string, r RawStatisticsApiListLiveStreamSessionsRequest) (*RawStatisticsListLiveStreamAnalyticsResponse, error)
+
+
 
 List live stream player sessions
 
@@ -83,6 +86,9 @@ Name | Type | Description  | Notes
 > ListSessionEvents(sessionId string, r RawStatisticsApiListSessionEventsRequest) (*RawStatisticsListPlayerSessionEventsResponse, error)
 
 
+> ListSessionEventsWithContext(ctx context.Context, sessionId string, r RawStatisticsApiListSessionEventsRequest) (*RawStatisticsListPlayerSessionEventsResponse, error)
+
+
 
 List player session events
 
@@ -149,6 +155,9 @@ Name | Type | Description  | Notes
 ## ListVideoSessions
 
 > ListVideoSessions(videoId string, r RawStatisticsApiListVideoSessionsRequest) (*RawStatisticsListSessionsResponse, error)
+
+
+> ListVideoSessionsWithContext(ctx context.Context, videoId string, r RawStatisticsApiListVideoSessionsRequest) (*RawStatisticsListSessionsResponse, error)
 
 
 

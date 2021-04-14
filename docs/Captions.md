@@ -16,6 +16,8 @@ Method | HTTP request | Description
 
 > Delete(videoId string, language string) (error)
 
+> DeleteWithContext(ctx context.Context, videoId string, language string) (error)
+
 
 Delete a caption
 
@@ -77,6 +79,9 @@ Name | Type | Description  | Notes
 ## List
 
 > List(videoId string, r CaptionsApiListRequest) (*CaptionsListResponse, error)
+
+
+> ListWithContext(ctx context.Context, videoId string, r CaptionsApiListRequest) (*CaptionsListResponse, error)
 
 
 
@@ -146,6 +151,8 @@ Name | Type | Description  | Notes
 
 > Get(videoId string, language string) (*Subtitle, error)
 
+> GetWithContext(ctx context.Context, videoId string, language string) (*Subtitle, error)
+
 
 Show a caption
 
@@ -209,6 +216,8 @@ Name | Type | Description  | Notes
 ## Update
 
 > Update(videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Subtitle, error)
+
+> UpdateWithContext(ctx context.Context, videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Subtitle, error)
 
 
 Update caption
@@ -275,8 +284,9 @@ Name | Type | Description  | Notes
 ## Upload
 
 > UploadFile(videoId string, language string, file *os.File) (*Subtitle, error)
-
 > Upload(videoId string, language string, fileName string, fileReader io.Reader)
+> UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Subtitle, error)
+> UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader)
 
 Upload a caption
 

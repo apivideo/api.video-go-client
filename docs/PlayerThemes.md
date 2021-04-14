@@ -18,6 +18,8 @@ Method | HTTP request | Description
 
 > Delete(playerId string) (error)
 
+> DeleteWithContext(ctx context.Context, playerId string) (error)
+
 
 Delete a player
 
@@ -78,6 +80,8 @@ Name | Type | Description  | Notes
 
 > DeleteLogo(playerId string) (error)
 
+> DeleteLogoWithContext(ctx context.Context, playerId string) (error)
+
 
 Delete logo
 
@@ -135,6 +139,9 @@ Name | Type | Description  | Notes
 ## List
 
 > List(r PlayerThemesApiListRequest) (*PlayersListResponse, error)
+
+
+> ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayersListResponse, error)
 
 
 
@@ -204,6 +211,8 @@ Name | Type | Description  | Notes
 
 > Get(playerId string) (*Player, error)
 
+> GetWithContext(ctx context.Context, playerId string) (*Player, error)
+
 
 Show a player
 
@@ -265,6 +274,8 @@ Name | Type | Description  | Notes
 ## Update
 
 > Update(playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error)
+
+> UpdateWithContext(ctx context.Context, playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error)
 
 
 Update a player
@@ -330,6 +341,8 @@ Name | Type | Description  | Notes
 
 > Create(playerCreationPayload PlayerCreationPayload) (*Player, error)
 
+> CreateWithContext(ctx context.Context, playerCreationPayload PlayerCreationPayload) (*Player, error)
+
 
 Create a player
 
@@ -389,8 +402,9 @@ Name | Type | Description  | Notes
 ## UploadLogo
 
 > UploadLogoFile(playerId string, file *os.File, link string) (*Player, error)
-
 > UploadLogo(playerId string, link string, fileName string, fileReader io.Reader)
+> UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link string) (*Player, error)
+> UploadLogoWithContext(ctx context.Context, playerId string, link string, fileName string, fileReader io.Reader)
 
 Upload a logo
 

@@ -61,12 +61,29 @@ func (r LiveStreamsApiListRequest) PageSize(pageSize int32) LiveStreamsApiListRe
 type LiveStreamsServiceI interface {
 	/*
 	 * Delete Delete a live stream
-	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param liveStreamId The unique ID for the live stream that you want to remove.
 	 * @return LiveStreamsApiDeleteRequest
 	 */
 
 	Delete(liveStreamId string) error
+
+	/*
+	 * Delete Delete a live stream
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param liveStreamId The unique ID for the live stream that you want to remove.
+	 * @return LiveStreamsApiDeleteRequest
+	 */
+
+	DeleteWithContext(ctx context.Context, liveStreamId string) error
+
+	/*
+	 * DeleteThumbnail Delete a thumbnail
+	 * @param liveStreamId The unique identifier for the live stream you want to delete.
+	 * @return LiveStreamsApiDeleteThumbnailRequest
+	 */
+
+	DeleteThumbnail(liveStreamId string) (*LiveStream, error)
+
 	/*
 	 * DeleteThumbnail Delete a thumbnail
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -74,14 +91,30 @@ type LiveStreamsServiceI interface {
 	 * @return LiveStreamsApiDeleteThumbnailRequest
 	 */
 
-	DeleteThumbnail(liveStreamId string) (*LiveStream, error)
+	DeleteThumbnailWithContext(ctx context.Context, liveStreamId string) (*LiveStream, error)
+
+	/*
+	 * List List all live streams
+	 * @return LiveStreamsApiListRequest
+	 */
+
+	List(r LiveStreamsApiListRequest) (*LiveStreamListResponse, error)
+
 	/*
 	 * List List all live streams
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return LiveStreamsApiListRequest
 	 */
 
-	List(r LiveStreamsApiListRequest) (*LiveStreamListResponse, error)
+	ListWithContext(ctx context.Context, r LiveStreamsApiListRequest) (*LiveStreamListResponse, error)
+
+	/*
+	 * Get Show live stream
+	 * @param liveStreamId The unique ID for the live stream you want to watch.
+	 * @return LiveStreamsApiGetRequest
+	 */
+
+	Get(liveStreamId string) (*LiveStream, error)
 
 	/*
 	 * Get Show live stream
@@ -90,7 +123,16 @@ type LiveStreamsServiceI interface {
 	 * @return LiveStreamsApiGetRequest
 	 */
 
-	Get(liveStreamId string) (*LiveStream, error)
+	GetWithContext(ctx context.Context, liveStreamId string) (*LiveStream, error)
+
+	/*
+	 * Update Update a live stream
+	 * @param liveStreamId The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+	 * @return LiveStreamsApiUpdateRequest
+	 */
+
+	Update(liveStreamId string, liveStreamUpdatePayload LiveStreamUpdatePayload) (*LiveStream, error)
+
 	/*
 	 * Update Update a live stream
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -98,21 +140,36 @@ type LiveStreamsServiceI interface {
 	 * @return LiveStreamsApiUpdateRequest
 	 */
 
-	Update(liveStreamId string, liveStreamUpdatePayload LiveStreamUpdatePayload) (*LiveStream, error)
+	UpdateWithContext(ctx context.Context, liveStreamId string, liveStreamUpdatePayload LiveStreamUpdatePayload) (*LiveStream, error)
+
+	/*
+	 * Create Create live stream
+	 * @return LiveStreamsApiCreateRequest
+	 */
+
+	Create(liveStreamCreatePayload LiveStreamCreatePayload) (*LiveStream, error)
+
 	/*
 	 * Create Create live stream
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return LiveStreamsApiCreateRequest
 	 */
 
-	Create(liveStreamCreatePayload LiveStreamCreatePayload) (*LiveStream, error)
+	CreateWithContext(ctx context.Context, liveStreamCreatePayload LiveStreamCreatePayload) (*LiveStream, error)
+
+	/*
+	 * UploadThumbnail Upload a thumbnail
+	 * @param liveStreamId The unique ID for the live stream you want to upload.
+	 * @return LiveStreamsApiUploadThumbnailRequest
+	 */
+	UploadThumbnail(liveStreamId string, fileName string, fileReader io.Reader) (*LiveStream, error)
 	/*
 	 * UploadThumbnail Upload a thumbnail
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param liveStreamId The unique ID for the live stream you want to upload.
 	 * @return LiveStreamsApiUploadThumbnailRequest
 	 */
-	UploadThumbnail(liveStreamId string, fileName string, fileReader io.Reader) (*LiveStream, error)
+	UploadThumbnailWithContext(ctx context.Context, liveStreamId string, fileName string, fileReader io.Reader) (*LiveStream, error)
 
 	/*
 	 * UploadThumbnail Upload a thumbnail
@@ -120,6 +177,14 @@ type LiveStreamsServiceI interface {
 	 * @return LiveStreamsApiUploadThumbnailRequest
 	 */
 	UploadThumbnailFile(liveStreamId string, file *os.File) (*LiveStream, error)
+
+	/*
+	 * UploadThumbnail Upload a thumbnail
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param liveStreamId The unique ID for the live stream you want to upload.
+	 * @return LiveStreamsApiUploadThumbnailRequest
+	 */
+	UploadThumbnailFileWithContext(ctx context.Context, liveStreamId string, file *os.File) (*LiveStream, error)
 }
 
 // LiveStreamsService communicating with the LiveStreams
@@ -136,6 +201,19 @@ type LiveStreamsService struct {
  */
 
 func (s *LiveStreamsService) Delete(liveStreamId string) error {
+
+	return s.DeleteWithContext(context.Background(), liveStreamId)
+
+}
+
+/*
+ * Delete Delete a live stream
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param liveStreamId The unique ID for the live stream that you want to remove.
+ * @return LiveStreamsApiDeleteRequest
+ */
+
+func (s *LiveStreamsService) DeleteWithContext(ctx context.Context, liveStreamId string) error {
 	var localVarPostBody interface{}
 
 	localVarPath := "/live-streams/{liveStreamId}"
@@ -144,7 +222,7 @@ func (s *LiveStreamsService) Delete(liveStreamId string) error {
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	req, err := s.client.prepareRequest(http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return err
 	}
@@ -168,6 +246,20 @@ func (s *LiveStreamsService) Delete(liveStreamId string) error {
  */
 
 func (s *LiveStreamsService) DeleteThumbnail(liveStreamId string) (*LiveStream, error) {
+
+	return s.DeleteThumbnailWithContext(context.Background(), liveStreamId)
+
+}
+
+/*
+ * DeleteThumbnail Delete a thumbnail
+ * Send the unique identifier for a live stream to delete it from the system.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param liveStreamId The unique identifier for the live stream you want to delete.
+ * @return LiveStreamsApiDeleteThumbnailRequest
+ */
+
+func (s *LiveStreamsService) DeleteThumbnailWithContext(ctx context.Context, liveStreamId string) (*LiveStream, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/live-streams/{liveStreamId}/thumbnail"
@@ -176,7 +268,7 @@ func (s *LiveStreamsService) DeleteThumbnail(liveStreamId string) (*LiveStream, 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	req, err := s.client.prepareRequest(http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -200,6 +292,19 @@ func (s *LiveStreamsService) DeleteThumbnail(liveStreamId string) (*LiveStream, 
  */
 
 func (s *LiveStreamsService) List(r LiveStreamsApiListRequest) (*LiveStreamListResponse, error) {
+
+	return s.ListWithContext(context.Background(), r)
+
+}
+
+/*
+ * List List all live streams
+ * With no parameters added to the url, this will return all livestreams. Query by name or key to limit the list.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return LiveStreamsApiListRequest
+ */
+
+func (s *LiveStreamsService) ListWithContext(ctx context.Context, r LiveStreamsApiListRequest) (*LiveStreamListResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/live-streams"
@@ -225,7 +330,7 @@ func (s *LiveStreamsService) List(r LiveStreamsApiListRequest) (*LiveStreamListR
 		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
 	}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -250,6 +355,20 @@ func (s *LiveStreamsService) List(r LiveStreamsApiListRequest) (*LiveStreamListR
  */
 
 func (s *LiveStreamsService) Get(liveStreamId string) (*LiveStream, error) {
+
+	return s.GetWithContext(context.Background(), liveStreamId)
+
+}
+
+/*
+ * Get Show live stream
+ * Supply a LivestreamId, and you'll get all the details for streaming into, and watching the livestream.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param liveStreamId The unique ID for the live stream you want to watch.
+ * @return LiveStreamsApiGetRequest
+ */
+
+func (s *LiveStreamsService) GetWithContext(ctx context.Context, liveStreamId string) (*LiveStream, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/live-streams/{liveStreamId}"
@@ -258,7 +377,7 @@ func (s *LiveStreamsService) Get(liveStreamId string) (*LiveStream, error) {
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -283,6 +402,20 @@ func (s *LiveStreamsService) Get(liveStreamId string) (*LiveStream, error) {
  */
 
 func (s *LiveStreamsService) Update(liveStreamId string, liveStreamUpdatePayload LiveStreamUpdatePayload) (*LiveStream, error) {
+
+	return s.UpdateWithContext(context.Background(), liveStreamId, liveStreamUpdatePayload)
+
+}
+
+/*
+ * Update Update a live stream
+ * Use this endpoint to update the player, or to turn recording on/off (saving a copy of the livestream). NOTE: If the livestream is actively streaming, changing the recording status will only affect the NEXT stream.    The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param liveStreamId The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+ * @return LiveStreamsApiUpdateRequest
+ */
+
+func (s *LiveStreamsService) UpdateWithContext(ctx context.Context, liveStreamId string, liveStreamUpdatePayload LiveStreamUpdatePayload) (*LiveStream, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/live-streams/{liveStreamId}"
@@ -293,7 +426,7 @@ func (s *LiveStreamsService) Update(liveStreamId string, liveStreamUpdatePayload
 	// body params
 	localVarPostBody = liveStreamUpdatePayload
 
-	req, err := s.client.prepareRequest(http.MethodPatch, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodPatch, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -321,6 +454,23 @@ Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey
 */
 
 func (s *LiveStreamsService) Create(liveStreamCreatePayload LiveStreamCreatePayload) (*LiveStream, error) {
+
+	return s.CreateWithContext(context.Background(), liveStreamCreatePayload)
+
+}
+
+/*
+ * Create Create live stream
+ * A live stream will give you the 'connection point' to RTMP your video stream to api.video. It will also give you the details for viewers to watch the same livestream.
+The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
+
+See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS.
+Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return LiveStreamsApiCreateRequest
+*/
+
+func (s *LiveStreamsService) CreateWithContext(ctx context.Context, liveStreamCreatePayload LiveStreamCreatePayload) (*LiveStream, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/live-streams"
@@ -330,7 +480,7 @@ func (s *LiveStreamsService) Create(liveStreamCreatePayload LiveStreamCreatePayl
 	// body params
 	localVarPostBody = liveStreamCreatePayload
 
-	req, err := s.client.prepareRequest(http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -355,7 +505,19 @@ func (s *LiveStreamsService) Create(liveStreamCreatePayload LiveStreamCreatePayl
  */
 
 func (s *LiveStreamsService) UploadThumbnailFile(liveStreamId string, file *os.File) (*LiveStream, error) {
-	return s.UploadThumbnail(liveStreamId, file.Name(), io.Reader(file))
+	return s.UploadThumbnailFileWithContext(context.Background(), liveStreamId, file)
+}
+
+/*
+ * UploadThumbnail Upload a thumbnail
+ * Upload an image to use as a backdrop for your livestream.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param liveStreamId The unique ID for the live stream you want to upload.
+ * @return LiveStreamsApiUploadThumbnailRequest
+ */
+
+func (s *LiveStreamsService) UploadThumbnailFileWithContext(ctx context.Context, liveStreamId string, file *os.File) (*LiveStream, error) {
+	return s.UploadThumbnailWithContext(ctx, liveStreamId, file.Name(), io.Reader(file))
 }
 
 /*
@@ -366,6 +528,17 @@ func (s *LiveStreamsService) UploadThumbnailFile(liveStreamId string, file *os.F
  * @return LiveStreamsApiUploadThumbnailRequest
  */
 func (s *LiveStreamsService) UploadThumbnail(liveStreamId string, fileName string, fileReader io.Reader) (*LiveStream, error) {
+	return s.UploadThumbnailWithContext(context.Background(), liveStreamId, fileName, fileReader)
+}
+
+/*
+ * UploadThumbnail Upload a thumbnail
+ * Upload an image to use as a backdrop for your livestream.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param liveStreamId The unique ID for the live stream you want to upload.
+ * @return LiveStreamsApiUploadThumbnailRequest
+ */
+func (s *LiveStreamsService) UploadThumbnailWithContext(ctx context.Context, liveStreamId string, fileName string, fileReader io.Reader) (*LiveStream, error) {
 	localVarPath := "/live-streams/{liveStreamId}/thumbnail"
 	localVarPath = strings.Replace(localVarPath, "{"+"liveStreamId"+"}", url.PathEscape(parameterToString(liveStreamId, "")), -1)
 
@@ -373,7 +546,7 @@ func (s *LiveStreamsService) UploadThumbnail(liveStreamId string, fileName strin
 	localVarQueryParams := url.Values{}
 	localVarFormParams := make(map[string]string)
 
-	req, err := s.client.prepareUploadRequest(localVarPath, fileName, fileReader, localVarHeaderParams, localVarQueryParams, localVarFormParams)
+	req, err := s.client.prepareUploadRequest(ctx, localVarPath, fileName, fileReader, localVarHeaderParams, localVarQueryParams, localVarFormParams)
 
 	if err != nil {
 		return nil, err

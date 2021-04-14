@@ -15,6 +15,8 @@ Method | HTTP request | Description
 
 > DeleteToken(uploadToken string) (error)
 
+> DeleteTokenWithContext(ctx context.Context, uploadToken string) (error)
+
 
 Delete an upload token
 
@@ -74,6 +76,9 @@ Name | Type | Description  | Notes
 ## List
 
 > List(r UploadTokensApiListRequest) (*TokenListResponse, error)
+
+
+> ListWithContext(ctx context.Context, r UploadTokensApiListRequest) (*TokenListResponse, error)
 
 
 
@@ -143,6 +148,8 @@ Name | Type | Description  | Notes
 
 > GetToken(uploadToken string) (*UploadToken, error)
 
+> GetTokenWithContext(ctx context.Context, uploadToken string) (*UploadToken, error)
+
 
 Show upload token
 
@@ -204,6 +211,8 @@ Name | Type | Description  | Notes
 ## CreateToken
 
 > CreateToken(tokenCreatePayload TokenCreatePayload) (*UploadToken, error)
+
+> CreateTokenWithContext(ctx context.Context, tokenCreatePayload TokenCreatePayload) (*UploadToken, error)
 
 
 Generate an upload token

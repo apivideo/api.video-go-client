@@ -51,12 +51,29 @@ func (r PlayerThemesApiListRequest) PageSize(pageSize int32) PlayerThemesApiList
 type PlayerThemesServiceI interface {
 	/*
 	 * Delete Delete a player
-	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param playerId The unique identifier for the player you want to delete.
 	 * @return PlayerThemesApiDeleteRequest
 	 */
 
 	Delete(playerId string) error
+
+	/*
+	 * Delete Delete a player
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param playerId The unique identifier for the player you want to delete.
+	 * @return PlayerThemesApiDeleteRequest
+	 */
+
+	DeleteWithContext(ctx context.Context, playerId string) error
+
+	/*
+	 * DeleteLogo Delete logo
+	 * @param playerId The unique identifier for the player.
+	 * @return PlayerThemesApiDeleteLogoRequest
+	 */
+
+	DeleteLogo(playerId string) error
+
 	/*
 	 * DeleteLogo Delete logo
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -64,14 +81,30 @@ type PlayerThemesServiceI interface {
 	 * @return PlayerThemesApiDeleteLogoRequest
 	 */
 
-	DeleteLogo(playerId string) error
+	DeleteLogoWithContext(ctx context.Context, playerId string) error
+
+	/*
+	 * List List all players
+	 * @return PlayerThemesApiListRequest
+	 */
+
+	List(r PlayerThemesApiListRequest) (*PlayersListResponse, error)
+
 	/*
 	 * List List all players
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return PlayerThemesApiListRequest
 	 */
 
-	List(r PlayerThemesApiListRequest) (*PlayersListResponse, error)
+	ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayersListResponse, error)
+
+	/*
+	 * Get Show a player
+	 * @param playerId The unique identifier for the player you want to retrieve.
+	 * @return PlayerThemesApiGetRequest
+	 */
+
+	Get(playerId string) (*Player, error)
 
 	/*
 	 * Get Show a player
@@ -80,7 +113,16 @@ type PlayerThemesServiceI interface {
 	 * @return PlayerThemesApiGetRequest
 	 */
 
-	Get(playerId string) (*Player, error)
+	GetWithContext(ctx context.Context, playerId string) (*Player, error)
+
+	/*
+	 * Update Update a player
+	 * @param playerId The unique identifier for the player.
+	 * @return PlayerThemesApiUpdateRequest
+	 */
+
+	Update(playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error)
+
 	/*
 	 * Update Update a player
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -88,21 +130,36 @@ type PlayerThemesServiceI interface {
 	 * @return PlayerThemesApiUpdateRequest
 	 */
 
-	Update(playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error)
+	UpdateWithContext(ctx context.Context, playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error)
+
+	/*
+	 * Create Create a player
+	 * @return PlayerThemesApiCreateRequest
+	 */
+
+	Create(playerCreationPayload PlayerCreationPayload) (*Player, error)
+
 	/*
 	 * Create Create a player
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return PlayerThemesApiCreateRequest
 	 */
 
-	Create(playerCreationPayload PlayerCreationPayload) (*Player, error)
+	CreateWithContext(ctx context.Context, playerCreationPayload PlayerCreationPayload) (*Player, error)
+
+	/*
+	 * UploadLogo Upload a logo
+	 * @param playerId The unique identifier for the player.
+	 * @return PlayerThemesApiUploadLogoRequest
+	 */
+	UploadLogo(playerId string, link string, fileName string, fileReader io.Reader) (*Player, error)
 	/*
 	 * UploadLogo Upload a logo
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param playerId The unique identifier for the player.
 	 * @return PlayerThemesApiUploadLogoRequest
 	 */
-	UploadLogo(playerId string, link string, fileName string, fileReader io.Reader) (*Player, error)
+	UploadLogoWithContext(ctx context.Context, playerId string, link string, fileName string, fileReader io.Reader) (*Player, error)
 
 	/*
 	 * UploadLogo Upload a logo
@@ -110,6 +167,14 @@ type PlayerThemesServiceI interface {
 	 * @return PlayerThemesApiUploadLogoRequest
 	 */
 	UploadLogoFile(playerId string, file *os.File, link string) (*Player, error)
+
+	/*
+	 * UploadLogo Upload a logo
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param playerId The unique identifier for the player.
+	 * @return PlayerThemesApiUploadLogoRequest
+	 */
+	UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link string) (*Player, error)
 }
 
 // PlayerThemesService communicating with the PlayerThemes
@@ -127,6 +192,20 @@ type PlayerThemesService struct {
  */
 
 func (s *PlayerThemesService) Delete(playerId string) error {
+
+	return s.DeleteWithContext(context.Background(), playerId)
+
+}
+
+/*
+ * Delete Delete a player
+ * Delete a player if you no longer need it. You can delete any player that you have the player ID for.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param playerId The unique identifier for the player you want to delete.
+ * @return PlayerThemesApiDeleteRequest
+ */
+
+func (s *PlayerThemesService) DeleteWithContext(ctx context.Context, playerId string) error {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players/{playerId}"
@@ -135,7 +214,7 @@ func (s *PlayerThemesService) Delete(playerId string) error {
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	req, err := s.client.prepareRequest(http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return err
 	}
@@ -158,6 +237,19 @@ func (s *PlayerThemesService) Delete(playerId string) error {
  */
 
 func (s *PlayerThemesService) DeleteLogo(playerId string) error {
+
+	return s.DeleteLogoWithContext(context.Background(), playerId)
+
+}
+
+/*
+ * DeleteLogo Delete logo
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param playerId The unique identifier for the player.
+ * @return PlayerThemesApiDeleteLogoRequest
+ */
+
+func (s *PlayerThemesService) DeleteLogoWithContext(ctx context.Context, playerId string) error {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players/{playerId}/logo"
@@ -166,7 +258,7 @@ func (s *PlayerThemesService) DeleteLogo(playerId string) error {
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	req, err := s.client.prepareRequest(http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return err
 	}
@@ -189,6 +281,19 @@ func (s *PlayerThemesService) DeleteLogo(playerId string) error {
  */
 
 func (s *PlayerThemesService) List(r PlayerThemesApiListRequest) (*PlayersListResponse, error) {
+
+	return s.ListWithContext(context.Background(), r)
+
+}
+
+/*
+ * List List all players
+ * Retrieve a list of all the players you created, as well as details about each one.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return PlayerThemesApiListRequest
+ */
+
+func (s *PlayerThemesService) ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayersListResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players"
@@ -208,7 +313,7 @@ func (s *PlayerThemesService) List(r PlayerThemesApiListRequest) (*PlayersListRe
 		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
 	}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -233,6 +338,20 @@ func (s *PlayerThemesService) List(r PlayerThemesApiListRequest) (*PlayersListRe
  */
 
 func (s *PlayerThemesService) Get(playerId string) (*Player, error) {
+
+	return s.GetWithContext(context.Background(), playerId)
+
+}
+
+/*
+ * Get Show a player
+ * Use a player ID to retrieve details about the player and display it for viewers.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param playerId The unique identifier for the player you want to retrieve.
+ * @return PlayerThemesApiGetRequest
+ */
+
+func (s *PlayerThemesService) GetWithContext(ctx context.Context, playerId string) (*Player, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players/{playerId}"
@@ -241,7 +360,7 @@ func (s *PlayerThemesService) Get(playerId string) (*Player, error) {
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -266,6 +385,20 @@ func (s *PlayerThemesService) Get(playerId string) (*Player, error) {
  */
 
 func (s *PlayerThemesService) Update(playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error) {
+
+	return s.UpdateWithContext(context.Background(), playerId, playerUpdatePayload)
+
+}
+
+/*
+ * Update Update a player
+ * Use a player ID to update specific details for a player. NOTE: It may take up to 10 min before the new player configuration is available from our CDN.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param playerId The unique identifier for the player.
+ * @return PlayerThemesApiUpdateRequest
+ */
+
+func (s *PlayerThemesService) UpdateWithContext(ctx context.Context, playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players/{playerId}"
@@ -276,7 +409,7 @@ func (s *PlayerThemesService) Update(playerId string, playerUpdatePayload Player
 	// body params
 	localVarPostBody = playerUpdatePayload
 
-	req, err := s.client.prepareRequest(http.MethodPatch, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodPatch, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -300,6 +433,19 @@ func (s *PlayerThemesService) Update(playerId string, playerUpdatePayload Player
  */
 
 func (s *PlayerThemesService) Create(playerCreationPayload PlayerCreationPayload) (*Player, error) {
+
+	return s.CreateWithContext(context.Background(), playerCreationPayload)
+
+}
+
+/*
+ * Create Create a player
+ * Create a player for your video, and customise it.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return PlayerThemesApiCreateRequest
+ */
+
+func (s *PlayerThemesService) CreateWithContext(ctx context.Context, playerCreationPayload PlayerCreationPayload) (*Player, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players"
@@ -309,7 +455,7 @@ func (s *PlayerThemesService) Create(playerCreationPayload PlayerCreationPayload
 	// body params
 	localVarPostBody = playerCreationPayload
 
-	req, err := s.client.prepareRequest(http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -335,7 +481,20 @@ It will be scaled down to 30px height and converted to PNG to be displayed in th
 */
 
 func (s *PlayerThemesService) UploadLogoFile(playerId string, file *os.File, link string) (*Player, error) {
-	return s.UploadLogo(playerId, link, file.Name(), io.Reader(file))
+	return s.UploadLogoFileWithContext(context.Background(), playerId, file, link)
+}
+
+/*
+ * UploadLogo Upload a logo
+ * The uploaded image maximum size should be 200x100 and its weight should be 200KB.
+It will be scaled down to 30px height and converted to PNG to be displayed in the player.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param playerId The unique identifier for the player.
+ * @return PlayerThemesApiUploadLogoRequest
+*/
+
+func (s *PlayerThemesService) UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link string) (*Player, error) {
+	return s.UploadLogoWithContext(ctx, playerId, link, file.Name(), io.Reader(file))
 }
 
 /*
@@ -347,6 +506,18 @@ It will be scaled down to 30px height and converted to PNG to be displayed in th
  * @return PlayerThemesApiUploadLogoRequest
 */
 func (s *PlayerThemesService) UploadLogo(playerId string, link string, fileName string, fileReader io.Reader) (*Player, error) {
+	return s.UploadLogoWithContext(context.Background(), playerId, link, fileName, fileReader)
+}
+
+/*
+ * UploadLogo Upload a logo
+ * The uploaded image maximum size should be 200x100 and its weight should be 200KB.
+It will be scaled down to 30px height and converted to PNG to be displayed in the player.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param playerId The unique identifier for the player.
+ * @return PlayerThemesApiUploadLogoRequest
+*/
+func (s *PlayerThemesService) UploadLogoWithContext(ctx context.Context, playerId string, link string, fileName string, fileReader io.Reader) (*Player, error) {
 	localVarPath := "/players/{playerId}/logo"
 	localVarPath = strings.Replace(localVarPath, "{"+"playerId"+"}", url.PathEscape(parameterToString(playerId, "")), -1)
 
@@ -356,7 +527,7 @@ func (s *PlayerThemesService) UploadLogo(playerId string, link string, fileName 
 
 	localVarFormParams["link"] = parameterToString(link, "")
 
-	req, err := s.client.prepareUploadRequest(localVarPath, fileName, fileReader, localVarHeaderParams, localVarQueryParams, localVarFormParams)
+	req, err := s.client.prepareUploadRequest(ctx, localVarPath, fileName, fileReader, localVarHeaderParams, localVarQueryParams, localVarFormParams)
 
 	if err != nil {
 		return nil, err

@@ -13,6 +13,8 @@ Method | HTTP request | Description
 
 > Authenticate(authenticatePayload AuthenticatePayload) (*AccessToken, error)
 
+> AuthenticateWithContext(ctx context.Context, authenticatePayload AuthenticatePayload) (*AccessToken, error)
+
 
 Authenticate
 
@@ -72,6 +74,8 @@ Name | Type | Description  | Notes
 ## Refresh
 
 > Refresh(refreshTokenPayload RefreshTokenPayload) (*AccessToken, error)
+
+> RefreshWithContext(ctx context.Context, refreshTokenPayload RefreshTokenPayload) (*AccessToken, error)
 
 
 Refresh token

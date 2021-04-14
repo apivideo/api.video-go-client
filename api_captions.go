@@ -41,13 +41,31 @@ func (r CaptionsApiListRequest) PageSize(pageSize int32) CaptionsApiListRequest 
 type CaptionsServiceI interface {
 	/*
 	 * Delete Delete a caption
-	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId The unique identifier for the video you want to delete a caption from.
 	 * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
 	 * @return CaptionsApiDeleteRequest
 	 */
 
 	Delete(videoId string, language string) error
+
+	/*
+	 * Delete Delete a caption
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param videoId The unique identifier for the video you want to delete a caption from.
+	 * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+	 * @return CaptionsApiDeleteRequest
+	 */
+
+	DeleteWithContext(ctx context.Context, videoId string, language string) error
+
+	/*
+	 * List List video captions
+	 * @param videoId The unique identifier for the video you want to retrieve a list of captions for.
+	 * @return CaptionsApiListRequest
+	 */
+
+	List(videoId string, r CaptionsApiListRequest) (*CaptionsListResponse, error)
+
 	/*
 	 * List List video captions
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -55,7 +73,16 @@ type CaptionsServiceI interface {
 	 * @return CaptionsApiListRequest
 	 */
 
-	List(videoId string, r CaptionsApiListRequest) (*CaptionsListResponse, error)
+	ListWithContext(ctx context.Context, videoId string, r CaptionsApiListRequest) (*CaptionsListResponse, error)
+
+	/*
+	 * Get Show a caption
+	 * @param videoId The unique identifier for the video you want captions for.
+	 * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+	 * @return CaptionsApiGetRequest
+	 */
+
+	Get(videoId string, language string) (*Subtitle, error)
 
 	/*
 	 * Get Show a caption
@@ -65,7 +92,17 @@ type CaptionsServiceI interface {
 	 * @return CaptionsApiGetRequest
 	 */
 
-	Get(videoId string, language string) (*Subtitle, error)
+	GetWithContext(ctx context.Context, videoId string, language string) (*Subtitle, error)
+
+	/*
+	 * Update Update caption
+	 * @param videoId The unique identifier for the video you want to have automatic captions for.
+	 * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+	 * @return CaptionsApiUpdateRequest
+	 */
+
+	Update(videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Subtitle, error)
+
 	/*
 	 * Update Update caption
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -74,7 +111,15 @@ type CaptionsServiceI interface {
 	 * @return CaptionsApiUpdateRequest
 	 */
 
-	Update(videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Subtitle, error)
+	UpdateWithContext(ctx context.Context, videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Subtitle, error)
+
+	/*
+	 * Upload Upload a caption
+	 * @param videoId The unique identifier for the video you want to add a caption to.
+	 * @param language A valid BCP 47 language representation.
+	 * @return CaptionsApiUploadRequest
+	 */
+	Upload(videoId string, language string, fileName string, fileReader io.Reader) (*Subtitle, error)
 	/*
 	 * Upload Upload a caption
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -82,14 +127,24 @@ type CaptionsServiceI interface {
 	 * @param language A valid BCP 47 language representation.
 	 * @return CaptionsApiUploadRequest
 	 */
-	Upload(videoId string, language string, fileName string, fileReader io.Reader) (*Subtitle, error)
+	UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader) (*Subtitle, error)
 
 	/*
 	 * Upload Upload a caption
-	 * @param videoId The unique identifier for the video you want to add a caption to.     * @param language A valid BCP 47 language representation.
+	 * @param videoId The unique identifier for the video you want to add a caption to.
+	 * @param language A valid BCP 47 language representation.
 	 * @return CaptionsApiUploadRequest
 	 */
 	UploadFile(videoId string, language string, file *os.File) (*Subtitle, error)
+
+	/*
+	 * Upload Upload a caption
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param videoId The unique identifier for the video you want to add a caption to.
+	 * @param language A valid BCP 47 language representation.
+	 * @return CaptionsApiUploadRequest
+	 */
+	UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Subtitle, error)
 }
 
 // CaptionsService communicating with the Captions
@@ -108,6 +163,21 @@ type CaptionsService struct {
  */
 
 func (s *CaptionsService) Delete(videoId string, language string) error {
+
+	return s.DeleteWithContext(context.Background(), videoId, language)
+
+}
+
+/*
+ * Delete Delete a caption
+ * Delete a caption in a specific language by providing the video ID for the video you want to delete the caption from and the language the caption is in.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId The unique identifier for the video you want to delete a caption from.
+ * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+ * @return CaptionsApiDeleteRequest
+ */
+
+func (s *CaptionsService) DeleteWithContext(ctx context.Context, videoId string, language string) error {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos/{videoId}/captions/{language}"
@@ -117,7 +187,7 @@ func (s *CaptionsService) Delete(videoId string, language string) error {
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	req, err := s.client.prepareRequest(http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return err
 	}
@@ -141,6 +211,20 @@ func (s *CaptionsService) Delete(videoId string, language string) error {
  */
 
 func (s *CaptionsService) List(videoId string, r CaptionsApiListRequest) (*CaptionsListResponse, error) {
+
+	return s.ListWithContext(context.Background(), videoId, r)
+
+}
+
+/*
+ * List List video captions
+ * Retrieve a list of available captions for the videoId you provide.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId The unique identifier for the video you want to retrieve a list of captions for.
+ * @return CaptionsApiListRequest
+ */
+
+func (s *CaptionsService) ListWithContext(ctx context.Context, videoId string, r CaptionsApiListRequest) (*CaptionsListResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos/{videoId}/captions"
@@ -155,7 +239,7 @@ func (s *CaptionsService) List(videoId string, r CaptionsApiListRequest) (*Capti
 		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
 	}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -181,6 +265,21 @@ func (s *CaptionsService) List(videoId string, r CaptionsApiListRequest) (*Capti
  */
 
 func (s *CaptionsService) Get(videoId string, language string) (*Subtitle, error) {
+
+	return s.GetWithContext(context.Background(), videoId, language)
+
+}
+
+/*
+ * Get Show a caption
+ * Display a caption for a video in a specific language. If the language is available, the caption is returned. Otherwise, you will get a response indicating the caption was not found.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId The unique identifier for the video you want captions for.
+ * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+ * @return CaptionsApiGetRequest
+ */
+
+func (s *CaptionsService) GetWithContext(ctx context.Context, videoId string, language string) (*Subtitle, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos/{videoId}/captions/{language}"
@@ -190,7 +289,7 @@ func (s *CaptionsService) Get(videoId string, language string) (*Subtitle, error
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -216,6 +315,21 @@ func (s *CaptionsService) Get(videoId string, language string) (*Subtitle, error
  */
 
 func (s *CaptionsService) Update(videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Subtitle, error) {
+
+	return s.UpdateWithContext(context.Background(), videoId, language, captionsUpdatePayload)
+
+}
+
+/*
+ * Update Update caption
+ * To have the captions on automatically, use this PATCH to set default: true.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId The unique identifier for the video you want to have automatic captions for.
+ * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+ * @return CaptionsApiUpdateRequest
+ */
+
+func (s *CaptionsService) UpdateWithContext(ctx context.Context, videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Subtitle, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos/{videoId}/captions/{language}"
@@ -227,7 +341,7 @@ func (s *CaptionsService) Update(videoId string, language string, captionsUpdate
 	// body params
 	localVarPostBody = captionsUpdatePayload
 
-	req, err := s.client.prepareRequest(http.MethodPatch, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodPatch, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -254,7 +368,21 @@ func (s *CaptionsService) Update(videoId string, language string, captionsUpdate
 */
 
 func (s *CaptionsService) UploadFile(videoId string, language string, file *os.File) (*Subtitle, error) {
-	return s.Upload(videoId, language, file.Name(), io.Reader(file))
+	return s.UploadFileWithContext(context.Background(), videoId, language, file)
+}
+
+/*
+ * Upload Upload a caption
+ * Upload a VTT file to add captions to your video.
+ Read our [captioning tutorial](https://api.video/blog/tutorials/adding-captions) for more details.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId The unique identifier for the video you want to add a caption to.
+ * @param language A valid BCP 47 language representation.
+ * @return CaptionsApiUploadRequest
+*/
+
+func (s *CaptionsService) UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Subtitle, error) {
+	return s.UploadWithContext(ctx, videoId, language, file.Name(), io.Reader(file))
 }
 
 /*
@@ -267,6 +395,19 @@ func (s *CaptionsService) UploadFile(videoId string, language string, file *os.F
  * @return CaptionsApiUploadRequest
 */
 func (s *CaptionsService) Upload(videoId string, language string, fileName string, fileReader io.Reader) (*Subtitle, error) {
+	return s.UploadWithContext(context.Background(), videoId, language, fileName, fileReader)
+}
+
+/*
+ * Upload Upload a caption
+ * Upload a VTT file to add captions to your video.
+ Read our [captioning tutorial](https://api.video/blog/tutorials/adding-captions) for more details.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId The unique identifier for the video you want to add a caption to.
+ * @param language A valid BCP 47 language representation.
+ * @return CaptionsApiUploadRequest
+*/
+func (s *CaptionsService) UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader) (*Subtitle, error) {
 	localVarPath := "/videos/{videoId}/captions/{language}"
 	localVarPath = strings.Replace(localVarPath, "{"+"videoId"+"}", url.PathEscape(parameterToString(videoId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"language"+"}", url.PathEscape(parameterToString(language, "")), -1)
@@ -275,7 +416,7 @@ func (s *CaptionsService) Upload(videoId string, language string, fileName strin
 	localVarQueryParams := url.Values{}
 	localVarFormParams := make(map[string]string)
 
-	req, err := s.client.prepareUploadRequest(localVarPath, fileName, fileReader, localVarHeaderParams, localVarQueryParams, localVarFormParams)
+	req, err := s.client.prepareUploadRequest(ctx, localVarPath, fileName, fileReader, localVarHeaderParams, localVarQueryParams, localVarFormParams)
 
 	if err != nil {
 		return nil, err

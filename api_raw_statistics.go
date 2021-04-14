@@ -83,12 +83,28 @@ func (r RawStatisticsApiListVideoSessionsRequest) PageSize(pageSize int32) RawSt
 type RawStatisticsServiceI interface {
 	/*
 	 * ListLiveStreamSessions List live stream player sessions
-	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param liveStreamId The unique identifier for the live stream you want to retrieve analytics for.
 	 * @return RawStatisticsApiListLiveStreamSessionsRequest
 	 */
 
 	ListLiveStreamSessions(liveStreamId string, r RawStatisticsApiListLiveStreamSessionsRequest) (*RawStatisticsListLiveStreamAnalyticsResponse, error)
+
+	/*
+	 * ListLiveStreamSessions List live stream player sessions
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param liveStreamId The unique identifier for the live stream you want to retrieve analytics for.
+	 * @return RawStatisticsApiListLiveStreamSessionsRequest
+	 */
+
+	ListLiveStreamSessionsWithContext(ctx context.Context, liveStreamId string, r RawStatisticsApiListLiveStreamSessionsRequest) (*RawStatisticsListLiveStreamAnalyticsResponse, error)
+
+	/*
+	 * ListSessionEvents List player session events
+	 * @param sessionId A unique identifier you can use to reference and track a session with.
+	 * @return RawStatisticsApiListSessionEventsRequest
+	 */
+
+	ListSessionEvents(sessionId string, r RawStatisticsApiListSessionEventsRequest) (*RawStatisticsListPlayerSessionEventsResponse, error)
 
 	/*
 	 * ListSessionEvents List player session events
@@ -97,7 +113,15 @@ type RawStatisticsServiceI interface {
 	 * @return RawStatisticsApiListSessionEventsRequest
 	 */
 
-	ListSessionEvents(sessionId string, r RawStatisticsApiListSessionEventsRequest) (*RawStatisticsListPlayerSessionEventsResponse, error)
+	ListSessionEventsWithContext(ctx context.Context, sessionId string, r RawStatisticsApiListSessionEventsRequest) (*RawStatisticsListPlayerSessionEventsResponse, error)
+
+	/*
+	 * ListVideoSessions List video player sessions
+	 * @param videoId The unique identifier for the video you want to retrieve session information for.
+	 * @return RawStatisticsApiListVideoSessionsRequest
+	 */
+
+	ListVideoSessions(videoId string, r RawStatisticsApiListVideoSessionsRequest) (*RawStatisticsListSessionsResponse, error)
 
 	/*
 	 * ListVideoSessions List video player sessions
@@ -106,7 +130,7 @@ type RawStatisticsServiceI interface {
 	 * @return RawStatisticsApiListVideoSessionsRequest
 	 */
 
-	ListVideoSessions(videoId string, r RawStatisticsApiListVideoSessionsRequest) (*RawStatisticsListSessionsResponse, error)
+	ListVideoSessionsWithContext(ctx context.Context, videoId string, r RawStatisticsApiListVideoSessionsRequest) (*RawStatisticsListSessionsResponse, error)
 }
 
 // RawStatisticsService communicating with the RawStatistics
@@ -123,6 +147,19 @@ type RawStatisticsService struct {
  */
 
 func (s *RawStatisticsService) ListLiveStreamSessions(liveStreamId string, r RawStatisticsApiListLiveStreamSessionsRequest) (*RawStatisticsListLiveStreamAnalyticsResponse, error) {
+
+	return s.ListLiveStreamSessionsWithContext(context.Background(), liveStreamId, r)
+
+}
+
+/*
+ * ListLiveStreamSessions List live stream player sessions
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param liveStreamId The unique identifier for the live stream you want to retrieve analytics for.
+ * @return RawStatisticsApiListLiveStreamSessionsRequest
+ */
+
+func (s *RawStatisticsService) ListLiveStreamSessionsWithContext(ctx context.Context, liveStreamId string, r RawStatisticsApiListLiveStreamSessionsRequest) (*RawStatisticsListLiveStreamAnalyticsResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/analytics/live-streams/{liveStreamId}"
@@ -140,7 +177,7 @@ func (s *RawStatisticsService) ListLiveStreamSessions(liveStreamId string, r Raw
 		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
 	}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -165,6 +202,20 @@ func (s *RawStatisticsService) ListLiveStreamSessions(liveStreamId string, r Raw
  */
 
 func (s *RawStatisticsService) ListSessionEvents(sessionId string, r RawStatisticsApiListSessionEventsRequest) (*RawStatisticsListPlayerSessionEventsResponse, error) {
+
+	return s.ListSessionEventsWithContext(context.Background(), sessionId, r)
+
+}
+
+/*
+ * ListSessionEvents List player session events
+ * Useful to track and measure video's engagement.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param sessionId A unique identifier you can use to reference and track a session with.
+ * @return RawStatisticsApiListSessionEventsRequest
+ */
+
+func (s *RawStatisticsService) ListSessionEventsWithContext(ctx context.Context, sessionId string, r RawStatisticsApiListSessionEventsRequest) (*RawStatisticsListPlayerSessionEventsResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/analytics/sessions/{sessionId}/events"
@@ -179,7 +230,7 @@ func (s *RawStatisticsService) ListSessionEvents(sessionId string, r RawStatisti
 		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
 	}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -204,6 +255,20 @@ func (s *RawStatisticsService) ListSessionEvents(sessionId string, r RawStatisti
  */
 
 func (s *RawStatisticsService) ListVideoSessions(videoId string, r RawStatisticsApiListVideoSessionsRequest) (*RawStatisticsListSessionsResponse, error) {
+
+	return s.ListVideoSessionsWithContext(context.Background(), videoId, r)
+
+}
+
+/*
+ * ListVideoSessions List video player sessions
+ * Retrieve all available user sessions for a specific video.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId The unique identifier for the video you want to retrieve session information for.
+ * @return RawStatisticsApiListVideoSessionsRequest
+ */
+
+func (s *RawStatisticsService) ListVideoSessionsWithContext(ctx context.Context, videoId string, r RawStatisticsApiListVideoSessionsRequest) (*RawStatisticsListSessionsResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/analytics/videos/{videoId}"
@@ -232,7 +297,7 @@ func (s *RawStatisticsService) ListVideoSessions(videoId string, r RawStatistics
 		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
 	}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}

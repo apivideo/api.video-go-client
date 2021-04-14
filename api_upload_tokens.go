@@ -49,19 +49,43 @@ func (r UploadTokensApiListRequest) PageSize(pageSize int32) UploadTokensApiList
 type UploadTokensServiceI interface {
 	/*
 	 * DeleteToken Delete an upload token
-	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param uploadToken The unique identifier for the upload token you want to delete. Deleting a token will make it so the token can no longer be used for authentication.
 	 * @return UploadTokensApiDeleteTokenRequest
 	 */
 
 	DeleteToken(uploadToken string) error
+
+	/*
+	 * DeleteToken Delete an upload token
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param uploadToken The unique identifier for the upload token you want to delete. Deleting a token will make it so the token can no longer be used for authentication.
+	 * @return UploadTokensApiDeleteTokenRequest
+	 */
+
+	DeleteTokenWithContext(ctx context.Context, uploadToken string) error
+
+	/*
+	 * List List all active upload tokens.
+	 * @return UploadTokensApiListRequest
+	 */
+
+	List(r UploadTokensApiListRequest) (*TokenListResponse, error)
+
 	/*
 	 * List List all active upload tokens.
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return UploadTokensApiListRequest
 	 */
 
-	List(r UploadTokensApiListRequest) (*TokenListResponse, error)
+	ListWithContext(ctx context.Context, r UploadTokensApiListRequest) (*TokenListResponse, error)
+
+	/*
+	 * GetToken Show upload token
+	 * @param uploadToken The unique identifier for the token you want information about.
+	 * @return UploadTokensApiGetTokenRequest
+	 */
+
+	GetToken(uploadToken string) (*UploadToken, error)
 
 	/*
 	 * GetToken Show upload token
@@ -70,14 +94,22 @@ type UploadTokensServiceI interface {
 	 * @return UploadTokensApiGetTokenRequest
 	 */
 
-	GetToken(uploadToken string) (*UploadToken, error)
+	GetTokenWithContext(ctx context.Context, uploadToken string) (*UploadToken, error)
+
+	/*
+	 * CreateToken Generate an upload token
+	 * @return UploadTokensApiCreateTokenRequest
+	 */
+
+	CreateToken(tokenCreatePayload TokenCreatePayload) (*UploadToken, error)
+
 	/*
 	 * CreateToken Generate an upload token
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return UploadTokensApiCreateTokenRequest
 	 */
 
-	CreateToken(tokenCreatePayload TokenCreatePayload) (*UploadToken, error)
+	CreateTokenWithContext(ctx context.Context, tokenCreatePayload TokenCreatePayload) (*UploadToken, error)
 }
 
 // UploadTokensService communicating with the UploadTokens
@@ -95,6 +127,20 @@ type UploadTokensService struct {
  */
 
 func (s *UploadTokensService) DeleteToken(uploadToken string) error {
+
+	return s.DeleteTokenWithContext(context.Background(), uploadToken)
+
+}
+
+/*
+ * DeleteToken Delete an upload token
+ * Delete an existing upload token. This is especially useful for tokens you may have created that do not expire.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param uploadToken The unique identifier for the upload token you want to delete. Deleting a token will make it so the token can no longer be used for authentication.
+ * @return UploadTokensApiDeleteTokenRequest
+ */
+
+func (s *UploadTokensService) DeleteTokenWithContext(ctx context.Context, uploadToken string) error {
 	var localVarPostBody interface{}
 
 	localVarPath := "/upload-tokens/{uploadToken}"
@@ -103,7 +149,7 @@ func (s *UploadTokensService) DeleteToken(uploadToken string) error {
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	req, err := s.client.prepareRequest(http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return err
 	}
@@ -126,6 +172,19 @@ func (s *UploadTokensService) DeleteToken(uploadToken string) error {
  */
 
 func (s *UploadTokensService) List(r UploadTokensApiListRequest) (*TokenListResponse, error) {
+
+	return s.ListWithContext(context.Background(), r)
+
+}
+
+/*
+ * List List all active upload tokens.
+ * A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return UploadTokensApiListRequest
+ */
+
+func (s *UploadTokensService) ListWithContext(ctx context.Context, r UploadTokensApiListRequest) (*TokenListResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/upload-tokens"
@@ -145,7 +204,7 @@ func (s *UploadTokensService) List(r UploadTokensApiListRequest) (*TokenListResp
 		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
 	}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -170,6 +229,20 @@ func (s *UploadTokensService) List(r UploadTokensApiListRequest) (*TokenListResp
  */
 
 func (s *UploadTokensService) GetToken(uploadToken string) (*UploadToken, error) {
+
+	return s.GetTokenWithContext(context.Background(), uploadToken)
+
+}
+
+/*
+ * GetToken Show upload token
+ * You can retrieve details about a specific upload token if you have the unique identifier for the upload token. Add it in the path of the endpoint. Details include time-to-live (ttl), when the token was created, and when it will expire.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param uploadToken The unique identifier for the token you want information about.
+ * @return UploadTokensApiGetTokenRequest
+ */
+
+func (s *UploadTokensService) GetTokenWithContext(ctx context.Context, uploadToken string) (*UploadToken, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/upload-tokens/{uploadToken}"
@@ -178,7 +251,7 @@ func (s *UploadTokensService) GetToken(uploadToken string) (*UploadToken, error)
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	req, err := s.client.prepareRequest(http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -202,6 +275,19 @@ func (s *UploadTokensService) GetToken(uploadToken string) (*UploadToken, error)
  */
 
 func (s *UploadTokensService) CreateToken(tokenCreatePayload TokenCreatePayload) (*UploadToken, error) {
+
+	return s.CreateTokenWithContext(context.Background(), tokenCreatePayload)
+
+}
+
+/*
+ * CreateToken Generate an upload token
+ * Use this endpoint to generate an upload token. You can use this token to authenticate video uploads while keeping your API key safe.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return UploadTokensApiCreateTokenRequest
+ */
+
+func (s *UploadTokensService) CreateTokenWithContext(ctx context.Context, tokenCreatePayload TokenCreatePayload) (*UploadToken, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/upload-tokens"
@@ -211,7 +297,7 @@ func (s *UploadTokensService) CreateToken(tokenCreatePayload TokenCreatePayload)
 	// body params
 	localVarPostBody = tokenCreatePayload
 
-	req, err := s.client.prepareRequest(http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}

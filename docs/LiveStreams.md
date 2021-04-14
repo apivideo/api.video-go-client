@@ -18,6 +18,8 @@ Method | HTTP request | Description
 
 > Delete(liveStreamId string) (error)
 
+> DeleteWithContext(ctx context.Context, liveStreamId string) (error)
+
 
 Delete a live stream
 
@@ -75,6 +77,8 @@ Name | Type | Description  | Notes
 ## DeleteThumbnail
 
 > DeleteThumbnail(liveStreamId string) (*LiveStream, error)
+
+> DeleteThumbnailWithContext(ctx context.Context, liveStreamId string) (*LiveStream, error)
 
 
 Delete a thumbnail
@@ -137,6 +141,9 @@ Name | Type | Description  | Notes
 ## List
 
 > List(r LiveStreamsApiListRequest) (*LiveStreamListResponse, error)
+
+
+> ListWithContext(ctx context.Context, r LiveStreamsApiListRequest) (*LiveStreamListResponse, error)
 
 
 
@@ -210,6 +217,8 @@ Name | Type | Description  | Notes
 
 > Get(liveStreamId string) (*LiveStream, error)
 
+> GetWithContext(ctx context.Context, liveStreamId string) (*LiveStream, error)
+
 
 Show live stream
 
@@ -271,6 +280,8 @@ Name | Type | Description  | Notes
 ## Update
 
 > Update(liveStreamId string, liveStreamUpdatePayload LiveStreamUpdatePayload) (*LiveStream, error)
+
+> UpdateWithContext(ctx context.Context, liveStreamId string, liveStreamUpdatePayload LiveStreamUpdatePayload) (*LiveStream, error)
 
 
 Update a live stream
@@ -336,6 +347,8 @@ Name | Type | Description  | Notes
 
 > Create(liveStreamCreatePayload LiveStreamCreatePayload) (*LiveStream, error)
 
+> CreateWithContext(ctx context.Context, liveStreamCreatePayload LiveStreamCreatePayload) (*LiveStream, error)
+
 
 Create live stream
 
@@ -395,8 +408,9 @@ Name | Type | Description  | Notes
 ## UploadThumbnail
 
 > UploadThumbnailFile(liveStreamId string, file *os.File) (*LiveStream, error)
-
 > UploadThumbnail(liveStreamId string, fileName string, fileReader io.Reader)
+> UploadThumbnailFileWithContext(ctx context.Context, liveStreamId string, file *os.File) (*LiveStream, error)
+> UploadThumbnailWithContext(ctx context.Context, liveStreamId string, fileName string, fileReader io.Reader)
 
 Upload a thumbnail
 

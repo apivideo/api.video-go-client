@@ -366,13 +366,14 @@ func TestVideos_List(t *testing.T) {
 		fmt.Fprint(w, JSONResp)
 	})
 
-	videos, err := client.Videos.List(new(VideosApiListRequest).
-		CurrentPage(1).
-		PageSize(25).
-		SortBy("publishedAt").
-		SortOrder("desc").
-		Tags([]string{"tag1", "tag2"}).
-		Metadata(map[string]string{"key": "value", "key2": "value2"}))
+	videos, err := client.Videos.List(
+		new(VideosApiListRequest).
+			CurrentPage(1).
+			PageSize(25).
+			SortBy("publishedAt").
+			SortOrder("desc").
+			Tags([]string{"tag1", "tag2"}).
+			Metadata(map[string]string{"key": "value", "key2": "value2"}))
 
 	if err != nil {
 		t.Errorf("Videos.List error: %v", err)
@@ -414,12 +415,12 @@ func TestVideos_ListUpdatedAt(t *testing.T) {
 	})
 
 	videos, err := client.Videos.List(new(VideosApiListRequest).
-		CurrentPage(1).
-		PageSize(25).
-		SortBy("updatedAt").
-		SortOrder("desc").
-		Tags([]string{"tag1", "tag2"}).
-		Metadata(map[string]string{"key": "value", "key2": "value2"}))
+			CurrentPage(1).
+			PageSize(25).
+			SortBy("updatedAt").
+			SortOrder("desc").
+			Tags([]string{"tag1", "tag2"}).
+			Metadata(map[string]string{"key": "value", "key2": "value2"}))
 
 	if err != nil {
 		t.Errorf("Videos.List error: %v", err)

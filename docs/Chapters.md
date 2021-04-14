@@ -15,6 +15,8 @@ Method | HTTP request | Description
 
 > Delete(videoId string, language string) (error)
 
+> DeleteWithContext(ctx context.Context, videoId string, language string) (error)
+
 
 Delete a chapter
 
@@ -74,6 +76,9 @@ Name | Type | Description  | Notes
 ## List
 
 > List(videoId string, r ChaptersApiListRequest) (*ChaptersListResponse, error)
+
+
+> ListWithContext(ctx context.Context, videoId string, r ChaptersApiListRequest) (*ChaptersListResponse, error)
 
 
 
@@ -143,6 +148,8 @@ Name | Type | Description  | Notes
 
 > Get(videoId string, language string) (*Chapter, error)
 
+> GetWithContext(ctx context.Context, videoId string, language string) (*Chapter, error)
+
 
 Show a chapter
 
@@ -204,8 +211,9 @@ Name | Type | Description  | Notes
 ## Upload
 
 > UploadFile(videoId string, language string, file *os.File) (*Chapter, error)
-
 > Upload(videoId string, language string, fileName string, fileReader io.Reader)
+> UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Chapter, error)
+> UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader)
 
 Upload a chapter
 

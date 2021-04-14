@@ -15,6 +15,8 @@ Method | HTTP request | Description
 
 > Delete(webhookId string) (error)
 
+> DeleteWithContext(ctx context.Context, webhookId string) (error)
+
 
 Delete a Webhook
 
@@ -74,6 +76,8 @@ Name | Type | Description  | Notes
 ## Get
 
 > Get(webhookId string) (*Webhook, error)
+
+> GetWithContext(ctx context.Context, webhookId string) (*Webhook, error)
 
 
 Show Webhook details
@@ -136,6 +140,9 @@ Name | Type | Description  | Notes
 ## List
 
 > List(r WebhooksApiListRequest) (*WebhooksListResponse, error)
+
+
+> ListWithContext(ctx context.Context, r WebhooksApiListRequest) (*WebhooksListResponse, error)
 
 
 
@@ -202,6 +209,8 @@ Name | Type | Description  | Notes
 ## Create
 
 > Create(webhooksCreatePayload WebhooksCreatePayload) (*Webhook, error)
+
+> CreateWithContext(ctx context.Context, webhooksCreatePayload WebhooksCreatePayload) (*Webhook, error)
 
 
 Create Webhook

@@ -21,6 +21,8 @@ Method | HTTP request | Description
 
 > Delete(videoId string) (error)
 
+> DeleteWithContext(ctx context.Context, videoId string) (error)
+
 
 Delete a video
 
@@ -80,6 +82,8 @@ Name | Type | Description  | Notes
 ## Get
 
 > Get(videoId string) (*Video, error)
+
+> GetWithContext(ctx context.Context, videoId string) (*Video, error)
 
 
 Show a video
@@ -143,6 +147,8 @@ Name | Type | Description  | Notes
 
 > GetStatus(videoId string) (*Videostatus, error)
 
+> GetStatusWithContext(ctx context.Context, videoId string) (*Videostatus, error)
+
 
 Show video status
 
@@ -204,6 +210,9 @@ Name | Type | Description  | Notes
 ## List
 
 > List(r VideosApiListRequest) (*VideosListResponse, error)
+
+
+> ListWithContext(ctx context.Context, r VideosApiListRequest) (*VideosListResponse, error)
 
 
 
@@ -283,6 +292,8 @@ Name | Type | Description  | Notes
 
 > Update(videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error)
 
+> UpdateWithContext(ctx context.Context, videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error)
+
 
 Update a video
 
@@ -347,6 +358,8 @@ Name | Type | Description  | Notes
 
 > PickThumbnail(videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
 
+> PickThumbnailWithContext(ctx context.Context, videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
+
 
 Pick a thumbnail
 
@@ -410,8 +423,9 @@ Name | Type | Description  | Notes
 ## UploadWithUploadToken
 
 > UploadWithUploadTokenFile(token string, file *os.File) (*Video, error)
-
 > UploadWithUploadToken(token string, fileName string, fileReader io.Reader, fileSize int64)
+> UploadWithUploadTokenFileWithContext(ctx context.Context, token string, file *os.File) (*Video, error)
+> UploadWithUploadTokenWithContext(ctx context.Context, token string, fileName string, fileReader io.Reader, fileSize int64)
 
 Upload with an upload token
 
@@ -477,6 +491,8 @@ Name | Type | Description  | Notes
 
 > Create(videoCreatePayload VideoCreatePayload) (*Video, error)
 
+> CreateWithContext(ctx context.Context, videoCreatePayload VideoCreatePayload) (*Video, error)
+
 
 Create a video
 
@@ -536,8 +552,9 @@ Name | Type | Description  | Notes
 ## Upload
 
 > UploadFile(videoId string, file *os.File) (*Video, error)
-
 > Upload(videoId string, fileName string, fileReader io.Reader, fileSize int64)
+> UploadFileWithContext(ctx context.Context, videoId string, file *os.File) (*Video, error)
+> UploadWithContext(ctx context.Context, videoId string, fileName string, fileReader io.Reader, fileSize int64)
 
 Upload a video
 
@@ -604,8 +621,9 @@ Name | Type | Description  | Notes
 ## UploadThumbnail
 
 > UploadThumbnailFile(videoId string, file *os.File) (*Video, error)
-
 > UploadThumbnail(videoId string, fileName string, fileReader io.Reader)
+> UploadThumbnailFileWithContext(ctx context.Context, videoId string, file *os.File) (*Video, error)
+> UploadThumbnailWithContext(ctx context.Context, videoId string, fileName string, fileReader io.Reader)
 
 Upload a thumbnail
 

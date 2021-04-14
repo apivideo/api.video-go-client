@@ -2,6 +2,7 @@ package apivideosdk
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -133,6 +134,7 @@ func (c *Client) ChunkSize(size int64) {
 }
 
 func (c *Client) prepareRequest(
+	ctx context.Context,
 	method,
 	urlStr string,
 	body interface{},
@@ -166,7 +168,7 @@ func (c *Client) prepareRequest(
 		}
 	}
 
-	req, err := http.NewRequest(method, u.String(), buf)
+	req, err := http.NewRequestWithContext(ctx, method, u.String(), buf)
 	if err != nil {
 		return nil, err
 	}
@@ -190,6 +192,7 @@ func (c *Client) prepareRequest(
 }
 
 func (c *Client) prepareRangeRequests(
+	ctx context.Context,
 	urlStr string,
 	fileName string,
 	fileReader io.Reader,
@@ -241,7 +244,7 @@ func (c *Client) prepareRangeRequests(
 			return nil, err
 		}
 
-		req, err := c.prepareRequest(http.MethodPost, urlStr, body, headerParams, queryParams)
+		req, err := c.prepareRequest(ctx, http.MethodPost, urlStr, body, headerParams, queryParams)
 		if err != nil {
 			return nil, err
 		}
@@ -265,6 +268,7 @@ func (c *Client) prepareRangeRequests(
 }
 
 func (c *Client) prepareUploadRequest(
+	ctx context.Context,
 	urlStr string,
 	fileName string,
 	fileReader io.Reader,
@@ -299,7 +303,7 @@ func (c *Client) prepareUploadRequest(
 		return nil, err
 	}
 
-	req, err := c.prepareRequest(http.MethodPost, urlStr, body, headerParams, queryParams)
+	req, err := c.prepareRequest(ctx, http.MethodPost, urlStr, body, headerParams, queryParams)
 	if err != nil {
 		return nil, err
 	}

@@ -24,18 +24,33 @@ var (
 type AuthenticationServiceI interface {
 	/*
 	 * Authenticate Authenticate
-	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return AuthenticationApiAuthenticateRequest
 	 */
 
 	Authenticate(authenticatePayload AuthenticatePayload) (*AccessToken, error)
+
+	/*
+	 * Authenticate Authenticate
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return AuthenticationApiAuthenticateRequest
+	 */
+
+	AuthenticateWithContext(ctx context.Context, authenticatePayload AuthenticatePayload) (*AccessToken, error)
+
+	/*
+	 * Refresh Refresh token
+	 * @return AuthenticationApiRefreshRequest
+	 */
+
+	Refresh(refreshTokenPayload RefreshTokenPayload) (*AccessToken, error)
+
 	/*
 	 * Refresh Refresh token
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return AuthenticationApiRefreshRequest
 	 */
 
-	Refresh(refreshTokenPayload RefreshTokenPayload) (*AccessToken, error)
+	RefreshWithContext(ctx context.Context, refreshTokenPayload RefreshTokenPayload) (*AccessToken, error)
 }
 
 // AuthenticationService communicating with the Authentication
@@ -52,6 +67,19 @@ type AuthenticationService struct {
  */
 
 func (s *AuthenticationService) Authenticate(authenticatePayload AuthenticatePayload) (*AccessToken, error) {
+
+	return s.AuthenticateWithContext(context.Background(), authenticatePayload)
+
+}
+
+/*
+ * Authenticate Authenticate
+ * To get started, submit your API key in the body of your request. api.video returns an access token that is valid for one hour (3600 seconds). A refresh token is also returned. View a [tutorial](https://api.video/blog/tutorials/authentication-tutorial) on authentication.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return AuthenticationApiAuthenticateRequest
+ */
+
+func (s *AuthenticationService) AuthenticateWithContext(ctx context.Context, authenticatePayload AuthenticatePayload) (*AccessToken, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/auth/api-key"
@@ -61,7 +89,7 @@ func (s *AuthenticationService) Authenticate(authenticatePayload AuthenticatePay
 	// body params
 	localVarPostBody = authenticatePayload
 
-	req, err := s.client.prepareRequest(http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
@@ -86,6 +114,20 @@ func (s *AuthenticationService) Authenticate(authenticatePayload AuthenticatePay
  */
 
 func (s *AuthenticationService) Refresh(refreshTokenPayload RefreshTokenPayload) (*AccessToken, error) {
+
+	return s.RefreshWithContext(context.Background(), refreshTokenPayload)
+
+}
+
+/*
+ * Refresh Refresh token
+ * Use the refresh endpoint with the refresh token you received when you first authenticated using the api-key endpoint. Send the refresh token in the body of your request. The api.video API returns a new access token that is valid for one hour (3600 seconds) and a new refresh token.
+
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return AuthenticationApiRefreshRequest
+ */
+
+func (s *AuthenticationService) RefreshWithContext(ctx context.Context, refreshTokenPayload RefreshTokenPayload) (*AccessToken, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/auth/refresh"
@@ -95,7 +137,7 @@ func (s *AuthenticationService) Refresh(refreshTokenPayload RefreshTokenPayload)
 	// body params
 	localVarPostBody = refreshTokenPayload
 
-	req, err := s.client.prepareRequest(http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
