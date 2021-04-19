@@ -31,6 +31,10 @@ type LiveStream struct {
 	PlayerId *string `json:"playerId,omitempty"`
 	// Whether or not you are broadcasting the live video you recorded for others to see. True means you are broadcasting to viewers, false means you are not.
 	Broadcasting *bool `json:"broadcasting,omitempty"`
+	// When the player was created, presented in ISO-8601 format.
+	CreatedAt *string `json:"createdAt,omitempty"`
+	// When the player was last updated, presented in ISO-8601 format.
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
 // NewLiveStream instantiates a new LiveStream object
@@ -304,6 +308,70 @@ func (o *LiveStream) HasBroadcasting() bool {
 // SetBroadcasting gets a reference to the given bool and assigns it to the Broadcasting field.
 func (o *LiveStream) SetBroadcasting(v bool) {
 	o.Broadcasting = &v
+}
+
+// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+func (o *LiveStream) GetCreatedAt() string {
+	if o == nil || o.CreatedAt == nil {
+		var ret string
+		return ret
+	}
+	return *o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LiveStream) GetCreatedAtOk() (*string, bool) {
+	if o == nil || o.CreatedAt == nil {
+		return nil, false
+	}
+	return o.CreatedAt, true
+}
+
+// HasCreatedAt returns a boolean if a field has been set.
+func (o *LiveStream) HasCreatedAt() bool {
+	if o != nil && o.CreatedAt != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
+func (o *LiveStream) SetCreatedAt(v string) {
+	o.CreatedAt = &v
+}
+
+// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+func (o *LiveStream) GetUpdatedAt() string {
+	if o == nil || o.UpdatedAt == nil {
+		var ret string
+		return ret
+	}
+	return *o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LiveStream) GetUpdatedAtOk() (*string, bool) {
+	if o == nil || o.UpdatedAt == nil {
+		return nil, false
+	}
+	return o.UpdatedAt, true
+}
+
+// HasUpdatedAt returns a boolean if a field has been set.
+func (o *LiveStream) HasUpdatedAt() bool {
+	if o != nil && o.UpdatedAt != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedAt gets a reference to the given string and assigns it to the UpdatedAt field.
+func (o *LiveStream) SetUpdatedAt(v string) {
+	o.UpdatedAt = &v
 }
 
 type NullableLiveStream struct {

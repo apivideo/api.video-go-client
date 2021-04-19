@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **Assets** | Pointer to [**LiveStreamAssets**](live_stream_assets.md) |  | [optional] 
 **PlayerId** | Pointer to **string** | The unique identifier for the player. | [optional] 
 **Broadcasting** | Pointer to **bool** | Whether or not you are broadcasting the live video you recorded for others to see. True means you are broadcasting to viewers, false means you are not. | [optional] 
+**CreatedAt** | Pointer to **string** | When the player was created, presented in ISO-8601 format. | [optional] 
+**UpdatedAt** | Pointer to **string** | When the player was last updated, presented in ISO-8601 format. | [optional] 
 
 ## Methods
 
@@ -231,6 +233,56 @@ SetBroadcasting sets Broadcasting field to given value.
 `func (o *LiveStream) HasBroadcasting() bool`
 
 HasBroadcasting returns a boolean if a field has been set.
+
+### GetCreatedAt
+
+`func (o *LiveStream) GetCreatedAt() string`
+
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+
+### GetCreatedAtOk
+
+`func (o *LiveStream) GetCreatedAtOk() (*string, bool)`
+
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedAt
+
+`func (o *LiveStream) SetCreatedAt(v string)`
+
+SetCreatedAt sets CreatedAt field to given value.
+
+### HasCreatedAt
+
+`func (o *LiveStream) HasCreatedAt() bool`
+
+HasCreatedAt returns a boolean if a field has been set.
+
+### GetUpdatedAt
+
+`func (o *LiveStream) GetUpdatedAt() string`
+
+GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
+
+### GetUpdatedAtOk
+
+`func (o *LiveStream) GetUpdatedAtOk() (*string, bool)`
+
+GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdatedAt
+
+`func (o *LiveStream) SetUpdatedAt(v string)`
+
+SetUpdatedAt sets UpdatedAt field to given value.
+
+### HasUpdatedAt
+
+`func (o *LiveStream) HasUpdatedAt() bool`
+
+HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

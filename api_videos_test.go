@@ -328,7 +328,8 @@ func TestVideos_Get(t *testing.T) {
 		fmt.Fprint(w, videoJSONResponses[0])
 	})
 
-	video, err := client.Videos.Get("vi4k0jvEUuaTdRAEjQ4Jfagz")
+	video, err := client.Videos.Get(
+		"vi4k0jvEUuaTdRAEjQ4Jfagz")
 	if err != nil {
 		t.Errorf("Videos.Get error: %v", err)
 	}
@@ -366,14 +367,13 @@ func TestVideos_List(t *testing.T) {
 		fmt.Fprint(w, JSONResp)
 	})
 
-	videos, err := client.Videos.List(
-		new(VideosApiListRequest).
-			CurrentPage(1).
-			PageSize(25).
-			SortBy("publishedAt").
-			SortOrder("desc").
-			Tags([]string{"tag1", "tag2"}).
-			Metadata(map[string]string{"key": "value", "key2": "value2"}))
+	videos, err := client.Videos.List(new(VideosApiListRequest).
+		CurrentPage(1).
+		PageSize(25).
+		SortBy("publishedAt").
+		SortOrder("desc").
+		Tags([]string{"tag1", "tag2"}).
+		Metadata(map[string]string{"key": "value", "key2": "value2"}))
 
 	if err != nil {
 		t.Errorf("Videos.List error: %v", err)
@@ -414,7 +414,8 @@ func TestVideos_ListUpdatedAt(t *testing.T) {
 		fmt.Fprint(w, JSONResp)
 	})
 
-	videos, err := client.Videos.List(new(VideosApiListRequest).
+	videos, err := client.Videos.List(
+		new(VideosApiListRequest).
 			CurrentPage(1).
 			PageSize(25).
 			SortBy("updatedAt").
@@ -506,7 +507,8 @@ func TestVideos_Update(t *testing.T) {
 		fmt.Fprint(w, videoJSONResponses[0])
 	})
 
-	video, err := client.Videos.Update("vi4k0jvEUuaTdRAEjQ4Jfagz", videoUpdateStruct)
+	video, err := client.Videos.Update(
+		"vi4k0jvEUuaTdRAEjQ4Jfagz", videoUpdateStruct)
 	if err != nil {
 		t.Errorf("Videos.Update error: %v", err)
 	}
@@ -525,7 +527,8 @@ func TestVideos_Delete(t *testing.T) {
 		testMethod(t, r, http.MethodDelete)
 	})
 
-	err := client.Videos.Delete("vi4k0jvEUuaTdRAEjQ4Jfagz")
+	err := client.Videos.Delete(
+		"vi4k0jvEUuaTdRAEjQ4Jfagz")
 	if err != nil {
 		t.Errorf("Videos.Delete error: %v", err)
 	}
@@ -547,7 +550,8 @@ func TestVideos_Upload(t *testing.T) {
 	file := createTempFile("test.video", 8*1024*1024)
 	defer os.Remove(file.Name())
 
-	video, err := client.Videos.UploadFile("vi4k0jvEUuaTdRAEjQ4Jfagz", file)
+	video, err := client.Videos.UploadFile(
+		"vi4k0jvEUuaTdRAEjQ4Jfagz", file)
 	if err != nil {
 		t.Errorf("Videos.Upload error: %v", err)
 	}
@@ -591,7 +595,8 @@ func TestVideos_ChunkedUpload(t *testing.T) {
 	defer os.Remove(file.Name())
 
 	client.ChunkSize(chunksize)
-	video, err := client.Videos.UploadFile("vi4k0jvEUuaTdRAEjQ4Jfagz", file)
+	video, err := client.Videos.UploadFile(
+		"vi4k0jvEUuaTdRAEjQ4Jfagz", file)
 	if err != nil {
 		t.Errorf("Videos.ChunkedUpload error: %v", err)
 	}
@@ -614,7 +619,8 @@ func TestVideos_Status(t *testing.T) {
 		fmt.Fprint(w, videoStatusJSONResponse)
 	})
 
-	status, err := client.Videos.GetStatus("vi4k0jvEUuaTdRAEjQ4Jfagz")
+	status, err := client.Videos.GetStatus(
+		"vi4k0jvEUuaTdRAEjQ4Jfagz")
 	if err != nil {
 		t.Errorf("Videos.Status error: %v", err)
 	}
@@ -634,7 +640,8 @@ func TestVideos_PickThumbnail(t *testing.T) {
 		fmt.Fprint(w, videoJSONResponses[0])
 	})
 
-	video, err := client.Videos.PickThumbnail("vi4k0jvEUuaTdRAEjQ4Jfagz", VideoThumbnailPickPayload{Timecode: "00:00:01:02"})
+	video, err := client.Videos.PickThumbnail(
+		"vi4k0jvEUuaTdRAEjQ4Jfagz", VideoThumbnailPickPayload{Timecode: "00:00:01:02"})
 	if err != nil {
 		t.Errorf("Videos.PickThumbnail error: %v", err)
 	}
@@ -658,7 +665,8 @@ func TestVideos_UploadThumbnail(t *testing.T) {
 	file := createTempFile("test.thumbnail", 1024*1024)
 	defer os.Remove(file.Name())
 
-	video, err := client.Videos.UploadThumbnailFile("vi4k0jvEUuaTdRAEjQ4Jfagz", file)
+	video, err := client.Videos.UploadThumbnailFile(
+		"vi4k0jvEUuaTdRAEjQ4Jfagz", file)
 	if err != nil {
 		t.Errorf("Videos.UploadThumbnail error: %v", err)
 	}

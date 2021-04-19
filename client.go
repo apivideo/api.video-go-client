@@ -118,9 +118,12 @@ func (cb *clientBuilder) Build() *Client {
 
 	baseURL, _ := url.Parse(cb.baseURL)
 
-	httpClient := *cb.httpClient
-	if httpClient == nil {
+	var httpClient Doer
+
+	if cb.httpClient == nil {
 		httpClient = http.DefaultClient
+	} else {
+		httpClient = *cb.httpClient
 	}
 
 	c := &Client{
