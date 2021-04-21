@@ -39,10 +39,6 @@ var captionStructs = []Subtitle{
 	},
 }
 
-var captionRequestJSON = `{
-	"default": true
-  }`
-
 func TestCaptions_Get(t *testing.T) {
 	setup()
 	defer teardown()

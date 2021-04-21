@@ -71,12 +71,6 @@ var liveStructs = []LiveStream{
 	},
 }
 
-var liveRequestJSON = `{
-	"name": "Test live",
-	"record": true,
-	"playerId": "pl4f4ferf5erfr5zed4fsdd"
-  }`
-
 var liveStreamCreatePayload = LiveStreamCreatePayload{
 	Name:     "Test live",
 	Record:   PtrBool(true),

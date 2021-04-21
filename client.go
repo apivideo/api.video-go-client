@@ -19,7 +19,7 @@ import (
 type Client struct {
 	BaseURL    *url.URL
 	APIKey     string
-	httpClient *Doer
+	httpClient Doer
 	chunkSize  int64
 	Token      *Token
 
@@ -73,36 +73,36 @@ type Doer interface {
 	Do(*http.Request) (*http.Response, error)
 }
 
-type clientBuilder struct {
+type Builder struct {
 	apiKey          string
 	baseURL         string
 	uploadChunkSize int64
-	httpClient      *Doer
+	httpClient      Doer
 }
 
-func (cb *clientBuilder) BaseUrl(url string) *clientBuilder {
+func (cb *Builder) BaseURL(url string) *Builder {
 	cb.baseURL = url
 	return cb
 }
 
-func (cb *clientBuilder) ApiKey(key string) *clientBuilder {
+func (cb *Builder) APIKey(key string) *Builder {
 	cb.apiKey = key
 	return cb
 }
 
-func (cb *clientBuilder) UploadChunkSize(size int64) *clientBuilder {
+func (cb *Builder) UploadChunkSize(size int64) *Builder {
 	cb.uploadChunkSize = size
 	return cb
 }
 
-func (cb *clientBuilder) HttpClient(httpClient *Doer) *clientBuilder {
+func (cb *Builder) HTTPClient(httpClient Doer) *Builder {
 	cb.httpClient = httpClient
 	return cb
 }
 
 // ClientBuilder returns a new api.video API client builder for production
-func ClientBuilder(apiKey string) *clientBuilder {
-	return &clientBuilder{
+func ClientBuilder(apiKey string) *Builder {
+	return &Builder{
 		baseURL:         defaultBaseURL,
 		uploadChunkSize: defaultChunkSize,
 		apiKey:          apiKey,
@@ -110,11 +110,11 @@ func ClientBuilder(apiKey string) *clientBuilder {
 }
 
 // SandboxClientBuilder returns a new api.video API client builder for sandbox environment
-func SandboxClientBuilder(apiKey string) *clientBuilder {
-	return ClientBuilder(apiKey).BaseUrl(defaultSandboxBaseURL)
+func SandboxClientBuilder(apiKey string) *Builder {
+	return ClientBuilder(apiKey).BaseURL(defaultSandboxBaseURL)
 }
 
-func (cb *clientBuilder) Build() *Client {
+func (cb *Builder) Build() *Client {
 
 	baseURL, _ := url.Parse(cb.baseURL)
 
@@ -123,13 +123,13 @@ func (cb *clientBuilder) Build() *Client {
 	if cb.httpClient == nil {
 		httpClient = http.DefaultClient
 	} else {
-		httpClient = *cb.httpClient
+		httpClient = cb.httpClient
 	}
 
 	c := &Client{
 		BaseURL:    baseURL,
 		APIKey:     cb.apiKey,
-		httpClient: &httpClient,
+		httpClient: httpClient,
 		chunkSize:  cb.uploadChunkSize,
 	}
 
@@ -146,7 +146,7 @@ func (cb *clientBuilder) Build() *Client {
 	return c
 }
 
-//ChunkSize changes chunk size for video upload, by default its 128MB
+// ChunkSize changes chunk size for video upload, by default its 128MB
 func (c *Client) ChunkSize(size int64) {
 	c.chunkSize = size
 }
@@ -236,12 +236,10 @@ func (c *Client) prepareRangeRequests(
 			return nil, err
 		}
 
-		if formParams != nil {
-			for key, val := range formParams {
-				err = writer.WriteField(key, val)
-				if err != nil {
-					return nil, err
-				}
+		for key, val := range formParams {
+			err = writer.WriteField(key, val)
+			if err != nil {
+				return nil, err
 			}
 		}
 
@@ -307,12 +305,10 @@ func (c *Client) prepareUploadRequest(
 		return nil, err
 	}
 
-	if formParams != nil {
-		for key, val := range formParams {
-			err = writer.WriteField(key, val)
-			if err != nil {
-				return nil, err
-			}
+	for key, val := range formParams {
+		err = writer.WriteField(key, val)
+		if err != nil {
+			return nil, err
 		}
 	}
 
@@ -332,8 +328,8 @@ func (c *Client) prepareUploadRequest(
 }
 
 func (c *Client) do(req *http.Request, v interface{}) (*http.Response, error) {
-	cl := *c.httpClient
-	resp, err := cl.Do(req)
+	resp, err := c.httpClient.Do(req)
+
 	if err != nil {
 		return nil, err
 	}
@@ -381,8 +377,7 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("User-Agent", "api.video SDK (go; v:1.0)")
 
-		cl := *c.httpClient
-		resp, err := cl.Do(req)
+		resp, err := c.httpClient.Do(req)
 
 		if err != nil {
 			return nil, err
