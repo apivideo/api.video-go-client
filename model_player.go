@@ -60,8 +60,8 @@ type Player struct {
 	// Deprecated
 	ShapeBackgroundBottom *string `json:"shapeBackgroundBottom,omitempty"`
 	// Deprecated
-	LinkActive *string            `json:"linkActive,omitempty"`
-	Assets     *PlayerAllOfAssets `json:"assets,omitempty"`
+	LinkActive *string       `json:"linkActive,omitempty"`
+	Assets     *PlayerAssets `json:"assets,omitempty"`
 }
 
 // NewPlayer instantiates a new Player object
@@ -70,16 +70,6 @@ type Player struct {
 // will change when the set of required properties is changed
 func NewPlayer() *Player {
 	this := Player{}
-	var enableApi bool = true
-	this.EnableApi = &enableApi
-	var enableControls bool = true
-	this.EnableControls = &enableControls
-	var forceAutoplay bool = false
-	this.ForceAutoplay = &forceAutoplay
-	var hideTitle bool = false
-	this.HideTitle = &hideTitle
-	var forceLoop bool = false
-	this.ForceLoop = &forceLoop
 	return &this
 }
 
@@ -88,16 +78,6 @@ func NewPlayer() *Player {
 // but it doesn't guarantee that properties required by API are set
 func NewPlayerWithDefaults() *Player {
 	this := Player{}
-	var enableApi bool = true
-	this.EnableApi = &enableApi
-	var enableControls bool = true
-	this.EnableControls = &enableControls
-	var forceAutoplay bool = false
-	this.ForceAutoplay = &forceAutoplay
-	var hideTitle bool = false
-	this.HideTitle = &hideTitle
-	var forceLoop bool = false
-	this.ForceLoop = &forceLoop
 	return &this
 }
 
@@ -838,9 +818,9 @@ func (o *Player) SetLinkActive(v string) {
 }
 
 // GetAssets returns the Assets field value if set, zero value otherwise.
-func (o *Player) GetAssets() PlayerAllOfAssets {
+func (o *Player) GetAssets() PlayerAssets {
 	if o == nil || o.Assets == nil {
-		var ret PlayerAllOfAssets
+		var ret PlayerAssets
 		return ret
 	}
 	return *o.Assets
@@ -848,7 +828,7 @@ func (o *Player) GetAssets() PlayerAllOfAssets {
 
 // GetAssetsOk returns a tuple with the Assets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetAssetsOk() (*PlayerAllOfAssets, bool) {
+func (o *Player) GetAssetsOk() (*PlayerAssets, bool) {
 	if o == nil || o.Assets == nil {
 		return nil, false
 	}
@@ -864,8 +844,8 @@ func (o *Player) HasAssets() bool {
 	return false
 }
 
-// SetAssets gets a reference to the given PlayerAllOfAssets and assigns it to the Assets field.
-func (o *Player) SetAssets(v PlayerAllOfAssets) {
+// SetAssets gets a reference to the given PlayerAssets and assigns it to the Assets field.
+func (o *Player) SetAssets(v PlayerAssets) {
 	o.Assets = &v
 }
 

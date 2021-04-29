@@ -52,16 +52,6 @@ type PlayerUpdatePayload struct {
 // will change when the set of required properties is changed
 func NewPlayerUpdatePayload() *PlayerUpdatePayload {
 	this := PlayerUpdatePayload{}
-	var enableApi bool = true
-	this.EnableApi = &enableApi
-	var enableControls bool = true
-	this.EnableControls = &enableControls
-	var forceAutoplay bool = false
-	this.ForceAutoplay = &forceAutoplay
-	var hideTitle bool = false
-	this.HideTitle = &hideTitle
-	var forceLoop bool = false
-	this.ForceLoop = &forceLoop
 	return &this
 }
 
@@ -70,16 +60,6 @@ func NewPlayerUpdatePayload() *PlayerUpdatePayload {
 // but it doesn't guarantee that properties required by API are set
 func NewPlayerUpdatePayloadWithDefaults() *PlayerUpdatePayload {
 	this := PlayerUpdatePayload{}
-	var enableApi bool = true
-	this.EnableApi = &enableApi
-	var enableControls bool = true
-	this.EnableControls = &enableControls
-	var forceAutoplay bool = false
-	this.ForceAutoplay = &forceAutoplay
-	var hideTitle bool = false
-	this.HideTitle = &hideTitle
-	var forceLoop bool = false
-	this.ForceLoop = &forceLoop
 	return &this
 }
 

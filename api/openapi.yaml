@@ -3612,42 +3612,119 @@ components:
       title: video
       type: object
     player:
-      allOf:
-      - $ref: '#/components/schemas/playerinput'
-      - $ref: '#/components/schemas/player_allOf'
-      title: Player
-    playerCreationPayload:
-      allOf:
-      - $ref: '#/components/schemas/playerinput'
-    playerUpdatePayload:
-      allOf:
-      - $ref: '#/components/schemas/playerinput'
-    playerinput:
       example:
-        assets:
-          logo: https://cdn.api.video/player/pl14Db6oMJRH6SRVoOwORacK/logo.png
-          link: https://api.video
-        shapeMargin: 10
-        shapeRadius: 3
-        shapeAspect: flat
-        shapeBackgroundTop: rgba(50, 50, 50, .7)
-        shapeBackgroundBottom: rgba(50, 50, 50, .8)
-        text: rgba(255, 255, 255, .95)
-        link: rgba(255, 0, 0, .95)
-        linkHover: rgba(255, 255, 255, .75)
-        linkActive: rgba(255, 0, 0, .75)
-        trackPlayed: rgba(255, 255, 255, .95)
-        trackUnplayed: rgba(255, 255, 255, .1)
-        trackBackground: rgba(0, 0, 0, 0)
-        backgroundTop: rgba(72, 4, 45, 1)
-        backgroundBottom: rgba(94, 95, 89, 1)
-        backgroundText: rgba(255, 255, 255, .95)
-        language: en
-        enableApi: true
+        trackUnplayed: trackUnplayed
+        shapeMargin: 0
+        backgroundTop: backgroundTop
+        link: link
+        trackPlayed: trackPlayed
+        shapeBackgroundTop: shapeBackgroundTop
+        linkHover: linkHover
+        backgroundBottom: backgroundBottom
         enableControls: true
-        forceAutoplay: false
-        hideTitle: false
-        forceLoop: false
+        backgroundText: backgroundText
+        enableApi: true
+        forceAutoplay: true
+        shapeBackgroundBottom: shapeBackgroundBottom
+        trackBackground: trackBackground
+        createdAt: 2020-01-31T10:17:47Z
+        assets:
+          link: path/to/my/logo/mylogo.jpg
+          logo: mylogo.jpg
+        hideTitle: true
+        shapeAspect: shapeAspect
+        text: text
+        linkActive: linkActive
+        forceLoop: true
+        playerId: pl45KFKdlddgk654dspkze
+        updatedAt: 2020-01-31T10:18:47Z
+        shapeRadius: 6
+      properties:
+        text:
+          description: 'RGBA color for timer text. Default: rgba(255, 255, 255, 1)'
+          type: string
+        link:
+          description: 'RGBA color for all controls. Default: rgba(255, 255, 255,
+            1)'
+          type: string
+        linkHover:
+          description: 'RGBA color for all controls when hovered. Default: rgba(255,
+            255, 255, 1)'
+          type: string
+        trackPlayed:
+          description: 'RGBA color playback bar: played content. Default: rgba(88,
+            131, 255, .95)'
+          type: string
+        trackUnplayed:
+          description: 'RGBA color playback bar: downloaded but unplayed (buffered)
+            content. Default: rgba(255, 255, 255, .35)'
+          type: string
+        trackBackground:
+          description: 'RGBA color playback bar: background. Default: rgba(255, 255,
+            255, .2)'
+          type: string
+        backgroundTop:
+          description: 'RGBA color: top 50% of background. Default: rgba(0, 0, 0,
+            .7)'
+          type: string
+        backgroundBottom:
+          description: 'RGBA color: bottom 50% of background. Default: rgba(0, 0,
+            0, .7)'
+          type: string
+        backgroundText:
+          description: 'RGBA color for title text. Default: rgba(255, 255, 255, 1)'
+          type: string
+        enableApi:
+          description: 'enable/disable player SDK access. Default: true'
+          type: boolean
+        enableControls:
+          description: 'enable/disable player controls. Default: true'
+          type: boolean
+        forceAutoplay:
+          description: 'enable/disable player autoplay. Default: false'
+          type: boolean
+        hideTitle:
+          description: 'enable/disable title. Default: false'
+          type: boolean
+        forceLoop:
+          description: 'enable/disable looping. Default: false'
+          type: boolean
+        playerId:
+          example: pl45KFKdlddgk654dspkze
+          type: string
+        createdAt:
+          description: When the player was created, presented in ISO-8601 format.
+          example: 2020-01-31T10:17:47Z
+          format: date-time
+          type: string
+        updatedAt:
+          description: When the player was last updated, presented in ISO-8601 format.
+          example: 2020-01-31T10:18:47Z
+          format: date-time
+          type: string
+        shapeMargin:
+          description: Deprecated
+          type: integer
+        shapeRadius:
+          description: Deprecated
+          type: integer
+        shapeAspect:
+          description: Deprecated
+          type: string
+        shapeBackgroundTop:
+          description: Deprecated
+          type: string
+        shapeBackgroundBottom:
+          description: Deprecated
+          type: string
+        linkActive:
+          description: Deprecated
+          type: string
+        assets:
+          $ref: '#/components/schemas/player_assets'
+      title: Player
+      type: object
+    playerCreationPayload:
       properties:
         text:
           description: 'RGBA color for timer text. Default: rgba(255, 255, 255, 1)'
@@ -3703,7 +3780,59 @@ components:
           default: false
           description: 'enable/disable looping. Default: false'
           type: boolean
-      title: PlayerInput
+      type: object
+    playerUpdatePayload:
+      properties:
+        text:
+          description: 'RGBA color for timer text. Default: rgba(255, 255, 255, 1)'
+          type: string
+        link:
+          description: 'RGBA color for all controls. Default: rgba(255, 255, 255,
+            1)'
+          type: string
+        linkHover:
+          description: 'RGBA color for all controls when hovered. Default: rgba(255,
+            255, 255, 1)'
+          type: string
+        trackPlayed:
+          description: 'RGBA color playback bar: played content. Default: rgba(88,
+            131, 255, .95)'
+          type: string
+        trackUnplayed:
+          description: 'RGBA color playback bar: downloaded but unplayed (buffered)
+            content. Default: rgba(255, 255, 255, .35)'
+          type: string
+        trackBackground:
+          description: 'RGBA color playback bar: background. Default: rgba(255, 255,
+            255, .2)'
+          type: string
+        backgroundTop:
+          description: 'RGBA color: top 50% of background. Default: rgba(0, 0, 0,
+            .7)'
+          type: string
+        backgroundBottom:
+          description: 'RGBA color: bottom 50% of background. Default: rgba(0, 0,
+            0, .7)'
+          type: string
+        backgroundText:
+          description: 'RGBA color for title text. Default: rgba(255, 255, 255, 1)'
+          type: string
+        enableApi:
+          description: 'enable/disable player SDK access. Default: true'
+          type: boolean
+        enableControls:
+          description: 'enable/disable player controls. Default: true'
+          type: boolean
+        forceAutoplay:
+          description: 'enable/disable player autoplay. Default: false'
+          type: boolean
+        hideTitle:
+          description: 'enable/disable title. Default: false'
+          type: boolean
+        forceLoop:
+          description: 'enable/disable looping. Default: false'
+          type: boolean
+      title: PlayerUpdatePayload
       type: object
     subtitle:
       example:
@@ -4669,8 +4798,58 @@ components:
               rel: last
               uri: /videos/search?currentPage=6&pageSize=20
         data:
-        - null
-        - null
+        - trackUnplayed: trackUnplayed
+          shapeMargin: 0
+          backgroundTop: backgroundTop
+          link: link
+          trackPlayed: trackPlayed
+          shapeBackgroundTop: shapeBackgroundTop
+          linkHover: linkHover
+          backgroundBottom: backgroundBottom
+          enableControls: true
+          backgroundText: backgroundText
+          enableApi: true
+          forceAutoplay: true
+          shapeBackgroundBottom: shapeBackgroundBottom
+          trackBackground: trackBackground
+          createdAt: 2020-01-31T10:17:47Z
+          assets:
+            link: path/to/my/logo/mylogo.jpg
+            logo: mylogo.jpg
+          hideTitle: true
+          shapeAspect: shapeAspect
+          text: text
+          linkActive: linkActive
+          forceLoop: true
+          playerId: pl45KFKdlddgk654dspkze
+          updatedAt: 2020-01-31T10:18:47Z
+          shapeRadius: 6
+        - trackUnplayed: trackUnplayed
+          shapeMargin: 0
+          backgroundTop: backgroundTop
+          link: link
+          trackPlayed: trackPlayed
+          shapeBackgroundTop: shapeBackgroundTop
+          linkHover: linkHover
+          backgroundBottom: backgroundBottom
+          enableControls: true
+          backgroundText: backgroundText
+          enableApi: true
+          forceAutoplay: true
+          shapeBackgroundBottom: shapeBackgroundBottom
+          trackBackground: trackBackground
+          createdAt: 2020-01-31T10:17:47Z
+          assets:
+            link: path/to/my/logo/mylogo.jpg
+            logo: mylogo.jpg
+          hideTitle: true
+          shapeAspect: shapeAspect
+          text: text
+          linkActive: linkActive
+          forceLoop: true
+          playerId: pl45KFKdlddgk654dspkze
+          updatedAt: 2020-01-31T10:18:47Z
+          shapeRadius: 6
       properties:
         data:
           items:
@@ -5371,7 +5550,10 @@ components:
           type: string
       title: Account
       type: object
-    player_allOf_assets:
+    player_assets:
+      example:
+        link: path/to/my/logo/mylogo.jpg
+        logo: mylogo.jpg
       properties:
         logo:
           description: The name of the file containing the logo you want to use.
@@ -5381,42 +5563,6 @@ components:
           description: The path to the file containing your logo.
           example: path/to/my/logo/mylogo.jpg
           type: string
-      type: object
-    player_allOf:
-      properties:
-        playerId:
-          example: pl45KFKdlddgk654dspkze
-          type: string
-        createdAt:
-          description: When the player was created, presented in ISO-8601 format.
-          example: 2020-01-31T10:17:47Z
-          format: date-time
-          type: string
-        updatedAt:
-          description: When the player was last updated, presented in ISO-8601 format.
-          example: 2020-01-31T10:18:47Z
-          format: date-time
-          type: string
-        shapeMargin:
-          description: Deprecated
-          type: integer
-        shapeRadius:
-          description: Deprecated
-          type: integer
-        shapeAspect:
-          description: Deprecated
-          type: string
-        shapeBackgroundTop:
-          description: Deprecated
-          type: string
-        shapeBackgroundBottom:
-          description: Deprecated
-          type: string
-        linkActive:
-          description: Deprecated
-          type: string
-        assets:
-          $ref: '#/components/schemas/player_allOf_assets'
       type: object
     account_quota:
       description: Deprecated

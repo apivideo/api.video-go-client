@@ -14,33 +14,33 @@ import (
 //"encoding/json"
 )
 
-// PlayerAllOfAssets struct for PlayerAllOfAssets
-type PlayerAllOfAssets struct {
+// PlayerAssets struct for PlayerAssets
+type PlayerAssets struct {
 	// The name of the file containing the logo you want to use.
 	Logo *string `json:"logo,omitempty"`
 	// The path to the file containing your logo.
 	Link *string `json:"link,omitempty"`
 }
 
-// NewPlayerAllOfAssets instantiates a new PlayerAllOfAssets object
+// NewPlayerAssets instantiates a new PlayerAssets object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlayerAllOfAssets() *PlayerAllOfAssets {
-	this := PlayerAllOfAssets{}
+func NewPlayerAssets() *PlayerAssets {
+	this := PlayerAssets{}
 	return &this
 }
 
-// NewPlayerAllOfAssetsWithDefaults instantiates a new PlayerAllOfAssets object
+// NewPlayerAssetsWithDefaults instantiates a new PlayerAssets object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPlayerAllOfAssetsWithDefaults() *PlayerAllOfAssets {
-	this := PlayerAllOfAssets{}
+func NewPlayerAssetsWithDefaults() *PlayerAssets {
+	this := PlayerAssets{}
 	return &this
 }
 
 // GetLogo returns the Logo field value if set, zero value otherwise.
-func (o *PlayerAllOfAssets) GetLogo() string {
+func (o *PlayerAssets) GetLogo() string {
 	if o == nil || o.Logo == nil {
 		var ret string
 		return ret
@@ -50,7 +50,7 @@ func (o *PlayerAllOfAssets) GetLogo() string {
 
 // GetLogoOk returns a tuple with the Logo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PlayerAllOfAssets) GetLogoOk() (*string, bool) {
+func (o *PlayerAssets) GetLogoOk() (*string, bool) {
 	if o == nil || o.Logo == nil {
 		return nil, false
 	}
@@ -58,7 +58,7 @@ func (o *PlayerAllOfAssets) GetLogoOk() (*string, bool) {
 }
 
 // HasLogo returns a boolean if a field has been set.
-func (o *PlayerAllOfAssets) HasLogo() bool {
+func (o *PlayerAssets) HasLogo() bool {
 	if o != nil && o.Logo != nil {
 		return true
 	}
@@ -67,12 +67,12 @@ func (o *PlayerAllOfAssets) HasLogo() bool {
 }
 
 // SetLogo gets a reference to the given string and assigns it to the Logo field.
-func (o *PlayerAllOfAssets) SetLogo(v string) {
+func (o *PlayerAssets) SetLogo(v string) {
 	o.Logo = &v
 }
 
 // GetLink returns the Link field value if set, zero value otherwise.
-func (o *PlayerAllOfAssets) GetLink() string {
+func (o *PlayerAssets) GetLink() string {
 	if o == nil || o.Link == nil {
 		var ret string
 		return ret
@@ -82,7 +82,7 @@ func (o *PlayerAllOfAssets) GetLink() string {
 
 // GetLinkOk returns a tuple with the Link field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PlayerAllOfAssets) GetLinkOk() (*string, bool) {
+func (o *PlayerAssets) GetLinkOk() (*string, bool) {
 	if o == nil || o.Link == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *PlayerAllOfAssets) GetLinkOk() (*string, bool) {
 }
 
 // HasLink returns a boolean if a field has been set.
-func (o *PlayerAllOfAssets) HasLink() bool {
+func (o *PlayerAssets) HasLink() bool {
 	if o != nil && o.Link != nil {
 		return true
 	}
@@ -99,33 +99,33 @@ func (o *PlayerAllOfAssets) HasLink() bool {
 }
 
 // SetLink gets a reference to the given string and assigns it to the Link field.
-func (o *PlayerAllOfAssets) SetLink(v string) {
+func (o *PlayerAssets) SetLink(v string) {
 	o.Link = &v
 }
 
-type NullablePlayerAllOfAssets struct {
-	value *PlayerAllOfAssets
+type NullablePlayerAssets struct {
+	value *PlayerAssets
 	isSet bool
 }
 
-func (v NullablePlayerAllOfAssets) Get() *PlayerAllOfAssets {
+func (v NullablePlayerAssets) Get() *PlayerAssets {
 	return v.value
 }
 
-func (v *NullablePlayerAllOfAssets) Set(val *PlayerAllOfAssets) {
+func (v *NullablePlayerAssets) Set(val *PlayerAssets) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePlayerAllOfAssets) IsSet() bool {
+func (v NullablePlayerAssets) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePlayerAllOfAssets) Unset() {
+func (v *NullablePlayerAssets) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePlayerAllOfAssets(val *PlayerAllOfAssets) *NullablePlayerAllOfAssets {
-	return &NullablePlayerAllOfAssets{value: val, isSet: true}
+func NewNullablePlayerAssets(val *PlayerAssets) *NullablePlayerAssets {
+	return &NullablePlayerAssets{value: val, isSet: true}
 }

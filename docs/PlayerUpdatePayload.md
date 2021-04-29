@@ -13,11 +13,11 @@ Name | Type | Description | Notes
 **BackgroundTop** | Pointer to **string** | RGBA color: top 50% of background. Default: rgba(0, 0, 0, .7) | [optional] 
 **BackgroundBottom** | Pointer to **string** | RGBA color: bottom 50% of background. Default: rgba(0, 0, 0, .7) | [optional] 
 **BackgroundText** | Pointer to **string** | RGBA color for title text. Default: rgba(255, 255, 255, 1) | [optional] 
-**EnableApi** | Pointer to **bool** | enable/disable player SDK access. Default: true | [optional] [default to true]
-**EnableControls** | Pointer to **bool** | enable/disable player controls. Default: true | [optional] [default to true]
-**ForceAutoplay** | Pointer to **bool** | enable/disable player autoplay. Default: false | [optional] [default to false]
-**HideTitle** | Pointer to **bool** | enable/disable title. Default: false | [optional] [default to false]
-**ForceLoop** | Pointer to **bool** | enable/disable looping. Default: false | [optional] [default to false]
+**EnableApi** | Pointer to **bool** | enable/disable player SDK access. Default: true | [optional] 
+**EnableControls** | Pointer to **bool** | enable/disable player controls. Default: true | [optional] 
+**ForceAutoplay** | Pointer to **bool** | enable/disable player autoplay. Default: false | [optional] 
+**HideTitle** | Pointer to **bool** | enable/disable title. Default: false | [optional] 
+**ForceLoop** | Pointer to **bool** | enable/disable looping. Default: false | [optional] 
 
 ## Methods
 

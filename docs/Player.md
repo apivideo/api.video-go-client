@@ -13,11 +13,11 @@ Name | Type | Description | Notes
 **BackgroundTop** | Pointer to **string** | RGBA color: top 50% of background. Default: rgba(0, 0, 0, .7) | [optional] 
 **BackgroundBottom** | Pointer to **string** | RGBA color: bottom 50% of background. Default: rgba(0, 0, 0, .7) | [optional] 
 **BackgroundText** | Pointer to **string** | RGBA color for title text. Default: rgba(255, 255, 255, 1) | [optional] 
-**EnableApi** | Pointer to **bool** | enable/disable player SDK access. Default: true | [optional] [default to true]
-**EnableControls** | Pointer to **bool** | enable/disable player controls. Default: true | [optional] [default to true]
-**ForceAutoplay** | Pointer to **bool** | enable/disable player autoplay. Default: false | [optional] [default to false]
-**HideTitle** | Pointer to **bool** | enable/disable title. Default: false | [optional] [default to false]
-**ForceLoop** | Pointer to **bool** | enable/disable looping. Default: false | [optional] [default to false]
+**EnableApi** | Pointer to **bool** | enable/disable player SDK access. Default: true | [optional] 
+**EnableControls** | Pointer to **bool** | enable/disable player controls. Default: true | [optional] 
+**ForceAutoplay** | Pointer to **bool** | enable/disable player autoplay. Default: false | [optional] 
+**HideTitle** | Pointer to **bool** | enable/disable title. Default: false | [optional] 
+**ForceLoop** | Pointer to **bool** | enable/disable looping. Default: false | [optional] 
 **PlayerId** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **string** | When the player was created, presented in ISO-8601 format. | [optional] 
 **UpdatedAt** | Pointer to **string** | When the player was last updated, presented in ISO-8601 format. | [optional] 
@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **ShapeBackgroundTop** | Pointer to **string** | Deprecated | [optional] 
 **ShapeBackgroundBottom** | Pointer to **string** | Deprecated | [optional] 
 **LinkActive** | Pointer to **string** | Deprecated | [optional] 
-**Assets** | Pointer to [**PlayerAllOfAssets**](player_allOf_assets.md) |  | [optional] 
+**Assets** | Pointer to [**PlayerAssets**](player_assets.md) |  | [optional] 
 
 ## Methods
 
@@ -625,20 +625,20 @@ HasLinkActive returns a boolean if a field has been set.
 
 ### GetAssets
 
-`func (o *Player) GetAssets() PlayerAllOfAssets`
+`func (o *Player) GetAssets() PlayerAssets`
 
 GetAssets returns the Assets field if non-nil, zero value otherwise.
 
 ### GetAssetsOk
 
-`func (o *Player) GetAssetsOk() (*PlayerAllOfAssets, bool)`
+`func (o *Player) GetAssetsOk() (*PlayerAssets, bool)`
 
 GetAssetsOk returns a tuple with the Assets field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAssets
 
-`func (o *Player) SetAssets(v PlayerAllOfAssets)`
+`func (o *Player) SetAssets(v PlayerAssets)`
 
 SetAssets sets Assets field to given value.
 

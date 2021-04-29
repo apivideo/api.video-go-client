@@ -72,7 +72,7 @@ var playerStructs = []Player{
 		ForceAutoplay:    PtrBool(false),
 		HideTitle:        PtrBool(false),
 		ForceLoop:        PtrBool(false),
-		Assets: &PlayerAllOfAssets{
+		Assets: &PlayerAssets{
 			Logo: PtrString("https://cdn.api.video/player/pl3Lony8J6NozV71Yxn8KVFn/logo.png"),
 			Link: PtrString("https://api.video"),
 		},
@@ -93,7 +93,7 @@ var playerStructs = []Player{
 		ForceAutoplay:    PtrBool(false),
 		HideTitle:        PtrBool(false),
 		ForceLoop:        PtrBool(false),
-		Assets: &PlayerAllOfAssets{
+		Assets: &PlayerAssets{
 			Logo: PtrString("https://cdn.api.video/player/pl3zY7qtojdW2EvMIU37707q/logo.png"),
 			Link: PtrString("https://api.video"),
 		},

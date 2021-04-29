@@ -3,8 +3,10 @@
 # api.video Golang api client
 
 api.video is an API that encodes on the go to facilitate immediate playback, enhancing viewer streaming experiences across multiple devices and platforms. You can stream live or on-demand online videos within minutes.
-This documentation helps you use the corresponding Golang client.
 
+## Warning
+
+This API client is still in beta. Please feel free to report any issue you may encounter.
 
 ## Installation
 ```bash
@@ -283,12 +285,10 @@ Method | HTTP request | Description
  - [Pagination](docs/Pagination.md)
  - [PaginationLink](docs/PaginationLink.md)
  - [Player](docs/Player.md)
- - [PlayerAllOf](docs/PlayerAllOf.md)
- - [PlayerAllOfAssets](docs/PlayerAllOfAssets.md)
+ - [PlayerAssets](docs/PlayerAssets.md)
  - [PlayerCreationPayload](docs/PlayerCreationPayload.md)
  - [PlayerSessionEvent](docs/PlayerSessionEvent.md)
  - [PlayerUpdatePayload](docs/PlayerUpdatePayload.md)
- - [Playerinput](docs/Playerinput.md)
  - [PlayersListResponse](docs/PlayersListResponse.md)
  - [Quality](docs/Quality.md)
  - [RawStatisticsListLiveStreamAnalyticsResponse](docs/RawStatisticsListLiveStreamAnalyticsResponse.md)
