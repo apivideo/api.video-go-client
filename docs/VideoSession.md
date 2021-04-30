@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Session** | Pointer to [**VideoSessionSession**](video_session_session.md) |  | [optional] 
-**Location** | Pointer to [**VideoSessionLocation**](video_session_location.md) |  | [optional] 
-**Referrer** | Pointer to [**VideoSessionReferrer**](video_session_referrer.md) |  | [optional] 
-**Device** | Pointer to [**VideoSessionDevice**](video_session_device.md) |  | [optional] 
-**Os** | Pointer to [**VideoSessionOs**](video_session_os.md) |  | [optional] 
-**Client** | Pointer to [**VideoSessionClient**](video_session_client.md) |  | [optional] 
+**Session** | Pointer to [**VideoSessionSession**](video-session-session.md) |  | [optional] 
+**Location** | Pointer to [**VideoSessionLocation**](video-session-location.md) |  | [optional] 
+**Referrer** | Pointer to [**VideoSessionReferrer**](video-session-referrer.md) |  | [optional] 
+**Device** | Pointer to [**VideoSessionDevice**](video-session-device.md) |  | [optional] 
+**Os** | Pointer to [**VideoSessionOs**](video-session-os.md) |  | [optional] 
+**Client** | Pointer to [**VideoSessionClient**](video-session-client.md) |  | [optional] 
 
 ## Methods
 

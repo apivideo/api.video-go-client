@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Session** | Pointer to [**LiveStreamSessionSession**](live_stream_session_session.md) |  | [optional] 
-**Location** | Pointer to [**LiveStreamSessionLocation**](live_stream_session_location.md) |  | [optional] 
-**Referrer** | Pointer to [**LiveStreamSessionReferrer**](live_stream_session_referrer.md) |  | [optional] 
-**Device** | Pointer to [**LiveStreamSessionDevice**](live_stream_session_device.md) |  | [optional] 
-**Os** | Pointer to [**VideoSessionOs**](video_session_os.md) |  | [optional] 
-**Client** | Pointer to [**LiveStreamSessionClient**](live_stream_session_client.md) |  | [optional] 
+**Session** | Pointer to [**LiveStreamSessionSession**](live-stream-session-session.md) |  | [optional] 
+**Location** | Pointer to [**LiveStreamSessionLocation**](live-stream-session-location.md) |  | [optional] 
+**Referrer** | Pointer to [**LiveStreamSessionReferrer**](live-stream-session-referrer.md) |  | [optional] 
+**Device** | Pointer to [**LiveStreamSessionDevice**](live-stream-session-device.md) |  | [optional] 
+**Os** | Pointer to [**VideoSessionOs**](video-session-os.md) |  | [optional] 
+**Client** | Pointer to [**LiveStreamSessionClient**](live-stream-session-client.md) |  | [optional] 
 
 ## Methods
 

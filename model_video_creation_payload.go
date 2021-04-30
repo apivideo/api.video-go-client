@@ -14,8 +14,8 @@ import (
 //"encoding/json"
 )
 
-// VideoCreatePayload struct for VideoCreatePayload
-type VideoCreatePayload struct {
+// VideoCreationPayload struct for VideoCreationPayload
+type VideoCreationPayload struct {
 	// The title of your new video.
 	Title string `json:"title"`
 	// A brief description of your video.
@@ -38,12 +38,12 @@ type VideoCreatePayload struct {
 	PublishedAt *string `json:"publishedAt,omitempty"`
 }
 
-// NewVideoCreatePayload instantiates a new VideoCreatePayload object
+// NewVideoCreationPayload instantiates a new VideoCreationPayload object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVideoCreatePayload(title string) *VideoCreatePayload {
-	this := VideoCreatePayload{}
+func NewVideoCreationPayload(title string) *VideoCreationPayload {
+	this := VideoCreationPayload{}
 	this.Title = title
 	var public bool = true
 	this.Public = &public
@@ -54,11 +54,11 @@ func NewVideoCreatePayload(title string) *VideoCreatePayload {
 	return &this
 }
 
-// NewVideoCreatePayloadWithDefaults instantiates a new VideoCreatePayload object
+// NewVideoCreationPayloadWithDefaults instantiates a new VideoCreationPayload object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewVideoCreatePayloadWithDefaults() *VideoCreatePayload {
-	this := VideoCreatePayload{}
+func NewVideoCreationPayloadWithDefaults() *VideoCreationPayload {
+	this := VideoCreationPayload{}
 	var public bool = true
 	this.Public = &public
 	var panoramic bool = false
@@ -69,7 +69,7 @@ func NewVideoCreatePayloadWithDefaults() *VideoCreatePayload {
 }
 
 // GetTitle returns the Title field value
-func (o *VideoCreatePayload) GetTitle() string {
+func (o *VideoCreationPayload) GetTitle() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -80,7 +80,7 @@ func (o *VideoCreatePayload) GetTitle() string {
 
 // GetTitleOk returns a tuple with the Title field value
 // and a boolean to check if the value has been set.
-func (o *VideoCreatePayload) GetTitleOk() (*string, bool) {
+func (o *VideoCreationPayload) GetTitleOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,12 +88,12 @@ func (o *VideoCreatePayload) GetTitleOk() (*string, bool) {
 }
 
 // SetTitle sets field value
-func (o *VideoCreatePayload) SetTitle(v string) {
+func (o *VideoCreationPayload) SetTitle(v string) {
 	o.Title = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
-func (o *VideoCreatePayload) GetDescription() string {
+func (o *VideoCreationPayload) GetDescription() string {
 	if o == nil || o.Description == nil {
 		var ret string
 		return ret
@@ -103,7 +103,7 @@ func (o *VideoCreatePayload) GetDescription() string {
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideoCreatePayload) GetDescriptionOk() (*string, bool) {
+func (o *VideoCreationPayload) GetDescriptionOk() (*string, bool) {
 	if o == nil || o.Description == nil {
 		return nil, false
 	}
@@ -111,7 +111,7 @@ func (o *VideoCreatePayload) GetDescriptionOk() (*string, bool) {
 }
 
 // HasDescription returns a boolean if a field has been set.
-func (o *VideoCreatePayload) HasDescription() bool {
+func (o *VideoCreationPayload) HasDescription() bool {
 	if o != nil && o.Description != nil {
 		return true
 	}
@@ -120,12 +120,12 @@ func (o *VideoCreatePayload) HasDescription() bool {
 }
 
 // SetDescription gets a reference to the given string and assigns it to the Description field.
-func (o *VideoCreatePayload) SetDescription(v string) {
+func (o *VideoCreationPayload) SetDescription(v string) {
 	o.Description = &v
 }
 
 // GetSource returns the Source field value if set, zero value otherwise.
-func (o *VideoCreatePayload) GetSource() string {
+func (o *VideoCreationPayload) GetSource() string {
 	if o == nil || o.Source == nil {
 		var ret string
 		return ret
@@ -135,7 +135,7 @@ func (o *VideoCreatePayload) GetSource() string {
 
 // GetSourceOk returns a tuple with the Source field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideoCreatePayload) GetSourceOk() (*string, bool) {
+func (o *VideoCreationPayload) GetSourceOk() (*string, bool) {
 	if o == nil || o.Source == nil {
 		return nil, false
 	}
@@ -143,7 +143,7 @@ func (o *VideoCreatePayload) GetSourceOk() (*string, bool) {
 }
 
 // HasSource returns a boolean if a field has been set.
-func (o *VideoCreatePayload) HasSource() bool {
+func (o *VideoCreationPayload) HasSource() bool {
 	if o != nil && o.Source != nil {
 		return true
 	}
@@ -152,12 +152,12 @@ func (o *VideoCreatePayload) HasSource() bool {
 }
 
 // SetSource gets a reference to the given string and assigns it to the Source field.
-func (o *VideoCreatePayload) SetSource(v string) {
+func (o *VideoCreationPayload) SetSource(v string) {
 	o.Source = &v
 }
 
 // GetPublic returns the Public field value if set, zero value otherwise.
-func (o *VideoCreatePayload) GetPublic() bool {
+func (o *VideoCreationPayload) GetPublic() bool {
 	if o == nil || o.Public == nil {
 		var ret bool
 		return ret
@@ -167,7 +167,7 @@ func (o *VideoCreatePayload) GetPublic() bool {
 
 // GetPublicOk returns a tuple with the Public field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideoCreatePayload) GetPublicOk() (*bool, bool) {
+func (o *VideoCreationPayload) GetPublicOk() (*bool, bool) {
 	if o == nil || o.Public == nil {
 		return nil, false
 	}
@@ -175,7 +175,7 @@ func (o *VideoCreatePayload) GetPublicOk() (*bool, bool) {
 }
 
 // HasPublic returns a boolean if a field has been set.
-func (o *VideoCreatePayload) HasPublic() bool {
+func (o *VideoCreationPayload) HasPublic() bool {
 	if o != nil && o.Public != nil {
 		return true
 	}
@@ -184,12 +184,12 @@ func (o *VideoCreatePayload) HasPublic() bool {
 }
 
 // SetPublic gets a reference to the given bool and assigns it to the Public field.
-func (o *VideoCreatePayload) SetPublic(v bool) {
+func (o *VideoCreationPayload) SetPublic(v bool) {
 	o.Public = &v
 }
 
 // GetPanoramic returns the Panoramic field value if set, zero value otherwise.
-func (o *VideoCreatePayload) GetPanoramic() bool {
+func (o *VideoCreationPayload) GetPanoramic() bool {
 	if o == nil || o.Panoramic == nil {
 		var ret bool
 		return ret
@@ -199,7 +199,7 @@ func (o *VideoCreatePayload) GetPanoramic() bool {
 
 // GetPanoramicOk returns a tuple with the Panoramic field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideoCreatePayload) GetPanoramicOk() (*bool, bool) {
+func (o *VideoCreationPayload) GetPanoramicOk() (*bool, bool) {
 	if o == nil || o.Panoramic == nil {
 		return nil, false
 	}
@@ -207,7 +207,7 @@ func (o *VideoCreatePayload) GetPanoramicOk() (*bool, bool) {
 }
 
 // HasPanoramic returns a boolean if a field has been set.
-func (o *VideoCreatePayload) HasPanoramic() bool {
+func (o *VideoCreationPayload) HasPanoramic() bool {
 	if o != nil && o.Panoramic != nil {
 		return true
 	}
@@ -216,12 +216,12 @@ func (o *VideoCreatePayload) HasPanoramic() bool {
 }
 
 // SetPanoramic gets a reference to the given bool and assigns it to the Panoramic field.
-func (o *VideoCreatePayload) SetPanoramic(v bool) {
+func (o *VideoCreationPayload) SetPanoramic(v bool) {
 	o.Panoramic = &v
 }
 
 // GetMp4Support returns the Mp4Support field value if set, zero value otherwise.
-func (o *VideoCreatePayload) GetMp4Support() bool {
+func (o *VideoCreationPayload) GetMp4Support() bool {
 	if o == nil || o.Mp4Support == nil {
 		var ret bool
 		return ret
@@ -231,7 +231,7 @@ func (o *VideoCreatePayload) GetMp4Support() bool {
 
 // GetMp4SupportOk returns a tuple with the Mp4Support field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideoCreatePayload) GetMp4SupportOk() (*bool, bool) {
+func (o *VideoCreationPayload) GetMp4SupportOk() (*bool, bool) {
 	if o == nil || o.Mp4Support == nil {
 		return nil, false
 	}
@@ -239,7 +239,7 @@ func (o *VideoCreatePayload) GetMp4SupportOk() (*bool, bool) {
 }
 
 // HasMp4Support returns a boolean if a field has been set.
-func (o *VideoCreatePayload) HasMp4Support() bool {
+func (o *VideoCreationPayload) HasMp4Support() bool {
 	if o != nil && o.Mp4Support != nil {
 		return true
 	}
@@ -248,12 +248,12 @@ func (o *VideoCreatePayload) HasMp4Support() bool {
 }
 
 // SetMp4Support gets a reference to the given bool and assigns it to the Mp4Support field.
-func (o *VideoCreatePayload) SetMp4Support(v bool) {
+func (o *VideoCreationPayload) SetMp4Support(v bool) {
 	o.Mp4Support = &v
 }
 
 // GetPlayerId returns the PlayerId field value if set, zero value otherwise.
-func (o *VideoCreatePayload) GetPlayerId() string {
+func (o *VideoCreationPayload) GetPlayerId() string {
 	if o == nil || o.PlayerId == nil {
 		var ret string
 		return ret
@@ -263,7 +263,7 @@ func (o *VideoCreatePayload) GetPlayerId() string {
 
 // GetPlayerIdOk returns a tuple with the PlayerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideoCreatePayload) GetPlayerIdOk() (*string, bool) {
+func (o *VideoCreationPayload) GetPlayerIdOk() (*string, bool) {
 	if o == nil || o.PlayerId == nil {
 		return nil, false
 	}
@@ -271,7 +271,7 @@ func (o *VideoCreatePayload) GetPlayerIdOk() (*string, bool) {
 }
 
 // HasPlayerId returns a boolean if a field has been set.
-func (o *VideoCreatePayload) HasPlayerId() bool {
+func (o *VideoCreationPayload) HasPlayerId() bool {
 	if o != nil && o.PlayerId != nil {
 		return true
 	}
@@ -280,12 +280,12 @@ func (o *VideoCreatePayload) HasPlayerId() bool {
 }
 
 // SetPlayerId gets a reference to the given string and assigns it to the PlayerId field.
-func (o *VideoCreatePayload) SetPlayerId(v string) {
+func (o *VideoCreationPayload) SetPlayerId(v string) {
 	o.PlayerId = &v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
-func (o *VideoCreatePayload) GetTags() []string {
+func (o *VideoCreationPayload) GetTags() []string {
 	if o == nil || o.Tags == nil {
 		var ret []string
 		return ret
@@ -295,7 +295,7 @@ func (o *VideoCreatePayload) GetTags() []string {
 
 // GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideoCreatePayload) GetTagsOk() (*[]string, bool) {
+func (o *VideoCreationPayload) GetTagsOk() (*[]string, bool) {
 	if o == nil || o.Tags == nil {
 		return nil, false
 	}
@@ -303,7 +303,7 @@ func (o *VideoCreatePayload) GetTagsOk() (*[]string, bool) {
 }
 
 // HasTags returns a boolean if a field has been set.
-func (o *VideoCreatePayload) HasTags() bool {
+func (o *VideoCreationPayload) HasTags() bool {
 	if o != nil && o.Tags != nil {
 		return true
 	}
@@ -312,12 +312,12 @@ func (o *VideoCreatePayload) HasTags() bool {
 }
 
 // SetTags gets a reference to the given []string and assigns it to the Tags field.
-func (o *VideoCreatePayload) SetTags(v []string) {
+func (o *VideoCreationPayload) SetTags(v []string) {
 	o.Tags = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *VideoCreatePayload) GetMetadata() []Metadata {
+func (o *VideoCreationPayload) GetMetadata() []Metadata {
 	if o == nil || o.Metadata == nil {
 		var ret []Metadata
 		return ret
@@ -327,7 +327,7 @@ func (o *VideoCreatePayload) GetMetadata() []Metadata {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideoCreatePayload) GetMetadataOk() (*[]Metadata, bool) {
+func (o *VideoCreationPayload) GetMetadataOk() (*[]Metadata, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -335,7 +335,7 @@ func (o *VideoCreatePayload) GetMetadataOk() (*[]Metadata, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *VideoCreatePayload) HasMetadata() bool {
+func (o *VideoCreationPayload) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -344,12 +344,12 @@ func (o *VideoCreatePayload) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given []Metadata and assigns it to the Metadata field.
-func (o *VideoCreatePayload) SetMetadata(v []Metadata) {
+func (o *VideoCreationPayload) SetMetadata(v []Metadata) {
 	o.Metadata = &v
 }
 
 // GetPublishedAt returns the PublishedAt field value if set, zero value otherwise.
-func (o *VideoCreatePayload) GetPublishedAt() string {
+func (o *VideoCreationPayload) GetPublishedAt() string {
 	if o == nil || o.PublishedAt == nil {
 		var ret string
 		return ret
@@ -359,7 +359,7 @@ func (o *VideoCreatePayload) GetPublishedAt() string {
 
 // GetPublishedAtOk returns a tuple with the PublishedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideoCreatePayload) GetPublishedAtOk() (*string, bool) {
+func (o *VideoCreationPayload) GetPublishedAtOk() (*string, bool) {
 	if o == nil || o.PublishedAt == nil {
 		return nil, false
 	}
@@ -367,7 +367,7 @@ func (o *VideoCreatePayload) GetPublishedAtOk() (*string, bool) {
 }
 
 // HasPublishedAt returns a boolean if a field has been set.
-func (o *VideoCreatePayload) HasPublishedAt() bool {
+func (o *VideoCreationPayload) HasPublishedAt() bool {
 	if o != nil && o.PublishedAt != nil {
 		return true
 	}
@@ -376,33 +376,33 @@ func (o *VideoCreatePayload) HasPublishedAt() bool {
 }
 
 // SetPublishedAt gets a reference to the given string and assigns it to the PublishedAt field.
-func (o *VideoCreatePayload) SetPublishedAt(v string) {
+func (o *VideoCreationPayload) SetPublishedAt(v string) {
 	o.PublishedAt = &v
 }
 
-type NullableVideoCreatePayload struct {
-	value *VideoCreatePayload
+type NullableVideoCreationPayload struct {
+	value *VideoCreationPayload
 	isSet bool
 }
 
-func (v NullableVideoCreatePayload) Get() *VideoCreatePayload {
+func (v NullableVideoCreationPayload) Get() *VideoCreationPayload {
 	return v.value
 }
 
-func (v *NullableVideoCreatePayload) Set(val *VideoCreatePayload) {
+func (v *NullableVideoCreationPayload) Set(val *VideoCreationPayload) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableVideoCreatePayload) IsSet() bool {
+func (v NullableVideoCreationPayload) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableVideoCreatePayload) Unset() {
+func (v *NullableVideoCreationPayload) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableVideoCreatePayload(val *VideoCreatePayload) *NullableVideoCreatePayload {
-	return &NullableVideoCreatePayload{value: val, isSet: true}
+func NewNullableVideoCreationPayload(val *VideoCreationPayload) *NullableVideoCreationPayload {
+	return &NullableVideoCreationPayload{value: val, isSet: true}
 }

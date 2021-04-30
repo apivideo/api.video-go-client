@@ -140,7 +140,7 @@ var videoStructs = []Video{
 	},
 }
 
-var videoCreatePayload = VideoCreatePayload{
+var videoCreatePayload = VideoCreationPayload{
 	Title:       "Maths video",
 	Description: PtrString("An amazing video explaining the string theory"),
 	Public:      PtrBool(true),
@@ -235,8 +235,8 @@ var videoStatusJSONResponse = `{
 	}
   }`
 
-var videoStatusStruct = Videostatus{
-	Ingest: &VideostatusIngest{
+var videoStatusStruct = VideoStatus{
+	Ingest: &VideoStatusIngest{
 		Status:   PtrString("uploaded"),
 		Filesize: PtrInt32(273579401),
 		ReceivedBytes: &[]BytesRange{
@@ -252,7 +252,7 @@ var videoStatusStruct = Videostatus{
 			},
 		},
 	},
-	Encoding: &VideostatusEncoding{
+	Encoding: &VideoStatusEncoding{
 		Playable: PtrBool(true),
 		Qualities: &[]Quality{
 			{
@@ -276,7 +276,7 @@ var videoStatusStruct = Videostatus{
 				Status:  PtrString("waiting"),
 			},
 		},
-		Metadata: &VideostatusEncodingMetadata{
+		Metadata: &VideoStatusEncodingMetadata{
 			Width:       PtrInt32(424),
 			Height:      PtrInt32(240),
 			Bitrate:     PtrFloat32(411),

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **StreamKey** | Pointer to **string** | The unique, private stream key that you use to begin streaming. | [optional] 
 **Record** | Pointer to **bool** | Whether you are recording or not. | [optional] 
 **Public** | Pointer to **bool** | BETA FEATURE Please limit all public &#x3D; false (\&quot;private\&quot;) livestreams to 3,000 users. Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. | [optional] 
-**Assets** | Pointer to [**LiveStreamAssets**](live_stream_assets.md) |  | [optional] 
+**Assets** | Pointer to [**LiveStreamAssets**](live-stream-assets.md) |  | [optional] 
 **PlayerId** | Pointer to **string** | The unique identifier for the player. | [optional] 
 **Broadcasting** | Pointer to **bool** | Whether or not you are broadcasting the live video you recorded for others to see. True means you are broadcasting to viewers, false means you are not. | [optional] 
 **CreatedAt** | Pointer to **string** | When the player was created, presented in ISO-8601 format. | [optional] 

@@ -14,8 +14,8 @@ import (
 //"encoding/json"
 )
 
-// LiveStreamCreatePayload struct for LiveStreamCreatePayload
-type LiveStreamCreatePayload struct {
+// LiveStreamCreationPayload struct for LiveStreamCreationPayload
+type LiveStreamCreationPayload struct {
 	// Add a name for your live stream here.
 	Name string `json:"name"`
 	// Whether you are recording or not. True for record, false for not record.
@@ -26,30 +26,30 @@ type LiveStreamCreatePayload struct {
 	PlayerId *string `json:"playerId,omitempty"`
 }
 
-// NewLiveStreamCreatePayload instantiates a new LiveStreamCreatePayload object
+// NewLiveStreamCreationPayload instantiates a new LiveStreamCreationPayload object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLiveStreamCreatePayload(name string) *LiveStreamCreatePayload {
-	this := LiveStreamCreatePayload{}
+func NewLiveStreamCreationPayload(name string) *LiveStreamCreationPayload {
+	this := LiveStreamCreationPayload{}
 	this.Name = name
 	var record bool = false
 	this.Record = &record
 	return &this
 }
 
-// NewLiveStreamCreatePayloadWithDefaults instantiates a new LiveStreamCreatePayload object
+// NewLiveStreamCreationPayloadWithDefaults instantiates a new LiveStreamCreationPayload object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewLiveStreamCreatePayloadWithDefaults() *LiveStreamCreatePayload {
-	this := LiveStreamCreatePayload{}
+func NewLiveStreamCreationPayloadWithDefaults() *LiveStreamCreationPayload {
+	this := LiveStreamCreationPayload{}
 	var record bool = false
 	this.Record = &record
 	return &this
 }
 
 // GetName returns the Name field value
-func (o *LiveStreamCreatePayload) GetName() string {
+func (o *LiveStreamCreationPayload) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -60,7 +60,7 @@ func (o *LiveStreamCreatePayload) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *LiveStreamCreatePayload) GetNameOk() (*string, bool) {
+func (o *LiveStreamCreationPayload) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,12 +68,12 @@ func (o *LiveStreamCreatePayload) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *LiveStreamCreatePayload) SetName(v string) {
+func (o *LiveStreamCreationPayload) SetName(v string) {
 	o.Name = v
 }
 
 // GetRecord returns the Record field value if set, zero value otherwise.
-func (o *LiveStreamCreatePayload) GetRecord() bool {
+func (o *LiveStreamCreationPayload) GetRecord() bool {
 	if o == nil || o.Record == nil {
 		var ret bool
 		return ret
@@ -83,7 +83,7 @@ func (o *LiveStreamCreatePayload) GetRecord() bool {
 
 // GetRecordOk returns a tuple with the Record field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LiveStreamCreatePayload) GetRecordOk() (*bool, bool) {
+func (o *LiveStreamCreationPayload) GetRecordOk() (*bool, bool) {
 	if o == nil || o.Record == nil {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *LiveStreamCreatePayload) GetRecordOk() (*bool, bool) {
 }
 
 // HasRecord returns a boolean if a field has been set.
-func (o *LiveStreamCreatePayload) HasRecord() bool {
+func (o *LiveStreamCreationPayload) HasRecord() bool {
 	if o != nil && o.Record != nil {
 		return true
 	}
@@ -100,12 +100,12 @@ func (o *LiveStreamCreatePayload) HasRecord() bool {
 }
 
 // SetRecord gets a reference to the given bool and assigns it to the Record field.
-func (o *LiveStreamCreatePayload) SetRecord(v bool) {
+func (o *LiveStreamCreationPayload) SetRecord(v bool) {
 	o.Record = &v
 }
 
 // GetPublic returns the Public field value if set, zero value otherwise.
-func (o *LiveStreamCreatePayload) GetPublic() bool {
+func (o *LiveStreamCreationPayload) GetPublic() bool {
 	if o == nil || o.Public == nil {
 		var ret bool
 		return ret
@@ -115,7 +115,7 @@ func (o *LiveStreamCreatePayload) GetPublic() bool {
 
 // GetPublicOk returns a tuple with the Public field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LiveStreamCreatePayload) GetPublicOk() (*bool, bool) {
+func (o *LiveStreamCreationPayload) GetPublicOk() (*bool, bool) {
 	if o == nil || o.Public == nil {
 		return nil, false
 	}
@@ -123,7 +123,7 @@ func (o *LiveStreamCreatePayload) GetPublicOk() (*bool, bool) {
 }
 
 // HasPublic returns a boolean if a field has been set.
-func (o *LiveStreamCreatePayload) HasPublic() bool {
+func (o *LiveStreamCreationPayload) HasPublic() bool {
 	if o != nil && o.Public != nil {
 		return true
 	}
@@ -132,12 +132,12 @@ func (o *LiveStreamCreatePayload) HasPublic() bool {
 }
 
 // SetPublic gets a reference to the given bool and assigns it to the Public field.
-func (o *LiveStreamCreatePayload) SetPublic(v bool) {
+func (o *LiveStreamCreationPayload) SetPublic(v bool) {
 	o.Public = &v
 }
 
 // GetPlayerId returns the PlayerId field value if set, zero value otherwise.
-func (o *LiveStreamCreatePayload) GetPlayerId() string {
+func (o *LiveStreamCreationPayload) GetPlayerId() string {
 	if o == nil || o.PlayerId == nil {
 		var ret string
 		return ret
@@ -147,7 +147,7 @@ func (o *LiveStreamCreatePayload) GetPlayerId() string {
 
 // GetPlayerIdOk returns a tuple with the PlayerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LiveStreamCreatePayload) GetPlayerIdOk() (*string, bool) {
+func (o *LiveStreamCreationPayload) GetPlayerIdOk() (*string, bool) {
 	if o == nil || o.PlayerId == nil {
 		return nil, false
 	}
@@ -155,7 +155,7 @@ func (o *LiveStreamCreatePayload) GetPlayerIdOk() (*string, bool) {
 }
 
 // HasPlayerId returns a boolean if a field has been set.
-func (o *LiveStreamCreatePayload) HasPlayerId() bool {
+func (o *LiveStreamCreationPayload) HasPlayerId() bool {
 	if o != nil && o.PlayerId != nil {
 		return true
 	}
@@ -164,33 +164,33 @@ func (o *LiveStreamCreatePayload) HasPlayerId() bool {
 }
 
 // SetPlayerId gets a reference to the given string and assigns it to the PlayerId field.
-func (o *LiveStreamCreatePayload) SetPlayerId(v string) {
+func (o *LiveStreamCreationPayload) SetPlayerId(v string) {
 	o.PlayerId = &v
 }
 
-type NullableLiveStreamCreatePayload struct {
-	value *LiveStreamCreatePayload
+type NullableLiveStreamCreationPayload struct {
+	value *LiveStreamCreationPayload
 	isSet bool
 }
 
-func (v NullableLiveStreamCreatePayload) Get() *LiveStreamCreatePayload {
+func (v NullableLiveStreamCreationPayload) Get() *LiveStreamCreationPayload {
 	return v.value
 }
 
-func (v *NullableLiveStreamCreatePayload) Set(val *LiveStreamCreatePayload) {
+func (v *NullableLiveStreamCreationPayload) Set(val *LiveStreamCreationPayload) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableLiveStreamCreatePayload) IsSet() bool {
+func (v NullableLiveStreamCreationPayload) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableLiveStreamCreatePayload) Unset() {
+func (v *NullableLiveStreamCreationPayload) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableLiveStreamCreatePayload(val *LiveStreamCreatePayload) *NullableLiveStreamCreatePayload {
-	return &NullableLiveStreamCreatePayload{value: val, isSet: true}
+func NewNullableLiveStreamCreationPayload(val *LiveStreamCreationPayload) *NullableLiveStreamCreationPayload {
+	return &NullableLiveStreamCreationPayload{value: val, isSet: true}
 }

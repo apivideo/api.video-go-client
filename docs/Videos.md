@@ -145,9 +145,9 @@ Name | Type | Description  | Notes
 
 ## GetStatus
 
-> GetStatus(videoId string) (*Videostatus, error)
+> GetStatus(videoId string) (*VideoStatus, error)
 
-> GetStatusWithContext(ctx context.Context, videoId string) (*Videostatus, error)
+> GetStatusWithContext(ctx context.Context, videoId string) (*VideoStatus, error)
 
 
 Show video status
@@ -179,7 +179,7 @@ func main() {
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Videos.GetStatus``: %v\n", err)
     }
-    // response from `GetStatus`: Videostatus
+    // response from `GetStatus`: VideoStatus
     fmt.Fprintf(os.Stdout, "Response from `Videos.GetStatus`: %v\n", res)
 }
 ```
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Videostatus**](videostatus.md)
+[**VideoStatus**](video-status.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -489,9 +489,9 @@ Name | Type | Description  | Notes
 
 ## Create
 
-> Create(videoCreatePayload VideoCreatePayload) (*Video, error)
+> Create(videoCreationPayload VideoCreationPayload) (*Video, error)
 
-> CreateWithContext(ctx context.Context, videoCreatePayload VideoCreatePayload) (*Video, error)
+> CreateWithContext(ctx context.Context, videoCreationPayload VideoCreationPayload) (*Video, error)
 
 
 Create a video
@@ -515,10 +515,10 @@ func main() {
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
-    videoCreatePayload := *apivideosdk.NewVideoCreatePayload("Maths video") // VideoCreatePayload | video to create
+    videoCreationPayload := *apivideosdk.NewVideoCreationPayload("Maths video") // VideoCreationPayload | video to create
 
     
-    res, err := client.Videos.Create(videoCreatePayload)
+    res, err := client.Videos.Create(videoCreationPayload)
 
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Videos.Create``: %v\n", err)
@@ -538,7 +538,7 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**videoCreatePayload** | [**VideoCreatePayload**](VideoCreatePayload.md) | video to create | 
+**videoCreationPayload** | [**VideoCreationPayload**](VideoCreationPayload.md) | video to create | 
 
 ### Return type
 

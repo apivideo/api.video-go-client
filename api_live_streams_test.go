@@ -71,7 +71,7 @@ var liveStructs = []LiveStream{
 	},
 }
 
-var liveStreamCreatePayload = LiveStreamCreatePayload{
+var liveStreamCreatePayload = LiveStreamCreationPayload{
 	Name:     "Test live",
 	Record:   PtrBool(true),
 	PlayerId: PtrString("pl4f4ferf5erfr5zed4fsdd"),

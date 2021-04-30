@@ -14,35 +14,35 @@ import (
 //"encoding/json"
 )
 
-// WebhooksCreatePayload struct for WebhooksCreatePayload
-type WebhooksCreatePayload struct {
+// WebhooksCreationPayload struct for WebhooksCreationPayload
+type WebhooksCreationPayload struct {
 	// A list of the webhooks that you are subscribing to. Currently \"video.encoding.quality.completed\" is the only option. video.encoding.quality.completed - a video encoding quality is ready for the video (for example the 720p quality hls encoding video is ready.)
 	Events []string `json:"events"`
 	// The the url to which HTTP notifications are sent. It could be any http or https URL.
 	Url string `json:"url"`
 }
 
-// NewWebhooksCreatePayload instantiates a new WebhooksCreatePayload object
+// NewWebhooksCreationPayload instantiates a new WebhooksCreationPayload object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWebhooksCreatePayload(events []string, url string) *WebhooksCreatePayload {
-	this := WebhooksCreatePayload{}
+func NewWebhooksCreationPayload(events []string, url string) *WebhooksCreationPayload {
+	this := WebhooksCreationPayload{}
 	this.Events = events
 	this.Url = url
 	return &this
 }
 
-// NewWebhooksCreatePayloadWithDefaults instantiates a new WebhooksCreatePayload object
+// NewWebhooksCreationPayloadWithDefaults instantiates a new WebhooksCreationPayload object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewWebhooksCreatePayloadWithDefaults() *WebhooksCreatePayload {
-	this := WebhooksCreatePayload{}
+func NewWebhooksCreationPayloadWithDefaults() *WebhooksCreationPayload {
+	this := WebhooksCreationPayload{}
 	return &this
 }
 
 // GetEvents returns the Events field value
-func (o *WebhooksCreatePayload) GetEvents() []string {
+func (o *WebhooksCreationPayload) GetEvents() []string {
 	if o == nil {
 		var ret []string
 		return ret
@@ -53,7 +53,7 @@ func (o *WebhooksCreatePayload) GetEvents() []string {
 
 // GetEventsOk returns a tuple with the Events field value
 // and a boolean to check if the value has been set.
-func (o *WebhooksCreatePayload) GetEventsOk() (*[]string, bool) {
+func (o *WebhooksCreationPayload) GetEventsOk() (*[]string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -61,12 +61,12 @@ func (o *WebhooksCreatePayload) GetEventsOk() (*[]string, bool) {
 }
 
 // SetEvents sets field value
-func (o *WebhooksCreatePayload) SetEvents(v []string) {
+func (o *WebhooksCreationPayload) SetEvents(v []string) {
 	o.Events = v
 }
 
 // GetUrl returns the Url field value
-func (o *WebhooksCreatePayload) GetUrl() string {
+func (o *WebhooksCreationPayload) GetUrl() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -77,7 +77,7 @@ func (o *WebhooksCreatePayload) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-func (o *WebhooksCreatePayload) GetUrlOk() (*string, bool) {
+func (o *WebhooksCreationPayload) GetUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -85,33 +85,33 @@ func (o *WebhooksCreatePayload) GetUrlOk() (*string, bool) {
 }
 
 // SetUrl sets field value
-func (o *WebhooksCreatePayload) SetUrl(v string) {
+func (o *WebhooksCreationPayload) SetUrl(v string) {
 	o.Url = v
 }
 
-type NullableWebhooksCreatePayload struct {
-	value *WebhooksCreatePayload
+type NullableWebhooksCreationPayload struct {
+	value *WebhooksCreationPayload
 	isSet bool
 }
 
-func (v NullableWebhooksCreatePayload) Get() *WebhooksCreatePayload {
+func (v NullableWebhooksCreationPayload) Get() *WebhooksCreationPayload {
 	return v.value
 }
 
-func (v *NullableWebhooksCreatePayload) Set(val *WebhooksCreatePayload) {
+func (v *NullableWebhooksCreationPayload) Set(val *WebhooksCreationPayload) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableWebhooksCreatePayload) IsSet() bool {
+func (v NullableWebhooksCreationPayload) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableWebhooksCreatePayload) Unset() {
+func (v *NullableWebhooksCreationPayload) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableWebhooksCreatePayload(val *WebhooksCreatePayload) *NullableWebhooksCreatePayload {
-	return &NullableWebhooksCreatePayload{value: val, isSet: true}
+func NewNullableWebhooksCreationPayload(val *WebhooksCreationPayload) *NullableWebhooksCreationPayload {
+	return &NullableWebhooksCreationPayload{value: val, isSet: true}
 }

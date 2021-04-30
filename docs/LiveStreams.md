@@ -345,9 +345,9 @@ Name | Type | Description  | Notes
 
 ## Create
 
-> Create(liveStreamCreatePayload LiveStreamCreatePayload) (*LiveStream, error)
+> Create(liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error)
 
-> CreateWithContext(ctx context.Context, liveStreamCreatePayload LiveStreamCreatePayload) (*LiveStream, error)
+> CreateWithContext(ctx context.Context, liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error)
 
 
 Create live stream
@@ -371,10 +371,10 @@ func main() {
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
-    liveStreamCreatePayload := *apivideosdk.NewLiveStreamCreatePayload("My Live Stream Video") // LiveStreamCreatePayload | 
+    liveStreamCreationPayload := *apivideosdk.NewLiveStreamCreationPayload("My Live Stream Video") // LiveStreamCreationPayload | 
 
     
-    res, err := client.LiveStreams.Create(liveStreamCreatePayload)
+    res, err := client.LiveStreams.Create(liveStreamCreationPayload)
 
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Create``: %v\n", err)
@@ -394,7 +394,7 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**liveStreamCreatePayload** | [**LiveStreamCreatePayload**](LiveStreamCreatePayload.md) |  | 
+**liveStreamCreationPayload** | [**LiveStreamCreationPayload**](LiveStreamCreationPayload.md) |  | 
 
 ### Return type
 

@@ -1,4 +1,4 @@
-# VideostatusEncoding
+# VideoStatusEncoding
 
 ## Properties
 
@@ -6,99 +6,99 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Playable** | Pointer to **bool** | Whether the video is playable or not. | [optional] 
 **Qualities** | Pointer to [**[]Quality**](Quality.md) | Available qualities the video can be viewed in. | [optional] 
-**Metadata** | Pointer to [**VideostatusEncodingMetadata**](videostatus_encoding_metadata.md) |  | [optional] 
+**Metadata** | Pointer to [**VideoStatusEncodingMetadata**](video-status-encoding-metadata.md) |  | [optional] 
 
 ## Methods
 
-### NewVideostatusEncoding
+### NewVideoStatusEncoding
 
-`func NewVideostatusEncoding() *VideostatusEncoding`
+`func NewVideoStatusEncoding() *VideoStatusEncoding`
 
-NewVideostatusEncoding instantiates a new VideostatusEncoding object
+NewVideoStatusEncoding instantiates a new VideoStatusEncoding object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewVideostatusEncodingWithDefaults
+### NewVideoStatusEncodingWithDefaults
 
-`func NewVideostatusEncodingWithDefaults() *VideostatusEncoding`
+`func NewVideoStatusEncodingWithDefaults() *VideoStatusEncoding`
 
-NewVideostatusEncodingWithDefaults instantiates a new VideostatusEncoding object
+NewVideoStatusEncodingWithDefaults instantiates a new VideoStatusEncoding object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetPlayable
 
-`func (o *VideostatusEncoding) GetPlayable() bool`
+`func (o *VideoStatusEncoding) GetPlayable() bool`
 
 GetPlayable returns the Playable field if non-nil, zero value otherwise.
 
 ### GetPlayableOk
 
-`func (o *VideostatusEncoding) GetPlayableOk() (*bool, bool)`
+`func (o *VideoStatusEncoding) GetPlayableOk() (*bool, bool)`
 
 GetPlayableOk returns a tuple with the Playable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPlayable
 
-`func (o *VideostatusEncoding) SetPlayable(v bool)`
+`func (o *VideoStatusEncoding) SetPlayable(v bool)`
 
 SetPlayable sets Playable field to given value.
 
 ### HasPlayable
 
-`func (o *VideostatusEncoding) HasPlayable() bool`
+`func (o *VideoStatusEncoding) HasPlayable() bool`
 
 HasPlayable returns a boolean if a field has been set.
 
 ### GetQualities
 
-`func (o *VideostatusEncoding) GetQualities() []Quality`
+`func (o *VideoStatusEncoding) GetQualities() []Quality`
 
 GetQualities returns the Qualities field if non-nil, zero value otherwise.
 
 ### GetQualitiesOk
 
-`func (o *VideostatusEncoding) GetQualitiesOk() (*[]Quality, bool)`
+`func (o *VideoStatusEncoding) GetQualitiesOk() (*[]Quality, bool)`
 
 GetQualitiesOk returns a tuple with the Qualities field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetQualities
 
-`func (o *VideostatusEncoding) SetQualities(v []Quality)`
+`func (o *VideoStatusEncoding) SetQualities(v []Quality)`
 
 SetQualities sets Qualities field to given value.
 
 ### HasQualities
 
-`func (o *VideostatusEncoding) HasQualities() bool`
+`func (o *VideoStatusEncoding) HasQualities() bool`
 
 HasQualities returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *VideostatusEncoding) GetMetadata() VideostatusEncodingMetadata`
+`func (o *VideoStatusEncoding) GetMetadata() VideoStatusEncodingMetadata`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *VideostatusEncoding) GetMetadataOk() (*VideostatusEncodingMetadata, bool)`
+`func (o *VideoStatusEncoding) GetMetadataOk() (*VideoStatusEncodingMetadata, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *VideostatusEncoding) SetMetadata(v VideostatusEncodingMetadata)`
+`func (o *VideoStatusEncoding) SetMetadata(v VideoStatusEncodingMetadata)`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *VideostatusEncoding) HasMetadata() bool`
+`func (o *VideoStatusEncoding) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 

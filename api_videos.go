@@ -116,7 +116,7 @@ type VideosServiceI interface {
 	 * @return VideosApiGetStatusRequest
 	 */
 
-	GetStatus(videoId string) (*Videostatus, error)
+	GetStatus(videoId string) (*VideoStatus, error)
 
 	/*
 	 * GetStatus Show video status
@@ -125,7 +125,7 @@ type VideosServiceI interface {
 	 * @return VideosApiGetStatusRequest
 	 */
 
-	GetStatusWithContext(ctx context.Context, videoId string) (*Videostatus, error)
+	GetStatusWithContext(ctx context.Context, videoId string) (*VideoStatus, error)
 
 	/*
 	 * List List all videos
@@ -205,7 +205,7 @@ type VideosServiceI interface {
 	 * @return VideosApiCreateRequest
 	 */
 
-	Create(videoCreatePayload VideoCreatePayload) (*Video, error)
+	Create(videoCreationPayload VideoCreationPayload) (*Video, error)
 
 	/*
 	 * Create Create a video
@@ -213,7 +213,7 @@ type VideosServiceI interface {
 	 * @return VideosApiCreateRequest
 	 */
 
-	CreateWithContext(ctx context.Context, videoCreatePayload VideoCreatePayload) (*Video, error)
+	CreateWithContext(ctx context.Context, videoCreationPayload VideoCreationPayload) (*Video, error)
 
 	/*
 	 * Upload Upload a video
@@ -382,7 +382,7 @@ Once encoding is completed, the response also lists the available stream qualiti
  * @return VideosApiGetStatusRequest
 */
 
-func (s *VideosService) GetStatus(videoId string) (*Videostatus, error) {
+func (s *VideosService) GetStatus(videoId string) (*VideoStatus, error) {
 
 	return s.GetStatusWithContext(context.Background(), videoId)
 
@@ -398,7 +398,7 @@ Once encoding is completed, the response also lists the available stream qualiti
  * @return VideosApiGetStatusRequest
 */
 
-func (s *VideosService) GetStatusWithContext(ctx context.Context, videoId string) (*Videostatus, error) {
+func (s *VideosService) GetStatusWithContext(ctx context.Context, videoId string) (*VideoStatus, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos/{videoId}/status"
@@ -412,7 +412,7 @@ func (s *VideosService) GetStatusWithContext(ctx context.Context, videoId string
 		return nil, err
 	}
 
-	res := new(Videostatus)
+	res := new(VideoStatus)
 	_, err = s.client.do(req, res)
 
 	if err != nil {
@@ -899,9 +899,9 @@ In this case, the service will respond `202 Accepted` and download the video asy
  * @return VideosApiCreateRequest
 */
 
-func (s *VideosService) Create(videoCreatePayload VideoCreatePayload) (*Video, error) {
+func (s *VideosService) Create(videoCreationPayload VideoCreationPayload) (*Video, error) {
 
-	return s.CreateWithContext(context.Background(), videoCreatePayload)
+	return s.CreateWithContext(context.Background(), videoCreationPayload)
 
 }
 
@@ -941,7 +941,7 @@ In this case, the service will respond `202 Accepted` and download the video asy
  * @return VideosApiCreateRequest
 */
 
-func (s *VideosService) CreateWithContext(ctx context.Context, videoCreatePayload VideoCreatePayload) (*Video, error) {
+func (s *VideosService) CreateWithContext(ctx context.Context, videoCreationPayload VideoCreationPayload) (*Video, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos"
@@ -949,7 +949,7 @@ func (s *VideosService) CreateWithContext(ctx context.Context, videoCreatePayloa
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	// body params
-	localVarPostBody = videoCreatePayload
+	localVarPostBody = videoCreationPayload
 
 	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {

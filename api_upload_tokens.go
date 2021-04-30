@@ -101,7 +101,7 @@ type UploadTokensServiceI interface {
 	 * @return UploadTokensApiCreateTokenRequest
 	 */
 
-	CreateToken(tokenCreatePayload TokenCreatePayload) (*UploadToken, error)
+	CreateToken(tokenCreationPayload TokenCreationPayload) (*UploadToken, error)
 
 	/*
 	 * CreateToken Generate an upload token
@@ -109,7 +109,7 @@ type UploadTokensServiceI interface {
 	 * @return UploadTokensApiCreateTokenRequest
 	 */
 
-	CreateTokenWithContext(ctx context.Context, tokenCreatePayload TokenCreatePayload) (*UploadToken, error)
+	CreateTokenWithContext(ctx context.Context, tokenCreationPayload TokenCreationPayload) (*UploadToken, error)
 }
 
 // UploadTokensService communicating with the UploadTokens
@@ -274,9 +274,9 @@ func (s *UploadTokensService) GetTokenWithContext(ctx context.Context, uploadTok
  * @return UploadTokensApiCreateTokenRequest
  */
 
-func (s *UploadTokensService) CreateToken(tokenCreatePayload TokenCreatePayload) (*UploadToken, error) {
+func (s *UploadTokensService) CreateToken(tokenCreationPayload TokenCreationPayload) (*UploadToken, error) {
 
-	return s.CreateTokenWithContext(context.Background(), tokenCreatePayload)
+	return s.CreateTokenWithContext(context.Background(), tokenCreationPayload)
 
 }
 
@@ -287,7 +287,7 @@ func (s *UploadTokensService) CreateToken(tokenCreatePayload TokenCreatePayload)
  * @return UploadTokensApiCreateTokenRequest
  */
 
-func (s *UploadTokensService) CreateTokenWithContext(ctx context.Context, tokenCreatePayload TokenCreatePayload) (*UploadToken, error) {
+func (s *UploadTokensService) CreateTokenWithContext(ctx context.Context, tokenCreationPayload TokenCreationPayload) (*UploadToken, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/upload-tokens"
@@ -295,7 +295,7 @@ func (s *UploadTokensService) CreateTokenWithContext(ctx context.Context, tokenC
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	// body params
-	localVarPostBody = tokenCreatePayload
+	localVarPostBody = tokenCreationPayload
 
 	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {

@@ -14,34 +14,34 @@ import (
 //"encoding/json"
 )
 
-// VideostatusEncoding struct for VideostatusEncoding
-type VideostatusEncoding struct {
+// VideoStatusEncoding struct for VideoStatusEncoding
+type VideoStatusEncoding struct {
 	// Whether the video is playable or not.
 	Playable *bool `json:"playable,omitempty"`
 	// Available qualities the video can be viewed in.
 	Qualities *[]Quality                   `json:"qualities,omitempty"`
-	Metadata  *VideostatusEncodingMetadata `json:"metadata,omitempty"`
+	Metadata  *VideoStatusEncodingMetadata `json:"metadata,omitempty"`
 }
 
-// NewVideostatusEncoding instantiates a new VideostatusEncoding object
+// NewVideoStatusEncoding instantiates a new VideoStatusEncoding object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVideostatusEncoding() *VideostatusEncoding {
-	this := VideostatusEncoding{}
+func NewVideoStatusEncoding() *VideoStatusEncoding {
+	this := VideoStatusEncoding{}
 	return &this
 }
 
-// NewVideostatusEncodingWithDefaults instantiates a new VideostatusEncoding object
+// NewVideoStatusEncodingWithDefaults instantiates a new VideoStatusEncoding object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewVideostatusEncodingWithDefaults() *VideostatusEncoding {
-	this := VideostatusEncoding{}
+func NewVideoStatusEncodingWithDefaults() *VideoStatusEncoding {
+	this := VideoStatusEncoding{}
 	return &this
 }
 
 // GetPlayable returns the Playable field value if set, zero value otherwise.
-func (o *VideostatusEncoding) GetPlayable() bool {
+func (o *VideoStatusEncoding) GetPlayable() bool {
 	if o == nil || o.Playable == nil {
 		var ret bool
 		return ret
@@ -51,7 +51,7 @@ func (o *VideostatusEncoding) GetPlayable() bool {
 
 // GetPlayableOk returns a tuple with the Playable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideostatusEncoding) GetPlayableOk() (*bool, bool) {
+func (o *VideoStatusEncoding) GetPlayableOk() (*bool, bool) {
 	if o == nil || o.Playable == nil {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *VideostatusEncoding) GetPlayableOk() (*bool, bool) {
 }
 
 // HasPlayable returns a boolean if a field has been set.
-func (o *VideostatusEncoding) HasPlayable() bool {
+func (o *VideoStatusEncoding) HasPlayable() bool {
 	if o != nil && o.Playable != nil {
 		return true
 	}
@@ -68,12 +68,12 @@ func (o *VideostatusEncoding) HasPlayable() bool {
 }
 
 // SetPlayable gets a reference to the given bool and assigns it to the Playable field.
-func (o *VideostatusEncoding) SetPlayable(v bool) {
+func (o *VideoStatusEncoding) SetPlayable(v bool) {
 	o.Playable = &v
 }
 
 // GetQualities returns the Qualities field value if set, zero value otherwise.
-func (o *VideostatusEncoding) GetQualities() []Quality {
+func (o *VideoStatusEncoding) GetQualities() []Quality {
 	if o == nil || o.Qualities == nil {
 		var ret []Quality
 		return ret
@@ -83,7 +83,7 @@ func (o *VideostatusEncoding) GetQualities() []Quality {
 
 // GetQualitiesOk returns a tuple with the Qualities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideostatusEncoding) GetQualitiesOk() (*[]Quality, bool) {
+func (o *VideoStatusEncoding) GetQualitiesOk() (*[]Quality, bool) {
 	if o == nil || o.Qualities == nil {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *VideostatusEncoding) GetQualitiesOk() (*[]Quality, bool) {
 }
 
 // HasQualities returns a boolean if a field has been set.
-func (o *VideostatusEncoding) HasQualities() bool {
+func (o *VideoStatusEncoding) HasQualities() bool {
 	if o != nil && o.Qualities != nil {
 		return true
 	}
@@ -100,14 +100,14 @@ func (o *VideostatusEncoding) HasQualities() bool {
 }
 
 // SetQualities gets a reference to the given []Quality and assigns it to the Qualities field.
-func (o *VideostatusEncoding) SetQualities(v []Quality) {
+func (o *VideoStatusEncoding) SetQualities(v []Quality) {
 	o.Qualities = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *VideostatusEncoding) GetMetadata() VideostatusEncodingMetadata {
+func (o *VideoStatusEncoding) GetMetadata() VideoStatusEncodingMetadata {
 	if o == nil || o.Metadata == nil {
-		var ret VideostatusEncodingMetadata
+		var ret VideoStatusEncodingMetadata
 		return ret
 	}
 	return *o.Metadata
@@ -115,7 +115,7 @@ func (o *VideostatusEncoding) GetMetadata() VideostatusEncodingMetadata {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideostatusEncoding) GetMetadataOk() (*VideostatusEncodingMetadata, bool) {
+func (o *VideoStatusEncoding) GetMetadataOk() (*VideoStatusEncodingMetadata, bool) {
 	if o == nil || o.Metadata == nil {
 		return nil, false
 	}
@@ -123,7 +123,7 @@ func (o *VideostatusEncoding) GetMetadataOk() (*VideostatusEncodingMetadata, boo
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *VideostatusEncoding) HasMetadata() bool {
+func (o *VideoStatusEncoding) HasMetadata() bool {
 	if o != nil && o.Metadata != nil {
 		return true
 	}
@@ -131,34 +131,34 @@ func (o *VideostatusEncoding) HasMetadata() bool {
 	return false
 }
 
-// SetMetadata gets a reference to the given VideostatusEncodingMetadata and assigns it to the Metadata field.
-func (o *VideostatusEncoding) SetMetadata(v VideostatusEncodingMetadata) {
+// SetMetadata gets a reference to the given VideoStatusEncodingMetadata and assigns it to the Metadata field.
+func (o *VideoStatusEncoding) SetMetadata(v VideoStatusEncodingMetadata) {
 	o.Metadata = &v
 }
 
-type NullableVideostatusEncoding struct {
-	value *VideostatusEncoding
+type NullableVideoStatusEncoding struct {
+	value *VideoStatusEncoding
 	isSet bool
 }
 
-func (v NullableVideostatusEncoding) Get() *VideostatusEncoding {
+func (v NullableVideoStatusEncoding) Get() *VideoStatusEncoding {
 	return v.value
 }
 
-func (v *NullableVideostatusEncoding) Set(val *VideostatusEncoding) {
+func (v *NullableVideoStatusEncoding) Set(val *VideoStatusEncoding) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableVideostatusEncoding) IsSet() bool {
+func (v NullableVideoStatusEncoding) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableVideostatusEncoding) Unset() {
+func (v *NullableVideoStatusEncoding) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableVideostatusEncoding(val *VideostatusEncoding) *NullableVideostatusEncoding {
-	return &NullableVideostatusEncoding{value: val, isSet: true}
+func NewNullableVideoStatusEncoding(val *VideoStatusEncoding) *NullableVideoStatusEncoding {
+	return &NullableVideoStatusEncoding{value: val, isSet: true}
 }

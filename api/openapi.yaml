@@ -361,7 +361,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/video-create-payload'
+              $ref: '#/components/schemas/video-creation-payload'
         description: video to create
         required: true
       responses:
@@ -1006,7 +1006,7 @@ paths:
                         audioCodec: aac
                         aspectRatio: 16/9
               schema:
-                $ref: '#/components/schemas/videostatus'
+                $ref: '#/components/schemas/video-status'
           description: Success
         "404":
           content:
@@ -1130,7 +1130,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/token-create-payload'
+              $ref: '#/components/schemas/token-creation-payload'
         required: true
       responses:
         "200":
@@ -1480,7 +1480,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/live-stream-create-payload'
+              $ref: '#/components/schemas/live-stream-creation-payload'
         required: true
       responses:
         "200":
@@ -2455,7 +2455,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/playerCreationPayload'
+              $ref: '#/components/schemas/player-creation-payload'
         required: true
       responses:
         "201":
@@ -2616,7 +2616,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/playerUpdatePayload'
+              $ref: '#/components/schemas/player-update-payload'
         required: true
       responses:
         "200":
@@ -3267,7 +3267,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/webhooks-create-payload'
+              $ref: '#/components/schemas/webhooks-creation-payload'
         required: true
       responses:
         "201":
@@ -3384,7 +3384,7 @@ paths:
       x-client-action: get
 components:
   parameters:
-    currentPage:
+    current-page:
       description: 'Choose the number of search results to return per page. Minimum
         value: 1'
       example: 2
@@ -3396,7 +3396,7 @@ components:
         default: 1
         type: integer
       style: form
-    pageSize:
+    page-size:
       description: Results per page. Allowed values 1-100, default is 25.
       example: 30
       explode: true
@@ -3586,9 +3586,9 @@ components:
             $ref: '#/components/schemas/metadata'
           type: array
         source:
-          $ref: '#/components/schemas/videoSource'
+          $ref: '#/components/schemas/video-source'
         assets:
-          $ref: '#/components/schemas/videoAssets'
+          $ref: '#/components/schemas/video-assets'
         playerId:
           description: |
             The id of the player that will be applied on the video.
@@ -3609,7 +3609,7 @@ components:
             This lets you know whether mp4 is supported. If enabled, an mp4 URL will be provided in the response for the video.
           example: true
           type: boolean
-      title: video
+      title: Video
       type: object
     player:
       example:
@@ -3724,7 +3724,7 @@ components:
           $ref: '#/components/schemas/player_assets'
       title: Player
       type: object
-    playerCreationPayload:
+    player-creation-payload:
       properties:
         text:
           description: 'RGBA color for timer text. Default: rgba(255, 255, 255, 1)'
@@ -3781,7 +3781,7 @@ components:
           description: 'enable/disable looping. Default: false'
           type: boolean
       type: object
-    playerUpdatePayload:
+    player-update-payload:
       properties:
         text:
           description: 'RGBA color for timer text. Default: rgba(255, 255, 255, 1)'
@@ -3883,18 +3883,18 @@ components:
           version: "67.0"
       properties:
         session:
-          $ref: '#/components/schemas/video_session_session'
+          $ref: '#/components/schemas/video-session-session'
         location:
-          $ref: '#/components/schemas/video_session_location'
+          $ref: '#/components/schemas/video-session-location'
         referrer:
-          $ref: '#/components/schemas/video_session_referrer'
+          $ref: '#/components/schemas/video-session-referrer'
         device:
-          $ref: '#/components/schemas/video_session_device'
+          $ref: '#/components/schemas/video-session-device'
         os:
-          $ref: '#/components/schemas/video_session_os'
+          $ref: '#/components/schemas/video-session-os'
         client:
-          $ref: '#/components/schemas/video_session_client'
-      title: Video Session
+          $ref: '#/components/schemas/video-session-client'
+      title: VideoSession
       type: object
     live-stream:
       example:
@@ -3939,7 +3939,7 @@ components:
           example: true
           type: boolean
         assets:
-          $ref: '#/components/schemas/live_stream_assets'
+          $ref: '#/components/schemas/live-stream-assets'
         playerId:
           description: The unique identifier for the player.
           example: pl45d5vFFGrfdsdsd156dGhh
@@ -3990,18 +3990,18 @@ components:
           type: desktop
       properties:
         session:
-          $ref: '#/components/schemas/live_stream_session_session'
+          $ref: '#/components/schemas/live-stream-session-session'
         location:
-          $ref: '#/components/schemas/live_stream_session_location'
+          $ref: '#/components/schemas/live-stream-session-location'
         referrer:
-          $ref: '#/components/schemas/live_stream_session_referrer'
+          $ref: '#/components/schemas/live-stream-session-referrer'
         device:
-          $ref: '#/components/schemas/live_stream_session_device'
+          $ref: '#/components/schemas/live-stream-session-device'
         os:
-          $ref: '#/components/schemas/video_session_os'
+          $ref: '#/components/schemas/video-session-os'
         client:
-          $ref: '#/components/schemas/live_stream_session_client'
-      title: Live Stream Session
+          $ref: '#/components/schemas/live-stream-session-client'
+      title: LiveStreamSession
       type: object
     player-session-event:
       example:
@@ -4027,7 +4027,7 @@ components:
           type: integer
         to:
           type: integer
-      title: Player Session Event
+      title: PlayerSessionEvent
       type: object
     webhook:
       example:
@@ -4057,7 +4057,7 @@ components:
           type: string
       title: Webhook
       type: object
-    videostatus:
+    video-status:
       example:
         ingest:
           status: uploaded
@@ -4099,9 +4099,9 @@ components:
             aspectRatio: 16/9
       properties:
         ingest:
-          $ref: '#/components/schemas/videostatus_ingest'
+          $ref: '#/components/schemas/video-status-ingest'
         encoding:
-          $ref: '#/components/schemas/videostatus_encoding'
+          $ref: '#/components/schemas/video-status-encoding'
       title: VideoStatus
       type: object
     quality:
@@ -4129,9 +4129,9 @@ components:
           - encoded
           - failed
           type: string
-      title: quality
+      title: Quality
       type: object
-    bytes_range:
+    bytes-range:
       properties:
         from:
           description: The starting point for the range of bytes for a chunk of a
@@ -4146,7 +4146,7 @@ components:
           description: The total number of bytes in the provided range.
           example: 10000
           type: integer
-      title: bytes_range
+      title: BytesRange
       type: object
     chapter:
       example:
@@ -4204,7 +4204,7 @@ components:
           type: string
       required:
       - apiKey
-      title: apiKey
+      title: ApiKey
       type: object
     refresh-token-payload:
       example:
@@ -4216,7 +4216,7 @@ components:
           type: string
       required:
       - refreshToken
-      title: refreshToken
+      title: RefreshToken
       type: object
     videos-list-response:
       example:
@@ -4298,10 +4298,10 @@ components:
           description: A variable which belongs to the data set.
           example: Green
           type: string
-      title: metadata
+      title: Metadata
       type: object
       x-client-all-args-constructor: true
-    video-create-payload:
+    video-creation-payload:
       example:
         title: Maths video
         description: An amazing video explaining string theory.
@@ -4375,7 +4375,7 @@ components:
           type: string
       required:
       - title
-      title: videoCreationPayload
+      title: VideoCreationPayload
       type: object
     video-upload-payload:
       properties:
@@ -4404,7 +4404,7 @@ components:
           type: string
       required:
       - timecode
-      title: pickThumbnailPayload
+      title: ThumbnailPickPayload
       type: object
     video-thumbnail-upload-payload:
       properties:
@@ -4414,6 +4414,7 @@ components:
           type: string
       required:
       - file
+      title: VideoThumbnailUploadPayload
       type: object
     video-update-payload:
       example:
@@ -4474,7 +4475,7 @@ components:
           items:
             $ref: '#/components/schemas/metadata'
           type: array
-      title: videoUpdatePayload
+      title: VideoUpdatePayload
       type: object
     token-list-response:
       example:
@@ -4517,9 +4518,9 @@ components:
       required:
       - data
       - pagination
-      title: uploadTokens
+      title: UploadTokens
       type: object
-    token-create-payload:
+    token-creation-payload:
       example:
         ttl: 3600
       properties:
@@ -4531,7 +4532,7 @@ components:
           maximum: 2147483647
           minimum: 0
           type: integer
-      title: tokenCreationPayload
+      title: TokenCreationPayload
       type: object
     token-upload-payload:
       properties:
@@ -4548,6 +4549,7 @@ components:
           x-client-copy-from-response: true
       required:
       - file
+      title: tokenUploadPayload
       type: object
     live-stream-list-response:
       example:
@@ -4613,7 +4615,7 @@ components:
       - pagination
       title: LiveStreams
       type: object
-    live-stream-create-payload:
+    live-stream-creation-payload:
       example:
         name: Test live
         record: true
@@ -4641,7 +4643,7 @@ components:
           type: string
       required:
       - name
-      title: liveStreamCreationPayload
+      title: LiveStreamCreationPayload
       type: object
     live-stream-update-payload:
       properties:
@@ -4674,6 +4676,7 @@ components:
           type: string
       required:
       - file
+      title: CaptionsUploadPayload
       type: object
     live-stream-thumbnail-upload-payload:
       properties:
@@ -4683,12 +4686,13 @@ components:
           type: string
       required:
       - file
+      title: LiveStreamThumbnailUploadPayload
       type: object
     captions-update-payload:
       properties:
         default:
           type: boolean
-      title: UpdateCaptionPayload
+      title: CaptionsUpdatePayload
       type: object
     captions-list-response:
       example:
@@ -4737,7 +4741,7 @@ components:
           type: string
       required:
       - file
-      title: UpdateChapterPayload
+      title: ChaptersUpdatePayload
       type: object
     chapters-list-response:
       example:
@@ -4873,6 +4877,7 @@ components:
       required:
       - file
       - link
+      title: PlayersUploadLogoPayload
       type: object
     raw-statistics-list-sessions-response:
       example:
@@ -5112,7 +5117,7 @@ components:
           $ref: '#/components/schemas/pagination'
       title: Webhooks
       type: object
-    webhooks-create-payload:
+    webhooks-creation-payload:
       example:
         events:
         - video.encoding.quality.completed
@@ -5135,8 +5140,9 @@ components:
       required:
       - events
       - url
+      title: WebhooksCreationPayloas
       type: object
-    pagination_link:
+    pagination-link:
       properties:
         rel:
           type: string
@@ -5145,14 +5151,14 @@ components:
           type: string
       title: PaginationLink
       type: object
-    video_source_live_stream_link:
+    video-source-live-stream-link:
       properties:
         rel:
           type: string
         uri:
           type: string
       type: object
-    video_source_live_stream:
+    video-source-live-stream:
       description: This appears if the video is from a Live Record.
       properties:
         liveStreamId:
@@ -5161,10 +5167,10 @@ components:
           type: string
         links:
           items:
-            $ref: '#/components/schemas/video_source_live_stream_link'
+            $ref: '#/components/schemas/video-source-live-stream-link'
           type: array
       type: object
-    videoSource:
+    video-source:
       description: Source information about the video.
       properties:
         uri:
@@ -5174,9 +5180,10 @@ components:
         type:
           type: string
         liveStream:
-          $ref: '#/components/schemas/video_source_live_stream'
+          $ref: '#/components/schemas/video-source-live-stream'
+      title: VideoSource
       type: object
-    videoAssets:
+    video-assets:
       description: Collection of details about the video object that you can use to
         work with the video object.
       properties:
@@ -5207,8 +5214,9 @@ components:
           example: https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4
           format: uri
           type: string
+      title: VideoAssets
       type: object
-    video_session_session:
+    video-session-session:
       properties:
         sessionId:
           description: The unique identifier for the session that you can use to track
@@ -5225,8 +5233,9 @@ components:
           example: 2019-06-24T12:45:01.109Z
           format: date-time
           type: string
+      title: VideoSessionSession
       type: object
-    video_session_location:
+    video-session-location:
       description: The location of the viewer.
       properties:
         country:
@@ -5237,8 +5246,9 @@ components:
           description: The city of the viewer.
           example: Paris
           type: string
+      title: VideoSessionLocation
       type: object
-    video_session_referrer:
+    video-session-referrer:
       properties:
         url:
           description: The link the viewer used to reach the video session.
@@ -5258,8 +5268,9 @@ components:
         searchTerm:
           description: The search term they typed to arrive at the video session.
           type: string
+      title: VideoSessionReferrer
       type: object
-    video_session_device:
+    video-session-device:
       description: What type of device the user is on when in the video session.
       properties:
         type:
@@ -5275,8 +5286,9 @@ components:
           description: The specific model of the device, if known.
           example: unknown
           type: string
+      title: VideoSessionDevice
       type: object
-    video_session_os:
+    video-session-os:
       description: The operating system the viewer is on.
       example:
         name: Microsoft Windows
@@ -5296,8 +5308,9 @@ components:
           description: The version of the operating system.
           example: Windows 10
           type: string
+      title: VideoSessionOs
       type: object
-    video_session_client:
+    video-session-client:
       description: What kind of browser the viewer is using for the video session.
       properties:
         name:
@@ -5312,8 +5325,9 @@ components:
           description: The type of client used to view the video session.
           example: browser
           type: string
+      title: VideoSessionClient
       type: object
-    live_stream_assets:
+    live-stream-assets:
       example:
         thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
         iframe: <iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\"
@@ -5341,8 +5355,9 @@ components:
           example: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
           format: uri
           type: string
+      title: LiveStreamAssets
       type: object
-    live_stream_session_session:
+    live-stream-session-session:
       example:
         loadedAt: 2019-06-24T11:45:01.109Z
         endedAt: 2019-06-24T12:45:01.109Z
@@ -5364,8 +5379,9 @@ components:
           example: 2019-06-24T12:45:01.109Z
           format: date-time
           type: string
+      title: LiveStreamSessionSession
       type: object
-    live_stream_session_location:
+    live-stream-session-location:
       description: The location of the viewer of the live stream.
       example:
         country: France
@@ -5379,8 +5395,9 @@ components:
           description: The city of the viewer of the live stream.
           example: Paris
           type: string
+      title: LiveStreamSessionLocation
       type: object
-    live_stream_session_referrer:
+    live-stream-session-referrer:
       example:
         searchTerm: video stream
         medium: organic
@@ -5407,8 +5424,9 @@ components:
           description: What term they searched for that led them to the live stream.
           example: video stream
           type: string
+      title: LiveStreamSessionReferrer
       type: object
-    live_stream_session_device:
+    live-stream-session-device:
       description: What type of device the user is on when in the live stream session.
       example:
         vendor: Dell
@@ -5428,8 +5446,9 @@ components:
           description: The specific model of the device, if known.
           example: unknown
           type: string
+      title: LiveStreamSessionDevice
       type: object
-    live_stream_session_client:
+    live-stream-session-client:
       description: What kind of browser the viewer is using for the live stream session.
       example:
         name: Firefox
@@ -5448,8 +5467,9 @@ components:
           description: The type of client used to view the live stream session.
           example: browser
           type: string
+      title: LiveStreamSessionClient
       type: object
-    videostatus_ingest:
+    video-status-ingest:
       description: Details about the capturing, transferring, and storing of your
         video for use immediately or in the future.
       properties:
@@ -5472,10 +5492,11 @@ components:
           description: The total number of bytes received, listed for each chunk of
             the upload.
           items:
-            $ref: '#/components/schemas/bytes_range'
+            $ref: '#/components/schemas/bytes-range'
           type: array
+      title: VideoStatusIngest
       type: object
-    videostatus_encoding_metadata:
+    video-status-encoding-metadata:
       properties:
         width:
           description: The width of the video in pixels.
@@ -5510,8 +5531,9 @@ components:
           type: string
         aspectRatio:
           type: string
+      title: VideoStatusEncodingMetadata
       type: object
-    videostatus_encoding:
+    video-status-encoding:
       properties:
         playable:
           description: Whether the video is playable or not.
@@ -5523,7 +5545,8 @@ components:
             $ref: '#/components/schemas/quality'
           type: array
         metadata:
-          $ref: '#/components/schemas/videostatus_encoding_metadata'
+          $ref: '#/components/schemas/video-status-encoding-metadata'
+      title: VideoStatusEncoding
       type: object
     account:
       deprecated: true

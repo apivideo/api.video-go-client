@@ -96,7 +96,7 @@ type WebhooksServiceI interface {
 	 * @return WebhooksApiCreateRequest
 	 */
 
-	Create(webhooksCreatePayload WebhooksCreatePayload) (*Webhook, error)
+	Create(webhooksCreationPayload WebhooksCreationPayload) (*Webhook, error)
 
 	/*
 	 * Create Create Webhook
@@ -104,7 +104,7 @@ type WebhooksServiceI interface {
 	 * @return WebhooksApiCreateRequest
 	 */
 
-	CreateWithContext(ctx context.Context, webhooksCreatePayload WebhooksCreatePayload) (*Webhook, error)
+	CreateWithContext(ctx context.Context, webhooksCreationPayload WebhooksCreationPayload) (*Webhook, error)
 }
 
 // WebhooksService communicating with the Webhooks
@@ -266,9 +266,9 @@ func (s *WebhooksService) ListWithContext(ctx context.Context, r WebhooksApiList
  * @return WebhooksApiCreateRequest
  */
 
-func (s *WebhooksService) Create(webhooksCreatePayload WebhooksCreatePayload) (*Webhook, error) {
+func (s *WebhooksService) Create(webhooksCreationPayload WebhooksCreationPayload) (*Webhook, error) {
 
-	return s.CreateWithContext(context.Background(), webhooksCreatePayload)
+	return s.CreateWithContext(context.Background(), webhooksCreationPayload)
 
 }
 
@@ -279,7 +279,7 @@ func (s *WebhooksService) Create(webhooksCreatePayload WebhooksCreatePayload) (*
  * @return WebhooksApiCreateRequest
  */
 
-func (s *WebhooksService) CreateWithContext(ctx context.Context, webhooksCreatePayload WebhooksCreatePayload) (*Webhook, error) {
+func (s *WebhooksService) CreateWithContext(ctx context.Context, webhooksCreationPayload WebhooksCreationPayload) (*Webhook, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/webhooks"
@@ -287,7 +287,7 @@ func (s *WebhooksService) CreateWithContext(ctx context.Context, webhooksCreateP
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	// body params
-	localVarPostBody = webhooksCreatePayload
+	localVarPostBody = webhooksCreationPayload
 
 	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {

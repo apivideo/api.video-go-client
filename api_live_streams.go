@@ -147,7 +147,7 @@ type LiveStreamsServiceI interface {
 	 * @return LiveStreamsApiCreateRequest
 	 */
 
-	Create(liveStreamCreatePayload LiveStreamCreatePayload) (*LiveStream, error)
+	Create(liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error)
 
 	/*
 	 * Create Create live stream
@@ -155,7 +155,7 @@ type LiveStreamsServiceI interface {
 	 * @return LiveStreamsApiCreateRequest
 	 */
 
-	CreateWithContext(ctx context.Context, liveStreamCreatePayload LiveStreamCreatePayload) (*LiveStream, error)
+	CreateWithContext(ctx context.Context, liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error)
 
 	/*
 	 * UploadThumbnail Upload a thumbnail
@@ -453,9 +453,9 @@ Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey
  * @return LiveStreamsApiCreateRequest
 */
 
-func (s *LiveStreamsService) Create(liveStreamCreatePayload LiveStreamCreatePayload) (*LiveStream, error) {
+func (s *LiveStreamsService) Create(liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error) {
 
-	return s.CreateWithContext(context.Background(), liveStreamCreatePayload)
+	return s.CreateWithContext(context.Background(), liveStreamCreationPayload)
 
 }
 
@@ -470,7 +470,7 @@ Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey
  * @return LiveStreamsApiCreateRequest
 */
 
-func (s *LiveStreamsService) CreateWithContext(ctx context.Context, liveStreamCreatePayload LiveStreamCreatePayload) (*LiveStream, error) {
+func (s *LiveStreamsService) CreateWithContext(ctx context.Context, liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/live-streams"
@@ -478,7 +478,7 @@ func (s *LiveStreamsService) CreateWithContext(ctx context.Context, liveStreamCr
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	// body params
-	localVarPostBody = liveStreamCreatePayload
+	localVarPostBody = liveStreamCreationPayload
 
 	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {

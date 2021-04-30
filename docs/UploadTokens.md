@@ -210,9 +210,9 @@ Name | Type | Description  | Notes
 
 ## CreateToken
 
-> CreateToken(tokenCreatePayload TokenCreatePayload) (*UploadToken, error)
+> CreateToken(tokenCreationPayload TokenCreationPayload) (*UploadToken, error)
 
-> CreateTokenWithContext(ctx context.Context, tokenCreatePayload TokenCreatePayload) (*UploadToken, error)
+> CreateTokenWithContext(ctx context.Context, tokenCreationPayload TokenCreationPayload) (*UploadToken, error)
 
 
 Generate an upload token
@@ -236,10 +236,10 @@ func main() {
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
-    tokenCreatePayload := *apivideosdk.NewTokenCreatePayload() // TokenCreatePayload | 
+    tokenCreationPayload := *apivideosdk.NewTokenCreationPayload() // TokenCreationPayload | 
 
     
-    res, err := client.UploadTokens.CreateToken(tokenCreatePayload)
+    res, err := client.UploadTokens.CreateToken(tokenCreationPayload)
 
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `UploadTokens.CreateToken``: %v\n", err)
@@ -259,7 +259,7 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**tokenCreatePayload** | [**TokenCreatePayload**](TokenCreatePayload.md) |  | 
+**tokenCreationPayload** | [**TokenCreationPayload**](TokenCreationPayload.md) |  | 
 
 ### Return type
 

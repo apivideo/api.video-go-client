@@ -1,78 +1,78 @@
-# Videostatus
+# VideoStatus
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ingest** | Pointer to [**VideostatusIngest**](videostatus_ingest.md) |  | [optional] 
-**Encoding** | Pointer to [**VideostatusEncoding**](videostatus_encoding.md) |  | [optional] 
+**Ingest** | Pointer to [**VideoStatusIngest**](video-status-ingest.md) |  | [optional] 
+**Encoding** | Pointer to [**VideoStatusEncoding**](video-status-encoding.md) |  | [optional] 
 
 ## Methods
 
-### NewVideostatus
+### NewVideoStatus
 
-`func NewVideostatus() *Videostatus`
+`func NewVideoStatus() *VideoStatus`
 
-NewVideostatus instantiates a new Videostatus object
+NewVideoStatus instantiates a new VideoStatus object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewVideostatusWithDefaults
+### NewVideoStatusWithDefaults
 
-`func NewVideostatusWithDefaults() *Videostatus`
+`func NewVideoStatusWithDefaults() *VideoStatus`
 
-NewVideostatusWithDefaults instantiates a new Videostatus object
+NewVideoStatusWithDefaults instantiates a new VideoStatus object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetIngest
 
-`func (o *Videostatus) GetIngest() VideostatusIngest`
+`func (o *VideoStatus) GetIngest() VideoStatusIngest`
 
 GetIngest returns the Ingest field if non-nil, zero value otherwise.
 
 ### GetIngestOk
 
-`func (o *Videostatus) GetIngestOk() (*VideostatusIngest, bool)`
+`func (o *VideoStatus) GetIngestOk() (*VideoStatusIngest, bool)`
 
 GetIngestOk returns a tuple with the Ingest field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIngest
 
-`func (o *Videostatus) SetIngest(v VideostatusIngest)`
+`func (o *VideoStatus) SetIngest(v VideoStatusIngest)`
 
 SetIngest sets Ingest field to given value.
 
 ### HasIngest
 
-`func (o *Videostatus) HasIngest() bool`
+`func (o *VideoStatus) HasIngest() bool`
 
 HasIngest returns a boolean if a field has been set.
 
 ### GetEncoding
 
-`func (o *Videostatus) GetEncoding() VideostatusEncoding`
+`func (o *VideoStatus) GetEncoding() VideoStatusEncoding`
 
 GetEncoding returns the Encoding field if non-nil, zero value otherwise.
 
 ### GetEncodingOk
 
-`func (o *Videostatus) GetEncodingOk() (*VideostatusEncoding, bool)`
+`func (o *VideoStatus) GetEncodingOk() (*VideoStatusEncoding, bool)`
 
 GetEncodingOk returns a tuple with the Encoding field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEncoding
 
-`func (o *Videostatus) SetEncoding(v VideostatusEncoding)`
+`func (o *VideoStatus) SetEncoding(v VideoStatusEncoding)`
 
 SetEncoding sets Encoding field to given value.
 
 ### HasEncoding
 
-`func (o *Videostatus) HasEncoding() bool`
+`func (o *VideoStatus) HasEncoding() bool`
 
 HasEncoding returns a boolean if a field has been set.
 

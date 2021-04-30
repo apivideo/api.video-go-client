@@ -208,9 +208,9 @@ Name | Type | Description  | Notes
 
 ## Create
 
-> Create(webhooksCreatePayload WebhooksCreatePayload) (*Webhook, error)
+> Create(webhooksCreationPayload WebhooksCreationPayload) (*Webhook, error)
 
-> CreateWithContext(ctx context.Context, webhooksCreatePayload WebhooksCreatePayload) (*Webhook, error)
+> CreateWithContext(ctx context.Context, webhooksCreationPayload WebhooksCreationPayload) (*Webhook, error)
 
 
 Create Webhook
@@ -234,10 +234,10 @@ func main() {
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
-    webhooksCreatePayload := *apivideosdk.NewWebhooksCreatePayload([]string{"Events_example"}, "https://example.com/webhooks") // WebhooksCreatePayload | 
+    webhooksCreationPayload := *apivideosdk.NewWebhooksCreationPayload([]string{"Events_example"}, "https://example.com/webhooks") // WebhooksCreationPayload | 
 
     
-    res, err := client.Webhooks.Create(webhooksCreatePayload)
+    res, err := client.Webhooks.Create(webhooksCreationPayload)
 
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.Create``: %v\n", err)
@@ -257,7 +257,7 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**webhooksCreatePayload** | [**WebhooksCreatePayload**](WebhooksCreatePayload.md) |  | 
+**webhooksCreationPayload** | [**WebhooksCreationPayload**](WebhooksCreationPayload.md) |  | 
 
 ### Return type
 

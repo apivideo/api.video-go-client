@@ -14,33 +14,33 @@ import (
 //"encoding/json"
 )
 
-// Videostatus struct for Videostatus
-type Videostatus struct {
-	Ingest   *VideostatusIngest   `json:"ingest,omitempty"`
-	Encoding *VideostatusEncoding `json:"encoding,omitempty"`
+// VideoStatus struct for VideoStatus
+type VideoStatus struct {
+	Ingest   *VideoStatusIngest   `json:"ingest,omitempty"`
+	Encoding *VideoStatusEncoding `json:"encoding,omitempty"`
 }
 
-// NewVideostatus instantiates a new Videostatus object
+// NewVideoStatus instantiates a new VideoStatus object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVideostatus() *Videostatus {
-	this := Videostatus{}
+func NewVideoStatus() *VideoStatus {
+	this := VideoStatus{}
 	return &this
 }
 
-// NewVideostatusWithDefaults instantiates a new Videostatus object
+// NewVideoStatusWithDefaults instantiates a new VideoStatus object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewVideostatusWithDefaults() *Videostatus {
-	this := Videostatus{}
+func NewVideoStatusWithDefaults() *VideoStatus {
+	this := VideoStatus{}
 	return &this
 }
 
 // GetIngest returns the Ingest field value if set, zero value otherwise.
-func (o *Videostatus) GetIngest() VideostatusIngest {
+func (o *VideoStatus) GetIngest() VideoStatusIngest {
 	if o == nil || o.Ingest == nil {
-		var ret VideostatusIngest
+		var ret VideoStatusIngest
 		return ret
 	}
 	return *o.Ingest
@@ -48,7 +48,7 @@ func (o *Videostatus) GetIngest() VideostatusIngest {
 
 // GetIngestOk returns a tuple with the Ingest field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Videostatus) GetIngestOk() (*VideostatusIngest, bool) {
+func (o *VideoStatus) GetIngestOk() (*VideoStatusIngest, bool) {
 	if o == nil || o.Ingest == nil {
 		return nil, false
 	}
@@ -56,7 +56,7 @@ func (o *Videostatus) GetIngestOk() (*VideostatusIngest, bool) {
 }
 
 // HasIngest returns a boolean if a field has been set.
-func (o *Videostatus) HasIngest() bool {
+func (o *VideoStatus) HasIngest() bool {
 	if o != nil && o.Ingest != nil {
 		return true
 	}
@@ -64,15 +64,15 @@ func (o *Videostatus) HasIngest() bool {
 	return false
 }
 
-// SetIngest gets a reference to the given VideostatusIngest and assigns it to the Ingest field.
-func (o *Videostatus) SetIngest(v VideostatusIngest) {
+// SetIngest gets a reference to the given VideoStatusIngest and assigns it to the Ingest field.
+func (o *VideoStatus) SetIngest(v VideoStatusIngest) {
 	o.Ingest = &v
 }
 
 // GetEncoding returns the Encoding field value if set, zero value otherwise.
-func (o *Videostatus) GetEncoding() VideostatusEncoding {
+func (o *VideoStatus) GetEncoding() VideoStatusEncoding {
 	if o == nil || o.Encoding == nil {
-		var ret VideostatusEncoding
+		var ret VideoStatusEncoding
 		return ret
 	}
 	return *o.Encoding
@@ -80,7 +80,7 @@ func (o *Videostatus) GetEncoding() VideostatusEncoding {
 
 // GetEncodingOk returns a tuple with the Encoding field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Videostatus) GetEncodingOk() (*VideostatusEncoding, bool) {
+func (o *VideoStatus) GetEncodingOk() (*VideoStatusEncoding, bool) {
 	if o == nil || o.Encoding == nil {
 		return nil, false
 	}
@@ -88,7 +88,7 @@ func (o *Videostatus) GetEncodingOk() (*VideostatusEncoding, bool) {
 }
 
 // HasEncoding returns a boolean if a field has been set.
-func (o *Videostatus) HasEncoding() bool {
+func (o *VideoStatus) HasEncoding() bool {
 	if o != nil && o.Encoding != nil {
 		return true
 	}
@@ -96,34 +96,34 @@ func (o *Videostatus) HasEncoding() bool {
 	return false
 }
 
-// SetEncoding gets a reference to the given VideostatusEncoding and assigns it to the Encoding field.
-func (o *Videostatus) SetEncoding(v VideostatusEncoding) {
+// SetEncoding gets a reference to the given VideoStatusEncoding and assigns it to the Encoding field.
+func (o *VideoStatus) SetEncoding(v VideoStatusEncoding) {
 	o.Encoding = &v
 }
 
-type NullableVideostatus struct {
-	value *Videostatus
+type NullableVideoStatus struct {
+	value *VideoStatus
 	isSet bool
 }
 
-func (v NullableVideostatus) Get() *Videostatus {
+func (v NullableVideoStatus) Get() *VideoStatus {
 	return v.value
 }
 
-func (v *NullableVideostatus) Set(val *Videostatus) {
+func (v *NullableVideoStatus) Set(val *VideoStatus) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableVideostatus) IsSet() bool {
+func (v NullableVideoStatus) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableVideostatus) Unset() {
+func (v *NullableVideoStatus) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableVideostatus(val *Videostatus) *NullableVideostatus {
-	return &NullableVideostatus{value: val, isSet: true}
+func NewNullableVideoStatus(val *VideoStatus) *NullableVideoStatus {
+	return &NullableVideoStatus{value: val, isSet: true}
 }

@@ -14,8 +14,8 @@ import (
 //"encoding/json"
 )
 
-// VideostatusIngest Details about the capturing, transferring, and storing of your video for use immediately or in the future.
-type VideostatusIngest struct {
+// VideoStatusIngest Details about the capturing, transferring, and storing of your video for use immediately or in the future.
+type VideoStatusIngest struct {
 	// There are three possible ingest statuses. missing - you are missing information required to ingest the video. uploading - the video is in the process of being uploaded. uploaded - the video is ready for use.
 	Status *string `json:"status,omitempty"`
 	// The size of your file in bytes.
@@ -24,25 +24,25 @@ type VideostatusIngest struct {
 	ReceivedBytes *[]BytesRange `json:"receivedBytes,omitempty"`
 }
 
-// NewVideostatusIngest instantiates a new VideostatusIngest object
+// NewVideoStatusIngest instantiates a new VideoStatusIngest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVideostatusIngest() *VideostatusIngest {
-	this := VideostatusIngest{}
+func NewVideoStatusIngest() *VideoStatusIngest {
+	this := VideoStatusIngest{}
 	return &this
 }
 
-// NewVideostatusIngestWithDefaults instantiates a new VideostatusIngest object
+// NewVideoStatusIngestWithDefaults instantiates a new VideoStatusIngest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewVideostatusIngestWithDefaults() *VideostatusIngest {
-	this := VideostatusIngest{}
+func NewVideoStatusIngestWithDefaults() *VideoStatusIngest {
+	this := VideoStatusIngest{}
 	return &this
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *VideostatusIngest) GetStatus() string {
+func (o *VideoStatusIngest) GetStatus() string {
 	if o == nil || o.Status == nil {
 		var ret string
 		return ret
@@ -52,7 +52,7 @@ func (o *VideostatusIngest) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideostatusIngest) GetStatusOk() (*string, bool) {
+func (o *VideoStatusIngest) GetStatusOk() (*string, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -60,7 +60,7 @@ func (o *VideostatusIngest) GetStatusOk() (*string, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *VideostatusIngest) HasStatus() bool {
+func (o *VideoStatusIngest) HasStatus() bool {
 	if o != nil && o.Status != nil {
 		return true
 	}
@@ -69,12 +69,12 @@ func (o *VideostatusIngest) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *VideostatusIngest) SetStatus(v string) {
+func (o *VideoStatusIngest) SetStatus(v string) {
 	o.Status = &v
 }
 
 // GetFilesize returns the Filesize field value if set, zero value otherwise.
-func (o *VideostatusIngest) GetFilesize() int32 {
+func (o *VideoStatusIngest) GetFilesize() int32 {
 	if o == nil || o.Filesize == nil {
 		var ret int32
 		return ret
@@ -84,7 +84,7 @@ func (o *VideostatusIngest) GetFilesize() int32 {
 
 // GetFilesizeOk returns a tuple with the Filesize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideostatusIngest) GetFilesizeOk() (*int32, bool) {
+func (o *VideoStatusIngest) GetFilesizeOk() (*int32, bool) {
 	if o == nil || o.Filesize == nil {
 		return nil, false
 	}
@@ -92,7 +92,7 @@ func (o *VideostatusIngest) GetFilesizeOk() (*int32, bool) {
 }
 
 // HasFilesize returns a boolean if a field has been set.
-func (o *VideostatusIngest) HasFilesize() bool {
+func (o *VideoStatusIngest) HasFilesize() bool {
 	if o != nil && o.Filesize != nil {
 		return true
 	}
@@ -101,12 +101,12 @@ func (o *VideostatusIngest) HasFilesize() bool {
 }
 
 // SetFilesize gets a reference to the given int32 and assigns it to the Filesize field.
-func (o *VideostatusIngest) SetFilesize(v int32) {
+func (o *VideoStatusIngest) SetFilesize(v int32) {
 	o.Filesize = &v
 }
 
 // GetReceivedBytes returns the ReceivedBytes field value if set, zero value otherwise.
-func (o *VideostatusIngest) GetReceivedBytes() []BytesRange {
+func (o *VideoStatusIngest) GetReceivedBytes() []BytesRange {
 	if o == nil || o.ReceivedBytes == nil {
 		var ret []BytesRange
 		return ret
@@ -116,7 +116,7 @@ func (o *VideostatusIngest) GetReceivedBytes() []BytesRange {
 
 // GetReceivedBytesOk returns a tuple with the ReceivedBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VideostatusIngest) GetReceivedBytesOk() (*[]BytesRange, bool) {
+func (o *VideoStatusIngest) GetReceivedBytesOk() (*[]BytesRange, bool) {
 	if o == nil || o.ReceivedBytes == nil {
 		return nil, false
 	}
@@ -124,7 +124,7 @@ func (o *VideostatusIngest) GetReceivedBytesOk() (*[]BytesRange, bool) {
 }
 
 // HasReceivedBytes returns a boolean if a field has been set.
-func (o *VideostatusIngest) HasReceivedBytes() bool {
+func (o *VideoStatusIngest) HasReceivedBytes() bool {
 	if o != nil && o.ReceivedBytes != nil {
 		return true
 	}
@@ -133,33 +133,33 @@ func (o *VideostatusIngest) HasReceivedBytes() bool {
 }
 
 // SetReceivedBytes gets a reference to the given []BytesRange and assigns it to the ReceivedBytes field.
-func (o *VideostatusIngest) SetReceivedBytes(v []BytesRange) {
+func (o *VideoStatusIngest) SetReceivedBytes(v []BytesRange) {
 	o.ReceivedBytes = &v
 }
 
-type NullableVideostatusIngest struct {
-	value *VideostatusIngest
+type NullableVideoStatusIngest struct {
+	value *VideoStatusIngest
 	isSet bool
 }
 
-func (v NullableVideostatusIngest) Get() *VideostatusIngest {
+func (v NullableVideoStatusIngest) Get() *VideoStatusIngest {
 	return v.value
 }
 
-func (v *NullableVideostatusIngest) Set(val *VideostatusIngest) {
+func (v *NullableVideoStatusIngest) Set(val *VideoStatusIngest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableVideostatusIngest) IsSet() bool {
+func (v NullableVideoStatusIngest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableVideostatusIngest) Unset() {
+func (v *NullableVideoStatusIngest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableVideostatusIngest(val *VideostatusIngest) *NullableVideostatusIngest {
-	return &NullableVideostatusIngest{value: val, isSet: true}
+func NewNullableVideoStatusIngest(val *VideoStatusIngest) *NullableVideoStatusIngest {
+	return &NullableVideoStatusIngest{value: val, isSet: true}
 }

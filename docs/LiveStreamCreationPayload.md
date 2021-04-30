@@ -1,4 +1,4 @@
-# LiveStreamCreatePayload
+# LiveStreamCreationPayload
 
 ## Properties
 
@@ -11,115 +11,115 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewLiveStreamCreatePayload
+### NewLiveStreamCreationPayload
 
-`func NewLiveStreamCreatePayload(name string, ) *LiveStreamCreatePayload`
+`func NewLiveStreamCreationPayload(name string, ) *LiveStreamCreationPayload`
 
-NewLiveStreamCreatePayload instantiates a new LiveStreamCreatePayload object
+NewLiveStreamCreationPayload instantiates a new LiveStreamCreationPayload object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewLiveStreamCreatePayloadWithDefaults
+### NewLiveStreamCreationPayloadWithDefaults
 
-`func NewLiveStreamCreatePayloadWithDefaults() *LiveStreamCreatePayload`
+`func NewLiveStreamCreationPayloadWithDefaults() *LiveStreamCreationPayload`
 
-NewLiveStreamCreatePayloadWithDefaults instantiates a new LiveStreamCreatePayload object
+NewLiveStreamCreationPayloadWithDefaults instantiates a new LiveStreamCreationPayload object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetName
 
-`func (o *LiveStreamCreatePayload) GetName() string`
+`func (o *LiveStreamCreationPayload) GetName() string`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *LiveStreamCreatePayload) GetNameOk() (*string, bool)`
+`func (o *LiveStreamCreationPayload) GetNameOk() (*string, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *LiveStreamCreatePayload) SetName(v string)`
+`func (o *LiveStreamCreationPayload) SetName(v string)`
 
 SetName sets Name field to given value.
 
 
 ### GetRecord
 
-`func (o *LiveStreamCreatePayload) GetRecord() bool`
+`func (o *LiveStreamCreationPayload) GetRecord() bool`
 
 GetRecord returns the Record field if non-nil, zero value otherwise.
 
 ### GetRecordOk
 
-`func (o *LiveStreamCreatePayload) GetRecordOk() (*bool, bool)`
+`func (o *LiveStreamCreationPayload) GetRecordOk() (*bool, bool)`
 
 GetRecordOk returns a tuple with the Record field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRecord
 
-`func (o *LiveStreamCreatePayload) SetRecord(v bool)`
+`func (o *LiveStreamCreationPayload) SetRecord(v bool)`
 
 SetRecord sets Record field to given value.
 
 ### HasRecord
 
-`func (o *LiveStreamCreatePayload) HasRecord() bool`
+`func (o *LiveStreamCreationPayload) HasRecord() bool`
 
 HasRecord returns a boolean if a field has been set.
 
 ### GetPublic
 
-`func (o *LiveStreamCreatePayload) GetPublic() bool`
+`func (o *LiveStreamCreationPayload) GetPublic() bool`
 
 GetPublic returns the Public field if non-nil, zero value otherwise.
 
 ### GetPublicOk
 
-`func (o *LiveStreamCreatePayload) GetPublicOk() (*bool, bool)`
+`func (o *LiveStreamCreationPayload) GetPublicOk() (*bool, bool)`
 
 GetPublicOk returns a tuple with the Public field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPublic
 
-`func (o *LiveStreamCreatePayload) SetPublic(v bool)`
+`func (o *LiveStreamCreationPayload) SetPublic(v bool)`
 
 SetPublic sets Public field to given value.
 
 ### HasPublic
 
-`func (o *LiveStreamCreatePayload) HasPublic() bool`
+`func (o *LiveStreamCreationPayload) HasPublic() bool`
 
 HasPublic returns a boolean if a field has been set.
 
 ### GetPlayerId
 
-`func (o *LiveStreamCreatePayload) GetPlayerId() string`
+`func (o *LiveStreamCreationPayload) GetPlayerId() string`
 
 GetPlayerId returns the PlayerId field if non-nil, zero value otherwise.
 
 ### GetPlayerIdOk
 
-`func (o *LiveStreamCreatePayload) GetPlayerIdOk() (*string, bool)`
+`func (o *LiveStreamCreationPayload) GetPlayerIdOk() (*string, bool)`
 
 GetPlayerIdOk returns a tuple with the PlayerId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPlayerId
 
-`func (o *LiveStreamCreatePayload) SetPlayerId(v string)`
+`func (o *LiveStreamCreationPayload) SetPlayerId(v string)`
 
 SetPlayerId sets PlayerId field to given value.
 
 ### HasPlayerId
 
-`func (o *LiveStreamCreatePayload) HasPlayerId() bool`
+`func (o *LiveStreamCreationPayload) HasPlayerId() bool`
 
 HasPlayerId returns a boolean if a field has been set.
 

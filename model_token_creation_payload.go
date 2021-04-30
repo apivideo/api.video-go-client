@@ -14,35 +14,35 @@ import (
 //"encoding/json"
 )
 
-// TokenCreatePayload struct for TokenCreatePayload
-type TokenCreatePayload struct {
+// TokenCreationPayload struct for TokenCreationPayload
+type TokenCreationPayload struct {
 	// Time in seconds that the token will be active. A value of 0 means that the token has no exipration date. The default is to have no expiration.
 	Ttl *int32 `json:"ttl,omitempty"`
 }
 
-// NewTokenCreatePayload instantiates a new TokenCreatePayload object
+// NewTokenCreationPayload instantiates a new TokenCreationPayload object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTokenCreatePayload() *TokenCreatePayload {
-	this := TokenCreatePayload{}
+func NewTokenCreationPayload() *TokenCreationPayload {
+	this := TokenCreationPayload{}
 	var ttl int32 = 0
 	this.Ttl = &ttl
 	return &this
 }
 
-// NewTokenCreatePayloadWithDefaults instantiates a new TokenCreatePayload object
+// NewTokenCreationPayloadWithDefaults instantiates a new TokenCreationPayload object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTokenCreatePayloadWithDefaults() *TokenCreatePayload {
-	this := TokenCreatePayload{}
+func NewTokenCreationPayloadWithDefaults() *TokenCreationPayload {
+	this := TokenCreationPayload{}
 	var ttl int32 = 0
 	this.Ttl = &ttl
 	return &this
 }
 
 // GetTtl returns the Ttl field value if set, zero value otherwise.
-func (o *TokenCreatePayload) GetTtl() int32 {
+func (o *TokenCreationPayload) GetTtl() int32 {
 	if o == nil || o.Ttl == nil {
 		var ret int32
 		return ret
@@ -52,7 +52,7 @@ func (o *TokenCreatePayload) GetTtl() int32 {
 
 // GetTtlOk returns a tuple with the Ttl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TokenCreatePayload) GetTtlOk() (*int32, bool) {
+func (o *TokenCreationPayload) GetTtlOk() (*int32, bool) {
 	if o == nil || o.Ttl == nil {
 		return nil, false
 	}
@@ -60,7 +60,7 @@ func (o *TokenCreatePayload) GetTtlOk() (*int32, bool) {
 }
 
 // HasTtl returns a boolean if a field has been set.
-func (o *TokenCreatePayload) HasTtl() bool {
+func (o *TokenCreationPayload) HasTtl() bool {
 	if o != nil && o.Ttl != nil {
 		return true
 	}
@@ -69,33 +69,33 @@ func (o *TokenCreatePayload) HasTtl() bool {
 }
 
 // SetTtl gets a reference to the given int32 and assigns it to the Ttl field.
-func (o *TokenCreatePayload) SetTtl(v int32) {
+func (o *TokenCreationPayload) SetTtl(v int32) {
 	o.Ttl = &v
 }
 
-type NullableTokenCreatePayload struct {
-	value *TokenCreatePayload
+type NullableTokenCreationPayload struct {
+	value *TokenCreationPayload
 	isSet bool
 }
 
-func (v NullableTokenCreatePayload) Get() *TokenCreatePayload {
+func (v NullableTokenCreationPayload) Get() *TokenCreationPayload {
 	return v.value
 }
 
-func (v *NullableTokenCreatePayload) Set(val *TokenCreatePayload) {
+func (v *NullableTokenCreationPayload) Set(val *TokenCreationPayload) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTokenCreatePayload) IsSet() bool {
+func (v NullableTokenCreationPayload) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTokenCreatePayload) Unset() {
+func (v *NullableTokenCreationPayload) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTokenCreatePayload(val *TokenCreatePayload) *NullableTokenCreatePayload {
-	return &NullableTokenCreatePayload{value: val, isSet: true}
+func NewNullableTokenCreationPayload(val *TokenCreationPayload) *NullableTokenCreationPayload {
+	return &NullableTokenCreationPayload{value: val, isSet: true}
 }
