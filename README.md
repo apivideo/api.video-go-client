@@ -58,7 +58,7 @@ func main() {
 
     //Upload a video
     //First create a container
-    create, err := client.Videos.Create(apivideosdk.VideoCreatePayload{Title: "My video title"})
+    create, err := client.Videos.Create(apivideosdk.VideoCreationPayload{Title: "My video title"})
 
     if err != nil {
         fmt.Println(err)
