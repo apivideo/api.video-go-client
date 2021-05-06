@@ -1,4 +1,4 @@
-# Player
+# PlayerTheme
 
 ## Properties
 
@@ -27,624 +27,624 @@ Name | Type | Description | Notes
 **ShapeBackgroundTop** | Pointer to **string** | Deprecated | [optional] 
 **ShapeBackgroundBottom** | Pointer to **string** | Deprecated | [optional] 
 **LinkActive** | Pointer to **string** | Deprecated | [optional] 
-**Assets** | Pointer to [**PlayerAssets**](player_assets.md) |  | [optional] 
+**Assets** | Pointer to [**PlayerThemeAssets**](player_theme_assets.md) |  | [optional] 
 
 ## Methods
 
-### NewPlayer
+### NewPlayerTheme
 
-`func NewPlayer() *Player`
+`func NewPlayerTheme() *PlayerTheme`
 
-NewPlayer instantiates a new Player object
+NewPlayerTheme instantiates a new PlayerTheme object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewPlayerWithDefaults
+### NewPlayerThemeWithDefaults
 
-`func NewPlayerWithDefaults() *Player`
+`func NewPlayerThemeWithDefaults() *PlayerTheme`
 
-NewPlayerWithDefaults instantiates a new Player object
+NewPlayerThemeWithDefaults instantiates a new PlayerTheme object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetText
 
-`func (o *Player) GetText() string`
+`func (o *PlayerTheme) GetText() string`
 
 GetText returns the Text field if non-nil, zero value otherwise.
 
 ### GetTextOk
 
-`func (o *Player) GetTextOk() (*string, bool)`
+`func (o *PlayerTheme) GetTextOk() (*string, bool)`
 
 GetTextOk returns a tuple with the Text field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetText
 
-`func (o *Player) SetText(v string)`
+`func (o *PlayerTheme) SetText(v string)`
 
 SetText sets Text field to given value.
 
 ### HasText
 
-`func (o *Player) HasText() bool`
+`func (o *PlayerTheme) HasText() bool`
 
 HasText returns a boolean if a field has been set.
 
 ### GetLink
 
-`func (o *Player) GetLink() string`
+`func (o *PlayerTheme) GetLink() string`
 
 GetLink returns the Link field if non-nil, zero value otherwise.
 
 ### GetLinkOk
 
-`func (o *Player) GetLinkOk() (*string, bool)`
+`func (o *PlayerTheme) GetLinkOk() (*string, bool)`
 
 GetLinkOk returns a tuple with the Link field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLink
 
-`func (o *Player) SetLink(v string)`
+`func (o *PlayerTheme) SetLink(v string)`
 
 SetLink sets Link field to given value.
 
 ### HasLink
 
-`func (o *Player) HasLink() bool`
+`func (o *PlayerTheme) HasLink() bool`
 
 HasLink returns a boolean if a field has been set.
 
 ### GetLinkHover
 
-`func (o *Player) GetLinkHover() string`
+`func (o *PlayerTheme) GetLinkHover() string`
 
 GetLinkHover returns the LinkHover field if non-nil, zero value otherwise.
 
 ### GetLinkHoverOk
 
-`func (o *Player) GetLinkHoverOk() (*string, bool)`
+`func (o *PlayerTheme) GetLinkHoverOk() (*string, bool)`
 
 GetLinkHoverOk returns a tuple with the LinkHover field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLinkHover
 
-`func (o *Player) SetLinkHover(v string)`
+`func (o *PlayerTheme) SetLinkHover(v string)`
 
 SetLinkHover sets LinkHover field to given value.
 
 ### HasLinkHover
 
-`func (o *Player) HasLinkHover() bool`
+`func (o *PlayerTheme) HasLinkHover() bool`
 
 HasLinkHover returns a boolean if a field has been set.
 
 ### GetTrackPlayed
 
-`func (o *Player) GetTrackPlayed() string`
+`func (o *PlayerTheme) GetTrackPlayed() string`
 
 GetTrackPlayed returns the TrackPlayed field if non-nil, zero value otherwise.
 
 ### GetTrackPlayedOk
 
-`func (o *Player) GetTrackPlayedOk() (*string, bool)`
+`func (o *PlayerTheme) GetTrackPlayedOk() (*string, bool)`
 
 GetTrackPlayedOk returns a tuple with the TrackPlayed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTrackPlayed
 
-`func (o *Player) SetTrackPlayed(v string)`
+`func (o *PlayerTheme) SetTrackPlayed(v string)`
 
 SetTrackPlayed sets TrackPlayed field to given value.
 
 ### HasTrackPlayed
 
-`func (o *Player) HasTrackPlayed() bool`
+`func (o *PlayerTheme) HasTrackPlayed() bool`
 
 HasTrackPlayed returns a boolean if a field has been set.
 
 ### GetTrackUnplayed
 
-`func (o *Player) GetTrackUnplayed() string`
+`func (o *PlayerTheme) GetTrackUnplayed() string`
 
 GetTrackUnplayed returns the TrackUnplayed field if non-nil, zero value otherwise.
 
 ### GetTrackUnplayedOk
 
-`func (o *Player) GetTrackUnplayedOk() (*string, bool)`
+`func (o *PlayerTheme) GetTrackUnplayedOk() (*string, bool)`
 
 GetTrackUnplayedOk returns a tuple with the TrackUnplayed field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTrackUnplayed
 
-`func (o *Player) SetTrackUnplayed(v string)`
+`func (o *PlayerTheme) SetTrackUnplayed(v string)`
 
 SetTrackUnplayed sets TrackUnplayed field to given value.
 
 ### HasTrackUnplayed
 
-`func (o *Player) HasTrackUnplayed() bool`
+`func (o *PlayerTheme) HasTrackUnplayed() bool`
 
 HasTrackUnplayed returns a boolean if a field has been set.
 
 ### GetTrackBackground
 
-`func (o *Player) GetTrackBackground() string`
+`func (o *PlayerTheme) GetTrackBackground() string`
 
 GetTrackBackground returns the TrackBackground field if non-nil, zero value otherwise.
 
 ### GetTrackBackgroundOk
 
-`func (o *Player) GetTrackBackgroundOk() (*string, bool)`
+`func (o *PlayerTheme) GetTrackBackgroundOk() (*string, bool)`
 
 GetTrackBackgroundOk returns a tuple with the TrackBackground field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTrackBackground
 
-`func (o *Player) SetTrackBackground(v string)`
+`func (o *PlayerTheme) SetTrackBackground(v string)`
 
 SetTrackBackground sets TrackBackground field to given value.
 
 ### HasTrackBackground
 
-`func (o *Player) HasTrackBackground() bool`
+`func (o *PlayerTheme) HasTrackBackground() bool`
 
 HasTrackBackground returns a boolean if a field has been set.
 
 ### GetBackgroundTop
 
-`func (o *Player) GetBackgroundTop() string`
+`func (o *PlayerTheme) GetBackgroundTop() string`
 
 GetBackgroundTop returns the BackgroundTop field if non-nil, zero value otherwise.
 
 ### GetBackgroundTopOk
 
-`func (o *Player) GetBackgroundTopOk() (*string, bool)`
+`func (o *PlayerTheme) GetBackgroundTopOk() (*string, bool)`
 
 GetBackgroundTopOk returns a tuple with the BackgroundTop field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBackgroundTop
 
-`func (o *Player) SetBackgroundTop(v string)`
+`func (o *PlayerTheme) SetBackgroundTop(v string)`
 
 SetBackgroundTop sets BackgroundTop field to given value.
 
 ### HasBackgroundTop
 
-`func (o *Player) HasBackgroundTop() bool`
+`func (o *PlayerTheme) HasBackgroundTop() bool`
 
 HasBackgroundTop returns a boolean if a field has been set.
 
 ### GetBackgroundBottom
 
-`func (o *Player) GetBackgroundBottom() string`
+`func (o *PlayerTheme) GetBackgroundBottom() string`
 
 GetBackgroundBottom returns the BackgroundBottom field if non-nil, zero value otherwise.
 
 ### GetBackgroundBottomOk
 
-`func (o *Player) GetBackgroundBottomOk() (*string, bool)`
+`func (o *PlayerTheme) GetBackgroundBottomOk() (*string, bool)`
 
 GetBackgroundBottomOk returns a tuple with the BackgroundBottom field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBackgroundBottom
 
-`func (o *Player) SetBackgroundBottom(v string)`
+`func (o *PlayerTheme) SetBackgroundBottom(v string)`
 
 SetBackgroundBottom sets BackgroundBottom field to given value.
 
 ### HasBackgroundBottom
 
-`func (o *Player) HasBackgroundBottom() bool`
+`func (o *PlayerTheme) HasBackgroundBottom() bool`
 
 HasBackgroundBottom returns a boolean if a field has been set.
 
 ### GetBackgroundText
 
-`func (o *Player) GetBackgroundText() string`
+`func (o *PlayerTheme) GetBackgroundText() string`
 
 GetBackgroundText returns the BackgroundText field if non-nil, zero value otherwise.
 
 ### GetBackgroundTextOk
 
-`func (o *Player) GetBackgroundTextOk() (*string, bool)`
+`func (o *PlayerTheme) GetBackgroundTextOk() (*string, bool)`
 
 GetBackgroundTextOk returns a tuple with the BackgroundText field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBackgroundText
 
-`func (o *Player) SetBackgroundText(v string)`
+`func (o *PlayerTheme) SetBackgroundText(v string)`
 
 SetBackgroundText sets BackgroundText field to given value.
 
 ### HasBackgroundText
 
-`func (o *Player) HasBackgroundText() bool`
+`func (o *PlayerTheme) HasBackgroundText() bool`
 
 HasBackgroundText returns a boolean if a field has been set.
 
 ### GetEnableApi
 
-`func (o *Player) GetEnableApi() bool`
+`func (o *PlayerTheme) GetEnableApi() bool`
 
 GetEnableApi returns the EnableApi field if non-nil, zero value otherwise.
 
 ### GetEnableApiOk
 
-`func (o *Player) GetEnableApiOk() (*bool, bool)`
+`func (o *PlayerTheme) GetEnableApiOk() (*bool, bool)`
 
 GetEnableApiOk returns a tuple with the EnableApi field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnableApi
 
-`func (o *Player) SetEnableApi(v bool)`
+`func (o *PlayerTheme) SetEnableApi(v bool)`
 
 SetEnableApi sets EnableApi field to given value.
 
 ### HasEnableApi
 
-`func (o *Player) HasEnableApi() bool`
+`func (o *PlayerTheme) HasEnableApi() bool`
 
 HasEnableApi returns a boolean if a field has been set.
 
 ### GetEnableControls
 
-`func (o *Player) GetEnableControls() bool`
+`func (o *PlayerTheme) GetEnableControls() bool`
 
 GetEnableControls returns the EnableControls field if non-nil, zero value otherwise.
 
 ### GetEnableControlsOk
 
-`func (o *Player) GetEnableControlsOk() (*bool, bool)`
+`func (o *PlayerTheme) GetEnableControlsOk() (*bool, bool)`
 
 GetEnableControlsOk returns a tuple with the EnableControls field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnableControls
 
-`func (o *Player) SetEnableControls(v bool)`
+`func (o *PlayerTheme) SetEnableControls(v bool)`
 
 SetEnableControls sets EnableControls field to given value.
 
 ### HasEnableControls
 
-`func (o *Player) HasEnableControls() bool`
+`func (o *PlayerTheme) HasEnableControls() bool`
 
 HasEnableControls returns a boolean if a field has been set.
 
 ### GetForceAutoplay
 
-`func (o *Player) GetForceAutoplay() bool`
+`func (o *PlayerTheme) GetForceAutoplay() bool`
 
 GetForceAutoplay returns the ForceAutoplay field if non-nil, zero value otherwise.
 
 ### GetForceAutoplayOk
 
-`func (o *Player) GetForceAutoplayOk() (*bool, bool)`
+`func (o *PlayerTheme) GetForceAutoplayOk() (*bool, bool)`
 
 GetForceAutoplayOk returns a tuple with the ForceAutoplay field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetForceAutoplay
 
-`func (o *Player) SetForceAutoplay(v bool)`
+`func (o *PlayerTheme) SetForceAutoplay(v bool)`
 
 SetForceAutoplay sets ForceAutoplay field to given value.
 
 ### HasForceAutoplay
 
-`func (o *Player) HasForceAutoplay() bool`
+`func (o *PlayerTheme) HasForceAutoplay() bool`
 
 HasForceAutoplay returns a boolean if a field has been set.
 
 ### GetHideTitle
 
-`func (o *Player) GetHideTitle() bool`
+`func (o *PlayerTheme) GetHideTitle() bool`
 
 GetHideTitle returns the HideTitle field if non-nil, zero value otherwise.
 
 ### GetHideTitleOk
 
-`func (o *Player) GetHideTitleOk() (*bool, bool)`
+`func (o *PlayerTheme) GetHideTitleOk() (*bool, bool)`
 
 GetHideTitleOk returns a tuple with the HideTitle field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHideTitle
 
-`func (o *Player) SetHideTitle(v bool)`
+`func (o *PlayerTheme) SetHideTitle(v bool)`
 
 SetHideTitle sets HideTitle field to given value.
 
 ### HasHideTitle
 
-`func (o *Player) HasHideTitle() bool`
+`func (o *PlayerTheme) HasHideTitle() bool`
 
 HasHideTitle returns a boolean if a field has been set.
 
 ### GetForceLoop
 
-`func (o *Player) GetForceLoop() bool`
+`func (o *PlayerTheme) GetForceLoop() bool`
 
 GetForceLoop returns the ForceLoop field if non-nil, zero value otherwise.
 
 ### GetForceLoopOk
 
-`func (o *Player) GetForceLoopOk() (*bool, bool)`
+`func (o *PlayerTheme) GetForceLoopOk() (*bool, bool)`
 
 GetForceLoopOk returns a tuple with the ForceLoop field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetForceLoop
 
-`func (o *Player) SetForceLoop(v bool)`
+`func (o *PlayerTheme) SetForceLoop(v bool)`
 
 SetForceLoop sets ForceLoop field to given value.
 
 ### HasForceLoop
 
-`func (o *Player) HasForceLoop() bool`
+`func (o *PlayerTheme) HasForceLoop() bool`
 
 HasForceLoop returns a boolean if a field has been set.
 
 ### GetPlayerId
 
-`func (o *Player) GetPlayerId() string`
+`func (o *PlayerTheme) GetPlayerId() string`
 
 GetPlayerId returns the PlayerId field if non-nil, zero value otherwise.
 
 ### GetPlayerIdOk
 
-`func (o *Player) GetPlayerIdOk() (*string, bool)`
+`func (o *PlayerTheme) GetPlayerIdOk() (*string, bool)`
 
 GetPlayerIdOk returns a tuple with the PlayerId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPlayerId
 
-`func (o *Player) SetPlayerId(v string)`
+`func (o *PlayerTheme) SetPlayerId(v string)`
 
 SetPlayerId sets PlayerId field to given value.
 
 ### HasPlayerId
 
-`func (o *Player) HasPlayerId() bool`
+`func (o *PlayerTheme) HasPlayerId() bool`
 
 HasPlayerId returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
-`func (o *Player) GetCreatedAt() string`
+`func (o *PlayerTheme) GetCreatedAt() string`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *Player) GetCreatedAtOk() (*string, bool)`
+`func (o *PlayerTheme) GetCreatedAtOk() (*string, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *Player) SetCreatedAt(v string)`
+`func (o *PlayerTheme) SetCreatedAt(v string)`
 
 SetCreatedAt sets CreatedAt field to given value.
 
 ### HasCreatedAt
 
-`func (o *Player) HasCreatedAt() bool`
+`func (o *PlayerTheme) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 
-`func (o *Player) GetUpdatedAt() string`
+`func (o *PlayerTheme) GetUpdatedAt() string`
 
 GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
 
 ### GetUpdatedAtOk
 
-`func (o *Player) GetUpdatedAtOk() (*string, bool)`
+`func (o *PlayerTheme) GetUpdatedAtOk() (*string, bool)`
 
 GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUpdatedAt
 
-`func (o *Player) SetUpdatedAt(v string)`
+`func (o *PlayerTheme) SetUpdatedAt(v string)`
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
 ### HasUpdatedAt
 
-`func (o *Player) HasUpdatedAt() bool`
+`func (o *PlayerTheme) HasUpdatedAt() bool`
 
 HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetShapeMargin
 
-`func (o *Player) GetShapeMargin() int32`
+`func (o *PlayerTheme) GetShapeMargin() int32`
 
 GetShapeMargin returns the ShapeMargin field if non-nil, zero value otherwise.
 
 ### GetShapeMarginOk
 
-`func (o *Player) GetShapeMarginOk() (*int32, bool)`
+`func (o *PlayerTheme) GetShapeMarginOk() (*int32, bool)`
 
 GetShapeMarginOk returns a tuple with the ShapeMargin field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetShapeMargin
 
-`func (o *Player) SetShapeMargin(v int32)`
+`func (o *PlayerTheme) SetShapeMargin(v int32)`
 
 SetShapeMargin sets ShapeMargin field to given value.
 
 ### HasShapeMargin
 
-`func (o *Player) HasShapeMargin() bool`
+`func (o *PlayerTheme) HasShapeMargin() bool`
 
 HasShapeMargin returns a boolean if a field has been set.
 
 ### GetShapeRadius
 
-`func (o *Player) GetShapeRadius() int32`
+`func (o *PlayerTheme) GetShapeRadius() int32`
 
 GetShapeRadius returns the ShapeRadius field if non-nil, zero value otherwise.
 
 ### GetShapeRadiusOk
 
-`func (o *Player) GetShapeRadiusOk() (*int32, bool)`
+`func (o *PlayerTheme) GetShapeRadiusOk() (*int32, bool)`
 
 GetShapeRadiusOk returns a tuple with the ShapeRadius field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetShapeRadius
 
-`func (o *Player) SetShapeRadius(v int32)`
+`func (o *PlayerTheme) SetShapeRadius(v int32)`
 
 SetShapeRadius sets ShapeRadius field to given value.
 
 ### HasShapeRadius
 
-`func (o *Player) HasShapeRadius() bool`
+`func (o *PlayerTheme) HasShapeRadius() bool`
 
 HasShapeRadius returns a boolean if a field has been set.
 
 ### GetShapeAspect
 
-`func (o *Player) GetShapeAspect() string`
+`func (o *PlayerTheme) GetShapeAspect() string`
 
 GetShapeAspect returns the ShapeAspect field if non-nil, zero value otherwise.
 
 ### GetShapeAspectOk
 
-`func (o *Player) GetShapeAspectOk() (*string, bool)`
+`func (o *PlayerTheme) GetShapeAspectOk() (*string, bool)`
 
 GetShapeAspectOk returns a tuple with the ShapeAspect field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetShapeAspect
 
-`func (o *Player) SetShapeAspect(v string)`
+`func (o *PlayerTheme) SetShapeAspect(v string)`
 
 SetShapeAspect sets ShapeAspect field to given value.
 
 ### HasShapeAspect
 
-`func (o *Player) HasShapeAspect() bool`
+`func (o *PlayerTheme) HasShapeAspect() bool`
 
 HasShapeAspect returns a boolean if a field has been set.
 
 ### GetShapeBackgroundTop
 
-`func (o *Player) GetShapeBackgroundTop() string`
+`func (o *PlayerTheme) GetShapeBackgroundTop() string`
 
 GetShapeBackgroundTop returns the ShapeBackgroundTop field if non-nil, zero value otherwise.
 
 ### GetShapeBackgroundTopOk
 
-`func (o *Player) GetShapeBackgroundTopOk() (*string, bool)`
+`func (o *PlayerTheme) GetShapeBackgroundTopOk() (*string, bool)`
 
 GetShapeBackgroundTopOk returns a tuple with the ShapeBackgroundTop field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetShapeBackgroundTop
 
-`func (o *Player) SetShapeBackgroundTop(v string)`
+`func (o *PlayerTheme) SetShapeBackgroundTop(v string)`
 
 SetShapeBackgroundTop sets ShapeBackgroundTop field to given value.
 
 ### HasShapeBackgroundTop
 
-`func (o *Player) HasShapeBackgroundTop() bool`
+`func (o *PlayerTheme) HasShapeBackgroundTop() bool`
 
 HasShapeBackgroundTop returns a boolean if a field has been set.
 
 ### GetShapeBackgroundBottom
 
-`func (o *Player) GetShapeBackgroundBottom() string`
+`func (o *PlayerTheme) GetShapeBackgroundBottom() string`
 
 GetShapeBackgroundBottom returns the ShapeBackgroundBottom field if non-nil, zero value otherwise.
 
 ### GetShapeBackgroundBottomOk
 
-`func (o *Player) GetShapeBackgroundBottomOk() (*string, bool)`
+`func (o *PlayerTheme) GetShapeBackgroundBottomOk() (*string, bool)`
 
 GetShapeBackgroundBottomOk returns a tuple with the ShapeBackgroundBottom field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetShapeBackgroundBottom
 
-`func (o *Player) SetShapeBackgroundBottom(v string)`
+`func (o *PlayerTheme) SetShapeBackgroundBottom(v string)`
 
 SetShapeBackgroundBottom sets ShapeBackgroundBottom field to given value.
 
 ### HasShapeBackgroundBottom
 
-`func (o *Player) HasShapeBackgroundBottom() bool`
+`func (o *PlayerTheme) HasShapeBackgroundBottom() bool`
 
 HasShapeBackgroundBottom returns a boolean if a field has been set.
 
 ### GetLinkActive
 
-`func (o *Player) GetLinkActive() string`
+`func (o *PlayerTheme) GetLinkActive() string`
 
 GetLinkActive returns the LinkActive field if non-nil, zero value otherwise.
 
 ### GetLinkActiveOk
 
-`func (o *Player) GetLinkActiveOk() (*string, bool)`
+`func (o *PlayerTheme) GetLinkActiveOk() (*string, bool)`
 
 GetLinkActiveOk returns a tuple with the LinkActive field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLinkActive
 
-`func (o *Player) SetLinkActive(v string)`
+`func (o *PlayerTheme) SetLinkActive(v string)`
 
 SetLinkActive sets LinkActive field to given value.
 
 ### HasLinkActive
 
-`func (o *Player) HasLinkActive() bool`
+`func (o *PlayerTheme) HasLinkActive() bool`
 
 HasLinkActive returns a boolean if a field has been set.
 
 ### GetAssets
 
-`func (o *Player) GetAssets() PlayerAssets`
+`func (o *PlayerTheme) GetAssets() PlayerThemeAssets`
 
 GetAssets returns the Assets field if non-nil, zero value otherwise.
 
 ### GetAssetsOk
 
-`func (o *Player) GetAssetsOk() (*PlayerAssets, bool)`
+`func (o *PlayerTheme) GetAssetsOk() (*PlayerThemeAssets, bool)`
 
 GetAssetsOk returns a tuple with the Assets field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAssets
 
-`func (o *Player) SetAssets(v PlayerAssets)`
+`func (o *PlayerTheme) SetAssets(v PlayerThemeAssets)`
 
 SetAssets sets Assets field to given value.
 
 ### HasAssets
 
-`func (o *Player) HasAssets() bool`
+`func (o *PlayerTheme) HasAssets() bool`
 
 HasAssets returns a boolean if a field has been set.
 

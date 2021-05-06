@@ -88,7 +88,7 @@ type PlayerThemesServiceI interface {
 	 * @return PlayerThemesApiListRequest
 	 */
 
-	List(r PlayerThemesApiListRequest) (*PlayersListResponse, error)
+	List(r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error)
 
 	/*
 	 * List List all players
@@ -96,7 +96,7 @@ type PlayerThemesServiceI interface {
 	 * @return PlayerThemesApiListRequest
 	 */
 
-	ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayersListResponse, error)
+	ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error)
 
 	/*
 	 * Get Show a player
@@ -104,7 +104,7 @@ type PlayerThemesServiceI interface {
 	 * @return PlayerThemesApiGetRequest
 	 */
 
-	Get(playerId string) (*Player, error)
+	Get(playerId string) (*PlayerTheme, error)
 
 	/*
 	 * Get Show a player
@@ -113,7 +113,7 @@ type PlayerThemesServiceI interface {
 	 * @return PlayerThemesApiGetRequest
 	 */
 
-	GetWithContext(ctx context.Context, playerId string) (*Player, error)
+	GetWithContext(ctx context.Context, playerId string) (*PlayerTheme, error)
 
 	/*
 	 * Update Update a player
@@ -121,7 +121,7 @@ type PlayerThemesServiceI interface {
 	 * @return PlayerThemesApiUpdateRequest
 	 */
 
-	Update(playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error)
+	Update(playerId string, playerThemeUpdatePayload PlayerThemeUpdatePayload) (*PlayerTheme, error)
 
 	/*
 	 * Update Update a player
@@ -130,14 +130,14 @@ type PlayerThemesServiceI interface {
 	 * @return PlayerThemesApiUpdateRequest
 	 */
 
-	UpdateWithContext(ctx context.Context, playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error)
+	UpdateWithContext(ctx context.Context, playerId string, playerThemeUpdatePayload PlayerThemeUpdatePayload) (*PlayerTheme, error)
 
 	/*
 	 * Create Create a player
 	 * @return PlayerThemesApiCreateRequest
 	 */
 
-	Create(playerCreationPayload PlayerCreationPayload) (*Player, error)
+	Create(playerThemeCreationPayload PlayerThemeCreationPayload) (*PlayerTheme, error)
 
 	/*
 	 * Create Create a player
@@ -145,28 +145,28 @@ type PlayerThemesServiceI interface {
 	 * @return PlayerThemesApiCreateRequest
 	 */
 
-	CreateWithContext(ctx context.Context, playerCreationPayload PlayerCreationPayload) (*Player, error)
+	CreateWithContext(ctx context.Context, playerThemeCreationPayload PlayerThemeCreationPayload) (*PlayerTheme, error)
 
 	/*
 	 * UploadLogo Upload a logo
 	 * @param playerId The unique identifier for the player.
 	 * @return PlayerThemesApiUploadLogoRequest
 	 */
-	UploadLogo(playerId string, link string, fileName string, fileReader io.Reader) (*Player, error)
+	UploadLogo(playerId string, link string, fileName string, fileReader io.Reader) (*PlayerTheme, error)
 	/*
 	 * UploadLogo Upload a logo
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param playerId The unique identifier for the player.
 	 * @return PlayerThemesApiUploadLogoRequest
 	 */
-	UploadLogoWithContext(ctx context.Context, playerId string, link string, fileName string, fileReader io.Reader) (*Player, error)
+	UploadLogoWithContext(ctx context.Context, playerId string, link string, fileName string, fileReader io.Reader) (*PlayerTheme, error)
 
 	/*
 	 * UploadLogo Upload a logo
 	 * @param playerId The unique identifier for the player.
 	 * @return PlayerThemesApiUploadLogoRequest
 	 */
-	UploadLogoFile(playerId string, file *os.File, link string) (*Player, error)
+	UploadLogoFile(playerId string, file *os.File, link string) (*PlayerTheme, error)
 
 	/*
 	 * UploadLogo Upload a logo
@@ -174,7 +174,7 @@ type PlayerThemesServiceI interface {
 	 * @param playerId The unique identifier for the player.
 	 * @return PlayerThemesApiUploadLogoRequest
 	 */
-	UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link string) (*Player, error)
+	UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link string) (*PlayerTheme, error)
 }
 
 // PlayerThemesService communicating with the PlayerThemes
@@ -280,7 +280,7 @@ func (s *PlayerThemesService) DeleteLogoWithContext(ctx context.Context, playerI
  * @return PlayerThemesApiListRequest
  */
 
-func (s *PlayerThemesService) List(r PlayerThemesApiListRequest) (*PlayersListResponse, error) {
+func (s *PlayerThemesService) List(r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error) {
 
 	return s.ListWithContext(context.Background(), r)
 
@@ -293,7 +293,7 @@ func (s *PlayerThemesService) List(r PlayerThemesApiListRequest) (*PlayersListRe
  * @return PlayerThemesApiListRequest
  */
 
-func (s *PlayerThemesService) ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayersListResponse, error) {
+func (s *PlayerThemesService) ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players"
@@ -318,7 +318,7 @@ func (s *PlayerThemesService) ListWithContext(ctx context.Context, r PlayerTheme
 		return nil, err
 	}
 
-	res := new(PlayersListResponse)
+	res := new(PlayerThemesListResponse)
 	_, err = s.client.do(req, res)
 
 	if err != nil {
@@ -337,7 +337,7 @@ func (s *PlayerThemesService) ListWithContext(ctx context.Context, r PlayerTheme
  * @return PlayerThemesApiGetRequest
  */
 
-func (s *PlayerThemesService) Get(playerId string) (*Player, error) {
+func (s *PlayerThemesService) Get(playerId string) (*PlayerTheme, error) {
 
 	return s.GetWithContext(context.Background(), playerId)
 
@@ -351,7 +351,7 @@ func (s *PlayerThemesService) Get(playerId string) (*Player, error) {
  * @return PlayerThemesApiGetRequest
  */
 
-func (s *PlayerThemesService) GetWithContext(ctx context.Context, playerId string) (*Player, error) {
+func (s *PlayerThemesService) GetWithContext(ctx context.Context, playerId string) (*PlayerTheme, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players/{playerId}"
@@ -365,7 +365,7 @@ func (s *PlayerThemesService) GetWithContext(ctx context.Context, playerId strin
 		return nil, err
 	}
 
-	res := new(Player)
+	res := new(PlayerTheme)
 	_, err = s.client.do(req, res)
 
 	if err != nil {
@@ -384,9 +384,9 @@ func (s *PlayerThemesService) GetWithContext(ctx context.Context, playerId strin
  * @return PlayerThemesApiUpdateRequest
  */
 
-func (s *PlayerThemesService) Update(playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error) {
+func (s *PlayerThemesService) Update(playerId string, playerThemeUpdatePayload PlayerThemeUpdatePayload) (*PlayerTheme, error) {
 
-	return s.UpdateWithContext(context.Background(), playerId, playerUpdatePayload)
+	return s.UpdateWithContext(context.Background(), playerId, playerThemeUpdatePayload)
 
 }
 
@@ -398,7 +398,7 @@ func (s *PlayerThemesService) Update(playerId string, playerUpdatePayload Player
  * @return PlayerThemesApiUpdateRequest
  */
 
-func (s *PlayerThemesService) UpdateWithContext(ctx context.Context, playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error) {
+func (s *PlayerThemesService) UpdateWithContext(ctx context.Context, playerId string, playerThemeUpdatePayload PlayerThemeUpdatePayload) (*PlayerTheme, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players/{playerId}"
@@ -407,14 +407,14 @@ func (s *PlayerThemesService) UpdateWithContext(ctx context.Context, playerId st
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	// body params
-	localVarPostBody = playerUpdatePayload
+	localVarPostBody = playerThemeUpdatePayload
 
 	req, err := s.client.prepareRequest(ctx, http.MethodPatch, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
 
-	res := new(Player)
+	res := new(PlayerTheme)
 	_, err = s.client.do(req, res)
 
 	if err != nil {
@@ -432,9 +432,9 @@ func (s *PlayerThemesService) UpdateWithContext(ctx context.Context, playerId st
  * @return PlayerThemesApiCreateRequest
  */
 
-func (s *PlayerThemesService) Create(playerCreationPayload PlayerCreationPayload) (*Player, error) {
+func (s *PlayerThemesService) Create(playerThemeCreationPayload PlayerThemeCreationPayload) (*PlayerTheme, error) {
 
-	return s.CreateWithContext(context.Background(), playerCreationPayload)
+	return s.CreateWithContext(context.Background(), playerThemeCreationPayload)
 
 }
 
@@ -445,7 +445,7 @@ func (s *PlayerThemesService) Create(playerCreationPayload PlayerCreationPayload
  * @return PlayerThemesApiCreateRequest
  */
 
-func (s *PlayerThemesService) CreateWithContext(ctx context.Context, playerCreationPayload PlayerCreationPayload) (*Player, error) {
+func (s *PlayerThemesService) CreateWithContext(ctx context.Context, playerThemeCreationPayload PlayerThemeCreationPayload) (*PlayerTheme, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/players"
@@ -453,14 +453,14 @@ func (s *PlayerThemesService) CreateWithContext(ctx context.Context, playerCreat
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	// body params
-	localVarPostBody = playerCreationPayload
+	localVarPostBody = playerThemeCreationPayload
 
 	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
 
-	res := new(Player)
+	res := new(PlayerTheme)
 	_, err = s.client.do(req, res)
 
 	if err != nil {
@@ -480,7 +480,7 @@ It will be scaled down to 30px height and converted to PNG to be displayed in th
  * @return PlayerThemesApiUploadLogoRequest
 */
 
-func (s *PlayerThemesService) UploadLogoFile(playerId string, file *os.File, link string) (*Player, error) {
+func (s *PlayerThemesService) UploadLogoFile(playerId string, file *os.File, link string) (*PlayerTheme, error) {
 	return s.UploadLogoFileWithContext(context.Background(), playerId, file, link)
 }
 
@@ -493,7 +493,7 @@ It will be scaled down to 30px height and converted to PNG to be displayed in th
  * @return PlayerThemesApiUploadLogoRequest
 */
 
-func (s *PlayerThemesService) UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link string) (*Player, error) {
+func (s *PlayerThemesService) UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link string) (*PlayerTheme, error) {
 	return s.UploadLogoWithContext(ctx, playerId, link, file.Name(), io.Reader(file))
 }
 
@@ -505,7 +505,7 @@ It will be scaled down to 30px height and converted to PNG to be displayed in th
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUploadLogoRequest
 */
-func (s *PlayerThemesService) UploadLogo(playerId string, link string, fileName string, fileReader io.Reader) (*Player, error) {
+func (s *PlayerThemesService) UploadLogo(playerId string, link string, fileName string, fileReader io.Reader) (*PlayerTheme, error) {
 	return s.UploadLogoWithContext(context.Background(), playerId, link, fileName, fileReader)
 }
 
@@ -517,7 +517,7 @@ It will be scaled down to 30px height and converted to PNG to be displayed in th
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUploadLogoRequest
 */
-func (s *PlayerThemesService) UploadLogoWithContext(ctx context.Context, playerId string, link string, fileName string, fileReader io.Reader) (*Player, error) {
+func (s *PlayerThemesService) UploadLogoWithContext(ctx context.Context, playerId string, link string, fileName string, fileReader io.Reader) (*PlayerTheme, error) {
 	localVarPath := "/players/{playerId}/logo"
 	localVarPath = strings.Replace(localVarPath, "{"+"playerId"+"}", url.PathEscape(parameterToString(playerId, "")), -1)
 
@@ -533,7 +533,7 @@ func (s *PlayerThemesService) UploadLogoWithContext(ctx context.Context, playerI
 		return nil, err
 	}
 
-	res := new(Player)
+	res := new(PlayerTheme)
 	_, err = s.client.do(req, res)
 
 	if err != nil {

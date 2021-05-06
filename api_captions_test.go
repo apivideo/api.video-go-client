@@ -24,7 +24,7 @@ var captionJSONResponses = []string{
 	}`,
 }
 
-var captionStructs = []Subtitle{
+var captionStructs = []Caption{
 	{
 		Uri:     PtrString("/videos/vi2ZEQZrOQckdYZ3X5sjPse8/captions/en"),
 		Src:     PtrString("https://cdn.api.video/vod/vi2ZEQZrOQckdYZ3X5sjPse8/captions/en.vtt"),

@@ -85,7 +85,7 @@ var videoStructs = []Video{
 		Description: PtrString("An amazing video explaining the string theory"),
 		PublishedAt: PtrString("2019-07-14T23:36:18.598Z"),
 		UpdatedAt:   PtrString("2019-07-14T23:49:18.598Z"),
-		Tags:        &[]interface{}{"maths", "string theory", "video"},
+		Tags:        &[]string{"maths", "string theory", "video"},
 		Metadata: &[]Metadata{
 			{
 				Key:   PtrString("Author"),
@@ -117,7 +117,7 @@ var videoStructs = []Video{
 		Description: PtrString("An amazing video explaining the string theory 2"),
 		PublishedAt: PtrString("2019-07-16T23:36:18.598Z"),
 		UpdatedAt:   PtrString("2019-07-16T23:49:18.598Z"),
-		Tags:        &[]interface{}{"maths", "string theory"},
+		Tags:        &[]string{"maths", "string theory"},
 		Metadata: &[]Metadata{
 			{
 				Key:   PtrString("Author"),

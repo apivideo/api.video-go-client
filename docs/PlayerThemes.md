@@ -138,10 +138,10 @@ Name | Type | Description  | Notes
 
 ## List
 
-> List(r PlayerThemesApiListRequest) (*PlayersListResponse, error)
+> List(r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error)
 
 
-> ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayersListResponse, error)
+> ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error)
 
 
 
@@ -178,7 +178,7 @@ func main() {
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.List``: %v\n", err)
     }
-    // response from `List`: PlayersListResponse
+    // response from `List`: PlayerThemesListResponse
     fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.List`: %v\n", res)
 }
 ```
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PlayersListResponse**](players-list-response.md)
+[**PlayerThemesListResponse**](player-themes-list-response.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -209,9 +209,9 @@ Name | Type | Description  | Notes
 
 ## Get
 
-> Get(playerId string) (*Player, error)
+> Get(playerId string) (*PlayerTheme, error)
 
-> GetWithContext(ctx context.Context, playerId string) (*Player, error)
+> GetWithContext(ctx context.Context, playerId string) (*PlayerTheme, error)
 
 
 Show a player
@@ -243,7 +243,7 @@ func main() {
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Get``: %v\n", err)
     }
-    // response from `Get`: Player
+    // response from `Get`: PlayerTheme
     fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Get`: %v\n", res)
 }
 ```
@@ -264,7 +264,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Player**](player.md)
+[**PlayerTheme**](player-theme.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -273,9 +273,9 @@ Name | Type | Description  | Notes
 
 ## Update
 
-> Update(playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error)
+> Update(playerId string, playerThemeUpdatePayload PlayerThemeUpdatePayload) (*PlayerTheme, error)
 
-> UpdateWithContext(ctx context.Context, playerId string, playerUpdatePayload PlayerUpdatePayload) (*Player, error)
+> UpdateWithContext(ctx context.Context, playerId string, playerThemeUpdatePayload PlayerThemeUpdatePayload) (*PlayerTheme, error)
 
 
 Update a player
@@ -300,15 +300,15 @@ func main() {
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
     playerId := "pl45d5vFFGrfdsdsd156dGhh" // string | The unique identifier for the player.
-    playerUpdatePayload := *apivideosdk.NewPlayerUpdatePayload() // PlayerUpdatePayload | 
+    playerThemeUpdatePayload := *apivideosdk.NewPlayerThemeUpdatePayload() // PlayerThemeUpdatePayload | 
 
     
-    res, err := client.PlayerThemes.Update(playerId, playerUpdatePayload)
+    res, err := client.PlayerThemes.Update(playerId, playerThemeUpdatePayload)
 
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Update``: %v\n", err)
     }
-    // response from `Update`: Player
+    // response from `Update`: PlayerTheme
     fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Update`: %v\n", res)
 }
 ```
@@ -326,11 +326,11 @@ Name | Type | Description  | Notes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**playerUpdatePayload** | [**PlayerUpdatePayload**](PlayerUpdatePayload.md) |  | 
+**playerThemeUpdatePayload** | [**PlayerThemeUpdatePayload**](PlayerThemeUpdatePayload.md) |  | 
 
 ### Return type
 
-[**Player**](player.md)
+[**PlayerTheme**](player-theme.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -339,9 +339,9 @@ Name | Type | Description  | Notes
 
 ## Create
 
-> Create(playerCreationPayload PlayerCreationPayload) (*Player, error)
+> Create(playerThemeCreationPayload PlayerThemeCreationPayload) (*PlayerTheme, error)
 
-> CreateWithContext(ctx context.Context, playerCreationPayload PlayerCreationPayload) (*Player, error)
+> CreateWithContext(ctx context.Context, playerThemeCreationPayload PlayerThemeCreationPayload) (*PlayerTheme, error)
 
 
 Create a player
@@ -365,15 +365,15 @@ func main() {
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
-    playerCreationPayload := *apivideosdk.NewPlayerCreationPayload() // PlayerCreationPayload | 
+    playerThemeCreationPayload := *apivideosdk.NewPlayerThemeCreationPayload() // PlayerThemeCreationPayload | 
 
     
-    res, err := client.PlayerThemes.Create(playerCreationPayload)
+    res, err := client.PlayerThemes.Create(playerThemeCreationPayload)
 
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Create``: %v\n", err)
     }
-    // response from `Create`: Player
+    // response from `Create`: PlayerTheme
     fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Create`: %v\n", res)
 }
 ```
@@ -388,11 +388,11 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**playerCreationPayload** | [**PlayerCreationPayload**](PlayerCreationPayload.md) |  | 
+**playerThemeCreationPayload** | [**PlayerThemeCreationPayload**](PlayerThemeCreationPayload.md) |  | 
 
 ### Return type
 
-[**Player**](player.md)
+[**PlayerTheme**](player-theme.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -401,9 +401,9 @@ Name | Type | Description  | Notes
 
 ## UploadLogo
 
-> UploadLogoFile(playerId string, file *os.File, link string) (*Player, error)
+> UploadLogoFile(playerId string, file *os.File, link string) (*PlayerTheme, error)
 > UploadLogo(playerId string, link string, fileName string, fileReader io.Reader)
-> UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link string) (*Player, error)
+> UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link string) (*PlayerTheme, error)
 > UploadLogoWithContext(ctx context.Context, playerId string, link string, fileName string, fileReader io.Reader)
 
 Upload a logo
@@ -440,7 +440,7 @@ func main() {
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.UploadLogo``: %v\n", err)
     }
-    // response from `UploadLogo`: Player
+    // response from `UploadLogo`: PlayerTheme
     fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.UploadLogo`: %v\n", res)
 }
 ```
@@ -463,7 +463,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Player**](player.md)
+[**PlayerTheme**](player-theme.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

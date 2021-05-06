@@ -1,4 +1,4 @@
-# Subtitle
+# Caption
 
 ## Properties
 
@@ -11,120 +11,120 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewSubtitle
+### NewCaption
 
-`func NewSubtitle() *Subtitle`
+`func NewCaption() *Caption`
 
-NewSubtitle instantiates a new Subtitle object
+NewCaption instantiates a new Caption object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewSubtitleWithDefaults
+### NewCaptionWithDefaults
 
-`func NewSubtitleWithDefaults() *Subtitle`
+`func NewCaptionWithDefaults() *Caption`
 
-NewSubtitleWithDefaults instantiates a new Subtitle object
+NewCaptionWithDefaults instantiates a new Caption object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetUri
 
-`func (o *Subtitle) GetUri() string`
+`func (o *Caption) GetUri() string`
 
 GetUri returns the Uri field if non-nil, zero value otherwise.
 
 ### GetUriOk
 
-`func (o *Subtitle) GetUriOk() (*string, bool)`
+`func (o *Caption) GetUriOk() (*string, bool)`
 
 GetUriOk returns a tuple with the Uri field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUri
 
-`func (o *Subtitle) SetUri(v string)`
+`func (o *Caption) SetUri(v string)`
 
 SetUri sets Uri field to given value.
 
 ### HasUri
 
-`func (o *Subtitle) HasUri() bool`
+`func (o *Caption) HasUri() bool`
 
 HasUri returns a boolean if a field has been set.
 
 ### GetSrc
 
-`func (o *Subtitle) GetSrc() string`
+`func (o *Caption) GetSrc() string`
 
 GetSrc returns the Src field if non-nil, zero value otherwise.
 
 ### GetSrcOk
 
-`func (o *Subtitle) GetSrcOk() (*string, bool)`
+`func (o *Caption) GetSrcOk() (*string, bool)`
 
 GetSrcOk returns a tuple with the Src field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSrc
 
-`func (o *Subtitle) SetSrc(v string)`
+`func (o *Caption) SetSrc(v string)`
 
 SetSrc sets Src field to given value.
 
 ### HasSrc
 
-`func (o *Subtitle) HasSrc() bool`
+`func (o *Caption) HasSrc() bool`
 
 HasSrc returns a boolean if a field has been set.
 
 ### GetSrclang
 
-`func (o *Subtitle) GetSrclang() string`
+`func (o *Caption) GetSrclang() string`
 
 GetSrclang returns the Srclang field if non-nil, zero value otherwise.
 
 ### GetSrclangOk
 
-`func (o *Subtitle) GetSrclangOk() (*string, bool)`
+`func (o *Caption) GetSrclangOk() (*string, bool)`
 
 GetSrclangOk returns a tuple with the Srclang field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSrclang
 
-`func (o *Subtitle) SetSrclang(v string)`
+`func (o *Caption) SetSrclang(v string)`
 
 SetSrclang sets Srclang field to given value.
 
 ### HasSrclang
 
-`func (o *Subtitle) HasSrclang() bool`
+`func (o *Caption) HasSrclang() bool`
 
 HasSrclang returns a boolean if a field has been set.
 
 ### GetDefault
 
-`func (o *Subtitle) GetDefault() bool`
+`func (o *Caption) GetDefault() bool`
 
 GetDefault returns the Default field if non-nil, zero value otherwise.
 
 ### GetDefaultOk
 
-`func (o *Subtitle) GetDefaultOk() (*bool, bool)`
+`func (o *Caption) GetDefaultOk() (*bool, bool)`
 
 GetDefaultOk returns a tuple with the Default field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDefault
 
-`func (o *Subtitle) SetDefault(v bool)`
+`func (o *Caption) SetDefault(v bool)`
 
 SetDefault sets Default field to given value.
 
 ### HasDefault
 
-`func (o *Subtitle) HasDefault() bool`
+`func (o *Caption) HasDefault() bool`
 
 HasDefault returns a boolean if a field has been set.
 
