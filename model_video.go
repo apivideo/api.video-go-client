@@ -29,7 +29,7 @@ type Video struct {
 	// The date and time the video was updated. Date and time are provided using ISO-8601 UTC format.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 	// One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.
-	Tags *[]interface{} `json:"tags,omitempty"`
+	Tags *[]string `json:"tags,omitempty"`
 	// Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.
 	Metadata *[]Metadata  `json:"metadata,omitempty"`
 	Source   *VideoSource `json:"source,omitempty"`
@@ -254,9 +254,9 @@ func (o *Video) SetUpdatedAt(v string) {
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.
-func (o *Video) GetTags() []interface{} {
+func (o *Video) GetTags() []string {
 	if o == nil || o.Tags == nil {
-		var ret []interface{}
+		var ret []string
 		return ret
 	}
 	return *o.Tags
@@ -264,7 +264,7 @@ func (o *Video) GetTags() []interface{} {
 
 // GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Video) GetTagsOk() (*[]interface{}, bool) {
+func (o *Video) GetTagsOk() (*[]string, bool) {
 	if o == nil || o.Tags == nil {
 		return nil, false
 	}
@@ -280,8 +280,8 @@ func (o *Video) HasTags() bool {
 	return false
 }
 
-// SetTags gets a reference to the given []interface{} and assigns it to the Tags field.
-func (o *Video) SetTags(v []interface{}) {
+// SetTags gets a reference to the given []string and assigns it to the Tags field.
+func (o *Video) SetTags(v []string) {
 	o.Tags = &v
 }
 

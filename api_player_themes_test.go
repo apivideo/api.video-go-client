@@ -55,7 +55,7 @@ var playerJSONResponses = []string{
 	}`,
 }
 
-var playerStructs = []Player{
+var playerStructs = []PlayerTheme{
 	{
 		PlayerId:         PtrString("pt3Lony8J6NozV71Yxn8KVFn"),
 		Text:             PtrString("rgba(255, 255, 255, 0.95)"),
@@ -72,7 +72,7 @@ var playerStructs = []Player{
 		ForceAutoplay:    PtrBool(false),
 		HideTitle:        PtrBool(false),
 		ForceLoop:        PtrBool(false),
-		Assets: &PlayerAssets{
+		Assets: &PlayerThemeAssets{
 			Logo: PtrString("https://cdn.api.video/player/pl3Lony8J6NozV71Yxn8KVFn/logo.png"),
 			Link: PtrString("https://api.video"),
 		},
@@ -93,14 +93,14 @@ var playerStructs = []Player{
 		ForceAutoplay:    PtrBool(false),
 		HideTitle:        PtrBool(false),
 		ForceLoop:        PtrBool(false),
-		Assets: &PlayerAssets{
+		Assets: &PlayerThemeAssets{
 			Logo: PtrString("https://cdn.api.video/player/pl3zY7qtojdW2EvMIU37707q/logo.png"),
 			Link: PtrString("https://api.video"),
 		},
 	},
 }
 
-var playerCreationPayload = PlayerCreationPayload{
+var playerCreationPayload = PlayerThemeCreationPayload{
 	Text:             PtrString("rgba(255, 255, 255, 0.95)"),
 	Link:             PtrString("rgba(255, 0, 0, 0.95)"),
 	LinkHover:        PtrString("rgba(255, 255, 255, 0.75)"),
@@ -117,7 +117,7 @@ var playerCreationPayload = PlayerCreationPayload{
 	ForceLoop:        PtrBool(false),
 }
 
-var playerUpdatePayload = PlayerUpdatePayload{
+var playerUpdatePayload = PlayerThemeUpdatePayload{
 	Text:             PtrString("rgba(255, 255, 255, 0.95)"),
 	Link:             PtrString("rgba(255, 0, 0, 0.95)"),
 	LinkHover:        PtrString("rgba(255, 255, 255, 0.75)"),
@@ -181,7 +181,7 @@ func TestPlayers_List(t *testing.T) {
 		t.Errorf("Players.List error: %v", err)
 	}
 
-	expected := PlayersListResponse{
+	expected := PlayerThemesListResponse{
 		Data:       &playerStructs,
 		Pagination: &paginationStruct,
 	}

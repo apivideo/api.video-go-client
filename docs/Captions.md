@@ -149,9 +149,9 @@ Name | Type | Description  | Notes
 
 ## Get
 
-> Get(videoId string, language string) (*Subtitle, error)
+> Get(videoId string, language string) (*Caption, error)
 
-> GetWithContext(ctx context.Context, videoId string, language string) (*Subtitle, error)
+> GetWithContext(ctx context.Context, videoId string, language string) (*Caption, error)
 
 
 Show a caption
@@ -184,7 +184,7 @@ func main() {
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Captions.Get``: %v\n", err)
     }
-    // response from `Get`: Subtitle
+    // response from `Get`: Caption
     fmt.Fprintf(os.Stdout, "Response from `Captions.Get`: %v\n", res)
 }
 ```
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Subtitle**](subtitle.md)
+[**Caption**](caption.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -215,9 +215,9 @@ Name | Type | Description  | Notes
 
 ## Update
 
-> Update(videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Subtitle, error)
+> Update(videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Caption, error)
 
-> UpdateWithContext(ctx context.Context, videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Subtitle, error)
+> UpdateWithContext(ctx context.Context, videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Caption, error)
 
 
 Update caption
@@ -251,7 +251,7 @@ func main() {
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Captions.Update``: %v\n", err)
     }
-    // response from `Update`: Subtitle
+    // response from `Update`: Caption
     fmt.Fprintf(os.Stdout, "Response from `Captions.Update`: %v\n", res)
 }
 ```
@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Subtitle**](subtitle.md)
+[**Caption**](caption.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -283,9 +283,9 @@ Name | Type | Description  | Notes
 
 ## Upload
 
-> UploadFile(videoId string, language string, file *os.File) (*Subtitle, error)
+> UploadFile(videoId string, language string, file *os.File) (*Caption, error)
 > Upload(videoId string, language string, fileName string, fileReader io.Reader)
-> UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Subtitle, error)
+> UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Caption, error)
 > UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader)
 
 Upload a caption
@@ -322,7 +322,7 @@ func main() {
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Captions.Upload``: %v\n", err)
     }
-    // response from `Upload`: Subtitle
+    // response from `Upload`: Caption
     fmt.Fprintf(os.Stdout, "Response from `Captions.Upload`: %v\n", res)
 }
 ```
@@ -345,7 +345,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Subtitle**](subtitle.md)
+[**Caption**](caption.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

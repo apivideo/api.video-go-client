@@ -16,7 +16,7 @@ import (
 
 // CaptionsListResponse struct for CaptionsListResponse
 type CaptionsListResponse struct {
-	Data       *[]Subtitle `json:"data,omitempty"`
+	Data       *[]Caption  `json:"data,omitempty"`
 	Pagination *Pagination `json:"pagination,omitempty"`
 }
 
@@ -38,9 +38,9 @@ func NewCaptionsListResponseWithDefaults() *CaptionsListResponse {
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *CaptionsListResponse) GetData() []Subtitle {
+func (o *CaptionsListResponse) GetData() []Caption {
 	if o == nil || o.Data == nil {
-		var ret []Subtitle
+		var ret []Caption
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *CaptionsListResponse) GetData() []Subtitle {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CaptionsListResponse) GetDataOk() (*[]Subtitle, bool) {
+func (o *CaptionsListResponse) GetDataOk() (*[]Caption, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *CaptionsListResponse) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given []Subtitle and assigns it to the Data field.
-func (o *CaptionsListResponse) SetData(v []Subtitle) {
+// SetData gets a reference to the given []Caption and assigns it to the Data field.
+func (o *CaptionsListResponse) SetData(v []Caption) {
 	o.Data = &v
 }
 

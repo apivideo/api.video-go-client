@@ -14,8 +14,8 @@ import (
 //"encoding/json"
 )
 
-// Player struct for Player
-type Player struct {
+// PlayerTheme struct for PlayerTheme
+type PlayerTheme struct {
 	// RGBA color for timer text. Default: rgba(255, 255, 255, 1)
 	Text *string `json:"text,omitempty"`
 	// RGBA color for all controls. Default: rgba(255, 255, 255, 1)
@@ -60,29 +60,29 @@ type Player struct {
 	// Deprecated
 	ShapeBackgroundBottom *string `json:"shapeBackgroundBottom,omitempty"`
 	// Deprecated
-	LinkActive *string       `json:"linkActive,omitempty"`
-	Assets     *PlayerAssets `json:"assets,omitempty"`
+	LinkActive *string            `json:"linkActive,omitempty"`
+	Assets     *PlayerThemeAssets `json:"assets,omitempty"`
 }
 
-// NewPlayer instantiates a new Player object
+// NewPlayerTheme instantiates a new PlayerTheme object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlayer() *Player {
-	this := Player{}
+func NewPlayerTheme() *PlayerTheme {
+	this := PlayerTheme{}
 	return &this
 }
 
-// NewPlayerWithDefaults instantiates a new Player object
+// NewPlayerThemeWithDefaults instantiates a new PlayerTheme object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPlayerWithDefaults() *Player {
-	this := Player{}
+func NewPlayerThemeWithDefaults() *PlayerTheme {
+	this := PlayerTheme{}
 	return &this
 }
 
 // GetText returns the Text field value if set, zero value otherwise.
-func (o *Player) GetText() string {
+func (o *PlayerTheme) GetText() string {
 	if o == nil || o.Text == nil {
 		var ret string
 		return ret
@@ -92,7 +92,7 @@ func (o *Player) GetText() string {
 
 // GetTextOk returns a tuple with the Text field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetTextOk() (*string, bool) {
+func (o *PlayerTheme) GetTextOk() (*string, bool) {
 	if o == nil || o.Text == nil {
 		return nil, false
 	}
@@ -100,7 +100,7 @@ func (o *Player) GetTextOk() (*string, bool) {
 }
 
 // HasText returns a boolean if a field has been set.
-func (o *Player) HasText() bool {
+func (o *PlayerTheme) HasText() bool {
 	if o != nil && o.Text != nil {
 		return true
 	}
@@ -109,12 +109,12 @@ func (o *Player) HasText() bool {
 }
 
 // SetText gets a reference to the given string and assigns it to the Text field.
-func (o *Player) SetText(v string) {
+func (o *PlayerTheme) SetText(v string) {
 	o.Text = &v
 }
 
 // GetLink returns the Link field value if set, zero value otherwise.
-func (o *Player) GetLink() string {
+func (o *PlayerTheme) GetLink() string {
 	if o == nil || o.Link == nil {
 		var ret string
 		return ret
@@ -124,7 +124,7 @@ func (o *Player) GetLink() string {
 
 // GetLinkOk returns a tuple with the Link field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetLinkOk() (*string, bool) {
+func (o *PlayerTheme) GetLinkOk() (*string, bool) {
 	if o == nil || o.Link == nil {
 		return nil, false
 	}
@@ -132,7 +132,7 @@ func (o *Player) GetLinkOk() (*string, bool) {
 }
 
 // HasLink returns a boolean if a field has been set.
-func (o *Player) HasLink() bool {
+func (o *PlayerTheme) HasLink() bool {
 	if o != nil && o.Link != nil {
 		return true
 	}
@@ -141,12 +141,12 @@ func (o *Player) HasLink() bool {
 }
 
 // SetLink gets a reference to the given string and assigns it to the Link field.
-func (o *Player) SetLink(v string) {
+func (o *PlayerTheme) SetLink(v string) {
 	o.Link = &v
 }
 
 // GetLinkHover returns the LinkHover field value if set, zero value otherwise.
-func (o *Player) GetLinkHover() string {
+func (o *PlayerTheme) GetLinkHover() string {
 	if o == nil || o.LinkHover == nil {
 		var ret string
 		return ret
@@ -156,7 +156,7 @@ func (o *Player) GetLinkHover() string {
 
 // GetLinkHoverOk returns a tuple with the LinkHover field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetLinkHoverOk() (*string, bool) {
+func (o *PlayerTheme) GetLinkHoverOk() (*string, bool) {
 	if o == nil || o.LinkHover == nil {
 		return nil, false
 	}
@@ -164,7 +164,7 @@ func (o *Player) GetLinkHoverOk() (*string, bool) {
 }
 
 // HasLinkHover returns a boolean if a field has been set.
-func (o *Player) HasLinkHover() bool {
+func (o *PlayerTheme) HasLinkHover() bool {
 	if o != nil && o.LinkHover != nil {
 		return true
 	}
@@ -173,12 +173,12 @@ func (o *Player) HasLinkHover() bool {
 }
 
 // SetLinkHover gets a reference to the given string and assigns it to the LinkHover field.
-func (o *Player) SetLinkHover(v string) {
+func (o *PlayerTheme) SetLinkHover(v string) {
 	o.LinkHover = &v
 }
 
 // GetTrackPlayed returns the TrackPlayed field value if set, zero value otherwise.
-func (o *Player) GetTrackPlayed() string {
+func (o *PlayerTheme) GetTrackPlayed() string {
 	if o == nil || o.TrackPlayed == nil {
 		var ret string
 		return ret
@@ -188,7 +188,7 @@ func (o *Player) GetTrackPlayed() string {
 
 // GetTrackPlayedOk returns a tuple with the TrackPlayed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetTrackPlayedOk() (*string, bool) {
+func (o *PlayerTheme) GetTrackPlayedOk() (*string, bool) {
 	if o == nil || o.TrackPlayed == nil {
 		return nil, false
 	}
@@ -196,7 +196,7 @@ func (o *Player) GetTrackPlayedOk() (*string, bool) {
 }
 
 // HasTrackPlayed returns a boolean if a field has been set.
-func (o *Player) HasTrackPlayed() bool {
+func (o *PlayerTheme) HasTrackPlayed() bool {
 	if o != nil && o.TrackPlayed != nil {
 		return true
 	}
@@ -205,12 +205,12 @@ func (o *Player) HasTrackPlayed() bool {
 }
 
 // SetTrackPlayed gets a reference to the given string and assigns it to the TrackPlayed field.
-func (o *Player) SetTrackPlayed(v string) {
+func (o *PlayerTheme) SetTrackPlayed(v string) {
 	o.TrackPlayed = &v
 }
 
 // GetTrackUnplayed returns the TrackUnplayed field value if set, zero value otherwise.
-func (o *Player) GetTrackUnplayed() string {
+func (o *PlayerTheme) GetTrackUnplayed() string {
 	if o == nil || o.TrackUnplayed == nil {
 		var ret string
 		return ret
@@ -220,7 +220,7 @@ func (o *Player) GetTrackUnplayed() string {
 
 // GetTrackUnplayedOk returns a tuple with the TrackUnplayed field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetTrackUnplayedOk() (*string, bool) {
+func (o *PlayerTheme) GetTrackUnplayedOk() (*string, bool) {
 	if o == nil || o.TrackUnplayed == nil {
 		return nil, false
 	}
@@ -228,7 +228,7 @@ func (o *Player) GetTrackUnplayedOk() (*string, bool) {
 }
 
 // HasTrackUnplayed returns a boolean if a field has been set.
-func (o *Player) HasTrackUnplayed() bool {
+func (o *PlayerTheme) HasTrackUnplayed() bool {
 	if o != nil && o.TrackUnplayed != nil {
 		return true
 	}
@@ -237,12 +237,12 @@ func (o *Player) HasTrackUnplayed() bool {
 }
 
 // SetTrackUnplayed gets a reference to the given string and assigns it to the TrackUnplayed field.
-func (o *Player) SetTrackUnplayed(v string) {
+func (o *PlayerTheme) SetTrackUnplayed(v string) {
 	o.TrackUnplayed = &v
 }
 
 // GetTrackBackground returns the TrackBackground field value if set, zero value otherwise.
-func (o *Player) GetTrackBackground() string {
+func (o *PlayerTheme) GetTrackBackground() string {
 	if o == nil || o.TrackBackground == nil {
 		var ret string
 		return ret
@@ -252,7 +252,7 @@ func (o *Player) GetTrackBackground() string {
 
 // GetTrackBackgroundOk returns a tuple with the TrackBackground field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetTrackBackgroundOk() (*string, bool) {
+func (o *PlayerTheme) GetTrackBackgroundOk() (*string, bool) {
 	if o == nil || o.TrackBackground == nil {
 		return nil, false
 	}
@@ -260,7 +260,7 @@ func (o *Player) GetTrackBackgroundOk() (*string, bool) {
 }
 
 // HasTrackBackground returns a boolean if a field has been set.
-func (o *Player) HasTrackBackground() bool {
+func (o *PlayerTheme) HasTrackBackground() bool {
 	if o != nil && o.TrackBackground != nil {
 		return true
 	}
@@ -269,12 +269,12 @@ func (o *Player) HasTrackBackground() bool {
 }
 
 // SetTrackBackground gets a reference to the given string and assigns it to the TrackBackground field.
-func (o *Player) SetTrackBackground(v string) {
+func (o *PlayerTheme) SetTrackBackground(v string) {
 	o.TrackBackground = &v
 }
 
 // GetBackgroundTop returns the BackgroundTop field value if set, zero value otherwise.
-func (o *Player) GetBackgroundTop() string {
+func (o *PlayerTheme) GetBackgroundTop() string {
 	if o == nil || o.BackgroundTop == nil {
 		var ret string
 		return ret
@@ -284,7 +284,7 @@ func (o *Player) GetBackgroundTop() string {
 
 // GetBackgroundTopOk returns a tuple with the BackgroundTop field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetBackgroundTopOk() (*string, bool) {
+func (o *PlayerTheme) GetBackgroundTopOk() (*string, bool) {
 	if o == nil || o.BackgroundTop == nil {
 		return nil, false
 	}
@@ -292,7 +292,7 @@ func (o *Player) GetBackgroundTopOk() (*string, bool) {
 }
 
 // HasBackgroundTop returns a boolean if a field has been set.
-func (o *Player) HasBackgroundTop() bool {
+func (o *PlayerTheme) HasBackgroundTop() bool {
 	if o != nil && o.BackgroundTop != nil {
 		return true
 	}
@@ -301,12 +301,12 @@ func (o *Player) HasBackgroundTop() bool {
 }
 
 // SetBackgroundTop gets a reference to the given string and assigns it to the BackgroundTop field.
-func (o *Player) SetBackgroundTop(v string) {
+func (o *PlayerTheme) SetBackgroundTop(v string) {
 	o.BackgroundTop = &v
 }
 
 // GetBackgroundBottom returns the BackgroundBottom field value if set, zero value otherwise.
-func (o *Player) GetBackgroundBottom() string {
+func (o *PlayerTheme) GetBackgroundBottom() string {
 	if o == nil || o.BackgroundBottom == nil {
 		var ret string
 		return ret
@@ -316,7 +316,7 @@ func (o *Player) GetBackgroundBottom() string {
 
 // GetBackgroundBottomOk returns a tuple with the BackgroundBottom field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetBackgroundBottomOk() (*string, bool) {
+func (o *PlayerTheme) GetBackgroundBottomOk() (*string, bool) {
 	if o == nil || o.BackgroundBottom == nil {
 		return nil, false
 	}
@@ -324,7 +324,7 @@ func (o *Player) GetBackgroundBottomOk() (*string, bool) {
 }
 
 // HasBackgroundBottom returns a boolean if a field has been set.
-func (o *Player) HasBackgroundBottom() bool {
+func (o *PlayerTheme) HasBackgroundBottom() bool {
 	if o != nil && o.BackgroundBottom != nil {
 		return true
 	}
@@ -333,12 +333,12 @@ func (o *Player) HasBackgroundBottom() bool {
 }
 
 // SetBackgroundBottom gets a reference to the given string and assigns it to the BackgroundBottom field.
-func (o *Player) SetBackgroundBottom(v string) {
+func (o *PlayerTheme) SetBackgroundBottom(v string) {
 	o.BackgroundBottom = &v
 }
 
 // GetBackgroundText returns the BackgroundText field value if set, zero value otherwise.
-func (o *Player) GetBackgroundText() string {
+func (o *PlayerTheme) GetBackgroundText() string {
 	if o == nil || o.BackgroundText == nil {
 		var ret string
 		return ret
@@ -348,7 +348,7 @@ func (o *Player) GetBackgroundText() string {
 
 // GetBackgroundTextOk returns a tuple with the BackgroundText field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetBackgroundTextOk() (*string, bool) {
+func (o *PlayerTheme) GetBackgroundTextOk() (*string, bool) {
 	if o == nil || o.BackgroundText == nil {
 		return nil, false
 	}
@@ -356,7 +356,7 @@ func (o *Player) GetBackgroundTextOk() (*string, bool) {
 }
 
 // HasBackgroundText returns a boolean if a field has been set.
-func (o *Player) HasBackgroundText() bool {
+func (o *PlayerTheme) HasBackgroundText() bool {
 	if o != nil && o.BackgroundText != nil {
 		return true
 	}
@@ -365,12 +365,12 @@ func (o *Player) HasBackgroundText() bool {
 }
 
 // SetBackgroundText gets a reference to the given string and assigns it to the BackgroundText field.
-func (o *Player) SetBackgroundText(v string) {
+func (o *PlayerTheme) SetBackgroundText(v string) {
 	o.BackgroundText = &v
 }
 
 // GetEnableApi returns the EnableApi field value if set, zero value otherwise.
-func (o *Player) GetEnableApi() bool {
+func (o *PlayerTheme) GetEnableApi() bool {
 	if o == nil || o.EnableApi == nil {
 		var ret bool
 		return ret
@@ -380,7 +380,7 @@ func (o *Player) GetEnableApi() bool {
 
 // GetEnableApiOk returns a tuple with the EnableApi field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetEnableApiOk() (*bool, bool) {
+func (o *PlayerTheme) GetEnableApiOk() (*bool, bool) {
 	if o == nil || o.EnableApi == nil {
 		return nil, false
 	}
@@ -388,7 +388,7 @@ func (o *Player) GetEnableApiOk() (*bool, bool) {
 }
 
 // HasEnableApi returns a boolean if a field has been set.
-func (o *Player) HasEnableApi() bool {
+func (o *PlayerTheme) HasEnableApi() bool {
 	if o != nil && o.EnableApi != nil {
 		return true
 	}
@@ -397,12 +397,12 @@ func (o *Player) HasEnableApi() bool {
 }
 
 // SetEnableApi gets a reference to the given bool and assigns it to the EnableApi field.
-func (o *Player) SetEnableApi(v bool) {
+func (o *PlayerTheme) SetEnableApi(v bool) {
 	o.EnableApi = &v
 }
 
 // GetEnableControls returns the EnableControls field value if set, zero value otherwise.
-func (o *Player) GetEnableControls() bool {
+func (o *PlayerTheme) GetEnableControls() bool {
 	if o == nil || o.EnableControls == nil {
 		var ret bool
 		return ret
@@ -412,7 +412,7 @@ func (o *Player) GetEnableControls() bool {
 
 // GetEnableControlsOk returns a tuple with the EnableControls field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetEnableControlsOk() (*bool, bool) {
+func (o *PlayerTheme) GetEnableControlsOk() (*bool, bool) {
 	if o == nil || o.EnableControls == nil {
 		return nil, false
 	}
@@ -420,7 +420,7 @@ func (o *Player) GetEnableControlsOk() (*bool, bool) {
 }
 
 // HasEnableControls returns a boolean if a field has been set.
-func (o *Player) HasEnableControls() bool {
+func (o *PlayerTheme) HasEnableControls() bool {
 	if o != nil && o.EnableControls != nil {
 		return true
 	}
@@ -429,12 +429,12 @@ func (o *Player) HasEnableControls() bool {
 }
 
 // SetEnableControls gets a reference to the given bool and assigns it to the EnableControls field.
-func (o *Player) SetEnableControls(v bool) {
+func (o *PlayerTheme) SetEnableControls(v bool) {
 	o.EnableControls = &v
 }
 
 // GetForceAutoplay returns the ForceAutoplay field value if set, zero value otherwise.
-func (o *Player) GetForceAutoplay() bool {
+func (o *PlayerTheme) GetForceAutoplay() bool {
 	if o == nil || o.ForceAutoplay == nil {
 		var ret bool
 		return ret
@@ -444,7 +444,7 @@ func (o *Player) GetForceAutoplay() bool {
 
 // GetForceAutoplayOk returns a tuple with the ForceAutoplay field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetForceAutoplayOk() (*bool, bool) {
+func (o *PlayerTheme) GetForceAutoplayOk() (*bool, bool) {
 	if o == nil || o.ForceAutoplay == nil {
 		return nil, false
 	}
@@ -452,7 +452,7 @@ func (o *Player) GetForceAutoplayOk() (*bool, bool) {
 }
 
 // HasForceAutoplay returns a boolean if a field has been set.
-func (o *Player) HasForceAutoplay() bool {
+func (o *PlayerTheme) HasForceAutoplay() bool {
 	if o != nil && o.ForceAutoplay != nil {
 		return true
 	}
@@ -461,12 +461,12 @@ func (o *Player) HasForceAutoplay() bool {
 }
 
 // SetForceAutoplay gets a reference to the given bool and assigns it to the ForceAutoplay field.
-func (o *Player) SetForceAutoplay(v bool) {
+func (o *PlayerTheme) SetForceAutoplay(v bool) {
 	o.ForceAutoplay = &v
 }
 
 // GetHideTitle returns the HideTitle field value if set, zero value otherwise.
-func (o *Player) GetHideTitle() bool {
+func (o *PlayerTheme) GetHideTitle() bool {
 	if o == nil || o.HideTitle == nil {
 		var ret bool
 		return ret
@@ -476,7 +476,7 @@ func (o *Player) GetHideTitle() bool {
 
 // GetHideTitleOk returns a tuple with the HideTitle field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetHideTitleOk() (*bool, bool) {
+func (o *PlayerTheme) GetHideTitleOk() (*bool, bool) {
 	if o == nil || o.HideTitle == nil {
 		return nil, false
 	}
@@ -484,7 +484,7 @@ func (o *Player) GetHideTitleOk() (*bool, bool) {
 }
 
 // HasHideTitle returns a boolean if a field has been set.
-func (o *Player) HasHideTitle() bool {
+func (o *PlayerTheme) HasHideTitle() bool {
 	if o != nil && o.HideTitle != nil {
 		return true
 	}
@@ -493,12 +493,12 @@ func (o *Player) HasHideTitle() bool {
 }
 
 // SetHideTitle gets a reference to the given bool and assigns it to the HideTitle field.
-func (o *Player) SetHideTitle(v bool) {
+func (o *PlayerTheme) SetHideTitle(v bool) {
 	o.HideTitle = &v
 }
 
 // GetForceLoop returns the ForceLoop field value if set, zero value otherwise.
-func (o *Player) GetForceLoop() bool {
+func (o *PlayerTheme) GetForceLoop() bool {
 	if o == nil || o.ForceLoop == nil {
 		var ret bool
 		return ret
@@ -508,7 +508,7 @@ func (o *Player) GetForceLoop() bool {
 
 // GetForceLoopOk returns a tuple with the ForceLoop field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetForceLoopOk() (*bool, bool) {
+func (o *PlayerTheme) GetForceLoopOk() (*bool, bool) {
 	if o == nil || o.ForceLoop == nil {
 		return nil, false
 	}
@@ -516,7 +516,7 @@ func (o *Player) GetForceLoopOk() (*bool, bool) {
 }
 
 // HasForceLoop returns a boolean if a field has been set.
-func (o *Player) HasForceLoop() bool {
+func (o *PlayerTheme) HasForceLoop() bool {
 	if o != nil && o.ForceLoop != nil {
 		return true
 	}
@@ -525,12 +525,12 @@ func (o *Player) HasForceLoop() bool {
 }
 
 // SetForceLoop gets a reference to the given bool and assigns it to the ForceLoop field.
-func (o *Player) SetForceLoop(v bool) {
+func (o *PlayerTheme) SetForceLoop(v bool) {
 	o.ForceLoop = &v
 }
 
 // GetPlayerId returns the PlayerId field value if set, zero value otherwise.
-func (o *Player) GetPlayerId() string {
+func (o *PlayerTheme) GetPlayerId() string {
 	if o == nil || o.PlayerId == nil {
 		var ret string
 		return ret
@@ -540,7 +540,7 @@ func (o *Player) GetPlayerId() string {
 
 // GetPlayerIdOk returns a tuple with the PlayerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetPlayerIdOk() (*string, bool) {
+func (o *PlayerTheme) GetPlayerIdOk() (*string, bool) {
 	if o == nil || o.PlayerId == nil {
 		return nil, false
 	}
@@ -548,7 +548,7 @@ func (o *Player) GetPlayerIdOk() (*string, bool) {
 }
 
 // HasPlayerId returns a boolean if a field has been set.
-func (o *Player) HasPlayerId() bool {
+func (o *PlayerTheme) HasPlayerId() bool {
 	if o != nil && o.PlayerId != nil {
 		return true
 	}
@@ -557,12 +557,12 @@ func (o *Player) HasPlayerId() bool {
 }
 
 // SetPlayerId gets a reference to the given string and assigns it to the PlayerId field.
-func (o *Player) SetPlayerId(v string) {
+func (o *PlayerTheme) SetPlayerId(v string) {
 	o.PlayerId = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *Player) GetCreatedAt() string {
+func (o *PlayerTheme) GetCreatedAt() string {
 	if o == nil || o.CreatedAt == nil {
 		var ret string
 		return ret
@@ -572,7 +572,7 @@ func (o *Player) GetCreatedAt() string {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetCreatedAtOk() (*string, bool) {
+func (o *PlayerTheme) GetCreatedAtOk() (*string, bool) {
 	if o == nil || o.CreatedAt == nil {
 		return nil, false
 	}
@@ -580,7 +580,7 @@ func (o *Player) GetCreatedAtOk() (*string, bool) {
 }
 
 // HasCreatedAt returns a boolean if a field has been set.
-func (o *Player) HasCreatedAt() bool {
+func (o *PlayerTheme) HasCreatedAt() bool {
 	if o != nil && o.CreatedAt != nil {
 		return true
 	}
@@ -589,12 +589,12 @@ func (o *Player) HasCreatedAt() bool {
 }
 
 // SetCreatedAt gets a reference to the given string and assigns it to the CreatedAt field.
-func (o *Player) SetCreatedAt(v string) {
+func (o *PlayerTheme) SetCreatedAt(v string) {
 	o.CreatedAt = &v
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *Player) GetUpdatedAt() string {
+func (o *PlayerTheme) GetUpdatedAt() string {
 	if o == nil || o.UpdatedAt == nil {
 		var ret string
 		return ret
@@ -604,7 +604,7 @@ func (o *Player) GetUpdatedAt() string {
 
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetUpdatedAtOk() (*string, bool) {
+func (o *PlayerTheme) GetUpdatedAtOk() (*string, bool) {
 	if o == nil || o.UpdatedAt == nil {
 		return nil, false
 	}
@@ -612,7 +612,7 @@ func (o *Player) GetUpdatedAtOk() (*string, bool) {
 }
 
 // HasUpdatedAt returns a boolean if a field has been set.
-func (o *Player) HasUpdatedAt() bool {
+func (o *PlayerTheme) HasUpdatedAt() bool {
 	if o != nil && o.UpdatedAt != nil {
 		return true
 	}
@@ -621,12 +621,12 @@ func (o *Player) HasUpdatedAt() bool {
 }
 
 // SetUpdatedAt gets a reference to the given string and assigns it to the UpdatedAt field.
-func (o *Player) SetUpdatedAt(v string) {
+func (o *PlayerTheme) SetUpdatedAt(v string) {
 	o.UpdatedAt = &v
 }
 
 // GetShapeMargin returns the ShapeMargin field value if set, zero value otherwise.
-func (o *Player) GetShapeMargin() int32 {
+func (o *PlayerTheme) GetShapeMargin() int32 {
 	if o == nil || o.ShapeMargin == nil {
 		var ret int32
 		return ret
@@ -636,7 +636,7 @@ func (o *Player) GetShapeMargin() int32 {
 
 // GetShapeMarginOk returns a tuple with the ShapeMargin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetShapeMarginOk() (*int32, bool) {
+func (o *PlayerTheme) GetShapeMarginOk() (*int32, bool) {
 	if o == nil || o.ShapeMargin == nil {
 		return nil, false
 	}
@@ -644,7 +644,7 @@ func (o *Player) GetShapeMarginOk() (*int32, bool) {
 }
 
 // HasShapeMargin returns a boolean if a field has been set.
-func (o *Player) HasShapeMargin() bool {
+func (o *PlayerTheme) HasShapeMargin() bool {
 	if o != nil && o.ShapeMargin != nil {
 		return true
 	}
@@ -653,12 +653,12 @@ func (o *Player) HasShapeMargin() bool {
 }
 
 // SetShapeMargin gets a reference to the given int32 and assigns it to the ShapeMargin field.
-func (o *Player) SetShapeMargin(v int32) {
+func (o *PlayerTheme) SetShapeMargin(v int32) {
 	o.ShapeMargin = &v
 }
 
 // GetShapeRadius returns the ShapeRadius field value if set, zero value otherwise.
-func (o *Player) GetShapeRadius() int32 {
+func (o *PlayerTheme) GetShapeRadius() int32 {
 	if o == nil || o.ShapeRadius == nil {
 		var ret int32
 		return ret
@@ -668,7 +668,7 @@ func (o *Player) GetShapeRadius() int32 {
 
 // GetShapeRadiusOk returns a tuple with the ShapeRadius field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetShapeRadiusOk() (*int32, bool) {
+func (o *PlayerTheme) GetShapeRadiusOk() (*int32, bool) {
 	if o == nil || o.ShapeRadius == nil {
 		return nil, false
 	}
@@ -676,7 +676,7 @@ func (o *Player) GetShapeRadiusOk() (*int32, bool) {
 }
 
 // HasShapeRadius returns a boolean if a field has been set.
-func (o *Player) HasShapeRadius() bool {
+func (o *PlayerTheme) HasShapeRadius() bool {
 	if o != nil && o.ShapeRadius != nil {
 		return true
 	}
@@ -685,12 +685,12 @@ func (o *Player) HasShapeRadius() bool {
 }
 
 // SetShapeRadius gets a reference to the given int32 and assigns it to the ShapeRadius field.
-func (o *Player) SetShapeRadius(v int32) {
+func (o *PlayerTheme) SetShapeRadius(v int32) {
 	o.ShapeRadius = &v
 }
 
 // GetShapeAspect returns the ShapeAspect field value if set, zero value otherwise.
-func (o *Player) GetShapeAspect() string {
+func (o *PlayerTheme) GetShapeAspect() string {
 	if o == nil || o.ShapeAspect == nil {
 		var ret string
 		return ret
@@ -700,7 +700,7 @@ func (o *Player) GetShapeAspect() string {
 
 // GetShapeAspectOk returns a tuple with the ShapeAspect field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetShapeAspectOk() (*string, bool) {
+func (o *PlayerTheme) GetShapeAspectOk() (*string, bool) {
 	if o == nil || o.ShapeAspect == nil {
 		return nil, false
 	}
@@ -708,7 +708,7 @@ func (o *Player) GetShapeAspectOk() (*string, bool) {
 }
 
 // HasShapeAspect returns a boolean if a field has been set.
-func (o *Player) HasShapeAspect() bool {
+func (o *PlayerTheme) HasShapeAspect() bool {
 	if o != nil && o.ShapeAspect != nil {
 		return true
 	}
@@ -717,12 +717,12 @@ func (o *Player) HasShapeAspect() bool {
 }
 
 // SetShapeAspect gets a reference to the given string and assigns it to the ShapeAspect field.
-func (o *Player) SetShapeAspect(v string) {
+func (o *PlayerTheme) SetShapeAspect(v string) {
 	o.ShapeAspect = &v
 }
 
 // GetShapeBackgroundTop returns the ShapeBackgroundTop field value if set, zero value otherwise.
-func (o *Player) GetShapeBackgroundTop() string {
+func (o *PlayerTheme) GetShapeBackgroundTop() string {
 	if o == nil || o.ShapeBackgroundTop == nil {
 		var ret string
 		return ret
@@ -732,7 +732,7 @@ func (o *Player) GetShapeBackgroundTop() string {
 
 // GetShapeBackgroundTopOk returns a tuple with the ShapeBackgroundTop field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetShapeBackgroundTopOk() (*string, bool) {
+func (o *PlayerTheme) GetShapeBackgroundTopOk() (*string, bool) {
 	if o == nil || o.ShapeBackgroundTop == nil {
 		return nil, false
 	}
@@ -740,7 +740,7 @@ func (o *Player) GetShapeBackgroundTopOk() (*string, bool) {
 }
 
 // HasShapeBackgroundTop returns a boolean if a field has been set.
-func (o *Player) HasShapeBackgroundTop() bool {
+func (o *PlayerTheme) HasShapeBackgroundTop() bool {
 	if o != nil && o.ShapeBackgroundTop != nil {
 		return true
 	}
@@ -749,12 +749,12 @@ func (o *Player) HasShapeBackgroundTop() bool {
 }
 
 // SetShapeBackgroundTop gets a reference to the given string and assigns it to the ShapeBackgroundTop field.
-func (o *Player) SetShapeBackgroundTop(v string) {
+func (o *PlayerTheme) SetShapeBackgroundTop(v string) {
 	o.ShapeBackgroundTop = &v
 }
 
 // GetShapeBackgroundBottom returns the ShapeBackgroundBottom field value if set, zero value otherwise.
-func (o *Player) GetShapeBackgroundBottom() string {
+func (o *PlayerTheme) GetShapeBackgroundBottom() string {
 	if o == nil || o.ShapeBackgroundBottom == nil {
 		var ret string
 		return ret
@@ -764,7 +764,7 @@ func (o *Player) GetShapeBackgroundBottom() string {
 
 // GetShapeBackgroundBottomOk returns a tuple with the ShapeBackgroundBottom field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetShapeBackgroundBottomOk() (*string, bool) {
+func (o *PlayerTheme) GetShapeBackgroundBottomOk() (*string, bool) {
 	if o == nil || o.ShapeBackgroundBottom == nil {
 		return nil, false
 	}
@@ -772,7 +772,7 @@ func (o *Player) GetShapeBackgroundBottomOk() (*string, bool) {
 }
 
 // HasShapeBackgroundBottom returns a boolean if a field has been set.
-func (o *Player) HasShapeBackgroundBottom() bool {
+func (o *PlayerTheme) HasShapeBackgroundBottom() bool {
 	if o != nil && o.ShapeBackgroundBottom != nil {
 		return true
 	}
@@ -781,12 +781,12 @@ func (o *Player) HasShapeBackgroundBottom() bool {
 }
 
 // SetShapeBackgroundBottom gets a reference to the given string and assigns it to the ShapeBackgroundBottom field.
-func (o *Player) SetShapeBackgroundBottom(v string) {
+func (o *PlayerTheme) SetShapeBackgroundBottom(v string) {
 	o.ShapeBackgroundBottom = &v
 }
 
 // GetLinkActive returns the LinkActive field value if set, zero value otherwise.
-func (o *Player) GetLinkActive() string {
+func (o *PlayerTheme) GetLinkActive() string {
 	if o == nil || o.LinkActive == nil {
 		var ret string
 		return ret
@@ -796,7 +796,7 @@ func (o *Player) GetLinkActive() string {
 
 // GetLinkActiveOk returns a tuple with the LinkActive field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetLinkActiveOk() (*string, bool) {
+func (o *PlayerTheme) GetLinkActiveOk() (*string, bool) {
 	if o == nil || o.LinkActive == nil {
 		return nil, false
 	}
@@ -804,7 +804,7 @@ func (o *Player) GetLinkActiveOk() (*string, bool) {
 }
 
 // HasLinkActive returns a boolean if a field has been set.
-func (o *Player) HasLinkActive() bool {
+func (o *PlayerTheme) HasLinkActive() bool {
 	if o != nil && o.LinkActive != nil {
 		return true
 	}
@@ -813,14 +813,14 @@ func (o *Player) HasLinkActive() bool {
 }
 
 // SetLinkActive gets a reference to the given string and assigns it to the LinkActive field.
-func (o *Player) SetLinkActive(v string) {
+func (o *PlayerTheme) SetLinkActive(v string) {
 	o.LinkActive = &v
 }
 
 // GetAssets returns the Assets field value if set, zero value otherwise.
-func (o *Player) GetAssets() PlayerAssets {
+func (o *PlayerTheme) GetAssets() PlayerThemeAssets {
 	if o == nil || o.Assets == nil {
-		var ret PlayerAssets
+		var ret PlayerThemeAssets
 		return ret
 	}
 	return *o.Assets
@@ -828,7 +828,7 @@ func (o *Player) GetAssets() PlayerAssets {
 
 // GetAssetsOk returns a tuple with the Assets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Player) GetAssetsOk() (*PlayerAssets, bool) {
+func (o *PlayerTheme) GetAssetsOk() (*PlayerThemeAssets, bool) {
 	if o == nil || o.Assets == nil {
 		return nil, false
 	}
@@ -836,7 +836,7 @@ func (o *Player) GetAssetsOk() (*PlayerAssets, bool) {
 }
 
 // HasAssets returns a boolean if a field has been set.
-func (o *Player) HasAssets() bool {
+func (o *PlayerTheme) HasAssets() bool {
 	if o != nil && o.Assets != nil {
 		return true
 	}
@@ -844,34 +844,34 @@ func (o *Player) HasAssets() bool {
 	return false
 }
 
-// SetAssets gets a reference to the given PlayerAssets and assigns it to the Assets field.
-func (o *Player) SetAssets(v PlayerAssets) {
+// SetAssets gets a reference to the given PlayerThemeAssets and assigns it to the Assets field.
+func (o *PlayerTheme) SetAssets(v PlayerThemeAssets) {
 	o.Assets = &v
 }
 
-type NullablePlayer struct {
-	value *Player
+type NullablePlayerTheme struct {
+	value *PlayerTheme
 	isSet bool
 }
 
-func (v NullablePlayer) Get() *Player {
+func (v NullablePlayerTheme) Get() *PlayerTheme {
 	return v.value
 }
 
-func (v *NullablePlayer) Set(val *Player) {
+func (v *NullablePlayerTheme) Set(val *PlayerTheme) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePlayer) IsSet() bool {
+func (v NullablePlayerTheme) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePlayer) Unset() {
+func (v *NullablePlayerTheme) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePlayer(val *Player) *NullablePlayer {
-	return &NullablePlayer{value: val, isSet: true}
+func NewNullablePlayerTheme(val *PlayerTheme) *NullablePlayerTheme {
+	return &NullablePlayerTheme{value: val, isSet: true}
 }

@@ -14,33 +14,33 @@ import (
 //"encoding/json"
 )
 
-// PlayersListResponse struct for PlayersListResponse
-type PlayersListResponse struct {
-	Data       *[]Player   `json:"data,omitempty"`
-	Pagination *Pagination `json:"pagination,omitempty"`
+// PlayerThemesListResponse struct for PlayerThemesListResponse
+type PlayerThemesListResponse struct {
+	Data       *[]PlayerTheme `json:"data,omitempty"`
+	Pagination *Pagination    `json:"pagination,omitempty"`
 }
 
-// NewPlayersListResponse instantiates a new PlayersListResponse object
+// NewPlayerThemesListResponse instantiates a new PlayerThemesListResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlayersListResponse() *PlayersListResponse {
-	this := PlayersListResponse{}
+func NewPlayerThemesListResponse() *PlayerThemesListResponse {
+	this := PlayerThemesListResponse{}
 	return &this
 }
 
-// NewPlayersListResponseWithDefaults instantiates a new PlayersListResponse object
+// NewPlayerThemesListResponseWithDefaults instantiates a new PlayerThemesListResponse object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPlayersListResponseWithDefaults() *PlayersListResponse {
-	this := PlayersListResponse{}
+func NewPlayerThemesListResponseWithDefaults() *PlayerThemesListResponse {
+	this := PlayerThemesListResponse{}
 	return &this
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *PlayersListResponse) GetData() []Player {
+func (o *PlayerThemesListResponse) GetData() []PlayerTheme {
 	if o == nil || o.Data == nil {
-		var ret []Player
+		var ret []PlayerTheme
 		return ret
 	}
 	return *o.Data
@@ -48,7 +48,7 @@ func (o *PlayersListResponse) GetData() []Player {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PlayersListResponse) GetDataOk() (*[]Player, bool) {
+func (o *PlayerThemesListResponse) GetDataOk() (*[]PlayerTheme, bool) {
 	if o == nil || o.Data == nil {
 		return nil, false
 	}
@@ -56,7 +56,7 @@ func (o *PlayersListResponse) GetDataOk() (*[]Player, bool) {
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *PlayersListResponse) HasData() bool {
+func (o *PlayerThemesListResponse) HasData() bool {
 	if o != nil && o.Data != nil {
 		return true
 	}
@@ -64,13 +64,13 @@ func (o *PlayersListResponse) HasData() bool {
 	return false
 }
 
-// SetData gets a reference to the given []Player and assigns it to the Data field.
-func (o *PlayersListResponse) SetData(v []Player) {
+// SetData gets a reference to the given []PlayerTheme and assigns it to the Data field.
+func (o *PlayerThemesListResponse) SetData(v []PlayerTheme) {
 	o.Data = &v
 }
 
 // GetPagination returns the Pagination field value if set, zero value otherwise.
-func (o *PlayersListResponse) GetPagination() Pagination {
+func (o *PlayerThemesListResponse) GetPagination() Pagination {
 	if o == nil || o.Pagination == nil {
 		var ret Pagination
 		return ret
@@ -80,7 +80,7 @@ func (o *PlayersListResponse) GetPagination() Pagination {
 
 // GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PlayersListResponse) GetPaginationOk() (*Pagination, bool) {
+func (o *PlayerThemesListResponse) GetPaginationOk() (*Pagination, bool) {
 	if o == nil || o.Pagination == nil {
 		return nil, false
 	}
@@ -88,7 +88,7 @@ func (o *PlayersListResponse) GetPaginationOk() (*Pagination, bool) {
 }
 
 // HasPagination returns a boolean if a field has been set.
-func (o *PlayersListResponse) HasPagination() bool {
+func (o *PlayerThemesListResponse) HasPagination() bool {
 	if o != nil && o.Pagination != nil {
 		return true
 	}
@@ -97,33 +97,33 @@ func (o *PlayersListResponse) HasPagination() bool {
 }
 
 // SetPagination gets a reference to the given Pagination and assigns it to the Pagination field.
-func (o *PlayersListResponse) SetPagination(v Pagination) {
+func (o *PlayerThemesListResponse) SetPagination(v Pagination) {
 	o.Pagination = &v
 }
 
-type NullablePlayersListResponse struct {
-	value *PlayersListResponse
+type NullablePlayerThemesListResponse struct {
+	value *PlayerThemesListResponse
 	isSet bool
 }
 
-func (v NullablePlayersListResponse) Get() *PlayersListResponse {
+func (v NullablePlayerThemesListResponse) Get() *PlayerThemesListResponse {
 	return v.value
 }
 
-func (v *NullablePlayersListResponse) Set(val *PlayersListResponse) {
+func (v *NullablePlayerThemesListResponse) Set(val *PlayerThemesListResponse) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePlayersListResponse) IsSet() bool {
+func (v NullablePlayerThemesListResponse) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePlayersListResponse) Unset() {
+func (v *NullablePlayerThemesListResponse) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePlayersListResponse(val *PlayersListResponse) *NullablePlayersListResponse {
-	return &NullablePlayersListResponse{value: val, isSet: true}
+func NewNullablePlayerThemesListResponse(val *PlayerThemesListResponse) *NullablePlayerThemesListResponse {
+	return &NullablePlayerThemesListResponse{value: val, isSet: true}
 }

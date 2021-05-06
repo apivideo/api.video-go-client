@@ -82,7 +82,7 @@ type CaptionsServiceI interface {
 	 * @return CaptionsApiGetRequest
 	 */
 
-	Get(videoId string, language string) (*Subtitle, error)
+	Get(videoId string, language string) (*Caption, error)
 
 	/*
 	 * Get Show a caption
@@ -92,7 +92,7 @@ type CaptionsServiceI interface {
 	 * @return CaptionsApiGetRequest
 	 */
 
-	GetWithContext(ctx context.Context, videoId string, language string) (*Subtitle, error)
+	GetWithContext(ctx context.Context, videoId string, language string) (*Caption, error)
 
 	/*
 	 * Update Update caption
@@ -101,7 +101,7 @@ type CaptionsServiceI interface {
 	 * @return CaptionsApiUpdateRequest
 	 */
 
-	Update(videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Subtitle, error)
+	Update(videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Caption, error)
 
 	/*
 	 * Update Update caption
@@ -111,7 +111,7 @@ type CaptionsServiceI interface {
 	 * @return CaptionsApiUpdateRequest
 	 */
 
-	UpdateWithContext(ctx context.Context, videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Subtitle, error)
+	UpdateWithContext(ctx context.Context, videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Caption, error)
 
 	/*
 	 * Upload Upload a caption
@@ -119,7 +119,7 @@ type CaptionsServiceI interface {
 	 * @param language A valid BCP 47 language representation.
 	 * @return CaptionsApiUploadRequest
 	 */
-	Upload(videoId string, language string, fileName string, fileReader io.Reader) (*Subtitle, error)
+	Upload(videoId string, language string, fileName string, fileReader io.Reader) (*Caption, error)
 	/*
 	 * Upload Upload a caption
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -127,7 +127,7 @@ type CaptionsServiceI interface {
 	 * @param language A valid BCP 47 language representation.
 	 * @return CaptionsApiUploadRequest
 	 */
-	UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader) (*Subtitle, error)
+	UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader) (*Caption, error)
 
 	/*
 	 * Upload Upload a caption
@@ -135,7 +135,7 @@ type CaptionsServiceI interface {
 	 * @param language A valid BCP 47 language representation.
 	 * @return CaptionsApiUploadRequest
 	 */
-	UploadFile(videoId string, language string, file *os.File) (*Subtitle, error)
+	UploadFile(videoId string, language string, file *os.File) (*Caption, error)
 
 	/*
 	 * Upload Upload a caption
@@ -144,7 +144,7 @@ type CaptionsServiceI interface {
 	 * @param language A valid BCP 47 language representation.
 	 * @return CaptionsApiUploadRequest
 	 */
-	UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Subtitle, error)
+	UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Caption, error)
 }
 
 // CaptionsService communicating with the Captions
@@ -264,7 +264,7 @@ func (s *CaptionsService) ListWithContext(ctx context.Context, videoId string, r
  * @return CaptionsApiGetRequest
  */
 
-func (s *CaptionsService) Get(videoId string, language string) (*Subtitle, error) {
+func (s *CaptionsService) Get(videoId string, language string) (*Caption, error) {
 
 	return s.GetWithContext(context.Background(), videoId, language)
 
@@ -279,7 +279,7 @@ func (s *CaptionsService) Get(videoId string, language string) (*Subtitle, error
  * @return CaptionsApiGetRequest
  */
 
-func (s *CaptionsService) GetWithContext(ctx context.Context, videoId string, language string) (*Subtitle, error) {
+func (s *CaptionsService) GetWithContext(ctx context.Context, videoId string, language string) (*Caption, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos/{videoId}/captions/{language}"
@@ -294,7 +294,7 @@ func (s *CaptionsService) GetWithContext(ctx context.Context, videoId string, la
 		return nil, err
 	}
 
-	res := new(Subtitle)
+	res := new(Caption)
 	_, err = s.client.do(req, res)
 
 	if err != nil {
@@ -314,7 +314,7 @@ func (s *CaptionsService) GetWithContext(ctx context.Context, videoId string, la
  * @return CaptionsApiUpdateRequest
  */
 
-func (s *CaptionsService) Update(videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Subtitle, error) {
+func (s *CaptionsService) Update(videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Caption, error) {
 
 	return s.UpdateWithContext(context.Background(), videoId, language, captionsUpdatePayload)
 
@@ -329,7 +329,7 @@ func (s *CaptionsService) Update(videoId string, language string, captionsUpdate
  * @return CaptionsApiUpdateRequest
  */
 
-func (s *CaptionsService) UpdateWithContext(ctx context.Context, videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Subtitle, error) {
+func (s *CaptionsService) UpdateWithContext(ctx context.Context, videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Caption, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/videos/{videoId}/captions/{language}"
@@ -346,7 +346,7 @@ func (s *CaptionsService) UpdateWithContext(ctx context.Context, videoId string,
 		return nil, err
 	}
 
-	res := new(Subtitle)
+	res := new(Caption)
 	_, err = s.client.do(req, res)
 
 	if err != nil {
@@ -367,7 +367,7 @@ func (s *CaptionsService) UpdateWithContext(ctx context.Context, videoId string,
  * @return CaptionsApiUploadRequest
 */
 
-func (s *CaptionsService) UploadFile(videoId string, language string, file *os.File) (*Subtitle, error) {
+func (s *CaptionsService) UploadFile(videoId string, language string, file *os.File) (*Caption, error) {
 	return s.UploadFileWithContext(context.Background(), videoId, language, file)
 }
 
@@ -381,7 +381,7 @@ func (s *CaptionsService) UploadFile(videoId string, language string, file *os.F
  * @return CaptionsApiUploadRequest
 */
 
-func (s *CaptionsService) UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Subtitle, error) {
+func (s *CaptionsService) UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Caption, error) {
 	return s.UploadWithContext(ctx, videoId, language, file.Name(), io.Reader(file))
 }
 
@@ -394,7 +394,7 @@ func (s *CaptionsService) UploadFileWithContext(ctx context.Context, videoId str
  * @param language A valid BCP 47 language representation.
  * @return CaptionsApiUploadRequest
 */
-func (s *CaptionsService) Upload(videoId string, language string, fileName string, fileReader io.Reader) (*Subtitle, error) {
+func (s *CaptionsService) Upload(videoId string, language string, fileName string, fileReader io.Reader) (*Caption, error) {
 	return s.UploadWithContext(context.Background(), videoId, language, fileName, fileReader)
 }
 
@@ -407,7 +407,7 @@ func (s *CaptionsService) Upload(videoId string, language string, fileName strin
  * @param language A valid BCP 47 language representation.
  * @return CaptionsApiUploadRequest
 */
-func (s *CaptionsService) UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader) (*Subtitle, error) {
+func (s *CaptionsService) UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader) (*Caption, error) {
 	localVarPath := "/videos/{videoId}/captions/{language}"
 	localVarPath = strings.Replace(localVarPath, "{"+"videoId"+"}", url.PathEscape(parameterToString(videoId, "")), -1)
 	localVarPath = strings.Replace(localVarPath, "{"+"language"+"}", url.PathEscape(parameterToString(language, "")), -1)
@@ -422,7 +422,7 @@ func (s *CaptionsService) UploadWithContext(ctx context.Context, videoId string,
 		return nil, err
 	}
 
-	res := new(Subtitle)
+	res := new(Caption)
 	_, err = s.client.do(req, res)
 
 	if err != nil {

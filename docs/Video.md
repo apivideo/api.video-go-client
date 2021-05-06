@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | A description for the video content.  | [optional] 
 **PublishedAt** | Pointer to **string** | The date and time the API created the video. Date and time are provided using ISO-8601 UTC format. | [optional] 
 **UpdatedAt** | Pointer to **string** | The date and time the video was updated. Date and time are provided using ISO-8601 UTC format. | [optional] 
-**Tags** | Pointer to **[]interface{}** | One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.   | [optional] 
+**Tags** | Pointer to **[]string** | One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.   | [optional] 
 **Metadata** | Pointer to [**[]Metadata**](Metadata.md) | Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.   | [optional] 
 **Source** | Pointer to [**VideoSource**](video-source.md) |  | [optional] 
 **Assets** | Pointer to [**VideoAssets**](video-assets.md) |  | [optional] 
@@ -190,20 +190,20 @@ HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetTags
 
-`func (o *Video) GetTags() []interface{}`
+`func (o *Video) GetTags() []string`
 
 GetTags returns the Tags field if non-nil, zero value otherwise.
 
 ### GetTagsOk
 
-`func (o *Video) GetTagsOk() (*[]interface{}, bool)`
+`func (o *Video) GetTagsOk() (*[]string, bool)`
 
 GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTags
 
-`func (o *Video) SetTags(v []interface{})`
+`func (o *Video) SetTags(v []string)`
 
 SetTags sets Tags field to given value.
 
