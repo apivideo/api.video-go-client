@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LiveStreamId** | Pointer to **string** | The unique identifier for the live stream. Live stream IDs begin with \&quot;li.\&quot; | [optional] 
+**LiveStreamId** | **string** | The unique identifier for the live stream. Live stream IDs begin with \&quot;li.\&quot; | 
 **Name** | Pointer to **string** | The name of your live stream. | [optional] 
 **StreamKey** | Pointer to **string** | The unique, private stream key that you use to begin streaming. | [optional] 
 **Record** | Pointer to **bool** | Whether you are recording or not. | [optional] 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewLiveStream
 
-`func NewLiveStream() *LiveStream`
+`func NewLiveStream(liveStreamId string, ) *LiveStream`
 
 NewLiveStream instantiates a new LiveStream object
 This constructor will assign default values to properties that have it defined,
@@ -53,11 +53,6 @@ and a boolean to check if the value has been set.
 
 SetLiveStreamId sets LiveStreamId field to given value.
 
-### HasLiveStreamId
-
-`func (o *LiveStream) HasLiveStreamId() bool`
-
-HasLiveStreamId returns a boolean if a field has been set.
 
 ### GetName
 

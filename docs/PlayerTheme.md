@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **ForceAutoplay** | Pointer to **bool** | enable/disable player autoplay. Default: false | [optional] 
 **HideTitle** | Pointer to **bool** | enable/disable title. Default: false | [optional] 
 **ForceLoop** | Pointer to **bool** | enable/disable looping. Default: false | [optional] 
-**PlayerId** | Pointer to **string** |  | [optional] 
+**PlayerId** | **string** |  | 
 **CreatedAt** | Pointer to **string** | When the player was created, presented in ISO-8601 format. | [optional] 
 **UpdatedAt** | Pointer to **string** | When the player was last updated, presented in ISO-8601 format. | [optional] 
 **ShapeMargin** | Pointer to **int32** | Deprecated | [optional] 
@@ -33,7 +33,7 @@ Name | Type | Description | Notes
 
 ### NewPlayerTheme
 
-`func NewPlayerTheme() *PlayerTheme`
+`func NewPlayerTheme(playerId string, ) *PlayerTheme`
 
 NewPlayerTheme instantiates a new PlayerTheme object
 This constructor will assign default values to properties that have it defined,
@@ -417,11 +417,6 @@ and a boolean to check if the value has been set.
 
 SetPlayerId sets PlayerId field to given value.
 
-### HasPlayerId
-
-`func (o *PlayerTheme) HasPlayerId() bool`
-
-HasPlayerId returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

@@ -16,16 +16,18 @@ import (
 
 // RawStatisticsListSessionsResponse struct for RawStatisticsListSessionsResponse
 type RawStatisticsListSessionsResponse struct {
-	Data       *[]VideoSession `json:"data,omitempty"`
-	Pagination *Pagination     `json:"pagination,omitempty"`
+	Data       []VideoSession `json:"data"`
+	Pagination Pagination     `json:"pagination"`
 }
 
 // NewRawStatisticsListSessionsResponse instantiates a new RawStatisticsListSessionsResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRawStatisticsListSessionsResponse() *RawStatisticsListSessionsResponse {
+func NewRawStatisticsListSessionsResponse(data []VideoSession, pagination Pagination) *RawStatisticsListSessionsResponse {
 	this := RawStatisticsListSessionsResponse{}
+	this.Data = data
+	this.Pagination = pagination
 	return &this
 }
 
@@ -37,68 +39,52 @@ func NewRawStatisticsListSessionsResponseWithDefaults() *RawStatisticsListSessio
 	return &this
 }
 
-// GetData returns the Data field value if set, zero value otherwise.
+// GetData returns the Data field value
 func (o *RawStatisticsListSessionsResponse) GetData() []VideoSession {
-	if o == nil || o.Data == nil {
+	if o == nil {
 		var ret []VideoSession
 		return ret
 	}
-	return *o.Data
+
+	return o.Data
 }
 
-// GetDataOk returns a tuple with the Data field value if set, nil otherwise
+// GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
 func (o *RawStatisticsListSessionsResponse) GetDataOk() (*[]VideoSession, bool) {
-	if o == nil || o.Data == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Data, true
+	return &o.Data, true
 }
 
-// HasData returns a boolean if a field has been set.
-func (o *RawStatisticsListSessionsResponse) HasData() bool {
-	if o != nil && o.Data != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetData gets a reference to the given []VideoSession and assigns it to the Data field.
+// SetData sets field value
 func (o *RawStatisticsListSessionsResponse) SetData(v []VideoSession) {
-	o.Data = &v
+	o.Data = v
 }
 
-// GetPagination returns the Pagination field value if set, zero value otherwise.
+// GetPagination returns the Pagination field value
 func (o *RawStatisticsListSessionsResponse) GetPagination() Pagination {
-	if o == nil || o.Pagination == nil {
+	if o == nil {
 		var ret Pagination
 		return ret
 	}
-	return *o.Pagination
+
+	return o.Pagination
 }
 
-// GetPaginationOk returns a tuple with the Pagination field value if set, nil otherwise
+// GetPaginationOk returns a tuple with the Pagination field value
 // and a boolean to check if the value has been set.
 func (o *RawStatisticsListSessionsResponse) GetPaginationOk() (*Pagination, bool) {
-	if o == nil || o.Pagination == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Pagination, true
+	return &o.Pagination, true
 }
 
-// HasPagination returns a boolean if a field has been set.
-func (o *RawStatisticsListSessionsResponse) HasPagination() bool {
-	if o != nil && o.Pagination != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPagination gets a reference to the given Pagination and assigns it to the Pagination field.
+// SetPagination sets field value
 func (o *RawStatisticsListSessionsResponse) SetPagination(v Pagination) {
-	o.Pagination = &v
+	o.Pagination = v
 }
 
 type NullableRawStatisticsListSessionsResponse struct {

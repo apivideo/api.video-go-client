@@ -17,11 +17,11 @@ import (
 // Video struct for Video
 type Video struct {
 	// The unique identifier of the video object.
-	VideoId *string `json:"videoId,omitempty"`
+	VideoId string `json:"videoId"`
 	// When an webhook was created, presented in ISO-8601 format.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// The title of the video content.
-	Title *string `json:"title,omitempty"`
+	Title string `json:"title"`
 	// A description for the video content.
 	Description *string `json:"description,omitempty"`
 	// The date and time the API created the video. Date and time are provided using ISO-8601 UTC format.
@@ -48,8 +48,10 @@ type Video struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVideo() *Video {
+func NewVideo(videoId string, title string) *Video {
 	this := Video{}
+	this.VideoId = videoId
+	this.Title = title
 	return &this
 }
 
@@ -61,36 +63,28 @@ func NewVideoWithDefaults() *Video {
 	return &this
 }
 
-// GetVideoId returns the VideoId field value if set, zero value otherwise.
+// GetVideoId returns the VideoId field value
 func (o *Video) GetVideoId() string {
-	if o == nil || o.VideoId == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.VideoId
+
+	return o.VideoId
 }
 
-// GetVideoIdOk returns a tuple with the VideoId field value if set, nil otherwise
+// GetVideoIdOk returns a tuple with the VideoId field value
 // and a boolean to check if the value has been set.
 func (o *Video) GetVideoIdOk() (*string, bool) {
-	if o == nil || o.VideoId == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.VideoId, true
+	return &o.VideoId, true
 }
 
-// HasVideoId returns a boolean if a field has been set.
-func (o *Video) HasVideoId() bool {
-	if o != nil && o.VideoId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetVideoId gets a reference to the given string and assigns it to the VideoId field.
+// SetVideoId sets field value
 func (o *Video) SetVideoId(v string) {
-	o.VideoId = &v
+	o.VideoId = v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -125,36 +119,28 @@ func (o *Video) SetCreatedAt(v string) {
 	o.CreatedAt = &v
 }
 
-// GetTitle returns the Title field value if set, zero value otherwise.
+// GetTitle returns the Title field value
 func (o *Video) GetTitle() string {
-	if o == nil || o.Title == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Title
+
+	return o.Title
 }
 
-// GetTitleOk returns a tuple with the Title field value if set, nil otherwise
+// GetTitleOk returns a tuple with the Title field value
 // and a boolean to check if the value has been set.
 func (o *Video) GetTitleOk() (*string, bool) {
-	if o == nil || o.Title == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Title, true
+	return &o.Title, true
 }
 
-// HasTitle returns a boolean if a field has been set.
-func (o *Video) HasTitle() bool {
-	if o != nil && o.Title != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetTitle gets a reference to the given string and assigns it to the Title field.
+// SetTitle sets field value
 func (o *Video) SetTitle(v string) {
-	o.Title = &v
+	o.Title = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.

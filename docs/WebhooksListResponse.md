@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to [**[]Webhook**](Webhook.md) |  | [optional] 
-**Pagination** | Pointer to [**Pagination**](pagination.md) |  | [optional] 
+**Data** | [**[]Webhook**](Webhook.md) |  | 
+**Pagination** | [**Pagination**](pagination.md) |  | 
 
 ## Methods
 
 ### NewWebhooksListResponse
 
-`func NewWebhooksListResponse() *WebhooksListResponse`
+`func NewWebhooksListResponse(data []Webhook, pagination Pagination, ) *WebhooksListResponse`
 
 NewWebhooksListResponse instantiates a new WebhooksListResponse object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetData sets Data field to given value.
 
-### HasData
-
-`func (o *WebhooksListResponse) HasData() bool`
-
-HasData returns a boolean if a field has been set.
 
 ### GetPagination
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetPagination sets Pagination field to given value.
 
-### HasPagination
-
-`func (o *WebhooksListResponse) HasPagination() bool`
-
-HasPagination returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

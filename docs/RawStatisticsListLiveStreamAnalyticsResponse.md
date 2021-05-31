@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to [**[]LiveStreamSession**](LiveStreamSession.md) |  | [optional] 
-**Pagination** | Pointer to [**Pagination**](pagination.md) |  | [optional] 
+**Data** | [**[]LiveStreamSession**](LiveStreamSession.md) |  | 
+**Pagination** | [**Pagination**](pagination.md) |  | 
 
 ## Methods
 
 ### NewRawStatisticsListLiveStreamAnalyticsResponse
 
-`func NewRawStatisticsListLiveStreamAnalyticsResponse() *RawStatisticsListLiveStreamAnalyticsResponse`
+`func NewRawStatisticsListLiveStreamAnalyticsResponse(data []LiveStreamSession, pagination Pagination, ) *RawStatisticsListLiveStreamAnalyticsResponse`
 
 NewRawStatisticsListLiveStreamAnalyticsResponse instantiates a new RawStatisticsListLiveStreamAnalyticsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetData sets Data field to given value.
 
-### HasData
-
-`func (o *RawStatisticsListLiveStreamAnalyticsResponse) HasData() bool`
-
-HasData returns a boolean if a field has been set.
 
 ### GetPagination
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetPagination sets Pagination field to given value.
 
-### HasPagination
-
-`func (o *RawStatisticsListLiveStreamAnalyticsResponse) HasPagination() bool`
-
-HasPagination returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

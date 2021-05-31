@@ -55,10 +55,8 @@ paths:
       x-client-hidden: true
   /auth/refresh:
     post:
-      description: "Use the refresh endpoint with the refresh token you received when\
-        \ you first authenticated using the api-key endpoint. Send the refresh token\
-        \ in the body of your request. The api.video API returns a new access token\
-        \ that is valid for one hour (3600 seconds) and a new refresh token. \n"
+      description: |
+        Use the refresh endpoint with the refresh token you received when you first authenticated using the api-key endpoint. Send the refresh token in the body of your request. The api.video API returns a new access token that is valid for one hour (3600 seconds) and a new refresh token.
       operationId: POST_auth-refresh
       requestBody:
         content:
@@ -339,23 +337,38 @@ paths:
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
+      x-optional-object: true
     post:
-      description: "To create a video, you create its metadata first, before adding\
-        \ the video file (exception - when using an existing HTTP source).\n\nVideos\
-        \ are public by default. Mp4 encoded versions are created at the highest quality\
-        \ (max 1080p) by default.\n ```shell\n$ curl https://ws.api.video/videos \\\
-        \n-H 'Authorization: Bearer {access_token} \\\n-d '{\"title\":\"My video\"\
-        , \n     \"description\":\"so many details\",\n     \"mp4Support\":true\n\
-        }'\n```\n\n### Creating a hosted video \n\nYou can also create a video directly\
-        \ from one hosted on a third-party server by giving its URI in `source` parameter:\n\
-        \n```shell\n$ curl https://ws.api.video/videos \\\n-H 'Authorization: Bearer\
-        \ {access_token} \\\n-d '{\"source\":\"http://uri/to/video.mp4\", \"title\"\
-        :\"My video\"}'\n```\n\nIn this case, the service will respond `202 Accepted`\
-        \ and download the video asynchronously.\n\n We have tutorials on:\n* [Creating\
-        \ and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)\n\
-        * [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)\n\
-        * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)\n\
-        * [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)\n"
+      description: |
+        To create a video, you create its metadata first, before adding the video file (exception - when using an existing HTTP source).
+
+        Videos are public by default. Mp4 encoded versions are created at the highest quality (max 1080p) by default.
+         ```shell
+        $ curl https://ws.api.video/videos \
+        -H 'Authorization: Bearer {access_token} \
+        -d '{"title":"My video",
+             "description":"so many details",
+             "mp4Support":true
+        }'
+        ```
+
+        ### Creating a hosted video
+
+        You can also create a video directly from one hosted on a third-party server by giving its URI in `source` parameter:
+
+        ```shell
+        $ curl https://ws.api.video/videos \
+        -H 'Authorization: Bearer {access_token} \
+        -d '{"source":"http://uri/to/video.mp4", "title":"My video"}'
+        ```
+
+        In this case, the service will respond `202 Accepted` and download the video asynchronously.
+
+         We have tutorials on:
+        * [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
+        * [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
+        * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
+        * [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
       operationId: POST-video
       requestBody:
         content:
@@ -1122,6 +1135,7 @@ paths:
       x-group-parameters: true
       x-client-paginated: true
       x-client-action: list
+      x-optional-object: true
     post:
       description: Use this endpoint to generate an upload token. You can use this
         token to authenticate video uploads while keeping your API key safe.
@@ -1467,14 +1481,14 @@ paths:
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
+      x-optional-object: true
     post:
-      description: "A live stream will give you the 'connection point' to RTMP your\
-        \ video stream to api.video. It will also give you the details for viewers\
-        \ to watch the same livestream. \nThe public=false 'private livestream' is\
-        \ available as a BETA feature, and should be limited to livestreams of 3,000\
-        \ viewers or fewer.\n\nSee our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial)\
-        \ for a walkthrough of this API with OBS.\nYour RTMP endpoint for the livestream\
-        \ is rtmp://broadcast.api.video/s/{streamKey}"
+      description: |-
+        A live stream will give you the 'connection point' to RTMP your video stream to api.video. It will also give you the details for viewers to watch the same livestream.
+        The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
+
+        See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS.
+        Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
       operationId: POST_live-streams
       requestBody:
         content:
@@ -1844,8 +1858,8 @@ paths:
         true.'
       operationId: PATCH_videos-videoId-captions-language
       parameters:
-      - description: 'The unique identifier for the video you want to have automatic
-          captions for. '
+      - description: The unique identifier for the video you want to have automatic
+          captions for.
         example: vi4k0jvEUuaTdRAEjQ4Prklg
         explode: false
         in: path
@@ -2067,8 +2081,8 @@ paths:
     delete:
       operationId: DELETE_videos-videoId-chapters-language
       parameters:
-      - description: 'The unique identifier for the video you want to delete a chapter
-          from. '
+      - description: The unique identifier for the video you want to delete a chapter
+          from.
         example: vi4k0jvEUuaTdRAEjQ4Jfrgz
         explode: false
         in: path
@@ -2448,6 +2462,7 @@ paths:
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
+      x-optional-object: true
     post:
       description: Create a player for your video, and customise it.
       operationId: POST_players
@@ -2705,9 +2720,9 @@ paths:
       - Player Themes
       x-client-action: deleteLogo
     post:
-      description: "The uploaded image maximum size should be 200x100 and its weight\
-        \ should be 200KB. \nIt will be scaled down to 30px height and converted to\
-        \ PNG to be displayed in the player."
+      description: |-
+        The uploaded image maximum size should be 200x100 and its weight should be 200KB.
+        It will be scaled down to 30px height and converted to PNG to be displayed in the player.
       operationId: POST_players-playerId-logo
       parameters:
       - description: The unique identifier for the player.
@@ -2780,9 +2795,16 @@ paths:
         schema:
           type: string
         style: simple
-      - description: "Period must have one of the following formats: \n\n- For a day\
-          \ : 2018-01-01,\n- For a week: 2018-W01, \n- For a month: 2018-01\n- For\
-          \ a year: 2018\n\nFor a range period: \n-  Date range: 2018-01-01/2018-01-15\n"
+      - description: |
+          Period must have one of the following formats:
+
+          - For a day : 2018-01-01,
+          - For a week: 2018-W01,
+          - For a month: 2018-01
+          - For a year: 2018
+
+          For a range period:
+          -  Date range: 2018-01-01/2018-01-15
         explode: true
         in: query
         name: period
@@ -2908,10 +2930,16 @@ paths:
         schema:
           type: string
         style: simple
-      - description: "Period must have one of the following formats: \n\n- For a day\
-          \ : \"2018-01-01\",\n- For a week: \"2018-W01\", \n- For a month: \"2018-01\"\
-          \n- For a year: \"2018\"\n\nFor a range period: \n-  Date range: \"2018-01-01/2018-01-15\"\
-          \n"
+      - description: |
+          Period must have one of the following formats:
+
+          - For a day : "2018-01-01",
+          - For a week: "2018-W01",
+          - For a month: "2018-01"
+          - For a year: "2018"
+
+          For a range period:
+          -  Date range: "2018-01-01/2018-01-15"
         example: 2019-01-01
         explode: true
         in: query
@@ -3253,6 +3281,7 @@ paths:
       x-group-parameters: true
       x-client-paginated: true
       x-client-action: list
+      x-optional-object: true
     post:
       description: 'Webhooks can push notifications to your server, rather than polling
         api.video for changes. We currently offer one event, the ```video.encoding.quality.completed```
@@ -3485,7 +3514,7 @@ components:
           type: integer
         links:
           items:
-            $ref: '#/components/schemas/pagination_link'
+            $ref: '#/components/schemas/pagination-link'
           type: array
       required:
       - links
@@ -3547,7 +3576,6 @@ components:
           type: string
         createdAt:
           description: When an webhook was created, presented in ISO-8601 format.
-          example: 2019-06-24T11:45:01.109Z
           format: date-time
           type: string
         title:
@@ -3572,16 +3600,15 @@ components:
           format: date-time
           type: string
         tags:
-          description: "One array of tags (each tag is a string) in order to categorize\
-            \ a video. Tags may include spaces. \n"
+          description: |
+            One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.
           example: '"tags": ["maths", "string theory", "video"]'
           items:
             type: string
           type: array
         metadata:
-          description: "Metadata you can use to categorise and filter videos. Metadata\
-            \ is a list of dictionaries, where each dictionary represents a key value\
-            \ pair for categorising a video. \n"
+          description: |
+            Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.
           example: '[{"key":"Author", "value":"John Doe"}, {"key":"Format", "value":"Tutorial"}]'
           items:
             $ref: '#/components/schemas/metadata'
@@ -3610,6 +3637,9 @@ components:
             This lets you know whether mp4 is supported. If enabled, an mp4 URL will be provided in the response for the video.
           example: true
           type: boolean
+      required:
+      - title
+      - videoId
       title: Video
       type: object
     player-theme:
@@ -3723,6 +3753,8 @@ components:
           type: string
         assets:
           $ref: '#/components/schemas/player_theme_assets'
+      required:
+      - playerId
       title: PlayerTheme
       type: object
     player-theme-creation-payload:
@@ -3962,6 +3994,8 @@ components:
           example: 2020-01-31T10:18:47Z
           format: date-time
           type: string
+      required:
+      - liveStreamId
       title: LiveStream
       type: object
     live-stream-session:
@@ -3976,8 +4010,8 @@ components:
           shortname: W10
           version: Windows 10
         session:
-          loadedAt: 2019-06-24T11:45:01.109Z
-          endedAt: 2019-06-24T12:45:01.109Z
+          loadedAt: 2000-01-23T04:56:07.000+00:00
+          endedAt: 2000-01-23T04:56:07.000+00:00
           sessionId: sessionId
         client:
           name: Firefox
@@ -4007,7 +4041,7 @@ components:
       type: object
     player-session-event:
       example:
-        emittedAt: 2019-06-24T11:45:01.109Z
+        emittedAt: 2000-01-23T04:56:07.000+00:00
         at: 0
         from: 6
         to: 1
@@ -4020,7 +4054,6 @@ components:
           type: string
         emittedAt:
           description: When an event occurred, presented in ISO-8601 format.
-          example: 2019-06-24T11:45:01.109Z
           format: date-time
           type: string
         at:
@@ -4033,7 +4066,7 @@ components:
       type: object
     webhook:
       example:
-        createdAt: 2019-06-24T11:45:01.109Z
+        createdAt: 2000-01-23T04:56:07.000+00:00
         webhookId: webhook_XXXXXXXXXXXXXXX
         events: '["video.encoding.quality.completed"]'
         url: http://clientnotificationserver.com/notif?myquery=query
@@ -4044,7 +4077,6 @@ components:
           type: string
         createdAt:
           description: When an webhook was created, presented in ISO-8601 format.
-          example: 2019-06-24T11:45:01.109Z
           format: date-time
           type: string
         events:
@@ -4193,6 +4225,7 @@ components:
           description: When the token expires, displayed in ISO-8601 format.
           example: 2019-12-16T09:25:51Z
           format: date-time
+          nullable: true
           type: string
       title: UploadToken
       type: object
@@ -4397,11 +4430,14 @@ components:
         timecode: 00:00:00.000
       properties:
         timecode:
-          description: "Frame in video to be used as a placeholder before the video\
-            \ plays. \nExample: '\"00:01:00.000\" for 1 minute into the video.'\n\
-            Valid Patterns: \n\"hh:mm:ss.ms\"\n\"hh:mm:ss:frameNumber\"\n\"124\" (integer\
-            \ value is reported as seconds) \nIf selection is out of range, \"00:00:00.00\"\
-            \ will be chosen."
+          description: |-
+            Frame in video to be used as a placeholder before the video plays.
+            Example: '"00:01:00.000" for 1 minute into the video.'
+            Valid Patterns:
+            "hh:mm:ss.ms"
+            "hh:mm:ss:frameNumber"
+            "124" (integer value is reported as seconds)
+            If selection is out of range, "00:00:00.00" will be chosen.
           pattern: \d{2}:\d{2}:\d{2}(\.\d{2})?
           type: string
       required:
@@ -4733,6 +4769,9 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+      - data
+      - pagination
       title: VideoCaptions
       type: object
     chapters-update-payload:
@@ -4780,6 +4819,9 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+      - data
+      - pagination
       title: VideoChapters
       type: object
     player-themes-list-response:
@@ -4863,6 +4905,9 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+      - data
+      - pagination
       title: PlayerThemes
       type: object
     player-theme-upload-logo-payload:
@@ -4872,13 +4917,14 @@ components:
           format: binary
           type: string
         link:
-          description: The path to the file you want to upload and use as a logo.
-          example: path/to/my/logo/mylogo.jpg
+          description: A public link that you want to advertise in your player. For
+            example, you could add a link to your company. When a viewer clicks on
+            your logo, they will be taken to this address.
+          example: https://my-company.com
           format: string
           type: string
       required:
       - file
-      - link
       title: PlayerThemeUploadLogoPayload
       type: object
     raw-statistics-list-sessions-response:
@@ -4958,6 +5004,9 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+      - data
+      - pagination
       title: VideoSessions
       type: object
     raw-statistics-list-live-stream-analytics-response:
@@ -4992,8 +5041,8 @@ components:
             shortname: W10
             version: Windows 10
           session:
-            loadedAt: 2019-06-24T11:45:01.109Z
-            endedAt: 2019-06-24T12:45:01.109Z
+            loadedAt: 2000-01-23T04:56:07.000+00:00
+            endedAt: 2000-01-23T04:56:07.000+00:00
             sessionId: sessionId
           client:
             name: Firefox
@@ -5016,8 +5065,8 @@ components:
             shortname: W10
             version: Windows 10
           session:
-            loadedAt: 2019-06-24T11:45:01.109Z
-            endedAt: 2019-06-24T12:45:01.109Z
+            loadedAt: 2000-01-23T04:56:07.000+00:00
+            endedAt: 2000-01-23T04:56:07.000+00:00
             sessionId: sessionId
           client:
             name: Firefox
@@ -5037,6 +5086,9 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+      - data
+      - pagination
       title: LiveStreamSessions
       type: object
     raw-statistics-list-player-session-events-response:
@@ -5061,12 +5113,12 @@ components:
               rel: last
               uri: /videos/search?currentPage=6&pageSize=20
         data:
-        - emittedAt: 2019-06-24T11:45:01.109Z
+        - emittedAt: 2000-01-23T04:56:07.000+00:00
           at: 0
           from: 6
           to: 1
           type: play
-        - emittedAt: 2019-06-24T11:45:01.109Z
+        - emittedAt: 2000-01-23T04:56:07.000+00:00
           at: 0
           from: 6
           to: 1
@@ -5078,6 +5130,9 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+      - data
+      - pagination
       title: PlayerSessionEvents
       type: object
     webhooks-list-response:
@@ -5102,11 +5157,11 @@ components:
               rel: last
               uri: /videos/search?currentPage=6&pageSize=20
         data:
-        - createdAt: 2019-06-24T11:45:01.109Z
+        - createdAt: 2000-01-23T04:56:07.000+00:00
           webhookId: webhook_XXXXXXXXXXXXXXX
           events: '["video.encoding.quality.completed"]'
           url: http://clientnotificationserver.com/notif?myquery=query
-        - createdAt: 2019-06-24T11:45:01.109Z
+        - createdAt: 2000-01-23T04:56:07.000+00:00
           webhookId: webhook_XXXXXXXXXXXXXXX
           events: '["video.encoding.quality.completed"]'
           url: http://clientnotificationserver.com/notif?myquery=query
@@ -5117,6 +5172,9 @@ components:
           type: array
         pagination:
           $ref: '#/components/schemas/pagination'
+      required:
+      - data
+      - pagination
       title: Webhooks
       type: object
     webhooks-creation-payload:
@@ -5227,12 +5285,10 @@ components:
           type: string
         loadedAt:
           description: When the video session started, presented in ISO-8601 format.
-          example: 2019-06-24T11:45:01.109Z
           format: date-time
           type: string
         endedAt:
           description: When the video session ended, presented in ISO-8601 format.
-          example: 2019-06-24T12:45:01.109Z
           format: date-time
           type: string
       title: VideoSessionSession
@@ -5361,8 +5417,8 @@ components:
       type: object
     live-stream-session-session:
       example:
-        loadedAt: 2019-06-24T11:45:01.109Z
-        endedAt: 2019-06-24T12:45:01.109Z
+        loadedAt: 2000-01-23T04:56:07.000+00:00
+        endedAt: 2000-01-23T04:56:07.000+00:00
         sessionId: sessionId
       properties:
         sessionId:
@@ -5372,13 +5428,11 @@ components:
         loadedAt:
           description: When the session started, with the date and time presented
             in ISO-8601 format.
-          example: 2019-06-24T11:45:01.109Z
           format: date-time
           type: string
         endedAt:
           description: When the session ended, with the date and time presented in
             ISO-8601 format.
-          example: 2019-06-24T12:45:01.109Z
           format: date-time
           type: string
       title: LiveStreamSessionSession
@@ -5524,8 +5578,8 @@ components:
           example: 48000
           type: integer
         videoCodec:
-          description: 'The method used to compress and decompress digital video.
-            API Video supports all codecs in the libavcodec library. '
+          description: The method used to compress and decompress digital video. API
+            Video supports all codecs in the libavcodec library.
           type: string
         audioCodec:
           description: The method used to compress and decompress digital audio for

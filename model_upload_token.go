@@ -23,7 +23,7 @@ type UploadToken struct {
 	// When the token was created, displayed in ISO-8601 format.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// When the token expires, displayed in ISO-8601 format.
-	ExpiresAt *string `json:"expiresAt,omitempty"`
+	ExpiresAt *NullableString `json:"expiresAt,omitempty"`
 }
 
 // NewUploadToken instantiates a new UploadToken object
@@ -139,36 +139,47 @@ func (o *UploadToken) SetCreatedAt(v string) {
 	o.CreatedAt = &v
 }
 
-// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
+// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UploadToken) GetExpiresAt() string {
-	if o == nil || o.ExpiresAt == nil {
+	if o == nil || o.ExpiresAt.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.ExpiresAt
+	return *o.ExpiresAt.Get()
 }
 
 // GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UploadToken) GetExpiresAtOk() (*string, bool) {
-	if o == nil || o.ExpiresAt == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExpiresAt, true
+	return o.ExpiresAt.Get(), o.ExpiresAt.IsSet()
 }
 
 // HasExpiresAt returns a boolean if a field has been set.
 func (o *UploadToken) HasExpiresAt() bool {
-	if o != nil && o.ExpiresAt != nil {
+	if o != nil && o.ExpiresAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExpiresAt gets a reference to the given string and assigns it to the ExpiresAt field.
+// SetExpiresAt gets a reference to the given NullableString and assigns it to the ExpiresAt field.
 func (o *UploadToken) SetExpiresAt(v string) {
-	o.ExpiresAt = &v
+	o.ExpiresAt.Set(&v)
+}
+
+// SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
+func (o *UploadToken) SetExpiresAtNil() {
+	o.ExpiresAt.Set(nil)
+}
+
+// UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
+func (o *UploadToken) UnsetExpiresAt() {
+	o.ExpiresAt.Unset()
 }
 
 type NullableUploadToken struct {
