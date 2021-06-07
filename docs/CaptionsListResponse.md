@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to [**[]Caption**](Caption.md) |  | [optional] 
-**Pagination** | Pointer to [**Pagination**](pagination.md) |  | [optional] 
+**Data** | [**[]Caption**](Caption.md) |  | 
+**Pagination** | [**Pagination**](pagination.md) |  | 
 
 ## Methods
 
 ### NewCaptionsListResponse
 
-`func NewCaptionsListResponse() *CaptionsListResponse`
+`func NewCaptionsListResponse(data []Caption, pagination Pagination, ) *CaptionsListResponse`
 
 NewCaptionsListResponse instantiates a new CaptionsListResponse object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetData sets Data field to given value.
 
-### HasData
-
-`func (o *CaptionsListResponse) HasData() bool`
-
-HasData returns a boolean if a field has been set.
 
 ### GetPagination
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetPagination sets Pagination field to given value.
 
-### HasPagination
-
-`func (o *CaptionsListResponse) HasPagination() bool`
-
-HasPagination returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

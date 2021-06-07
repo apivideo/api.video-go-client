@@ -80,8 +80,8 @@ var videoJSONResponses = []string{`{
 
 var videoStructs = []Video{
 	{
-		VideoId:     PtrString("vi4k0jvEUuaTdRAEjQ4Jfagz"),
-		Title:       PtrString("Maths video"),
+		VideoId:     "vi4k0jvEUuaTdRAEjQ4Jfagz",
+		Title:       "Maths video",
 		Description: PtrString("An amazing video explaining the string theory"),
 		PublishedAt: PtrString("2019-07-14T23:36:18.598Z"),
 		UpdatedAt:   PtrString("2019-07-14T23:49:18.598Z"),
@@ -112,8 +112,8 @@ var videoStructs = []Video{
 		Mp4Support: PtrBool(true),
 	},
 	{
-		VideoId:     PtrString("vi6HangYsow3vXxwdx3YMlAb"),
-		Title:       PtrString("Maths video 2"),
+		VideoId:     "vi6HangYsow3vXxwdx3YMlAb",
+		Title:       "Maths video 2",
 		Description: PtrString("An amazing video explaining the string theory 2"),
 		PublishedAt: PtrString("2019-07-16T23:36:18.598Z"),
 		UpdatedAt:   PtrString("2019-07-16T23:49:18.598Z"),

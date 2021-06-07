@@ -43,8 +43,8 @@ type PlayerTheme struct {
 	// enable/disable title. Default: false
 	HideTitle *bool `json:"hideTitle,omitempty"`
 	// enable/disable looping. Default: false
-	ForceLoop *bool   `json:"forceLoop,omitempty"`
-	PlayerId  *string `json:"playerId,omitempty"`
+	ForceLoop *bool  `json:"forceLoop,omitempty"`
+	PlayerId  string `json:"playerId"`
 	// When the player was created, presented in ISO-8601 format.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// When the player was last updated, presented in ISO-8601 format.
@@ -68,8 +68,9 @@ type PlayerTheme struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPlayerTheme() *PlayerTheme {
+func NewPlayerTheme(playerId string) *PlayerTheme {
 	this := PlayerTheme{}
+	this.PlayerId = playerId
 	return &this
 }
 
@@ -529,36 +530,28 @@ func (o *PlayerTheme) SetForceLoop(v bool) {
 	o.ForceLoop = &v
 }
 
-// GetPlayerId returns the PlayerId field value if set, zero value otherwise.
+// GetPlayerId returns the PlayerId field value
 func (o *PlayerTheme) GetPlayerId() string {
-	if o == nil || o.PlayerId == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.PlayerId
+
+	return o.PlayerId
 }
 
-// GetPlayerIdOk returns a tuple with the PlayerId field value if set, nil otherwise
+// GetPlayerIdOk returns a tuple with the PlayerId field value
 // and a boolean to check if the value has been set.
 func (o *PlayerTheme) GetPlayerIdOk() (*string, bool) {
-	if o == nil || o.PlayerId == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PlayerId, true
+	return &o.PlayerId, true
 }
 
-// HasPlayerId returns a boolean if a field has been set.
-func (o *PlayerTheme) HasPlayerId() bool {
-	if o != nil && o.PlayerId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPlayerId gets a reference to the given string and assigns it to the PlayerId field.
+// SetPlayerId sets field value
 func (o *PlayerTheme) SetPlayerId(v string) {
-	o.PlayerId = &v
+	o.PlayerId = v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.

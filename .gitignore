@@ -25,3 +25,4 @@ _testmain.go
 .idea
 .openapi-generator
 .openapi-generator-ignore
+post-generate.sh

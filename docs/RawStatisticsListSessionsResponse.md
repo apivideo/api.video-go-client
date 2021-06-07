@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Data** | Pointer to [**[]VideoSession**](VideoSession.md) |  | [optional] 
-**Pagination** | Pointer to [**Pagination**](pagination.md) |  | [optional] 
+**Data** | [**[]VideoSession**](VideoSession.md) |  | 
+**Pagination** | [**Pagination**](pagination.md) |  | 
 
 ## Methods
 
 ### NewRawStatisticsListSessionsResponse
 
-`func NewRawStatisticsListSessionsResponse() *RawStatisticsListSessionsResponse`
+`func NewRawStatisticsListSessionsResponse(data []VideoSession, pagination Pagination, ) *RawStatisticsListSessionsResponse`
 
 NewRawStatisticsListSessionsResponse instantiates a new RawStatisticsListSessionsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetData sets Data field to given value.
 
-### HasData
-
-`func (o *RawStatisticsListSessionsResponse) HasData() bool`
-
-HasData returns a boolean if a field has been set.
 
 ### GetPagination
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetPagination sets Pagination field to given value.
 
-### HasPagination
-
-`func (o *RawStatisticsListSessionsResponse) HasPagination() bool`
-
-HasPagination returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
