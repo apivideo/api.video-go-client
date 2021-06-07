@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**VideoId** | Pointer to **string** | The unique identifier of the video object. | [optional] 
+**VideoId** | **string** | The unique identifier of the video object. | 
 **CreatedAt** | Pointer to **string** | When an webhook was created, presented in ISO-8601 format. | [optional] 
-**Title** | Pointer to **string** | The title of the video content.  | [optional] 
+**Title** | **string** | The title of the video content.  | 
 **Description** | Pointer to **string** | A description for the video content.  | [optional] 
 **PublishedAt** | Pointer to **string** | The date and time the API created the video. Date and time are provided using ISO-8601 UTC format. | [optional] 
 **UpdatedAt** | Pointer to **string** | The date and time the video was updated. Date and time are provided using ISO-8601 UTC format. | [optional] 
-**Tags** | Pointer to **[]string** | One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.   | [optional] 
-**Metadata** | Pointer to [**[]Metadata**](Metadata.md) | Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.   | [optional] 
+**Tags** | Pointer to **[]string** | One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.  | [optional] 
+**Metadata** | Pointer to [**[]Metadata**](Metadata.md) | Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.  | [optional] 
 **Source** | Pointer to [**VideoSource**](video-source.md) |  | [optional] 
 **Assets** | Pointer to [**VideoAssets**](video-assets.md) |  | [optional] 
 **PlayerId** | Pointer to **string** | The id of the player that will be applied on the video.  | [optional] 
@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewVideo
 
-`func NewVideo() *Video`
+`func NewVideo(videoId string, title string, ) *Video`
 
 NewVideo instantiates a new Video object
 This constructor will assign default values to properties that have it defined,
@@ -57,11 +57,6 @@ and a boolean to check if the value has been set.
 
 SetVideoId sets VideoId field to given value.
 
-### HasVideoId
-
-`func (o *Video) HasVideoId() bool`
-
-HasVideoId returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -107,11 +102,6 @@ and a boolean to check if the value has been set.
 
 SetTitle sets Title field to given value.
 
-### HasTitle
-
-`func (o *Video) HasTitle() bool`
-
-HasTitle returns a boolean if a field has been set.
 
 ### GetDescription
 

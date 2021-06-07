@@ -17,7 +17,7 @@ import (
 // LiveStream struct for LiveStream
 type LiveStream struct {
 	// The unique identifier for the live stream. Live stream IDs begin with \"li.\"
-	LiveStreamId *string `json:"liveStreamId,omitempty"`
+	LiveStreamId string `json:"liveStreamId"`
 	// The name of your live stream.
 	Name *string `json:"name,omitempty"`
 	// The unique, private stream key that you use to begin streaming.
@@ -41,8 +41,9 @@ type LiveStream struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLiveStream() *LiveStream {
+func NewLiveStream(liveStreamId string) *LiveStream {
 	this := LiveStream{}
+	this.LiveStreamId = liveStreamId
 	return &this
 }
 
@@ -54,36 +55,28 @@ func NewLiveStreamWithDefaults() *LiveStream {
 	return &this
 }
 
-// GetLiveStreamId returns the LiveStreamId field value if set, zero value otherwise.
+// GetLiveStreamId returns the LiveStreamId field value
 func (o *LiveStream) GetLiveStreamId() string {
-	if o == nil || o.LiveStreamId == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.LiveStreamId
+
+	return o.LiveStreamId
 }
 
-// GetLiveStreamIdOk returns a tuple with the LiveStreamId field value if set, nil otherwise
+// GetLiveStreamIdOk returns a tuple with the LiveStreamId field value
 // and a boolean to check if the value has been set.
 func (o *LiveStream) GetLiveStreamIdOk() (*string, bool) {
-	if o == nil || o.LiveStreamId == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.LiveStreamId, true
+	return &o.LiveStreamId, true
 }
 
-// HasLiveStreamId returns a boolean if a field has been set.
-func (o *LiveStream) HasLiveStreamId() bool {
-	if o != nil && o.LiveStreamId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLiveStreamId gets a reference to the given string and assigns it to the LiveStreamId field.
+// SetLiveStreamId sets field value
 func (o *LiveStream) SetLiveStreamId(v string) {
-	o.LiveStreamId = &v
+	o.LiveStreamId = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.

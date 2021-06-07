@@ -73,8 +73,8 @@ func TestChapters_List(t *testing.T) {
 	}
 
 	expected := &ChaptersListResponse{
-		Data:       &chapterStructs,
-		Pagination: &paginationStruct,
+		Data:       chapterStructs,
+		Pagination: paginationStruct,
 	}
 	if !reflect.DeepEqual(chapters, expected) {
 		t.Errorf("Chapters.List\n got=%#v\nwant=%#v", chapters, expected)

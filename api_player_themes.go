@@ -152,21 +152,21 @@ type PlayerThemesServiceI interface {
 	 * @param playerId The unique identifier for the player.
 	 * @return PlayerThemesApiUploadLogoRequest
 	 */
-	UploadLogo(playerId string, link string, fileName string, fileReader io.Reader) (*PlayerTheme, error)
+	UploadLogo(playerId string, link *string, fileName string, fileReader io.Reader) (*PlayerTheme, error)
 	/*
 	 * UploadLogo Upload a logo
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param playerId The unique identifier for the player.
 	 * @return PlayerThemesApiUploadLogoRequest
 	 */
-	UploadLogoWithContext(ctx context.Context, playerId string, link string, fileName string, fileReader io.Reader) (*PlayerTheme, error)
+	UploadLogoWithContext(ctx context.Context, playerId string, link *string, fileName string, fileReader io.Reader) (*PlayerTheme, error)
 
 	/*
 	 * UploadLogo Upload a logo
 	 * @param playerId The unique identifier for the player.
 	 * @return PlayerThemesApiUploadLogoRequest
 	 */
-	UploadLogoFile(playerId string, file *os.File, link string) (*PlayerTheme, error)
+	UploadLogoFile(playerId string, file *os.File, link *string) (*PlayerTheme, error)
 
 	/*
 	 * UploadLogo Upload a logo
@@ -174,7 +174,7 @@ type PlayerThemesServiceI interface {
 	 * @param playerId The unique identifier for the player.
 	 * @return PlayerThemesApiUploadLogoRequest
 	 */
-	UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link string) (*PlayerTheme, error)
+	UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link *string) (*PlayerTheme, error)
 }
 
 // PlayerThemesService communicating with the PlayerThemes
@@ -480,7 +480,7 @@ It will be scaled down to 30px height and converted to PNG to be displayed in th
  * @return PlayerThemesApiUploadLogoRequest
 */
 
-func (s *PlayerThemesService) UploadLogoFile(playerId string, file *os.File, link string) (*PlayerTheme, error) {
+func (s *PlayerThemesService) UploadLogoFile(playerId string, file *os.File, link *string) (*PlayerTheme, error) {
 	return s.UploadLogoFileWithContext(context.Background(), playerId, file, link)
 }
 
@@ -493,7 +493,7 @@ It will be scaled down to 30px height and converted to PNG to be displayed in th
  * @return PlayerThemesApiUploadLogoRequest
 */
 
-func (s *PlayerThemesService) UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link string) (*PlayerTheme, error) {
+func (s *PlayerThemesService) UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link *string) (*PlayerTheme, error) {
 	return s.UploadLogoWithContext(ctx, playerId, link, file.Name(), io.Reader(file))
 }
 
@@ -505,7 +505,7 @@ It will be scaled down to 30px height and converted to PNG to be displayed in th
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUploadLogoRequest
 */
-func (s *PlayerThemesService) UploadLogo(playerId string, link string, fileName string, fileReader io.Reader) (*PlayerTheme, error) {
+func (s *PlayerThemesService) UploadLogo(playerId string, link *string, fileName string, fileReader io.Reader) (*PlayerTheme, error) {
 	return s.UploadLogoWithContext(context.Background(), playerId, link, fileName, fileReader)
 }
 
@@ -517,15 +517,16 @@ It will be scaled down to 30px height and converted to PNG to be displayed in th
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUploadLogoRequest
 */
-func (s *PlayerThemesService) UploadLogoWithContext(ctx context.Context, playerId string, link string, fileName string, fileReader io.Reader) (*PlayerTheme, error) {
+func (s *PlayerThemesService) UploadLogoWithContext(ctx context.Context, playerId string, link *string, fileName string, fileReader io.Reader) (*PlayerTheme, error) {
 	localVarPath := "/players/{playerId}/logo"
 	localVarPath = strings.Replace(localVarPath, "{"+"playerId"+"}", url.PathEscape(parameterToString(playerId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := make(map[string]string)
-
-	localVarFormParams["link"] = parameterToString(link, "")
+	if link != nil {
+		localVarFormParams["link"] = parameterToString(*link, "")
+	}
 
 	req, err := s.client.prepareUploadRequest(ctx, localVarPath, fileName, fileReader, localVarHeaderParams, localVarQueryParams, localVarFormParams)
 

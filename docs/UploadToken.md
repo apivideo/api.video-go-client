@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Token** | Pointer to **string** | The unique identifier for the token you will use to authenticate an upload. | [optional] 
 **Ttl** | Pointer to **int32** | Time-to-live - how long the upload token is valid for. | [optional] 
 **CreatedAt** | Pointer to **string** | When the token was created, displayed in ISO-8601 format. | [optional] 
-**ExpiresAt** | Pointer to **string** | When the token expires, displayed in ISO-8601 format. | [optional] 
+**ExpiresAt** | Pointer to **NullableString** | When the token expires, displayed in ISO-8601 format. | [optional] 
 
 ## Methods
 
@@ -128,6 +128,16 @@ SetExpiresAt sets ExpiresAt field to given value.
 
 HasExpiresAt returns a boolean if a field has been set.
 
+### SetExpiresAtNil
+
+`func (o *UploadToken) SetExpiresAtNil(b bool)`
+
+ SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
+
+### UnsetExpiresAt
+`func (o *UploadToken) UnsetExpiresAt()`
+
+UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

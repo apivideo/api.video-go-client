@@ -42,7 +42,7 @@ var liveJSONResponses = []string{
 }
 var liveStructs = []LiveStream{
 	{
-		LiveStreamId: PtrString("li2FgWk8CyBKFIGyDK1SimnL"),
+		LiveStreamId: "li2FgWk8CyBKFIGyDK1SimnL",
 		Name:         PtrString("My livestream"),
 		StreamKey:    PtrString("bd003ee9-9f71-44fd-a191-14d6a5063181"),
 		Record:       PtrBool(false),
@@ -56,7 +56,7 @@ var liveStructs = []LiveStream{
 		Broadcasting: PtrBool(false),
 	},
 	{
-		LiveStreamId: PtrString("liXyizQXIaWWenlD8pc3WLS"),
+		LiveStreamId: "liXyizQXIaWWenlD8pc3WLS",
 		Name:         PtrString("My livestream 2"),
 		StreamKey:    PtrString("ffee715c-72b8-4ed6-ab98-8d4602ced98f"),
 		Record:       PtrBool(false),

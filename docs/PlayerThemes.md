@@ -401,10 +401,10 @@ Name | Type | Description  | Notes
 
 ## UploadLogo
 
-> UploadLogoFile(playerId string, file *os.File, link string) (*PlayerTheme, error)
-> UploadLogo(playerId string, link string, fileName string, fileReader io.Reader)
-> UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link string) (*PlayerTheme, error)
-> UploadLogoWithContext(ctx context.Context, playerId string, link string, fileName string, fileReader io.Reader)
+> UploadLogoFile(playerId string, file *os.File) (*PlayerTheme, error)
+> UploadLogo(playerId string, fileName string, fileReader io.Reader)
+> UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File) (*PlayerTheme, error)
+> UploadLogoWithContext(ctx context.Context, playerId string, fileName string, fileReader io.Reader)
 
 Upload a logo
 
@@ -429,13 +429,13 @@ func main() {
         
     playerId := "pl14Db6oMJRH6SRVoOwORacK" // string | The unique identifier for the player.
     file := os.NewFile(1234, "some_file") // *os.File | The name of the file you want to use for your logo.
-    link := "link_example" // string | The path to the file you want to upload and use as a logo.
+    link := "link_example" // string | A public link that you want to advertise in your player. For example, you could add a link to your company. When a viewer clicks on your logo, they will be taken to this address.
 
     
-    res, err := client.PlayerThemes.UploadLogoFile(playerId, file, link)
+    res, err := client.PlayerThemes.UploadLogoFile(playerId, file)
 
     // you can also use a Reader instead of a File:
-    // client.PlayerThemes.UploadLogo(playerId, link, fileName, fileReader)
+    // client.PlayerThemes.UploadLogo(playerId, fileName, fileReader)
 
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.UploadLogo``: %v\n", err)
@@ -459,7 +459,7 @@ Name | Type | Description  | Notes
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **file** | ***os.File** | The name of the file you want to use for your logo. | 
-**link** | **string** | The path to the file you want to upload and use as a logo. | 
+**link** | **string** | A public link that you want to advertise in your player. For example, you could add a link to your company. When a viewer clicks on your logo, they will be taken to this address. | 
 
 ### Return type
 
