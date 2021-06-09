@@ -140,7 +140,7 @@ paths:
             type: string
           type: object
         style: deepObject
-        x-key-value-serialized-param: true
+        x-is-deep-object: true
       - description: If you described a video with a term or sentence, you can add
           it here to return videos containing this string.
         example: New Zealand
@@ -2815,17 +2815,17 @@ paths:
         style: form
       - description: Metadata and Dynamic Metadata filter. Send an array of key value
           pairs you want to filter sessios with.
-        example: '[{"key": "Author", "value": "John Doe"}, {"key": "Format", "value":
-          "Tutorial"}]'
+        example: metadata[Author]=John Doe&metadata[Format]=Tutorial
         explode: true
         in: query
         name: metadata
         required: false
         schema:
-          items:
+          additionalProperties:
             type: string
-          type: array
-        style: form
+          type: object
+        style: deepObject
+        x-is-deep-object: true
       - description: 'Choose the number of search results to return per page. Minimum
           value: 1'
         example: 2
@@ -5291,6 +5291,15 @@ components:
           description: When the video session ended, presented in ISO-8601 format.
           format: date-time
           type: string
+        metadata:
+          description: A list of key value pairs that you use to provide metadata
+            for your video. These pairs can be made dynamic, allowing you to segment
+            your audience. You can also just use the pairs as another way to tag and
+            categorize your videos.
+          example: '[{"key": "Author", "value": "John Doe"}]'
+          items:
+            $ref: '#/components/schemas/metadata'
+          type: array
       title: VideoSessionSession
       type: object
     video-session-location:
@@ -5303,6 +5312,7 @@ components:
         city:
           description: The city of the viewer.
           example: Paris
+          nullable: true
           type: string
       title: VideoSessionLocation
       type: object
@@ -5311,6 +5321,7 @@ components:
         url:
           description: The link the viewer used to reach the video session.
           example: https://api.video
+          nullable: true
           type: string
         medium:
           description: How they arrived at the site, for example organic or paid.

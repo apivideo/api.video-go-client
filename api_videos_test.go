@@ -331,7 +331,6 @@ func TestVideos_List(t *testing.T) {
 			"metadata[key]":  []string{"value"},
 			"metadata[key2]": []string{"value2"},
 		}
-		fmt.Println(r.URL.Query())
 		if !reflect.DeepEqual(r.URL.Query(), expectedQuery) {
 			t.Errorf("Request querystring\n got=%#v\nwant=%#v", r.URL.Query(), expectedQuery)
 		}

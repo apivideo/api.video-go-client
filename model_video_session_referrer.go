@@ -17,7 +17,7 @@ import (
 // VideoSessionReferrer struct for VideoSessionReferrer
 type VideoSessionReferrer struct {
 	// The link the viewer used to reach the video session.
-	Url *string `json:"url,omitempty"`
+	Url *NullableString `json:"url,omitempty"`
 	// How they arrived at the site, for example organic or paid. Organic meaning they found it themselves and paid meaning they followed a link from an advertisement.
 	Medium *string `json:"medium,omitempty"`
 	// The source the referrer came from to the video session. For example if they searched through google to find the stream.
@@ -43,36 +43,47 @@ func NewVideoSessionReferrerWithDefaults() *VideoSessionReferrer {
 	return &this
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
+// GetUrl returns the Url field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoSessionReferrer) GetUrl() string {
-	if o == nil || o.Url == nil {
+	if o == nil || o.Url.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Url
+	return *o.Url.Get()
 }
 
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoSessionReferrer) GetUrlOk() (*string, bool) {
-	if o == nil || o.Url == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Url, true
+	return o.Url.Get(), o.Url.IsSet()
 }
 
 // HasUrl returns a boolean if a field has been set.
 func (o *VideoSessionReferrer) HasUrl() bool {
-	if o != nil && o.Url != nil {
+	if o != nil && o.Url.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetUrl gets a reference to the given string and assigns it to the Url field.
+// SetUrl gets a reference to the given NullableString and assigns it to the Url field.
 func (o *VideoSessionReferrer) SetUrl(v string) {
-	o.Url = &v
+	o.Url.Set(&v)
+}
+
+// SetUrlNil sets the value for Url to be an explicit nil
+func (o *VideoSessionReferrer) SetUrlNil() {
+	o.Url.Set(nil)
+}
+
+// UnsetUrl ensures that no value is present for Url, not even an explicit nil
+func (o *VideoSessionReferrer) UnsetUrl() {
+	o.Url.Unset()
 }
 
 // GetMedium returns the Medium field value if set, zero value otherwise.

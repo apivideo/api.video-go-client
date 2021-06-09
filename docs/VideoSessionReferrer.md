@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Url** | Pointer to **string** | The link the viewer used to reach the video session. | [optional] 
+**Url** | Pointer to **NullableString** | The link the viewer used to reach the video session. | [optional] 
 **Medium** | Pointer to **string** | How they arrived at the site, for example organic or paid. Organic meaning they found it themselves and paid meaning they followed a link from an advertisement. | [optional] 
 **Source** | Pointer to **string** | The source the referrer came from to the video session. For example if they searched through google to find the stream. | [optional] 
 **SearchTerm** | Pointer to **string** | The search term they typed to arrive at the video session. | [optional] 
@@ -53,6 +53,16 @@ SetUrl sets Url field to given value.
 
 HasUrl returns a boolean if a field has been set.
 
+### SetUrlNil
+
+`func (o *VideoSessionReferrer) SetUrlNil(b bool)`
+
+ SetUrlNil sets the value for Url to be an explicit nil
+
+### UnsetUrl
+`func (o *VideoSessionReferrer) UnsetUrl()`
+
+UnsetUrl ensures that no value is present for Url, not even an explicit nil
 ### GetMedium
 
 `func (o *VideoSessionReferrer) GetMedium() string`
