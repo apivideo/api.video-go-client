@@ -19,7 +19,7 @@ type VideoSessionLocation struct {
 	// The country of the viewer.
 	Country *string `json:"country,omitempty"`
 	// The city of the viewer.
-	City *string `json:"city,omitempty"`
+	City *NullableString `json:"city,omitempty"`
 }
 
 // NewVideoSessionLocation instantiates a new VideoSessionLocation object
@@ -71,36 +71,47 @@ func (o *VideoSessionLocation) SetCountry(v string) {
 	o.Country = &v
 }
 
-// GetCity returns the City field value if set, zero value otherwise.
+// GetCity returns the City field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoSessionLocation) GetCity() string {
-	if o == nil || o.City == nil {
+	if o == nil || o.City.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.City
+	return *o.City.Get()
 }
 
 // GetCityOk returns a tuple with the City field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoSessionLocation) GetCityOk() (*string, bool) {
-	if o == nil || o.City == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.City, true
+	return o.City.Get(), o.City.IsSet()
 }
 
 // HasCity returns a boolean if a field has been set.
 func (o *VideoSessionLocation) HasCity() bool {
-	if o != nil && o.City != nil {
+	if o != nil && o.City.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCity gets a reference to the given string and assigns it to the City field.
+// SetCity gets a reference to the given NullableString and assigns it to the City field.
 func (o *VideoSessionLocation) SetCity(v string) {
-	o.City = &v
+	o.City.Set(&v)
+}
+
+// SetCityNil sets the value for City to be an explicit nil
+func (o *VideoSessionLocation) SetCityNil() {
+	o.City.Set(nil)
+}
+
+// UnsetCity ensures that no value is present for City, not even an explicit nil
+func (o *VideoSessionLocation) UnsetCity() {
+	o.City.Unset()
 }
 
 type NullableVideoSessionLocation struct {

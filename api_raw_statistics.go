@@ -12,9 +12,9 @@ package apivideosdk
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
 )
 
@@ -58,7 +58,7 @@ func (r RawStatisticsApiListSessionEventsRequest) PageSize(pageSize int32) RawSt
 
 type RawStatisticsApiListVideoSessionsRequest struct {
 	period      *string
-	metadata    *[]string
+	metadata    *map[string]string
 	currentPage *int32
 	pageSize    *int32
 }
@@ -67,7 +67,7 @@ func (r RawStatisticsApiListVideoSessionsRequest) Period(period string) RawStati
 	r.period = &period
 	return r
 }
-func (r RawStatisticsApiListVideoSessionsRequest) Metadata(metadata []string) RawStatisticsApiListVideoSessionsRequest {
+func (r RawStatisticsApiListVideoSessionsRequest) Metadata(metadata map[string]string) RawStatisticsApiListVideoSessionsRequest {
 	r.metadata = &metadata
 	return r
 }
@@ -280,14 +280,10 @@ func (s *RawStatisticsService) ListVideoSessionsWithContext(ctx context.Context,
 		localVarQueryParams.Add("period", parameterToString(*r.period, ""))
 	}
 	if r.metadata != nil {
-		t := *r.metadata
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("metadata", parameterToString(s.Index(i), "multi"))
+		if r.metadata != nil && len(*r.metadata) > 0 {
+			for k, v := range *r.metadata {
+				localVarQueryParams.Add(fmt.Sprintf("metadata[%s]", k), v)
 			}
-		} else {
-			localVarQueryParams.Add("metadata", parameterToString(t, "multi"))
 		}
 	}
 	if r.currentPage != nil {

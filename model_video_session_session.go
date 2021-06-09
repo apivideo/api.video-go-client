@@ -22,6 +22,8 @@ type VideoSessionSession struct {
 	LoadedAt *string `json:"loadedAt,omitempty"`
 	// When the video session ended, presented in ISO-8601 format.
 	EndedAt *string `json:"endedAt,omitempty"`
+	// A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. You can also just use the pairs as another way to tag and categorize your videos.
+	Metadata *[]Metadata `json:"metadata,omitempty"`
 }
 
 // NewVideoSessionSession instantiates a new VideoSessionSession object
@@ -135,6 +137,38 @@ func (o *VideoSessionSession) HasEndedAt() bool {
 // SetEndedAt gets a reference to the given string and assigns it to the EndedAt field.
 func (o *VideoSessionSession) SetEndedAt(v string) {
 	o.EndedAt = &v
+}
+
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *VideoSessionSession) GetMetadata() []Metadata {
+	if o == nil || o.Metadata == nil {
+		var ret []Metadata
+		return ret
+	}
+	return *o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VideoSessionSession) GetMetadataOk() (*[]Metadata, bool) {
+	if o == nil || o.Metadata == nil {
+		return nil, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *VideoSessionSession) HasMetadata() bool {
+	if o != nil && o.Metadata != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given []Metadata and assigns it to the Metadata field.
+func (o *VideoSessionSession) SetMetadata(v []Metadata) {
+	o.Metadata = &v
 }
 
 type NullableVideoSessionSession struct {

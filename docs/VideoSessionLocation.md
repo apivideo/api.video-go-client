@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Country** | Pointer to **string** | The country of the viewer. | [optional] 
-**City** | Pointer to **string** | The city of the viewer. | [optional] 
+**City** | Pointer to **NullableString** | The city of the viewer. | [optional] 
 
 ## Methods
 
@@ -76,6 +76,16 @@ SetCity sets City field to given value.
 
 HasCity returns a boolean if a field has been set.
 
+### SetCityNil
+
+`func (o *VideoSessionLocation) SetCityNil(b bool)`
+
+ SetCityNil sets the value for City to be an explicit nil
+
+### UnsetCity
+`func (o *VideoSessionLocation) UnsetCity()`
+
+UnsetCity ensures that no value is present for City, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

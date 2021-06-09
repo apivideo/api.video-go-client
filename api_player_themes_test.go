@@ -259,7 +259,6 @@ func TestPlayers_Update(t *testing.T) {
 		if err != nil {
 			t.Fatalf("decode json: %v", err)
 		}
-		fmt.Println(v)
 		if !reflect.DeepEqual(v, expectedBody) {
 			t.Errorf("Request body\n got=%#v\n want=%#v", v, expectedBody)
 		}
