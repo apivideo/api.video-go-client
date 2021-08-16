@@ -348,7 +348,7 @@ func (s *LiveStreamsService) ListWithContext(ctx context.Context, r LiveStreamsA
 
 /*
  * Get Show live stream
- * Supply a LivestreamId, and you'll get all the details for streaming into, and watching the livestream.
+ * Supply a LivestreamId, and you'll get all the details for streaming into, and watching the livestream. Tutorials that use the [show livestream endpoint](https://api.video/blog/endpoints/live-stream-status).
 
  * @param liveStreamId The unique ID for the live stream you want to watch.
  * @return LiveStreamsApiGetRequest
@@ -362,7 +362,7 @@ func (s *LiveStreamsService) Get(liveStreamId string) (*LiveStream, error) {
 
 /*
  * Get Show live stream
- * Supply a LivestreamId, and you'll get all the details for streaming into, and watching the livestream.
+ * Supply a LivestreamId, and you'll get all the details for streaming into, and watching the livestream. Tutorials that use the [show livestream endpoint](https://api.video/blog/endpoints/live-stream-status).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param liveStreamId The unique ID for the live stream you want to watch.
  * @return LiveStreamsApiGetRequest
@@ -449,6 +449,7 @@ The public=false 'private livestream' is available as a BETA feature, and should
 
 See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS.
 Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
+Tutorials that [create live streams](https://api.video/blog/endpoints/live-create).
 
  * @return LiveStreamsApiCreateRequest
 */
@@ -466,6 +467,7 @@ The public=false 'private livestream' is available as a BETA feature, and should
 
 See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS.
 Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
+Tutorials that [create live streams](https://api.video/blog/endpoints/live-create).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return LiveStreamsApiCreateRequest
 */
@@ -498,7 +500,7 @@ func (s *LiveStreamsService) CreateWithContext(ctx context.Context, liveStreamCr
 
 /*
  * UploadThumbnail Upload a thumbnail
- * Upload an image to use as a backdrop for your livestream.
+ * Upload an image to use as a backdrop for your livestream. Tutorials that [update live stream thumbnails](https://api.video/blog/endpoints/live-upload-a-thumbnail).
 
  * @param liveStreamId The unique ID for the live stream you want to upload.
  * @return LiveStreamsApiUploadThumbnailRequest
@@ -510,7 +512,7 @@ func (s *LiveStreamsService) UploadThumbnailFile(liveStreamId string, file *os.F
 
 /*
  * UploadThumbnail Upload a thumbnail
- * Upload an image to use as a backdrop for your livestream.
+ * Upload an image to use as a backdrop for your livestream. Tutorials that [update live stream thumbnails](https://api.video/blog/endpoints/live-upload-a-thumbnail).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param liveStreamId The unique ID for the live stream you want to upload.
  * @return LiveStreamsApiUploadThumbnailRequest
@@ -522,7 +524,7 @@ func (s *LiveStreamsService) UploadThumbnailFileWithContext(ctx context.Context,
 
 /*
  * UploadThumbnail Upload a thumbnail
- * Upload an image to use as a backdrop for your livestream.
+ * Upload an image to use as a backdrop for your livestream. Tutorials that [update live stream thumbnails](https://api.video/blog/endpoints/live-upload-a-thumbnail).
 
  * @param liveStreamId The unique ID for the live stream you want to upload.
  * @return LiveStreamsApiUploadThumbnailRequest
@@ -533,7 +535,7 @@ func (s *LiveStreamsService) UploadThumbnail(liveStreamId string, fileName strin
 
 /*
  * UploadThumbnail Upload a thumbnail
- * Upload an image to use as a backdrop for your livestream.
+ * Upload an image to use as a backdrop for your livestream. Tutorials that [update live stream thumbnails](https://api.video/blog/endpoints/live-upload-a-thumbnail).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param liveStreamId The unique ID for the live stream you want to upload.
  * @return LiveStreamsApiUploadThumbnailRequest

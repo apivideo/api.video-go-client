@@ -166,7 +166,7 @@ func (s *UploadTokensService) DeleteTokenWithContext(ctx context.Context, upload
 
 /*
  * List List all active upload tokens.
- * A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens.
+ * A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens. Tutorials using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
 
  * @return UploadTokensApiListRequest
  */
@@ -179,7 +179,7 @@ func (s *UploadTokensService) List(r UploadTokensApiListRequest) (*TokenListResp
 
 /*
  * List List all active upload tokens.
- * A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens.
+ * A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens. Tutorials using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return UploadTokensApiListRequest
  */
@@ -269,7 +269,7 @@ func (s *UploadTokensService) GetTokenWithContext(ctx context.Context, uploadTok
 
 /*
  * CreateToken Generate an upload token
- * Use this endpoint to generate an upload token. You can use this token to authenticate video uploads while keeping your API key safe.
+ * Use this endpoint to generate an upload token. You can use this token to authenticate video uploads while keeping your API key safe. Tutorials using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
 
  * @return UploadTokensApiCreateTokenRequest
  */
@@ -282,7 +282,7 @@ func (s *UploadTokensService) CreateToken(tokenCreationPayload TokenCreationPayl
 
 /*
  * CreateToken Generate an upload token
- * Use this endpoint to generate an upload token. You can use this token to authenticate video uploads while keeping your API key safe.
+ * Use this endpoint to generate an upload token. You can use this token to authenticate video uploads while keeping your API key safe. Tutorials using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return UploadTokensApiCreateTokenRequest
  */

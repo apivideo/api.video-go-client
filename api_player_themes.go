@@ -276,9 +276,10 @@ func (s *PlayerThemesService) DeleteLogoWithContext(ctx context.Context, playerI
 /*
  * List List all players
  * Retrieve a list of all the players you created, as well as details about each one.
+Tutorials that use the [player endpoint](https://api.video/blog/endpoints/player).
 
  * @return PlayerThemesApiListRequest
- */
+*/
 
 func (s *PlayerThemesService) List(r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error) {
 
@@ -289,9 +290,10 @@ func (s *PlayerThemesService) List(r PlayerThemesApiListRequest) (*PlayerThemesL
 /*
  * List List all players
  * Retrieve a list of all the players you created, as well as details about each one.
+Tutorials that use the [player endpoint](https://api.video/blog/endpoints/player).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return PlayerThemesApiListRequest
- */
+*/
 
 func (s *PlayerThemesService) ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error) {
 	var localVarPostBody interface{}

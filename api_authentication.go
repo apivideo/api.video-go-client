@@ -62,9 +62,10 @@ type AuthenticationService struct {
 /*
  * Authenticate Authenticate
  * To get started, submit your API key in the body of your request. api.video returns an access token that is valid for one hour (3600 seconds). A refresh token is also returned. View a [tutorial](https://api.video/blog/tutorials/authentication-tutorial) on authentication.
+All tutorials using the [authentication endpoint](https://api.video/blog/endpoints/authenticate)
 
  * @return AuthenticationApiAuthenticateRequest
- */
+*/
 
 func (s *AuthenticationService) Authenticate(authenticatePayload AuthenticatePayload) (*AccessToken, error) {
 
@@ -75,9 +76,10 @@ func (s *AuthenticationService) Authenticate(authenticatePayload AuthenticatePay
 /*
  * Authenticate Authenticate
  * To get started, submit your API key in the body of your request. api.video returns an access token that is valid for one hour (3600 seconds). A refresh token is also returned. View a [tutorial](https://api.video/blog/tutorials/authentication-tutorial) on authentication.
+All tutorials using the [authentication endpoint](https://api.video/blog/endpoints/authenticate)
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return AuthenticationApiAuthenticateRequest
- */
+*/
 
 func (s *AuthenticationService) AuthenticateWithContext(ctx context.Context, authenticatePayload AuthenticatePayload) (*AccessToken, error) {
 	var localVarPostBody interface{}

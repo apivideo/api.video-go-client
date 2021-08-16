@@ -153,6 +153,8 @@ Name | Type | Description  | Notes
 
 Show a chapter
 
+
+
 ### Example
 
 ```go

@@ -236,6 +236,7 @@ func (s *ChaptersService) ListWithContext(ctx context.Context, videoId string, r
 
 /*
  * Get Show a chapter
+ * Chapters help your viewers find the sections of the video they are most interested in viewing. Tutorials that use the [chapters endpoint](https://api.video/blog/endpoints/chapters).
 
  * @param videoId The unique identifier for the video you want to show a chapter for.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -250,6 +251,7 @@ func (s *ChaptersService) Get(videoId string, language string) (*Chapter, error)
 
 /*
  * Get Show a chapter
+ * Chapters help your viewers find the sections of the video they are most interested in viewing. Tutorials that use the [chapters endpoint](https://api.video/blog/endpoints/chapters).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want to show a chapter for.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
