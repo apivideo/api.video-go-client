@@ -66,7 +66,9 @@ func (r *ErrorResponse) Error() string {
 const (
 	defaultBaseURL        = "https://ws.api.video/"
 	defaultSandboxBaseURL = "https://sandbox.api.video/"
-	defaultChunkSize      = 128 * 1024 * 1024
+	defaultChunkSize      = 50 * 1024 * 1024
+	minChunkSize          = 5 * 1024 * 1024
+	maxChunkSize          = 128 * 1024 * 1024
 )
 
 type Doer interface {
@@ -91,7 +93,13 @@ func (cb *Builder) APIKey(key string) *Builder {
 }
 
 func (cb *Builder) UploadChunkSize(size int64) *Builder {
-	cb.uploadChunkSize = size
+	if size < minChunkSize {
+		cb.uploadChunkSize = minChunkSize
+	} else if size > maxChunkSize {
+		cb.uploadChunkSize = maxChunkSize
+	} else {
+		cb.uploadChunkSize = size
+	}
 	return cb
 }
 
