@@ -4529,7 +4529,7 @@ components:
         ttl:
           default: 0
           description: Time in seconds that the token will be active. A value of 0
-            means that the token has no exipration date. The default is to have no
+            means that the token has no expiration date. The default is to have no
             expiration.
           maximum: 2147483647
           minimum: 0
@@ -5144,7 +5144,8 @@ components:
             * ```live-stream.broadcast.started```  When a livestream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
             * ```live-stream.broadcast.ended```  This event fores when the livestream has finished broadcasting, and the broadcasting parameter flips from false to true.
             * ```video.source.recorded```  This event is similar to ```video.encoding.quality.completed```, but tells you if a livestream has been recorded as a VOD.
-          example: video.encoding.quality.completed
+          example:
+          - video.encoding.quality.completed
           items:
             type: string
           type: array
