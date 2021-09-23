@@ -4366,12 +4366,6 @@ components:
           items:
             $ref: '#/components/schemas/metadata'
           type: array
-        publishedAt:
-          description: The API uses ISO-8601 format for time, and includes 3 places
-            for milliseconds.
-          example: 2020-07-14T23:36:18.598Z
-          format: date-time
-          type: string
       required:
       - title
       title: VideoCreationPayload
