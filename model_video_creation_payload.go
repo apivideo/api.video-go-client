@@ -34,8 +34,6 @@ type VideoCreationPayload struct {
 	Tags *[]string `json:"tags,omitempty"`
 	// A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. You can also just use the pairs as another way to tag and categorize your videos.
 	Metadata *[]Metadata `json:"metadata,omitempty"`
-	// The API uses ISO-8601 format for time, and includes 3 places for milliseconds.
-	PublishedAt *string `json:"publishedAt,omitempty"`
 }
 
 // NewVideoCreationPayload instantiates a new VideoCreationPayload object
@@ -346,38 +344,6 @@ func (o *VideoCreationPayload) HasMetadata() bool {
 // SetMetadata gets a reference to the given []Metadata and assigns it to the Metadata field.
 func (o *VideoCreationPayload) SetMetadata(v []Metadata) {
 	o.Metadata = &v
-}
-
-// GetPublishedAt returns the PublishedAt field value if set, zero value otherwise.
-func (o *VideoCreationPayload) GetPublishedAt() string {
-	if o == nil || o.PublishedAt == nil {
-		var ret string
-		return ret
-	}
-	return *o.PublishedAt
-}
-
-// GetPublishedAtOk returns a tuple with the PublishedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *VideoCreationPayload) GetPublishedAtOk() (*string, bool) {
-	if o == nil || o.PublishedAt == nil {
-		return nil, false
-	}
-	return o.PublishedAt, true
-}
-
-// HasPublishedAt returns a boolean if a field has been set.
-func (o *VideoCreationPayload) HasPublishedAt() bool {
-	if o != nil && o.PublishedAt != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPublishedAt gets a reference to the given string and assigns it to the PublishedAt field.
-func (o *VideoCreationPayload) SetPublishedAt(v string) {
-	o.PublishedAt = &v
 }
 
 type NullableVideoCreationPayload struct {

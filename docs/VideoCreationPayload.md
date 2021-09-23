@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **PlayerId** | Pointer to **string** | The unique identification number for your video player. | [optional] 
 **Tags** | Pointer to **[]string** | A list of tags you want to use to describe your video. | [optional] 
 **Metadata** | Pointer to [**[]Metadata**](Metadata.md) | A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. You can also just use the pairs as another way to tag and categorize your videos. | [optional] 
-**PublishedAt** | Pointer to **string** | The API uses ISO-8601 format for time, and includes 3 places for milliseconds. | [optional] 
 
 ## Methods
 
@@ -253,31 +252,6 @@ SetMetadata sets Metadata field to given value.
 `func (o *VideoCreationPayload) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
-
-### GetPublishedAt
-
-`func (o *VideoCreationPayload) GetPublishedAt() string`
-
-GetPublishedAt returns the PublishedAt field if non-nil, zero value otherwise.
-
-### GetPublishedAtOk
-
-`func (o *VideoCreationPayload) GetPublishedAtOk() (*string, bool)`
-
-GetPublishedAtOk returns a tuple with the PublishedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPublishedAt
-
-`func (o *VideoCreationPayload) SetPublishedAt(v string)`
-
-SetPublishedAt sets PublishedAt field to given value.
-
-### HasPublishedAt
-
-`func (o *VideoCreationPayload) HasPublishedAt() bool`
-
-HasPublishedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
