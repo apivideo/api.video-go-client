@@ -101,7 +101,7 @@ paths:
         their details). With no parameters added to this query, the API returns all
         videos. You can filter what videos the API returns using the parameters described
         below. We have [several tutorials](https://api.video/blog/endpoints/video-list)
-        that demonstrate this endpoint.
+        that demonstrate this endpoint..
       operationId: LIST-videos
       parameters:
       - description: The title of a specific video you want to find. The search will
