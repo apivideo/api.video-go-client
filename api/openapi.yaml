@@ -4104,6 +4104,13 @@ components:
       type: object
     quality:
       properties:
+        type:
+          description: The type of video (hls or mp4).
+          enum:
+          - hls
+          - mp4
+          example: hls
+          type: string
         quality:
           description: The quality of the video you have, in pixels. Choices include
             360p, 480p, 720p, 1080p, and 2160p.

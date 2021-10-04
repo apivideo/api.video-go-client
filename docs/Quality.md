@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Type** | Pointer to **string** | The type of video (hls or mp4). | [optional] 
 **Quality** | Pointer to **string** | The quality of the video you have, in pixels. Choices include 360p, 480p, 720p, 1080p, and 2160p. | [optional] 
 **Status** | Pointer to **string** | The status of your video. Statuses include waiting - the video is waiting to be encoded. encoding - the video is in the process of being encoded. encoded - the video was successfully encoded. failed - the video failed to be encoded. | [optional] 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewQualityWithDefaults instantiates a new Quality object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetType
+
+`func (o *Quality) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *Quality) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *Quality) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *Quality) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetQuality
 
