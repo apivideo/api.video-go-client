@@ -16,6 +16,8 @@ import (
 
 // Quality struct for Quality
 type Quality struct {
+	// The type of video (hls or mp4).
+	Type *string `json:"type,omitempty"`
 	// The quality of the video you have, in pixels. Choices include 360p, 480p, 720p, 1080p, and 2160p.
 	Quality *string `json:"quality,omitempty"`
 	// The status of your video. Statuses include waiting - the video is waiting to be encoded. encoding - the video is in the process of being encoded. encoded - the video was successfully encoded. failed - the video failed to be encoded.
@@ -37,6 +39,38 @@ func NewQuality() *Quality {
 func NewQualityWithDefaults() *Quality {
 	this := Quality{}
 	return &this
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *Quality) GetType() string {
+	if o == nil || o.Type == nil {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Quality) GetTypeOk() (*string, bool) {
+	if o == nil || o.Type == nil {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *Quality) HasType() bool {
+	if o != nil && o.Type != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *Quality) SetType(v string) {
+	o.Type = &v
 }
 
 // GetQuality returns the Quality field value if set, zero value otherwise.
