@@ -843,7 +843,7 @@ func (s *VideosService) UploadWithUploadTokenWithContext(ctx context.Context, to
 	localVarPath := "/upload"
 
 	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
+	localVarQueryParams := url.Values{"token": []string{token}}
 	localVarFormParams := make(map[string]string)
 
 	requests, err := s.client.prepareRangeRequests(ctx, localVarPath, fileName, fileReader, fileSize, localVarHeaderParams, localVarQueryParams, localVarFormParams)
