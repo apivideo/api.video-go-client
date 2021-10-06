@@ -536,6 +536,41 @@ func TestVideos_Upload(t *testing.T) {
 	}
 }
 
+func TestVideos_UploadWithUploadToken(t *testing.T) {
+	setup()
+	defer teardown()
+	var count int
+	mux.HandleFunc("/upload", func(w http.ResponseWriter, r *http.Request) {
+		testMethod(t, r, http.MethodPost)
+		if r.Header.Get("Content-Range") != "" {
+			t.Errorf("Videos.UploadWithUploadTokenFile Content-Range header shouldn't be set in non chunked uploads")
+		}
+		if r.URL.Query().Get("token") != "123456" {
+			t.Errorf("Videos.UploadWithUploadTokenFile Token value is not in the url query parameters")
+		}
+		fmt.Fprint(w, videoJSONResponses[0])
+		count++
+	})
+
+	file := createTempFile("test.video", 8*1024*1024)
+	defer os.Remove(file.Name())
+
+	video, err := client.Videos.UploadWithUploadTokenFile(
+		"123456", file)
+	if err != nil {
+		t.Errorf("Videos.Upload error: %v", err)
+	}
+
+	if count != 1 {
+		t.Errorf("Videos.Upload endpoint should be called 1 time on non chunked uploads")
+	}
+
+	expected := &videoStructs[0]
+	if !reflect.DeepEqual(video, expected) {
+		t.Errorf("Videos.Upload\n got=%#v\nwant=%#v", video, expected)
+	}
+}
+
 func TestVideos_ChunkedUpload(t *testing.T) {
 	setup()
 	defer teardown()
