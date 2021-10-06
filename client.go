@@ -201,7 +201,7 @@ func (c *Client) prepareRequest(
 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("User-Agent", "api.video client (GO; v:0.0.7; )")
+	req.Header.Set("User-Agent", "api.video client (GO; v:0.0.8; )")
 
 	for headerName := range headerParams {
 		req.Header.Set(headerName, headerParams[headerName])
@@ -382,7 +382,7 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 
 		req.Header.Set("Accept", "application/json")
 		req.Header.Set("Content-Type", "application/json")
-		req.Header.Set("User-Agent", "api.video client (GO; v:0.0.7; )")
+		req.Header.Set("User-Agent", "api.video client (GO; v:0.0.8; )")
 
 		resp, err := c.httpClient.Do(req)
 
