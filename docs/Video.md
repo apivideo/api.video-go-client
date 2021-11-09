@@ -5,17 +5,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **VideoId** | **string** | The unique identifier of the video object. | 
-**CreatedAt** | Pointer to **string** | When an webhook was created, presented in ISO-8601 format. | [optional] 
+**CreatedAt** | Pointer to **string** | When a video was created, presented in ISO-8601 format. | [optional] 
 **Title** | **string** | The title of the video content.  | 
 **Description** | Pointer to **string** | A description for the video content.  | [optional] 
 **PublishedAt** | Pointer to **string** | The date and time the API created the video. Date and time are provided using ISO-8601 UTC format. | [optional] 
 **UpdatedAt** | Pointer to **string** | The date and time the video was updated. Date and time are provided using ISO-8601 UTC format. | [optional] 
-**Tags** | Pointer to **[]string** | One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.  | [optional] 
-**Metadata** | Pointer to [**[]Metadata**](Metadata.md) | Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.  | [optional] 
+**Tags** | Pointer to **[]string** | One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.   | [optional] 
+**Metadata** | Pointer to [**[]Metadata**](Metadata.md) | Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.  | [optional] 
 **Source** | Pointer to [**VideoSource**](video-source.md) |  | [optional] 
 **Assets** | Pointer to [**VideoAssets**](video-assets.md) |  | [optional] 
 **PlayerId** | Pointer to **string** | The id of the player that will be applied on the video.  | [optional] 
-**Public** | Pointer to **bool** | Defines if the content is publicly reachable or if a unique token is needed for each play session.  | [optional] 
+**Public** | Pointer to **bool** | Defines if the content is publicly reachable or if a unique token is needed for each play session. Default is true. Tutorials on [private videos](https://api.video/blog/endpoints/private-videos).  | [optional] 
 **Panoramic** | Pointer to **bool** | Defines if video is panoramic.  | [optional] 
 **Mp4Support** | Pointer to **bool** | This lets you know whether mp4 is supported. If enabled, an mp4 URL will be provided in the response for the video.  | [optional] 
 

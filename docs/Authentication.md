@@ -49,7 +49,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Authentication.Authenticate`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -111,7 +110,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Authentication.Refresh`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 

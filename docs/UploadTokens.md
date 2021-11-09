@@ -49,7 +49,6 @@ func main() {
     }
 }
 ```
-
 ### Path Parameters
 
 
@@ -119,7 +118,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `UploadTokens.List`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -184,7 +182,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `UploadTokens.GetToken`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -248,7 +245,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `UploadTokens.CreateToken`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 

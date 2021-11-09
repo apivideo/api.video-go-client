@@ -49,7 +49,6 @@ func main() {
     }
 }
 ```
-
 ### Path Parameters
 
 
@@ -113,7 +112,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Webhooks.Get`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -182,7 +180,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Webhooks.List`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -246,7 +243,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Webhooks.Create`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 

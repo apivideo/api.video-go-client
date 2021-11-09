@@ -48,7 +48,6 @@ func main() {
     }
 }
 ```
-
 ### Path Parameters
 
 
@@ -118,7 +117,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Chapters.List`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -185,7 +183,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Chapters.Get`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -255,7 +252,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Chapters.Upload`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 

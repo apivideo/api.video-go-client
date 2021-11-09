@@ -51,7 +51,6 @@ func main() {
     }
 }
 ```
-
 ### Path Parameters
 
 
@@ -121,7 +120,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Captions.List`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -188,7 +186,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Captions.Get`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -255,7 +252,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Captions.Update`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -326,7 +322,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Captions.Upload`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 

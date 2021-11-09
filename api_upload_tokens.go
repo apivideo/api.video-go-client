@@ -166,10 +166,11 @@ func (s *UploadTokensService) DeleteTokenWithContext(ctx context.Context, upload
 
 /*
  * List List all active upload tokens.
- * A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens. Tutorials using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
+ * A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens.
+Tutorials using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
 
  * @return UploadTokensApiListRequest
- */
+*/
 
 func (s *UploadTokensService) List(r UploadTokensApiListRequest) (*TokenListResponse, error) {
 
@@ -179,10 +180,11 @@ func (s *UploadTokensService) List(r UploadTokensApiListRequest) (*TokenListResp
 
 /*
  * List List all active upload tokens.
- * A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens. Tutorials using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
+ * A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens.
+Tutorials using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return UploadTokensApiListRequest
- */
+*/
 
 func (s *UploadTokensService) ListWithContext(ctx context.Context, r UploadTokensApiListRequest) (*TokenListResponse, error) {
 	var localVarPostBody interface{}

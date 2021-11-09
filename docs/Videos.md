@@ -55,7 +55,6 @@ func main() {
     }
 }
 ```
-
 ### Path Parameters
 
 
@@ -119,7 +118,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Videos.Get`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -183,7 +181,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Videos.GetStatus`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -240,7 +237,7 @@ func main() {
     
     req.Title("My Video.mp4") // string | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles.
     req.Tags([]string{"Inner_example"}) // []string | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
-    req.Metadata(map[string]string{"key": "Inner_example"}) // map[string]string | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter.
+    req.Metadata(map[string]string{"key": "Inner_example"}) // map[string]string | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.
     req.Description("New Zealand") // string | If you described a video with a term or sentence, you can add it here to return videos containing this string.
     req.LiveStreamId("li400mYKSgQ6xs7taUeSaEKr") // string | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here.
     req.SortBy("publishedAt") // string | Allowed: publishedAt, title. You can search by the time videos were published at, or by title.
@@ -258,7 +255,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Videos.List`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -271,7 +267,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **title** | **string** | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles. | 
 **tags** | **[]string** | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned. | 
-**metadata** | **map[string]string** | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. | 
+**metadata** | **map[string]string** | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair. | 
 **description** | **string** | If you described a video with a term or sentence, you can add it here to return videos containing this string. | 
 **liveStreamId** | **string** | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here. | 
 **sortBy** | **string** | Allowed: publishedAt, title. You can search by the time videos were published at, or by title. | 
@@ -329,7 +325,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Videos.Update`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -395,7 +390,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Videos.PickThumbnail`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -464,7 +458,32 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Videos.UploadWithUploadToken`: %v\n", res)
 }
 ```
+### Progressive uploads
 
+Progressive uploads make it possible to upload a video source "progressively," i.e., before knowing the total size of the video. This is done by sending chunks of the video source file sequentially.
+The last chunk is sent by calling a different method, so api.video knows that it is time to reassemble the different chunks that were received.
+
+
+```go
+
+token := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the token you want to use to upload a video.
+
+part1, err := os.Open("10m.mp4.part.a")
+part2, err := os.Open("10m.mp4.part.b")
+part3, err := os.Open("10m.mp4.part.c")
+
+stream = client.Videos.CreateUploadWithUploadTokenStream(token, nil)
+// or, if you want to upload to an existing video:
+// stream = client.Videos.CreateUploadWithUploadTokenStream(token, videoId)
+_, err = stream.UploadPartFile(part1)
+_, err = stream.UploadPartFile(part2)
+res, err := stream.UploadLastPartFile(part3)
+
+err = part1.Close()
+err = part2.Close()
+err = part3.Close()
+
+```
 ### Path Parameters
 
 
@@ -527,7 +546,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Videos.Create`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -593,7 +611,30 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Videos.Upload`: %v\n", res)
 }
 ```
+### Progressive uploads
 
+Progressive uploads make it possible to upload a video source "progressively," i.e., before knowing the total size of the video. This is done by sending chunks of the video source file sequentially.
+The last chunk is sent by calling a different method, so api.video knows that it is time to reassemble the different chunks that were received.
+
+
+```go
+
+videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | Enter the videoId you want to use to upload your video.
+
+part1, err := os.Open("10m.mp4.part.a")
+part2, err := os.Open("10m.mp4.part.b")
+part3, err := os.Open("10m.mp4.part.c")
+
+stream = client.Videos.CreateUploadStream(videoId)
+_, err = stream.UploadPartFile(part1)
+_, err = stream.UploadPartFile(part2)
+res, err := stream.UploadLastPartFile(part3)
+
+err = part1.Close()
+err = part2.Close()
+err = part3.Close()
+
+```
 ### Path Parameters
 
 
@@ -662,7 +703,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `Videos.UploadThumbnail`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 

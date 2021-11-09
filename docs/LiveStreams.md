@@ -50,7 +50,6 @@ func main() {
     }
 }
 ```
-
 ### Path Parameters
 
 
@@ -114,7 +113,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `LiveStreams.DeleteThumbnail`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -186,7 +184,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `LiveStreams.List`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -253,7 +250,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Get`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -318,7 +314,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Update`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -383,7 +378,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Create`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -449,7 +443,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `LiveStreams.UploadThumbnail`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 

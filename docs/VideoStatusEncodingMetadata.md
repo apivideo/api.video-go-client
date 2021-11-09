@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Duration** | Pointer to **int32** | The length of the video. | [optional] 
 **Framerate** | Pointer to **int32** | The frequency with which consecutive images or frames appear on a display. Shown in this API as frames per second (fps). | [optional] 
 **Samplerate** | Pointer to **int32** | How many samples per second a digital audio system uses to record an audio signal. The higher the rate, the higher the frequencies that can be recorded. They are presented in this API using hertz. | [optional] 
-**VideoCodec** | Pointer to **string** | The method used to compress and decompress digital video. API Video supports all codecs in the libavcodec library. | [optional] 
+**VideoCodec** | Pointer to **string** | The method used to compress and decompress digital video. API Video supports all codecs in the libavcodec library.  | [optional] 
 **AudioCodec** | Pointer to **string** | The method used to compress and decompress digital audio for your video. | [optional] 
 **AspectRatio** | Pointer to **string** |  | [optional] 
 
