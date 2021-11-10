@@ -52,7 +52,6 @@ func main() {
     }
 }
 ```
-
 ### Path Parameters
 
 
@@ -112,7 +111,6 @@ func main() {
     }
 }
 ```
-
 ### Path Parameters
 
 
@@ -182,7 +180,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.List`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -247,7 +244,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Get`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -312,7 +308,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Update`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -377,7 +372,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Create`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 
@@ -444,7 +438,6 @@ func main() {
     fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.UploadLogo`: %v\n", res)
 }
 ```
-
 ### Path Parameters
 
 

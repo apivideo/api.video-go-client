@@ -444,11 +444,7 @@ func (s *LiveStreamsService) UpdateWithContext(ctx context.Context, liveStreamId
 
 /*
  * Create Create live stream
- * A live stream will give you the 'connection point' to RTMP your video stream to api.video. It will also give you the details for viewers to watch the same livestream.
-The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
-
-See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS.
-Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
+ * A live stream will give you the 'connection point' to RTMP your video stream to api.video. It will also give you the details for viewers to watch the same livestream.  The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer. See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS. Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
 Tutorials that [create live streams](https://api.video/blog/endpoints/live-create).
 
  * @return LiveStreamsApiCreateRequest
@@ -462,11 +458,7 @@ func (s *LiveStreamsService) Create(liveStreamCreationPayload LiveStreamCreation
 
 /*
  * Create Create live stream
- * A live stream will give you the 'connection point' to RTMP your video stream to api.video. It will also give you the details for viewers to watch the same livestream.
-The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
-
-See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS.
-Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
+ * A live stream will give you the 'connection point' to RTMP your video stream to api.video. It will also give you the details for viewers to watch the same livestream.  The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer. See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS. Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
 Tutorials that [create live streams](https://api.video/blog/endpoints/live-create).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return LiveStreamsApiCreateRequest

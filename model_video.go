@@ -18,7 +18,7 @@ import (
 type Video struct {
 	// The unique identifier of the video object.
 	VideoId string `json:"videoId"`
-	// When an webhook was created, presented in ISO-8601 format.
+	// When a video was created, presented in ISO-8601 format.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// The title of the video content.
 	Title string `json:"title"`
@@ -30,13 +30,13 @@ type Video struct {
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 	// One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.
 	Tags *[]string `json:"tags,omitempty"`
-	// Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.
+	// Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.
 	Metadata *[]Metadata  `json:"metadata,omitempty"`
 	Source   *VideoSource `json:"source,omitempty"`
 	Assets   *VideoAssets `json:"assets,omitempty"`
 	// The id of the player that will be applied on the video.
 	PlayerId *string `json:"playerId,omitempty"`
-	// Defines if the content is publicly reachable or if a unique token is needed for each play session.
+	// Defines if the content is publicly reachable or if a unique token is needed for each play session. Default is true. Tutorials on [private videos](https://api.video/blog/endpoints/private-videos).
 	Public *bool `json:"public,omitempty"`
 	// Defines if video is panoramic.
 	Panoramic *bool `json:"panoramic,omitempty"`

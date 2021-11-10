@@ -26,6 +26,19 @@ var (
 	_ context.Context
 )
 
+// VideosService communicating with the Videos
+// endpoints of the api.video API
+type IUploadStream interface {
+	UploadPart(fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+	UploadPartWithContext(ctx context.Context, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+	UploadPartFile(file *os.File) (*Video, error)
+	UploadPartWithContextFile(ctx context.Context, file *os.File) (*Video, error)
+	UploadLastPart(fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+	UploadLastPartWithContext(ctx context.Context, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+	UploadLastPartFile(file *os.File) (*Video, error)
+	UploadLastPartWithContextFile(ctx context.Context, file *os.File) (*Video, error)
+}
+
 type VideosApiListRequest struct {
 	title        *string
 	tags         *[]string
@@ -190,6 +203,12 @@ type VideosServiceI interface {
 
 	/*
 	 * UploadWithUploadToken Upload with an upload token
+	 * @return IUploadStream
+	 */
+	CreateUploadWithUploadTokenStream(token string, videoId *string) (IUploadStream, error)
+
+	/*
+	 * UploadWithUploadToken Upload with an upload token
 	 * @return VideosApiUploadWithUploadTokenRequest
 	 */
 	UploadWithUploadTokenFile(token string, file *os.File) (*Video, error)
@@ -228,6 +247,13 @@ type VideosServiceI interface {
 	 * @return VideosApiUploadRequest
 	 */
 	UploadWithContext(ctx context.Context, videoId string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+
+	/*
+	 * Upload Upload a video
+	 * @param videoId Enter the videoId you want to use to upload your video.
+	 * @return IUploadStream
+	 */
+	CreateUploadStream(videoId string) (IUploadStream, error)
 
 	/*
 	 * Upload Upload a video
@@ -374,13 +400,11 @@ func (s *VideosService) GetWithContext(ctx context.Context, videoId string) (*Vi
 
 /*
  * GetStatus Show video status
- * This API provides upload status & encoding status to determine when the video is uploaded or ready to playback.
-
-Once encoding is completed, the response also lists the available stream qualities. Tutorials using [video status](https://api.video/blog/endpoints/video-status).
+ * This API provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities. Tutorials using [video status](https://api.video/blog/endpoints/video-status).
 
  * @param videoId The unique identifier for the video you want the status for.
  * @return VideosApiGetStatusRequest
-*/
+ */
 
 func (s *VideosService) GetStatus(videoId string) (*VideoStatus, error) {
 
@@ -390,13 +414,11 @@ func (s *VideosService) GetStatus(videoId string) (*VideoStatus, error) {
 
 /*
  * GetStatus Show video status
- * This API provides upload status & encoding status to determine when the video is uploaded or ready to playback.
-
-Once encoding is completed, the response also lists the available stream qualities. Tutorials using [video status](https://api.video/blog/endpoints/video-status).
+ * This API provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities. Tutorials using [video status](https://api.video/blog/endpoints/video-status).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want the status for.
  * @return VideosApiGetStatusRequest
-*/
+ */
 
 func (s *VideosService) GetStatusWithContext(ctx context.Context, videoId string) (*VideoStatus, error) {
 	var localVarPostBody interface{}
@@ -425,7 +447,7 @@ func (s *VideosService) GetStatusWithContext(ctx context.Context, videoId string
 
 /*
  * List List all videos
- * Requests to this endpoint return a list of your videos (with all their details). With no parameters added to this query, the API returns all videos. You can filter what videos the API returns using the parameters described below. We have [several tutorials](https://api.video/blog/endpoints/video-list) that demonstrate this endpoint.
+ * Requests to this endpoint return a list of your videos (with all their details). With no parameters added to this query, the API returns all videos. You can filter what videos the API returns using the parameters described below.  We have [several tutorials](https://api.video/blog/endpoints/video-list) that demonstrate this endpoint.
 
  * @return VideosApiListRequest
  */
@@ -438,7 +460,7 @@ func (s *VideosService) List(r VideosApiListRequest) (*VideosListResponse, error
 
 /*
  * List List all videos
- * Requests to this endpoint return a list of your videos (with all their details). With no parameters added to this query, the API returns all videos. You can filter what videos the API returns using the parameters described below. We have [several tutorials](https://api.video/blog/endpoints/video-list) that demonstrate this endpoint.
+ * Requests to this endpoint return a list of your videos (with all their details). With no parameters added to this query, the API returns all videos. You can filter what videos the API returns using the parameters described below.  We have [several tutorials](https://api.video/blog/endpoints/video-list) that demonstrate this endpoint.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return VideosApiListRequest
  */
@@ -727,6 +749,83 @@ func (s *VideosService) UploadWithUploadTokenFileWithContext(ctx context.Context
 	return s.UploadWithUploadTokenWithContext(ctx, token, file.Name(), io.Reader(file), fileSize)
 }
 
+// VideosService communicating with the Videos
+// endpoints of the api.video API
+type UploadWithUploadTokenStream struct {
+	client  *Client
+	token   string
+	part    int32
+	videoId *string
+}
+
+func (s *VideosService) CreateUploadWithUploadTokenStream(token string, videoId *string) (IUploadStream, error) {
+	return &UploadWithUploadTokenStream{client: s.client, token: token, videoId: videoId, part: 1}, nil
+}
+
+func (s *UploadWithUploadTokenStream) UploadAPart(ctx context.Context, fileName string, fileReader io.Reader, fileSize int64, isLast bool) (*Video, error) {
+	localVarPath := "/upload"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := make(map[string]string)
+
+	localVarQueryParams.Add("token", parameterToString(s.token, ""))
+
+	if s.videoId != nil {
+		localVarFormParams["videoId"] = parameterToString(*s.videoId, "")
+	}
+
+	request, err := s.client.prepareProgressiveUploadRequest(context.Background(), localVarPath, fileName, fileReader, fileSize, localVarHeaderParams, localVarQueryParams, localVarFormParams, s.part, isLast)
+
+	if err != nil {
+		return nil, err
+	}
+
+	s.part = s.part + 1
+
+	res := new(Video)
+
+	_, err = s.client.do(request, res)
+	if s.videoId == nil {
+		s.videoId = &res.VideoId
+	}
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+func (s *UploadWithUploadTokenStream) UploadPartWithContext(ctx context.Context, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadAPart(ctx, fileName, fileReader, fileSize, false)
+}
+func (s *UploadWithUploadTokenStream) UploadLastPartWithContext(ctx context.Context, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadAPart(ctx, fileName, fileReader, fileSize, true)
+}
+func (s *UploadWithUploadTokenStream) UploadPart(fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadPartWithContext(context.Background(), fileName, fileReader, fileSize)
+}
+func (s *UploadWithUploadTokenStream) UploadPartFile(file *os.File) (*Video, error) {
+	return s.UploadPartWithContextFile(context.Background(), file)
+}
+func (s *UploadWithUploadTokenStream) UploadPartWithContextFile(ctx context.Context, file *os.File) (*Video, error) {
+	fileInfo, _ := file.Stat()
+	fileSize := fileInfo.Size()
+
+	return s.UploadPartWithContext(ctx, file.Name(), io.Reader(file), fileSize)
+}
+func (s *UploadWithUploadTokenStream) UploadLastPart(fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadLastPartWithContext(context.Background(), fileName, fileReader, fileSize)
+}
+func (s *UploadWithUploadTokenStream) UploadLastPartFile(file *os.File) (*Video, error) {
+	return s.UploadLastPartWithContextFile(context.Background(), file)
+}
+func (s *UploadWithUploadTokenStream) UploadLastPartWithContextFile(ctx context.Context, file *os.File) (*Video, error) {
+	fileInfo, _ := file.Stat()
+	fileSize := fileInfo.Size()
+
+	return s.UploadLastPartWithContext(ctx, file.Name(), io.Reader(file), fileSize)
+}
+
 /*
  * UploadWithUploadToken Upload with an upload token
  * When given a token, anyone can upload a file to the URI `https://ws.api.video/upload?token=<tokenId>`.
@@ -869,34 +968,16 @@ func (s *VideosService) UploadWithUploadTokenWithContext(ctx context.Context, to
 
 /*
  * Create Create a video
- * To create a video, you create its metadata first, before adding the video file (exception - when using an existing HTTP source).
-* Videos are public by default. [Learn about Private videos](https://api.video/blog/tutorials/tutorial-private-videos) * Up to 6 responsive video streams will be created (from 240p to 4k) * Mp4 encoded versions are created at the highest quality (max 1080p) by default. * Panoramic videos are for videos recorded in 360 degrees.  You can toggle this after your 360 video upload. * Searchable parameters: title, description, tags and metadata
-
- ```shell
-$ curl https://ws.api.video/videos \
--H 'Authorization: Bearer {access_token} \
--d '{"title":"My video",
-     "description":"so many details",
-     "mp4Support":true
-}'
-``` ### add an URL to upload on creation
-You can also create a video directly from a video hosted on a third-party server by giving its URI in `source` parameter:
-```shell
-$ curl https://ws.api.video/videos \
--H 'Authorization: Bearer {access_token} \
--d '{"source":"http://uri/to/video.mp4", "title":"My video"}'
-```
-In this case, the service will respond `202 Accepted` and download the video asynchronously. ### Track users with Dynamic Metadata
-Metadata values can be a key:value where the values are predefined, but Dynamic metadata allows you to enter *any* value for a defined key.  To defined a dynamic metadata pair use: ``` "metadata":[{"dynamicKey": "__dynamicKey__"}] ```
-The double underscore on both sides of the value allows any variable to be added for a given video session. Added the the url you might have: ``` <iframe type="text/html" src="https://embed.api.video/vod/vi6QvU9dhYCzW3BpPvPsZUa8?metadata[classUserName]=Doug" width="960" height="320" frameborder="0" scrollling="no"></iframe> ```
-This video session will be tagged as watched by Doug - allowing for in-depth analysis on how each viewer interacts with the videos.
-
- We have tutorials on:
+ *
+## We have tutorials on:
 * [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
 * [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
+
+
 * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
 * [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
 * [Using Dynamic Metadata](https://api.video/blog/tutorials/dynamic-metadata)
+
 * Full list of [tutorials](https://api.video/blog/endpoints/video-create) that demonstrate this endpoint.
 
 
@@ -911,34 +992,16 @@ func (s *VideosService) Create(videoCreationPayload VideoCreationPayload) (*Vide
 
 /*
  * Create Create a video
- * To create a video, you create its metadata first, before adding the video file (exception - when using an existing HTTP source).
-* Videos are public by default. [Learn about Private videos](https://api.video/blog/tutorials/tutorial-private-videos) * Up to 6 responsive video streams will be created (from 240p to 4k) * Mp4 encoded versions are created at the highest quality (max 1080p) by default. * Panoramic videos are for videos recorded in 360 degrees.  You can toggle this after your 360 video upload. * Searchable parameters: title, description, tags and metadata
-
- ```shell
-$ curl https://ws.api.video/videos \
--H 'Authorization: Bearer {access_token} \
--d '{"title":"My video",
-     "description":"so many details",
-     "mp4Support":true
-}'
-``` ### add an URL to upload on creation
-You can also create a video directly from a video hosted on a third-party server by giving its URI in `source` parameter:
-```shell
-$ curl https://ws.api.video/videos \
--H 'Authorization: Bearer {access_token} \
--d '{"source":"http://uri/to/video.mp4", "title":"My video"}'
-```
-In this case, the service will respond `202 Accepted` and download the video asynchronously. ### Track users with Dynamic Metadata
-Metadata values can be a key:value where the values are predefined, but Dynamic metadata allows you to enter *any* value for a defined key.  To defined a dynamic metadata pair use: ``` "metadata":[{"dynamicKey": "__dynamicKey__"}] ```
-The double underscore on both sides of the value allows any variable to be added for a given video session. Added the the url you might have: ``` <iframe type="text/html" src="https://embed.api.video/vod/vi6QvU9dhYCzW3BpPvPsZUa8?metadata[classUserName]=Doug" width="960" height="320" frameborder="0" scrollling="no"></iframe> ```
-This video session will be tagged as watched by Doug - allowing for in-depth analysis on how each viewer interacts with the videos.
-
- We have tutorials on:
+ *
+## We have tutorials on:
 * [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
 * [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
+
+
 * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
 * [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
 * [Using Dynamic Metadata](https://api.video/blog/tutorials/dynamic-metadata)
+
 * Full list of [tutorials](https://api.video/blog/endpoints/video-create) that demonstrate this endpoint.
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -974,11 +1037,13 @@ func (s *VideosService) CreateWithContext(ctx context.Context, videoCreationPayl
 /*
  * Upload Upload a video
  * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
-```bash curl https://ws.api.video/videos/{videoId}/source \
+```bash
+curl https://ws.api.video/videos/{videoId}/source \
   -H 'Authorization: Bearer {access_token}' \
   -F file=@/path/to/video.mp4
+
   ```
-Tutorials using [video upload](https://api.video/blog/endpoints/video-upload)
+Tutorials using [video upload](https://api.video/blog/endpoints/video-upload).
 
  * @param videoId Enter the videoId you want to use to upload your video.
  * @return VideosApiUploadRequest
@@ -991,11 +1056,13 @@ func (s *VideosService) UploadFile(videoId string, file *os.File) (*Video, error
 /*
  * Upload Upload a video
  * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
-```bash curl https://ws.api.video/videos/{videoId}/source \
+```bash
+curl https://ws.api.video/videos/{videoId}/source \
   -H 'Authorization: Bearer {access_token}' \
   -F file=@/path/to/video.mp4
+
   ```
-Tutorials using [video upload](https://api.video/blog/endpoints/video-upload)
+Tutorials using [video upload](https://api.video/blog/endpoints/video-upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId Enter the videoId you want to use to upload your video.
  * @return VideosApiUploadRequest
@@ -1008,14 +1075,84 @@ func (s *VideosService) UploadFileWithContext(ctx context.Context, videoId strin
 	return s.UploadWithContext(ctx, videoId, file.Name(), io.Reader(file), fileSize)
 }
 
+// VideosService communicating with the Videos
+// endpoints of the api.video API
+type UploadStream struct {
+	client  *Client
+	videoId string
+	part    int32
+}
+
+func (s *VideosService) CreateUploadStream(videoId string) (IUploadStream, error) {
+	return &UploadStream{client: s.client, videoId: videoId, part: 1}, nil
+}
+
+func (s *UploadStream) UploadAPart(ctx context.Context, fileName string, fileReader io.Reader, fileSize int64, isLast bool) (*Video, error) {
+	localVarPath := "/videos/{videoId}/source"
+	localVarPath = strings.Replace(localVarPath, "{"+"videoId"+"}", url.PathEscape(parameterToString(s.videoId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := make(map[string]string)
+
+	request, err := s.client.prepareProgressiveUploadRequest(context.Background(), localVarPath, fileName, fileReader, fileSize, localVarHeaderParams, localVarQueryParams, localVarFormParams, s.part, isLast)
+
+	if err != nil {
+		return nil, err
+	}
+
+	s.part = s.part + 1
+
+	res := new(Video)
+
+	_, err = s.client.do(request, res)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+func (s *UploadStream) UploadPartWithContext(ctx context.Context, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadAPart(ctx, fileName, fileReader, fileSize, false)
+}
+func (s *UploadStream) UploadLastPartWithContext(ctx context.Context, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadAPart(ctx, fileName, fileReader, fileSize, true)
+}
+func (s *UploadStream) UploadPart(fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadPartWithContext(context.Background(), fileName, fileReader, fileSize)
+}
+func (s *UploadStream) UploadPartFile(file *os.File) (*Video, error) {
+	return s.UploadPartWithContextFile(context.Background(), file)
+}
+func (s *UploadStream) UploadPartWithContextFile(ctx context.Context, file *os.File) (*Video, error) {
+	fileInfo, _ := file.Stat()
+	fileSize := fileInfo.Size()
+
+	return s.UploadPartWithContext(ctx, file.Name(), io.Reader(file), fileSize)
+}
+func (s *UploadStream) UploadLastPart(fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadLastPartWithContext(context.Background(), fileName, fileReader, fileSize)
+}
+func (s *UploadStream) UploadLastPartFile(file *os.File) (*Video, error) {
+	return s.UploadLastPartWithContextFile(context.Background(), file)
+}
+func (s *UploadStream) UploadLastPartWithContextFile(ctx context.Context, file *os.File) (*Video, error) {
+	fileInfo, _ := file.Stat()
+	fileSize := fileInfo.Size()
+
+	return s.UploadLastPartWithContext(ctx, file.Name(), io.Reader(file), fileSize)
+}
+
 /*
  * Upload Upload a video
  * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
-```bash curl https://ws.api.video/videos/{videoId}/source \
+```bash
+curl https://ws.api.video/videos/{videoId}/source \
   -H 'Authorization: Bearer {access_token}' \
   -F file=@/path/to/video.mp4
+
   ```
-Tutorials using [video upload](https://api.video/blog/endpoints/video-upload)
+Tutorials using [video upload](https://api.video/blog/endpoints/video-upload).
 
  * @param videoId Enter the videoId you want to use to upload your video.
  * @return VideosApiUploadRequest
@@ -1027,11 +1164,13 @@ func (s *VideosService) Upload(videoId string, fileName string, fileReader io.Re
 /*
  * Upload Upload a video
  * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
-```bash curl https://ws.api.video/videos/{videoId}/source \
+```bash
+curl https://ws.api.video/videos/{videoId}/source \
   -H 'Authorization: Bearer {access_token}' \
   -F file=@/path/to/video.mp4
+
   ```
-Tutorials using [video upload](https://api.video/blog/endpoints/video-upload)
+Tutorials using [video upload](https://api.video/blog/endpoints/video-upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId Enter the videoId you want to use to upload your video.
  * @return VideosApiUploadRequest

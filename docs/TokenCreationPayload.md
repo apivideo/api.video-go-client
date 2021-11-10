@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ttl** | Pointer to **int32** | Time in seconds that the token will be active. A value of 0 means that the token has no expiration date. The default is to have no expiration. | [optional] [default to 0]
+**Ttl** | Pointer to **int32** | Time in seconds that the token will be active. A value of 0 means that the token has no exipration date. The default is to have no expiration. | [optional] [default to 0]
 
 ## Methods
 

@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"math"
 	"mime/multipart"
 	"net/http"
 	"net/url"
@@ -201,7 +202,7 @@ func (c *Client) prepareRequest(
 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("User-Agent", "api.video client (GO; v:0.0.8; )")
+	req.Header.Set("User-Agent", "api.video client (GO; v:0.0.9; )")
 
 	for headerName := range headerParams {
 		req.Header.Set(headerName, headerParams[headerName])
@@ -213,6 +214,61 @@ func (c *Client) prepareRequest(
 			return nil, err
 		}
 	}
+
+	return req, nil
+}
+
+func (c *Client) prepareProgressiveUploadRequest(
+	ctx context.Context,
+	urlStr string,
+	fileName string,
+	fileReader io.Reader,
+	fileSize int64,
+	headerParams map[string]string,
+	queryParams url.Values,
+	formParams map[string]string,
+	part int32,
+	isLast bool) (*http.Request, error) {
+
+	body := new(bytes.Buffer)
+	writer := multipart.NewWriter(body)
+	partWriter, err := writer.CreateFormFile("file", fileName)
+	if err != nil {
+		return nil, err
+	}
+
+	io.Copy(partWriter, fileReader)
+	if err != nil {
+		return nil, err
+	}
+
+	for key, val := range formParams {
+		err = writer.WriteField(key, val)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	err = writer.Close()
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := c.prepareRequest(ctx, http.MethodPost, urlStr, body, headerParams, queryParams)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Content-Type", writer.FormDataContentType())
+
+	var ranges string
+	if isLast {
+		ranges = fmt.Sprintf("part %d/%d", part, part)
+	} else {
+		ranges = fmt.Sprintf("part %d/*", part)
+	}
+
+	req.Header.Set("Content-Range", ranges)
 
 	return req, nil
 }
@@ -236,6 +292,8 @@ func (c *Client) prepareRangeRequests(
 
 	var requests []*http.Request
 	startByte := int64(0)
+	part := 1
+	partCount := int64(math.Ceil(float64(fileSize) / float64(c.chunkSize)))
 	for {
 		body := new(bytes.Buffer)
 		writer := multipart.NewWriter(body)
@@ -276,7 +334,7 @@ func (c *Client) prepareRangeRequests(
 		req.Header.Set("Content-Type", writer.FormDataContentType())
 
 		if fileSize > c.chunkSize && c.chunkSize != 0 {
-			ranges := fmt.Sprintf("bytes %d-%d/%d", startByte, (startByte+bytesread)-1, fileSize)
+			ranges := fmt.Sprintf("part %d/%d", part, partCount)
 			req.Header.Set("Content-Range", ranges)
 			startByte = startByte + bytesread
 		}
@@ -286,6 +344,8 @@ func (c *Client) prepareRangeRequests(
 		if startByte == fileSize || fileSize < c.chunkSize {
 			break
 		}
+
+		part = part + 1
 	}
 	return requests, nil
 }
@@ -382,7 +442,7 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 
 		req.Header.Set("Accept", "application/json")
 		req.Header.Set("Content-Type", "application/json")
-		req.Header.Set("User-Agent", "api.video client (GO; v:0.0.8; )")
+		req.Header.Set("User-Agent", "api.video client (GO; v:0.0.9; )")
 
 		resp, err := c.httpClient.Do(req)
 

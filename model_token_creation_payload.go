@@ -16,7 +16,7 @@ import (
 
 // TokenCreationPayload struct for TokenCreationPayload
 type TokenCreationPayload struct {
-	// Time in seconds that the token will be active. A value of 0 means that the token has no expiration date. The default is to have no expiration.
+	// Time in seconds that the token will be active. A value of 0 means that the token has no exipration date. The default is to have no expiration.
 	Ttl *int32 `json:"ttl,omitempty"`
 }
 

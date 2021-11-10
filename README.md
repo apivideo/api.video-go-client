@@ -21,6 +21,7 @@ This API client is still in beta. Please feel free to report any issue you may e
 go get github.com/apivideo/go-api-client
 ```
 
+
 ## Getting Started
 
 For a more advanced usage you can checkout the rest of the documentation in the [docs directory](/docs)
@@ -266,8 +267,6 @@ Method | HTTP request | Description
 ## Documentation For Models
 
  - [AccessToken](docs/AccessToken.md)
- - [Account](docs/Account.md)
- - [AccountQuota](docs/AccountQuota.md)
  - [AuthenticatePayload](docs/AuthenticatePayload.md)
  - [BadRequest](docs/BadRequest.md)
  - [BytesRange](docs/BytesRange.md)

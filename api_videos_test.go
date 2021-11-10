@@ -406,6 +406,123 @@ func TestVideos_ListUpdatedAt(t *testing.T) {
 	}
 }
 
+func skipIfNoApiKey(t *testing.T) {
+	if os.Getenv("API_KEY") == "" {
+		t.Skip("Skipping test because there is no API_KEY env var")
+	}
+	if os.Getenv("BASE_URI") == "" {
+		t.Skip("Skipping test because there is no BASE_URI env var")
+	}
+}
+
+func createRealClient() *Client {
+	return (&Builder{
+		baseURL:         os.Getenv("BASE_URI"),
+		uploadChunkSize: minChunkSize,
+		apiKey:          os.Getenv("API_KEY"),
+	}).Build()
+}
+
+func TestVideos_Integration_CreateUploadStream(t *testing.T) {
+	skipIfNoApiKey(t)
+
+	cl := createRealClient()
+
+	video, err := cl.Videos.Create(VideoCreationPayload{Title: "Upload stream GO"})
+	if err != nil {
+		t.Errorf("Videos.Create error: %v", err)
+	}
+	stream, err := cl.Videos.CreateUploadStream(video.VideoId)
+
+	parts := []string{"./test-assets/10m.mp4.part.a", "./test-assets/10m.mp4.part.b", "./test-assets/10m.mp4.part.d"}
+
+	var lastPart *Video
+	for i, part := range parts {
+		f, err := os.Open(part)
+		if err != nil {
+			t.Errorf("os.Open error: %v", err)
+		}
+		if i < 2 {
+			_, err = stream.UploadPartFile(f)
+			if err != nil {
+				t.Errorf("UploadPartFile error: %v", err)
+			}
+		} else {
+			lastPart, err = stream.UploadLastPartFile(f)
+			if err != nil {
+				t.Errorf("UploadLastPartFile error: %v", err)
+			}
+		}
+		err = f.Close()
+		if err != nil {
+			t.Errorf("os.Close error: %v", err)
+		}
+	}
+
+	if lastPart.Title != video.Title {
+		t.Fatalf("invalid title in result: %v != %v", lastPart.Title, video.Title)
+	}
+}
+
+func TestVideos_Integration_UploadChunk(t *testing.T) {
+	skipIfNoApiKey(t)
+
+	cl := createRealClient()
+
+	video, err := cl.Videos.Create(VideoCreationPayload{Title: "Upload by chunk GO"})
+	if err != nil {
+		t.Errorf("Videos.Create error: %v", err)
+	}
+
+	f, _ := os.Open("./test-assets/10m.mp4")
+	v, err := cl.Videos.UploadFile(video.VideoId, f)
+
+	if v.Title != video.Title {
+		t.Fatalf("invalid title in result: %v != %v", v.Title, video.Title)
+	}
+}
+
+func TestVideos_Integration_CreateUploadWithUploadTokenStream(t *testing.T) {
+	skipIfNoApiKey(t)
+
+	cl := createRealClient()
+
+	token, err := cl.UploadTokens.CreateToken(TokenCreationPayload{})
+	if err != nil {
+		t.Errorf("Videos.Create error: %v", err)
+	}
+	stream, err := cl.Videos.CreateUploadWithUploadTokenStream(*token.Token, nil)
+
+	parts := []string{"./test-assets/10m.mp4.part.a", "./test-assets/10m.mp4.part.b", "./test-assets/10m.mp4.part.d"}
+
+	var lastPart *Video
+	for i, part := range parts {
+		f, err := os.Open(part)
+		if err != nil {
+			t.Errorf("os.Open error: %v", err)
+		}
+		if i < 2 {
+			_, err = stream.UploadPartFile(f)
+			if err != nil {
+				t.Errorf("UploadPartFile error: %v", err)
+			}
+		} else {
+			lastPart, err = stream.UploadLastPartFile(f)
+			if err != nil {
+				t.Errorf("UploadLastPartFile error: %v", err)
+			}
+		}
+		err = f.Close()
+		if err != nil {
+			t.Errorf("os.Close error: %v", err)
+		}
+	}
+
+	if lastPart.Title != "10m.mp4.part.a" {
+		t.Fatalf("invalid title in result: %v != 10m.mp4.part.a", lastPart.Title)
+	}
+}
+
 func TestVideos_Create(t *testing.T) {
 	setup()
 	defer teardown()
@@ -576,10 +693,10 @@ func TestVideos_ChunkedUpload(t *testing.T) {
 	defer teardown()
 	var count int64
 	headers := []string{
-		"bytes 0-2097151/8388608",
-		"bytes 2097152-4194303/8388608",
-		"bytes 4194304-6291455/8388608",
-		"bytes 6291456-8388607/8388608",
+		"part 1/4",
+		"part 2/4",
+		"part 3/4",
+		"part 4/4",
 	}
 	mux.HandleFunc("/videos/vi4k0jvEUuaTdRAEjQ4Jfagz/source", func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, http.MethodPost)
