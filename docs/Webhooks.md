@@ -128,7 +128,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Webhook**](webhook.md)
+[**Webhook**](Webhook.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -196,7 +196,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**WebhooksListResponse**](webhooks-list-response.md)
+[**WebhooksListResponse**](WebhooksListResponse.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -257,7 +257,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Webhook**](webhook.md)
+[**Webhook**](Webhook.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

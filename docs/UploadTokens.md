@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TokenListResponse**](token-list-response.md)
+[**TokenListResponse**](TokenListResponse.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -198,7 +198,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UploadToken**](upload-token.md)
+[**UploadToken**](UploadToken.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -259,7 +259,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UploadToken**](upload-token.md)
+[**UploadToken**](UploadToken.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

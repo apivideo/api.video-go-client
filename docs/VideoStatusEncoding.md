@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Playable** | Pointer to **bool** | Whether the video is playable or not. | [optional] 
 **Qualities** | Pointer to [**[]Quality**](Quality.md) | Available qualities the video can be viewed in. | [optional] 
-**Metadata** | Pointer to [**VideoStatusEncodingMetadata**](video-status-encoding-metadata.md) |  | [optional] 
+**Metadata** | Pointer to [**VideoStatusEncodingMetadata**](VideoStatusEncodingMetadata.md) |  | [optional] 
 
 ## Methods
 

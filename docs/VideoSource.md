@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Uri** | Pointer to **string** | The URL where the video is stored. | [optional] 
 **Type** | Pointer to **string** |  | [optional] 
-**LiveStream** | Pointer to [**VideoSourceLiveStream**](video-source-live-stream.md) |  | [optional] 
+**LiveStream** | Pointer to [**VideoSourceLiveStream**](VideoSourceLiveStream.md) |  | [optional] 
 
 ## Methods
 

@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AccessToken**](access-token.md)
+[**AccessToken**](AccessToken.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AccessToken**](access-token.md)
+[**AccessToken**](AccessToken.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

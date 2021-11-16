@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Ingest** | Pointer to [**VideoStatusIngest**](video-status-ingest.md) |  | [optional] 
-**Encoding** | Pointer to [**VideoStatusEncoding**](video-status-encoding.md) |  | [optional] 
+**Ingest** | Pointer to [**VideoStatusIngest**](VideoStatusIngest.md) |  | [optional] 
+**Encoding** | Pointer to [**VideoStatusEncoding**](VideoStatusEncoding.md) |  | [optional] 
 
 ## Methods
 
