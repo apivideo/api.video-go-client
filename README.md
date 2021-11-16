@@ -32,7 +32,7 @@ api.video's Java Go client streamlines the coding process. Chunking files is han
 
 ## Installation
 ```bash
-go get github.com/apivideo/go-api-client
+go get github.com/apivideo/api.video-go-client
 ```
 
 
@@ -46,7 +46,7 @@ package main
 import (
     "fmt"
     "os"
-    apivideosdk "github.com/apivideo/go-api-client"
+    apivideosdk "github.com/apivideo/api.video-go-client"
 )
 
 func main() {
