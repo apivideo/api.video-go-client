@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Data** | [**[]PlayerSessionEvent**](PlayerSessionEvent.md) |  | 
-**Pagination** | [**Pagination**](pagination.md) |  | 
+**Pagination** | [**Pagination**](Pagination.md) |  | 
 
 ## Methods
 

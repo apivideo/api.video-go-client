@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Data** | [**[]UploadToken**](UploadToken.md) |  | 
-**Pagination** | [**Pagination**](pagination.md) |  | 
+**Pagination** | [**Pagination**](Pagination.md) |  | 
 
 ## Methods
 

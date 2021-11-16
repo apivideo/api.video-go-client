@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **CreatedAt** | Pointer to **string** | When the player was created, presented in ISO-8601 format. | [optional] 
 **UpdatedAt** | Pointer to **string** | When the player was last updated, presented in ISO-8601 format. | [optional] 
 **LinkActive** | Pointer to **string** | Deprecated | [optional] 
-**Assets** | Pointer to [**PlayerThemeAssets**](player_theme_assets.md) |  | [optional] 
+**Assets** | Pointer to [**PlayerThemeAssets**](PlayerThemeAssets.md) |  | [optional] 
 
 ## Methods
 

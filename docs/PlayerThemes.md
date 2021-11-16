@@ -197,7 +197,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PlayerThemesListResponse**](player-themes-list-response.md)
+[**PlayerThemesListResponse**](PlayerThemesListResponse.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -260,7 +260,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PlayerTheme**](player-theme.md)
+[**PlayerTheme**](PlayerTheme.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -325,7 +325,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PlayerTheme**](player-theme.md)
+[**PlayerTheme**](PlayerTheme.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -386,7 +386,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PlayerTheme**](player-theme.md)
+[**PlayerTheme**](PlayerTheme.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -456,7 +456,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PlayerTheme**](player-theme.md)
+[**PlayerTheme**](PlayerTheme.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

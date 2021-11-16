@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ChaptersListResponse**](chapters-list-response.md)
+[**ChaptersListResponse**](ChaptersListResponse.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -200,7 +200,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Chapter**](chapter.md)
+[**Chapter**](Chapter.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -270,7 +270,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Chapter**](chapter.md)
+[**Chapter**](Chapter.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
