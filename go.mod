@@ -1,3 +1,3 @@
-module github.com/apivideo/go-api-client
+module github.com/apivideo/api.video-go-client
 
 go 1.13

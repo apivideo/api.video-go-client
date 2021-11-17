@@ -32,7 +32,7 @@ import (
     "context"
     "fmt"
     "os"
-    apivideosdk "github.com/apivideo/go-api-client"
+    apivideosdk "github.com/apivideo/api.video-go-client"
 )
 
 func main() {
@@ -93,7 +93,7 @@ import (
     "context"
     "fmt"
     "os"
-    apivideosdk "github.com/apivideo/go-api-client"
+    apivideosdk "github.com/apivideo/api.video-go-client"
 )
 
 func main() {
@@ -158,7 +158,7 @@ import (
     "context"
     "fmt"
     "os"
-    apivideosdk "github.com/apivideo/go-api-client"
+    apivideosdk "github.com/apivideo/api.video-go-client"
 )
 
 func main() {
@@ -230,7 +230,7 @@ import (
     "context"
     "fmt"
     "os"
-    apivideosdk "github.com/apivideo/go-api-client"
+    apivideosdk "github.com/apivideo/api.video-go-client"
 )
 
 func main() {
@@ -293,7 +293,7 @@ import (
     "context"
     "fmt"
     "os"
-    apivideosdk "github.com/apivideo/go-api-client"
+    apivideosdk "github.com/apivideo/api.video-go-client"
 )
 
 func main() {
@@ -358,7 +358,7 @@ import (
     "context"
     "fmt"
     "os"
-    apivideosdk "github.com/apivideo/go-api-client"
+    apivideosdk "github.com/apivideo/api.video-go-client"
 )
 
 func main() {
@@ -419,7 +419,7 @@ import (
     "context"
     "fmt"
     "os"
-    apivideosdk "github.com/apivideo/go-api-client"
+    apivideosdk "github.com/apivideo/api.video-go-client"
 )
 
 func main() {
