@@ -693,7 +693,12 @@ paths:
   /videos/{videoId}/source:
     post:
       description: |-
-        To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+        To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.\nWe offer 2 types of upload:
+        * Regular uploads
+        * Progressive uploads
+        The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
+        * (1) allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+        * (2) allow to send a video source "progressively", i.e., before before knowing the total size of the video.\nOnce all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
         ```bash
         curl https://ws.api.video/videos/{videoId}/source \
           -H 'Authorization: Bearer {access_token}' \
@@ -712,16 +717,22 @@ paths:
         schema:
           type: string
         style: simple
-      - description: Content-Range represents the range of bytes that will be returned
-          as a result of the request. Byte ranges are inclusive, meaning that bytes
-          0-999 represents the first 1000 bytes in a file or object.
-        example: 'Content-Range: bytes 200-100/5000'
+      - description: |
+          Content-Range can be used if you want to split your file. You can do this by parts, or by chunk.
+          * If you split your file by bytes, bear in mind byte ranges are inclusive, meaning that bytes 0-5242880 represents the first 5,242,880 bytes in a file or object.\nAlso, the Content-Range header value must match the following pattern: bytes <from_byte>-<to_byte>/<total_bytes>:
+           * <from_byte> is a positive integer or 0. It represents the range start (aka lower bound), i.e., the first byte of the chunk compared to the total bytes composing the full video source. The first sequential range always starts at 0.
+           * <to_byte> is a positive integer representing the range end (aka upper bound), i.e., the last byte of the chunk compared to the total bytes composing the full video source.
+           * <total_bytes> is a positive integer representing the total bytes composing the full video source. It can also be * if or as long as it is unknown. Technically, this value is required only one time and cannot differ in several requests.
+          * If you split your file by part (recommended option), the `Content-Range` header value must match the following pattern: `part <part>/<total_parts>`:
+           * `<part>` is a positive integer representing the part number. The first sequential part number is always 1.
+           * `<total_parts>` is a positive integer representing the total parts of the video source. It can also be `*` if or as long as it is unknown. Technically, this value is required only one time and cannot differ in several requests.
+        example: bytes 209715200-419430399/52428800 OR part 2/3
         explode: false
         in: header
         name: Content-Range
         required: false
         schema:
-          pattern: ^bytes [0-9]*-[0-9]*\/[0-9]*$
+          pattern: /(?:bytes (?<from>\d+)-(?<to>\d+)|part (?<part>\d+))\/(?<total>\d+|\*)/
           type: string
         style: simple
         x-client-ignore: true

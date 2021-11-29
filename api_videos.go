@@ -1036,7 +1036,12 @@ func (s *VideosService) CreateWithContext(ctx context.Context, videoCreationPayl
 
 /*
  * Upload Upload a video
- * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+ * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.\nWe offer 2 types of upload:
+* Regular uploads
+* Progressive uploads
+The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
+* (1) allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+* (2) allow to send a video source "progressively", i.e., before before knowing the total size of the video.\nOnce all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
 ```bash
 curl https://ws.api.video/videos/{videoId}/source \
   -H 'Authorization: Bearer {access_token}' \
@@ -1055,7 +1060,12 @@ func (s *VideosService) UploadFile(videoId string, file *os.File) (*Video, error
 
 /*
  * Upload Upload a video
- * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+ * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.\nWe offer 2 types of upload:
+* Regular uploads
+* Progressive uploads
+The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
+* (1) allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+* (2) allow to send a video source "progressively", i.e., before before knowing the total size of the video.\nOnce all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
 ```bash
 curl https://ws.api.video/videos/{videoId}/source \
   -H 'Authorization: Bearer {access_token}' \
@@ -1145,7 +1155,12 @@ func (s *UploadStream) UploadLastPartWithContextFile(ctx context.Context, file *
 
 /*
  * Upload Upload a video
- * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+ * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.\nWe offer 2 types of upload:
+* Regular uploads
+* Progressive uploads
+The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
+* (1) allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+* (2) allow to send a video source "progressively", i.e., before before knowing the total size of the video.\nOnce all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
 ```bash
 curl https://ws.api.video/videos/{videoId}/source \
   -H 'Authorization: Bearer {access_token}' \
@@ -1163,7 +1178,12 @@ func (s *VideosService) Upload(videoId string, fileName string, fileReader io.Re
 
 /*
  * Upload Upload a video
- * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+ * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.\nWe offer 2 types of upload:
+* Regular uploads
+* Progressive uploads
+The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
+* (1) allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+* (2) allow to send a video source "progressively", i.e., before before knowing the total size of the video.\nOnce all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
 ```bash
 curl https://ws.api.video/videos/{videoId}/source \
   -H 'Authorization: Bearer {access_token}' \
