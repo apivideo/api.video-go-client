@@ -678,7 +678,7 @@ Or in an HTML form, with a little JavaScript to convert the form into JSON:
 
 ### Dealing with large files
 
-We have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
+You can upload large files on api.video with <a href='https://docs.api.video/reference/post_videos-videoid-source'>Progressive Upload</a>. Alternatively, if you want to use regular upload, we have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
 
  * @return VideosApiUploadWithUploadTokenRequest
 */
@@ -737,7 +737,7 @@ Or in an HTML form, with a little JavaScript to convert the form into JSON:
 
 ### Dealing with large files
 
-We have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
+You can upload large files on api.video with <a href='https://docs.api.video/reference/post_videos-videoid-source'>Progressive Upload</a>. Alternatively, if you want to use regular upload, we have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return VideosApiUploadWithUploadTokenRequest
 */
@@ -876,7 +876,7 @@ Or in an HTML form, with a little JavaScript to convert the form into JSON:
 
 ### Dealing with large files
 
-We have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
+You can upload large files on api.video with <a href='https://docs.api.video/reference/post_videos-videoid-source'>Progressive Upload</a>. Alternatively, if you want to use regular upload, we have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
 
  * @return VideosApiUploadWithUploadTokenRequest
 */
@@ -934,7 +934,7 @@ Or in an HTML form, with a little JavaScript to convert the form into JSON:
 
 ### Dealing with large files
 
-We have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
+You can upload large files on api.video with <a href='https://docs.api.video/reference/post_videos-videoid-source'>Progressive Upload</a>. Alternatively, if you want to use regular upload, we have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return VideosApiUploadWithUploadTokenRequest
 */
@@ -1036,12 +1036,14 @@ func (s *VideosService) CreateWithContext(ctx context.Context, videoCreationPayl
 
 /*
  * Upload Upload a video
- * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.\nWe offer 2 types of upload:
-* Regular uploads
-* Progressive uploads
+ * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+We offer 2 types of upload:
+* Regular upload
+* Progressive upload
 The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
-* (1) allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
-* (2) allow to send a video source "progressively", i.e., before before knowing the total size of the video.\nOnce all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
+  * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+  * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
+  Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
 ```bash
 curl https://ws.api.video/videos/{videoId}/source \
   -H 'Authorization: Bearer {access_token}' \
@@ -1060,12 +1062,14 @@ func (s *VideosService) UploadFile(videoId string, file *os.File) (*Video, error
 
 /*
  * Upload Upload a video
- * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.\nWe offer 2 types of upload:
-* Regular uploads
-* Progressive uploads
+ * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+We offer 2 types of upload:
+* Regular upload
+* Progressive upload
 The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
-* (1) allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
-* (2) allow to send a video source "progressively", i.e., before before knowing the total size of the video.\nOnce all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
+  * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+  * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
+  Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
 ```bash
 curl https://ws.api.video/videos/{videoId}/source \
   -H 'Authorization: Bearer {access_token}' \
@@ -1155,12 +1159,14 @@ func (s *UploadStream) UploadLastPartWithContextFile(ctx context.Context, file *
 
 /*
  * Upload Upload a video
- * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.\nWe offer 2 types of upload:
-* Regular uploads
-* Progressive uploads
+ * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+We offer 2 types of upload:
+* Regular upload
+* Progressive upload
 The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
-* (1) allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
-* (2) allow to send a video source "progressively", i.e., before before knowing the total size of the video.\nOnce all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
+  * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+  * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
+  Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
 ```bash
 curl https://ws.api.video/videos/{videoId}/source \
   -H 'Authorization: Bearer {access_token}' \
@@ -1178,12 +1184,14 @@ func (s *VideosService) Upload(videoId string, fileName string, fileReader io.Re
 
 /*
  * Upload Upload a video
- * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.\nWe offer 2 types of upload:
-* Regular uploads
-* Progressive uploads
+ * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+We offer 2 types of upload:
+* Regular upload
+* Progressive upload
 The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
-* (1) allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
-* (2) allow to send a video source "progressively", i.e., before before knowing the total size of the video.\nOnce all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
+  * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+  * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
+  Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
 ```bash
 curl https://ws.api.video/videos/{videoId}/source \
   -H 'Authorization: Bearer {access_token}' \

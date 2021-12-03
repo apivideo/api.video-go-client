@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Delete**](PlayerThemes.md#Delete) | **Delete** /players/{playerId} | Delete a player
 [**DeleteLogo**](PlayerThemes.md#DeleteLogo) | **Delete** /players/{playerId}/logo | Delete logo
-[**List**](PlayerThemes.md#List) | **Get** /players | List all players
+[**List**](PlayerThemes.md#List) | **Get** /players | List all player themes
 [**Get**](PlayerThemes.md#Get) | **Get** /players/{playerId} | Show a player
 [**Update**](PlayerThemes.md#Update) | **Patch** /players/{playerId} | Update a player
 [**Create**](PlayerThemes.md#Create) | **Post** /players | Create a player
@@ -143,7 +143,7 @@ Name | Type | Description  | Notes
 
 
 
-List all players
+List all player themes
 
 
 
