@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Name** | Pointer to **string** | Add a name for your player theme here. | [optional] 
 **Text** | Pointer to **string** | RGBA color for timer text. Default: rgba(255, 255, 255, 1) | [optional] 
 **Link** | Pointer to **string** | RGBA color for all controls. Default: rgba(255, 255, 255, 1) | [optional] 
 **LinkHover** | Pointer to **string** | RGBA color for all controls when hovered. Default: rgba(255, 255, 255, 1) | [optional] 
@@ -37,6 +38,31 @@ will change when the set of required properties is changed
 NewPlayerThemeUpdatePayloadWithDefaults instantiates a new PlayerThemeUpdatePayload object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetName
+
+`func (o *PlayerThemeUpdatePayload) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *PlayerThemeUpdatePayload) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *PlayerThemeUpdatePayload) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *PlayerThemeUpdatePayload) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetText
 

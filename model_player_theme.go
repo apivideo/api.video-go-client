@@ -16,6 +16,8 @@ import (
 
 // PlayerTheme struct for PlayerTheme
 type PlayerTheme struct {
+	// The name of the player theme
+	Name *string `json:"name,omitempty"`
 	// RGBA color for timer text. Default: rgba(255, 255, 255, 1)
 	Text *string `json:"text,omitempty"`
 	// RGBA color for all controls. Default: rgba(255, 255, 255, 1)
@@ -70,6 +72,38 @@ func NewPlayerTheme(playerId string) *PlayerTheme {
 func NewPlayerThemeWithDefaults() *PlayerTheme {
 	this := PlayerTheme{}
 	return &this
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *PlayerTheme) GetName() string {
+	if o == nil || o.Name == nil {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlayerTheme) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *PlayerTheme) HasName() bool {
+	if o != nil && o.Name != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *PlayerTheme) SetName(v string) {
+	o.Name = &v
 }
 
 // GetText returns the Text field value if set, zero value otherwise.

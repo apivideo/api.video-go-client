@@ -190,7 +190,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Delete**](docs/PlayerThemes.md#Delete) | **Delete** /players/{playerId} | Delete a player
 [**DeleteLogo**](docs/PlayerThemes.md#DeleteLogo) | **Delete** /players/{playerId}/logo | Delete logo
-[**List**](docs/PlayerThemes.md#List) | **Get** /players | List all players
+[**List**](docs/PlayerThemes.md#List) | **Get** /players | List all player themes
 [**Get**](docs/PlayerThemes.md#Get) | **Get** /players/{playerId} | Show a player
 [**Update**](docs/PlayerThemes.md#Update) | **Patch** /players/{playerId} | Update a player
 [**Create**](docs/PlayerThemes.md#Create) | **Post** /players | Create a player
