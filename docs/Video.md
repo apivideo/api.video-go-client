@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **VideoId** | **string** | The unique identifier of the video object. | 
 **CreatedAt** | Pointer to **string** | When a video was created, presented in ISO-8601 format. | [optional] 
-**Title** | **string** | The title of the video content.  | 
+**Title** | Pointer to **string** | The title of the video content.  | [optional] 
 **Description** | Pointer to **string** | A description for the video content.  | [optional] 
 **PublishedAt** | Pointer to **string** | The date and time the API created the video. Date and time are provided using ISO-8601 UTC format. | [optional] 
 **UpdatedAt** | Pointer to **string** | The date and time the video was updated. Date and time are provided using ISO-8601 UTC format. | [optional] 
@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewVideo
 
-`func NewVideo(videoId string, title string, ) *Video`
+`func NewVideo(videoId string, ) *Video`
 
 NewVideo instantiates a new Video object
 This constructor will assign default values to properties that have it defined,
@@ -102,6 +102,11 @@ and a boolean to check if the value has been set.
 
 SetTitle sets Title field to given value.
 
+### HasTitle
+
+`func (o *Video) HasTitle() bool`
+
+HasTitle returns a boolean if a field has been set.
 
 ### GetDescription
 

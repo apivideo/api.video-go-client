@@ -8414,7 +8414,6 @@ components:
           example: true
           type: boolean
       required:
-      - title
       - videoId
       title: Video
       type: object
