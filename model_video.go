@@ -21,7 +21,7 @@ type Video struct {
 	// When a video was created, presented in ISO-8601 format.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// The title of the video content.
-	Title string `json:"title"`
+	Title *string `json:"title,omitempty"`
 	// A description for the video content.
 	Description *string `json:"description,omitempty"`
 	// The date and time the API created the video. Date and time are provided using ISO-8601 UTC format.
@@ -48,10 +48,9 @@ type Video struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVideo(videoId string, title string) *Video {
+func NewVideo(videoId string) *Video {
 	this := Video{}
 	this.VideoId = videoId
-	this.Title = title
 	return &this
 }
 
@@ -119,28 +118,36 @@ func (o *Video) SetCreatedAt(v string) {
 	o.CreatedAt = &v
 }
 
-// GetTitle returns the Title field value
+// GetTitle returns the Title field value if set, zero value otherwise.
 func (o *Video) GetTitle() string {
-	if o == nil {
+	if o == nil || o.Title == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Title
+	return *o.Title
 }
 
-// GetTitleOk returns a tuple with the Title field value
+// GetTitleOk returns a tuple with the Title field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Video) GetTitleOk() (*string, bool) {
-	if o == nil {
+	if o == nil || o.Title == nil {
 		return nil, false
 	}
-	return &o.Title, true
+	return o.Title, true
 }
 
-// SetTitle sets field value
+// HasTitle returns a boolean if a field has been set.
+func (o *Video) HasTitle() bool {
+	if o != nil && o.Title != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTitle gets a reference to the given string and assigns it to the Title field.
 func (o *Video) SetTitle(v string) {
-	o.Title = v
+	o.Title = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.

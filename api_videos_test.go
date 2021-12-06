@@ -81,7 +81,7 @@ var videoJSONResponses = []string{`{
 var videoStructs = []Video{
 	{
 		VideoId:     "vi4k0jvEUuaTdRAEjQ4Jfagz",
-		Title:       "Maths video",
+		Title:       PtrString("Maths video"),
 		Description: PtrString("An amazing video explaining the string theory"),
 		PublishedAt: PtrString("2019-07-14T23:36:18.598Z"),
 		UpdatedAt:   PtrString("2019-07-14T23:49:18.598Z"),
@@ -113,7 +113,7 @@ var videoStructs = []Video{
 	},
 	{
 		VideoId:     "vi6HangYsow3vXxwdx3YMlAb",
-		Title:       "Maths video 2",
+		Title:       PtrString("Maths video 2"),
 		Description: PtrString("An amazing video explaining the string theory 2"),
 		PublishedAt: PtrString("2019-07-16T23:36:18.598Z"),
 		UpdatedAt:   PtrString("2019-07-16T23:49:18.598Z"),
@@ -518,7 +518,7 @@ func TestVideos_Integration_CreateUploadWithUploadTokenStream(t *testing.T) {
 		}
 	}
 
-	if lastPart.Title != "10m.mp4.part.a" {
+	if *lastPart.Title != "10m.mp4.part.a" {
 		t.Fatalf("invalid title in result: %v != 10m.mp4.part.a", lastPart.Title)
 	}
 }
