@@ -475,7 +475,7 @@ func (s *PlayerThemesService) CreateWithContext(ctx context.Context, playerTheme
 
 /*
  * UploadLogo Upload a logo
- * The uploaded image maximum size should be 200x100 and its weight should be 200KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
+ * The uploaded image maximum size should be 200x100 and its weight should be 100KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
 
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUploadLogoRequest
@@ -487,7 +487,7 @@ func (s *PlayerThemesService) UploadLogoFile(playerId string, file *os.File, lin
 
 /*
  * UploadLogo Upload a logo
- * The uploaded image maximum size should be 200x100 and its weight should be 200KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
+ * The uploaded image maximum size should be 200x100 and its weight should be 100KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUploadLogoRequest
@@ -499,7 +499,7 @@ func (s *PlayerThemesService) UploadLogoFileWithContext(ctx context.Context, pla
 
 /*
  * UploadLogo Upload a logo
- * The uploaded image maximum size should be 200x100 and its weight should be 200KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
+ * The uploaded image maximum size should be 200x100 and its weight should be 100KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
 
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUploadLogoRequest
@@ -510,7 +510,7 @@ func (s *PlayerThemesService) UploadLogo(playerId string, link *string, fileName
 
 /*
  * UploadLogo Upload a logo
- * The uploaded image maximum size should be 200x100 and its weight should be 200KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
+ * The uploaded image maximum size should be 200x100 and its weight should be 100KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUploadLogoRequest
