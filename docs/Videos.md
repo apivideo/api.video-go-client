@@ -688,7 +688,7 @@ func main() {
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
     videoId := "videoId_example" // string | Unique identifier of the chosen video 
-    file := os.NewFile(1234, "some_file") // *os.File | The image to be added as a thumbnail.
+    file := os.NewFile(1234, "some_file") // *os.File | The .jpg image to be added as a thumbnail.
 
     
     res, err := client.Videos.UploadThumbnailFile(videoId, file)
@@ -716,7 +716,7 @@ Name | Type | Description  | Notes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**file** | ***os.File** | The image to be added as a thumbnail. | 
+**file** | ***os.File** | The .jpg image to be added as a thumbnail. | 
 
 ### Return type
 
