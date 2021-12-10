@@ -1292,9 +1292,9 @@ paths:
             \    // client := apivideosdk.SandboxClientBuilder(\"YOU_SANDBOX_API_TOKEN\"\
             ).Build()\n\n    videoId := \"videoId_example\" // string | Unique identifier\
             \ of the chosen video \n    file := os.NewFile(1234, \"some_file\") //\
-            \ *os.File | The image to be added as a thumbnail.\n\n\n    res, err :=\
-            \ client.Videos.UploadThumbnailFile(videoId, file)\n\n    // you can also\
-            \ use a Reader instead of a File:\n    // client.Videos.UploadThumbnail(videoId,\
+            \ *os.File | The .jpg image to be added as a thumbnail.\n\n\n    res,\
+            \ err := client.Videos.UploadThumbnailFile(videoId, file)\n\n    // you\
+            \ can also use a Reader instead of a File:\n    // client.Videos.UploadThumbnail(videoId,\
             \ fileName, fileReader)\n\n    if err != nil {\n        fmt.Fprintf(os.Stderr,\
             \ \"Error when calling `Videos.UploadThumbnail``: %v\\n\", err)\n    }\n\
             \    // response from `UploadThumbnail`: Video\n    fmt.Fprintf(os.Stdout,\
@@ -1305,9 +1305,9 @@ paths:
             \ {\n        const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\"\
             \ });\n\n        const videoId = 'videoId_example'; // Unique identifier\
             \ of the chosen video \n        const file = 'BINARY_DATA_HERE'; // The\
-            \ image to be added as a thumbnail.\n\n        // Video\n        const\
-            \ result = await client.videos.uploadThumbnail(videoId, file);\n     \
-            \   console.log(result);\n    } catch (e) {\n        console.error(e);\n\
+            \ .jpg image to be added as a thumbnail.\n\n        // Video\n       \
+            \ const result = await client.videos.uploadThumbnail(videoId, file);\n\
+            \        console.log(result);\n    } catch (e) {\n        console.error(e);\n\
             \    }\n})();\n"
         - language: python
           code: "#install the api.video API client library\n#pip install api.video\n\
@@ -1318,9 +1318,9 @@ paths:
             \ as api_client:\n    # Create an instance of the API class\n    api_instance\
             \ = videos_api.VideosApi(api_client)\n    video_id = \"videoId_example\"\
             \ # str | Unique identifier of the chosen video \n    file = open('/path/to/file',\
-            \ 'rb') # file_type | The image to be added as a thumbnail.\n\n    # example\
-            \ passing only required values which don't have defaults set\n    try:\n\
-            \        # Upload a thumbnail\n        api_response = api_instance.upload_thumbnail(video_id,\
+            \ 'rb') # file_type | The .jpg image to be added as a thumbnail.\n\n \
+            \   # example passing only required values which don't have defaults set\n\
+            \    try:\n        # Upload a thumbnail\n        api_response = api_instance.upload_thumbnail(video_id,\
             \ file)\n        pprint(api_response)\n    except apivideo.ApiException\
             \ as e:\n        print(\"Exception when calling VideosApi->upload_thumbnail:\
             \ %s\\n\" % e)\n"
@@ -1334,10 +1334,10 @@ paths:
             \ client = new ApiVideoClient(\"YOU_SANDBOX_API_TOKEN\", ApiVideoClient.Environment.SANDBOX);\n\
             \n   VideosApi apiInstance = client.videos();\n\n   String videoId = \"\
             videoId_example\"; // Unique identifier of the chosen video \n   File\
-            \ file = new File(\"/path/to/file\"); // The image to be added as a thumbnail.\n\
-            \n   try {\n     Video result = apiInstance.uploadThumbnail(videoId, file);\n\
-            \     System.out.println(result);\n   } catch (ApiException e) {\n   \
-            \  System.err.println(\"Exception when calling VideosApi#uploadThumbnail\"\
+            \ file = new File(\"/path/to/file\"); // The .jpg image to be added as\
+            \ a thumbnail.\n\n   try {\n     Video result = apiInstance.uploadThumbnail(videoId,\
+            \ file);\n     System.out.println(result);\n   } catch (ApiException e)\
+            \ {\n     System.err.println(\"Exception when calling VideosApi#uploadThumbnail\"\
             );\n     System.err.println(\"Status code: \" + e.getCode());\n     System.err.println(\"\
             Reason: \" + e.getMessage());\n     System.err.println(\"Response headers:\
             \ \" + e.getResponseHeaders());\n     e.printStackTrace();\n   }\n }\n\
@@ -1350,7 +1350,7 @@ paths:
             \ apiKey = \"YOUR_API_KEY\";\n\n            var apiInstance = new ApiVideoClient(apiKey,basePath);\n\
             \n            var videoId = videoId_example;  // string | Unique identifier\
             \ of the chosen video \n            var file = BINARY_DATA_HERE;  // System.IO.Stream\
-            \ | The image to be added as a thumbnail.\n            var apiVideosInstance\
+            \ | The .jpg image to be added as a thumbnail.\n            var apiVideosInstance\
             \ = apiInstance.Videos();\n            try\n            {\n          \
             \      // Upload a thumbnail\n                Video result = apiVideosInstance.uploadThumbnail(videoId,\
             \ file);\n                Debug.WriteLine(result);\n            }\n  \
@@ -3857,8 +3857,8 @@ paths:
             \    // client := apivideosdk.SandboxClientBuilder(\"YOU_SANDBOX_API_TOKEN\"\
             ).Build()\n        \n    liveStreamId := \"vi4k0jvEUuaTdRAEjQ4Jfrgz\"\
             \ // string | The unique ID for the live stream you want to upload.\n\
-            \    file := os.NewFile(1234, \"some_file\") // *os.File | The image to\
-            \ be added as a thumbnail.\n\n    \n    res, err := client.LiveStreams.UploadThumbnailFile(liveStreamId,\
+            \    file := os.NewFile(1234, \"some_file\") // *os.File | The .jpg image\
+            \ to be added as a thumbnail.\n\n    \n    res, err := client.LiveStreams.UploadThumbnailFile(liveStreamId,\
             \ file)\n\n    // you can also use a Reader instead of a File:\n    //\
             \ client.LiveStreams.UploadThumbnail(liveStreamId, fileName, fileReader)\n\
             \n    if err != nil {\n        fmt.Fprintf(os.Stderr, \"Error when calling\
@@ -3875,7 +3875,7 @@ paths:
                     const client = new ApiVideoClient({ apiKey: "YOUR_API_TOKEN" });
 
                     const liveStreamId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique ID for the live stream you want to upload.
-                    const file = 'BINARY_DATA_HERE'; // The image to be added as a thumbnail.
+                    const file = 'BINARY_DATA_HERE'; // The .jpg image to be added as a thumbnail.
 
                     // LiveStream
                     const result = await client.liveStreams.uploadThumbnail(liveStreamId, file);
@@ -3900,7 +3900,7 @@ paths:
                 # Create an instance of the API class
                 api_instance = live_streams_api.LiveStreamsApi(api_client)
                 live_stream_id = "vi4k0jvEUuaTdRAEjQ4Jfrgz" # str | The unique ID for the live stream you want to upload.
-                file = open('/path/to/file', 'rb') # file_type | The image to be added as a thumbnail.
+                file = open('/path/to/file', 'rb') # file_type | The .jpg image to be added as a thumbnail.
 
                 # example passing only required values which don't have defaults set
                 try:
@@ -3920,7 +3920,7 @@ paths:
             , ApiVideoClient.Environment.SANDBOX);\n\n    LiveStreamsApi apiInstance\
             \ = client.liveStreams();\n    \n    String liveStreamId = \"vi4k0jvEUuaTdRAEjQ4Jfrgz\"\
             ; // The unique ID for the live stream you want to upload.\n    File file\
-            \ = new File(\"/path/to/file\"); // The image to be added as a thumbnail.\n\
+            \ = new File(\"/path/to/file\"); // The .jpg image to be added as a thumbnail.\n\
             \n    try {\n      LiveStream result = apiInstance.uploadThumbnail(liveStreamId,\
             \ file);\n      System.out.println(result);\n    } catch (ApiException\
             \ e) {\n      System.err.println(\"Exception when calling LiveStreamsApi#uploadThumbnail\"\
@@ -3947,7 +3947,7 @@ paths:
                         var apiInstance = new ApiVideoClient(apiKey,basePath);
 
                         var liveStreamId = vi4k0jvEUuaTdRAEjQ4Jfrgz;  // string | The unique ID for the live stream you want to upload.
-                        var file = BINARY_DATA_HERE;  // System.IO.Stream | The image to be added as a thumbnail.
+                        var file = BINARY_DATA_HERE;  // System.IO.Stream | The .jpg image to be added as a thumbnail.
                         var apiLiveStreamsInstance = apiInstance.LiveStreams();
                         try
                         {
@@ -9238,7 +9238,7 @@ components:
     video-thumbnail-upload-payload:
       properties:
         file:
-          description: The image to be added as a thumbnail.
+          description: The .jpg image to be added as a thumbnail.
           format: binary
           type: string
       required:
@@ -9512,7 +9512,7 @@ components:
     live-stream-thumbnail-upload-payload:
       properties:
         file:
-          description: The image to be added as a thumbnail.
+          description: The .jpg image to be added as a thumbnail.
           format: binary
           type: string
       required:

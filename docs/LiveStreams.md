@@ -428,7 +428,7 @@ func main() {
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
     liveStreamId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique ID for the live stream you want to upload.
-    file := os.NewFile(1234, "some_file") // *os.File | The image to be added as a thumbnail.
+    file := os.NewFile(1234, "some_file") // *os.File | The .jpg image to be added as a thumbnail.
 
     
     res, err := client.LiveStreams.UploadThumbnailFile(liveStreamId, file)
@@ -456,7 +456,7 @@ Name | Type | Description  | Notes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**file** | ***os.File** | The image to be added as a thumbnail. | 
+**file** | ***os.File** | The .jpg image to be added as a thumbnail. | 
 
 ### Return type
 
