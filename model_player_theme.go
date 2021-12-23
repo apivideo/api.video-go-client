@@ -51,7 +51,7 @@ type PlayerTheme struct {
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// When the player was last updated, presented in ISO-8601 format.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
-	// Deprecated
+	// RGBA color for the play button when hovered.
 	LinkActive *string            `json:"linkActive,omitempty"`
 	Assets     *PlayerThemeAssets `json:"assets,omitempty"`
 }
