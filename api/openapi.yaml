@@ -178,7 +178,7 @@ paths:
         example: '["captions", "dialogue"]'
         explode: true
         in: query
-        name: tags
+        name: tags[]
         required: false
         schema:
           items:

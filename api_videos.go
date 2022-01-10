@@ -480,10 +480,10 @@ func (s *VideosService) ListWithContext(ctx context.Context, r VideosApiListRequ
 		if reflect.TypeOf(t).Kind() == reflect.Slice {
 			s := reflect.ValueOf(t)
 			for i := 0; i < s.Len(); i++ {
-				localVarQueryParams.Add("tags", parameterToString(s.Index(i), "multi"))
+				localVarQueryParams.Add("tags[]", parameterToString(s.Index(i), "multi"))
 			}
 		} else {
-			localVarQueryParams.Add("tags", parameterToString(t, "multi"))
+			localVarQueryParams.Add("tags[]", parameterToString(t, "multi"))
 		}
 	}
 	if r.metadata != nil {
