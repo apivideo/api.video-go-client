@@ -7,6 +7,7 @@ import (
 	"net/url"
 	"os"
 	"reflect"
+	"strings"
 	"testing"
 )
 
@@ -73,7 +74,7 @@ var videoJSONResponses = []string{`{
 	  "iframe": "<iframe src='//embed.api.video/vod/vi6HangYsow3vXxwdx3YMlAb' width='100%' height='100%' frameborder='0' scrolling='no' allowfullscreen=''></iframe>",
 	  "player": "https://embed.api.video/vod/vi6HangYsow3vXxwdx3YMlAb",
 	  "hls": "https://cdn.api.video/vod/vi6HangYsow3vXxwdx3YMlAb/hls/manifest.m3u8",
-	  "thumbnail": "https://cdn.api.video/vod/vi6HangYsow3vXxwdx3YMlAb/thumbnail.jpg"			
+	  "thumbnail": "https://cdn.api.video/vod/vi6HangYsow3vXxwdx3YMlAb/thumbnail.jpg"
 	}
   }`,
 }
@@ -327,9 +328,12 @@ func TestVideos_List(t *testing.T) {
 			"pageSize":       []string{"25"},
 			"sortBy":         []string{"publishedAt"},
 			"sortOrder":      []string{"desc"},
-			"tags":           []string{"tag1", "tag2"},
+			"tags[]":         []string{"tag1", "tag2"},
 			"metadata[key]":  []string{"value"},
 			"metadata[key2]": []string{"value2"},
+		}
+		if !strings.Contains(r.URL.String(), "tags%5B%5D=tag1&tags%5B%5D=tag2") {
+			t.Errorf("Tags are not properly set in the query string")
 		}
 		if !reflect.DeepEqual(r.URL.Query(), expectedQuery) {
 			t.Errorf("Request querystring\n got=%#v\nwant=%#v", r.URL.Query(), expectedQuery)
@@ -374,7 +378,7 @@ func TestVideos_ListUpdatedAt(t *testing.T) {
 			"pageSize":       []string{"25"},
 			"sortBy":         []string{"updatedAt"},
 			"sortOrder":      []string{"desc"},
-			"tags":           []string{"tag1", "tag2"},
+			"tags[]":         []string{"tag1", "tag2"},
 			"metadata[key]":  []string{"value"},
 			"metadata[key2]": []string{"value2"},
 		}
