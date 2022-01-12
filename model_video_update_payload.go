@@ -17,7 +17,7 @@ import (
 // VideoUpdatePayload struct for VideoUpdatePayload
 type VideoUpdatePayload struct {
 	// The unique ID for the player you want to associate with your video.
-	PlayerId *string `json:"playerId,omitempty"`
+	PlayerId *NullableString `json:"playerId,omitempty"`
 	// The title you want to use for your video.
 	Title *string `json:"title,omitempty"`
 	// A brief description of the video.
@@ -51,36 +51,47 @@ func NewVideoUpdatePayloadWithDefaults() *VideoUpdatePayload {
 	return &this
 }
 
-// GetPlayerId returns the PlayerId field value if set, zero value otherwise.
+// GetPlayerId returns the PlayerId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoUpdatePayload) GetPlayerId() string {
-	if o == nil || o.PlayerId == nil {
+	if o == nil || o.PlayerId.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.PlayerId
+	return *o.PlayerId.Get()
 }
 
 // GetPlayerIdOk returns a tuple with the PlayerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoUpdatePayload) GetPlayerIdOk() (*string, bool) {
-	if o == nil || o.PlayerId == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.PlayerId, true
+	return o.PlayerId.Get(), o.PlayerId.IsSet()
 }
 
 // HasPlayerId returns a boolean if a field has been set.
 func (o *VideoUpdatePayload) HasPlayerId() bool {
-	if o != nil && o.PlayerId != nil {
+	if o != nil && o.PlayerId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPlayerId gets a reference to the given string and assigns it to the PlayerId field.
+// SetPlayerId gets a reference to the given NullableString and assigns it to the PlayerId field.
 func (o *VideoUpdatePayload) SetPlayerId(v string) {
-	o.PlayerId = &v
+	o.PlayerId.Set(&v)
+}
+
+// SetPlayerIdNil sets the value for PlayerId to be an explicit nil
+func (o *VideoUpdatePayload) SetPlayerIdNil() {
+	o.PlayerId.Set(nil)
+}
+
+// UnsetPlayerId ensures that no value is present for PlayerId, not even an explicit nil
+func (o *VideoUpdatePayload) UnsetPlayerId() {
+	o.PlayerId.Unset()
 }
 
 // GetTitle returns the Title field value if set, zero value otherwise.

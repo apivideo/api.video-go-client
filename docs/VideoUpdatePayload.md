@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PlayerId** | Pointer to **string** | The unique ID for the player you want to associate with your video. | [optional] 
+**PlayerId** | Pointer to **NullableString** | The unique ID for the player you want to associate with your video. | [optional] 
 **Title** | Pointer to **string** | The title you want to use for your video. | [optional] 
 **Description** | Pointer to **string** | A brief description of the video. | [optional] 
 **Public** | Pointer to **bool** | Whether the video is publicly available or not. False means it is set to private. Default is true. Tutorials on [private videos](https://api.video/blog/endpoints/private-videos). | [optional] 
@@ -57,6 +57,16 @@ SetPlayerId sets PlayerId field to given value.
 
 HasPlayerId returns a boolean if a field has been set.
 
+### SetPlayerIdNil
+
+`func (o *VideoUpdatePayload) SetPlayerIdNil(b bool)`
+
+ SetPlayerIdNil sets the value for PlayerId to be an explicit nil
+
+### UnsetPlayerId
+`func (o *VideoUpdatePayload) UnsetPlayerId()`
+
+UnsetPlayerId ensures that no value is present for PlayerId, not even an explicit nil
 ### GetTitle
 
 `func (o *VideoUpdatePayload) GetTitle() string`
