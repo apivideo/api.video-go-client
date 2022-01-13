@@ -33,7 +33,9 @@ type VideoCreationPayload struct {
 	// A list of tags you want to use to describe your video.
 	Tags *[]string `json:"tags,omitempty"`
 	// A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. Read more on [dynamic metadata](https://api.video/blog/endpoints/dynamic-metadata).
-	Metadata *[]Metadata `json:"metadata,omitempty"`
+	Metadata  *[]Metadata     `json:"metadata,omitempty"`
+	Clip      *VideoClip      `json:"clip,omitempty"`
+	Watermark *VideoWatermark `json:"watermark,omitempty"`
 }
 
 // NewVideoCreationPayload instantiates a new VideoCreationPayload object
@@ -344,6 +346,70 @@ func (o *VideoCreationPayload) HasMetadata() bool {
 // SetMetadata gets a reference to the given []Metadata and assigns it to the Metadata field.
 func (o *VideoCreationPayload) SetMetadata(v []Metadata) {
 	o.Metadata = &v
+}
+
+// GetClip returns the Clip field value if set, zero value otherwise.
+func (o *VideoCreationPayload) GetClip() VideoClip {
+	if o == nil || o.Clip == nil {
+		var ret VideoClip
+		return ret
+	}
+	return *o.Clip
+}
+
+// GetClipOk returns a tuple with the Clip field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VideoCreationPayload) GetClipOk() (*VideoClip, bool) {
+	if o == nil || o.Clip == nil {
+		return nil, false
+	}
+	return o.Clip, true
+}
+
+// HasClip returns a boolean if a field has been set.
+func (o *VideoCreationPayload) HasClip() bool {
+	if o != nil && o.Clip != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetClip gets a reference to the given VideoClip and assigns it to the Clip field.
+func (o *VideoCreationPayload) SetClip(v VideoClip) {
+	o.Clip = &v
+}
+
+// GetWatermark returns the Watermark field value if set, zero value otherwise.
+func (o *VideoCreationPayload) GetWatermark() VideoWatermark {
+	if o == nil || o.Watermark == nil {
+		var ret VideoWatermark
+		return ret
+	}
+	return *o.Watermark
+}
+
+// GetWatermarkOk returns a tuple with the Watermark field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VideoCreationPayload) GetWatermarkOk() (*VideoWatermark, bool) {
+	if o == nil || o.Watermark == nil {
+		return nil, false
+	}
+	return o.Watermark, true
+}
+
+// HasWatermark returns a boolean if a field has been set.
+func (o *VideoCreationPayload) HasWatermark() bool {
+	if o != nil && o.Watermark != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetWatermark gets a reference to the given VideoWatermark and assigns it to the Watermark field.
+func (o *VideoCreationPayload) SetWatermark(v VideoWatermark) {
+	o.Watermark = &v
 }
 
 type NullableVideoCreationPayload struct {

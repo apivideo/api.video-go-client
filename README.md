@@ -19,6 +19,7 @@
     - [RawStatistics](#rawstatistics)
     - [UploadTokens](#uploadtokens)
     - [Videos](#videos)
+    - [Watermarks](#watermarks)
     - [Webhooks](#webhooks)
   - [Models](#models)
 - [Have you gotten use from this API client?](#have-you-gotten-use-from-this-api-client-)
@@ -259,6 +260,24 @@ Method | HTTP request | Description
 [**UploadThumbnail**](docs/Videos.md#UploadThumbnail) | **Post** /videos/{videoId}/thumbnail | Upload a thumbnail
 
 
+### Watermarks
+
+
+#### Retrieve an instance of the Watermarks API:
+```golang
+client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
+watermarksApi := client.Watermarks
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**Delete**](docs/Watermarks.md#Delete) | **Delete** /watermarks/{watermarkId} | Delete a watermark
+[**List**](docs/Watermarks.md#List) | **Get** /watermarks | List all watermarks
+[**Upload**](docs/Watermarks.md#Upload) | **Post** /watermarks | Upload a watermark
+
+
 ### Webhooks
 
 
@@ -323,6 +342,7 @@ Method | HTTP request | Description
  - [UploadToken](docs/UploadToken.md)
  - [Video](docs/Video.md)
  - [VideoAssets](docs/VideoAssets.md)
+ - [VideoClip](docs/VideoClip.md)
  - [VideoCreationPayload](docs/VideoCreationPayload.md)
  - [VideoSession](docs/VideoSession.md)
  - [VideoSessionClient](docs/VideoSessionClient.md)
@@ -340,7 +360,10 @@ Method | HTTP request | Description
  - [VideoStatusIngest](docs/VideoStatusIngest.md)
  - [VideoThumbnailPickPayload](docs/VideoThumbnailPickPayload.md)
  - [VideoUpdatePayload](docs/VideoUpdatePayload.md)
+ - [VideoWatermark](docs/VideoWatermark.md)
  - [VideosListResponse](docs/VideosListResponse.md)
+ - [Watermark](docs/Watermark.md)
+ - [WatermarksListResponse](docs/WatermarksListResponse.md)
  - [Webhook](docs/Webhook.md)
  - [WebhooksCreationPayload](docs/WebhooksCreationPayload.md)
  - [WebhooksListResponse](docs/WebhooksListResponse.md)

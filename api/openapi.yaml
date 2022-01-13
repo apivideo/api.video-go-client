@@ -1013,6 +1013,269 @@ paths:
                     }
                 }
             }
+  /watermarks:
+    get:
+      description: List all watermarks. A watermark is a static image overlapping
+        a video used as a "stamp" to limit leetching.
+      operationId: LIST-watermarks
+      parameters:
+      - description: 'Allowed: createdAt. You can search by the time watermark were
+          created at.'
+        example: createdAt
+        explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: 'Allowed: asc, desc. asc is ascending and sorts from A to Z.
+          desc is descending and sorts from Z to A.'
+        example: asc
+        explode: true
+        in: query
+        name: sortOrder
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: 'Choose the number of search results to return per page. Minimum
+          value: 1'
+        example: 2
+        explode: true
+        in: query
+        name: currentPage
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - description: Results per page. Allowed values 1-100, default is 25.
+        example: 30
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 25
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                    - watermarkId: watermark_1BWr2L5MTQwxGkuxKjzh6i
+                      createdAt: 2019-12-16T08:25:51+00:00
+                    - watermarkId: watermark_3BWC2L5MTQwxGkuxKjzh7g
+                      createdAt: 2019-12-16T08:25:51+00:00
+                    pagination:
+                      currentPage: 1
+                      pageSize: 25
+                      pagesTotal: 1
+                      itemsTotal: 11
+                      currentPageItems: 11
+                      links:
+                      - rel: self
+                        uri: https://ws.api.video/watermarks?currentPage=1
+                      - rel: first
+                        uri: https://ws.api.video/watermarks?currentPage=1
+                      - rel: last
+                        uri: https://ws.api.video/watermarks?currentPage=1
+              schema:
+                $ref: '#/components/schemas/watermarks-list-response'
+          description: Success
+        "400":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    title: This parameter is out of the allowed range of values.
+                    name: page
+                    status: 400
+                    range:
+                      min: 1
+                    problems:
+                    - title: This parameter is out of the allowed range of values.
+                      name: page
+                      range:
+                        min: 1
+                    - title: This parameter is out of the allowed range of values.
+                      name: pageSize
+                      range:
+                        min: 10
+                        max: 100
+              schema:
+                $ref: '#/components/schemas/bad-request'
+          description: Bad Request
+      security:
+      - bearerAuth: []
+      summary: List all watermarks
+      tags:
+      - Watermarks
+      x-client-action: list
+      x-group-parameters: true
+      x-client-paginated: true
+    post:
+      description: Create a new watermark by uploading a .jpg or a .png image. A watermark
+        is a static image overlapping a video used as a "stamp" to limit leetching.
+      operationId: POST_watermark
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/watermark-upload-payload'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    watermarkId: watermark_1BWr2L5MTQwxGkuxKjzh6i
+                    createdAt: 2020-03-03T12:52:03.085+00:00
+              schema:
+                $ref: '#/components/schemas/watermark'
+          description: Success
+        "400":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    status: 400
+                    type: https://docs.api.video/docs/fileextension
+                    title: Only [jpeg, jpg, JPG, JPEG, png, PNG] extensions are supported.
+                    name: file
+              schema:
+                $ref: '#/components/schemas/bad-request'
+          description: Bad Request
+      security:
+      - bearerAuth: []
+      summary: Upload a watermark
+      tags:
+      - Watermarks
+      x-client-action: upload
+      x-readme:
+        code-samples:
+        - language: go
+          code: "//install the Go API client\n//go get github.com/apivideo/api.video-go-client\n\
+            \npackage main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\n\
+            \    apivideosdk \"github.com/apivideo/api.video-go-client\"\n)\n\nfunc\
+            \ main() {\n    client := apivideosdk.ClientBuilder(\"YOUR_API_TOKEN\"\
+            ).Build()\n    // if you rather like to use the sandbox environment:\n\
+            \    // client := apivideosdk.SandboxClientBuilder(\"YOU_SANDBOX_API_TOKEN\"\
+            ).Build()\n\n    videoId := \"videoId_example\" // string | Unique identifier\
+            \ of the chosen video \n    file := os.NewFile(1234, \"some_file\") //\
+            \ *os.File | The .jpg image to be added as a thumbnail.\n\n\n    res,\
+            \ err := client.Videos.UploadThumbnailFile(videoId, file)\n\n    // you\
+            \ can also use a Reader instead of a File:\n    // client.Videos.UploadThumbnail(videoId,\
+            \ fileName, fileReader)\n\n    if err != nil {\n        fmt.Fprintf(os.Stderr,\
+            \ \"Error when calling `Videos.UploadThumbnail``: %v\\n\", err)\n    }\n\
+            \    // response from `UploadThumbnail`: Video\n    fmt.Fprintf(os.Stdout,\
+            \ \"Response from `Videos.UploadThumbnail`: %v\\n\", res)\n}\n"
+        - language: node
+          code: "//install the module with npm or yarn\n//npm install @api.video/nodejs-client\
+            \ --save\n//yarn add @api.video/nodejs-client\n(async () => {\n    try\
+            \ {\n        const client = new ApiVideoClient({ apiKey: \"YOUR_API_TOKEN\"\
+            \ });\n\n        const videoId = 'videoId_example'; // Unique identifier\
+            \ of the chosen video \n        const file = 'BINARY_DATA_HERE'; // The\
+            \ .jpg image to be added as a thumbnail.\n\n        // Video\n       \
+            \ const result = await client.videos.uploadThumbnail(videoId, file);\n\
+            \        console.log(result);\n    } catch (e) {\n        console.error(e);\n\
+            \    }\n})();\n"
+        - language: python
+          code: "#install the api.video API client library\n#pip install api.video\n\
+            \nimport apivideo\nfrom apivideo.api import videos_api\nfrom apivideo.model.bad_request\
+            \ import BadRequest\nfrom apivideo.model.not_found import NotFound\nfrom\
+            \ apivideo.model.video import Video\nfrom pprint import pprint\n\n# Enter\
+            \ a context with an instance of the API client\nwith apivideo.AuthenticatedApiClient(__API_KEY__)\
+            \ as api_client:\n    # Create an instance of the API class\n    api_instance\
+            \ = videos_api.VideosApi(api_client)\n    video_id = \"videoId_example\"\
+            \ # str | Unique identifier of the chosen video \n    file = open('/path/to/file',\
+            \ 'rb') # file_type | The .jpg image to be added as a thumbnail.\n\n \
+            \   # example passing only required values which don't have defaults set\n\
+            \    try:\n        # Upload a thumbnail\n        api_response = api_instance.upload_thumbnail(video_id,\
+            \ file)\n        pprint(api_response)\n    except apivideo.ApiException\
+            \ as e:\n        print(\"Exception when calling VideosApi->upload_thumbnail:\
+            \ %s\\n\" % e)\n"
+        - language: java
+          code: "//dependency addition instructions\n//https://github.com/apivideo/api.video-java-client\n\
+            // Import classes:\nimport video.api.client.ApiVideoClient;\nimport video.api.client.api.ApiException;\n\
+            import video.api.client.api.models.*;\nimport video.api.client.api.clients.VideosApi;\n\
+            import java.util.*;\n\npublic class Example {\n public static void main(String[]\
+            \ args) {\n   ApiVideoClient client = new ApiVideoClient(\"YOUR_API_TOKEN\"\
+            );\n   // if you rather like to use the sandbox environment:\n   // ApiVideoClient\
+            \ client = new ApiVideoClient(\"YOU_SANDBOX_API_TOKEN\", ApiVideoClient.Environment.SANDBOX);\n\
+            \n   VideosApi apiInstance = client.videos();\n\n   String videoId = \"\
+            videoId_example\"; // Unique identifier of the chosen video \n   File\
+            \ file = new File(\"/path/to/file\"); // The .jpg image to be added as\
+            \ a thumbnail.\n\n   try {\n     Video result = apiInstance.uploadThumbnail(videoId,\
+            \ file);\n     System.out.println(result);\n   } catch (ApiException e)\
+            \ {\n     System.err.println(\"Exception when calling VideosApi#uploadThumbnail\"\
+            );\n     System.err.println(\"Status code: \" + e.getCode());\n     System.err.println(\"\
+            Reason: \" + e.getMessage());\n     System.err.println(\"Response headers:\
+            \ \" + e.getResponseHeaders());\n     e.printStackTrace();\n   }\n }\n\
+            }\n"
+        - language: csharp
+          code: "//install via Nuget\n//Install-Package ApiVideo\n\nusing System.Diagnostics;\n\
+            using ApiVideo.Client;\n\nnamespace Example\n{\n    public class uploadThumbnailExample\n\
+            \    {\n        public static void Main()\n        {\n            var\
+            \ basePath = ApiVideoClient.Client.Environment.SANDBOX;\n            var\
+            \ apiKey = \"YOUR_API_KEY\";\n\n            var apiInstance = new ApiVideoClient(apiKey,basePath);\n\
+            \n            var videoId = videoId_example;  // string | Unique identifier\
+            \ of the chosen video \n            var file = BINARY_DATA_HERE;  // System.IO.Stream\
+            \ | The .jpg image to be added as a thumbnail.\n            var apiVideosInstance\
+            \ = apiInstance.Videos();\n            try\n            {\n          \
+            \      // Upload a thumbnail\n                Video result = apiVideosInstance.uploadThumbnail(videoId,\
+            \ file);\n                Debug.WriteLine(result);\n            }\n  \
+            \          catch (ApiException  e)\n            {\n                Debug.Print(\"\
+            Exception when calling VideosApi.uploadThumbnail: \" + e.Message );\n\
+            \                Debug.Print(\"Status Code: \"+ e.ErrorCode);\n      \
+            \          Debug.Print(e.StackTrace);\n            }\n        }\n    }\n\
+            }\n"
+  /watermarks/{watermarkId}:
+    delete:
+      description: Delete a watermark. A watermark is a static image overlapping a
+        video used as a "stamp" to limit leetching.
+      operationId: DELETE_watermark
+      parameters:
+      - description: The watermark ID for the watermark you want to delete.
+        example: watermark_1BWr2L5MTQwxGkuxKjzh6i
+        explode: false
+        in: path
+        name: watermarkId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "404":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    type: https://docs.api.video/docs/resourcenot_found
+                    title: The requested resource was not found.
+                    name: watermarkId
+                    status: 404
+              schema:
+                $ref: '#/components/schemas/not-found'
+          description: Not Found
+      security:
+      - bearerAuth: []
+      summary: Delete a watermark
+      tags:
+      - Watermarks
+      x-client-action: delete
   /videos/{videoId}/thumbnail:
     patch:
       description: |-
@@ -8417,6 +8680,69 @@ components:
       - videoId
       title: Video
       type: object
+    watermark:
+      example:
+        watermarkId: watermark_1BWr2L5MTQwxGkuxKjzh6i
+        createdAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        watermarkId:
+          description: The unique identifier of the watermark.
+          example: watermark_1BWr2L5MTQwxGkuxKjzh6i
+          type: string
+        createdAt:
+          description: When the watermark was created, presented in ISO-8601 format.
+          format: date-time
+          type: string
+      title: Watermark
+      type: object
+    watermarks-list-response:
+      example:
+        pagination:
+          itemsTotal: 123
+          pagesTotal: 7
+          pageSize: 20
+          currentPage: 3
+          currentPageItems: 20
+          links:
+            first:
+              rel: first
+              uri: /videos/search?currentPage=1&pageSize=20
+            previous:
+              rel: previous
+              uri: /videos/search?currentPage=2&pageSize=20
+            next:
+              rel: next
+              uri: /videos/search?currentPage=4&pageSize=20
+            last:
+              rel: last
+              uri: /videos/search?currentPage=6&pageSize=20
+        data:
+        - watermarkId: watermark_1BWr2L5MTQwxGkuxKjzh6i
+          createdAt: 2000-01-23T04:56:07.000+00:00
+        - watermarkId: watermark_1BWr2L5MTQwxGkuxKjzh6i
+          createdAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/watermark'
+          type: array
+        pagination:
+          $ref: '#/components/schemas/pagination'
+      required:
+      - data
+      - pagination
+      title: Watermarks
+      type: object
+    watermark-upload-payload:
+      properties:
+        file:
+          description: The .jpg or .png image to be added as a watermark.
+          format: binary
+          type: string
+      required:
+      - file
+      title: WatermarkUploadPayload
+      type: object
     player-theme:
       example:
         trackUnplayed: trackUnplayed
@@ -9153,6 +9479,12 @@ components:
           value: John Doe
         - key: Format
           value: Tutorial
+        watermark:
+          id: watermark_1BWr2L5MTQwxGkuxKjzh6i
+          bottom: 10px
+          right: 10px
+          width: 50%
+          opacity: 70%
       properties:
         title:
           description: The title of your new video.
@@ -9202,6 +9534,10 @@ components:
           items:
             $ref: '#/components/schemas/metadata'
           type: array
+        clip:
+          $ref: '#/components/schemas/video-clip'
+        watermark:
+          $ref: '#/components/schemas/video-watermark'
       required:
       - title
       title: VideoCreationPayload
@@ -9999,6 +10335,59 @@ components:
           format: uri
           type: string
       title: PaginationLink
+      type: object
+    video-watermark:
+      properties:
+        id:
+          description: id of the watermark
+          example: watermark_1BWr2L5MTQwxGkuxKjzh6i
+          type: string
+        top:
+          description: Distance expressed in px or % between the top-border of the
+            video and the watermark-image.
+          example: 10px
+          type: string
+        left:
+          description: Distance expressed in px or % between the left-border of the
+            video and the watermark-image.
+          example: 10px
+          type: string
+        bottom:
+          description: Distance expressed in px or % between the bottom-border of
+            the video and the watermark-image.
+          example: 10px
+          type: string
+        right:
+          description: Distance expressed in px or % between the right-border of the
+            video and the watermark-image.
+          example: 10px
+          type: string
+        width:
+          description: 'Width of the watermark-image relative to the video if expressed
+            in %. Otherwise a fixed width. NOTE: To keep intrinsic watermark-image
+            width use initial'
+          example: 50%
+          type: string
+        height:
+          description: 'Width of the watermark-image relative to the video if expressed
+            in %. Otherwise a fixed height. NOTE: To keep intrinsic watermark-image
+            height use initial'
+          example: 50%
+          type: string
+        opacity:
+          description: Opacity expressed in % only to specify the degree of the watermark-image
+            transparency with the video.
+          example: 70%
+          type: string
+      type: object
+    video-clip:
+      properties:
+        startTimecode:
+          pattern: ^(?:\d{2,3}:[0-5]\d:[0-5]\d(?:\.\d{1,3}|\:\d{1,2})?|\d{1,7})$
+          type: string
+        endTimecode:
+          pattern: ^(?:\d{2,3}:[0-5]\d:[0-5]\d(?:\.\d{1,3}|\:\d{1,2})?|\d{1,7})$
+          type: string
       type: object
     video-source-live-stream-link:
       properties:
