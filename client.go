@@ -32,6 +32,7 @@ type Client struct {
 	RawStatistics  RawStatisticsServiceI
 	UploadTokens   UploadTokensServiceI
 	Videos         VideosServiceI
+	Watermarks     WatermarksServiceI
 	Webhooks       WebhooksServiceI
 }
 
@@ -150,6 +151,7 @@ func (cb *Builder) Build() *Client {
 	c.RawStatistics = &RawStatisticsService{client: c}
 	c.UploadTokens = &UploadTokensService{client: c}
 	c.Videos = &VideosService{client: c}
+	c.Watermarks = &WatermarksService{client: c}
 	c.Webhooks = &WebhooksService{client: c}
 
 	return c
@@ -202,7 +204,7 @@ func (c *Client) prepareRequest(
 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("User-Agent", "api.video client (GO; v:1.1.0; )")
+	req.Header.Set("User-Agent", "api.video client (GO; v:1.2.0; )")
 
 	for headerName := range headerParams {
 		req.Header.Set(headerName, headerParams[headerName])
@@ -442,7 +444,7 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 
 		req.Header.Set("Accept", "application/json")
 		req.Header.Set("Content-Type", "application/json")
-		req.Header.Set("User-Agent", "api.video client (GO; v:1.1.0; )")
+		req.Header.Set("User-Agent", "api.video client (GO; v:1.2.0; )")
 
 		resp, err := c.httpClient.Do(req)
 

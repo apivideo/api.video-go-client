@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **PlayerId** | Pointer to **string** | The unique identification number for your video player. | [optional] 
 **Tags** | Pointer to **[]string** | A list of tags you want to use to describe your video. | [optional] 
 **Metadata** | Pointer to [**[]Metadata**](Metadata.md) | A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. Read more on [dynamic metadata](https://api.video/blog/endpoints/dynamic-metadata). | [optional] 
+**Clip** | Pointer to [**VideoClip**](VideoClip.md) |  | [optional] 
+**Watermark** | Pointer to [**VideoWatermark**](VideoWatermark.md) |  | [optional] 
 
 ## Methods
 
@@ -252,6 +254,56 @@ SetMetadata sets Metadata field to given value.
 `func (o *VideoCreationPayload) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetClip
+
+`func (o *VideoCreationPayload) GetClip() VideoClip`
+
+GetClip returns the Clip field if non-nil, zero value otherwise.
+
+### GetClipOk
+
+`func (o *VideoCreationPayload) GetClipOk() (*VideoClip, bool)`
+
+GetClipOk returns a tuple with the Clip field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClip
+
+`func (o *VideoCreationPayload) SetClip(v VideoClip)`
+
+SetClip sets Clip field to given value.
+
+### HasClip
+
+`func (o *VideoCreationPayload) HasClip() bool`
+
+HasClip returns a boolean if a field has been set.
+
+### GetWatermark
+
+`func (o *VideoCreationPayload) GetWatermark() VideoWatermark`
+
+GetWatermark returns the Watermark field if non-nil, zero value otherwise.
+
+### GetWatermarkOk
+
+`func (o *VideoCreationPayload) GetWatermarkOk() (*VideoWatermark, bool)`
+
+GetWatermarkOk returns a tuple with the Watermark field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWatermark
+
+`func (o *VideoCreationPayload) SetWatermark(v VideoWatermark)`
+
+SetWatermark sets Watermark field to given value.
+
+### HasWatermark
+
+`func (o *VideoCreationPayload) HasWatermark() bool`
+
+HasWatermark returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
