@@ -36,6 +36,12 @@ func PtrFloat64(v float64) *float64 { return &v }
 // PtrString is a helper routine that returns a pointer to given string value.
 func PtrString(v string) *string { return &v }
 
+// PtrNullableString is a helper routine that returns a pointer to given NullableString value.
+func PtrNullableString(v string) *NullableString { return NewNullableString(&v) }
+
+// PtrNullableStringNull is a helper routine that returns a pointer to NullableString that has nil value.
+func PtrNullableStringNull() *NullableString { return &NullableString{value: nil, isSet: true} }
+
 // PtrTime is helper routine that returns a pointer to given Time value.
 func PtrTime(v time.Time) *time.Time { return &v }
 

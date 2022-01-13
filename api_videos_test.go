@@ -166,7 +166,7 @@ var videoUpdateStruct = VideoUpdatePayload{
 	Description: PtrString("An amazing video explaining the string theory"),
 	Public:      PtrBool(true),
 	Panoramic:   PtrBool(false),
-	PlayerId:    PtrString("pl45KFKdlddgk654dspkze"),
+	PlayerId:    PtrNullableString("pl45KFKdlddgk654dspkze"),
 	Tags:        &[]string{"maths", "string theory", "video"},
 	Metadata: &[]Metadata{
 		{
@@ -607,6 +607,32 @@ func TestVideos_Update(t *testing.T) {
 	expected := &videoStructs[0]
 	if !reflect.DeepEqual(video, expected) {
 		t.Errorf("Videos.Update\n got=%#v\nwant=%#v", video, expected)
+	}
+}
+
+func TestVideosUpdate_MarshalPlayerId(t *testing.T) {
+	if data, err := json.Marshal(VideoUpdatePayload{PlayerId: nil}); err != nil {
+		panic(err)
+	} else {
+		if strings.Compare(string(data), "{}") != 0 {
+			t.Errorf("Empty playerId in video update payload not properly marshaled")
+		}
+	}
+
+	if data, err := json.Marshal(VideoUpdatePayload{PlayerId: PtrNullableStringNull()}); err != nil {
+		panic(err)
+	} else {
+		if strings.Compare(string(data), "{\"playerId\":null}") != 0 {
+			t.Errorf("Null playerId in video update payload not properly marshaled")
+		}
+	}
+
+	if data, err := json.Marshal(VideoUpdatePayload{PlayerId: PtrNullableString("aa")}); err != nil {
+		panic(err)
+	} else {
+		if strings.Compare(string(data), "{\"playerId\":\"aa\"}") != 0 {
+			t.Errorf("Defined playerId in video update payload not properly marshaled")
+		}
 	}
 }
 

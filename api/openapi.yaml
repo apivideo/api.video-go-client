@@ -9268,6 +9268,7 @@ components:
             video.
           example: pl4k0jvEUuaTdRAEjQ4Jfrgz
           type: string
+          x-optional-nullable: true
         title:
           description: The title you want to use for your video.
           type: string
