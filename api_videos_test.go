@@ -424,7 +424,24 @@ func createRealClient() *Client {
 		baseURL:         os.Getenv("BASE_URI"),
 		uploadChunkSize: minChunkSize,
 		apiKey:          os.Getenv("API_KEY"),
+		applicationName: "client-integration-tests",
 	}).Build()
+}
+
+func TestVideos_BadApplicationName(t *testing.T) {
+	cl := ClientBuilder("a").ApplicationName("bad application name").Build()
+
+	_, err := cl.Videos.Create(VideoCreationPayload{Title: "Upload stream GO"})
+
+	if err == nil {
+		t.Errorf("Application name validation should failed when invalid characters are used")
+	}
+
+	_, err2 := cl.Videos.Create(VideoCreationPayload{Title: "012345678901234567890123456789012345678901234567891"})
+
+	if err2 == nil {
+		t.Errorf("Application name validation should failed when too long")
+	}
 }
 
 func TestVideos_Integration_CreateUploadStream(t *testing.T) {

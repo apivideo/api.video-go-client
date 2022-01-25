@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -12,17 +13,19 @@ import (
 	"net/http"
 	"net/url"
 	"reflect"
+	"regexp"
 	"strings"
 	"time"
 )
 
 // Client type handles communicating with the api.video API
 type Client struct {
-	BaseURL    *url.URL
-	APIKey     string
-	httpClient Doer
-	chunkSize  int64
-	Token      *Token
+	BaseURL         *url.URL
+	APIKey          string
+	httpClient      Doer
+	chunkSize       int64
+	Token           *Token
+	applicationName string
 
 	Authentication AuthenticationServiceI
 	Captions       CaptionsServiceI
@@ -82,6 +85,7 @@ type Builder struct {
 	baseURL         string
 	uploadChunkSize int64
 	httpClient      Doer
+	applicationName string
 }
 
 func (cb *Builder) BaseURL(url string) *Builder {
@@ -91,6 +95,11 @@ func (cb *Builder) BaseURL(url string) *Builder {
 
 func (cb *Builder) APIKey(key string) *Builder {
 	cb.apiKey = key
+	return cb
+}
+
+func (cb *Builder) ApplicationName(applicationName string) *Builder {
+	cb.applicationName = applicationName
 	return cb
 }
 
@@ -137,10 +146,11 @@ func (cb *Builder) Build() *Client {
 	}
 
 	c := &Client{
-		BaseURL:    baseURL,
-		APIKey:     cb.apiKey,
-		httpClient: httpClient,
-		chunkSize:  cb.uploadChunkSize,
+		BaseURL:         baseURL,
+		APIKey:          cb.apiKey,
+		httpClient:      httpClient,
+		chunkSize:       cb.uploadChunkSize,
+		applicationName: cb.applicationName,
 	}
 
 	c.Authentication = &AuthenticationService{client: c}
@@ -204,7 +214,12 @@ func (c *Client) prepareRequest(
 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("User-Agent", "api.video client (GO; v:1.2.0; )")
+
+	userAgent, err := getUserAgent(c.applicationName)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("User-Agent", userAgent)
 
 	for headerName := range headerParams {
 		req.Header.Set(headerName, headerParams[headerName])
@@ -218,6 +233,17 @@ func (c *Client) prepareRequest(
 	}
 
 	return req, nil
+}
+
+func getUserAgent(applicationName string) (string, error) {
+	if applicationName == "" {
+		return "api.video client (GO; v:1.2.1; )", nil
+	}
+	var re = regexp.MustCompile(`(?m)^[\w-\/\.]{1,50}$`)
+	if !re.MatchString(applicationName) {
+		return "", errors.New("Invalid application name. Allowed characters: A-Z, a-z, 0-9, '-', '_', '/'. Max length: 50")
+	}
+	return "api.video client (GO; v:1.2.1; ) " + applicationName, nil
 }
 
 func (c *Client) prepareProgressiveUploadRequest(
@@ -444,7 +470,12 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 
 		req.Header.Set("Accept", "application/json")
 		req.Header.Set("Content-Type", "application/json")
-		req.Header.Set("User-Agent", "api.video client (GO; v:1.2.0; )")
+
+		userAgent, err := getUserAgent(c.applicationName)
+		if err != nil {
+			return nil, err
+		}
+		req.Header.Set("User-Agent", userAgent)
 
 		resp, err := c.httpClient.Do(req)
 
