@@ -24,6 +24,8 @@ type PlayerThemeCreationPayload struct {
 	Link *string `json:"link,omitempty"`
 	// RGBA color for all controls when hovered. Default: rgba(255, 255, 255, 1)
 	LinkHover *string `json:"linkHover,omitempty"`
+	// RGBA color for the play button when hovered.
+	LinkActive *string `json:"linkActive,omitempty"`
 	// RGBA color playback bar: played content. Default: rgba(88, 131, 255, .95)
 	TrackPlayed *string `json:"trackPlayed,omitempty"`
 	// RGBA color playback bar: downloaded but unplayed (buffered) content. Default: rgba(255, 255, 255, .35)
@@ -211,6 +213,38 @@ func (o *PlayerThemeCreationPayload) HasLinkHover() bool {
 // SetLinkHover gets a reference to the given string and assigns it to the LinkHover field.
 func (o *PlayerThemeCreationPayload) SetLinkHover(v string) {
 	o.LinkHover = &v
+}
+
+// GetLinkActive returns the LinkActive field value if set, zero value otherwise.
+func (o *PlayerThemeCreationPayload) GetLinkActive() string {
+	if o == nil || o.LinkActive == nil {
+		var ret string
+		return ret
+	}
+	return *o.LinkActive
+}
+
+// GetLinkActiveOk returns a tuple with the LinkActive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlayerThemeCreationPayload) GetLinkActiveOk() (*string, bool) {
+	if o == nil || o.LinkActive == nil {
+		return nil, false
+	}
+	return o.LinkActive, true
+}
+
+// HasLinkActive returns a boolean if a field has been set.
+func (o *PlayerThemeCreationPayload) HasLinkActive() bool {
+	if o != nil && o.LinkActive != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLinkActive gets a reference to the given string and assigns it to the LinkActive field.
+func (o *PlayerThemeCreationPayload) SetLinkActive(v string) {
+	o.LinkActive = &v
 }
 
 // GetTrackPlayed returns the TrackPlayed field value if set, zero value otherwise.

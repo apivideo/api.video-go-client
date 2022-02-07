@@ -24,6 +24,8 @@ type PlayerTheme struct {
 	Link *string `json:"link,omitempty"`
 	// RGBA color for all controls when hovered. Default: rgba(255, 255, 255, 1)
 	LinkHover *string `json:"linkHover,omitempty"`
+	// RGBA color for the play button when hovered.
+	LinkActive *string `json:"linkActive,omitempty"`
 	// RGBA color playback bar: played content. Default: rgba(88, 131, 255, .95)
 	TrackPlayed *string `json:"trackPlayed,omitempty"`
 	// RGBA color playback bar: downloaded but unplayed (buffered) content. Default: rgba(255, 255, 255, .35)
@@ -50,10 +52,8 @@ type PlayerTheme struct {
 	// When the player was created, presented in ISO-8601 format.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// When the player was last updated, presented in ISO-8601 format.
-	UpdatedAt *string `json:"updatedAt,omitempty"`
-	// RGBA color for the play button when hovered.
-	LinkActive *string            `json:"linkActive,omitempty"`
-	Assets     *PlayerThemeAssets `json:"assets,omitempty"`
+	UpdatedAt *string            `json:"updatedAt,omitempty"`
+	Assets    *PlayerThemeAssets `json:"assets,omitempty"`
 }
 
 // NewPlayerTheme instantiates a new PlayerTheme object
@@ -200,6 +200,38 @@ func (o *PlayerTheme) HasLinkHover() bool {
 // SetLinkHover gets a reference to the given string and assigns it to the LinkHover field.
 func (o *PlayerTheme) SetLinkHover(v string) {
 	o.LinkHover = &v
+}
+
+// GetLinkActive returns the LinkActive field value if set, zero value otherwise.
+func (o *PlayerTheme) GetLinkActive() string {
+	if o == nil || o.LinkActive == nil {
+		var ret string
+		return ret
+	}
+	return *o.LinkActive
+}
+
+// GetLinkActiveOk returns a tuple with the LinkActive field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlayerTheme) GetLinkActiveOk() (*string, bool) {
+	if o == nil || o.LinkActive == nil {
+		return nil, false
+	}
+	return o.LinkActive, true
+}
+
+// HasLinkActive returns a boolean if a field has been set.
+func (o *PlayerTheme) HasLinkActive() bool {
+	if o != nil && o.LinkActive != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLinkActive gets a reference to the given string and assigns it to the LinkActive field.
+func (o *PlayerTheme) SetLinkActive(v string) {
+	o.LinkActive = &v
 }
 
 // GetTrackPlayed returns the TrackPlayed field value if set, zero value otherwise.
@@ -640,38 +672,6 @@ func (o *PlayerTheme) HasUpdatedAt() bool {
 // SetUpdatedAt gets a reference to the given string and assigns it to the UpdatedAt field.
 func (o *PlayerTheme) SetUpdatedAt(v string) {
 	o.UpdatedAt = &v
-}
-
-// GetLinkActive returns the LinkActive field value if set, zero value otherwise.
-func (o *PlayerTheme) GetLinkActive() string {
-	if o == nil || o.LinkActive == nil {
-		var ret string
-		return ret
-	}
-	return *o.LinkActive
-}
-
-// GetLinkActiveOk returns a tuple with the LinkActive field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PlayerTheme) GetLinkActiveOk() (*string, bool) {
-	if o == nil || o.LinkActive == nil {
-		return nil, false
-	}
-	return o.LinkActive, true
-}
-
-// HasLinkActive returns a boolean if a field has been set.
-func (o *PlayerTheme) HasLinkActive() bool {
-	if o != nil && o.LinkActive != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetLinkActive gets a reference to the given string and assigns it to the LinkActive field.
-func (o *PlayerTheme) SetLinkActive(v string) {
-	o.LinkActive = &v
 }
 
 // GetAssets returns the Assets field value if set, zero value otherwise.
