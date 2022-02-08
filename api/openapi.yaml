@@ -8782,6 +8782,9 @@ components:
           description: 'RGBA color for all controls when hovered. Default: rgba(255,
             255, 255, 1)'
           type: string
+        linkActive:
+          description: RGBA color for the play button when hovered.
+          type: string
         trackPlayed:
           description: 'RGBA color playback bar: played content. Default: rgba(88,
             131, 255, .95)'
@@ -8833,9 +8836,6 @@ components:
           example: 2020-01-31T10:18:47Z
           format: date-time
           type: string
-        linkActive:
-          description: RGBA color for the play button when hovered.
-          type: string
         assets:
           $ref: '#/components/schemas/player_theme_assets'
       required:
@@ -8884,6 +8884,9 @@ components:
         linkHover:
           description: 'RGBA color for all controls when hovered. Default: rgba(255,
             255, 255, 1)'
+          type: string
+        linkActive:
+          description: RGBA color for the play button when hovered.
           type: string
         trackPlayed:
           description: 'RGBA color playback bar: played content. Default: rgba(88,
@@ -8946,6 +8949,9 @@ components:
         linkHover:
           description: 'RGBA color for all controls when hovered. Default: rgba(255,
             255, 255, 1)'
+          type: string
+        linkActive:
+          description: RGBA color for the play button when hovered.
           type: string
         trackPlayed:
           description: 'RGBA color playback bar: played content. Default: rgba(88,

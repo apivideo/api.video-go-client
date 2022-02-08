@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Text** | Pointer to **string** | RGBA color for timer text. Default: rgba(255, 255, 255, 1) | [optional] 
 **Link** | Pointer to **string** | RGBA color for all controls. Default: rgba(255, 255, 255, 1) | [optional] 
 **LinkHover** | Pointer to **string** | RGBA color for all controls when hovered. Default: rgba(255, 255, 255, 1) | [optional] 
+**LinkActive** | Pointer to **string** | RGBA color for the play button when hovered. | [optional] 
 **TrackPlayed** | Pointer to **string** | RGBA color playback bar: played content. Default: rgba(88, 131, 255, .95) | [optional] 
 **TrackUnplayed** | Pointer to **string** | RGBA color playback bar: downloaded but unplayed (buffered) content. Default: rgba(255, 255, 255, .35) | [optional] 
 **TrackBackground** | Pointer to **string** | RGBA color playback bar: background. Default: rgba(255, 255, 255, .2) | [optional] 
@@ -138,6 +139,31 @@ SetLinkHover sets LinkHover field to given value.
 `func (o *PlayerThemeUpdatePayload) HasLinkHover() bool`
 
 HasLinkHover returns a boolean if a field has been set.
+
+### GetLinkActive
+
+`func (o *PlayerThemeUpdatePayload) GetLinkActive() string`
+
+GetLinkActive returns the LinkActive field if non-nil, zero value otherwise.
+
+### GetLinkActiveOk
+
+`func (o *PlayerThemeUpdatePayload) GetLinkActiveOk() (*string, bool)`
+
+GetLinkActiveOk returns a tuple with the LinkActive field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinkActive
+
+`func (o *PlayerThemeUpdatePayload) SetLinkActive(v string)`
+
+SetLinkActive sets LinkActive field to given value.
+
+### HasLinkActive
+
+`func (o *PlayerThemeUpdatePayload) HasLinkActive() bool`
+
+HasLinkActive returns a boolean if a field has been set.
 
 ### GetTrackPlayed
 
