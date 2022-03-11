@@ -20,12 +20,13 @@ import (
 
 // Client type handles communicating with the api.video API
 type Client struct {
-	BaseURL         *url.URL
-	APIKey          string
-	httpClient      Doer
-	chunkSize       int64
-	Token           *Token
-	applicationName string
+	BaseURL            *url.URL
+	APIKey             string
+	httpClient         Doer
+	chunkSize          int64
+	Token              *Token
+	applicationName    string
+	applicationVersion string
 
 	Authentication AuthenticationServiceI
 	Captions       CaptionsServiceI
@@ -81,11 +82,12 @@ type Doer interface {
 }
 
 type Builder struct {
-	apiKey          string
-	baseURL         string
-	uploadChunkSize int64
-	httpClient      Doer
-	applicationName string
+	apiKey             string
+	baseURL            string
+	uploadChunkSize    int64
+	httpClient         Doer
+	applicationName    string
+	applicationVersion string
 }
 
 func (cb *Builder) BaseURL(url string) *Builder {
@@ -100,6 +102,11 @@ func (cb *Builder) APIKey(key string) *Builder {
 
 func (cb *Builder) ApplicationName(applicationName string) *Builder {
 	cb.applicationName = applicationName
+	return cb
+}
+
+func (cb *Builder) ApplicationVersion(applicationVersion string) *Builder {
+	cb.applicationVersion = applicationVersion
 	return cb
 }
 
@@ -146,11 +153,12 @@ func (cb *Builder) Build() *Client {
 	}
 
 	c := &Client{
-		BaseURL:         baseURL,
-		APIKey:          cb.apiKey,
-		httpClient:      httpClient,
-		chunkSize:       cb.uploadChunkSize,
-		applicationName: cb.applicationName,
+		BaseURL:            baseURL,
+		APIKey:             cb.apiKey,
+		httpClient:         httpClient,
+		chunkSize:          cb.uploadChunkSize,
+		applicationName:    cb.applicationName,
+		applicationVersion: cb.applicationVersion,
 	}
 
 	c.Authentication = &AuthenticationService{client: c}
@@ -215,11 +223,15 @@ func (c *Client) prepareRequest(
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
 
-	userAgent, err := getUserAgent(c.applicationName)
+	originAppHeaderValue, err := getOriginAppHeaderValue(c.applicationName, c.applicationVersion)
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", userAgent)
+	if originAppHeaderValue != "" {
+		req.Header.Set("AV-Origin-App", originAppHeaderValue)
+	}
+
+	req.Header.Set("AV-Origin-Client", "go:1.2.2")
 
 	for headerName := range headerParams {
 		req.Header.Set(headerName, headerParams[headerName])
@@ -235,15 +247,27 @@ func (c *Client) prepareRequest(
 	return req, nil
 }
 
-func getUserAgent(applicationName string) (string, error) {
+func getOriginAppHeaderValue(applicationName string, applicationVersion string) (string, error) {
 	if applicationName == "" {
-		return "api.video client (GO; v:1.2.1; )", nil
+		if applicationVersion != "" {
+			return "", errors.New("applicationName is mandatory when applicationVersion is set.")
+		}
+		return "", nil
 	}
-	var re = regexp.MustCompile(`(?m)^[\w-\/\.]{1,50}$`)
+	var re = regexp.MustCompile(`(?m)^[\w-]{1,50}$`)
 	if !re.MatchString(applicationName) {
-		return "", errors.New("Invalid application name. Allowed characters: A-Z, a-z, 0-9, '-', '_', '/'. Max length: 50")
+		return "", errors.New("Invalid applicationName value. Allowed characters: A-Z, a-z, 0-9, '-', '_'. Max length: 50.")
 	}
-	return "api.video client (GO; v:1.2.1; ) " + applicationName, nil
+
+	if applicationVersion != "" {
+		var reVersion = regexp.MustCompile(`(?m)^\d{1,3}(\.\d{1,3}(\.\d{1,3})?)?$`)
+		if !reVersion.MatchString(applicationVersion) {
+			return "", errors.New("Invalid applicationVersion value. The version should match the xxx[.yyy][.zzz] pattern.")
+		}
+
+		return applicationName + ":" + applicationVersion, nil
+	}
+	return applicationName, nil
 }
 
 func (c *Client) prepareProgressiveUploadRequest(
@@ -471,11 +495,14 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 		req.Header.Set("Accept", "application/json")
 		req.Header.Set("Content-Type", "application/json")
 
-		userAgent, err := getUserAgent(c.applicationName)
+		originAppHeaderValue, err := getOriginAppHeaderValue(c.applicationName, c.applicationVersion)
 		if err != nil {
 			return nil, err
 		}
-		req.Header.Set("User-Agent", userAgent)
+		if originAppHeaderValue != "" {
+			req.Header.Set("AV-Origin-App", originAppHeaderValue)
+		}
+		req.Header.Set("AV-Origin-Client", "go:1.2.2")
 
 		resp, err := c.httpClient.Do(req)
 
