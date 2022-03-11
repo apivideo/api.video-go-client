@@ -480,7 +480,7 @@ func TestVideos_Integration_CreateUploadStream(t *testing.T) {
 		}
 	}
 
-	if lastPart.Title != video.Title {
+	if *lastPart.Title != *video.Title {
 		t.Fatalf("invalid title in result: %v != %v", lastPart.Title, video.Title)
 	}
 }
@@ -498,7 +498,7 @@ func TestVideos_Integration_UploadChunk(t *testing.T) {
 	f, _ := os.Open("./test-assets/10m.mp4")
 	v, err := cl.Videos.UploadFile(video.VideoId, f)
 
-	if v.Title != video.Title {
+	if *v.Title != *video.Title {
 		t.Fatalf("invalid title in result: %v != %v", v.Title, video.Title)
 	}
 }

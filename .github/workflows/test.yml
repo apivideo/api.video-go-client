@@ -13,5 +13,7 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
       - name: Test
-        run: |
-          go test
+        run: go test
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          BASE_URI: https://ws.api.video
