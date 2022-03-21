@@ -20,7 +20,7 @@ type BytesRange struct {
 	From *int32 `json:"from,omitempty"`
 	// The ending point for the range of bytes for a chunk of a video.
 	To *int32 `json:"to,omitempty"`
-	// The total number of bytes in the provided range.
+	// The total number of expected bytes.
 	Total *int32 `json:"total,omitempty"`
 }
 

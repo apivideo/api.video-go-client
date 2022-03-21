@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **From** | Pointer to **int32** | The starting point for the range of bytes for a chunk of a video. | [optional] 
 **To** | Pointer to **int32** | The ending point for the range of bytes for a chunk of a video. | [optional] 
-**Total** | Pointer to **int32** | The total number of bytes in the provided range. | [optional] 
+**Total** | Pointer to **int32** | The total number of expected bytes. | [optional] 
 
 ## Methods
 

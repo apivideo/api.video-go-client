@@ -9437,7 +9437,7 @@ components:
           example: 9999
           type: integer
         total:
-          description: The total number of bytes in the provided range.
+          description: The total number of expected bytes.
           example: 10000
           type: integer
       title: BytesRange
@@ -10953,8 +10953,8 @@ components:
     video_status_ingest_receivedParts:
       properties:
         parts:
-          description: The parts that are have been uploaded, ordered. For example,
-            if part 2 was sent before part 1, and both have been uploaded, the output
+          description: The parts that have been uploaded, ordered. For example, if
+            part 2 was sent before part 1, and both have been uploaded, the output
             will be [1, 2].
           example: '[1, 2, 3]'
           items:
