@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Samplerate** | Pointer to **int32** | How many samples per second a digital audio system uses to record an audio signal. The higher the rate, the higher the frequencies that can be recorded. They are presented in this API using hertz. | [optional] 
 **VideoCodec** | Pointer to **string** | The method used to compress and decompress digital video. API Video supports all codecs in the libavcodec library.  | [optional] 
 **AudioCodec** | Pointer to **string** | The method used to compress and decompress digital audio for your video. | [optional] 
-**AspectRatio** | Pointer to **string** |  | [optional] 
+**AspectRatio** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
 
@@ -258,6 +258,16 @@ SetAspectRatio sets AspectRatio field to given value.
 
 HasAspectRatio returns a boolean if a field has been set.
 
+### SetAspectRatioNil
+
+`func (o *VideoStatusEncodingMetadata) SetAspectRatioNil(b bool)`
+
+ SetAspectRatioNil sets the value for AspectRatio to be an explicit nil
+
+### UnsetAspectRatio
+`func (o *VideoStatusEncodingMetadata) UnsetAspectRatio()`
+
+UnsetAspectRatio ensures that no value is present for AspectRatio, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

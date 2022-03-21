@@ -115,7 +115,7 @@ type WatermarksService struct {
 
 /*
  * Delete Delete a watermark
- * Delete a watermark. A watermark is a static image overlapping a video used as a "stamp" to limit leetching.
+ * Delete a watermark. A watermark is a static image, directly burnt-into a video.
 
  * @param watermarkId The watermark ID for the watermark you want to delete.
  * @return WatermarksApiDeleteRequest
@@ -129,7 +129,7 @@ func (s *WatermarksService) Delete(watermarkId string) error {
 
 /*
  * Delete Delete a watermark
- * Delete a watermark. A watermark is a static image overlapping a video used as a "stamp" to limit leetching.
+ * Delete a watermark. A watermark is a static image, directly burnt-into a video.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param watermarkId The watermark ID for the watermark you want to delete.
  * @return WatermarksApiDeleteRequest
@@ -161,7 +161,7 @@ func (s *WatermarksService) DeleteWithContext(ctx context.Context, watermarkId s
 
 /*
  * List List all watermarks
- * List all watermarks. A watermark is a static image overlapping a video used as a "stamp" to limit leetching.
+ * List all watermarks. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
 
  * @return WatermarksApiListRequest
  */
@@ -174,7 +174,7 @@ func (s *WatermarksService) List(r WatermarksApiListRequest) (*WatermarksListRes
 
 /*
  * List List all watermarks
- * List all watermarks. A watermark is a static image overlapping a video used as a "stamp" to limit leetching.
+ * List all watermarks. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return WatermarksApiListRequest
  */
@@ -217,7 +217,7 @@ func (s *WatermarksService) ListWithContext(ctx context.Context, r WatermarksApi
 
 /*
  * Upload Upload a watermark
- * Create a new watermark by uploading a .jpg or a .png image. A watermark is a static image overlapping a video used as a "stamp" to limit leetching.
+ * Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
 
  * @return WatermarksApiUploadRequest
  */
@@ -228,7 +228,7 @@ func (s *WatermarksService) UploadFile(file *os.File) (*Watermark, error) {
 
 /*
  * Upload Upload a watermark
- * Create a new watermark by uploading a .jpg or a .png image. A watermark is a static image overlapping a video used as a "stamp" to limit leetching.
+ * Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return WatermarksApiUploadRequest
  */
@@ -239,7 +239,7 @@ func (s *WatermarksService) UploadFileWithContext(ctx context.Context, file *os.
 
 /*
  * Upload Upload a watermark
- * Create a new watermark by uploading a .jpg or a .png image. A watermark is a static image overlapping a video used as a "stamp" to limit leetching.
+ * Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
 
  * @return WatermarksApiUploadRequest
  */
@@ -249,7 +249,7 @@ func (s *WatermarksService) Upload(fileName string, fileReader io.Reader) (*Wate
 
 /*
  * Upload Upload a watermark
- * Create a new watermark by uploading a .jpg or a .png image. A watermark is a static image overlapping a video used as a "stamp" to limit leetching.
+ * Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return WatermarksApiUploadRequest
  */

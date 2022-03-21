@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | There are three possible ingest statuses. missing - you are missing information required to ingest the video. uploading - the video is in the process of being uploaded. uploaded - the video is ready for use. | [optional] 
 **Filesize** | Pointer to **int32** | The size of your file in bytes. | [optional] 
 **ReceivedBytes** | Pointer to [**[]BytesRange**](BytesRange.md) | The total number of bytes received, listed for each chunk of the upload. | [optional] 
+**ReceivedParts** | Pointer to [**VideoStatusIngestReceivedParts**](VideoStatusIngestReceivedParts.md) |  | [optional] 
 
 ## Methods
 
@@ -101,6 +102,31 @@ SetReceivedBytes sets ReceivedBytes field to given value.
 `func (o *VideoStatusIngest) HasReceivedBytes() bool`
 
 HasReceivedBytes returns a boolean if a field has been set.
+
+### GetReceivedParts
+
+`func (o *VideoStatusIngest) GetReceivedParts() VideoStatusIngestReceivedParts`
+
+GetReceivedParts returns the ReceivedParts field if non-nil, zero value otherwise.
+
+### GetReceivedPartsOk
+
+`func (o *VideoStatusIngest) GetReceivedPartsOk() (*VideoStatusIngestReceivedParts, bool)`
+
+GetReceivedPartsOk returns a tuple with the ReceivedParts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReceivedParts
+
+`func (o *VideoStatusIngest) SetReceivedParts(v VideoStatusIngestReceivedParts)`
+
+SetReceivedParts sets ReceivedParts field to given value.
+
+### HasReceivedParts
+
+`func (o *VideoStatusIngest) HasReceivedParts() bool`
+
+HasReceivedParts returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

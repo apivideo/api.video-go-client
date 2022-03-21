@@ -21,7 +21,8 @@ type VideoStatusIngest struct {
 	// The size of your file in bytes.
 	Filesize *int32 `json:"filesize,omitempty"`
 	// The total number of bytes received, listed for each chunk of the upload.
-	ReceivedBytes *[]BytesRange `json:"receivedBytes,omitempty"`
+	ReceivedBytes *[]BytesRange                   `json:"receivedBytes,omitempty"`
+	ReceivedParts *VideoStatusIngestReceivedParts `json:"receivedParts,omitempty"`
 }
 
 // NewVideoStatusIngest instantiates a new VideoStatusIngest object
@@ -135,6 +136,38 @@ func (o *VideoStatusIngest) HasReceivedBytes() bool {
 // SetReceivedBytes gets a reference to the given []BytesRange and assigns it to the ReceivedBytes field.
 func (o *VideoStatusIngest) SetReceivedBytes(v []BytesRange) {
 	o.ReceivedBytes = &v
+}
+
+// GetReceivedParts returns the ReceivedParts field value if set, zero value otherwise.
+func (o *VideoStatusIngest) GetReceivedParts() VideoStatusIngestReceivedParts {
+	if o == nil || o.ReceivedParts == nil {
+		var ret VideoStatusIngestReceivedParts
+		return ret
+	}
+	return *o.ReceivedParts
+}
+
+// GetReceivedPartsOk returns a tuple with the ReceivedParts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VideoStatusIngest) GetReceivedPartsOk() (*VideoStatusIngestReceivedParts, bool) {
+	if o == nil || o.ReceivedParts == nil {
+		return nil, false
+	}
+	return o.ReceivedParts, true
+}
+
+// HasReceivedParts returns a boolean if a field has been set.
+func (o *VideoStatusIngest) HasReceivedParts() bool {
+	if o != nil && o.ReceivedParts != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReceivedParts gets a reference to the given VideoStatusIngestReceivedParts and assigns it to the ReceivedParts field.
+func (o *VideoStatusIngest) SetReceivedParts(v VideoStatusIngestReceivedParts) {
+	o.ReceivedParts = &v
 }
 
 type NullableVideoStatusIngest struct {
