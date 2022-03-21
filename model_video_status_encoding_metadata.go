@@ -31,8 +31,8 @@ type VideoStatusEncodingMetadata struct {
 	// The method used to compress and decompress digital video. API Video supports all codecs in the libavcodec library.
 	VideoCodec *string `json:"videoCodec,omitempty"`
 	// The method used to compress and decompress digital audio for your video.
-	AudioCodec  *string `json:"audioCodec,omitempty"`
-	AspectRatio *string `json:"aspectRatio,omitempty"`
+	AudioCodec  *string         `json:"audioCodec,omitempty"`
+	AspectRatio *NullableString `json:"aspectRatio,omitempty"`
 }
 
 // NewVideoStatusEncodingMetadata instantiates a new VideoStatusEncodingMetadata object
@@ -308,36 +308,47 @@ func (o *VideoStatusEncodingMetadata) SetAudioCodec(v string) {
 	o.AudioCodec = &v
 }
 
-// GetAspectRatio returns the AspectRatio field value if set, zero value otherwise.
+// GetAspectRatio returns the AspectRatio field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoStatusEncodingMetadata) GetAspectRatio() string {
-	if o == nil || o.AspectRatio == nil {
+	if o == nil || o.AspectRatio.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.AspectRatio
+	return *o.AspectRatio.Get()
 }
 
 // GetAspectRatioOk returns a tuple with the AspectRatio field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoStatusEncodingMetadata) GetAspectRatioOk() (*string, bool) {
-	if o == nil || o.AspectRatio == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AspectRatio, true
+	return o.AspectRatio.Get(), o.AspectRatio.IsSet()
 }
 
 // HasAspectRatio returns a boolean if a field has been set.
 func (o *VideoStatusEncodingMetadata) HasAspectRatio() bool {
-	if o != nil && o.AspectRatio != nil {
+	if o != nil && o.AspectRatio.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAspectRatio gets a reference to the given string and assigns it to the AspectRatio field.
+// SetAspectRatio gets a reference to the given NullableString and assigns it to the AspectRatio field.
 func (o *VideoStatusEncodingMetadata) SetAspectRatio(v string) {
-	o.AspectRatio = &v
+	o.AspectRatio.Set(&v)
+}
+
+// SetAspectRatioNil sets the value for AspectRatio to be an explicit nil
+func (o *VideoStatusEncodingMetadata) SetAspectRatioNil() {
+	o.AspectRatio.Set(nil)
+}
+
+// UnsetAspectRatio ensures that no value is present for AspectRatio, not even an explicit nil
+func (o *VideoStatusEncodingMetadata) UnsetAspectRatio() {
+	o.AspectRatio.Unset()
 }
 
 type NullableVideoStatusEncodingMetadata struct {

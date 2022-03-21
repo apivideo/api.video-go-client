@@ -169,7 +169,7 @@ func main() {
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
-    file := os.NewFile(1234, "some_file") // *os.File | The .jpg or .png image to be added as a watermark.
+    file := os.NewFile(1234, "some_file") // *os.File | The `.jpg` or `.png` image to be added as a watermark.
 
     
     res, err := client.Watermarks.UploadFile(file)
@@ -194,7 +194,7 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**file** | ***os.File** | The .jpg or .png image to be added as a watermark. | 
+**file** | ***os.File** | The &#x60;.jpg&#x60; or &#x60;.png&#x60; image to be added as a watermark. | 
 
 ### Return type
 

@@ -231,7 +231,7 @@ func (c *Client) prepareRequest(
 		req.Header.Set("AV-Origin-App", originAppHeaderValue)
 	}
 
-	req.Header.Set("AV-Origin-Client", "go:1.2.2")
+	req.Header.Set("AV-Origin-Client", "go:1.2.3")
 
 	for headerName := range headerParams {
 		req.Header.Set(headerName, headerParams[headerName])
@@ -502,7 +502,7 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 		if originAppHeaderValue != "" {
 			req.Header.Set("AV-Origin-App", originAppHeaderValue)
 		}
-		req.Header.Set("AV-Origin-Client", "go:1.2.2")
+		req.Header.Set("AV-Origin-Client", "go:1.2.3")
 
 		resp, err := c.httpClient.Do(req)
 

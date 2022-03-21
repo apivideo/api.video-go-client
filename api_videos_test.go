@@ -286,7 +286,7 @@ var videoStatusStruct = VideoStatus{
 			Samplerate:  PtrInt32(48000),
 			VideoCodec:  PtrString("h264"),
 			AudioCodec:  PtrString("aac"),
-			AspectRatio: PtrString("16/9"),
+			AspectRatio: PtrNullableString("16/9"),
 		},
 	},
 }
