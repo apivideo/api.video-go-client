@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Parts** | Pointer to **[]int32** | The parts that are have been uploaded, ordered. For example, if part 2 was sent before part 1, and both have been uploaded, the output will be [1, 2]. | [optional] 
+**Parts** | Pointer to **[]int32** | The parts that have been uploaded, ordered. For example, if part 2 was sent before part 1, and both have been uploaded, the output will be [1, 2]. | [optional] 
 **Total** | Pointer to **NullableInt32** | Contains the number of expected parts. The total will be listed as \&quot;null\&quot; until the total number of parts is known. | [optional] 
 
 ## Methods

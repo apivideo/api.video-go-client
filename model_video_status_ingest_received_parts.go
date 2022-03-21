@@ -16,7 +16,7 @@ import (
 
 // VideoStatusIngestReceivedParts struct for VideoStatusIngestReceivedParts
 type VideoStatusIngestReceivedParts struct {
-	// The parts that are have been uploaded, ordered. For example, if part 2 was sent before part 1, and both have been uploaded, the output will be [1, 2].
+	// The parts that have been uploaded, ordered. For example, if part 2 was sent before part 1, and both have been uploaded, the output will be [1, 2].
 	Parts *[]int32 `json:"parts,omitempty"`
 	// Contains the number of expected parts. The total will be listed as \"null\" until the total number of parts is known.
 	Total *NullableInt32 `json:"total,omitempty"`
