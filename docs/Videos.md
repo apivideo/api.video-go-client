@@ -29,31 +29,28 @@ Delete a video
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
-
 import (
     "context"
     "fmt"
     "os"
     apivideosdk "github.com/apivideo/api.video-go-client"
 )
-
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The video ID for the video you want to delete.
-
-    
     err := client.Videos.Delete(videoId)
-
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Delete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Delete``: %v\
+", err)
     }
-}
+}  
 ```
 ### Path Parameters
 
@@ -90,8 +87,9 @@ Show a video
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -112,10 +110,12 @@ func main() {
     res, err := client.Videos.Get(videoId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Get``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Get``: %v\
+", err)
     }
     // response from `Get`: Video
-    fmt.Fprintf(os.Stdout, "Response from `Videos.Get`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `Videos.Get`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -153,9 +153,10 @@ Show video status
 
 
 ### Example
-
 ```go
-package main
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
+ package main
 
 import (
     "context"
@@ -175,11 +176,13 @@ func main() {
     res, err := client.Videos.GetStatus(videoId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.GetStatus``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.GetStatus``: %v\
+", err)
     }
     // response from `GetStatus`: VideoStatus
-    fmt.Fprintf(os.Stdout, "Response from `Videos.GetStatus`: %v\n", res)
-}
+    fmt.Fprintf(os.Stdout, "Response from `Videos.GetStatus`: %v\
+", res)
+}             
 ```
 ### Path Parameters
 
@@ -296,8 +299,9 @@ Update a video
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -319,10 +323,12 @@ func main() {
     res, err := client.Videos.Update(videoId, videoUpdatePayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Update``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Update``: %v\
+", err)
     }
     // response from `Update`: Video
-    fmt.Fprintf(os.Stdout, "Response from `Videos.Update`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `Videos.Update`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -361,8 +367,9 @@ Pick a thumbnail
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -384,10 +391,12 @@ func main() {
     res, err := client.Videos.PickThumbnail(videoId, videoThumbnailPickPayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.PickThumbnail``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.PickThumbnail``: %v\
+", err)
     }
     // response from `PickThumbnail`: Video
-    fmt.Fprintf(os.Stdout, "Response from `Videos.PickThumbnail`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `Videos.PickThumbnail`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -426,37 +435,10 @@ Upload with an upload token
 
 
 ### Example
-
 ```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
-        
-    token := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the token you want to use to upload a video.
-    file := os.NewFile(1234, "some_file") // *os.File | The path to the video you want to upload.
-
-    
-    res, err := client.Videos.UploadWithUploadTokenFile(token, file)
-
-    // you can also use a Reader instead of a File:
-    // client.Videos.UploadWithUploadToken(token, fileName, fileReader, fileSize)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.UploadWithUploadToken``: %v\n", err)
-    }
-    // response from `UploadWithUploadToken`: Video
-    fmt.Fprintf(os.Stdout, "Response from `Videos.UploadWithUploadToken`: %v\n", res)
-}
+//The upload will happen on the front end, and not on the backend code.  
+//Our [JavaScript uploader(https://docs.api.video/docs/video-uploader) is a great place to look for uploading videos with the delegated token.
+//We also have uploaders for a number of [mobile languages](https://docs.api.video/docs/flutter-uploader).
 ```
 ### Progressive uploads
 
@@ -518,8 +500,10 @@ Create a video
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
+
 package main
 
 import (
@@ -540,10 +524,12 @@ func main() {
     res, err := client.Videos.Create(videoCreationPayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Create``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Create``: %v\
+", err)
     }
     // response from `Create`: Video
-    fmt.Fprintf(os.Stdout, "Response from `Videos.Create`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `Videos.Create`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -579,8 +565,10 @@ Upload a video
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
+
 package main
 
 import (
@@ -594,22 +582,27 @@ func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
-        
-    videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | Enter the videoId you want to use to upload your video.
-    file := os.NewFile(1234, "some_file") // *os.File | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the \\\"/videos\\\" endpoint and add the \\\"source\\\" parameter when you create a new video.
 
+      videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" 
+    // string | Enter the videoId you want to use to upload your video.
+      file := os.NewFile(1234, "some_file") 
+    // *os.File | The path to the video you would like to upload. The path must be local. If you want to use a video from an online source, you must use the "/videos" endpoint and add the "source" parameter when you create a new video.
     
-    res, err := client.Videos.UploadFile(videoId, file)
-
-    // you can also use a Reader instead of a File:
-    // client.Videos.Upload(videoId, fileName, fileReader, fileSize)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Upload``: %v\n", err)
+    
+      res, err := client.Videos.UploadFile(videoId, file)
+    
+      // you can also use a Reader instead of a File:
+      // client.Videos.Upload(videoId, fileName, fileReader, fileSize)
+    
+      if err != nil {
+          fmt.Fprintf(os.Stderr, "Error when calling `Videos.Upload``: %v\
+", err)
+      }
+      // response from `Upload`: Video
+      fmt.Fprintf(os.Stdout, "Response from `Videos.Upload`: %v\
+", res)
     }
-    // response from `Upload`: Video
-    fmt.Fprintf(os.Stdout, "Response from `Videos.Upload`: %v\n", res)
-}
+      }
 ```
 ### Progressive uploads
 
@@ -671,8 +664,10 @@ Upload a thumbnail
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
+
 package main
 
 import (
@@ -686,21 +681,23 @@ func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
-        
-    videoId := "videoId_example" // string | Unique identifier of the chosen video 
-    file := os.NewFile(1234, "some_file") // *os.File | The image to be added as a thumbnail. The mime type should be image/jpeg, image/png or image/webp. The max allowed size is 8 MiB.
 
-    
+    videoId := "videoId_example" // string | Unique identifier of the chosen video 
+    file := os.NewFile(1234, "some_file") // *os.File | The image to be added as a thumbnail.
+
+
     res, err := client.Videos.UploadThumbnailFile(videoId, file)
 
     // you can also use a Reader instead of a File:
     // client.Videos.UploadThumbnail(videoId, fileName, fileReader)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.UploadThumbnail``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.UploadThumbnail``: %v\
+", err)
     }
     // response from `UploadThumbnail`: Video
-    fmt.Fprintf(os.Stdout, "Response from `Videos.UploadThumbnail`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `Videos.UploadThumbnail`: %v\
+", res)
 }
 ```
 ### Path Parameters

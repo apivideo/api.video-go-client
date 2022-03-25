@@ -74,7 +74,7 @@ func main() {
     }
 
     for _, video := range result.Data {
-        fmt.Printf("%s\n", *video.VideoId)
+        fmt.Printf("%s\n", video.VideoId)
         fmt.Printf("%s\n", *video.Title)
     }
 
@@ -95,7 +95,7 @@ func main() {
     }
 
     //Finally upload your video to the container with the videoId
-    uploadedVideo, err := client.Videos.UploadFile(*create.VideoId, videoFile)
+    uploadedVideo, err := client.Videos.UploadFile(create.VideoId, videoFile)
 
     if err != nil {
         fmt.Println(err)

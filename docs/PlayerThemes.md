@@ -26,8 +26,9 @@ Delete a player
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -48,7 +49,8 @@ func main() {
     err := client.PlayerThemes.Delete(playerId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Delete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Delete``: %v\
+", err)
     }
 }
 ```
@@ -85,8 +87,9 @@ Name | Type | Description  | Notes
 Delete logo
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -107,7 +110,8 @@ func main() {
     err := client.PlayerThemes.DeleteLogo(playerId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.DeleteLogo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.DeleteLogo``: %v\
+", err)
     }
 }
 ```
@@ -148,8 +152,9 @@ List all player themes
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -174,10 +179,12 @@ func main() {
     
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.List``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.List``: %v\
+", err)
     }
     // response from `List`: PlayerThemesListResponse
-    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.List`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.List`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -216,8 +223,9 @@ Show a player
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -238,10 +246,12 @@ func main() {
     res, err := client.PlayerThemes.Get(playerId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Get``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Get``: %v\
+", err)
     }
     // response from `Get`: PlayerTheme
-    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Get`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Get`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -279,8 +289,9 @@ Update a player
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -302,10 +313,12 @@ func main() {
     res, err := client.PlayerThemes.Update(playerId, playerThemeUpdatePayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Update``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Update``: %v\
+", err)
     }
     // response from `Update`: PlayerTheme
-    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Update`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Update`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -344,8 +357,9 @@ Create a player
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -366,10 +380,12 @@ func main() {
     res, err := client.PlayerThemes.Create(playerThemeCreationPayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Create``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Create``: %v\
+", err)
     }
     // response from `Create`: PlayerTheme
-    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Create`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Create`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -405,8 +421,9 @@ Upload a logo
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -432,10 +449,12 @@ func main() {
     // client.PlayerThemes.UploadLogo(playerId, fileName, fileReader)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.UploadLogo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.UploadLogo``: %v\
+", err)
     }
     // response from `UploadLogo`: PlayerTheme
-    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.UploadLogo`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.UploadLogo`: %v\
+", res)
 }
 ```
 ### Path Parameters
