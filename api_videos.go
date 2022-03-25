@@ -307,7 +307,7 @@ type VideosService struct {
 
 /*
  * Delete Delete a video
- * If you do not need a video any longer, you can send a request to delete it. All you need is the videoId. Tutorials using [video deletion](https://api.video/blog/endpoints/video-delete).
+ * If you do not need a video any longer, you can send a request to delete it. All you need is the videoId.
 
  * @param videoId The video ID for the video you want to delete.
  * @return VideosApiDeleteRequest
@@ -321,7 +321,7 @@ func (s *VideosService) Delete(videoId string) error {
 
 /*
  * Delete Delete a video
- * If you do not need a video any longer, you can send a request to delete it. All you need is the videoId. Tutorials using [video deletion](https://api.video/blog/endpoints/video-delete).
+ * If you do not need a video any longer, you can send a request to delete it. All you need is the videoId.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The video ID for the video you want to delete.
  * @return VideosApiDeleteRequest
@@ -353,7 +353,7 @@ func (s *VideosService) DeleteWithContext(ctx context.Context, videoId string) e
 
 /*
  * Get Show a video
- * This call provides the same JSON information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL. Tutorials using [video GET](https://api.video/blog/endpoints/video-get).
+ * This call provides the same information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL.
 
  * @param videoId The unique identifier for the video you want details about.
  * @return VideosApiGetRequest
@@ -367,7 +367,7 @@ func (s *VideosService) Get(videoId string) (*Video, error) {
 
 /*
  * Get Show a video
- * This call provides the same JSON information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL. Tutorials using [video GET](https://api.video/blog/endpoints/video-get).
+ * This call provides the same information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want details about.
  * @return VideosApiGetRequest
@@ -400,7 +400,7 @@ func (s *VideosService) GetWithContext(ctx context.Context, videoId string) (*Vi
 
 /*
  * GetStatus Show video status
- * This API provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities. Tutorials using [video status](https://api.video/blog/endpoints/video-status).
+ * This method provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities.
 
  * @param videoId The unique identifier for the video you want the status for.
  * @return VideosApiGetStatusRequest
@@ -414,7 +414,7 @@ func (s *VideosService) GetStatus(videoId string) (*VideoStatus, error) {
 
 /*
  * GetStatus Show video status
- * This API provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities. Tutorials using [video status](https://api.video/blog/endpoints/video-status).
+ * This method provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want the status for.
  * @return VideosApiGetStatusRequest
@@ -447,7 +447,7 @@ func (s *VideosService) GetStatusWithContext(ctx context.Context, videoId string
 
 /*
  * List List all videos
- * Requests to this endpoint return a list of your videos (with all their details). With no parameters added to this query, the API returns all videos. You can filter what videos the API returns using the parameters described below.  We have [several tutorials](https://api.video/blog/endpoints/video-list) that demonstrate this endpoint.
+ * This method returns a list of your videos (with all their details). With no parameters added, the API returns the first page of all videos. You can filter videos using the parameters described below.
 
  * @return VideosApiListRequest
  */
@@ -460,7 +460,7 @@ func (s *VideosService) List(r VideosApiListRequest) (*VideosListResponse, error
 
 /*
  * List List all videos
- * Requests to this endpoint return a list of your videos (with all their details). With no parameters added to this query, the API returns all videos. You can filter what videos the API returns using the parameters described below.  We have [several tutorials](https://api.video/blog/endpoints/video-list) that demonstrate this endpoint.
+ * This method returns a list of your videos (with all their details). With no parameters added, the API returns the first page of all videos. You can filter videos using the parameters described below.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return VideosApiListRequest
  */
@@ -530,11 +530,14 @@ func (s *VideosService) ListWithContext(ctx context.Context, r VideosApiListRequ
 
 /*
  * Update Update a video
- * Use this endpoint to update the parameters associated with your video. The video you are updating is determined by the video ID you provide in the path. For each parameter you want to update, include the update in the request body. NOTE: If you are updating an array, you must provide the entire array as what you provide here overwrites what is in the system rather than appending to it. Tutorials using [video update](https://api.video/blog/endpoints/video-update).
+ * Updates the parameters associated with your video. The video you are updating is determined by the video ID you provide.
+
+NOTE: If you are updating an array, you must provide the entire array as what you provide here overwrites what is in the system rather than appending to it.
+
 
  * @param videoId The video ID for the video you want to delete.
  * @return VideosApiUpdateRequest
- */
+*/
 
 func (s *VideosService) Update(videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error) {
 
@@ -544,11 +547,14 @@ func (s *VideosService) Update(videoId string, videoUpdatePayload VideoUpdatePay
 
 /*
  * Update Update a video
- * Use this endpoint to update the parameters associated with your video. The video you are updating is determined by the video ID you provide in the path. For each parameter you want to update, include the update in the request body. NOTE: If you are updating an array, you must provide the entire array as what you provide here overwrites what is in the system rather than appending to it. Tutorials using [video update](https://api.video/blog/endpoints/video-update).
+ * Updates the parameters associated with your video. The video you are updating is determined by the video ID you provide.
+
+NOTE: If you are updating an array, you must provide the entire array as what you provide here overwrites what is in the system rather than appending to it.
+
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The video ID for the video you want to delete.
  * @return VideosApiUpdateRequest
- */
+*/
 
 func (s *VideosService) UpdateWithContext(ctx context.Context, videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error) {
 	var localVarPostBody interface{}
@@ -579,8 +585,12 @@ func (s *VideosService) UpdateWithContext(ctx context.Context, videoId string, v
 
 /*
  * PickThumbnail Pick a thumbnail
- * Pick a thumbnail from the given time code. If you'd like to upload an image for your thumbnail, use the [Upload a Thumbnail](https://docs.api.video/reference#post_videos-videoid-thumbnail) endpoint. There may be a short delay for the thumbnail to update.
-Tutorials using [Thumbnail picking](https://api.video/blog/endpoints/video-pick-a-thumbnail).
+ * Pick a thumbnail from the given time code.
+
+If you'd like to upload an image for your thumbnail, use the dedicated [method](#uploadThumbnail).
+
+There may be a short delay for the thumbnail to update.
+
 
  * @param videoId Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
  * @return VideosApiPickThumbnailRequest
@@ -594,8 +604,12 @@ func (s *VideosService) PickThumbnail(videoId string, videoThumbnailPickPayload 
 
 /*
  * PickThumbnail Pick a thumbnail
- * Pick a thumbnail from the given time code. If you'd like to upload an image for your thumbnail, use the [Upload a Thumbnail](https://docs.api.video/reference#post_videos-videoid-thumbnail) endpoint. There may be a short delay for the thumbnail to update.
-Tutorials using [Thumbnail picking](https://api.video/blog/endpoints/video-pick-a-thumbnail).
+ * Pick a thumbnail from the given time code.
+
+If you'd like to upload an image for your thumbnail, use the dedicated [method](#uploadThumbnail).
+
+There may be a short delay for the thumbnail to update.
+
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
  * @return VideosApiPickThumbnailRequest
@@ -630,58 +644,10 @@ func (s *VideosService) PickThumbnailWithContext(ctx context.Context, videoId st
 
 /*
  * UploadWithUploadToken Upload with an upload token
- * When given a token, anyone can upload a file to the URI `https://ws.api.video/upload?token=<tokenId>`.
-
-Example with cURL:
-
-```curl
-$ curl  --request POST --url 'https://ws.api.video/upload?token=toXXX'
- --header 'content-type: multipart/form-data'
- -F file=@video.mp4
-```
-
-Or in an HTML form, with a little JavaScript to convert the form into JSON:
-```html
-<!--form for user interaction-->
-<form name="videoUploadForm" >
-  <label for=video>Video:</label>
-  <input type=file name=source/><br/>
-  <input value="Submit" type="submit">
-</form>
-<div></div>
-<!--JS takes the form data
-    uses FormData to turn the response into JSON.
-    then uses POST to upload the video file.
-    Update the token parameter in the url to your upload token.
-    -->
-<script>
-   var form = document.forms.namedItem("videoUploadForm");
-   form.addEventListener('submit', function(ev) {
-	 ev.preventDefault();
-     var oOutput = document.querySelector("div"),
-         oData = new FormData(form);
-     var oReq = new XMLHttpRequest();
-
-     oReq.open("POST", "https://ws.api.video/upload?token=toXXX", true);
-     oReq.send(oData);
-	 oReq.onload = function(oEvent) {
-       if (oReq.status ==201) {
-         oOutput.innerHTML = "Your video is uploaded!<br/>"  + oReq.response;
-       } else {
-         oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
-       }
-     };
-   }, false);
-</script>
-```
-
-
-### Dealing with large files
-
-You can upload large files on api.video with <a href='https://docs.api.video/reference/post_videos-videoid-source'>Progressive Upload</a>. Alternatively, if you want to use regular upload, we have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
+ * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
 
  * @return VideosApiUploadWithUploadTokenRequest
-*/
+ */
 
 func (s *VideosService) UploadWithUploadTokenFile(token string, file *os.File) (*Video, error) {
 	return s.UploadWithUploadTokenFileWithContext(context.Background(), token, file)
@@ -689,58 +655,10 @@ func (s *VideosService) UploadWithUploadTokenFile(token string, file *os.File) (
 
 /*
  * UploadWithUploadToken Upload with an upload token
- * When given a token, anyone can upload a file to the URI `https://ws.api.video/upload?token=<tokenId>`.
-
-Example with cURL:
-
-```curl
-$ curl  --request POST --url 'https://ws.api.video/upload?token=toXXX'
- --header 'content-type: multipart/form-data'
- -F file=@video.mp4
-```
-
-Or in an HTML form, with a little JavaScript to convert the form into JSON:
-```html
-<!--form for user interaction-->
-<form name="videoUploadForm" >
-  <label for=video>Video:</label>
-  <input type=file name=source/><br/>
-  <input value="Submit" type="submit">
-</form>
-<div></div>
-<!--JS takes the form data
-    uses FormData to turn the response into JSON.
-    then uses POST to upload the video file.
-    Update the token parameter in the url to your upload token.
-    -->
-<script>
-   var form = document.forms.namedItem("videoUploadForm");
-   form.addEventListener('submit', function(ev) {
-	 ev.preventDefault();
-     var oOutput = document.querySelector("div"),
-         oData = new FormData(form);
-     var oReq = new XMLHttpRequest();
-
-     oReq.open("POST", "https://ws.api.video/upload?token=toXXX", true);
-     oReq.send(oData);
-	 oReq.onload = function(oEvent) {
-       if (oReq.status ==201) {
-         oOutput.innerHTML = "Your video is uploaded!<br/>"  + oReq.response;
-       } else {
-         oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
-       }
-     };
-   }, false);
-</script>
-```
-
-
-### Dealing with large files
-
-You can upload large files on api.video with <a href='https://docs.api.video/reference/post_videos-videoid-source'>Progressive Upload</a>. Alternatively, if you want to use regular upload, we have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
+ * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return VideosApiUploadWithUploadTokenRequest
-*/
+ */
 
 func (s *VideosService) UploadWithUploadTokenFileWithContext(ctx context.Context, token string, file *os.File) (*Video, error) {
 	fileInfo, _ := file.Stat()
@@ -828,116 +746,20 @@ func (s *UploadWithUploadTokenStream) UploadLastPartWithContextFile(ctx context.
 
 /*
  * UploadWithUploadToken Upload with an upload token
- * When given a token, anyone can upload a file to the URI `https://ws.api.video/upload?token=<tokenId>`.
-
-Example with cURL:
-
-```curl
-$ curl  --request POST --url 'https://ws.api.video/upload?token=toXXX'
- --header 'content-type: multipart/form-data'
- -F file=@video.mp4
-```
-
-Or in an HTML form, with a little JavaScript to convert the form into JSON:
-```html
-<!--form for user interaction-->
-<form name="videoUploadForm" >
-  <label for=video>Video:</label>
-  <input type=file name=source/><br/>
-  <input value="Submit" type="submit">
-</form>
-<div></div>
-<!--JS takes the form data
-    uses FormData to turn the response into JSON.
-    then uses POST to upload the video file.
-    Update the token parameter in the url to your upload token.
-    -->
-<script>
-   var form = document.forms.namedItem("videoUploadForm");
-   form.addEventListener('submit', function(ev) {
-	 ev.preventDefault();
-     var oOutput = document.querySelector("div"),
-         oData = new FormData(form);
-     var oReq = new XMLHttpRequest();
-
-     oReq.open("POST", "https://ws.api.video/upload?token=toXXX", true);
-     oReq.send(oData);
-	 oReq.onload = function(oEvent) {
-       if (oReq.status ==201) {
-         oOutput.innerHTML = "Your video is uploaded!<br/>"  + oReq.response;
-       } else {
-         oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
-       }
-     };
-   }, false);
-</script>
-```
-
-
-### Dealing with large files
-
-You can upload large files on api.video with <a href='https://docs.api.video/reference/post_videos-videoid-source'>Progressive Upload</a>. Alternatively, if you want to use regular upload, we have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
+ * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
 
  * @return VideosApiUploadWithUploadTokenRequest
-*/
+ */
 func (s *VideosService) UploadWithUploadToken(token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
 	return s.UploadWithUploadTokenWithContext(context.Background(), token, fileName, fileReader, fileSize)
 }
 
 /*
  * UploadWithUploadToken Upload with an upload token
- * When given a token, anyone can upload a file to the URI `https://ws.api.video/upload?token=<tokenId>`.
-
-Example with cURL:
-
-```curl
-$ curl  --request POST --url 'https://ws.api.video/upload?token=toXXX'
- --header 'content-type: multipart/form-data'
- -F file=@video.mp4
-```
-
-Or in an HTML form, with a little JavaScript to convert the form into JSON:
-```html
-<!--form for user interaction-->
-<form name="videoUploadForm" >
-  <label for=video>Video:</label>
-  <input type=file name=source/><br/>
-  <input value="Submit" type="submit">
-</form>
-<div></div>
-<!--JS takes the form data
-    uses FormData to turn the response into JSON.
-    then uses POST to upload the video file.
-    Update the token parameter in the url to your upload token.
-    -->
-<script>
-   var form = document.forms.namedItem("videoUploadForm");
-   form.addEventListener('submit', function(ev) {
-	 ev.preventDefault();
-     var oOutput = document.querySelector("div"),
-         oData = new FormData(form);
-     var oReq = new XMLHttpRequest();
-
-     oReq.open("POST", "https://ws.api.video/upload?token=toXXX", true);
-     oReq.send(oData);
-	 oReq.onload = function(oEvent) {
-       if (oReq.status ==201) {
-         oOutput.innerHTML = "Your video is uploaded!<br/>"  + oReq.response;
-       } else {
-         oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
-       }
-     };
-   }, false);
-</script>
-```
-
-
-### Dealing with large files
-
-You can upload large files on api.video with <a href='https://docs.api.video/reference/post_videos-videoid-source'>Progressive Upload</a>. Alternatively, if you want to use regular upload, we have created a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a> to walk through the steps required.
+ * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return VideosApiUploadWithUploadTokenRequest
-*/
+ */
 func (s *VideosService) UploadWithUploadTokenWithContext(ctx context.Context, token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
 	localVarPath := "/upload"
 
@@ -968,12 +790,9 @@ func (s *VideosService) UploadWithUploadTokenWithContext(ctx context.Context, to
 
 /*
  * Create Create a video
- *
-## We have tutorials on:
+ * We have tutorials on:
 * [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
 * [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
-
-
 * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
 * [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
 * [Using Dynamic Metadata](https://api.video/blog/tutorials/dynamic-metadata)
@@ -992,12 +811,9 @@ func (s *VideosService) Create(videoCreationPayload VideoCreationPayload) (*Vide
 
 /*
  * Create Create a video
- *
-## We have tutorials on:
+ * We have tutorials on:
 * [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
 * [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
-
-
 * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
 * [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
 * [Using Dynamic Metadata](https://api.video/blog/tutorials/dynamic-metadata)
@@ -1036,7 +852,8 @@ func (s *VideosService) CreateWithContext(ctx context.Context, videoCreationPayl
 
 /*
  * Upload Upload a video
- * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+ * To upload a video to the videoId you created. You can only upload your video to the videoId once.
+
 We offer 2 types of upload:
 * Regular upload
 * Progressive upload
@@ -1044,13 +861,7 @@ The latter allows you to split a video source into X chunks and send those chunk
   * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
   * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
   Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
-```bash
-curl https://ws.api.video/videos/{videoId}/source \
-  -H 'Authorization: Bearer {access_token}' \
-  -F file=@/path/to/video.mp4
 
-  ```
-Tutorials using [video upload](https://api.video/blog/endpoints/video-upload).
 
  * @param videoId Enter the videoId you want to use to upload your video.
  * @return VideosApiUploadRequest
@@ -1062,7 +873,8 @@ func (s *VideosService) UploadFile(videoId string, file *os.File) (*Video, error
 
 /*
  * Upload Upload a video
- * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+ * To upload a video to the videoId you created. You can only upload your video to the videoId once.
+
 We offer 2 types of upload:
 * Regular upload
 * Progressive upload
@@ -1070,13 +882,7 @@ The latter allows you to split a video source into X chunks and send those chunk
   * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
   * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
   Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
-```bash
-curl https://ws.api.video/videos/{videoId}/source \
-  -H 'Authorization: Bearer {access_token}' \
-  -F file=@/path/to/video.mp4
 
-  ```
-Tutorials using [video upload](https://api.video/blog/endpoints/video-upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId Enter the videoId you want to use to upload your video.
  * @return VideosApiUploadRequest
@@ -1159,7 +965,8 @@ func (s *UploadStream) UploadLastPartWithContextFile(ctx context.Context, file *
 
 /*
  * Upload Upload a video
- * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+ * To upload a video to the videoId you created. You can only upload your video to the videoId once.
+
 We offer 2 types of upload:
 * Regular upload
 * Progressive upload
@@ -1167,13 +974,7 @@ The latter allows you to split a video source into X chunks and send those chunk
   * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
   * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
   Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
-```bash
-curl https://ws.api.video/videos/{videoId}/source \
-  -H 'Authorization: Bearer {access_token}' \
-  -F file=@/path/to/video.mp4
 
-  ```
-Tutorials using [video upload](https://api.video/blog/endpoints/video-upload).
 
  * @param videoId Enter the videoId you want to use to upload your video.
  * @return VideosApiUploadRequest
@@ -1184,7 +985,8 @@ func (s *VideosService) Upload(videoId string, fileName string, fileReader io.Re
 
 /*
  * Upload Upload a video
- * To upload a video to the videoId you created. Replace {videoId} with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4 with the path to the video you'd like to upload. You can only upload your video to the videoId once.
+ * To upload a video to the videoId you created. You can only upload your video to the videoId once.
+
 We offer 2 types of upload:
 * Regular upload
 * Progressive upload
@@ -1192,13 +994,7 @@ The latter allows you to split a video source into X chunks and send those chunk
   * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
   * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
   Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
-```bash
-curl https://ws.api.video/videos/{videoId}/source \
-  -H 'Authorization: Bearer {access_token}' \
-  -F file=@/path/to/video.mp4
 
-  ```
-Tutorials using [video upload](https://api.video/blog/endpoints/video-upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId Enter the videoId you want to use to upload your video.
  * @return VideosApiUploadRequest
@@ -1233,10 +1029,12 @@ func (s *VideosService) UploadWithContext(ctx context.Context, videoId string, f
 /*
  * UploadThumbnail Upload a thumbnail
  * The thumbnail is the poster that appears in the player window before video playback begins.
+
 This endpoint allows you to upload an image for the thumbnail.
-To select a still frame from the video using a time stamp, use [Pick a Thumbnail](https://docs.api.video/reference#patch_videos-videoid-thumbnail) to pick a time in the video.
+
+To select a still frame from the video using a time stamp, use the [dedicated method](#pickThumbnail) to pick a time in the video.
+
 Note: There may be a short delay before the new thumbnail is delivered to our CDN.
-Tutorials using [Thumbnail upload](https://api.video/blog/endpoints/videos-upload-a-thumbnail).
 
  * @param videoId Unique identifier of the chosen video
  * @return VideosApiUploadThumbnailRequest
@@ -1249,10 +1047,12 @@ func (s *VideosService) UploadThumbnailFile(videoId string, file *os.File) (*Vid
 /*
  * UploadThumbnail Upload a thumbnail
  * The thumbnail is the poster that appears in the player window before video playback begins.
+
 This endpoint allows you to upload an image for the thumbnail.
-To select a still frame from the video using a time stamp, use [Pick a Thumbnail](https://docs.api.video/reference#patch_videos-videoid-thumbnail) to pick a time in the video.
+
+To select a still frame from the video using a time stamp, use the [dedicated method](#pickThumbnail) to pick a time in the video.
+
 Note: There may be a short delay before the new thumbnail is delivered to our CDN.
-Tutorials using [Thumbnail upload](https://api.video/blog/endpoints/videos-upload-a-thumbnail).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId Unique identifier of the chosen video
  * @return VideosApiUploadThumbnailRequest
@@ -1265,10 +1065,12 @@ func (s *VideosService) UploadThumbnailFileWithContext(ctx context.Context, vide
 /*
  * UploadThumbnail Upload a thumbnail
  * The thumbnail is the poster that appears in the player window before video playback begins.
+
 This endpoint allows you to upload an image for the thumbnail.
-To select a still frame from the video using a time stamp, use [Pick a Thumbnail](https://docs.api.video/reference#patch_videos-videoid-thumbnail) to pick a time in the video.
+
+To select a still frame from the video using a time stamp, use the [dedicated method](#pickThumbnail) to pick a time in the video.
+
 Note: There may be a short delay before the new thumbnail is delivered to our CDN.
-Tutorials using [Thumbnail upload](https://api.video/blog/endpoints/videos-upload-a-thumbnail).
 
  * @param videoId Unique identifier of the chosen video
  * @return VideosApiUploadThumbnailRequest
@@ -1280,10 +1082,12 @@ func (s *VideosService) UploadThumbnail(videoId string, fileName string, fileRea
 /*
  * UploadThumbnail Upload a thumbnail
  * The thumbnail is the poster that appears in the player window before video playback begins.
+
 This endpoint allows you to upload an image for the thumbnail.
-To select a still frame from the video using a time stamp, use [Pick a Thumbnail](https://docs.api.video/reference#patch_videos-videoid-thumbnail) to pick a time in the video.
+
+To select a still frame from the video using a time stamp, use the [dedicated method](#pickThumbnail) to pick a time in the video.
+
 Note: There may be a short delay before the new thumbnail is delivered to our CDN.
-Tutorials using [Thumbnail upload](https://api.video/blog/endpoints/videos-upload-a-thumbnail).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId Unique identifier of the chosen video
  * @return VideosApiUploadThumbnailRequest

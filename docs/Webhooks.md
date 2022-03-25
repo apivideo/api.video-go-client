@@ -23,8 +23,9 @@ Delete a Webhook
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -45,7 +46,8 @@ func main() {
     err := client.Webhooks.Delete(webhookId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.Delete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.Delete``: %v\
+", err)
     }
 }
 ```
@@ -84,8 +86,9 @@ Show Webhook details
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -106,10 +109,12 @@ func main() {
     res, err := client.Webhooks.Get(webhookId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.Get``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.Get``: %v\
+", err)
     }
     // response from `Get`: Webhook
-    fmt.Fprintf(os.Stdout, "Response from `Webhooks.Get`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `Webhooks.Get`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -149,8 +154,9 @@ List all webhooks
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -174,10 +180,12 @@ func main() {
     
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.List``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.List``: %v\
+", err)
     }
     // response from `List`: WebhooksListResponse
-    fmt.Fprintf(os.Stdout, "Response from `Webhooks.List`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `Webhooks.List`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -215,8 +223,9 @@ Create Webhook
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -237,10 +246,12 @@ func main() {
     res, err := client.Webhooks.Create(webhooksCreationPayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.Create``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.Create``: %v\
+", err)
     }
     // response from `Create`: Webhook
-    fmt.Fprintf(os.Stdout, "Response from `Webhooks.Create`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `Webhooks.Create`: %v\
+", res)
 }
 ```
 ### Path Parameters

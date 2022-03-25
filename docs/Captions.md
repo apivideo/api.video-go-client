@@ -24,8 +24,9 @@ Delete a caption
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -47,7 +48,8 @@ func main() {
     err := client.Captions.Delete(videoId, language)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Delete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Delete``: %v\
+", err)
     }
 }
 ```
@@ -89,8 +91,9 @@ List video captions
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -104,20 +107,20 @@ func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
-    req := apivideosdk.CaptionsApiListRequest{}
-    
-    req.VideoId("vi4k0jvEUuaTdRAEjQ4Prklg") // string | The unique identifier for the video you want to retrieve a list of captions for.
-    req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
-    req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
+        
+    videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want captions for.
+    language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
 
-    res, err := client.Captions.List(videoId string, req)
     
+    res, err := client.Captions.Get(videoId, language)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Captions.List``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Get``: %v\
+", err)
     }
-    // response from `List`: CaptionsListResponse
-    fmt.Fprintf(os.Stdout, "Response from `Captions.List`: %v\n", res)
+    // response from `Get`: Caption
+    fmt.Fprintf(os.Stdout, "Response from `Captions.Get`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -157,8 +160,9 @@ Show a caption
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -180,10 +184,12 @@ func main() {
     res, err := client.Captions.Get(videoId, language)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Get``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Get``: %v\
+", err)
     }
     // response from `Get`: Caption
-    fmt.Fprintf(os.Stdout, "Response from `Captions.Get`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `Captions.Get`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -222,8 +228,9 @@ Update caption
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -246,10 +253,12 @@ func main() {
     res, err := client.Captions.Update(videoId, language, captionsUpdatePayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Update``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Update``: %v\
+", err)
     }
     // response from `Update`: Caption
-    fmt.Fprintf(os.Stdout, "Response from `Captions.Update`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `Captions.Update`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -289,8 +298,9 @@ Upload a caption
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -316,10 +326,12 @@ func main() {
     // client.Captions.Upload(videoId, language, fileName, fileReader)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Upload``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Upload``: %v\
+", err)
     }
     // response from `Upload`: Caption
-    fmt.Fprintf(os.Stdout, "Response from `Captions.Upload`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `Captions.Upload`: %v\
+", res)
 }
 ```
 ### Path Parameters

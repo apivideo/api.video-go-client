@@ -23,8 +23,9 @@ Delete an upload token
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -45,7 +46,8 @@ func main() {
     err := client.UploadTokens.DeleteToken(uploadToken)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UploadTokens.DeleteToken``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UploadTokens.DeleteToken``: %v\
+", err)
     }
 }
 ```
@@ -86,10 +88,10 @@ List all active upload tokens.
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
-
 import (
     "context"
     "fmt"
@@ -101,21 +103,19 @@ func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
-    req := apivideosdk.UploadTokensApiListRequest{}
-    
-    req.SortBy("ttl") // string | Allowed: createdAt, ttl. You can use these to sort by when a token was created, or how much longer the token will be active (ttl - time to live). Date and time is presented in ISO-8601 format.
-    req.SortOrder("asc") // string | Allowed: asc, desc. Ascending is 0-9 or A-Z. Descending is 9-0 or Z-A.
-    req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
-    req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
+        
+    uploadToken := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the token you want information about.
 
-    res, err := client.UploadTokens.List(req)
     
+    res, err := client.UploadTokens.GetToken(uploadToken)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UploadTokens.List``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UploadTokens.GetToken``: %v\
+", err)
     }
-    // response from `List`: TokenListResponse
-    fmt.Fprintf(os.Stdout, "Response from `UploadTokens.List`: %v\n", res)
+    // response from `GetToken`: UploadToken
+    fmt.Fprintf(os.Stdout, "Response from `UploadTokens.GetToken`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -154,8 +154,9 @@ Show upload token
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -176,10 +177,12 @@ func main() {
     res, err := client.UploadTokens.GetToken(uploadToken)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UploadTokens.GetToken``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UploadTokens.GetToken``: %v\
+", err)
     }
     // response from `GetToken`: UploadToken
-    fmt.Fprintf(os.Stdout, "Response from `UploadTokens.GetToken`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `UploadTokens.GetToken`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -217,8 +220,9 @@ Generate an upload token
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -239,10 +243,12 @@ func main() {
     res, err := client.UploadTokens.CreateToken(tokenCreationPayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UploadTokens.CreateToken``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `UploadTokens.CreateToken``: %v\
+", err)
     }
     // response from `CreateToken`: UploadToken
-    fmt.Fprintf(os.Stdout, "Response from `UploadTokens.CreateToken`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `UploadTokens.CreateToken`: %v\
+", res)
 }
 ```
 ### Path Parameters

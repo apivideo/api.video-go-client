@@ -24,8 +24,9 @@ Method | HTTP request | Description
 Delete a live stream
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -46,7 +47,8 @@ func main() {
     err := client.LiveStreams.Delete(liveStreamId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Delete``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Delete``: %v\
+", err)
     }
 }
 ```
@@ -85,8 +87,9 @@ Delete a thumbnail
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -107,10 +110,12 @@ func main() {
     res, err := client.LiveStreams.DeleteThumbnail(liveStreamId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.DeleteThumbnail``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.DeleteThumbnail``: %v\
+", err)
     }
     // response from `DeleteThumbnail`: LiveStream
-    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.DeleteThumbnail`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.DeleteThumbnail`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -150,39 +155,42 @@ List all live streams
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
-    req := apivideosdk.LiveStreamsApiListRequest{}
-    
-    req.StreamKey("30087931-229e-42cf-b5f9-e91bcc1f7332") // string | The unique stream key that allows you to stream videos.
-    req.Name("My Video") // string | You can filter live streams by their name or a part of their name.
-    req.SortBy("createdAt") // string | Allowed: createdAt, publishedAt, name. createdAt - the time a livestream was created using the specified streamKey. publishedAt - the time a livestream was published using the specified streamKey. name - the name of the livestream. If you choose one of the time based options, the time is presented in ISO-8601 format.
-    req.SortOrder("desc") // string | Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. For title, it is 0-9 and A-Z ascending and Z-A, 9-0 descending.
-    req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
-    req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
-
-    res, err := client.LiveStreams.List(req)
-    
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.List``: %v\n", err)
-    }
-    // response from `List`: LiveStreamListResponse
-    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.List`: %v\n", res)
-}
+  
+  import (
+      "context"
+      "fmt"
+      "os"
+      apivideosdk "github.com/apivideo/api.video-go-client"
+  )
+  
+  func main() {
+      client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+      // if you rather like to use the sandbox environment:
+      // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+      req := apivideosdk.LiveStreamsApiListRequest{}
+      
+      req.StreamKey("30087931-229e-42cf-b5f9-e91bcc1f7332") // string | The unique stream key that allows you to stream videos.
+      req.Name("My Video") // string | You can filter live streams by their name or a part of their name.
+      req.SortBy("createdAt") // string | Allowed: createdAt, publishedAt, name. createdAt - the time a livestream was created using the specified streamKey. publishedAt - the time a livestream was published using the specified streamKey. name - the name of the livestream. If you choose one of the time based options, the time is presented in ISO-8601 format.
+      req.SortOrder("desc") // string | Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. For title, it is 0-9 and A-Z ascending and Z-A, 9-0 descending.
+      req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
+      req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
+  
+      res, err := client.LiveStreams.List(req)
+      
+  
+      if err != nil {
+          fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.List``: %v\
+", err)
+      }
+      // response from `List`: LiveStreamListResponse
+      fmt.Fprintf(os.Stdout, "Response from `LiveStreams.List`: %v\
+", res)
+  }
 ```
 ### Path Parameters
 
@@ -222,8 +230,9 @@ Show live stream
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -244,10 +253,12 @@ func main() {
     res, err := client.LiveStreams.Get(liveStreamId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Get``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Get``: %v\
+", err)
     }
     // response from `Get`: LiveStream
-    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Get`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Get`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -285,8 +296,9 @@ Update a live stream
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -308,10 +320,12 @@ func main() {
     res, err := client.LiveStreams.Update(liveStreamId, liveStreamUpdatePayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Update``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Update``: %v\
+", err)
     }
     // response from `Update`: LiveStream
-    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Update`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Update`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -350,8 +364,9 @@ Create live stream
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -372,10 +387,12 @@ func main() {
     res, err := client.LiveStreams.Create(liveStreamCreationPayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Create``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Create``: %v\
+", err)
     }
     // response from `Create`: LiveStream
-    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Create`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Create`: %v\
+", res)
 }
 ```
 ### Path Parameters
@@ -411,8 +428,9 @@ Upload a thumbnail
 
 
 ### Example
-
 ```go
+//install the Go API client
+//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -428,7 +446,7 @@ func main() {
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
     liveStreamId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique ID for the live stream you want to upload.
-    file := os.NewFile(1234, "some_file") // *os.File | The image to be added as a thumbnail. The mime type should be image/jpeg, image/png or image/webp. The max allowed size is 8 MiB.
+    file := os.NewFile(1234, "some_file") // *os.File | The image to be added as a thumbnail.
 
     
     res, err := client.LiveStreams.UploadThumbnailFile(liveStreamId, file)
@@ -437,10 +455,12 @@ func main() {
     // client.LiveStreams.UploadThumbnail(liveStreamId, fileName, fileReader)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.UploadThumbnail``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.UploadThumbnail``: %v\
+", err)
     }
     // response from `UploadThumbnail`: LiveStream
-    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.UploadThumbnail`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.UploadThumbnail`: %v\
+", res)
 }
 ```
 ### Path Parameters
