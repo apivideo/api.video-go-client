@@ -36,7 +36,7 @@ import (
 )
 
 func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
@@ -99,7 +99,7 @@ import (
 )
 
 func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
@@ -167,7 +167,7 @@ import (
 )
 
 func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
     req := apivideosdk.WebhooksApiListRequest{}
@@ -236,7 +236,7 @@ import (
 )
 
 func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         

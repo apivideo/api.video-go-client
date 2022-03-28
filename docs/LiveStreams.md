@@ -37,7 +37,7 @@ import (
 )
 
 func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
@@ -100,7 +100,7 @@ import (
 )
 
 func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
@@ -168,7 +168,7 @@ package main
   )
   
   func main() {
-      client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+      client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
       // if you rather like to use the sandbox environment:
       // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
       req := apivideosdk.LiveStreamsApiListRequest{}
@@ -243,7 +243,7 @@ import (
 )
 
 func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
@@ -309,7 +309,7 @@ import (
 )
 
 func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
@@ -365,35 +365,22 @@ Create live stream
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
-package main
+// instantiate the client 
+client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
 
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
+liveStreamCreationPayload := apivideosdk.LiveStreamCreationPayload{}
+liveStreamCreationPayload.SetName("My Live Stream Video") // Add a name for your live stream here.
+liveStreamCreationPayload.SetRecord(false) // Whether you are recording or not. True for record, false for not record.
+liveStreamCreationPayload.SetPublic(true) // Whether your video can be viewed by everyone, or requires authentication to see it.
+liveStreamCreationPayload.SetPlayerId("pl4f4ferf5erfr5zed4fsdd") // The unique identifier for the player.
 
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
-        
-    liveStreamCreationPayload := *apivideosdk.NewLiveStreamCreationPayload("My Live Stream Video") // LiveStreamCreationPayload | 
+res, err := client.LiveStreams.Create(liveStreamCreationPayload)
 
-    
-    res, err := client.LiveStreams.Create(liveStreamCreationPayload)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Create``: %v\
-", err)
-    }
-    // response from `Create`: LiveStream
-    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Create`: %v\
-", res)
+if err != nil {
+    fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Create``: %v", err)
 }
+
+fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Create`: %v", res)
 ```
 ### Path Parameters
 
@@ -441,7 +428,7 @@ import (
 )
 
 func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
         
