@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Delete**](Chapters.md#Delete) | **Delete** /videos/{videoId}/chapters/{language} | Delete a chapter
 [**List**](Chapters.md#List) | **Get** /videos/{videoId}/chapters | List video chapters
-[**Get**](Chapters.md#Get) | **Get** /videos/{videoId}/chapters/{language} | Show a chapter
+[**Get**](Chapters.md#Get) | **Get** /videos/{videoId}/chapters/{language} | Retrieve a chapter
 [**Upload**](Chapters.md#Upload) | **Post** /videos/{videoId}/chapters/{language} | Upload a chapter
 
 
@@ -20,10 +20,10 @@ Method | HTTP request | Description
 
 Delete a chapter
 
+
+
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -36,7 +36,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique identifier for the video you want to delete a chapter from.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -89,8 +89,6 @@ List video chapters
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -103,7 +101,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique identifier for the video you want to show a chapter for.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -152,14 +150,12 @@ Name | Type | Description  | Notes
 > GetWithContext(ctx context.Context, videoId string, language string) (*Chapter, error)
 
 
-Show a chapter
+Retrieve a chapter
 
 
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -172,7 +168,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique identifier for the video you want to show a chapter for.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -226,8 +222,6 @@ Upload a chapter
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -240,7 +234,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique identifier for the video you want to upload a chapter for.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.

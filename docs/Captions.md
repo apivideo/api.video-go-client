@@ -6,8 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Delete**](Captions.md#Delete) | **Delete** /videos/{videoId}/captions/{language} | Delete a caption
 [**List**](Captions.md#List) | **Get** /videos/{videoId}/captions | List video captions
-[**Get**](Captions.md#Get) | **Get** /videos/{videoId}/captions/{language} | Show a caption
-[**Update**](Captions.md#Update) | **Patch** /videos/{videoId}/captions/{language} | Update caption
+[**Get**](Captions.md#Get) | **Get** /videos/{videoId}/captions/{language} | Retrieve a caption
+[**Update**](Captions.md#Update) | **Patch** /videos/{videoId}/captions/{language} | Update a caption
 [**Upload**](Captions.md#Upload) | **Post** /videos/{videoId}/captions/{language} | Upload a caption
 
 
@@ -25,8 +25,6 @@ Delete a caption
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -39,7 +37,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Prklgc" // string | The unique identifier for the video you want to delete a caption from.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -92,8 +90,6 @@ List video captions
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -106,7 +102,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want captions for.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
@@ -155,14 +151,12 @@ Name | Type | Description  | Notes
 > GetWithContext(ctx context.Context, videoId string, language string) (*Caption, error)
 
 
-Show a caption
+Retrieve a caption
 
 
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -175,7 +169,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want captions for.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
@@ -223,14 +217,12 @@ Name | Type | Description  | Notes
 > UpdateWithContext(ctx context.Context, videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Caption, error)
 
 
-Update caption
+Update a caption
 
 
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -243,7 +235,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want to have automatic captions for.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -299,8 +291,6 @@ Upload a caption
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -313,7 +303,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want to add a caption to.
     language := "en" // string | A valid BCP 47 language representation.

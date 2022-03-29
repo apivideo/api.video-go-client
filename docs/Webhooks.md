@@ -5,7 +5,7 @@ All URIs are relative to *https://ws.api.video*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Delete**](Webhooks.md#Delete) | **Delete** /webhooks/{webhookId} | Delete a Webhook
-[**Get**](Webhooks.md#Get) | **Get** /webhooks/{webhookId} | Show Webhook details
+[**Get**](Webhooks.md#Get) | **Get** /webhooks/{webhookId} | Retrieve Webhook details
 [**List**](Webhooks.md#List) | **Get** /webhooks | List all webhooks
 [**Create**](Webhooks.md#Create) | **Post** /webhooks | Create Webhook
 
@@ -24,8 +24,6 @@ Delete a Webhook
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -38,7 +36,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     webhookId := "webhookId_example" // string | The webhook you wish to delete.
 
@@ -81,14 +79,12 @@ Name | Type | Description  | Notes
 > GetWithContext(ctx context.Context, webhookId string) (*Webhook, error)
 
 
-Show Webhook details
+Retrieve Webhook details
 
 
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -101,7 +97,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     webhookId := "webhookId_example" // string | The unique webhook you wish to retreive details on.
 
@@ -155,8 +151,6 @@ List all webhooks
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -169,7 +163,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
     req := apivideosdk.WebhooksApiListRequest{}
     
     req.Events("video.encoding.quality.completed") // string | The webhook event that you wish to filter on.
@@ -224,8 +218,6 @@ Create Webhook
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -238,7 +230,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     webhooksCreationPayload := *apivideosdk.NewWebhooksCreationPayload([]string{"Events_example"}, "https://example.com/webhooks") // WebhooksCreationPayload | 
 

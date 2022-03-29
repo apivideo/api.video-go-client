@@ -78,7 +78,7 @@ type LiveStreamsServiceI interface {
 
 	/*
 	 * DeleteThumbnail Delete a thumbnail
-	 * @param liveStreamId The unique identifier for the live stream you want to delete.
+	 * @param liveStreamId The unique identifier of the live stream whose thumbnail you want to delete.
 	 * @return LiveStreamsApiDeleteThumbnailRequest
 	 */
 
@@ -87,7 +87,7 @@ type LiveStreamsServiceI interface {
 	/*
 	 * DeleteThumbnail Delete a thumbnail
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @param liveStreamId The unique identifier for the live stream you want to delete.
+	 * @param liveStreamId The unique identifier of the live stream whose thumbnail you want to delete.
 	 * @return LiveStreamsApiDeleteThumbnailRequest
 	 */
 
@@ -109,7 +109,7 @@ type LiveStreamsServiceI interface {
 	ListWithContext(ctx context.Context, r LiveStreamsApiListRequest) (*LiveStreamListResponse, error)
 
 	/*
-	 * Get Show live stream
+	 * Get Retrieve live stream
 	 * @param liveStreamId The unique ID for the live stream you want to watch.
 	 * @return LiveStreamsApiGetRequest
 	 */
@@ -117,7 +117,7 @@ type LiveStreamsServiceI interface {
 	Get(liveStreamId string) (*LiveStream, error)
 
 	/*
-	 * Get Show live stream
+	 * Get Retrieve live stream
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param liveStreamId The unique ID for the live stream you want to watch.
 	 * @return LiveStreamsApiGetRequest
@@ -195,6 +195,7 @@ type LiveStreamsService struct {
 
 /*
  * Delete Delete a live stream
+ * If you do not need a live stream any longer, you can send a request to delete it. All you need is the liveStreamId.
 
  * @param liveStreamId The unique ID for the live stream that you want to remove.
  * @return LiveStreamsApiDeleteRequest
@@ -208,6 +209,7 @@ func (s *LiveStreamsService) Delete(liveStreamId string) error {
 
 /*
  * Delete Delete a live stream
+ * If you do not need a live stream any longer, you can send a request to delete it. All you need is the liveStreamId.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param liveStreamId The unique ID for the live stream that you want to remove.
  * @return LiveStreamsApiDeleteRequest
@@ -239,9 +241,9 @@ func (s *LiveStreamsService) DeleteWithContext(ctx context.Context, liveStreamId
 
 /*
  * DeleteThumbnail Delete a thumbnail
- * Send the unique identifier for a live stream to delete it from the system.
+ * Send the unique identifier for a live stream to delete its thumbnail.
 
- * @param liveStreamId The unique identifier for the live stream you want to delete.
+ * @param liveStreamId The unique identifier of the live stream whose thumbnail you want to delete.
  * @return LiveStreamsApiDeleteThumbnailRequest
  */
 
@@ -253,9 +255,9 @@ func (s *LiveStreamsService) DeleteThumbnail(liveStreamId string) (*LiveStream, 
 
 /*
  * DeleteThumbnail Delete a thumbnail
- * Send the unique identifier for a live stream to delete it from the system.
+ * Send the unique identifier for a live stream to delete its thumbnail.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param liveStreamId The unique identifier for the live stream you want to delete.
+ * @param liveStreamId The unique identifier of the live stream whose thumbnail you want to delete.
  * @return LiveStreamsApiDeleteThumbnailRequest
  */
 
@@ -347,8 +349,8 @@ func (s *LiveStreamsService) ListWithContext(ctx context.Context, r LiveStreamsA
 }
 
 /*
- * Get Show live stream
- * Supply a LivestreamId, and you'll get all the details for streaming into, and watching the livestream. Tutorials that use the [show livestream endpoint](https://api.video/blog/endpoints/live-stream-status).
+ * Get Retrieve live stream
+ * Supply a liveStreamId, and you'll get all the details for streaming into, and watching the livestream. Tutorials that use the [show livestream endpoint](https://api.video/blog/endpoints/live-stream-status).
 
  * @param liveStreamId The unique ID for the live stream you want to watch.
  * @return LiveStreamsApiGetRequest
@@ -361,8 +363,8 @@ func (s *LiveStreamsService) Get(liveStreamId string) (*LiveStream, error) {
 }
 
 /*
- * Get Show live stream
- * Supply a LivestreamId, and you'll get all the details for streaming into, and watching the livestream. Tutorials that use the [show livestream endpoint](https://api.video/blog/endpoints/live-stream-status).
+ * Get Retrieve live stream
+ * Supply a liveStreamId, and you'll get all the details for streaming into, and watching the livestream. Tutorials that use the [show livestream endpoint](https://api.video/blog/endpoints/live-stream-status).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param liveStreamId The unique ID for the live stream you want to watch.
  * @return LiveStreamsApiGetRequest
@@ -395,11 +397,15 @@ func (s *LiveStreamsService) GetWithContext(ctx context.Context, liveStreamId st
 
 /*
  * Update Update a live stream
- * Use this endpoint to update the player, or to turn recording on/off (saving a copy of the livestream). NOTE: If the livestream is actively streaming, changing the recording status will only affect the NEXT stream.    The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
+ * Use this endpoint to update the player, or to turn recording on/off (saving a copy of the livestream).
+
+NOTE: If the livestream is actively streaming, changing the recording status will only affect the NEXT stream.
+
+The public=false "private livestream" is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
 
  * @param liveStreamId The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
  * @return LiveStreamsApiUpdateRequest
- */
+*/
 
 func (s *LiveStreamsService) Update(liveStreamId string, liveStreamUpdatePayload LiveStreamUpdatePayload) (*LiveStream, error) {
 
@@ -409,11 +415,15 @@ func (s *LiveStreamsService) Update(liveStreamId string, liveStreamUpdatePayload
 
 /*
  * Update Update a live stream
- * Use this endpoint to update the player, or to turn recording on/off (saving a copy of the livestream). NOTE: If the livestream is actively streaming, changing the recording status will only affect the NEXT stream.    The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
+ * Use this endpoint to update the player, or to turn recording on/off (saving a copy of the livestream).
+
+NOTE: If the livestream is actively streaming, changing the recording status will only affect the NEXT stream.
+
+The public=false "private livestream" is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param liveStreamId The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
  * @return LiveStreamsApiUpdateRequest
- */
+*/
 
 func (s *LiveStreamsService) UpdateWithContext(ctx context.Context, liveStreamId string, liveStreamUpdatePayload LiveStreamUpdatePayload) (*LiveStream, error) {
 	var localVarPostBody interface{}
@@ -444,7 +454,16 @@ func (s *LiveStreamsService) UpdateWithContext(ctx context.Context, liveStreamId
 
 /*
  * Create Create live stream
- * A live stream will give you the 'connection point' to RTMP your video stream to api.video. It will also give you the details for viewers to watch the same livestream.  The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer. See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS. Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
+ * A live stream will give you the 'connection point' to RTMP your video stream to api.video.
+
+It will also give you the details for viewers to watch the same livestream.
+
+The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
+
+See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS.
+
+Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
+
 Tutorials that [create live streams](https://api.video/blog/endpoints/live-create).
 
  * @return LiveStreamsApiCreateRequest
@@ -458,7 +477,16 @@ func (s *LiveStreamsService) Create(liveStreamCreationPayload LiveStreamCreation
 
 /*
  * Create Create live stream
- * A live stream will give you the 'connection point' to RTMP your video stream to api.video. It will also give you the details for viewers to watch the same livestream.  The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer. See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS. Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
+ * A live stream will give you the 'connection point' to RTMP your video stream to api.video.
+
+It will also give you the details for viewers to watch the same livestream.
+
+The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
+
+See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS.
+
+Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
+
 Tutorials that [create live streams](https://api.video/blog/endpoints/live-create).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return LiveStreamsApiCreateRequest

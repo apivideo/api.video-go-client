@@ -21,9 +21,33 @@ Authenticate
 
 
 ### Example
+
 ```go
-//With the api.video API clients, authentication is taken care of with each client created.
-// You get to skip this step!
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+        
+    authenticatePayload := *apivideosdk.NewAuthenticatePayload("ApiKey_example") // AuthenticatePayload | 
+
+    
+    res, err := client.Authentication.Authenticate(authenticatePayload)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Authentication.Authenticate``: %v\n", err)
+    }
+    // response from `Authenticate`: AccessToken
+    fmt.Fprintf(os.Stdout, "Response from `Authentication.Authenticate`: %v\n", res)
+}
 ```
 ### Path Parameters
 
@@ -58,9 +82,33 @@ Refresh token
 
 
 ### Example
+
 ```go
-//With the api.video API clients, authentication is taken care of with each client created.
-// You get to skip this step!
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+        
+    refreshTokenPayload := *apivideosdk.NewRefreshTokenPayload("RefreshToken_example") // RefreshTokenPayload | 
+
+    
+    res, err := client.Authentication.Refresh(refreshTokenPayload)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Authentication.Refresh``: %v\n", err)
+    }
+    // response from `Refresh`: AccessToken
+    fmt.Fprintf(os.Stdout, "Response from `Authentication.Refresh`: %v\n", res)
+}
 ```
 ### Path Parameters
 
