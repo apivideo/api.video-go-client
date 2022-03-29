@@ -23,8 +23,6 @@ List live stream player sessions
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -37,7 +35,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
     req := apivideosdk.RawStatisticsApiListLiveStreamSessionsRequest{}
     
     req.LiveStreamId("vi4k0jvEUuaTdRAEjQ4Jfrgz") // string | The unique identifier for the live stream you want to retrieve analytics for.
@@ -98,8 +96,6 @@ List player session events
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -112,7 +108,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
     req := apivideosdk.RawStatisticsApiListSessionEventsRequest{}
     
     req.SessionId("psEmFwGQUAXR2lFHj5nDOpy") // string | A unique identifier you can use to reference and track a session with.
@@ -171,8 +167,6 @@ List video player sessions
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -185,7 +179,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
     req := apivideosdk.RawStatisticsApiListVideoSessionsRequest{}
     
     req.VideoId("vi4k0jvEUuaTdRAEjQ4Prklg") // string | The unique identifier for the video you want to retrieve session information for.

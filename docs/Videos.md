@@ -5,8 +5,8 @@ All URIs are relative to *https://ws.api.video*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Delete**](Videos.md#Delete) | **Delete** /videos/{videoId} | Delete a video
-[**Get**](Videos.md#Get) | **Get** /videos/{videoId} | Show a video
-[**GetStatus**](Videos.md#GetStatus) | **Get** /videos/{videoId}/status | Show video status
+[**Get**](Videos.md#Get) | **Get** /videos/{videoId} | Retrieve a video
+[**GetStatus**](Videos.md#GetStatus) | **Get** /videos/{videoId}/status | Retrieve video status
 [**List**](Videos.md#List) | **Get** /videos | List all videos
 [**Update**](Videos.md#Update) | **Patch** /videos/{videoId} | Update a video
 [**PickThumbnail**](Videos.md#PickThumbnail) | **Patch** /videos/{videoId}/thumbnail | Pick a thumbnail
@@ -30,8 +30,6 @@ Delete a video
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 import (
     "context"
@@ -42,7 +40,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The video ID for the video you want to delete.
     err := client.Videos.Delete(videoId)
@@ -82,14 +80,12 @@ Name | Type | Description  | Notes
 > GetWithContext(ctx context.Context, videoId string) (*Video, error)
 
 
-Show a video
+Retrieve a video
 
 
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -102,7 +98,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "videoId_example" // string | The unique identifier for the video you want details about.
 
@@ -148,14 +144,12 @@ Name | Type | Description  | Notes
 > GetStatusWithContext(ctx context.Context, videoId string) (*VideoStatus, error)
 
 
-Show video status
+Retrieve video status
 
 
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
  package main
 
 import (
@@ -168,7 +162,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique identifier for the video you want the status for.
 
@@ -233,9 +227,9 @@ import (
 )
 
 func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
     req := apivideosdk.VideosApiListRequest{}
     
     req.Title("My Video.mp4") // string | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles.
@@ -300,8 +294,6 @@ Update a video
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -314,7 +306,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The video ID for the video you want to delete.
     videoUpdatePayload := *apivideosdk.NewVideoUpdatePayload() // VideoUpdatePayload | 
@@ -368,8 +360,6 @@ Pick a thumbnail
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -382,7 +372,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
     videoThumbnailPickPayload := *apivideosdk.NewVideoThumbnailPickPayload("Timecode_example") // VideoThumbnailPickPayload | 
@@ -435,10 +425,37 @@ Upload with an upload token
 
 
 ### Example
+
 ```go
-//The upload will happen on the front end, and not on the backend code.  
-//Our [JavaScript uploader(https://docs.api.video/docs/video-uploader) is a great place to look for uploading videos with the delegated token.
-//We also have uploaders for a number of [mobile languages](https://docs.api.video/docs/flutter-uploader).
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+        
+    token := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the token you want to use to upload a video.
+    file := os.NewFile(1234, "some_file") // *os.File | The path to the video you want to upload.
+
+    
+    res, err := client.Videos.UploadWithUploadTokenFile(token, file)
+
+    // you can also use a Reader instead of a File:
+    // client.Videos.UploadWithUploadToken(token, fileName, fileReader, fileSize)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.UploadWithUploadToken``: %v\n", err)
+    }
+    // response from `UploadWithUploadToken`: Video
+    fmt.Fprintf(os.Stdout, "Response from `Videos.UploadWithUploadToken`: %v\n", res)
+}
 ```
 ### Progressive uploads
 
@@ -501,9 +518,6 @@ Create a video
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
-
 package main
 
 import (
@@ -516,7 +530,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     videoCreationPayload := *apivideosdk.NewVideoCreationPayload("Maths video") // VideoCreationPayload | video to create
 
@@ -566,9 +580,6 @@ Upload a video
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
-
 package main
 
 import (
@@ -581,7 +592,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
 
       videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" 
     // string | Enter the videoId you want to use to upload your video.
@@ -665,9 +676,6 @@ Upload a thumbnail
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
-
 package main
 
 import (
@@ -680,7 +688,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
 
     videoId := "videoId_example" // string | Unique identifier of the chosen video 
     file := os.NewFile(1234, "some_file") // *os.File | The image to be added as a thumbnail.

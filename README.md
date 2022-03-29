@@ -52,10 +52,10 @@ import (
 
 func main() {
     //Connect to production environment
-    client := apivideosdk.ClientBuilder("YOUR_API_TOKEN").Build()
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
 
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
 
 
     //List Videos
@@ -130,8 +130,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Delete**](docs/Captions.md#Delete) | **Delete** /videos/{videoId}/captions/{language} | Delete a caption
 [**List**](docs/Captions.md#List) | **Get** /videos/{videoId}/captions | List video captions
-[**Get**](docs/Captions.md#Get) | **Get** /videos/{videoId}/captions/{language} | Show a caption
-[**Update**](docs/Captions.md#Update) | **Patch** /videos/{videoId}/captions/{language} | Update caption
+[**Get**](docs/Captions.md#Get) | **Get** /videos/{videoId}/captions/{language} | Retrieve a caption
+[**Update**](docs/Captions.md#Update) | **Patch** /videos/{videoId}/captions/{language} | Update a caption
 [**Upload**](docs/Captions.md#Upload) | **Post** /videos/{videoId}/captions/{language} | Upload a caption
 
 
@@ -150,7 +150,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Delete**](docs/Chapters.md#Delete) | **Delete** /videos/{videoId}/chapters/{language} | Delete a chapter
 [**List**](docs/Chapters.md#List) | **Get** /videos/{videoId}/chapters | List video chapters
-[**Get**](docs/Chapters.md#Get) | **Get** /videos/{videoId}/chapters/{language} | Show a chapter
+[**Get**](docs/Chapters.md#Get) | **Get** /videos/{videoId}/chapters/{language} | Retrieve a chapter
 [**Upload**](docs/Chapters.md#Upload) | **Post** /videos/{videoId}/chapters/{language} | Upload a chapter
 
 
@@ -170,7 +170,7 @@ Method | HTTP request | Description
 [**Delete**](docs/LiveStreams.md#Delete) | **Delete** /live-streams/{liveStreamId} | Delete a live stream
 [**DeleteThumbnail**](docs/LiveStreams.md#DeleteThumbnail) | **Delete** /live-streams/{liveStreamId}/thumbnail | Delete a thumbnail
 [**List**](docs/LiveStreams.md#List) | **Get** /live-streams | List all live streams
-[**Get**](docs/LiveStreams.md#Get) | **Get** /live-streams/{liveStreamId} | Show live stream
+[**Get**](docs/LiveStreams.md#Get) | **Get** /live-streams/{liveStreamId} | Retrieve live stream
 [**Update**](docs/LiveStreams.md#Update) | **Patch** /live-streams/{liveStreamId} | Update a live stream
 [**Create**](docs/LiveStreams.md#Create) | **Post** /live-streams | Create live stream
 [**UploadThumbnail**](docs/LiveStreams.md#UploadThumbnail) | **Post** /live-streams/{liveStreamId}/thumbnail | Upload a thumbnail
@@ -192,7 +192,7 @@ Method | HTTP request | Description
 [**Delete**](docs/PlayerThemes.md#Delete) | **Delete** /players/{playerId} | Delete a player
 [**DeleteLogo**](docs/PlayerThemes.md#DeleteLogo) | **Delete** /players/{playerId}/logo | Delete logo
 [**List**](docs/PlayerThemes.md#List) | **Get** /players | List all player themes
-[**Get**](docs/PlayerThemes.md#Get) | **Get** /players/{playerId} | Show a player
+[**Get**](docs/PlayerThemes.md#Get) | **Get** /players/{playerId} | Retrieve a player
 [**Update**](docs/PlayerThemes.md#Update) | **Patch** /players/{playerId} | Update a player
 [**Create**](docs/PlayerThemes.md#Create) | **Post** /players | Create a player
 [**UploadLogo**](docs/PlayerThemes.md#UploadLogo) | **Post** /players/{playerId}/logo | Upload a logo
@@ -231,7 +231,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteToken**](docs/UploadTokens.md#DeleteToken) | **Delete** /upload-tokens/{uploadToken} | Delete an upload token
 [**List**](docs/UploadTokens.md#List) | **Get** /upload-tokens | List all active upload tokens.
-[**GetToken**](docs/UploadTokens.md#GetToken) | **Get** /upload-tokens/{uploadToken} | Show upload token
+[**GetToken**](docs/UploadTokens.md#GetToken) | **Get** /upload-tokens/{uploadToken} | Retrieve upload token
 [**CreateToken**](docs/UploadTokens.md#CreateToken) | **Post** /upload-tokens | Generate an upload token
 
 
@@ -249,8 +249,8 @@ videosApi := client.Videos
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Delete**](docs/Videos.md#Delete) | **Delete** /videos/{videoId} | Delete a video
-[**Get**](docs/Videos.md#Get) | **Get** /videos/{videoId} | Show a video
-[**GetStatus**](docs/Videos.md#GetStatus) | **Get** /videos/{videoId}/status | Show video status
+[**Get**](docs/Videos.md#Get) | **Get** /videos/{videoId} | Retrieve a video
+[**GetStatus**](docs/Videos.md#GetStatus) | **Get** /videos/{videoId}/status | Retrieve video status
 [**List**](docs/Videos.md#List) | **Get** /videos | List all videos
 [**Update**](docs/Videos.md#Update) | **Patch** /videos/{videoId} | Update a video
 [**PickThumbnail**](docs/Videos.md#PickThumbnail) | **Patch** /videos/{videoId}/thumbnail | Pick a thumbnail
@@ -292,7 +292,7 @@ webhooksApi := client.Webhooks
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**Delete**](docs/Webhooks.md#Delete) | **Delete** /webhooks/{webhookId} | Delete a Webhook
-[**Get**](docs/Webhooks.md#Get) | **Get** /webhooks/{webhookId} | Show Webhook details
+[**Get**](docs/Webhooks.md#Get) | **Get** /webhooks/{webhookId} | Retrieve Webhook details
 [**List**](docs/Webhooks.md#List) | **Get** /webhooks | List all webhooks
 [**Create**](docs/Webhooks.md#Create) | **Post** /webhooks | Create Webhook
 

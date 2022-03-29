@@ -76,7 +76,7 @@ type CaptionsServiceI interface {
 	ListWithContext(ctx context.Context, videoId string, r CaptionsApiListRequest) (*CaptionsListResponse, error)
 
 	/*
-	 * Get Show a caption
+	 * Get Retrieve a caption
 	 * @param videoId The unique identifier for the video you want captions for.
 	 * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
 	 * @return CaptionsApiGetRequest
@@ -85,7 +85,7 @@ type CaptionsServiceI interface {
 	Get(videoId string, language string) (*Caption, error)
 
 	/*
-	 * Get Show a caption
+	 * Get Retrieve a caption
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId The unique identifier for the video you want captions for.
 	 * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
@@ -95,7 +95,7 @@ type CaptionsServiceI interface {
 	GetWithContext(ctx context.Context, videoId string, language string) (*Caption, error)
 
 	/*
-	 * Update Update caption
+	 * Update Update a caption
 	 * @param videoId The unique identifier for the video you want to have automatic captions for.
 	 * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
 	 * @return CaptionsApiUpdateRequest
@@ -104,7 +104,7 @@ type CaptionsServiceI interface {
 	Update(videoId string, language string, captionsUpdatePayload CaptionsUpdatePayload) (*Caption, error)
 
 	/*
-	 * Update Update caption
+	 * Update Update a caption
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId The unique identifier for the video you want to have automatic captions for.
 	 * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -256,8 +256,9 @@ func (s *CaptionsService) ListWithContext(ctx context.Context, videoId string, r
 }
 
 /*
- * Get Show a caption
- * Display a caption for a video in a specific language. If the language is available, the caption is returned. Otherwise, you will get a response indicating the caption was not found.
+ * Get Retrieve a caption
+ * Retrieve a caption for a video in a specific language. If the language is available, the caption is returned. Otherwise, you will get a error indicating the caption was not found.
+
 Tutorials that use the [captions endpoint](https://api.video/blog/endpoints/captions).
 
  * @param videoId The unique identifier for the video you want captions for.
@@ -272,8 +273,9 @@ func (s *CaptionsService) Get(videoId string, language string) (*Caption, error)
 }
 
 /*
- * Get Show a caption
- * Display a caption for a video in a specific language. If the language is available, the caption is returned. Otherwise, you will get a response indicating the caption was not found.
+ * Get Retrieve a caption
+ * Retrieve a caption for a video in a specific language. If the language is available, the caption is returned. Otherwise, you will get a error indicating the caption was not found.
+
 Tutorials that use the [captions endpoint](https://api.video/blog/endpoints/captions).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want captions for.
@@ -308,8 +310,8 @@ func (s *CaptionsService) GetWithContext(ctx context.Context, videoId string, la
 }
 
 /*
- * Update Update caption
- * To have the captions on automatically, use this PATCH to set default: true.
+ * Update Update a caption
+ * To have the captions on automatically, use this method to set default: true.
 
  * @param videoId The unique identifier for the video you want to have automatic captions for.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -323,8 +325,8 @@ func (s *CaptionsService) Update(videoId string, language string, captionsUpdate
 }
 
 /*
- * Update Update caption
- * To have the captions on automatically, use this PATCH to set default: true.
+ * Update Update a caption
+ * To have the captions on automatically, use this method to set default: true.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want to have automatic captions for.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -362,6 +364,7 @@ func (s *CaptionsService) UpdateWithContext(ctx context.Context, videoId string,
 /*
  * Upload Upload a caption
  * Upload a VTT file to add captions to your video.
+
  Read our [captioning tutorial](https://api.video/blog/tutorials/adding-captions) for more details.
 
  * @param videoId The unique identifier for the video you want to add a caption to.
@@ -376,6 +379,7 @@ func (s *CaptionsService) UploadFile(videoId string, language string, file *os.F
 /*
  * Upload Upload a caption
  * Upload a VTT file to add captions to your video.
+
  Read our [captioning tutorial](https://api.video/blog/tutorials/adding-captions) for more details.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want to add a caption to.
@@ -390,6 +394,7 @@ func (s *CaptionsService) UploadFileWithContext(ctx context.Context, videoId str
 /*
  * Upload Upload a caption
  * Upload a VTT file to add captions to your video.
+
  Read our [captioning tutorial](https://api.video/blog/tutorials/adding-captions) for more details.
 
  * @param videoId The unique identifier for the video you want to add a caption to.
@@ -403,6 +408,7 @@ func (s *CaptionsService) Upload(videoId string, language string, fileName strin
 /*
  * Upload Upload a caption
  * Upload a VTT file to add captions to your video.
+
  Read our [captioning tutorial](https://api.video/blog/tutorials/adding-captions) for more details.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want to add a caption to.

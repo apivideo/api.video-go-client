@@ -80,7 +80,7 @@ type UploadTokensServiceI interface {
 	ListWithContext(ctx context.Context, r UploadTokensApiListRequest) (*TokenListResponse, error)
 
 	/*
-	 * GetToken Show upload token
+	 * GetToken Retrieve upload token
 	 * @param uploadToken The unique identifier for the token you want information about.
 	 * @return UploadTokensApiGetTokenRequest
 	 */
@@ -88,7 +88,7 @@ type UploadTokensServiceI interface {
 	GetToken(uploadToken string) (*UploadToken, error)
 
 	/*
-	 * GetToken Show upload token
+	 * GetToken Retrieve upload token
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param uploadToken The unique identifier for the token you want information about.
 	 * @return UploadTokensApiGetTokenRequest
@@ -167,6 +167,7 @@ func (s *UploadTokensService) DeleteTokenWithContext(ctx context.Context, upload
 /*
  * List List all active upload tokens.
  * A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens.
+
 Tutorials using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
 
  * @return UploadTokensApiListRequest
@@ -181,6 +182,7 @@ func (s *UploadTokensService) List(r UploadTokensApiListRequest) (*TokenListResp
 /*
  * List List all active upload tokens.
  * A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens.
+
 Tutorials using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return UploadTokensApiListRequest
@@ -223,7 +225,7 @@ func (s *UploadTokensService) ListWithContext(ctx context.Context, r UploadToken
 }
 
 /*
- * GetToken Show upload token
+ * GetToken Retrieve upload token
  * You can retrieve details about a specific upload token if you have the unique identifier for the upload token. Add it in the path of the endpoint. Details include time-to-live (ttl), when the token was created, and when it will expire.
 
  * @param uploadToken The unique identifier for the token you want information about.
@@ -237,7 +239,7 @@ func (s *UploadTokensService) GetToken(uploadToken string) (*UploadToken, error)
 }
 
 /*
- * GetToken Show upload token
+ * GetToken Retrieve upload token
  * You can retrieve details about a specific upload token if you have the unique identifier for the upload token. Add it in the path of the endpoint. Details include time-to-live (ttl), when the token was created, and when it will expire.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param uploadToken The unique identifier for the token you want information about.

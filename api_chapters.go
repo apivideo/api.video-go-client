@@ -76,7 +76,7 @@ type ChaptersServiceI interface {
 	ListWithContext(ctx context.Context, videoId string, r ChaptersApiListRequest) (*ChaptersListResponse, error)
 
 	/*
-	 * Get Show a chapter
+	 * Get Retrieve a chapter
 	 * @param videoId The unique identifier for the video you want to show a chapter for.
 	 * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
 	 * @return ChaptersApiGetRequest
@@ -85,7 +85,7 @@ type ChaptersServiceI interface {
 	Get(videoId string, language string) (*Chapter, error)
 
 	/*
-	 * Get Show a chapter
+	 * Get Retrieve a chapter
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId The unique identifier for the video you want to show a chapter for.
 	 * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -136,6 +136,7 @@ type ChaptersService struct {
 
 /*
  * Delete Delete a chapter
+ * Delete a chapter in a specific language by providing the video ID for the video you want to delete the chapter from and the language the chapter is in.
 
  * @param videoId The unique identifier for the video you want to delete a chapter from.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -150,6 +151,7 @@ func (s *ChaptersService) Delete(videoId string, language string) error {
 
 /*
  * Delete Delete a chapter
+ * Delete a chapter in a specific language by providing the video ID for the video you want to delete the chapter from and the language the chapter is in.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want to delete a chapter from.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -235,13 +237,15 @@ func (s *ChaptersService) ListWithContext(ctx context.Context, videoId string, r
 }
 
 /*
- * Get Show a chapter
- * Chapters help your viewers find the sections of the video they are most interested in viewing. Tutorials that use the [chapters endpoint](https://api.video/blog/endpoints/chapters).
+ * Get Retrieve a chapter
+ * Retrieve a chapter for a video in a specific language.
+
+Chapters help your viewers find the sections of the video they are most interested in viewing. Tutorials that use the [chapters endpoint](https://api.video/blog/endpoints/chapters).
 
  * @param videoId The unique identifier for the video you want to show a chapter for.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
  * @return ChaptersApiGetRequest
- */
+*/
 
 func (s *ChaptersService) Get(videoId string, language string) (*Chapter, error) {
 
@@ -250,13 +254,15 @@ func (s *ChaptersService) Get(videoId string, language string) (*Chapter, error)
 }
 
 /*
- * Get Show a chapter
- * Chapters help your viewers find the sections of the video they are most interested in viewing. Tutorials that use the [chapters endpoint](https://api.video/blog/endpoints/chapters).
+ * Get Retrieve a chapter
+ * Retrieve a chapter for a video in a specific language.
+
+Chapters help your viewers find the sections of the video they are most interested in viewing. Tutorials that use the [chapters endpoint](https://api.video/blog/endpoints/chapters).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want to show a chapter for.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
  * @return ChaptersApiGetRequest
- */
+*/
 
 func (s *ChaptersService) GetWithContext(ctx context.Context, videoId string, language string) (*Chapter, error) {
 	var localVarPostBody interface{}
@@ -286,12 +292,14 @@ func (s *ChaptersService) GetWithContext(ctx context.Context, videoId string, la
 
 /*
  * Upload Upload a chapter
- * Chapters help break the video into sections. Read our [tutorial](https://api.video/blog/tutorials/adding-chapters-to-your-videos) for more details.
+ * Upload a VTT file to add chapters to your video.
+
+Chapters help break the video into sections. Read our [tutorial](https://api.video/blog/tutorials/adding-chapters-to-your-videos) for more details.
 
  * @param videoId The unique identifier for the video you want to upload a chapter for.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
  * @return ChaptersApiUploadRequest
- */
+*/
 
 func (s *ChaptersService) UploadFile(videoId string, language string, file *os.File) (*Chapter, error) {
 	return s.UploadFileWithContext(context.Background(), videoId, language, file)
@@ -299,12 +307,14 @@ func (s *ChaptersService) UploadFile(videoId string, language string, file *os.F
 
 /*
  * Upload Upload a chapter
- * Chapters help break the video into sections. Read our [tutorial](https://api.video/blog/tutorials/adding-chapters-to-your-videos) for more details.
+ * Upload a VTT file to add chapters to your video.
+
+Chapters help break the video into sections. Read our [tutorial](https://api.video/blog/tutorials/adding-chapters-to-your-videos) for more details.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want to upload a chapter for.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
  * @return ChaptersApiUploadRequest
- */
+*/
 
 func (s *ChaptersService) UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Chapter, error) {
 	return s.UploadWithContext(ctx, videoId, language, file.Name(), io.Reader(file))
@@ -312,24 +322,28 @@ func (s *ChaptersService) UploadFileWithContext(ctx context.Context, videoId str
 
 /*
  * Upload Upload a chapter
- * Chapters help break the video into sections. Read our [tutorial](https://api.video/blog/tutorials/adding-chapters-to-your-videos) for more details.
+ * Upload a VTT file to add chapters to your video.
+
+Chapters help break the video into sections. Read our [tutorial](https://api.video/blog/tutorials/adding-chapters-to-your-videos) for more details.
 
  * @param videoId The unique identifier for the video you want to upload a chapter for.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
  * @return ChaptersApiUploadRequest
- */
+*/
 func (s *ChaptersService) Upload(videoId string, language string, fileName string, fileReader io.Reader) (*Chapter, error) {
 	return s.UploadWithContext(context.Background(), videoId, language, fileName, fileReader)
 }
 
 /*
  * Upload Upload a chapter
- * Chapters help break the video into sections. Read our [tutorial](https://api.video/blog/tutorials/adding-chapters-to-your-videos) for more details.
+ * Upload a VTT file to add chapters to your video.
+
+Chapters help break the video into sections. Read our [tutorial](https://api.video/blog/tutorials/adding-chapters-to-your-videos) for more details.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want to upload a chapter for.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
  * @return ChaptersApiUploadRequest
- */
+*/
 func (s *ChaptersService) UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader) (*Chapter, error) {
 	localVarPath := "/videos/{videoId}/chapters/{language}"
 	localVarPath = strings.Replace(localVarPath, "{"+"videoId"+"}", url.PathEscape(parameterToString(videoId, "")), -1)

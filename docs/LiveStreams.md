@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**Delete**](LiveStreams.md#Delete) | **Delete** /live-streams/{liveStreamId} | Delete a live stream
 [**DeleteThumbnail**](LiveStreams.md#DeleteThumbnail) | **Delete** /live-streams/{liveStreamId}/thumbnail | Delete a thumbnail
 [**List**](LiveStreams.md#List) | **Get** /live-streams | List all live streams
-[**Get**](LiveStreams.md#Get) | **Get** /live-streams/{liveStreamId} | Show live stream
+[**Get**](LiveStreams.md#Get) | **Get** /live-streams/{liveStreamId} | Retrieve live stream
 [**Update**](LiveStreams.md#Update) | **Patch** /live-streams/{liveStreamId} | Update a live stream
 [**Create**](LiveStreams.md#Create) | **Post** /live-streams | Create live stream
 [**UploadThumbnail**](LiveStreams.md#UploadThumbnail) | **Post** /live-streams/{liveStreamId}/thumbnail | Upload a thumbnail
@@ -23,10 +23,10 @@ Method | HTTP request | Description
 
 Delete a live stream
 
+
+
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -39,7 +39,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream that you want to remove.
 
@@ -88,8 +88,6 @@ Delete a thumbnail
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -102,7 +100,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique identifier for the live stream you want to delete. 
 
@@ -123,7 +121,7 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**liveStreamId** | **string** | The unique identifier for the live stream you want to delete.  | 
+**liveStreamId** | **string** | The unique identifier of the live stream whose thumbnail you want to delete. | 
 
 ### Other Parameters
 
@@ -156,8 +154,6 @@ List all live streams
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
   
   import (
@@ -170,7 +166,7 @@ package main
   func main() {
       client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
       // if you rather like to use the sandbox environment:
-      // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+      // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
       req := apivideosdk.LiveStreamsApiListRequest{}
       
       req.StreamKey("30087931-229e-42cf-b5f9-e91bcc1f7332") // string | The unique stream key that allows you to stream videos.
@@ -225,14 +221,12 @@ Name | Type | Description  | Notes
 > GetWithContext(ctx context.Context, liveStreamId string) (*LiveStream, error)
 
 
-Show live stream
+Retrieve live stream
 
 
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -245,7 +239,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream you want to watch.
 
@@ -297,8 +291,6 @@ Update a live stream
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -311,7 +303,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
     liveStreamUpdatePayload := *apivideosdk.NewLiveStreamUpdatePayload() // LiveStreamUpdatePayload | 
@@ -416,8 +408,6 @@ Upload a thumbnail
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -430,7 +420,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     liveStreamId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique ID for the live stream you want to upload.
     file := os.NewFile(1234, "some_file") // *os.File | The image to be added as a thumbnail.

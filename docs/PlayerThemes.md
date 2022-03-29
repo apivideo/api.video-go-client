@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**Delete**](PlayerThemes.md#Delete) | **Delete** /players/{playerId} | Delete a player
 [**DeleteLogo**](PlayerThemes.md#DeleteLogo) | **Delete** /players/{playerId}/logo | Delete logo
 [**List**](PlayerThemes.md#List) | **Get** /players | List all player themes
-[**Get**](PlayerThemes.md#Get) | **Get** /players/{playerId} | Show a player
+[**Get**](PlayerThemes.md#Get) | **Get** /players/{playerId} | Retrieve a player
 [**Update**](PlayerThemes.md#Update) | **Patch** /players/{playerId} | Update a player
 [**Create**](PlayerThemes.md#Create) | **Post** /players | Create a player
 [**UploadLogo**](PlayerThemes.md#UploadLogo) | **Post** /players/{playerId}/logo | Upload a logo
@@ -27,8 +27,6 @@ Delete a player
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -41,7 +39,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     playerId := "pl45d5vFFGrfdsdsd156dGhh" // string | The unique identifier for the player you want to delete.
 
@@ -86,10 +84,10 @@ Name | Type | Description  | Notes
 
 Delete logo
 
+
+
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -102,7 +100,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     playerId := "pl14Db6oMJRH6SRVoOwORacK" // string | The unique identifier for the player.
 
@@ -153,8 +151,6 @@ List all player themes
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -167,7 +163,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
     req := apivideosdk.PlayerThemesApiListRequest{}
     
     req.SortBy("createdAt") // string | createdAt is the time the player was created. updatedAt is the time the player was last updated. The time is presented in ISO-8601 format.
@@ -218,14 +214,12 @@ Name | Type | Description  | Notes
 > GetWithContext(ctx context.Context, playerId string) (*PlayerTheme, error)
 
 
-Show a player
+Retrieve a player
 
 
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -238,7 +232,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     playerId := "pl45d5vFFGrfdsdsd156dGhh" // string | The unique identifier for the player you want to retrieve. 
 
@@ -290,8 +284,6 @@ Update a player
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -304,7 +296,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     playerId := "pl45d5vFFGrfdsdsd156dGhh" // string | The unique identifier for the player.
     playerThemeUpdatePayload := *apivideosdk.NewPlayerThemeUpdatePayload() // PlayerThemeUpdatePayload | 
@@ -358,8 +350,6 @@ Create a player
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -372,7 +362,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     playerThemeCreationPayload := *apivideosdk.NewPlayerThemeCreationPayload() // PlayerThemeCreationPayload | 
 
@@ -422,8 +412,6 @@ Upload a logo
 
 ### Example
 ```go
-//install the Go API client
-//go get github.com/apivideo/api.video-go-client
 package main
 
 import (
@@ -436,7 +424,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_TOKEN").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     playerId := "pl14Db6oMJRH6SRVoOwORacK" // string | The unique identifier for the player.
     file := os.NewFile(1234, "some_file") // *os.File | The name of the file you want to use for your logo.

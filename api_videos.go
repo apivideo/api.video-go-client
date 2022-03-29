@@ -107,7 +107,7 @@ type VideosServiceI interface {
 	DeleteWithContext(ctx context.Context, videoId string) error
 
 	/*
-	 * Get Show a video
+	 * Get Retrieve a video
 	 * @param videoId The unique identifier for the video you want details about.
 	 * @return VideosApiGetRequest
 	 */
@@ -115,7 +115,7 @@ type VideosServiceI interface {
 	Get(videoId string) (*Video, error)
 
 	/*
-	 * Get Show a video
+	 * Get Retrieve a video
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId The unique identifier for the video you want details about.
 	 * @return VideosApiGetRequest
@@ -124,7 +124,7 @@ type VideosServiceI interface {
 	GetWithContext(ctx context.Context, videoId string) (*Video, error)
 
 	/*
-	 * GetStatus Show video status
+	 * GetStatus Retrieve video status
 	 * @param videoId The unique identifier for the video you want the status for.
 	 * @return VideosApiGetStatusRequest
 	 */
@@ -132,7 +132,7 @@ type VideosServiceI interface {
 	GetStatus(videoId string) (*VideoStatus, error)
 
 	/*
-	 * GetStatus Show video status
+	 * GetStatus Retrieve video status
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId The unique identifier for the video you want the status for.
 	 * @return VideosApiGetStatusRequest
@@ -352,7 +352,7 @@ func (s *VideosService) DeleteWithContext(ctx context.Context, videoId string) e
 }
 
 /*
- * Get Show a video
+ * Get Retrieve a video
  * This call provides the same information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL.
 
  * @param videoId The unique identifier for the video you want details about.
@@ -366,7 +366,7 @@ func (s *VideosService) Get(videoId string) (*Video, error) {
 }
 
 /*
- * Get Show a video
+ * Get Retrieve a video
  * This call provides the same information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want details about.
@@ -399,7 +399,7 @@ func (s *VideosService) GetWithContext(ctx context.Context, videoId string) (*Vi
 }
 
 /*
- * GetStatus Show video status
+ * GetStatus Retrieve video status
  * This method provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities.
 
  * @param videoId The unique identifier for the video you want the status for.
@@ -413,7 +413,7 @@ func (s *VideosService) GetStatus(videoId string) (*VideoStatus, error) {
 }
 
 /*
- * GetStatus Show video status
+ * GetStatus Retrieve video status
  * This method provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want the status for.
@@ -532,7 +532,10 @@ func (s *VideosService) ListWithContext(ctx context.Context, r VideosApiListRequ
  * Update Update a video
  * Updates the parameters associated with your video. The video you are updating is determined by the video ID you provide.
 
+
+
 NOTE: If you are updating an array, you must provide the entire array as what you provide here overwrites what is in the system rather than appending to it.
+
 
 
  * @param videoId The video ID for the video you want to delete.
@@ -549,7 +552,10 @@ func (s *VideosService) Update(videoId string, videoUpdatePayload VideoUpdatePay
  * Update Update a video
  * Updates the parameters associated with your video. The video you are updating is determined by the video ID you provide.
 
+
+
 NOTE: If you are updating an array, you must provide the entire array as what you provide here overwrites what is in the system rather than appending to it.
+
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The video ID for the video you want to delete.
@@ -587,9 +593,14 @@ func (s *VideosService) UpdateWithContext(ctx context.Context, videoId string, v
  * PickThumbnail Pick a thumbnail
  * Pick a thumbnail from the given time code.
 
+
+
 If you'd like to upload an image for your thumbnail, use the dedicated [method](#uploadThumbnail).
 
+
+
 There may be a short delay for the thumbnail to update.
+
 
 
  * @param videoId Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
@@ -606,9 +617,14 @@ func (s *VideosService) PickThumbnail(videoId string, videoThumbnailPickPayload 
  * PickThumbnail Pick a thumbnail
  * Pick a thumbnail from the given time code.
 
+
+
 If you'd like to upload an image for your thumbnail, use the dedicated [method](#uploadThumbnail).
 
+
+
 There may be a short delay for the thumbnail to update.
+
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
@@ -791,13 +807,21 @@ func (s *VideosService) UploadWithUploadTokenWithContext(ctx context.Context, to
 /*
  * Create Create a video
  * We have tutorials on:
+
 * [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
+
 * [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
+
 * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
+
 * [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
+
 * [Using Dynamic Metadata](https://api.video/blog/tutorials/dynamic-metadata)
 
+
+
 * Full list of [tutorials](https://api.video/blog/endpoints/video-create) that demonstrate this endpoint.
+
 
 
  * @return VideosApiCreateRequest
@@ -812,13 +836,21 @@ func (s *VideosService) Create(videoCreationPayload VideoCreationPayload) (*Vide
 /*
  * Create Create a video
  * We have tutorials on:
+
 * [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
+
 * [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
+
 * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
+
 * [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
+
 * [Using Dynamic Metadata](https://api.video/blog/tutorials/dynamic-metadata)
 
+
+
 * Full list of [tutorials](https://api.video/blog/endpoints/video-create) that demonstrate this endpoint.
+
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return VideosApiCreateRequest
@@ -854,13 +886,22 @@ func (s *VideosService) CreateWithContext(ctx context.Context, videoCreationPayl
  * Upload Upload a video
  * To upload a video to the videoId you created. You can only upload your video to the videoId once.
 
+
+
 We offer 2 types of upload:
+
 * Regular upload
+
 * Progressive upload
+
 The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
+
   * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+
   * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
+
   Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
+
 
 
  * @param videoId Enter the videoId you want to use to upload your video.
@@ -875,13 +916,22 @@ func (s *VideosService) UploadFile(videoId string, file *os.File) (*Video, error
  * Upload Upload a video
  * To upload a video to the videoId you created. You can only upload your video to the videoId once.
 
+
+
 We offer 2 types of upload:
+
 * Regular upload
+
 * Progressive upload
+
 The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
+
   * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+
   * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
+
   Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
+
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId Enter the videoId you want to use to upload your video.
@@ -967,13 +1017,22 @@ func (s *UploadStream) UploadLastPartWithContextFile(ctx context.Context, file *
  * Upload Upload a video
  * To upload a video to the videoId you created. You can only upload your video to the videoId once.
 
+
+
 We offer 2 types of upload:
+
 * Regular upload
+
 * Progressive upload
+
 The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
+
   * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+
   * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
+
   Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
+
 
 
  * @param videoId Enter the videoId you want to use to upload your video.
@@ -987,13 +1046,22 @@ func (s *VideosService) Upload(videoId string, fileName string, fileReader io.Re
  * Upload Upload a video
  * To upload a video to the videoId you created. You can only upload your video to the videoId once.
 
+
+
 We offer 2 types of upload:
+
 * Regular upload
+
 * Progressive upload
+
 The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
+
   * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+
   * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
+
   Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
+
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId Enter the videoId you want to use to upload your video.
@@ -1030,9 +1098,15 @@ func (s *VideosService) UploadWithContext(ctx context.Context, videoId string, f
  * UploadThumbnail Upload a thumbnail
  * The thumbnail is the poster that appears in the player window before video playback begins.
 
+
+
 This endpoint allows you to upload an image for the thumbnail.
 
+
+
 To select a still frame from the video using a time stamp, use the [dedicated method](#pickThumbnail) to pick a time in the video.
+
+
 
 Note: There may be a short delay before the new thumbnail is delivered to our CDN.
 
@@ -1048,9 +1122,15 @@ func (s *VideosService) UploadThumbnailFile(videoId string, file *os.File) (*Vid
  * UploadThumbnail Upload a thumbnail
  * The thumbnail is the poster that appears in the player window before video playback begins.
 
+
+
 This endpoint allows you to upload an image for the thumbnail.
 
+
+
 To select a still frame from the video using a time stamp, use the [dedicated method](#pickThumbnail) to pick a time in the video.
+
+
 
 Note: There may be a short delay before the new thumbnail is delivered to our CDN.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1066,9 +1146,15 @@ func (s *VideosService) UploadThumbnailFileWithContext(ctx context.Context, vide
  * UploadThumbnail Upload a thumbnail
  * The thumbnail is the poster that appears in the player window before video playback begins.
 
+
+
 This endpoint allows you to upload an image for the thumbnail.
 
+
+
 To select a still frame from the video using a time stamp, use the [dedicated method](#pickThumbnail) to pick a time in the video.
+
+
 
 Note: There may be a short delay before the new thumbnail is delivered to our CDN.
 
@@ -1083,9 +1169,15 @@ func (s *VideosService) UploadThumbnail(videoId string, fileName string, fileRea
  * UploadThumbnail Upload a thumbnail
  * The thumbnail is the poster that appears in the player window before video playback begins.
 
+
+
 This endpoint allows you to upload an image for the thumbnail.
 
+
+
 To select a still frame from the video using a time stamp, use the [dedicated method](#pickThumbnail) to pick a time in the video.
+
+
 
 Note: There may be a short delay before the new thumbnail is delivered to our CDN.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

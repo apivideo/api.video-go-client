@@ -99,7 +99,7 @@ type PlayerThemesServiceI interface {
 	ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error)
 
 	/*
-	 * Get Show a player
+	 * Get Retrieve a player
 	 * @param playerId The unique identifier for the player you want to retrieve.
 	 * @return PlayerThemesApiGetRequest
 	 */
@@ -107,7 +107,7 @@ type PlayerThemesServiceI interface {
 	Get(playerId string) (*PlayerTheme, error)
 
 	/*
-	 * Get Show a player
+	 * Get Retrieve a player
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param playerId The unique identifier for the player you want to retrieve.
 	 * @return PlayerThemesApiGetRequest
@@ -231,6 +231,7 @@ func (s *PlayerThemesService) DeleteWithContext(ctx context.Context, playerId st
 
 /*
  * DeleteLogo Delete logo
+ * Delete the logo associated to a player.
 
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiDeleteLogoRequest
@@ -244,6 +245,7 @@ func (s *PlayerThemesService) DeleteLogo(playerId string) error {
 
 /*
  * DeleteLogo Delete logo
+ * Delete the logo associated to a player.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiDeleteLogoRequest
@@ -276,6 +278,7 @@ func (s *PlayerThemesService) DeleteLogoWithContext(ctx context.Context, playerI
 /*
  * List List all player themes
  * Retrieve a list of all the player themes you created, as well as details about each one.
+
 Tutorials that use the [player endpoint](https://api.video/blog/endpoints/player).
 
  * @return PlayerThemesApiListRequest
@@ -290,6 +293,7 @@ func (s *PlayerThemesService) List(r PlayerThemesApiListRequest) (*PlayerThemesL
 /*
  * List List all player themes
  * Retrieve a list of all the player themes you created, as well as details about each one.
+
 Tutorials that use the [player endpoint](https://api.video/blog/endpoints/player).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return PlayerThemesApiListRequest
@@ -332,7 +336,7 @@ func (s *PlayerThemesService) ListWithContext(ctx context.Context, r PlayerTheme
 }
 
 /*
- * Get Show a player
+ * Get Retrieve a player
  * Use a player ID to retrieve details about the player and display it for viewers.
 
  * @param playerId The unique identifier for the player you want to retrieve.
@@ -346,7 +350,7 @@ func (s *PlayerThemesService) Get(playerId string) (*PlayerTheme, error) {
 }
 
 /*
- * Get Show a player
+ * Get Retrieve a player
  * Use a player ID to retrieve details about the player and display it for viewers.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param playerId The unique identifier for the player you want to retrieve.
@@ -380,11 +384,13 @@ func (s *PlayerThemesService) GetWithContext(ctx context.Context, playerId strin
 
 /*
  * Update Update a player
- * Use a player ID to update specific details for a player. NOTE: It may take up to 10 min before the new player configuration is available from our CDN.
+ * Use a player ID to update specific details for a player.
+
+NOTE: It may take up to 10 min before the new player configuration is available from our CDN.
 
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUpdateRequest
- */
+*/
 
 func (s *PlayerThemesService) Update(playerId string, playerThemeUpdatePayload PlayerThemeUpdatePayload) (*PlayerTheme, error) {
 
@@ -394,11 +400,13 @@ func (s *PlayerThemesService) Update(playerId string, playerThemeUpdatePayload P
 
 /*
  * Update Update a player
- * Use a player ID to update specific details for a player. NOTE: It may take up to 10 min before the new player configuration is available from our CDN.
+ * Use a player ID to update specific details for a player.
+
+NOTE: It may take up to 10 min before the new player configuration is available from our CDN.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUpdateRequest
- */
+*/
 
 func (s *PlayerThemesService) UpdateWithContext(ctx context.Context, playerId string, playerThemeUpdatePayload PlayerThemeUpdatePayload) (*PlayerTheme, error) {
 	var localVarPostBody interface{}

@@ -60,7 +60,7 @@ type WebhooksServiceI interface {
 	DeleteWithContext(ctx context.Context, webhookId string) error
 
 	/*
-	 * Get Show Webhook details
+	 * Get Retrieve Webhook details
 	 * @param webhookId The unique webhook you wish to retreive details on.
 	 * @return WebhooksApiGetRequest
 	 */
@@ -68,7 +68,7 @@ type WebhooksServiceI interface {
 	Get(webhookId string) (*Webhook, error)
 
 	/*
-	 * Get Show Webhook details
+	 * Get Retrieve Webhook details
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param webhookId The unique webhook you wish to retreive details on.
 	 * @return WebhooksApiGetRequest
@@ -115,7 +115,7 @@ type WebhooksService struct {
 
 /*
  * Delete Delete a Webhook
- * This endpoint will delete the indicated webhook.
+ * This method will delete the indicated webhook.
 
  * @param webhookId The webhook you wish to delete.
  * @return WebhooksApiDeleteRequest
@@ -129,7 +129,7 @@ func (s *WebhooksService) Delete(webhookId string) error {
 
 /*
  * Delete Delete a Webhook
- * This endpoint will delete the indicated webhook.
+ * This method will delete the indicated webhook.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param webhookId The webhook you wish to delete.
  * @return WebhooksApiDeleteRequest
@@ -160,8 +160,8 @@ func (s *WebhooksService) DeleteWithContext(ctx context.Context, webhookId strin
 }
 
 /*
- * Get Show Webhook details
- * This call provides the same JSON information provided on Webjhook creation.
+ * Get Retrieve Webhook details
+ * This call provides the same JSON information provided on Webhook creation.
 
  * @param webhookId The unique webhook you wish to retreive details on.
  * @return WebhooksApiGetRequest
@@ -174,8 +174,8 @@ func (s *WebhooksService) Get(webhookId string) (*Webhook, error) {
 }
 
 /*
- * Get Show Webhook details
- * This call provides the same JSON information provided on Webjhook creation.
+ * Get Retrieve Webhook details
+ * This call provides the same JSON information provided on Webhook creation.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param webhookId The unique webhook you wish to retreive details on.
  * @return WebhooksApiGetRequest
@@ -208,10 +208,12 @@ func (s *WebhooksService) GetWithContext(ctx context.Context, webhookId string) 
 
 /*
  * List List all webhooks
- * Requests to this endpoint return a list of your webhooks (with all their details). You can filter what the webhook list that the API returns using the parameters described below.
+ * Thie method returns a list of your webhooks (with all their details).
+
+You can filter what the webhook list that the API returns using the parameters described below.
 
  * @return WebhooksApiListRequest
- */
+*/
 
 func (s *WebhooksService) List(r WebhooksApiListRequest) (*WebhooksListResponse, error) {
 
@@ -221,10 +223,12 @@ func (s *WebhooksService) List(r WebhooksApiListRequest) (*WebhooksListResponse,
 
 /*
  * List List all webhooks
- * Requests to this endpoint return a list of your webhooks (with all their details). You can filter what the webhook list that the API returns using the parameters described below.
+ * Thie method returns a list of your webhooks (with all their details).
+
+You can filter what the webhook list that the API returns using the parameters described below.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return WebhooksApiListRequest
- */
+*/
 
 func (s *WebhooksService) ListWithContext(ctx context.Context, r WebhooksApiListRequest) (*WebhooksListResponse, error) {
 	var localVarPostBody interface{}
@@ -262,9 +266,13 @@ func (s *WebhooksService) ListWithContext(ctx context.Context, r WebhooksApiList
 /*
  * Create Create Webhook
  * Webhooks can push notifications to your server, rather than polling api.video for changes. We currently offer four events:
-* ```video.encoding.quality.completed``` Occurs when a new video is uploaded into your account, it will be encoded into several different HLS and mp4 qualities. When each version is encoded, your webhook will get a notification.  It will look like ```{ \"type\": \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\", \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"720p\"} ```. This request says that the 720p HLS encoding was completed.
+
+* ```video.encoding.quality.completed``` Occurs when a new video is uploaded into your account, it will be encoded into several different HLS and mp4 qualities. When each version is encoded, your webhook will get a notification.  It will look like ```{ "type": "video.encoding.quality.completed", "emittedAt": "2021-01-29T16:46:25.217+01:00", "videoId": "viXXXXXXXX", "encoding": "hls", "quality": "720p"} ```. This request says that the 720p HLS encoding was completed.
+
 * ```live-stream.broadcast.started```  When a live stream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
+
 * ```live-stream.broadcast.ended```  This event fires when the live stream has finished broadcasting, and the broadcasting parameter flips from false to true.
+
 * ```video.source.recorded```  This event occurs when a live stream is recorded and submitted for encoding.
 
  * @return WebhooksApiCreateRequest
@@ -279,9 +287,13 @@ func (s *WebhooksService) Create(webhooksCreationPayload WebhooksCreationPayload
 /*
  * Create Create Webhook
  * Webhooks can push notifications to your server, rather than polling api.video for changes. We currently offer four events:
-* ```video.encoding.quality.completed``` Occurs when a new video is uploaded into your account, it will be encoded into several different HLS and mp4 qualities. When each version is encoded, your webhook will get a notification.  It will look like ```{ \"type\": \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\", \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"720p\"} ```. This request says that the 720p HLS encoding was completed.
+
+* ```video.encoding.quality.completed``` Occurs when a new video is uploaded into your account, it will be encoded into several different HLS and mp4 qualities. When each version is encoded, your webhook will get a notification.  It will look like ```{ "type": "video.encoding.quality.completed", "emittedAt": "2021-01-29T16:46:25.217+01:00", "videoId": "viXXXXXXXX", "encoding": "hls", "quality": "720p"} ```. This request says that the 720p HLS encoding was completed.
+
 * ```live-stream.broadcast.started```  When a live stream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
+
 * ```live-stream.broadcast.ended```  This event fires when the live stream has finished broadcasting, and the broadcasting parameter flips from false to true.
+
 * ```video.source.recorded```  This event occurs when a live stream is recorded and submitted for encoding.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return WebhooksApiCreateRequest
