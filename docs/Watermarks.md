@@ -4,10 +4,69 @@ All URIs are relative to *https://ws.api.video*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**Upload**](Watermarks.md#Upload) | **Post** /watermarks | Upload a watermark
 [**Delete**](Watermarks.md#Delete) | **Delete** /watermarks/{watermarkId} | Delete a watermark
 [**List**](Watermarks.md#List) | **Get** /watermarks | List all watermarks
-[**Upload**](Watermarks.md#Upload) | **Post** /watermarks | Upload a watermark
 
+
+
+## Upload
+
+> UploadFile(file *os.File) (*Watermark, error)
+> Upload(fileName string, fileReader io.Reader)
+> UploadFileWithContext(ctx context.Context, file *os.File) (*Watermark, error)
+> UploadWithContext(ctx context.Context, fileName string, fileReader io.Reader)
+
+Upload a watermark
+
+
+
+### Example
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+
+    file, _ := os.Open("./watermark.jpg")
+    
+    res, err := client.Watermarks.UploadFile(file)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Watermarks.UploadFile``: %v", err)
+    }
+    // response from `UploadFile`: Watermark
+    fmt.Fprintf(os.Stdout, "Response from `Watermarks.UploadFile`: %v", res)
+}
+```
+### Path Parameters
+
+
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**file** | ***os.File** | The &#x60;.jpg&#x60; or &#x60;.png&#x60; image to be added as a watermark. | 
+
+### Return type
+
+[**Watermark**](Watermark.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## Delete
@@ -135,65 +194,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**WatermarksListResponse**](WatermarksListResponse.md)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## Upload
-
-> UploadFile(file *os.File) (*Watermark, error)
-> Upload(fileName string, fileReader io.Reader)
-> UploadFileWithContext(ctx context.Context, file *os.File) (*Watermark, error)
-> UploadWithContext(ctx context.Context, fileName string, fileReader io.Reader)
-
-Upload a watermark
-
-
-
-### Example
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-
-    file, _ := os.Open("./watermark.jpg")
-    
-    res, err := client.Watermarks.UploadFile(file)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Watermarks.UploadFile``: %v", err)
-    }
-    // response from `UploadFile`: Watermark
-    fmt.Fprintf(os.Stdout, "Response from `Watermarks.UploadFile`: %v", res)
-}
-```
-### Path Parameters
-
-
-
-### Other Parameters
-
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**file** | ***os.File** | The &#x60;.jpg&#x60; or &#x60;.png&#x60; image to be added as a watermark. | 
-
-### Return type
-
-[**Watermark**](Watermark.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

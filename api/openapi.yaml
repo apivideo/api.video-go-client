@@ -411,19 +411,18 @@ paths:
         code-samples:
         - language: php
           code: |
+            <?php
             // First install the api client: "composer require api-video/php-api-client"
             // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#list
 
-            <?php
             require __DIR__ . '/vendor/autoload.php';
 
-            // instantiate the client
-            $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
-            $client = new \ApiVideo\Client(
-                                'https://sandbox.api.video',
-                                'YOUR_API_KEY',
-                                $httpClient
-                            );
+
+            $client = new \ApiVideo\Client\Client(
+                'https://ws.api.video',
+                'YOUR_API_KEY',
+                new \Symfony\Component\HttpClient\Psr18Client()
+            );
 
             // list all videos (all pages)
             $allVideos = [];
@@ -646,29 +645,44 @@ paths:
             \ way to tag and categorize your videos.\n});\n"
         - language: php
           code: |
+            <?php
             // First install the api client: "composer require api-video/php-api-client"
             // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#create
 
-            <?php
-
-            use ApiVideo\Client\Model\Metadata;
-            use ApiVideo\Client\Model\VideoCreationPayload;
-
             require __DIR__ . '/vendor/autoload.php';
 
-            $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
-            $client = new \ApiVideo\Client(
-                                'https://sandbox.api.video',
-                                'YOUR_API_KEY',
-                                $httpClient
-                            );
+            $client = new \ApiVideo\Client\Client(
+                'https://ws.api.video',
+                'YOUR_API_KEY',
+                new \Symfony\Component\HttpClient\Psr18Client()
+            );
 
-            $myVideo = $client->videos()->create((new VideoCreationPayload())
-                ->setTitle('Video B')
-                ->setTags(array("TAG1", "TAG2"))
-                ->setMetadata(array(
-                    new Metadata(['key' => 'key1', 'value' => 'key1value1']),
-                    new Metadata(['key' => 'key2', 'value' => 'key2value1']))));
+            // create a simple video
+            $video = $client->videos()->create((new \ApiVideo\Client\Model\VideoCreationPayload())->setTitle("Maths video"));
+
+            // create a video using an existing source
+            $existingSourceVideo = $client->videos()->create((new \ApiVideo\Client\Model\VideoCreationPayload())
+                ->setTitle("Maths video")
+                ->setSource("https://www.myvideo.url.com/video.mp4"));
+
+            // create a private video
+            $privateVideo = $client->videos()->create((new \ApiVideo\Client\Model\VideoCreationPayload())
+                ->setTitle("Maths video")
+                ->setPublic(false));
+
+            // create a video using all available attributes
+            $anotherVideo = $client->videos()->create((new \ApiVideo\Client\Model\VideoCreationPayload())
+                ->setTitle("Maths video") // The title of your new video.
+                ->setDescription("A video about string theory.") // A brief description of your video.
+                ->setSource("https://www.myvideo.url.com/video.mp4") // If you add a video already on the web, this is where you enter the url for the video.
+                ->setPublic(true) // Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view.
+                ->setPanoramic(false) // Indicates if your video is a 360/immersive video.
+                ->setMp4Support(true) // Enables mp4 version in addition to streamed version.
+                ->setPlayerId("pl45KFKdlddgk654dspkze") // The unique identification number for your video player.
+                ->setTags(array("TAG1", "TAG2")) // A list of tags you want to use to describe your video.
+                ->setMetadata(array( // A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. You can also just use the pairs as another way to tag and categorize your videos.
+                    new \ApiVideo\Client\Model\Metadata(['key' => 'key1', 'value' => 'key1value1']),
+                    new \ApiVideo\Client\Model\Metadata(['key' => 'key2', 'value' => 'key2value1']))));
         - language: python
           code: |
             # First install the api client with "pip install api.video"
@@ -999,36 +1013,21 @@ paths:
             \  console.log(\"currentChunkUploadedBytes: \" + event.currentChunkUploadedBytes);\n\
             });"
         - language: php
-          code: |
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#upload
-
-            <?php
-
-            use ApiVideo\Client\Model\VideoCreationPayload;
-
-            require __DIR__ . '/vendor/autoload.php';
-
-            $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
-            $client = new \ApiVideo\Client(
-                                'https://sandbox.api.video',
-                                'YOUR_API_KEY',
-                                $httpClient
-                            );
-
-            // create a new video & upload a video file
-            $myVideo = $client->videos()->create((new VideoCreationPayload())->setTitle('Uploaded video'));
-            $client->videos()->upload($myVideo->getVideoId(), new SplFileObject(__DIR__ . '/../../../tests/resources/558k.mp4'));
-
-            // create a new video & upload a video file using progressive upload (the file is uploaded by parts)
-            $myVideo2 = $client->videos()->create((new VideoCreationPayload())->setTitle('Uploaded video (progressive upload)'));
-
-            $progressiveSession = $client->videos()->createUploadProgressiveSession($myVideo2->getVideoId());
-
-            $progressiveSession->uploadPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.a'));
-            $progressiveSession->uploadPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.b'));
-
-            $progressiveSession->uploadLastPart(new SplFileObject(__DIR__ . '/../../../tests/resources/10m.mp4.part.c'));
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#upload\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n// create\
+            \ a new video & upload a video file\n$myVideo = $client->videos()->create((new\
+            \ \\ApiVideo\\Client\\Model\\VideoCreationPayload())->setTitle('Uploaded\
+            \ video'));\n$client->videos()->upload($myVideo->getVideoId(), new SplFileObject(__DIR__\
+            \ . '/558k.mp4'));\n\n// create a new video & upload a video file using\
+            \ progressive upload (the file is uploaded by parts)\n$myVideo2 = $client->videos()->create((new\
+            \ \\ApiVideo\\Client\\Model\\VideoCreationPayload())->setTitle('Uploaded\
+            \ video (progressive upload)'));\n\n$progressiveSession = $client->videos()->createUploadProgressiveSession($myVideo2->getVideoId());\n\
+            \n$progressiveSession->uploadPart(new SplFileObject(__DIR__ . '/10m.mp4.part.a'));\n\
+            $progressiveSession->uploadPart(new SplFileObject(__DIR__ . '/10m.mp4.part.b'));\n\
+            \n$progressiveSession->uploadLastPart(new SplFileObject(__DIR__ . '/10m.mp4.part.c')); "
         - language: python
           code: |
             # First install the api client with "pip install api.video"
@@ -1268,10 +1267,15 @@ paths:
             // Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/WatermarksApi.md#list
 
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WatermarksApi.md#list
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WatermarksApi.md#list\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n// retrieve\
+            \ the first page of all watermarks\n$watermarks =  client->watermarks()->list();\n\
+            \n// retrieve the 5 first watermarks, ordered by creation date\n$watermarks2\
+            \ = $client->watermarks()->list(array(\n    'pageSize' => 5,\n    'sortBy'\
+            \ => 'createdAt',\n    'sortOrder' => 'asc'\n)); "
         - language: python
           code: |+
             # First install the api client with "pip install api.video"
@@ -1362,39 +1366,20 @@ paths:
               },
             });
         - language: php
-          code: |
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WatermarksApi.md#upload
-
-            <?php
-              use ApiVideo\Client\Model\VideoCreationPayload;
-              use ApiVideo\Client\Model\VideoWatermark;
-
-              require __DIR__ . '/vendor/autoload.php';
-
-              $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
-              $client = new \ApiVideo\Client(
-                                  'https://sandbox.api.video',
-                                  'YOUR_API_KEY',
-                                  $httpClient
-                              );
-
-              // upload the watermark
-              $watermark = $client->watermarks()->upload(new SplFileObject(__DIR__ . '/watermark.png'));
-
-              // create a new video with the watermark
-              $video = $client->videos()->create((new VideoCreationPayload())
-                      ->setWatermark((new VideoWatermark())
-                              ->setId($watermark->getWatermarkId())
-                              ->setTop("0px")
-                              ->setLeft("0px")
-                              ->setWidth("100px")
-                              ->setHeight("100px"))
-                      ->setTitle("Test PHP watermark")
-              );
-
-              // upload the video
-              $client->videos()->upload($video->getVideoId(), new SplFileObject(__DIR__ . '/558k.mp4'));
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WatermarksApi.md#upload\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n// upload\
+            \ the watermark\n$watermark = $client->watermarks()->upload(new SplFileObject(__DIR__\
+            \ . '/watermark.png'));\n\n// create a new video with the watermark\n\
+            $video = $client->videos()->create((new VideoCreationPayload())\n    \
+            \    ->setWatermark((new VideoWatermark())\n                ->setId($watermark->getWatermarkId())\n\
+            \                ->setTop(\"0px\")\n                ->setLeft(\"0px\"\
+            )\n                ->setWidth(\"100px\")\n                ->setHeight(\"\
+            100px\"))\n        ->setTitle(\"Test PHP watermark\")\n);\n\n// upload\
+            \ the video\n$client->videos()->upload($video->getVideoId(), new SplFileObject(__DIR__\
+            \ . '/558k.mp4')); \n"
         - language: python
           code: |
             # First install the api client with "pip install api.video"
@@ -1556,10 +1541,13 @@ paths:
             // Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/WatermarksApi.md#delete
 
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WatermarksApi.md#delete
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WatermarksApi.md#list\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$watermarkId\
+            \ = 'watermark_1Bji68oeAAwR44dAb5ZhML'; // The watermark ID for the watermark\
+            \ you want to delete.\n\n$client->watermarks->delete(watermarkId);"
         - language: python
           code: |+
             # First install the api client with "pip install api.video"
@@ -1748,10 +1736,17 @@ paths:
             \                Debug.Print(e.StackTrace);\n            }\n        }\n\
             \    }\n}              \n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#pickThumbnail
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#pickThumbnail\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n \n$videoId\
+            \ = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // Unique identifier of the video you\
+            \ want to add a thumbnail to, where you use a section of your video as\
+            \ the thumbnail.\n\n$video = $client->videos()->pickThumbnail($videoId,\
+            \ (new \\ApiVideo\\Client\\Model\\VideoThumbnailPickPayload())\n    ->setTimecode(\"\
+            00:01:00.000\")); // Frame in video to be used as a placeholder before\
+            \ the video plays. "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -1941,10 +1936,15 @@ paths:
             \          Debug.Print(e.StackTrace);\n            }\n        }\n    }\n\
             }\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#uploadThumbnail
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#uploadWithUploadToken\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$videoId\
+            \ = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // Unique identifier of the chosen video\n\
+            $thumbnail = new SplFileObject(__DIR__ . '/thumbnail.jpg'); // The image\
+            \ to be added as a thumbnail.\n\n$client->videos()->uploadThumbnail($videoId,\
+            \ $thumbnail); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -2065,10 +2065,12 @@ paths:
             \                Debug.Print(e.StackTrace);\n            }\n        }\n\
             \    }\n} \n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#delete
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#delete\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n$videoId\
+            \ = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // the id of the video to delete\n$client->videos()->delete($videoId); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -2171,8 +2173,8 @@ paths:
             \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#get\n\
             \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
             const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for\
-            \ the video you want the status for.\nconst result = await client.videos.getStatus(videoId);\
-            \ \n"
+            \ the video you want to retrieve.\nconst result = await client.videos.get(videoId);\
+            \  \n"
         - language: python
           code: |
             # First install the api client with "pip install api.video"
@@ -2233,10 +2235,14 @@ paths:
             \ Code: \"+ e.ErrorCode);\n                Debug.Print(e.StackTrace);\n\
             \            }\n        }\n    }\n} \n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#get
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#getStatus\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n$videoId\
+            \ = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video\
+            \ you want the status for.\n$videoStatus = $client->videos()->getStatus($videoId);\
+            \  "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -2470,32 +2476,31 @@ paths:
             \       Debug.Print(\"Status Code: \"+ e.ErrorCode);\n               \
             \ Debug.Print(e.StackTrace);\n            }\n        }\n    }\n}\n"
         - language: php
-          code: |
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#update
-
-            <?php
-
-            use ApiVideo\Client\Model\Metadata;
-            use ApiVideo\Client\Model\VideoUpdatePayload;
-
-            require __DIR__ . '/../../../vendor/autoload.php';
-
-            $httpClient = new \Symfony\Component\HttpClient\Psr18Client();
-            $client = new \ApiVideo\Client(
-                                'https://sandbox.api.video',
-                                'YOUR_API_KEY',
-                                $httpClient
-                            );
-
-            $client->videos()->update("vi6DEWhlgoHU3Ig5tgPlYkBc", (new VideoUpdatePayload())
-                ->setTitle("The new title")
-                ->setPublic(false)
-                ->setDescription("A new description")
-                ->setTags(["tag1", "tag2"])
-                ->setMetadata(array(
-                    new Metadata(["key" => "aa", 'value' => "bb"]),
-                    new Metadata(["key" => "aa2", 'value' => "bb2"]))));
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#update\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n$videoId\
+            \ = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The video ID for the video you want\
+            \ to update.\n\n$client->videos()->update($videoId, (new \\ApiVideo\\\
+            Client\\Model\\VideoUpdatePayload())\n    ->setPlayerId(\"pl4k0jvEUuaTdRAEjQ4Jfrgz\"\
+            ) // The unique ID for the player you want to associate with your video.\n\
+            \    ->setTitle(\"The new title\") // The title you want to use for your\
+            \ video.\n    ->setDescription(\"A new description\") // A brief description\
+            \ of the video.\n    ->setPublic(false) // Whether the video is publicly\
+            \ available or not. False means it is set to private.\n    ->setPanoramic(false)\
+            \ // Whether the video is a 360 degree or immersive video.\n    ->setMp4Support(true)\
+            \ // Whether the player supports the mp4 format.\n    ->setTags([\"tag1\"\
+            , \"tag2\"]) // A list of terms or words you want to tag the video with.\
+            \ Make sure the list includes all the tags you want as whatever you send\
+            \ in this list will overwrite the existing list for the video.\n    ->setMetadata(array(\
+            \ // A list (array) of dictionaries where each dictionary contains a key\
+            \ value pair that describes the video. As with tags, you must send the\
+            \ complete list of metadata you want as whatever you send here will overwrite\
+            \ the existing metadata for the video.\n        new \\ApiVideo\\Client\\\
+            Model\\Metadata([\"key\" => \"aa\", 'value' => \"bb\"]),\n        new\
+            \ \\ApiVideo\\Client\\Model\\Metadata([\"key\" => \"aa2\", 'value' =>\
+            \ \"bb2\"])))); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -2691,10 +2696,14 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#getStatus
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#getStatus\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n$videoId\
+            \ = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video\
+            \ you want the status for.\n$videoStatus = $client->videos()->getStatus($videoId);\
+            \  "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -2916,10 +2925,12 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/UploadTokensApi.md#list
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/UploadTokensApi.md#list\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$uploadTokens\
+            \ = $client->uploadTokens()->list(); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -3042,10 +3053,14 @@ paths:
             \          Debug.Print(e.StackTrace);\n            }\n        }\n    }\n\
             }\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/UploadTokensApi.md#createToken
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/UploadTokensApi.md#deleteToken\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$uploadToken\
+            \ = 'to1tcmSFHeYY5KzyhOqVKMKb'; // The unique identifier for the upload\
+            \ token you want to delete. Deleting a token will make it so the token\
+            \ can no longer be used for authentication.\n$client->uploadTokens()->deleteToken($uploadToken); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -3183,10 +3198,13 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/UploadTokensApi.md#deleteToken
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/UploadTokensApi.md#getToken\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$uploadTokenId\
+            \ = 'to1tcmSFHeYY5KzyhOqVKMKb'; // The unique identifier for the token\
+            \ you want information about.\n$uploadToken = $client->uploadTokens()->getToken($uploadTokenId); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -3337,10 +3355,13 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/UploadTokensApi.md#getToken
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/UploadTokensApi.md#getToken\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$uploadTokenId\
+            \ = 'to1tcmSFHeYY5KzyhOqVKMKb'; // The unique identifier for the token\
+            \ you want information about.\n$uploadToken = $client->uploadTokens()->getToken($uploadTokenId); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -3489,10 +3510,17 @@ paths:
             // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
 
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#uploadWithUploadToken
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#pickThumbnail\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n \n$videoId\
+            \ = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // Unique identifier of the video you\
+            \ want to add a thumbnail to, where you use a section of your video as\
+            \ the thumbnail.\n\n$video = $client->videos()->pickThumbnail($videoId,\
+            \ (new \\ApiVideo\\Client\\Model\\VideoThumbnailPickPayload())\n    ->setTimecode(\"\
+            00:01:00.000\")); // Frame in video to be used as a placeholder before\
+            \ the video plays. "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -3690,8 +3718,8 @@ paths:
             const liveStreams3 = await client.liveStreams.list({
               sortBy: 'name',
               sortOrder: 'desc',
-              currentPage: '2',
-              pageSize: '30'
+              currentPage: 2,
+              pageSize: 30
             });
         - language: python
           code: |
@@ -3787,10 +3815,19 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#list
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#list\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n// retrieve\
+            \ the first page of all livestreams\n$liveStreams = $client->liveStreams()->list();\n\
+            \n// retrieve the livestreams having a given name\n$liveStreams2 = $client->liveStreams()->list(array(\n\
+            \    'name' => 'My livestream'\n));\n\n// retrieve the livestreams having\
+            \ a given stream key\n$liveStreams2 = $client->liveStreams()->list(array(\n\
+            \  'streamKey' => '30087931-229e-42cf-b5f9-e91bcc1f7332'\n));\n\n// retrieve\
+            \ the second page of 30 items sorted by name desc\n$liveStreams3 = $client->liveStreams()->list(array(\n\
+            \    'sortBy' => 'name',\n    'sortOrder' => 'desc',\n    'currentPage'\
+            \ => 2,\n    'pageSize' => 30\n)); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -3912,21 +3949,18 @@ paths:
             \    var liveStream = apiVideoClient.LiveStreams().create(liveStreamCreationPayload);\n\
             }\ncatch (ApiException e)\n{\n    // Manage create error here\n}\n"
         - language: php
-          code: |
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#create
-
-            $client = new \ApiVideo\Client\Client(
-                'https://ws.api.video',
-                'YOUR_API_KEY',
-                new \Symfony\Component\HttpClient\Psr18Client()
-            );
-
-            $liveStream = $client->liveStreams()->create((new \ApiVideo\Client\Model\LiveStreamCreationPayload())
-                ->setRecord(false)
-                ->setName("My Live Stream Video")
-                ->setPublic(true)
-                ->setPlayerId("pl4f4ferf5erfr5zed4fsdd"));
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#create\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n$liveStream\
+            \ = $client->liveStreams()->create((new \\ApiVideo\\Client\\Model\\LiveStreamCreationPayload())\n\
+            \    ->setRecord(false) // Whether you are recording or not. True for\
+            \ record, false for not record.\n    ->setName(\"My Live Stream Video\"\
+            ) // Add a name for your live stream here.\n    ->setPublic(true) // Whether\
+            \ your video can be viewed by everyone, or requires authentication to\
+            \ see it. \n    ->setPlayerId(\"pl4f4ferf5erfr5zed4fsdd\")); // The unique\
+            \ identifier for the player. \n"
         - language: swift
           code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -3989,7 +4023,7 @@ paths:
             \ %v\\\n\", err)\n    }\n}\n"
         - language: node
           code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
-            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/LiveStreamsApi.md#deleteThumbnail\n\
+            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/LiveStreamsApi.md#delete\n\
             \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
             const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique identifier\
             \ of the live stream whose thumbnail you want to delete.\n\nconst liveStream\
@@ -4069,10 +4103,14 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#delete
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#delete\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$liveStreamId\
+            \ = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique identifier of the live stream\
+            \ whose thumbnail you want to delete.\n$liveStream = $client->liveStreams()->deleteThumbnail($liveStreamId);\
+            \ \n"
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -4147,7 +4185,7 @@ paths:
 
             const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
 
-            const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream you want to watch.
+            const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream you want to retrieve.
 
             const liveStream = await client.liveStreams.get(liveStreamId);
         - language: python
@@ -4246,10 +4284,13 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#get
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#get\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$liveStreamId\
+            \ = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream you\
+            \ want to retrieve.\n$liveStream = $client->liveStreams()->get($liveStreamId);\n"
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -4423,10 +4464,23 @@ paths:
             \                Debug.Print(e.StackTrace);\n            }\n        }\n\
             \    }\n}\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#update
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#update\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$liveStreamId\
+            \ = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream that\
+            \ you want to update information for such as player details, or whether\
+            \ you want the recording on or off.\n\n$liveStreamUpdatePayload = (new\
+            \ \\ApiVideo\\Client\\Model\\LiveStreamUpdatePayload())\n    ->setName(\"\
+            My Live Stream Video\") // The name you want to use for your live stream.)\n\
+            \    ->setPublic(true) // Whether your video can be viewed by everyone,\
+            \ or requires authentication to see it. )\n    ->setRecord(true) // Use\
+            \ this to indicate whether you want the recording on or off. On is true,\
+            \ off is false.)\n    ->setPlayerId(\"pl45KFKdlddgk654dspkze\"); // The\
+            \ unique ID for the player associated with a live stream that you want\
+            \ to update.)\n\n\n$liveStream = $client->liveStreams()->update($liveStreamId,\
+            \ $liveStreamUpdatePayload); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -4491,15 +4545,12 @@ paths:
             \ from `DeleteThumbnail`: LiveStream\n    fmt.Fprintf(os.Stdout, \"Response\
             \ from `LiveStreams.DeleteThumbnail`: %v\\\n\", res)\n}\n"
         - language: node
-          code: |
-            // First install the "@api.video/nodejs-client" npm package
-            // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/LiveStreamsApi.md#get
-
-            const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
-
-            const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream you want to watch.
-
-            const liveStream = await client.liveStreams.get(liveStreamId);
+          code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
+            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/LiveStreamsApi.md#deleteThumbnail\n\
+            \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
+            const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for\
+            \ the live stream whose thumbnail you want to delete.\n\nconst liveStream\
+            \ = await client.liveStreams.deleteThumbnail(liveStreamId); "
         - language: python
           code: "# First install the api client with \"pip install api.video\"\n//\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#deleteThumbnail\n\
@@ -4553,10 +4604,13 @@ paths:
             Status Code: \"+ e.ErrorCode);\n                Debug.Print(e.StackTrace);\n\
             \            }\n        }\n    }\n}\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#deleteThumbnail
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#get\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$liveStreamId\
+            \ = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream you\
+            \ want to watch.\n$liveStream = $client->liveStreams()->get(liveStreamId); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -4737,10 +4791,15 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#uploadThumbnail
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#uploadThumbnail\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$liveStreamId\
+            \ = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique ID for the live stream you\
+            \ want to upload.\n$file = new SplFileObject(__DIR__ . './thumbnail.jpg');\
+            \ // The image to be added as a thumbnail.\n\n$livestream = $client->liveStreams()->uploadThumbnail($liveStreamId,\
+            \ $file); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -4893,10 +4952,12 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/CaptionsApi.md#delete
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/CaptionsApi.md#delete\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$videoId = 'vi4k0jvEUuaTdRAEjQ4Prklgc';\
+            \ // The unique identifier for the video you want to delete a caption\
+            \ from.\n$language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers)\
+            \ language representation.\n\n$client->captions()->delete($videoId, $language); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -5069,10 +5130,12 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/CaptionsApi.md#get
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/CaptionsApi.md#get\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg';\
+            \ // The unique identifier for the video you want captions for.\n$language\
+            \ = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers)\
+            \ language representation\n\n$client->captions()->get($videoId, $language); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -5252,10 +5315,14 @@ paths:
             \         Debug.Print(\"Status Code: \"+ e.ErrorCode);\n             \
             \   Debug.Print(e.StackTrace);\n            }\n        }\n    }\n}\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/CaptionsApi.md#update
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/CaptionsApi.md#update\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg';\
+            \ // The unique identifier for the video you want to have automatic captions\
+            \ for.\n$language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers)\
+            \ language representation.\n\n$captionsUpdatePayload = (new \\ApiVideo\\\
+            Client\\Model\\CaptionsUpdatePayload())\n    ->setDefault(true);\n \n\
+            $caption = $client->captions()->update($videoId, $language, $captionsUpdatePayload); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -5440,10 +5507,14 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/CaptionsApi.md#upload
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/CaptionsApi.md#upload\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg';\
+            \ // The unique identifier for the video you want to add a caption to.\n\
+            $language = 'en'; // A valid BCP 47 language representation.\n$file =\
+            \ new SplFileObject(__DIR__ . '/en.vtt'); // The video text track (VTT)\
+            \ you want to upload.\n\n$caption = $client->captions()->upload($videoId,\
+            \ $language, $file); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -5641,10 +5712,14 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/CaptionsApi.md#list
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/CaptionsApi.md#list\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg';\
+            \ // The unique identifier for the video you want to retrieve a list of\
+            \ captions for.\n\n$captions = $client->captions()->list($videoId, array(\n\
+            \    'currentPage' => 2, // Choose the number of search results to return\
+            \ per page. Minimum value: 1)\n    'pageSize' => 30 // Results per page.\
+            \ Allowed values 1-100, default is 25.)\n)); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -5796,10 +5871,12 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/ChaptersApi.md#delete
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/ChaptersApi.md#delete\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz';\
+            \ // The unique identifier for the video you want to delete a chapter\
+            \ from.\n$language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers)\
+            \ language representation.\n\n$client->chapters()->delete($videoId, $language); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -5966,10 +6043,12 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/ChaptersApi.md#get
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/ChaptersApi.md#delete\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz';\
+            \ // The unique identifier for the video you want to delete a chapter\
+            \ from.\n$language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers)\
+            \ language representation.\n\n$client->chapters()->delete($videoId, $language); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -6158,10 +6237,14 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/ChaptersApi.md#upload
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/ChaptersApi.md#upload\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz';\
+            \ // The unique identifier for the video you want to upload a chapter\
+            \ for.\n$language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers)\
+            \ language representation.\n$file = new SplFileObject(__DIR__ . '/en.vtt');\
+            \ // The VTT file describing the chapters you want to upload.\n\n$chapter\
+            \ = $client->chapters()->upload($videoId, $language, $file); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -6267,7 +6350,7 @@ paths:
             \ %v\\\n\", res)\n}\n"
         - language: node
           code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
-            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/CaptionsApi.md#get\n\
+            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/ChaptersApi.md#list\n\
             \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
             const captions = await client.chapters.list({\n  videoId 'vi4k0jvEUuaTdRAEjQ4Prklg',\
             \ // The unique identifier for the video you want to retrieve a list of\
@@ -6357,10 +6440,14 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/ChaptersApi.md#list
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/ChaptersApi.md#list\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg';\
+            \ // The unique identifier for the video you want to retrieve a list of\
+            \ chapters for.\n\n$captions = $client->chapters()->list($videoId, array(\n\
+            \    'currentPage' => 2, // Choose the number of search results to return\
+            \ per page. Minimum value: 1)\n    'pageSize' => 30 // Results per page.\
+            \ Allowed values 1-100, default is 25.)\n)); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -6635,10 +6722,17 @@ paths:
             \                Debug.Print(e.StackTrace);\n            }\n        }\n\
             \    }\n}\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#list
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#list\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$playerThemes = $client->playerThemes()->list(array(\n\
+            \    'sortBy' => 'createdAt', // createdAt is the time the player was\
+            \ created. updatedAt is the time the player was last updated. The time\
+            \ is presented in ISO-8601 format.\n    'sortOrder' => 'asc', // ->setAllowed(asc,\
+            \ desc. Ascending for date and time means that earlier values precede\
+            \ later ones. Descending means that later values preced earlier ones.)\n\
+            \    'currentPage' => 2, // Choose the number of search results to return\
+            \ per page. Minimum ->setvalue(1)\n    'pageSize' => 30 // Results per\
+            \ page. Allowed values 1-100, default is 25.\n)); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -6809,10 +6903,31 @@ paths:
             \       Debug.Print(e.StackTrace);\n            }\n        }\n    }\n\
             }\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#create
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#create\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$playerThemeCreationPayload\
+            \ = (new \\ApiVideo\\Client\\Model\\PlayerThemeCreationPayload())\n  \
+            \  ->setText(\"rgba(255, 255, 255, 1)\") // RGBA color for timer text.\
+            \ Default: rgba(255, 255, 255, 1))\n    ->setLink(\"rgba(255, 255, 255,\
+            \ 1)\") // RGBA color for all controls. Default: rgba(255, 255, 255, 1))\n\
+            \    ->setLinkHover(\"rgba(255, 255, 255, 1)\") // RGBA color for all\
+            \ controls when hovered. Default: rgba(255, 255, 255, 1))\n    ->setTrackPlayed(\"\
+            rgba(255, 255, 255, 1)\") // RGBA color playback bar: played content.\
+            \ Default: rgba(88, 131, 255, .95))\n    ->setTrackUnplayed(\"rgba(255,\
+            \ 255, 255, 1)\") // RGBA color playback bar: downloaded but unplayed\
+            \ (buffered) content. Default: rgba(255, 255, 255, .35))\n    ->setTrackBackground(\"\
+            rgba(255, 255, 255, 1)\") // RGBA color playback bar: background. Default:\
+            \ rgba(255, 255, 255, .2))\n    ->setBackgroundTop(\"rgba(255, 255, 255,\
+            \ 1)\") // RGBA color: top 50% of background. Default: rgba(0, 0, 0, .7))\n\
+            \    ->setBackgroundBottom(\"rgba(255, 255, 255, 1)\") // RGBA color:\
+            \ bottom 50% of background. Default: rgba(0, 0, 0, .7))\n    ->setBackgroundText(\"\
+            rgba(255, 255, 255, 1)\") // RGBA color for title text. Default: rgba(255,\
+            \ 255, 255, 1))\n    ->setEnableApi(true) // enable/disable player SDK\
+            \ access. Default: true)\n    ->setEnableControls(true) // enable/disable\
+            \ player controls. Default: true)\n    ->setForceAutoplay(true) // enable/disable\
+            \ player autoplay. Default: false)\n    ->setHideTitle(true) // enable/disable\
+            \ title. Default: false)\n    ->setForceLoop(true); // enable/disable\
+            \ looping. Default: false)\n\n$playerTheme = $client->playerThemes()->create($playerThemeCreationPayload); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -6952,10 +7067,11 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#delete
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#delete\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$playerId = 'pl45d5vFFGrfdsdsd156dGhh';\
+            \ // The unique identifier for the player you want to delete.\n$client->playerThemes()->delete($playerId);\
+            \  "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -7097,10 +7213,11 @@ paths:
             \          Debug.Print(\"Status Code: \"+ e.ErrorCode);\n            \
             \    Debug.Print(e.StackTrace);\n            }\n        }\n    }\n}\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#get
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#get\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$playerId = 'pl45d5vFFGrfdsdsd156dGhh';\
+            \ // The unique identifier for the player you want to retrieve. \n$playerTheme\
+            \ = $client->playerThemes()->get($playerId);  "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -7305,10 +7422,33 @@ paths:
             \       Debug.Print(e.StackTrace);\n            }\n        }\n    }\n\
             }\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#update
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#update\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n\n$playerId = 'pl45d5vFFGrfdsdsd156dGhh';\
+            \ // The unique identifier for the player.\n$playerThemeUpdatePayload\
+            \ = (new \\ApiVideo\\Client\\Model\\PlayerThemeUpdatePayload())\n    ->setText(\"\
+            rgba(255, 255, 255, 1)\") // RGBA color for timer text. Default: rgba(255,\
+            \ 255, 255, 1))\n    ->setLink(\"rgba(255, 255, 255, 1)\") // RGBA color\
+            \ for all controls. Default: rgba(255, 255, 255, 1))\n    ->setLinkHover(\"\
+            rgba(255, 255, 255, 1)\") // RGBA color for all controls when hovered.\
+            \ Default: rgba(255, 255, 255, 1))\n    ->setTrackPlayed(\"rgba(255, 255,\
+            \ 255, 1)\") // RGBA color playback bar: played content. Default: rgba(88,\
+            \ 131, 255, .95))\n    ->setTrackUnplayed(\"rgba(255, 255, 255, 1)\")\
+            \ // RGBA color playback bar: downloaded but unplayed (buffered) content.\
+            \ Default: rgba(255, 255, 255, .35))\n    ->setTrackBackground(\"rgba(255,\
+            \ 255, 255, 1)\") // RGBA color playback bar: background. Default: rgba(255,\
+            \ 255, 255, .2))\n    ->setBackgroundTop(\"rgba(255, 255, 255, 1)\") //\
+            \ RGBA color: top 50% of background. Default: rgba(0, 0, 0, .7))\n   \
+            \ ->setBackgroundBottom(\"rgba(255, 255, 255, 1)\") // RGBA color: bottom\
+            \ 50% of background. Default: rgba(0, 0, 0, .7))\n    ->setBackgroundText(\"\
+            rgba(255, 255, 255, 1)\") // RGBA color for title text. Default: rgba(255,\
+            \ 255, 255, 1))\n    ->setEnableApi(true) // enable/disable player SDK\
+            \ access. Default: true)\n    ->setEnableControls(true) // enable/disable\
+            \ player controls. Default: true)\n    ->setForceAutoplay(true) // enable/disable\
+            \ player autoplay. Default: false)\n    ->setHideTitle(true) // enable/disable\
+            \ title. Default: false)\n    ->setForceLoop(true); // enable/disable\
+            \ looping. Default: false)\n\n\n$playerTheme = $client->playerThemes()->update($playerId,\
+            \ $playerThemeUpdatePayload); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -7366,10 +7506,10 @@ paths:
             \ `PlayerThemes.DeleteLogo``: %v\\\n\", err)\n    }\n}\n"
         - language: node
           code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
-            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/PlayerThemesApi.md#delete\n\
+            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/PlayerThemesApi.md#deleteLogo\n\
             \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
             const playerId = 'pl45d5vFFGrfdsdsd156dGhh'; // The unique identifier\
-            \ for the player you want to delete.\nawait client.playerThemes.delete(playerId); "
+            \ for the player whose logo you want to delete.\nawait client.playerThemes.deleteLogo(playerId); "
         - language: python
           code: |
             # First install the api client with "pip install api.video"
@@ -7446,10 +7586,11 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#deleteLogo
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#deleteLogo\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$playerId = 'pl45d5vFFGrfdsdsd156dGhh';\
+            \ // The unique identifier for the player whose logo you want to delete.\n\
+            $client->playerThemes()->deleteLogo($playerId); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -7633,10 +7774,16 @@ paths:
             \                Debug.Print(e.StackTrace);\n            }\n        }\n\
             \    }\n}\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#uploadLogo
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/PlayerThemesApi.md#uploadLogo\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$playerId = 'pl14Db6oMJRH6SRVoOwORacK';\
+            \ // The unique identifier for the player.\n$file = new SplFileObject(__DIR__\
+            \ . '/company-logo.jpg'); // The name of the file you want to use for\
+            \ your logo.\n$link = 'https://my-company.org'; // A public link that\
+            \ you want to advertise in your player. For example, you could add a link\
+            \ to your company. When a viewer clicks on your logo, they will be taken\
+            \ to this address.\n\n$playerTheme = $client->playerThemes()->uploadLogo($playerId,\
+            \ $file, $link); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -7916,10 +8063,20 @@ paths:
             \                Debug.Print(e.StackTrace);\n            }\n        }\n\
             \    }\n}\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/RawStatisticsApi.md#listVideoSessions
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/RawStatisticsApi.md#listVideoSessions\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg';\
+            \ // The unique identifier for the video you want to retrieve session\
+            \ information for.\n\n$videoSessions = $client->rawStatistics()->listVideoSessions($videoId,\
+            \ array(\n    'period' => '2018-01', // Period must have one of the following\
+            \ formats: - For a day : 2018-01-01, - For a week: 2018-W01, - For a month:\
+            \ 2018-01 - For a year: 2018  For a range period: -  Date range: 2018-01-01/2018-01-15\
+            \ \n    'metadata' => array( // Metadata and Dynamic Metadata filter.\
+            \ Send an array of key value pairs you want to filter sessions with.\n\
+            \        'key' => 'value'\n    ),\n    'currentPage' => 2, // Choose the\
+            \ number of search results to return per page. Minimum ->setvalue(1)\n\
+            \    'pageSize' => 30 // Results per page. Allowed values 1-100, default\
+            \ is 25.\n)); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -8079,10 +8236,9 @@ paths:
             \ \"2018-01\" - For a year: \"2018\"  For a range period: -  Date range:\
             \ \"2018-01-01/2018-01-15\" \nconst currentPage = 2; // Choose the number\
             \ of search results to return per page. Minimum value: 1\nconst pageSize\
-            \ = 30; // Results per page. Allowed values 1-100, default is 25.\n\n\
-            // RawStatisticsListLiveStreamAnalyticsResponse\nconst liveStreamSessions\
-            \ = await client.rawStatistics.listLiveStreamSessions({ liveStreamId,\
-            \ period, currentPage, pageSize })\n"
+            \ = 30; // Results per page. Allowed values 1-100, default is 25.\n \n\
+            const liveStreamSessions = await client.rawStatistics.listLiveStreamSessions({\
+            \ liveStreamId, period, currentPage, pageSize })\n"
         - language: python
           code: |
             # First install the api client with "pip install api.video"
@@ -8175,10 +8331,20 @@ paths:
             \                Debug.Print(e.StackTrace);\n            }\n        }\n\
             \    }\n}\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/RawStatisticsApi.md#listLiveStreamSessions
-
+          code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
+            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/RawStatisticsApi.md#listLiveStreamSessions\n\
+            \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
+            const liveStreamId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier\
+            \ for the live stream you want to retrieve analytics for.\nconst period\
+            \ = '2019-01-01'; // Period must have one of the following formats:  -\
+            \ For a day : \"2018-01-01\", - For a week: \"2018-W01\", - For a month:\
+            \ \"2018-01\" - For a year: \"2018\"  For a range period: -  Date range:\
+            \ \"2018-01-01/2018-01-15\" \nconst currentPage = 2; // Choose the number\
+            \ of search results to return per page. Minimum value: 1\nconst pageSize\
+            \ = 30; // Results per page. Allowed values 1-100, default is 25.\n\n\
+            // RawStatisticsListLiveStreamAnalyticsResponse\nconst liveStreamSessions\
+            \ = await client.rawStatistics.listLiveStreamSessions({ liveStreamId,\
+            \ period, currentPage, pageSize })\n"
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -8477,10 +8643,14 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/RawStatisticsApi.md#listSessionEvents
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/RawStatisticsApi.md#listSessionEvents\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$sessionId = 'psEmFwGQUAXR2lFHj5nDOpy';\
+            \ // A unique identifier you can use to reference and track a session\
+            \ with.\n\n$sessionEvents = $client->rawStatistics()->listSessionEvents($sessionId,\
+            \ array(\n    'currentPage' => 2, // Choose the number of search results\
+            \ to return per page. Minimum ->setvalue(1)\n    'pageSize' => 30 // Results\
+            \ per page. Allowed values 1-100, default is 25.\n)); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -8597,9 +8767,9 @@ paths:
             const events = 'video.encoding.quality.completed'; // The webhook event\
             \ that you wish to filter on.\nconst currentPage = 2; // Choose the number\
             \ of search results to return per page. Minimum value: 1\nconst pageSize\
-            \ = 30; // Results per page. Allowed values 1-100, default is 25.\n\n\
-            // WebhooksListResponse\nconst webhooks = await client.webhooks.list({\
-            \ events, currentPage, pageSize }); "
+            \ = 30; // Results per page. Allowed values 1-100, default is 25.\n \n\
+            const webhooks = await client.webhooks.list({ events, currentPage, pageSize\
+            \ }); "
         - language: python
           code: |
             # First install the api client with "pip install api.video"
@@ -8670,10 +8840,15 @@ paths:
             \       Debug.Print(\"Status Code: \"+ e.ErrorCode);\n               \
             \ Debug.Print(e.StackTrace);\n            }\n        }\n    }\n}\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WebhooksApi.md#list
-
+          code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
+            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/WebhooksApi.md#list\n\
+            \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
+            const events = 'video.encoding.quality.completed'; // The webhook event\
+            \ that you wish to filter on.\nconst currentPage = 2; // Choose the number\
+            \ of search results to return per page. Minimum value: 1\nconst pageSize\
+            \ = 30; // Results per page. Allowed values 1-100, default is 25.\n\n\
+            // WebhooksListResponse\nconst webhooks = await client.webhooks.list({\
+            \ events, currentPage, pageSize }); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -8838,10 +9013,26 @@ paths:
             \         Debug.Print(\"Status Code: \"+ e.ErrorCode);\n             \
             \   Debug.Print(e.StackTrace);\n            }\n        }\n    }\n}\n"
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WebhooksApi.md#create
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WebhooksApi.md#create\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$webhooksCreationPayload\
+            \ = (new \\ApiVideo\\Client\\Model\\WebhooksCreationPayload())\n    ->setEvents(['video.encoding.quality.completed'])\
+            \ // A list of the webhooks that you are subscribing to. There are Currently\
+            \ four webhook options: * ```video.encoding.quality.completed```  Occurs\
+            \ when a new video is uploaded into your account, it will be encoded into\
+            \ several different HLS and mp4 qualities. When each version is encoded,\
+            \ your webhook will get a notification.  It will look like ```{ \"type\"\
+            : \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\"\
+            , \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"\
+            720p\"} ```. This request says that the 720p HLS encoding was completed.\
+            \ * ```live-stream.broadcast.started```  When a lives tream begins broadcasting,\
+            \ the broadcasting parameter changes from false to true, and this webhook\
+            \ fires. * ```live-stream.broadcast.ended```  This event fires when the\
+            \ live stream has finished broadcasting, and the broadcasting parameter\
+            \ flips from false to true. * ```video.source.recorded```  Occurs when\
+            \ a live stream is recorded and submitted for encoding.)\n    ->setUrl(\"\
+            https://example.com/webhooks\"); // The url to which HTTP notifications\
+            \ are sent. It could be any http or https URL.)\n\n$webhook = $client->webhooks()->create($webhooksCreationPayload); "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -8979,10 +9170,11 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WebhooksApi.md#delete
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WebhooksApi.md#delete\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$webhookId = 'webhookId_example';\
+            \ // The webhook you wish to delete.\n$client->webhooks()->delete($webhookId);\
+            \  "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -9122,10 +9314,11 @@ paths:
                 }
             }
         - language: php
-          code: |+
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WebhooksApi.md#get
-
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WebhooksApi.md#get\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$webhookId = 'webhookId_example';\
+            \ // The unique webhook you wish to retreive details on.\n\n$webhook =\
+            \ $client->webhooks()->get($webhookId);  "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started

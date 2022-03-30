@@ -60,53 +60,19 @@ func (r LiveStreamsApiListRequest) PageSize(pageSize int32) LiveStreamsApiListRe
 
 type LiveStreamsServiceI interface {
 	/*
-	 * Delete Delete a live stream
-	 * @param liveStreamId The unique ID for the live stream that you want to remove.
-	 * @return LiveStreamsApiDeleteRequest
+	 * Create Create live stream
+	 * @return LiveStreamsApiCreateRequest
 	 */
 
-	Delete(liveStreamId string) error
+	Create(liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error)
 
 	/*
-	 * Delete Delete a live stream
+	 * Create Create live stream
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @param liveStreamId The unique ID for the live stream that you want to remove.
-	 * @return LiveStreamsApiDeleteRequest
+	 * @return LiveStreamsApiCreateRequest
 	 */
 
-	DeleteWithContext(ctx context.Context, liveStreamId string) error
-
-	/*
-	 * DeleteThumbnail Delete a thumbnail
-	 * @param liveStreamId The unique identifier of the live stream whose thumbnail you want to delete.
-	 * @return LiveStreamsApiDeleteThumbnailRequest
-	 */
-
-	DeleteThumbnail(liveStreamId string) (*LiveStream, error)
-
-	/*
-	 * DeleteThumbnail Delete a thumbnail
-	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @param liveStreamId The unique identifier of the live stream whose thumbnail you want to delete.
-	 * @return LiveStreamsApiDeleteThumbnailRequest
-	 */
-
-	DeleteThumbnailWithContext(ctx context.Context, liveStreamId string) (*LiveStream, error)
-
-	/*
-	 * List List all live streams
-	 * @return LiveStreamsApiListRequest
-	 */
-
-	List(r LiveStreamsApiListRequest) (*LiveStreamListResponse, error)
-
-	/*
-	 * List List all live streams
-	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @return LiveStreamsApiListRequest
-	 */
-
-	ListWithContext(ctx context.Context, r LiveStreamsApiListRequest) (*LiveStreamListResponse, error)
+	CreateWithContext(ctx context.Context, liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error)
 
 	/*
 	 * Get Retrieve live stream
@@ -143,19 +109,36 @@ type LiveStreamsServiceI interface {
 	UpdateWithContext(ctx context.Context, liveStreamId string, liveStreamUpdatePayload LiveStreamUpdatePayload) (*LiveStream, error)
 
 	/*
-	 * Create Create live stream
-	 * @return LiveStreamsApiCreateRequest
+	 * Delete Delete a live stream
+	 * @param liveStreamId The unique ID for the live stream that you want to remove.
+	 * @return LiveStreamsApiDeleteRequest
 	 */
 
-	Create(liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error)
+	Delete(liveStreamId string) error
 
 	/*
-	 * Create Create live stream
+	 * Delete Delete a live stream
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @return LiveStreamsApiCreateRequest
+	 * @param liveStreamId The unique ID for the live stream that you want to remove.
+	 * @return LiveStreamsApiDeleteRequest
 	 */
 
-	CreateWithContext(ctx context.Context, liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error)
+	DeleteWithContext(ctx context.Context, liveStreamId string) error
+
+	/*
+	 * List List all live streams
+	 * @return LiveStreamsApiListRequest
+	 */
+
+	List(r LiveStreamsApiListRequest) (*LiveStreamListResponse, error)
+
+	/*
+	 * List List all live streams
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return LiveStreamsApiListRequest
+	 */
+
+	ListWithContext(ctx context.Context, r LiveStreamsApiListRequest) (*LiveStreamListResponse, error)
 
 	/*
 	 * UploadThumbnail Upload a thumbnail
@@ -185,6 +168,22 @@ type LiveStreamsServiceI interface {
 	 * @return LiveStreamsApiUploadThumbnailRequest
 	 */
 	UploadThumbnailFileWithContext(ctx context.Context, liveStreamId string, file *os.File) (*LiveStream, error)
+	/*
+	 * DeleteThumbnail Delete a thumbnail
+	 * @param liveStreamId The unique identifier of the live stream whose thumbnail you want to delete.
+	 * @return LiveStreamsApiDeleteThumbnailRequest
+	 */
+
+	DeleteThumbnail(liveStreamId string) (*LiveStream, error)
+
+	/*
+	 * DeleteThumbnail Delete a thumbnail
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param liveStreamId The unique identifier of the live stream whose thumbnail you want to delete.
+	 * @return LiveStreamsApiDeleteThumbnailRequest
+	 */
+
+	DeleteThumbnailWithContext(ctx context.Context, liveStreamId string) (*LiveStream, error)
 }
 
 // LiveStreamsService communicating with the LiveStreams
@@ -194,150 +193,61 @@ type LiveStreamsService struct {
 }
 
 /*
- * Delete Delete a live stream
- * If you do not need a live stream any longer, you can send a request to delete it. All you need is the liveStreamId.
+ * Create Create live stream
+ * A live stream will give you the 'connection point' to RTMP your video stream to api.video.
 
- * @param liveStreamId The unique ID for the live stream that you want to remove.
- * @return LiveStreamsApiDeleteRequest
- */
+It will also give you the details for viewers to watch the same livestream.
 
-func (s *LiveStreamsService) Delete(liveStreamId string) error {
+The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
 
-	return s.DeleteWithContext(context.Background(), liveStreamId)
+See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS.
+
+Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
+
+Tutorials that [create live streams](https://api.video/blog/endpoints/live-create).
+
+ * @return LiveStreamsApiCreateRequest
+*/
+
+func (s *LiveStreamsService) Create(liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error) {
+
+	return s.CreateWithContext(context.Background(), liveStreamCreationPayload)
 
 }
 
 /*
- * Delete Delete a live stream
- * If you do not need a live stream any longer, you can send a request to delete it. All you need is the liveStreamId.
+ * Create Create live stream
+ * A live stream will give you the 'connection point' to RTMP your video stream to api.video.
+
+It will also give you the details for viewers to watch the same livestream.
+
+The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
+
+See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS.
+
+Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
+
+Tutorials that [create live streams](https://api.video/blog/endpoints/live-create).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param liveStreamId The unique ID for the live stream that you want to remove.
- * @return LiveStreamsApiDeleteRequest
- */
+ * @return LiveStreamsApiCreateRequest
+*/
 
-func (s *LiveStreamsService) DeleteWithContext(ctx context.Context, liveStreamId string) error {
-	var localVarPostBody interface{}
-
-	localVarPath := "/live-streams/{liveStreamId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"liveStreamId"+"}", url.PathEscape(parameterToString(liveStreamId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-
-	req, err := s.client.prepareRequest(ctx, http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
-	if err != nil {
-		return err
-	}
-
-	_, err = s.client.do(req, nil)
-
-	if err != nil {
-		return err
-	}
-
-	return nil
-
-}
-
-/*
- * DeleteThumbnail Delete a thumbnail
- * Send the unique identifier for a live stream to delete its thumbnail.
-
- * @param liveStreamId The unique identifier of the live stream whose thumbnail you want to delete.
- * @return LiveStreamsApiDeleteThumbnailRequest
- */
-
-func (s *LiveStreamsService) DeleteThumbnail(liveStreamId string) (*LiveStream, error) {
-
-	return s.DeleteThumbnailWithContext(context.Background(), liveStreamId)
-
-}
-
-/*
- * DeleteThumbnail Delete a thumbnail
- * Send the unique identifier for a live stream to delete its thumbnail.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param liveStreamId The unique identifier of the live stream whose thumbnail you want to delete.
- * @return LiveStreamsApiDeleteThumbnailRequest
- */
-
-func (s *LiveStreamsService) DeleteThumbnailWithContext(ctx context.Context, liveStreamId string) (*LiveStream, error) {
-	var localVarPostBody interface{}
-
-	localVarPath := "/live-streams/{liveStreamId}/thumbnail"
-	localVarPath = strings.Replace(localVarPath, "{"+"liveStreamId"+"}", url.PathEscape(parameterToString(liveStreamId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-
-	req, err := s.client.prepareRequest(ctx, http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
-	if err != nil {
-		return nil, err
-	}
-
-	res := new(LiveStream)
-	_, err = s.client.do(req, res)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
-
-}
-
-/*
- * List List all live streams
- * With no parameters added to the url, this will return all livestreams. Query by name or key to limit the list.
-
- * @return LiveStreamsApiListRequest
- */
-
-func (s *LiveStreamsService) List(r LiveStreamsApiListRequest) (*LiveStreamListResponse, error) {
-
-	return s.ListWithContext(context.Background(), r)
-
-}
-
-/*
- * List List all live streams
- * With no parameters added to the url, this will return all livestreams. Query by name or key to limit the list.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return LiveStreamsApiListRequest
- */
-
-func (s *LiveStreamsService) ListWithContext(ctx context.Context, r LiveStreamsApiListRequest) (*LiveStreamListResponse, error) {
+func (s *LiveStreamsService) CreateWithContext(ctx context.Context, liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/live-streams"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
-	if r.streamKey != nil {
-		localVarQueryParams.Add("streamKey", parameterToString(*r.streamKey, ""))
-	}
-	if r.name != nil {
-		localVarQueryParams.Add("name", parameterToString(*r.name, ""))
-	}
-	if r.sortBy != nil {
-		localVarQueryParams.Add("sortBy", parameterToString(*r.sortBy, ""))
-	}
-	if r.sortOrder != nil {
-		localVarQueryParams.Add("sortOrder", parameterToString(*r.sortOrder, ""))
-	}
-	if r.currentPage != nil {
-		localVarQueryParams.Add("currentPage", parameterToString(*r.currentPage, ""))
-	}
-	if r.pageSize != nil {
-		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
-	}
+	// body params
+	localVarPostBody = liveStreamCreationPayload
 
-	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
 
-	res := new(LiveStreamListResponse)
+	res := new(LiveStream)
 	_, err = s.client.do(req, res)
 
 	if err != nil {
@@ -453,61 +363,103 @@ func (s *LiveStreamsService) UpdateWithContext(ctx context.Context, liveStreamId
 }
 
 /*
- * Create Create live stream
- * A live stream will give you the 'connection point' to RTMP your video stream to api.video.
+ * Delete Delete a live stream
+ * If you do not need a live stream any longer, you can send a request to delete it. All you need is the liveStreamId.
 
-It will also give you the details for viewers to watch the same livestream.
+ * @param liveStreamId The unique ID for the live stream that you want to remove.
+ * @return LiveStreamsApiDeleteRequest
+ */
 
-The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
+func (s *LiveStreamsService) Delete(liveStreamId string) error {
 
-See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS.
-
-Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
-
-Tutorials that [create live streams](https://api.video/blog/endpoints/live-create).
-
- * @return LiveStreamsApiCreateRequest
-*/
-
-func (s *LiveStreamsService) Create(liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error) {
-
-	return s.CreateWithContext(context.Background(), liveStreamCreationPayload)
+	return s.DeleteWithContext(context.Background(), liveStreamId)
 
 }
 
 /*
- * Create Create live stream
- * A live stream will give you the 'connection point' to RTMP your video stream to api.video.
-
-It will also give you the details for viewers to watch the same livestream.
-
-The public=false 'private livestream' is available as a BETA feature, and should be limited to livestreams of 3,000 viewers or fewer.
-
-See our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial) for a walkthrough of this API with OBS.
-
-Your RTMP endpoint for the livestream is rtmp://broadcast.api.video/s/{streamKey}
-
-Tutorials that [create live streams](https://api.video/blog/endpoints/live-create).
+ * Delete Delete a live stream
+ * If you do not need a live stream any longer, you can send a request to delete it. All you need is the liveStreamId.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return LiveStreamsApiCreateRequest
-*/
+ * @param liveStreamId The unique ID for the live stream that you want to remove.
+ * @return LiveStreamsApiDeleteRequest
+ */
 
-func (s *LiveStreamsService) CreateWithContext(ctx context.Context, liveStreamCreationPayload LiveStreamCreationPayload) (*LiveStream, error) {
+func (s *LiveStreamsService) DeleteWithContext(ctx context.Context, liveStreamId string) error {
+	var localVarPostBody interface{}
+
+	localVarPath := "/live-streams/{liveStreamId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"liveStreamId"+"}", url.PathEscape(parameterToString(liveStreamId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+
+	req, err := s.client.prepareRequest(ctx, http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	if err != nil {
+		return err
+	}
+
+	_, err = s.client.do(req, nil)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+
+}
+
+/*
+ * List List all live streams
+ * With no parameters added to the url, this will return all livestreams. Query by name or key to limit the list.
+
+ * @return LiveStreamsApiListRequest
+ */
+
+func (s *LiveStreamsService) List(r LiveStreamsApiListRequest) (*LiveStreamListResponse, error) {
+
+	return s.ListWithContext(context.Background(), r)
+
+}
+
+/*
+ * List List all live streams
+ * With no parameters added to the url, this will return all livestreams. Query by name or key to limit the list.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return LiveStreamsApiListRequest
+ */
+
+func (s *LiveStreamsService) ListWithContext(ctx context.Context, r LiveStreamsApiListRequest) (*LiveStreamListResponse, error) {
 	var localVarPostBody interface{}
 
 	localVarPath := "/live-streams"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
-	// body params
-	localVarPostBody = liveStreamCreationPayload
+	if r.streamKey != nil {
+		localVarQueryParams.Add("streamKey", parameterToString(*r.streamKey, ""))
+	}
+	if r.name != nil {
+		localVarQueryParams.Add("name", parameterToString(*r.name, ""))
+	}
+	if r.sortBy != nil {
+		localVarQueryParams.Add("sortBy", parameterToString(*r.sortBy, ""))
+	}
+	if r.sortOrder != nil {
+		localVarQueryParams.Add("sortOrder", parameterToString(*r.sortOrder, ""))
+	}
+	if r.currentPage != nil {
+		localVarQueryParams.Add("currentPage", parameterToString(*r.currentPage, ""))
+	}
+	if r.pageSize != nil {
+		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
+	}
 
-	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}
 
-	res := new(LiveStream)
+	res := new(LiveStreamListResponse)
 	_, err = s.client.do(req, res)
 
 	if err != nil {
@@ -570,6 +522,53 @@ func (s *LiveStreamsService) UploadThumbnailWithContext(ctx context.Context, liv
 
 	req, err := s.client.prepareUploadRequest(ctx, localVarPath, fileName, fileReader, localVarHeaderParams, localVarQueryParams, localVarFormParams)
 
+	if err != nil {
+		return nil, err
+	}
+
+	res := new(LiveStream)
+	_, err = s.client.do(req, res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+
+}
+
+/*
+ * DeleteThumbnail Delete a thumbnail
+ * Send the unique identifier for a live stream to delete its thumbnail.
+
+ * @param liveStreamId The unique identifier of the live stream whose thumbnail you want to delete.
+ * @return LiveStreamsApiDeleteThumbnailRequest
+ */
+
+func (s *LiveStreamsService) DeleteThumbnail(liveStreamId string) (*LiveStream, error) {
+
+	return s.DeleteThumbnailWithContext(context.Background(), liveStreamId)
+
+}
+
+/*
+ * DeleteThumbnail Delete a thumbnail
+ * Send the unique identifier for a live stream to delete its thumbnail.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param liveStreamId The unique identifier of the live stream whose thumbnail you want to delete.
+ * @return LiveStreamsApiDeleteThumbnailRequest
+ */
+
+func (s *LiveStreamsService) DeleteThumbnailWithContext(ctx context.Context, liveStreamId string) (*LiveStream, error) {
+	var localVarPostBody interface{}
+
+	localVarPath := "/live-streams/{liveStreamId}/thumbnail"
+	localVarPath = strings.Replace(localVarPath, "{"+"liveStreamId"+"}", url.PathEscape(parameterToString(liveStreamId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+
+	req, err := s.client.prepareRequest(ctx, http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
 		return nil, err
 	}

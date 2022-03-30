@@ -43,21 +43,19 @@ func (r WebhooksApiListRequest) PageSize(pageSize int32) WebhooksApiListRequest 
 
 type WebhooksServiceI interface {
 	/*
-	 * Delete Delete a Webhook
-	 * @param webhookId The webhook you wish to delete.
-	 * @return WebhooksApiDeleteRequest
+	 * Create Create Webhook
+	 * @return WebhooksApiCreateRequest
 	 */
 
-	Delete(webhookId string) error
+	Create(webhooksCreationPayload WebhooksCreationPayload) (*Webhook, error)
 
 	/*
-	 * Delete Delete a Webhook
+	 * Create Create Webhook
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @param webhookId The webhook you wish to delete.
-	 * @return WebhooksApiDeleteRequest
+	 * @return WebhooksApiCreateRequest
 	 */
 
-	DeleteWithContext(ctx context.Context, webhookId string) error
+	CreateWithContext(ctx context.Context, webhooksCreationPayload WebhooksCreationPayload) (*Webhook, error)
 
 	/*
 	 * Get Retrieve Webhook details
@@ -77,6 +75,23 @@ type WebhooksServiceI interface {
 	GetWithContext(ctx context.Context, webhookId string) (*Webhook, error)
 
 	/*
+	 * Delete Delete a Webhook
+	 * @param webhookId The webhook you wish to delete.
+	 * @return WebhooksApiDeleteRequest
+	 */
+
+	Delete(webhookId string) error
+
+	/*
+	 * Delete Delete a Webhook
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param webhookId The webhook you wish to delete.
+	 * @return WebhooksApiDeleteRequest
+	 */
+
+	DeleteWithContext(ctx context.Context, webhookId string) error
+
+	/*
 	 * List List all webhooks
 	 * @return WebhooksApiListRequest
 	 */
@@ -90,177 +105,12 @@ type WebhooksServiceI interface {
 	 */
 
 	ListWithContext(ctx context.Context, r WebhooksApiListRequest) (*WebhooksListResponse, error)
-
-	/*
-	 * Create Create Webhook
-	 * @return WebhooksApiCreateRequest
-	 */
-
-	Create(webhooksCreationPayload WebhooksCreationPayload) (*Webhook, error)
-
-	/*
-	 * Create Create Webhook
-	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @return WebhooksApiCreateRequest
-	 */
-
-	CreateWithContext(ctx context.Context, webhooksCreationPayload WebhooksCreationPayload) (*Webhook, error)
 }
 
 // WebhooksService communicating with the Webhooks
 // endpoints of the api.video API
 type WebhooksService struct {
 	client *Client
-}
-
-/*
- * Delete Delete a Webhook
- * This method will delete the indicated webhook.
-
- * @param webhookId The webhook you wish to delete.
- * @return WebhooksApiDeleteRequest
- */
-
-func (s *WebhooksService) Delete(webhookId string) error {
-
-	return s.DeleteWithContext(context.Background(), webhookId)
-
-}
-
-/*
- * Delete Delete a Webhook
- * This method will delete the indicated webhook.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param webhookId The webhook you wish to delete.
- * @return WebhooksApiDeleteRequest
- */
-
-func (s *WebhooksService) DeleteWithContext(ctx context.Context, webhookId string) error {
-	var localVarPostBody interface{}
-
-	localVarPath := "/webhooks/{webhookId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"webhookId"+"}", url.PathEscape(parameterToString(webhookId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-
-	req, err := s.client.prepareRequest(ctx, http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
-	if err != nil {
-		return err
-	}
-
-	_, err = s.client.do(req, nil)
-
-	if err != nil {
-		return err
-	}
-
-	return nil
-
-}
-
-/*
- * Get Retrieve Webhook details
- * This call provides the same JSON information provided on Webhook creation.
-
- * @param webhookId The unique webhook you wish to retreive details on.
- * @return WebhooksApiGetRequest
- */
-
-func (s *WebhooksService) Get(webhookId string) (*Webhook, error) {
-
-	return s.GetWithContext(context.Background(), webhookId)
-
-}
-
-/*
- * Get Retrieve Webhook details
- * This call provides the same JSON information provided on Webhook creation.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param webhookId The unique webhook you wish to retreive details on.
- * @return WebhooksApiGetRequest
- */
-
-func (s *WebhooksService) GetWithContext(ctx context.Context, webhookId string) (*Webhook, error) {
-	var localVarPostBody interface{}
-
-	localVarPath := "/webhooks/{webhookId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"webhookId"+"}", url.PathEscape(parameterToString(webhookId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-
-	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
-	if err != nil {
-		return nil, err
-	}
-
-	res := new(Webhook)
-	_, err = s.client.do(req, res)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
-
-}
-
-/*
- * List List all webhooks
- * Thie method returns a list of your webhooks (with all their details).
-
-You can filter what the webhook list that the API returns using the parameters described below.
-
- * @return WebhooksApiListRequest
-*/
-
-func (s *WebhooksService) List(r WebhooksApiListRequest) (*WebhooksListResponse, error) {
-
-	return s.ListWithContext(context.Background(), r)
-
-}
-
-/*
- * List List all webhooks
- * Thie method returns a list of your webhooks (with all their details).
-
-You can filter what the webhook list that the API returns using the parameters described below.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return WebhooksApiListRequest
-*/
-
-func (s *WebhooksService) ListWithContext(ctx context.Context, r WebhooksApiListRequest) (*WebhooksListResponse, error) {
-	var localVarPostBody interface{}
-
-	localVarPath := "/webhooks"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	if r.events != nil {
-		localVarQueryParams.Add("events", parameterToString(*r.events, ""))
-	}
-	if r.currentPage != nil {
-		localVarQueryParams.Add("currentPage", parameterToString(*r.currentPage, ""))
-	}
-	if r.pageSize != nil {
-		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
-	}
-
-	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
-	if err != nil {
-		return nil, err
-	}
-
-	res := new(WebhooksListResponse)
-	_, err = s.client.do(req, res)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
-
 }
 
 /*
@@ -315,6 +165,156 @@ func (s *WebhooksService) CreateWithContext(ctx context.Context, webhooksCreatio
 	}
 
 	res := new(Webhook)
+	_, err = s.client.do(req, res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+
+}
+
+/*
+ * Get Retrieve Webhook details
+ * This call provides the same JSON information provided on Webhook creation.
+
+ * @param webhookId The unique webhook you wish to retreive details on.
+ * @return WebhooksApiGetRequest
+ */
+
+func (s *WebhooksService) Get(webhookId string) (*Webhook, error) {
+
+	return s.GetWithContext(context.Background(), webhookId)
+
+}
+
+/*
+ * Get Retrieve Webhook details
+ * This call provides the same JSON information provided on Webhook creation.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param webhookId The unique webhook you wish to retreive details on.
+ * @return WebhooksApiGetRequest
+ */
+
+func (s *WebhooksService) GetWithContext(ctx context.Context, webhookId string) (*Webhook, error) {
+	var localVarPostBody interface{}
+
+	localVarPath := "/webhooks/{webhookId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"webhookId"+"}", url.PathEscape(parameterToString(webhookId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	if err != nil {
+		return nil, err
+	}
+
+	res := new(Webhook)
+	_, err = s.client.do(req, res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+
+}
+
+/*
+ * Delete Delete a Webhook
+ * This method will delete the indicated webhook.
+
+ * @param webhookId The webhook you wish to delete.
+ * @return WebhooksApiDeleteRequest
+ */
+
+func (s *WebhooksService) Delete(webhookId string) error {
+
+	return s.DeleteWithContext(context.Background(), webhookId)
+
+}
+
+/*
+ * Delete Delete a Webhook
+ * This method will delete the indicated webhook.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param webhookId The webhook you wish to delete.
+ * @return WebhooksApiDeleteRequest
+ */
+
+func (s *WebhooksService) DeleteWithContext(ctx context.Context, webhookId string) error {
+	var localVarPostBody interface{}
+
+	localVarPath := "/webhooks/{webhookId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"webhookId"+"}", url.PathEscape(parameterToString(webhookId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+
+	req, err := s.client.prepareRequest(ctx, http.MethodDelete, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	if err != nil {
+		return err
+	}
+
+	_, err = s.client.do(req, nil)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+
+}
+
+/*
+ * List List all webhooks
+ * Thie method returns a list of your webhooks (with all their details).
+
+You can filter what the webhook list that the API returns using the parameters described below.
+
+ * @return WebhooksApiListRequest
+*/
+
+func (s *WebhooksService) List(r WebhooksApiListRequest) (*WebhooksListResponse, error) {
+
+	return s.ListWithContext(context.Background(), r)
+
+}
+
+/*
+ * List List all webhooks
+ * Thie method returns a list of your webhooks (with all their details).
+
+You can filter what the webhook list that the API returns using the parameters described below.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return WebhooksApiListRequest
+*/
+
+func (s *WebhooksService) ListWithContext(ctx context.Context, r WebhooksApiListRequest) (*WebhooksListResponse, error) {
+	var localVarPostBody interface{}
+
+	localVarPath := "/webhooks"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	if r.events != nil {
+		localVarQueryParams.Add("events", parameterToString(*r.events, ""))
+	}
+	if r.currentPage != nil {
+		localVarQueryParams.Add("currentPage", parameterToString(*r.currentPage, ""))
+	}
+	if r.pageSize != nil {
+		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
+	}
+
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	if err != nil {
+		return nil, err
+	}
+
+	res := new(WebhooksListResponse)
 	_, err = s.client.do(req, res)
 
 	if err != nil {

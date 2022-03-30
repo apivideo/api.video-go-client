@@ -4,505 +4,17 @@ All URIs are relative to *https://ws.api.video*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Delete**](Videos.md#Delete) | **Delete** /videos/{videoId} | Delete a video
-[**Get**](Videos.md#Get) | **Get** /videos/{videoId} | Retrieve a video
-[**GetStatus**](Videos.md#GetStatus) | **Get** /videos/{videoId}/status | Retrieve video status
-[**List**](Videos.md#List) | **Get** /videos | List all videos
-[**Update**](Videos.md#Update) | **Patch** /videos/{videoId} | Update a video
-[**PickThumbnail**](Videos.md#PickThumbnail) | **Patch** /videos/{videoId}/thumbnail | Pick a thumbnail
-[**UploadWithUploadToken**](Videos.md#UploadWithUploadToken) | **Post** /upload | Upload with an upload token
 [**Create**](Videos.md#Create) | **Post** /videos | Create a video
 [**Upload**](Videos.md#Upload) | **Post** /videos/{videoId}/source | Upload a video
+[**UploadWithUploadToken**](Videos.md#UploadWithUploadToken) | **Post** /upload | Upload with an upload token
+[**Get**](Videos.md#Get) | **Get** /videos/{videoId} | Retrieve a video
+[**Update**](Videos.md#Update) | **Patch** /videos/{videoId} | Update a video
+[**Delete**](Videos.md#Delete) | **Delete** /videos/{videoId} | Delete a video
+[**List**](Videos.md#List) | **Get** /videos | List all videos
 [**UploadThumbnail**](Videos.md#UploadThumbnail) | **Post** /videos/{videoId}/thumbnail | Upload a thumbnail
+[**PickThumbnail**](Videos.md#PickThumbnail) | **Patch** /videos/{videoId}/thumbnail | Pick a thumbnail
+[**GetStatus**](Videos.md#GetStatus) | **Get** /videos/{videoId}/status | Retrieve video status
 
-
-
-## Delete
-
-> Delete(videoId string) (error)
-
-> DeleteWithContext(ctx context.Context, videoId string) (error)
-
-
-Delete a video
-
-
-
-### Example
-```go
-package main
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-        
-    videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The video ID for the video you want to delete.
-    err := client.Videos.Delete(videoId)
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Delete``: %v\
-", err)
-    }
-}  
-```
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**videoId** | **string** | The video ID for the video you want to delete. | 
-
-### Other Parameters
-
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-### Return type
-
- (empty response body)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## Get
-
-> Get(videoId string) (*Video, error)
-
-> GetWithContext(ctx context.Context, videoId string) (*Video, error)
-
-
-Retrieve a video
-
-
-
-### Example
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-        
-    videoId := "videoId_example" // string | The unique identifier for the video you want details about.
-
-    
-    res, err := client.Videos.Get(videoId)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Get``: %v\
-", err)
-    }
-    // response from `Get`: Video
-    fmt.Fprintf(os.Stdout, "Response from `Videos.Get`: %v\
-", res)
-}
-```
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**videoId** | **string** | The unique identifier for the video you want details about. | 
-
-### Other Parameters
-
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-### Return type
-
-[**Video**](Video.md)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetStatus
-
-> GetStatus(videoId string) (*VideoStatus, error)
-
-> GetStatusWithContext(ctx context.Context, videoId string) (*VideoStatus, error)
-
-
-Retrieve video status
-
-
-
-### Example
-```go
- package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-        
-    videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique identifier for the video you want the status for.
-
-    
-    res, err := client.Videos.GetStatus(videoId)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.GetStatus``: %v\
-", err)
-    }
-    // response from `GetStatus`: VideoStatus
-    fmt.Fprintf(os.Stdout, "Response from `Videos.GetStatus`: %v\
-", res)
-}             
-```
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**videoId** | **string** | The unique identifier for the video you want the status for. | 
-
-### Other Parameters
-
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-### Return type
-
-[**VideoStatus**](VideoStatus.md)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## List
-
-> List(r VideosApiListRequest) (*VideosListResponse, error)
-
-
-> ListWithContext(ctx context.Context, r VideosApiListRequest) (*VideosListResponse, error)
-
-
-
-List all videos
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
-    req := apivideosdk.VideosApiListRequest{}
-    
-    req.Title("My Video.mp4") // string | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles.
-    req.Tags([]string{"Inner_example"}) // []string | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
-    req.Metadata(map[string]string{"key": "TODO"}) // map[string]string | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.
-    req.Description("New Zealand") // string | If you described a video with a term or sentence, you can add it here to return videos containing this string.
-    req.LiveStreamId("li400mYKSgQ6xs7taUeSaEKr") // string | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here.
-    req.SortBy("publishedAt") // string | Allowed: publishedAt, title. You can search by the time videos were published at, or by title.
-    req.SortOrder("asc") // string | Allowed: asc, desc. asc is ascending and sorts from A to Z. desc is descending and sorts from Z to A.
-    req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
-    req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
-
-    res, err := client.Videos.List(req)
-    
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.List``: %v\n", err)
-    }
-    // response from `List`: VideosListResponse
-    fmt.Fprintf(os.Stdout, "Response from `Videos.List`: %v\n", res)
-}
-```
-### Path Parameters
-
-
-
-### Other Parameters
-
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**title** | **string** | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles. | 
-**tags** | **[]string** | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned. | 
-**metadata** | [**map[string]**](.md) | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair. | 
-**description** | **string** | If you described a video with a term or sentence, you can add it here to return videos containing this string. | 
-**liveStreamId** | **string** | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here. | 
-**sortBy** | **string** | Allowed: publishedAt, title. You can search by the time videos were published at, or by title. | 
-**sortOrder** | **string** | Allowed: asc, desc. asc is ascending and sorts from A to Z. desc is descending and sorts from Z to A. | 
-**currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
-**pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
-
-### Return type
-
-[**VideosListResponse**](VideosListResponse.md)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## Update
-
-> Update(videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error)
-
-> UpdateWithContext(ctx context.Context, videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error)
-
-
-Update a video
-
-
-
-### Example
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-        
-    videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The video ID for the video you want to delete.
-    videoUpdatePayload := *apivideosdk.NewVideoUpdatePayload() // VideoUpdatePayload | 
-
-    
-    res, err := client.Videos.Update(videoId, videoUpdatePayload)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Update``: %v\
-", err)
-    }
-    // response from `Update`: Video
-    fmt.Fprintf(os.Stdout, "Response from `Videos.Update`: %v\
-", res)
-}
-```
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**videoId** | **string** | The video ID for the video you want to delete. | 
-
-### Other Parameters
-
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**videoUpdatePayload** | [**VideoUpdatePayload**](VideoUpdatePayload.md) |  | 
-
-### Return type
-
-[**Video**](Video.md)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## PickThumbnail
-
-> PickThumbnail(videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
-
-> PickThumbnailWithContext(ctx context.Context, videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
-
-
-Pick a thumbnail
-
-
-
-### Example
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-        
-    videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
-    videoThumbnailPickPayload := *apivideosdk.NewVideoThumbnailPickPayload("Timecode_example") // VideoThumbnailPickPayload | 
-
-    
-    res, err := client.Videos.PickThumbnail(videoId, videoThumbnailPickPayload)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.PickThumbnail``: %v\
-", err)
-    }
-    // response from `PickThumbnail`: Video
-    fmt.Fprintf(os.Stdout, "Response from `Videos.PickThumbnail`: %v\
-", res)
-}
-```
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**videoId** | **string** | Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail. | 
-
-### Other Parameters
-
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**videoThumbnailPickPayload** | [**VideoThumbnailPickPayload**](VideoThumbnailPickPayload.md) |  | 
-
-### Return type
-
-[**Video**](Video.md)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## UploadWithUploadToken
-
-> UploadWithUploadTokenFile(token string, file *os.File) (*Video, error)
-> UploadWithUploadToken(token string, fileName string, fileReader io.Reader, fileSize int64)
-> UploadWithUploadTokenFileWithContext(ctx context.Context, token string, file *os.File) (*Video, error)
-> UploadWithUploadTokenWithContext(ctx context.Context, token string, fileName string, fileReader io.Reader, fileSize int64)
-
-Upload with an upload token
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
-        
-    token := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the token you want to use to upload a video.
-    file := os.NewFile(1234, "some_file") // *os.File | The path to the video you want to upload.
-
-    
-    res, err := client.Videos.UploadWithUploadTokenFile(token, file)
-
-    // you can also use a Reader instead of a File:
-    // client.Videos.UploadWithUploadToken(token, fileName, fileReader, fileSize)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Videos.UploadWithUploadToken``: %v\n", err)
-    }
-    // response from `UploadWithUploadToken`: Video
-    fmt.Fprintf(os.Stdout, "Response from `Videos.UploadWithUploadToken`: %v\n", res)
-}
-```
-### Progressive uploads
-
-Progressive uploads make it possible to upload a video source "progressively," i.e., before knowing the total size of the video. This is done by sending chunks of the video source file sequentially.
-The last chunk is sent by calling a different method, so api.video knows that it is time to reassemble the different chunks that were received.
-
-
-```go
-
-token := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the token you want to use to upload a video.
-
-part1, err := os.Open("10m.mp4.part.a")
-part2, err := os.Open("10m.mp4.part.b")
-part3, err := os.Open("10m.mp4.part.c")
-
-stream = client.Videos.CreateUploadWithUploadTokenStream(token, nil)
-// or, if you want to upload to an existing video:
-// stream = client.Videos.CreateUploadWithUploadTokenStream(token, videoId)
-_, err = stream.UploadPartFile(part1)
-_, err = stream.UploadPartFile(part2)
-res, err := stream.UploadLastPartFile(part3)
-
-err = part1.Close()
-err = part2.Close()
-err = part3.Close()
-
-```
-### Path Parameters
-
-
-
-### Other Parameters
-
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**token** | **string** | The unique identifier for the token you want to use to upload a video. | 
-**file** | ***os.File** | The path to the video you want to upload. | 
-
-### Return type
-
-[**Video**](Video.md)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## Create
@@ -663,6 +175,364 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UploadWithUploadToken
+
+> UploadWithUploadTokenFile(token string, file *os.File) (*Video, error)
+> UploadWithUploadToken(token string, fileName string, fileReader io.Reader, fileSize int64)
+> UploadWithUploadTokenFileWithContext(ctx context.Context, token string, file *os.File) (*Video, error)
+> UploadWithUploadTokenWithContext(ctx context.Context, token string, fileName string, fileReader io.Reader, fileSize int64)
+
+Upload with an upload token
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+        
+    token := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the token you want to use to upload a video.
+    file := os.NewFile(1234, "some_file") // *os.File | The path to the video you want to upload.
+
+    
+    res, err := client.Videos.UploadWithUploadTokenFile(token, file)
+
+    // you can also use a Reader instead of a File:
+    // client.Videos.UploadWithUploadToken(token, fileName, fileReader, fileSize)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.UploadWithUploadToken``: %v\n", err)
+    }
+    // response from `UploadWithUploadToken`: Video
+    fmt.Fprintf(os.Stdout, "Response from `Videos.UploadWithUploadToken`: %v\n", res)
+}
+```
+### Progressive uploads
+
+Progressive uploads make it possible to upload a video source "progressively," i.e., before knowing the total size of the video. This is done by sending chunks of the video source file sequentially.
+The last chunk is sent by calling a different method, so api.video knows that it is time to reassemble the different chunks that were received.
+
+
+```go
+
+token := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the token you want to use to upload a video.
+
+part1, err := os.Open("10m.mp4.part.a")
+part2, err := os.Open("10m.mp4.part.b")
+part3, err := os.Open("10m.mp4.part.c")
+
+stream = client.Videos.CreateUploadWithUploadTokenStream(token, nil)
+// or, if you want to upload to an existing video:
+// stream = client.Videos.CreateUploadWithUploadTokenStream(token, videoId)
+_, err = stream.UploadPartFile(part1)
+_, err = stream.UploadPartFile(part2)
+res, err := stream.UploadLastPartFile(part3)
+
+err = part1.Close()
+err = part2.Close()
+err = part3.Close()
+
+```
+### Path Parameters
+
+
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**token** | **string** | The unique identifier for the token you want to use to upload a video. | 
+**file** | ***os.File** | The path to the video you want to upload. | 
+
+### Return type
+
+[**Video**](Video.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Get
+
+> Get(videoId string) (*Video, error)
+
+> GetWithContext(ctx context.Context, videoId string) (*Video, error)
+
+
+Retrieve a video
+
+
+
+### Example
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+        
+    videoId := "videoId_example" // string | The unique identifier for the video you want details about.
+
+    
+    res, err := client.Videos.Get(videoId)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Get``: %v\
+", err)
+    }
+    // response from `Get`: Video
+    fmt.Fprintf(os.Stdout, "Response from `Videos.Get`: %v\
+", res)
+}
+```
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**videoId** | **string** | The unique identifier for the video you want details about. | 
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+### Return type
+
+[**Video**](Video.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Update
+
+> Update(videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error)
+
+> UpdateWithContext(ctx context.Context, videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error)
+
+
+Update a video
+
+
+
+### Example
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+        
+    videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The video ID for the video you want to delete.
+    videoUpdatePayload := *apivideosdk.NewVideoUpdatePayload() // VideoUpdatePayload | 
+
+    
+    res, err := client.Videos.Update(videoId, videoUpdatePayload)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Update``: %v\
+", err)
+    }
+    // response from `Update`: Video
+    fmt.Fprintf(os.Stdout, "Response from `Videos.Update`: %v\
+", res)
+}
+```
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**videoId** | **string** | The video ID for the video you want to delete. | 
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**videoUpdatePayload** | [**VideoUpdatePayload**](VideoUpdatePayload.md) |  | 
+
+### Return type
+
+[**Video**](Video.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Delete
+
+> Delete(videoId string) (error)
+
+> DeleteWithContext(ctx context.Context, videoId string) (error)
+
+
+Delete a video
+
+
+
+### Example
+```go
+package main
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+        
+    videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The video ID for the video you want to delete.
+    err := client.Videos.Delete(videoId)
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.Delete``: %v\
+", err)
+    }
+}  
+```
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**videoId** | **string** | The video ID for the video you want to delete. | 
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+### Return type
+
+ (empty response body)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## List
+
+> List(r VideosApiListRequest) (*VideosListResponse, error)
+
+
+> ListWithContext(ctx context.Context, r VideosApiListRequest) (*VideosListResponse, error)
+
+
+
+List all videos
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+    req := apivideosdk.VideosApiListRequest{}
+    
+    req.Title("My Video.mp4") // string | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles.
+    req.Tags([]string{"Inner_example"}) // []string | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
+    req.Metadata(map[string]string{"key": "TODO"}) // map[string]string | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.
+    req.Description("New Zealand") // string | If you described a video with a term or sentence, you can add it here to return videos containing this string.
+    req.LiveStreamId("li400mYKSgQ6xs7taUeSaEKr") // string | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here.
+    req.SortBy("publishedAt") // string | Allowed: publishedAt, title. You can search by the time videos were published at, or by title.
+    req.SortOrder("asc") // string | Allowed: asc, desc. asc is ascending and sorts from A to Z. desc is descending and sorts from Z to A.
+    req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
+    req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
+
+    res, err := client.Videos.List(req)
+    
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.List``: %v\n", err)
+    }
+    // response from `List`: VideosListResponse
+    fmt.Fprintf(os.Stdout, "Response from `Videos.List`: %v\n", res)
+}
+```
+### Path Parameters
+
+
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**title** | **string** | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles. | 
+**tags** | **[]string** | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned. | 
+**metadata** | [**map[string]**](.md) | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair. | 
+**description** | **string** | If you described a video with a term or sentence, you can add it here to return videos containing this string. | 
+**liveStreamId** | **string** | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here. | 
+**sortBy** | **string** | Allowed: publishedAt, title. You can search by the time videos were published at, or by title. | 
+**sortOrder** | **string** | Allowed: asc, desc. asc is ascending and sorts from A to Z. desc is descending and sorts from Z to A. | 
+**currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
+**pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
+
+### Return type
+
+[**VideosListResponse**](VideosListResponse.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UploadThumbnail
 
 > UploadThumbnailFile(videoId string, file *os.File) (*Video, error)
@@ -726,6 +596,136 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Video**](Video.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PickThumbnail
+
+> PickThumbnail(videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
+
+> PickThumbnailWithContext(ctx context.Context, videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
+
+
+Pick a thumbnail
+
+
+
+### Example
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+        
+    videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
+    videoThumbnailPickPayload := *apivideosdk.NewVideoThumbnailPickPayload("Timecode_example") // VideoThumbnailPickPayload | 
+
+    
+    res, err := client.Videos.PickThumbnail(videoId, videoThumbnailPickPayload)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.PickThumbnail``: %v\
+", err)
+    }
+    // response from `PickThumbnail`: Video
+    fmt.Fprintf(os.Stdout, "Response from `Videos.PickThumbnail`: %v\
+", res)
+}
+```
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**videoId** | **string** | Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail. | 
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**videoThumbnailPickPayload** | [**VideoThumbnailPickPayload**](VideoThumbnailPickPayload.md) |  | 
+
+### Return type
+
+[**Video**](Video.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStatus
+
+> GetStatus(videoId string) (*VideoStatus, error)
+
+> GetStatusWithContext(ctx context.Context, videoId string) (*VideoStatus, error)
+
+
+Retrieve video status
+
+
+
+### Example
+```go
+ package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+        
+    videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique identifier for the video you want the status for.
+
+    
+    res, err := client.Videos.GetStatus(videoId)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.GetStatus``: %v\
+", err)
+    }
+    // response from `GetStatus`: VideoStatus
+    fmt.Fprintf(os.Stdout, "Response from `Videos.GetStatus`: %v\
+", res)
+}             
+```
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**videoId** | **string** | The unique identifier for the video you want the status for. | 
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+### Return type
+
+[**VideoStatus**](VideoStatus.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
