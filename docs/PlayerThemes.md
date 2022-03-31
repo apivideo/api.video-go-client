@@ -4,85 +4,24 @@ All URIs are relative to *https://ws.api.video*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Delete**](PlayerThemes.md#Delete) | **Delete** /players/{playerId} | Delete a player
-[**DeleteLogo**](PlayerThemes.md#DeleteLogo) | **Delete** /players/{playerId}/logo | Delete logo
-[**List**](PlayerThemes.md#List) | **Get** /players | List all player themes
+[**Create**](PlayerThemes.md#Create) | **Post** /players | Create a player
 [**Get**](PlayerThemes.md#Get) | **Get** /players/{playerId} | Retrieve a player
 [**Update**](PlayerThemes.md#Update) | **Patch** /players/{playerId} | Update a player
-[**Create**](PlayerThemes.md#Create) | **Post** /players | Create a player
+[**Delete**](PlayerThemes.md#Delete) | **Delete** /players/{playerId} | Delete a player
+[**List**](PlayerThemes.md#List) | **Get** /players | List all player themes
 [**UploadLogo**](PlayerThemes.md#UploadLogo) | **Post** /players/{playerId}/logo | Upload a logo
+[**DeleteLogo**](PlayerThemes.md#DeleteLogo) | **Delete** /players/{playerId}/logo | Delete logo
 
 
 
-## Delete
+## Create
 
-> Delete(playerId string) (error)
+> Create(playerThemeCreationPayload PlayerThemeCreationPayload) (*PlayerTheme, error)
 
-> DeleteWithContext(ctx context.Context, playerId string) (error)
-
-
-Delete a player
+> CreateWithContext(ctx context.Context, playerThemeCreationPayload PlayerThemeCreationPayload) (*PlayerTheme, error)
 
 
-
-### Example
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-        
-    playerId := "pl45d5vFFGrfdsdsd156dGhh" // string | The unique identifier for the player you want to delete.
-
-    
-    err := client.PlayerThemes.Delete(playerId)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Delete``: %v\
-", err)
-    }
-}
-```
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**playerId** | **string** | The unique identifier for the player you want to delete. | 
-
-### Other Parameters
-
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-### Return type
-
- (empty response body)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## DeleteLogo
-
-> DeleteLogo(playerId string) (error)
-
-> DeleteLogoWithContext(ctx context.Context, playerId string) (error)
-
-
-Delete logo
+Create a player
 
 
 
@@ -102,84 +41,17 @@ func main() {
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
-    playerId := "pl14Db6oMJRH6SRVoOwORacK" // string | The unique identifier for the player.
+    playerThemeCreationPayload := *apivideosdk.NewPlayerThemeCreationPayload() // PlayerThemeCreationPayload | 
 
     
-    err := client.PlayerThemes.DeleteLogo(playerId)
+    res, err := client.PlayerThemes.Create(playerThemeCreationPayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.DeleteLogo``: %v\
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Create``: %v\
 ", err)
     }
-}
-```
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**playerId** | **string** | The unique identifier for the player. | 
-
-### Other Parameters
-
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-### Return type
-
- (empty response body)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## List
-
-> List(r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error)
-
-
-> ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error)
-
-
-
-List all player themes
-
-
-
-### Example
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-    req := apivideosdk.PlayerThemesApiListRequest{}
-    
-    req.SortBy("createdAt") // string | createdAt is the time the player was created. updatedAt is the time the player was last updated. The time is presented in ISO-8601 format.
-    req.SortOrder("asc") // string | Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones.
-    req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
-    req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
-
-    res, err := client.PlayerThemes.List(req)
-    
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.List``: %v\
-", err)
-    }
-    // response from `List`: PlayerThemesListResponse
-    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.List`: %v\
+    // response from `Create`: PlayerTheme
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Create`: %v\
 ", res)
 }
 ```
@@ -193,14 +65,11 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**sortBy** | **string** | createdAt is the time the player was created. updatedAt is the time the player was last updated. The time is presented in ISO-8601 format. | 
-**sortOrder** | **string** | Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. | 
-**currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
-**pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
+**playerThemeCreationPayload** | [**PlayerThemeCreationPayload**](PlayerThemeCreationPayload.md) |  | 
 
 ### Return type
 
-[**PlayerThemesListResponse**](PlayerThemesListResponse.md)
+[**PlayerTheme**](PlayerTheme.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -337,14 +206,14 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## Create
+## Delete
 
-> Create(playerThemeCreationPayload PlayerThemeCreationPayload) (*PlayerTheme, error)
+> Delete(playerId string) (error)
 
-> CreateWithContext(ctx context.Context, playerThemeCreationPayload PlayerThemeCreationPayload) (*PlayerTheme, error)
+> DeleteWithContext(ctx context.Context, playerId string) (error)
 
 
-Create a player
+Delete a player
 
 
 
@@ -364,17 +233,84 @@ func main() {
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
-    playerThemeCreationPayload := *apivideosdk.NewPlayerThemeCreationPayload() // PlayerThemeCreationPayload | 
+    playerId := "pl45d5vFFGrfdsdsd156dGhh" // string | The unique identifier for the player you want to delete.
 
     
-    res, err := client.PlayerThemes.Create(playerThemeCreationPayload)
+    err := client.PlayerThemes.Delete(playerId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Create``: %v\
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Delete``: %v\
 ", err)
     }
-    // response from `Create`: PlayerTheme
-    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Create`: %v\
+}
+```
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**playerId** | **string** | The unique identifier for the player you want to delete. | 
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+### Return type
+
+ (empty response body)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## List
+
+> List(r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error)
+
+
+> ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error)
+
+
+
+List all player themes
+
+
+
+### Example
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    req := apivideosdk.PlayerThemesApiListRequest{}
+    
+    req.SortBy("createdAt") // string | createdAt is the time the player was created. updatedAt is the time the player was last updated. The time is presented in ISO-8601 format.
+    req.SortOrder("asc") // string | Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones.
+    req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
+    req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
+
+    res, err := client.PlayerThemes.List(req)
+    
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.List``: %v\
+", err)
+    }
+    // response from `List`: PlayerThemesListResponse
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.List`: %v\
 ", res)
 }
 ```
@@ -388,11 +324,14 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**playerThemeCreationPayload** | [**PlayerThemeCreationPayload**](PlayerThemeCreationPayload.md) |  | 
+**sortBy** | **string** | createdAt is the time the player was created. updatedAt is the time the player was last updated. The time is presented in ISO-8601 format. | 
+**sortOrder** | **string** | Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. | 
+**currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
+**pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
 
 ### Return type
 
-[**PlayerTheme**](PlayerTheme.md)
+[**PlayerThemesListResponse**](PlayerThemesListResponse.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -464,6 +403,67 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PlayerTheme**](PlayerTheme.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteLogo
+
+> DeleteLogo(playerId string) (error)
+
+> DeleteLogoWithContext(ctx context.Context, playerId string) (error)
+
+
+Delete logo
+
+
+
+### Example
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+        
+    playerId := "pl14Db6oMJRH6SRVoOwORacK" // string | The unique identifier for the player.
+
+    
+    err := client.PlayerThemes.DeleteLogo(playerId)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.DeleteLogo``: %v\
+", err)
+    }
+}
+```
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**playerId** | **string** | The unique identifier for the player. | 
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+### Return type
+
+ (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

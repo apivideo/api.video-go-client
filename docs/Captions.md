@@ -4,87 +4,22 @@ All URIs are relative to *https://ws.api.video*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Delete**](Captions.md#Delete) | **Delete** /videos/{videoId}/captions/{language} | Delete a caption
-[**List**](Captions.md#List) | **Get** /videos/{videoId}/captions | List video captions
+[**Upload**](Captions.md#Upload) | **Post** /videos/{videoId}/captions/{language} | Upload a caption
 [**Get**](Captions.md#Get) | **Get** /videos/{videoId}/captions/{language} | Retrieve a caption
 [**Update**](Captions.md#Update) | **Patch** /videos/{videoId}/captions/{language} | Update a caption
-[**Upload**](Captions.md#Upload) | **Post** /videos/{videoId}/captions/{language} | Upload a caption
+[**Delete**](Captions.md#Delete) | **Delete** /videos/{videoId}/captions/{language} | Delete a caption
+[**List**](Captions.md#List) | **Get** /videos/{videoId}/captions | List video captions
 
 
 
-## Delete
+## Upload
 
-> Delete(videoId string, language string) (error)
+> UploadFile(videoId string, language string, file *os.File) (*Caption, error)
+> Upload(videoId string, language string, fileName string, fileReader io.Reader)
+> UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Caption, error)
+> UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader)
 
-> DeleteWithContext(ctx context.Context, videoId string, language string) (error)
-
-
-Delete a caption
-
-
-
-### Example
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-        
-    videoId := "vi4k0jvEUuaTdRAEjQ4Prklgc" // string | The unique identifier for the video you want to delete a caption from.
-    language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
-
-    
-    err := client.Captions.Delete(videoId, language)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Delete``: %v\
-", err)
-    }
-}
-```
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**videoId** | **string** | The unique identifier for the video you want to delete a caption from. | 
-**language** | **string** | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation. | 
-
-### Other Parameters
-
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-### Return type
-
- (empty response body)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## List
-
-> List(videoId string, r CaptionsApiListRequest) (*CaptionsListResponse, error)
-
-
-> ListWithContext(ctx context.Context, videoId string, r CaptionsApiListRequest) (*CaptionsListResponse, error)
-
-
-
-List video captions
+Upload a caption
 
 
 
@@ -104,18 +39,22 @@ func main() {
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
-    videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want captions for.
-    language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+    videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want to add a caption to.
+    language := "en" // string | A valid BCP 47 language representation.
+    file := os.NewFile(1234, "some_file") // *os.File | The video text track (VTT) you want to upload.
 
     
-    res, err := client.Captions.Get(videoId, language)
+    res, err := client.Captions.UploadFile(videoId, language, file)
+
+    // you can also use a Reader instead of a File:
+    // client.Captions.Upload(videoId, language, fileName, fileReader)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Get``: %v\
+        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Upload``: %v\
 ", err)
     }
-    // response from `Get`: Caption
-    fmt.Fprintf(os.Stdout, "Response from `Captions.Get`: %v\
+    // response from `Upload`: Caption
+    fmt.Fprintf(os.Stdout, "Response from `Captions.Upload`: %v\
 ", res)
 }
 ```
@@ -124,7 +63,8 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**videoId** | **string** | The unique identifier for the video you want to retrieve a list of captions for. | 
+**videoId** | **string** | The unique identifier for the video you want to add a caption to. | 
+**language** | **string** | A valid BCP 47 language representation. | 
 
 ### Other Parameters
 
@@ -132,12 +72,11 @@ Name | Type | Description  | Notes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
-**pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
+**file** | ***os.File** | The video text track (VTT) you want to upload. | 
 
 ### Return type
 
-[**CaptionsListResponse**](CaptionsListResponse.md)
+[**Caption**](Caption.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -278,14 +217,14 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## Upload
+## Delete
 
-> UploadFile(videoId string, language string, file *os.File) (*Caption, error)
-> Upload(videoId string, language string, fileName string, fileReader io.Reader)
-> UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Caption, error)
-> UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader)
+> Delete(videoId string, language string) (error)
 
-Upload a caption
+> DeleteWithContext(ctx context.Context, videoId string, language string) (error)
+
+
+Delete a caption
 
 
 
@@ -305,22 +244,83 @@ func main() {
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
-    videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want to add a caption to.
-    language := "en" // string | A valid BCP 47 language representation.
-    file := os.NewFile(1234, "some_file") // *os.File | The video text track (VTT) you want to upload.
+    videoId := "vi4k0jvEUuaTdRAEjQ4Prklgc" // string | The unique identifier for the video you want to delete a caption from.
+    language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
 
     
-    res, err := client.Captions.UploadFile(videoId, language, file)
-
-    // you can also use a Reader instead of a File:
-    // client.Captions.Upload(videoId, language, fileName, fileReader)
+    err := client.Captions.Delete(videoId, language)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Upload``: %v\
+        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Delete``: %v\
 ", err)
     }
-    // response from `Upload`: Caption
-    fmt.Fprintf(os.Stdout, "Response from `Captions.Upload`: %v\
+}
+```
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**videoId** | **string** | The unique identifier for the video you want to delete a caption from. | 
+**language** | **string** | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation. | 
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+### Return type
+
+ (empty response body)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## List
+
+> List(videoId string, r CaptionsApiListRequest) (*CaptionsListResponse, error)
+
+
+> ListWithContext(ctx context.Context, videoId string, r CaptionsApiListRequest) (*CaptionsListResponse, error)
+
+
+
+List video captions
+
+
+
+### Example
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+        
+    videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want captions for.
+    language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
+
+    
+    res, err := client.Captions.Get(videoId, language)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Get``: %v\
+", err)
+    }
+    // response from `Get`: Caption
+    fmt.Fprintf(os.Stdout, "Response from `Captions.Get`: %v\
 ", res)
 }
 ```
@@ -329,8 +329,7 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**videoId** | **string** | The unique identifier for the video you want to add a caption to. | 
-**language** | **string** | A valid BCP 47 language representation. | 
+**videoId** | **string** | The unique identifier for the video you want to retrieve a list of captions for. | 
 
 ### Other Parameters
 
@@ -338,11 +337,12 @@ Name | Type | Description  | Notes
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**file** | ***os.File** | The video text track (VTT) you want to upload. | 
+**currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
+**pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
 
 ### Return type
 
-[**Caption**](Caption.md)
+[**CaptionsListResponse**](CaptionsListResponse.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

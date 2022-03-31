@@ -4,11 +4,137 @@ All URIs are relative to *https://ws.api.video*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateToken**](UploadTokens.md#CreateToken) | **Post** /upload-tokens | Generate an upload token
+[**GetToken**](UploadTokens.md#GetToken) | **Get** /upload-tokens/{uploadToken} | Retrieve upload token
 [**DeleteToken**](UploadTokens.md#DeleteToken) | **Delete** /upload-tokens/{uploadToken} | Delete an upload token
 [**List**](UploadTokens.md#List) | **Get** /upload-tokens | List all active upload tokens.
-[**GetToken**](UploadTokens.md#GetToken) | **Get** /upload-tokens/{uploadToken} | Retrieve upload token
-[**CreateToken**](UploadTokens.md#CreateToken) | **Post** /upload-tokens | Generate an upload token
 
+
+
+## CreateToken
+
+> CreateToken(tokenCreationPayload TokenCreationPayload) (*UploadToken, error)
+
+> CreateTokenWithContext(ctx context.Context, tokenCreationPayload TokenCreationPayload) (*UploadToken, error)
+
+
+Generate an upload token
+
+
+
+### Example
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+        
+    tokenCreationPayload := *apivideosdk.NewTokenCreationPayload() // TokenCreationPayload | 
+
+    
+    res, err := client.UploadTokens.CreateToken(tokenCreationPayload)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UploadTokens.CreateToken``: %v\
+", err)
+    }
+    // response from `CreateToken`: UploadToken
+    fmt.Fprintf(os.Stdout, "Response from `UploadTokens.CreateToken`: %v\
+", res)
+}
+```
+### Path Parameters
+
+
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**tokenCreationPayload** | [**TokenCreationPayload**](TokenCreationPayload.md) |  | 
+
+### Return type
+
+[**UploadToken**](UploadToken.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetToken
+
+> GetToken(uploadToken string) (*UploadToken, error)
+
+> GetTokenWithContext(ctx context.Context, uploadToken string) (*UploadToken, error)
+
+
+Retrieve upload token
+
+
+
+### Example
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+        
+    uploadToken := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the token you want information about.
+
+    
+    res, err := client.UploadTokens.GetToken(uploadToken)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `UploadTokens.GetToken``: %v\
+", err)
+    }
+    // response from `GetToken`: UploadToken
+    fmt.Fprintf(os.Stdout, "Response from `UploadTokens.GetToken`: %v\
+", res)
+}
+```
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**uploadToken** | **string** | The unique identifier for the token you want information about. | 
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+### Return type
+
+[**UploadToken**](UploadToken.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## DeleteToken
@@ -132,132 +258,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TokenListResponse**](TokenListResponse.md)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GetToken
-
-> GetToken(uploadToken string) (*UploadToken, error)
-
-> GetTokenWithContext(ctx context.Context, uploadToken string) (*UploadToken, error)
-
-
-Retrieve upload token
-
-
-
-### Example
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-        
-    uploadToken := "to1tcmSFHeYY5KzyhOqVKMKb" // string | The unique identifier for the token you want information about.
-
-    
-    res, err := client.UploadTokens.GetToken(uploadToken)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UploadTokens.GetToken``: %v\
-", err)
-    }
-    // response from `GetToken`: UploadToken
-    fmt.Fprintf(os.Stdout, "Response from `UploadTokens.GetToken`: %v\
-", res)
-}
-```
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**uploadToken** | **string** | The unique identifier for the token you want information about. | 
-
-### Other Parameters
-
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-### Return type
-
-[**UploadToken**](UploadToken.md)
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CreateToken
-
-> CreateToken(tokenCreationPayload TokenCreationPayload) (*UploadToken, error)
-
-> CreateTokenWithContext(ctx context.Context, tokenCreationPayload TokenCreationPayload) (*UploadToken, error)
-
-
-Generate an upload token
-
-
-
-### Example
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    apivideosdk "github.com/apivideo/api.video-go-client"
-)
-
-func main() {
-    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
-    // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-        
-    tokenCreationPayload := *apivideosdk.NewTokenCreationPayload() // TokenCreationPayload | 
-
-    
-    res, err := client.UploadTokens.CreateToken(tokenCreationPayload)
-
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `UploadTokens.CreateToken``: %v\
-", err)
-    }
-    // response from `CreateToken`: UploadToken
-    fmt.Fprintf(os.Stdout, "Response from `UploadTokens.CreateToken`: %v\
-", res)
-}
-```
-### Path Parameters
-
-
-
-### Other Parameters
-
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**tokenCreationPayload** | [**TokenCreationPayload**](TokenCreationPayload.md) |  | 
-
-### Return type
-
-[**UploadToken**](UploadToken.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -50,6 +50,30 @@ func (r WatermarksApiListRequest) PageSize(pageSize int32) WatermarksApiListRequ
 
 type WatermarksServiceI interface {
 	/*
+	 * Upload Upload a watermark
+	 * @return WatermarksApiUploadRequest
+	 */
+	Upload(fileName string, fileReader io.Reader) (*Watermark, error)
+	/*
+	 * Upload Upload a watermark
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return WatermarksApiUploadRequest
+	 */
+	UploadWithContext(ctx context.Context, fileName string, fileReader io.Reader) (*Watermark, error)
+
+	/*
+	 * Upload Upload a watermark
+	 * @return WatermarksApiUploadRequest
+	 */
+	UploadFile(file *os.File) (*Watermark, error)
+
+	/*
+	 * Upload Upload a watermark
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return WatermarksApiUploadRequest
+	 */
+	UploadFileWithContext(ctx context.Context, file *os.File) (*Watermark, error)
+	/*
 	 * Delete Delete a watermark
 	 * @param watermarkId The watermark ID for the watermark you want to delete.
 	 * @return WatermarksApiDeleteRequest
@@ -80,37 +104,74 @@ type WatermarksServiceI interface {
 	 */
 
 	ListWithContext(ctx context.Context, r WatermarksApiListRequest) (*WatermarksListResponse, error)
-
-	/*
-	 * Upload Upload a watermark
-	 * @return WatermarksApiUploadRequest
-	 */
-	Upload(fileName string, fileReader io.Reader) (*Watermark, error)
-	/*
-	 * Upload Upload a watermark
-	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @return WatermarksApiUploadRequest
-	 */
-	UploadWithContext(ctx context.Context, fileName string, fileReader io.Reader) (*Watermark, error)
-
-	/*
-	 * Upload Upload a watermark
-	 * @return WatermarksApiUploadRequest
-	 */
-	UploadFile(file *os.File) (*Watermark, error)
-
-	/*
-	 * Upload Upload a watermark
-	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @return WatermarksApiUploadRequest
-	 */
-	UploadFileWithContext(ctx context.Context, file *os.File) (*Watermark, error)
 }
 
 // WatermarksService communicating with the Watermarks
 // endpoints of the api.video API
 type WatermarksService struct {
 	client *Client
+}
+
+/*
+ * Upload Upload a watermark
+ * Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
+
+ * @return WatermarksApiUploadRequest
+ */
+
+func (s *WatermarksService) UploadFile(file *os.File) (*Watermark, error) {
+	return s.UploadFileWithContext(context.Background(), file)
+}
+
+/*
+ * Upload Upload a watermark
+ * Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return WatermarksApiUploadRequest
+ */
+
+func (s *WatermarksService) UploadFileWithContext(ctx context.Context, file *os.File) (*Watermark, error) {
+	return s.UploadWithContext(ctx, file.Name(), io.Reader(file))
+}
+
+/*
+ * Upload Upload a watermark
+ * Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
+
+ * @return WatermarksApiUploadRequest
+ */
+func (s *WatermarksService) Upload(fileName string, fileReader io.Reader) (*Watermark, error) {
+	return s.UploadWithContext(context.Background(), fileName, fileReader)
+}
+
+/*
+ * Upload Upload a watermark
+ * Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return WatermarksApiUploadRequest
+ */
+func (s *WatermarksService) UploadWithContext(ctx context.Context, fileName string, fileReader io.Reader) (*Watermark, error) {
+	localVarPath := "/watermarks"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := make(map[string]string)
+
+	req, err := s.client.prepareUploadRequest(ctx, localVarPath, fileName, fileReader, localVarHeaderParams, localVarQueryParams, localVarFormParams)
+
+	if err != nil {
+		return nil, err
+	}
+
+	res := new(Watermark)
+	_, err = s.client.do(req, res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+
 }
 
 /*
@@ -205,68 +266,6 @@ func (s *WatermarksService) ListWithContext(ctx context.Context, r WatermarksApi
 	}
 
 	res := new(WatermarksListResponse)
-	_, err = s.client.do(req, res)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return res, nil
-
-}
-
-/*
- * Upload Upload a watermark
- * Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
-
- * @return WatermarksApiUploadRequest
- */
-
-func (s *WatermarksService) UploadFile(file *os.File) (*Watermark, error) {
-	return s.UploadFileWithContext(context.Background(), file)
-}
-
-/*
- * Upload Upload a watermark
- * Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return WatermarksApiUploadRequest
- */
-
-func (s *WatermarksService) UploadFileWithContext(ctx context.Context, file *os.File) (*Watermark, error) {
-	return s.UploadWithContext(ctx, file.Name(), io.Reader(file))
-}
-
-/*
- * Upload Upload a watermark
- * Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
-
- * @return WatermarksApiUploadRequest
- */
-func (s *WatermarksService) Upload(fileName string, fileReader io.Reader) (*Watermark, error) {
-	return s.UploadWithContext(context.Background(), fileName, fileReader)
-}
-
-/*
- * Upload Upload a watermark
- * Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return WatermarksApiUploadRequest
- */
-func (s *WatermarksService) UploadWithContext(ctx context.Context, fileName string, fileReader io.Reader) (*Watermark, error) {
-	localVarPath := "/watermarks"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := make(map[string]string)
-
-	req, err := s.client.prepareUploadRequest(ctx, localVarPath, fileName, fileReader, localVarHeaderParams, localVarQueryParams, localVarFormParams)
-
-	if err != nil {
-		return nil, err
-	}
-
-	res := new(Watermark)
 	_, err = s.client.do(req, res)
 
 	if err != nil {
