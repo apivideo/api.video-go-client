@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Width** | Pointer to **int32** | The width of the video in pixels. | [optional] 
-**Height** | Pointer to **int32** | The height of the video in pixels. | [optional] 
-**Bitrate** | Pointer to **float32** | The number of bits processed per second. | [optional] 
-**Duration** | Pointer to **int32** | The length of the video. | [optional] 
-**Framerate** | Pointer to **int32** | The frequency with which consecutive images or frames appear on a display. Shown in this API as frames per second (fps). | [optional] 
-**Samplerate** | Pointer to **int32** | How many samples per second a digital audio system uses to record an audio signal. The higher the rate, the higher the frequencies that can be recorded. They are presented in this API using hertz. | [optional] 
-**VideoCodec** | Pointer to **string** | The method used to compress and decompress digital video. API Video supports all codecs in the libavcodec library.  | [optional] 
-**AudioCodec** | Pointer to **string** | The method used to compress and decompress digital audio for your video. | [optional] 
+**Width** | Pointer to **NullableInt32** | The width of the video in pixels. | [optional] 
+**Height** | Pointer to **NullableInt32** | The height of the video in pixels. | [optional] 
+**Bitrate** | Pointer to **NullableFloat32** | The number of bits processed per second. | [optional] 
+**Duration** | Pointer to **NullableInt32** | The length of the video. | [optional] 
+**Framerate** | Pointer to **NullableInt32** | The frequency with which consecutive images or frames appear on a display. Shown in this API as frames per second (fps). | [optional] 
+**Samplerate** | Pointer to **NullableInt32** | How many samples per second a digital audio system uses to record an audio signal. The higher the rate, the higher the frequencies that can be recorded. They are presented in this API using hertz. | [optional] 
+**VideoCodec** | Pointer to **NullableString** | The method used to compress and decompress digital video. API Video supports all codecs in the libavcodec library.  | [optional] 
+**AudioCodec** | Pointer to **NullableString** | The method used to compress and decompress digital audio for your video. | [optional] 
 **AspectRatio** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
@@ -58,6 +58,16 @@ SetWidth sets Width field to given value.
 
 HasWidth returns a boolean if a field has been set.
 
+### SetWidthNil
+
+`func (o *VideoStatusEncodingMetadata) SetWidthNil(b bool)`
+
+ SetWidthNil sets the value for Width to be an explicit nil
+
+### UnsetWidth
+`func (o *VideoStatusEncodingMetadata) UnsetWidth()`
+
+UnsetWidth ensures that no value is present for Width, not even an explicit nil
 ### GetHeight
 
 `func (o *VideoStatusEncodingMetadata) GetHeight() int32`
@@ -83,6 +93,16 @@ SetHeight sets Height field to given value.
 
 HasHeight returns a boolean if a field has been set.
 
+### SetHeightNil
+
+`func (o *VideoStatusEncodingMetadata) SetHeightNil(b bool)`
+
+ SetHeightNil sets the value for Height to be an explicit nil
+
+### UnsetHeight
+`func (o *VideoStatusEncodingMetadata) UnsetHeight()`
+
+UnsetHeight ensures that no value is present for Height, not even an explicit nil
 ### GetBitrate
 
 `func (o *VideoStatusEncodingMetadata) GetBitrate() float32`
@@ -108,6 +128,16 @@ SetBitrate sets Bitrate field to given value.
 
 HasBitrate returns a boolean if a field has been set.
 
+### SetBitrateNil
+
+`func (o *VideoStatusEncodingMetadata) SetBitrateNil(b bool)`
+
+ SetBitrateNil sets the value for Bitrate to be an explicit nil
+
+### UnsetBitrate
+`func (o *VideoStatusEncodingMetadata) UnsetBitrate()`
+
+UnsetBitrate ensures that no value is present for Bitrate, not even an explicit nil
 ### GetDuration
 
 `func (o *VideoStatusEncodingMetadata) GetDuration() int32`
@@ -133,6 +163,16 @@ SetDuration sets Duration field to given value.
 
 HasDuration returns a boolean if a field has been set.
 
+### SetDurationNil
+
+`func (o *VideoStatusEncodingMetadata) SetDurationNil(b bool)`
+
+ SetDurationNil sets the value for Duration to be an explicit nil
+
+### UnsetDuration
+`func (o *VideoStatusEncodingMetadata) UnsetDuration()`
+
+UnsetDuration ensures that no value is present for Duration, not even an explicit nil
 ### GetFramerate
 
 `func (o *VideoStatusEncodingMetadata) GetFramerate() int32`
@@ -158,6 +198,16 @@ SetFramerate sets Framerate field to given value.
 
 HasFramerate returns a boolean if a field has been set.
 
+### SetFramerateNil
+
+`func (o *VideoStatusEncodingMetadata) SetFramerateNil(b bool)`
+
+ SetFramerateNil sets the value for Framerate to be an explicit nil
+
+### UnsetFramerate
+`func (o *VideoStatusEncodingMetadata) UnsetFramerate()`
+
+UnsetFramerate ensures that no value is present for Framerate, not even an explicit nil
 ### GetSamplerate
 
 `func (o *VideoStatusEncodingMetadata) GetSamplerate() int32`
@@ -183,6 +233,16 @@ SetSamplerate sets Samplerate field to given value.
 
 HasSamplerate returns a boolean if a field has been set.
 
+### SetSamplerateNil
+
+`func (o *VideoStatusEncodingMetadata) SetSamplerateNil(b bool)`
+
+ SetSamplerateNil sets the value for Samplerate to be an explicit nil
+
+### UnsetSamplerate
+`func (o *VideoStatusEncodingMetadata) UnsetSamplerate()`
+
+UnsetSamplerate ensures that no value is present for Samplerate, not even an explicit nil
 ### GetVideoCodec
 
 `func (o *VideoStatusEncodingMetadata) GetVideoCodec() string`
@@ -208,6 +268,16 @@ SetVideoCodec sets VideoCodec field to given value.
 
 HasVideoCodec returns a boolean if a field has been set.
 
+### SetVideoCodecNil
+
+`func (o *VideoStatusEncodingMetadata) SetVideoCodecNil(b bool)`
+
+ SetVideoCodecNil sets the value for VideoCodec to be an explicit nil
+
+### UnsetVideoCodec
+`func (o *VideoStatusEncodingMetadata) UnsetVideoCodec()`
+
+UnsetVideoCodec ensures that no value is present for VideoCodec, not even an explicit nil
 ### GetAudioCodec
 
 `func (o *VideoStatusEncodingMetadata) GetAudioCodec() string`
@@ -233,6 +303,16 @@ SetAudioCodec sets AudioCodec field to given value.
 
 HasAudioCodec returns a boolean if a field has been set.
 
+### SetAudioCodecNil
+
+`func (o *VideoStatusEncodingMetadata) SetAudioCodecNil(b bool)`
+
+ SetAudioCodecNil sets the value for AudioCodec to be an explicit nil
+
+### UnsetAudioCodec
+`func (o *VideoStatusEncodingMetadata) UnsetAudioCodec()`
+
+UnsetAudioCodec ensures that no value is present for AudioCodec, not even an explicit nil
 ### GetAspectRatio
 
 `func (o *VideoStatusEncodingMetadata) GetAspectRatio() string`

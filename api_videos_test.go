@@ -239,7 +239,7 @@ var videoStatusJSONResponse = `{
 var videoStatusStruct = VideoStatus{
 	Ingest: &VideoStatusIngest{
 		Status:   PtrString("uploaded"),
-		Filesize: PtrInt32(273579401),
+		Filesize: PtrNullableInt32(273579401),
 		ReceivedBytes: &[]BytesRange{
 			{
 				To:    PtrInt32(134217727),
@@ -278,14 +278,14 @@ var videoStatusStruct = VideoStatus{
 			},
 		},
 		Metadata: &VideoStatusEncodingMetadata{
-			Width:       PtrInt32(424),
-			Height:      PtrInt32(240),
-			Bitrate:     PtrFloat32(411),
-			Duration:    PtrInt32(4176),
-			Framerate:   PtrInt32(24),
-			Samplerate:  PtrInt32(48000),
-			VideoCodec:  PtrString("h264"),
-			AudioCodec:  PtrString("aac"),
+			Width:       PtrNullableInt32(424),
+			Height:      PtrNullableInt32(240),
+			Bitrate:     PtrNullableFloat32(411),
+			Duration:    PtrNullableInt32(4176),
+			Framerate:   PtrNullableInt32(24),
+			Samplerate:  PtrNullableInt32(48000),
+			VideoCodec:  PtrNullableString("h264"),
+			AudioCodec:  PtrNullableString("aac"),
 			AspectRatio: PtrNullableString("16/9"),
 		},
 	},

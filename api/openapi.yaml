@@ -2235,14 +2235,21 @@ paths:
             \ Code: \"+ e.ErrorCode);\n                Debug.Print(e.StackTrace);\n\
             \            }\n        }\n    }\n} \n"
         - language: php
-          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
-            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#getStatus\n\
-            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
-            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
-            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n$videoId\
-            \ = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video\
-            \ you want the status for.\n$videoStatus = $client->videos()->getStatus($videoId);\
-            \  "
+          code: |-
+            <?php
+            // First install the api client: "composer require api-video/php-api-client"
+            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#get
+
+            require __DIR__ . '/vendor/autoload.php';
+
+            $client = new \ApiVideo\Client\Client(
+                'https://ws.api.video',
+                'YOUR_API_KEY',
+                new \Symfony\Component\HttpClient\Psr18Client()
+            );
+
+            $videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want details about.
+            $videoStatus = $client->videos()->get($videoId);
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -11624,6 +11631,7 @@ components:
         filesize:
           description: The size of your file in bytes.
           example: 200000
+          nullable: true
           type: integer
         receivedBytes:
           description: The total number of bytes received, listed for each chunk of
@@ -11639,34 +11647,42 @@ components:
       properties:
         width:
           description: The width of the video in pixels.
+          nullable: true
           type: integer
         height:
           description: The height of the video in pixels.
+          nullable: true
           type: integer
         bitrate:
           description: The number of bits processed per second.
+          nullable: true
           type: number
         duration:
           description: The length of the video.
+          nullable: true
           type: integer
         framerate:
           description: The frequency with which consecutive images or frames appear
             on a display. Shown in this API as frames per second (fps).
           example: 60
+          nullable: true
           type: integer
         samplerate:
           description: How many samples per second a digital audio system uses to
             record an audio signal. The higher the rate, the higher the frequencies
             that can be recorded. They are presented in this API using hertz.
           example: 48000
+          nullable: true
           type: integer
         videoCodec:
           description: 'The method used to compress and decompress digital video.
             API Video supports all codecs in the libavcodec library. '
+          nullable: true
           type: string
         audioCodec:
           description: The method used to compress and decompress digital audio for
             your video.
+          nullable: true
           type: string
         aspectRatio:
           nullable: true

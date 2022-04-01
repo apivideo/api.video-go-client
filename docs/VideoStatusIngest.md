@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Status** | Pointer to **string** | There are three possible ingest statuses. missing - you are missing information required to ingest the video. uploading - the video is in the process of being uploaded. uploaded - the video is ready for use. | [optional] 
-**Filesize** | Pointer to **int32** | The size of your file in bytes. | [optional] 
+**Filesize** | Pointer to **NullableInt32** | The size of your file in bytes. | [optional] 
 **ReceivedBytes** | Pointer to [**[]BytesRange**](BytesRange.md) | The total number of bytes received, listed for each chunk of the upload. | [optional] 
 **ReceivedParts** | Pointer to [**VideoStatusIngestReceivedParts**](VideoStatusIngestReceivedParts.md) |  | [optional] 
 
@@ -78,6 +78,16 @@ SetFilesize sets Filesize field to given value.
 
 HasFilesize returns a boolean if a field has been set.
 
+### SetFilesizeNil
+
+`func (o *VideoStatusIngest) SetFilesizeNil(b bool)`
+
+ SetFilesizeNil sets the value for Filesize to be an explicit nil
+
+### UnsetFilesize
+`func (o *VideoStatusIngest) UnsetFilesize()`
+
+UnsetFilesize ensures that no value is present for Filesize, not even an explicit nil
 ### GetReceivedBytes
 
 `func (o *VideoStatusIngest) GetReceivedBytes() []BytesRange`
