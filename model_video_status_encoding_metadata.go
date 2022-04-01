@@ -17,21 +17,21 @@ import (
 // VideoStatusEncodingMetadata struct for VideoStatusEncodingMetadata
 type VideoStatusEncodingMetadata struct {
 	// The width of the video in pixels.
-	Width *int32 `json:"width,omitempty"`
+	Width *NullableInt32 `json:"width,omitempty"`
 	// The height of the video in pixels.
-	Height *int32 `json:"height,omitempty"`
+	Height *NullableInt32 `json:"height,omitempty"`
 	// The number of bits processed per second.
-	Bitrate *float32 `json:"bitrate,omitempty"`
+	Bitrate *NullableFloat32 `json:"bitrate,omitempty"`
 	// The length of the video.
-	Duration *int32 `json:"duration,omitempty"`
+	Duration *NullableInt32 `json:"duration,omitempty"`
 	// The frequency with which consecutive images or frames appear on a display. Shown in this API as frames per second (fps).
-	Framerate *int32 `json:"framerate,omitempty"`
+	Framerate *NullableInt32 `json:"framerate,omitempty"`
 	// How many samples per second a digital audio system uses to record an audio signal. The higher the rate, the higher the frequencies that can be recorded. They are presented in this API using hertz.
-	Samplerate *int32 `json:"samplerate,omitempty"`
+	Samplerate *NullableInt32 `json:"samplerate,omitempty"`
 	// The method used to compress and decompress digital video. API Video supports all codecs in the libavcodec library.
-	VideoCodec *string `json:"videoCodec,omitempty"`
+	VideoCodec *NullableString `json:"videoCodec,omitempty"`
 	// The method used to compress and decompress digital audio for your video.
-	AudioCodec  *string         `json:"audioCodec,omitempty"`
+	AudioCodec  *NullableString `json:"audioCodec,omitempty"`
 	AspectRatio *NullableString `json:"aspectRatio,omitempty"`
 }
 
@@ -52,260 +52,348 @@ func NewVideoStatusEncodingMetadataWithDefaults() *VideoStatusEncodingMetadata {
 	return &this
 }
 
-// GetWidth returns the Width field value if set, zero value otherwise.
+// GetWidth returns the Width field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoStatusEncodingMetadata) GetWidth() int32 {
-	if o == nil || o.Width == nil {
+	if o == nil || o.Width.Get() == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Width
+	return *o.Width.Get()
 }
 
 // GetWidthOk returns a tuple with the Width field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoStatusEncodingMetadata) GetWidthOk() (*int32, bool) {
-	if o == nil || o.Width == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Width, true
+	return o.Width.Get(), o.Width.IsSet()
 }
 
 // HasWidth returns a boolean if a field has been set.
 func (o *VideoStatusEncodingMetadata) HasWidth() bool {
-	if o != nil && o.Width != nil {
+	if o != nil && o.Width.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetWidth gets a reference to the given int32 and assigns it to the Width field.
+// SetWidth gets a reference to the given NullableInt32 and assigns it to the Width field.
 func (o *VideoStatusEncodingMetadata) SetWidth(v int32) {
-	o.Width = &v
+	o.Width.Set(&v)
 }
 
-// GetHeight returns the Height field value if set, zero value otherwise.
+// SetWidthNil sets the value for Width to be an explicit nil
+func (o *VideoStatusEncodingMetadata) SetWidthNil() {
+	o.Width.Set(nil)
+}
+
+// UnsetWidth ensures that no value is present for Width, not even an explicit nil
+func (o *VideoStatusEncodingMetadata) UnsetWidth() {
+	o.Width.Unset()
+}
+
+// GetHeight returns the Height field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoStatusEncodingMetadata) GetHeight() int32 {
-	if o == nil || o.Height == nil {
+	if o == nil || o.Height.Get() == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Height
+	return *o.Height.Get()
 }
 
 // GetHeightOk returns a tuple with the Height field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoStatusEncodingMetadata) GetHeightOk() (*int32, bool) {
-	if o == nil || o.Height == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Height, true
+	return o.Height.Get(), o.Height.IsSet()
 }
 
 // HasHeight returns a boolean if a field has been set.
 func (o *VideoStatusEncodingMetadata) HasHeight() bool {
-	if o != nil && o.Height != nil {
+	if o != nil && o.Height.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetHeight gets a reference to the given int32 and assigns it to the Height field.
+// SetHeight gets a reference to the given NullableInt32 and assigns it to the Height field.
 func (o *VideoStatusEncodingMetadata) SetHeight(v int32) {
-	o.Height = &v
+	o.Height.Set(&v)
 }
 
-// GetBitrate returns the Bitrate field value if set, zero value otherwise.
+// SetHeightNil sets the value for Height to be an explicit nil
+func (o *VideoStatusEncodingMetadata) SetHeightNil() {
+	o.Height.Set(nil)
+}
+
+// UnsetHeight ensures that no value is present for Height, not even an explicit nil
+func (o *VideoStatusEncodingMetadata) UnsetHeight() {
+	o.Height.Unset()
+}
+
+// GetBitrate returns the Bitrate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoStatusEncodingMetadata) GetBitrate() float32 {
-	if o == nil || o.Bitrate == nil {
+	if o == nil || o.Bitrate.Get() == nil {
 		var ret float32
 		return ret
 	}
-	return *o.Bitrate
+	return *o.Bitrate.Get()
 }
 
 // GetBitrateOk returns a tuple with the Bitrate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoStatusEncodingMetadata) GetBitrateOk() (*float32, bool) {
-	if o == nil || o.Bitrate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Bitrate, true
+	return o.Bitrate.Get(), o.Bitrate.IsSet()
 }
 
 // HasBitrate returns a boolean if a field has been set.
 func (o *VideoStatusEncodingMetadata) HasBitrate() bool {
-	if o != nil && o.Bitrate != nil {
+	if o != nil && o.Bitrate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBitrate gets a reference to the given float32 and assigns it to the Bitrate field.
+// SetBitrate gets a reference to the given NullableFloat32 and assigns it to the Bitrate field.
 func (o *VideoStatusEncodingMetadata) SetBitrate(v float32) {
-	o.Bitrate = &v
+	o.Bitrate.Set(&v)
 }
 
-// GetDuration returns the Duration field value if set, zero value otherwise.
+// SetBitrateNil sets the value for Bitrate to be an explicit nil
+func (o *VideoStatusEncodingMetadata) SetBitrateNil() {
+	o.Bitrate.Set(nil)
+}
+
+// UnsetBitrate ensures that no value is present for Bitrate, not even an explicit nil
+func (o *VideoStatusEncodingMetadata) UnsetBitrate() {
+	o.Bitrate.Unset()
+}
+
+// GetDuration returns the Duration field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoStatusEncodingMetadata) GetDuration() int32 {
-	if o == nil || o.Duration == nil {
+	if o == nil || o.Duration.Get() == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Duration
+	return *o.Duration.Get()
 }
 
 // GetDurationOk returns a tuple with the Duration field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoStatusEncodingMetadata) GetDurationOk() (*int32, bool) {
-	if o == nil || o.Duration == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Duration, true
+	return o.Duration.Get(), o.Duration.IsSet()
 }
 
 // HasDuration returns a boolean if a field has been set.
 func (o *VideoStatusEncodingMetadata) HasDuration() bool {
-	if o != nil && o.Duration != nil {
+	if o != nil && o.Duration.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDuration gets a reference to the given int32 and assigns it to the Duration field.
+// SetDuration gets a reference to the given NullableInt32 and assigns it to the Duration field.
 func (o *VideoStatusEncodingMetadata) SetDuration(v int32) {
-	o.Duration = &v
+	o.Duration.Set(&v)
 }
 
-// GetFramerate returns the Framerate field value if set, zero value otherwise.
+// SetDurationNil sets the value for Duration to be an explicit nil
+func (o *VideoStatusEncodingMetadata) SetDurationNil() {
+	o.Duration.Set(nil)
+}
+
+// UnsetDuration ensures that no value is present for Duration, not even an explicit nil
+func (o *VideoStatusEncodingMetadata) UnsetDuration() {
+	o.Duration.Unset()
+}
+
+// GetFramerate returns the Framerate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoStatusEncodingMetadata) GetFramerate() int32 {
-	if o == nil || o.Framerate == nil {
+	if o == nil || o.Framerate.Get() == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Framerate
+	return *o.Framerate.Get()
 }
 
 // GetFramerateOk returns a tuple with the Framerate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoStatusEncodingMetadata) GetFramerateOk() (*int32, bool) {
-	if o == nil || o.Framerate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Framerate, true
+	return o.Framerate.Get(), o.Framerate.IsSet()
 }
 
 // HasFramerate returns a boolean if a field has been set.
 func (o *VideoStatusEncodingMetadata) HasFramerate() bool {
-	if o != nil && o.Framerate != nil {
+	if o != nil && o.Framerate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFramerate gets a reference to the given int32 and assigns it to the Framerate field.
+// SetFramerate gets a reference to the given NullableInt32 and assigns it to the Framerate field.
 func (o *VideoStatusEncodingMetadata) SetFramerate(v int32) {
-	o.Framerate = &v
+	o.Framerate.Set(&v)
 }
 
-// GetSamplerate returns the Samplerate field value if set, zero value otherwise.
+// SetFramerateNil sets the value for Framerate to be an explicit nil
+func (o *VideoStatusEncodingMetadata) SetFramerateNil() {
+	o.Framerate.Set(nil)
+}
+
+// UnsetFramerate ensures that no value is present for Framerate, not even an explicit nil
+func (o *VideoStatusEncodingMetadata) UnsetFramerate() {
+	o.Framerate.Unset()
+}
+
+// GetSamplerate returns the Samplerate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoStatusEncodingMetadata) GetSamplerate() int32 {
-	if o == nil || o.Samplerate == nil {
+	if o == nil || o.Samplerate.Get() == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Samplerate
+	return *o.Samplerate.Get()
 }
 
 // GetSamplerateOk returns a tuple with the Samplerate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoStatusEncodingMetadata) GetSamplerateOk() (*int32, bool) {
-	if o == nil || o.Samplerate == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Samplerate, true
+	return o.Samplerate.Get(), o.Samplerate.IsSet()
 }
 
 // HasSamplerate returns a boolean if a field has been set.
 func (o *VideoStatusEncodingMetadata) HasSamplerate() bool {
-	if o != nil && o.Samplerate != nil {
+	if o != nil && o.Samplerate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSamplerate gets a reference to the given int32 and assigns it to the Samplerate field.
+// SetSamplerate gets a reference to the given NullableInt32 and assigns it to the Samplerate field.
 func (o *VideoStatusEncodingMetadata) SetSamplerate(v int32) {
-	o.Samplerate = &v
+	o.Samplerate.Set(&v)
 }
 
-// GetVideoCodec returns the VideoCodec field value if set, zero value otherwise.
+// SetSamplerateNil sets the value for Samplerate to be an explicit nil
+func (o *VideoStatusEncodingMetadata) SetSamplerateNil() {
+	o.Samplerate.Set(nil)
+}
+
+// UnsetSamplerate ensures that no value is present for Samplerate, not even an explicit nil
+func (o *VideoStatusEncodingMetadata) UnsetSamplerate() {
+	o.Samplerate.Unset()
+}
+
+// GetVideoCodec returns the VideoCodec field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoStatusEncodingMetadata) GetVideoCodec() string {
-	if o == nil || o.VideoCodec == nil {
+	if o == nil || o.VideoCodec.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.VideoCodec
+	return *o.VideoCodec.Get()
 }
 
 // GetVideoCodecOk returns a tuple with the VideoCodec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoStatusEncodingMetadata) GetVideoCodecOk() (*string, bool) {
-	if o == nil || o.VideoCodec == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.VideoCodec, true
+	return o.VideoCodec.Get(), o.VideoCodec.IsSet()
 }
 
 // HasVideoCodec returns a boolean if a field has been set.
 func (o *VideoStatusEncodingMetadata) HasVideoCodec() bool {
-	if o != nil && o.VideoCodec != nil {
+	if o != nil && o.VideoCodec.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetVideoCodec gets a reference to the given string and assigns it to the VideoCodec field.
+// SetVideoCodec gets a reference to the given NullableString and assigns it to the VideoCodec field.
 func (o *VideoStatusEncodingMetadata) SetVideoCodec(v string) {
-	o.VideoCodec = &v
+	o.VideoCodec.Set(&v)
 }
 
-// GetAudioCodec returns the AudioCodec field value if set, zero value otherwise.
+// SetVideoCodecNil sets the value for VideoCodec to be an explicit nil
+func (o *VideoStatusEncodingMetadata) SetVideoCodecNil() {
+	o.VideoCodec.Set(nil)
+}
+
+// UnsetVideoCodec ensures that no value is present for VideoCodec, not even an explicit nil
+func (o *VideoStatusEncodingMetadata) UnsetVideoCodec() {
+	o.VideoCodec.Unset()
+}
+
+// GetAudioCodec returns the AudioCodec field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoStatusEncodingMetadata) GetAudioCodec() string {
-	if o == nil || o.AudioCodec == nil {
+	if o == nil || o.AudioCodec.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.AudioCodec
+	return *o.AudioCodec.Get()
 }
 
 // GetAudioCodecOk returns a tuple with the AudioCodec field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoStatusEncodingMetadata) GetAudioCodecOk() (*string, bool) {
-	if o == nil || o.AudioCodec == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.AudioCodec, true
+	return o.AudioCodec.Get(), o.AudioCodec.IsSet()
 }
 
 // HasAudioCodec returns a boolean if a field has been set.
 func (o *VideoStatusEncodingMetadata) HasAudioCodec() bool {
-	if o != nil && o.AudioCodec != nil {
+	if o != nil && o.AudioCodec.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAudioCodec gets a reference to the given string and assigns it to the AudioCodec field.
+// SetAudioCodec gets a reference to the given NullableString and assigns it to the AudioCodec field.
 func (o *VideoStatusEncodingMetadata) SetAudioCodec(v string) {
-	o.AudioCodec = &v
+	o.AudioCodec.Set(&v)
+}
+
+// SetAudioCodecNil sets the value for AudioCodec to be an explicit nil
+func (o *VideoStatusEncodingMetadata) SetAudioCodecNil() {
+	o.AudioCodec.Set(nil)
+}
+
+// UnsetAudioCodec ensures that no value is present for AudioCodec, not even an explicit nil
+func (o *VideoStatusEncodingMetadata) UnsetAudioCodec() {
+	o.AudioCodec.Unset()
 }
 
 // GetAspectRatio returns the AspectRatio field value if set, zero value otherwise (both if not set or set to explicit null).

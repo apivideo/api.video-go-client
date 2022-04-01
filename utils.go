@@ -39,6 +39,12 @@ func PtrString(v string) *string { return &v }
 // PtrNullableString is a helper routine that returns a pointer to given NullableString value.
 func PtrNullableString(v string) *NullableString { return NewNullableString(&v) }
 
+// PtrNullableInt32 is a helper routine that returns a pointer to given NullableInt32 value.
+func PtrNullableInt32(v int32) *NullableInt32 { return NewNullableInt32(&v) }
+
+// PtrNullableFloat32 is a helper routine that returns a pointer to given NullableFloat32 value.
+func PtrNullableFloat32(v float32) *NullableFloat32 { return NewNullableFloat32(&v) }
+
 // PtrNullableStringNull is a helper routine that returns a pointer to NullableString that has nil value.
 func PtrNullableStringNull() *NullableString { return &NullableString{value: nil, isSet: true} }
 

@@ -19,7 +19,7 @@ type VideoStatusIngest struct {
 	// There are three possible ingest statuses. missing - you are missing information required to ingest the video. uploading - the video is in the process of being uploaded. uploaded - the video is ready for use.
 	Status *string `json:"status,omitempty"`
 	// The size of your file in bytes.
-	Filesize *int32 `json:"filesize,omitempty"`
+	Filesize *NullableInt32 `json:"filesize,omitempty"`
 	// The total number of bytes received, listed for each chunk of the upload.
 	ReceivedBytes *[]BytesRange                   `json:"receivedBytes,omitempty"`
 	ReceivedParts *VideoStatusIngestReceivedParts `json:"receivedParts,omitempty"`
@@ -74,36 +74,47 @@ func (o *VideoStatusIngest) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetFilesize returns the Filesize field value if set, zero value otherwise.
+// GetFilesize returns the Filesize field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoStatusIngest) GetFilesize() int32 {
-	if o == nil || o.Filesize == nil {
+	if o == nil || o.Filesize.Get() == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Filesize
+	return *o.Filesize.Get()
 }
 
 // GetFilesizeOk returns a tuple with the Filesize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoStatusIngest) GetFilesizeOk() (*int32, bool) {
-	if o == nil || o.Filesize == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Filesize, true
+	return o.Filesize.Get(), o.Filesize.IsSet()
 }
 
 // HasFilesize returns a boolean if a field has been set.
 func (o *VideoStatusIngest) HasFilesize() bool {
-	if o != nil && o.Filesize != nil {
+	if o != nil && o.Filesize.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFilesize gets a reference to the given int32 and assigns it to the Filesize field.
+// SetFilesize gets a reference to the given NullableInt32 and assigns it to the Filesize field.
 func (o *VideoStatusIngest) SetFilesize(v int32) {
-	o.Filesize = &v
+	o.Filesize.Set(&v)
+}
+
+// SetFilesizeNil sets the value for Filesize to be an explicit nil
+func (o *VideoStatusIngest) SetFilesizeNil() {
+	o.Filesize.Set(nil)
+}
+
+// UnsetFilesize ensures that no value is present for Filesize, not even an explicit nil
+func (o *VideoStatusIngest) UnsetFilesize() {
+	o.Filesize.Unset()
 }
 
 // GetReceivedBytes returns the ReceivedBytes field value if set, zero value otherwise.
