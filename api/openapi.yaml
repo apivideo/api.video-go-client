@@ -9511,7 +9511,8 @@ components:
         publishedAt:
           description: The date and time the API created the video. Date and time
             are provided using ISO-8601 UTC format.
-          example: 2019-12-16T08:25:51.000Z
+          example: 2019-12-16T08:25:51Z
+          format: date-time
           type: string
         updatedAt:
           description: The date and time the video was updated. Date and time are
