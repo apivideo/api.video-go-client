@@ -304,7 +304,7 @@ paths:
                         player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
                         hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
                         thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                        mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4
+                        mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
                     - videoId: vi4blUQJFrYWbaG44NChkH27
                       title: Video Title
                       description: A description for your video.
@@ -332,7 +332,7 @@ paths:
                         player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
                         hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
                         thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                        mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4
+                        mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
                     - videoId: vi4blUQJFrYWbaG44NChkH27
                       playerId: pl45KFKdlddgk654dspkze
                       title: My Video Title
@@ -357,7 +357,7 @@ paths:
                         player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
                         hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
                         thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                        mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4
+                        mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
                     pagination:
                       currentPage: 1
                       pageSize: 25
@@ -399,7 +399,7 @@ paths:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: List all videos
       tags:
       - Videos
@@ -496,7 +496,7 @@ paths:
         - language: python
           code: |+
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#list
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#list
 
         - language: swift
           code: |+
@@ -558,7 +558,7 @@ paths:
                       player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
                       hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
                       thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4
+                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
               schema:
                 $ref: '#/components/schemas/video'
           description: Created
@@ -595,7 +595,7 @@ paths:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Create a video
       tags:
       - Videos
@@ -686,7 +686,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#create
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#create
 
             import apivideo
             from apivideo.api import videos_api
@@ -910,7 +910,7 @@ paths:
                       player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
                       hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
                       thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4
+                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
               schema:
                 $ref: '#/components/schemas/video'
           description: Created
@@ -954,7 +954,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Upload a video
       tags:
       - Videos
@@ -1031,7 +1031,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#upload
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#upload
 
             import apivideo
             from apivideo.api import videos_api
@@ -1234,7 +1234,7 @@ paths:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: List all watermarks
       tags:
       - Watermarks
@@ -1279,7 +1279,7 @@ paths:
         - language: python
           code: |+
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WatermarksApi.md#list
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WatermarksApi.md#list
 
         - language: swift
           code: |+
@@ -1324,7 +1324,7 @@ paths:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Upload a watermark
       tags:
       - Watermarks
@@ -1383,7 +1383,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WatermarksApi.md#upload
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WatermarksApi.md#upload
 
             import apivideo
             from apivideo.api import videos_api
@@ -1512,7 +1512,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Delete a watermark
       tags:
       - Watermarks
@@ -1551,7 +1551,7 @@ paths:
         - language: python
           code: |+
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WatermarksApi.md#delete
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WatermarksApi.md#delete
 
         - language: swift
           code: |+
@@ -1614,7 +1614,7 @@ paths:
                       player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
                       hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
                       thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4
+                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
               schema:
                 $ref: '#/components/schemas/video'
           description: Success
@@ -1632,7 +1632,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Pick a thumbnail
       tags:
       - Videos
@@ -1671,7 +1671,7 @@ paths:
             \ the video plays. \n}; \n\nconst video = await client.videos.pickThumbnail(videoId,\
             \ videoThumbnailPickPayload);\n\n"
         - language: python
-          code: "# First install the api client with \"pip install api.video\"\n//\
+          code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#pickThumbnail\n\
             \nimport apivideo\nfrom apivideo.api import videos_api\nfrom apivideo.model.video_thumbnail_pick_payload\
             \ import VideoThumbnailPickPayload\nfrom apivideo.model.not_found import\
@@ -1809,7 +1809,7 @@ paths:
                       player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
                       hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
                       thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4
+                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
               schema:
                 $ref: '#/components/schemas/video'
           description: Success
@@ -1840,7 +1840,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Upload a thumbnail
       tags:
       - Videos
@@ -1882,7 +1882,7 @@ paths:
             \ a thumbnail.\n\nconst video = await client.videos.uploadThumbnail(videoId,\
             \ file);"
         - language: python
-          code: "# First install the api client with \"pip install api.video\"\n//\
+          code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#uploadThumbnail\n\
             \nimport apivideo\nfrom apivideo.api import videos_api\nfrom apivideo.model.bad_request\
             \ import BadRequest\nfrom apivideo.model.not_found import NotFound\nfrom\
@@ -1982,7 +1982,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Delete a video
       tags:
       - Videos
@@ -2013,7 +2013,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#delete
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#delete
 
             import apivideo
             from apivideo.api import videos_api
@@ -2125,7 +2125,7 @@ paths:
                       player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
                       hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
                       thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4
+                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
               schema:
                 $ref: '#/components/schemas/video'
           description: Success
@@ -2143,7 +2143,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Retrieve a video
       tags:
       - Videos
@@ -2178,7 +2178,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#get
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#get
 
             import apivideo
             from apivideo.api import videos_api
@@ -2235,21 +2235,14 @@ paths:
             \ Code: \"+ e.ErrorCode);\n                Debug.Print(e.StackTrace);\n\
             \            }\n        }\n    }\n} \n"
         - language: php
-          code: |-
-            <?php
-            // First install the api client: "composer require api-video/php-api-client"
-            // Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#get
-
-            require __DIR__ . '/vendor/autoload.php';
-
-            $client = new \ApiVideo\Client\Client(
-                'https://ws.api.video',
-                'YOUR_API_KEY',
-                new \Symfony\Component\HttpClient\Psr18Client()
-            );
-
-            $videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video you want details about.
-            $videoStatus = $client->videos()->get($videoId);
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#getStatus\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n$videoId\
+            \ = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier for the video\
+            \ you want the status for.\n$videoStatus = $client->videos()->getStatus($videoId);\
+            \  "
         - language: swift
           code: |+
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -2313,7 +2306,7 @@ paths:
                       player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
                       hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
                       thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4
+                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
               schema:
                 $ref: '#/components/schemas/video'
           description: Success
@@ -2354,7 +2347,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Update a video
       tags:
       - Videos
@@ -2407,7 +2400,7 @@ paths:
             const updatedVideo = await client.videos.update(videoId, videoUpdatePayload);\n\
             \n"
         - language: python
-          code: "# First install the api client with \"pip install api.video\"\n//\
+          code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#update\n\
             \nimport apivideo\nfrom apivideo.api import videos_api\nfrom apivideo.model.video_update_payload\
             \ import VideoUpdatePayload\nfrom apivideo.model.bad_request import BadRequest\n\
@@ -2590,7 +2583,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Retrieve video status
       tags:
       - Videos
@@ -2626,7 +2619,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#getStatus
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#getStatus
 
             import apivideo
             from apivideo.api import videos_api
@@ -2803,7 +2796,7 @@ paths:
                 $ref: '#/components/schemas/token-list-response'
           description: Success
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: List all active upload tokens.
       tags:
       - Upload Tokens
@@ -2836,7 +2829,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/UploadTokensApi.md#list
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/UploadTokensApi.md#list
 
             import apivideo
             from apivideo.api import upload_tokens_api
@@ -2975,7 +2968,7 @@ paths:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Generate an upload token
       tags:
       - Upload Tokens
@@ -3005,7 +2998,7 @@ paths:
             \ date. The default is to have no expiration.\n}; \n\nconst uploadToken\
             \ = await client.uploadTokens.createToken(tokenCreationPayload);\n"
         - language: python
-          code: "# First install the api client with \"pip install api.video\"\n//\
+          code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/UploadTokensApi.md#createToken\n\
             \nimport apivideo\nfrom apivideo.api import upload_tokens_api\nfrom apivideo.model.bad_request\
             \ import BadRequest\nfrom apivideo.model.upload_token import UploadToken\n\
@@ -3099,7 +3092,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Delete an upload token
       tags:
       - Upload Tokens
@@ -3131,7 +3124,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/UploadTokensApi.md#deleteToken
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/UploadTokensApi.md#deleteToken
 
             import apivideo
             from apivideo.api import upload_tokens_api
@@ -3253,7 +3246,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Retrieve upload token
       tags:
       - Upload Tokens
@@ -3285,7 +3278,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/UploadTokensApi.md#getToken
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/UploadTokensApi.md#getToken
 
             import apivideo
             from apivideo.api import upload_tokens_api
@@ -3462,7 +3455,7 @@ paths:
                       player: https://embed.api.video/vod/vi4blUQJFrYWbaG44NChkH27
                       hls: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/hls/manifest.m3u8
                       thumbnail: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/thumbnail.jpg
-                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/1080/source.mp4
+                      mp4: https://cdn.api.video/vod/vi4blUQJFrYWbaG44NChkH27/mp4/source.mp4
               schema:
                 $ref: '#/components/schemas/video'
           description: Created
@@ -3504,7 +3497,7 @@ paths:
         - language: python
           code: |+
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
 
         - language: java
           code: |+
@@ -3661,7 +3654,7 @@ paths:
                 $ref: '#/components/schemas/live-stream-list-response'
           description: Success
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: List all live streams
       tags:
       - Live Streams
@@ -3731,7 +3724,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#list
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#list
 
             import apivideo
             from apivideo.api import live_streams_api
@@ -3888,7 +3881,7 @@ paths:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Create live stream
       tags:
       - Live Streams
@@ -3921,7 +3914,7 @@ paths:
             \ to see it. \n    playerId: \"pl4f4ferf5erfr5zed4fsdd\", // The unique\
             \ identifier for the player.\n}; \n\nconst liveStream = await client.liveStreams.create(liveStreamCreationPayload);\n"
         - language: python
-          code: "# First install the api client with \"pip install api.video\"\n//\
+          code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#create\n\
             \nfrom apivideo.api.live_streams_api import LiveStreamsApi\nfrom apivideo.model.live_stream_creation_payload\
             \ import LiveStreamCreationPayload\nfrom apivideo import AuthenticatedApiClient,\
@@ -4008,7 +4001,7 @@ paths:
         "204":
           description: No Content
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Delete a live stream
       tags:
       - Live Streams
@@ -4038,7 +4031,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#delete
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#delete
 
             import apivideo
             from apivideo.api import live_streams_api
@@ -4164,7 +4157,7 @@ paths:
                 $ref: '#/components/schemas/live-stream'
           description: Success
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Retrieve live stream
       tags:
       - Live Streams
@@ -4198,7 +4191,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#get
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#get
 
             import apivideo
             from apivideo.api import live_streams_api
@@ -4359,7 +4352,7 @@ paths:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Update a live stream
       tags:
       - Live Streams
@@ -4399,7 +4392,7 @@ paths:
             \ to update.\n};\n\nconst liveStream = await client.liveStreams.update(liveStreamId,\
             \ liveStreamUpdatePayload); \n"
         - language: python
-          code: "# First install the api client with \"pip install api.video\"\n//\
+          code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#update\n\
             \nimport apivideo\nfrom apivideo.api import live_streams_api\nfrom apivideo.model.bad_request\
             \ import BadRequest\nfrom apivideo.model.live_stream_update_payload import\
@@ -4529,7 +4522,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Delete a thumbnail
       tags:
       - Live Streams
@@ -4559,7 +4552,7 @@ paths:
             \ the live stream whose thumbnail you want to delete.\n\nconst liveStream\
             \ = await client.liveStreams.deleteThumbnail(liveStreamId); "
         - language: python
-          code: "# First install the api client with \"pip install api.video\"\n//\
+          code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#deleteThumbnail\n\
             \nimport apivideo\nfrom apivideo.api import live_streams_api\nfrom apivideo.model.not_found\
             \ import NotFound\nfrom apivideo.model.live_stream import LiveStream\n\
@@ -4677,7 +4670,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Upload a thumbnail
       tags:
       - Live Streams
@@ -4717,7 +4710,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#uploadThumbnail
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#uploadThumbnail
 
             import apivideo
             from apivideo.api import live_streams_api
@@ -4849,7 +4842,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Delete a caption
       tags:
       - Captions
@@ -4882,7 +4875,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/CaptionsApi.md#delete
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/CaptionsApi.md#delete
 
             import apivideo
             from apivideo.api import captions_api
@@ -5016,7 +5009,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Retrieve a caption
       tags:
       - Captions
@@ -5057,7 +5050,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/CaptionsApi.md#get
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/CaptionsApi.md#get
 
             import apivideo
             from apivideo.api import captions_api
@@ -5222,7 +5215,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Update a caption
       tags:
       - Captions
@@ -5260,7 +5253,7 @@ paths:
             \ true,\n}; \n \nconst caption = await client.captions.update(videoId,\
             \ language, captionsUpdatePayload);\n        \n"
         - language: python
-          code: "# First install the api client with \"pip install api.video\"\n//\
+          code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/CaptionsApi.md#update\n\
             \nimport apivideo\nfrom apivideo.api import captions_api\nfrom apivideo.model.bad_request\
             \ import BadRequest\nfrom apivideo.model.captions_update_payload import\
@@ -5393,7 +5386,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Upload a caption
       tags:
       - Captions
@@ -5431,7 +5424,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/CaptionsApi.md#upload
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/CaptionsApi.md#upload
 
             import apivideo
             from apivideo.api import captions_api
@@ -5602,7 +5595,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: List video captions
       tags:
       - Captions
@@ -5639,7 +5632,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/CaptionsApi.md#list
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/CaptionsApi.md#list
 
             import apivideo
             from apivideo.api import captions_api
@@ -5769,7 +5762,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Delete a chapter
       tags:
       - Chapters
@@ -5801,7 +5794,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/ChaptersApi.md#delete
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/ChaptersApi.md#delete
 
             import apivideo
             from apivideo.api import chapters_api
@@ -5935,7 +5928,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Retrieve a chapter
       tags:
       - Chapters
@@ -5970,7 +5963,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/ChaptersApi.md#get
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/ChaptersApi.md#get
 
             import apivideo
             from apivideo.api import chapters_api
@@ -6119,7 +6112,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Upload a chapter
       tags:
       - Chapters
@@ -6159,7 +6152,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/ChaptersApi.md#upload
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/ChaptersApi.md#upload
 
             import apivideo
             from apivideo.api import chapters_api
@@ -6330,7 +6323,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: List video chapters
       tags:
       - Chapters
@@ -6367,7 +6360,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/ChaptersApi.md#list
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/ChaptersApi.md#list
 
             import apivideo
             from apivideo.api import chapters_api
@@ -6601,7 +6594,7 @@ paths:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: List all player themes
       tags:
       - Player Themes
@@ -6650,7 +6643,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/PlayerThemesApi.md#list
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/PlayerThemesApi.md#list
 
             import apivideo
             from apivideo.api import player_themes_api
@@ -6783,7 +6776,7 @@ paths:
                 $ref: '#/components/schemas/player-theme'
           description: Created
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Create a player
       tags:
       - Player Themes
@@ -6830,7 +6823,7 @@ paths:
             \ false\n  forceLoop: true, // enable/disable looping. Default: false\n\
             }; \n \nconst playerTheme = await client.playerThemes.create(playerThemeCreationPayload); "
         - language: python
-          code: "# First install the api client with \"pip install api.video\"\n//\
+          code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/PlayerThemesApi.md#create\n\
             \nimport apivideo\nfrom apivideo.api import player_themes_api\nfrom apivideo.model.player_theme_creation_payload\
             \ import PlayerThemeCreationPayload\nfrom apivideo.model.player_theme\
@@ -6972,7 +6965,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Delete a player
       tags:
       - Player Themes
@@ -7001,7 +6994,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/PlayerThemesApi.md#delete
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/PlayerThemesApi.md#delete
 
             import apivideo
             from apivideo.api import player_themes_api
@@ -7140,7 +7133,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Retrieve a player
       tags:
       - Player Themes
@@ -7169,7 +7162,7 @@ paths:
             const playerId = 'pl45d5vFFGrfdsdsd156dGhh'; // The unique identifier\
             \ for the player you want to retrieve. \nconst playerTheme = await client.playerThemes.get(playerId); "
         - language: python
-          code: "# First install the api client with \"pip install api.video\"\n//\
+          code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/PlayerThemesApi.md#get\n\
             \nimport apivideo\nfrom apivideo.api import player_themes_api\nfrom apivideo.model.not_found\
             \ import NotFound\nfrom apivideo.model.player_theme import PlayerTheme\n\
@@ -7293,7 +7286,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Update a player
       tags:
       - Player Themes
@@ -7343,7 +7336,7 @@ paths:
             }; \n\nconst playerTheme = await client.playerThemes.update(playerId,\
             \ playerThemeUpdatePayload); "
         - language: python
-          code: "# First install the api client with \"pip install api.video\"\n//\
+          code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/PlayerThemesApi.md#update\n\
             \nimport apivideo\nfrom apivideo.api import player_themes_api\nfrom apivideo.model.not_found\
             \ import NotFound\nfrom apivideo.model.player_theme import PlayerTheme\n\
@@ -7492,7 +7485,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Delete logo
       tags:
       - Player Themes
@@ -7520,7 +7513,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/PlayerThemesApi.md#deleteLogo
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/PlayerThemesApi.md#deleteLogo
 
             import apivideo
             from apivideo.api import player_themes_api
@@ -7659,7 +7652,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Upload a logo
       tags:
       - Player Themes
@@ -7701,7 +7694,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/PlayerThemesApi.md#uploadLogo
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/PlayerThemesApi.md#uploadLogo
 
             import apivideo
             from apivideo.api import player_themes_api
@@ -7919,7 +7912,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: List video player sessions
       tags:
       - Raw statistics
@@ -7973,7 +7966,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/RawStatisticsApi.md#listVideoSessions
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/RawStatisticsApi.md#listVideoSessions
 
             import apivideo
             from apivideo.api import raw_statistics_api
@@ -8199,7 +8192,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: List live stream player sessions
       tags:
       - Raw statistics
@@ -8249,7 +8242,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/RawStatisticsApi.md#listLiveStreamSessions
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/RawStatisticsApi.md#listLiveStreamSessions
 
             import apivideo
             from apivideo.api import raw_statistics_api
@@ -8513,7 +8506,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: List player session events
       tags:
       - Raw statistics
@@ -8555,7 +8548,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/RawStatisticsApi.md#listSessionEvents
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/RawStatisticsApi.md#listSessionEvents
 
             import apivideo
             from apivideo.api import raw_statistics_api
@@ -8735,7 +8728,7 @@ paths:
                 $ref: '#/components/schemas/webhooks-list-response'
           description: Success
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: List all webhooks
       tags:
       - Webhooks
@@ -8780,7 +8773,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WebhooksApi.md#list
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WebhooksApi.md#list
 
             import apivideo
             from apivideo.api import webhooks_api
@@ -8921,7 +8914,7 @@ paths:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Create Webhook
       tags:
       - Webhooks
@@ -8965,7 +8958,7 @@ paths:
             , // The url to which HTTP notifications are sent. It could be any http\
             \ or https URL.\n}; \n\nconst webhook = await client.webhooks.create(webhooksCreationPayload); "
         - language: python
-          code: "# First install the api client with \"pip install api.video\"\n//\
+          code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WebhooksApi.md#create\n\
             \nimport apivideo\nfrom apivideo.api import webhooks_api\nfrom apivideo.model.bad_request\
             \ import BadRequest\nfrom apivideo.model.webhook import Webhook\nfrom\
@@ -9075,7 +9068,7 @@ paths:
                 $ref: '#/components/schemas/not-found'
           description: Not Found
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Delete a Webhook
       tags:
       - Webhooks
@@ -9105,7 +9098,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WebhooksApi.md#delete
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WebhooksApi.md#delete
 
             import apivideo
             from apivideo.api import webhooks_api
@@ -9216,7 +9209,7 @@ paths:
                 $ref: '#/components/schemas/webhook'
           description: Success
       security:
-      - bearerAuth: []
+      - apiKey: []
       summary: Retrieve Webhook details
       tags:
       - Webhooks
@@ -9246,7 +9239,7 @@ paths:
         - language: python
           code: |
             # First install the api client with "pip install api.video"
-            // Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WebhooksApi.md#get
+            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WebhooksApi.md#get
 
             import apivideo
             from apivideo.api import webhooks_api
@@ -11345,7 +11338,7 @@ components:
           type: string
         mp4:
           description: Available only if mp4Support is enabled. Raw mp4 url.
-          example: https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/720/source.mp4
+          example: https://cdn.api.video/vod/vi4k0jvEUuaTdRAEjQ4Jfrgz/token/8fd70443-d9f0-45d2-b01c-12c8cfc707c9/mp4/source.mp4
           format: uri
           type: string
       title: VideoAssets
@@ -11739,6 +11732,9 @@ components:
   securitySchemes:
     bearerAuth:
       scheme: bearer
+      type: http
+    apiKey:
+      scheme: basic
       type: http
 x-client-base-paths:
   production: https://ws.api.video
