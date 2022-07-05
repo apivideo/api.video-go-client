@@ -27,6 +27,8 @@ type Client struct {
 	Token              *Token
 	applicationName    string
 	applicationVersion string
+	sdkName            string
+	sdkVersion         string
 
 	Authentication AuthenticationServiceI
 	Captions       CaptionsServiceI
@@ -88,6 +90,8 @@ type Builder struct {
 	httpClient         Doer
 	applicationName    string
 	applicationVersion string
+	sdkName            string
+	sdkVersion         string
 }
 
 func (cb *Builder) BaseURL(url string) *Builder {
@@ -107,6 +111,16 @@ func (cb *Builder) ApplicationName(applicationName string) *Builder {
 
 func (cb *Builder) ApplicationVersion(applicationVersion string) *Builder {
 	cb.applicationVersion = applicationVersion
+	return cb
+}
+
+func (cb *Builder) SdkName(sdkName string) *Builder {
+	cb.sdkName = sdkName
+	return cb
+}
+
+func (cb *Builder) SdkVersion(sdkVersion string) *Builder {
+	cb.sdkVersion = sdkVersion
 	return cb
 }
 
@@ -159,6 +173,8 @@ func (cb *Builder) Build() *Client {
 		chunkSize:          cb.uploadChunkSize,
 		applicationName:    cb.applicationName,
 		applicationVersion: cb.applicationVersion,
+		sdkName:            cb.sdkName,
+		sdkVersion:         cb.sdkVersion,
 	}
 
 	c.Authentication = &AuthenticationService{client: c}
@@ -223,7 +239,7 @@ func (c *Client) prepareRequest(
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
 
-	originAppHeaderValue, err := getOriginAppHeaderValue(c.applicationName, c.applicationVersion)
+	originAppHeaderValue, err := getOriginHeaderValue(c.applicationName, c.applicationVersion)
 	if err != nil {
 		return nil, err
 	}
@@ -231,7 +247,15 @@ func (c *Client) prepareRequest(
 		req.Header.Set("AV-Origin-App", originAppHeaderValue)
 	}
 
-	req.Header.Set("AV-Origin-Client", "go:1.2.4")
+	originSdkHeaderValue, err := getOriginHeaderValue(c.sdkName, c.sdkVersion)
+	if err != nil {
+		return nil, err
+	}
+	if originSdkHeaderValue != "" {
+		req.Header.Set("AV-Origin-Sdk", originSdkHeaderValue)
+	}
+
+	req.Header.Set("AV-Origin-Client", "go:1.2.5")
 
 	for headerName := range headerParams {
 		req.Header.Set(headerName, headerParams[headerName])
@@ -247,27 +271,21 @@ func (c *Client) prepareRequest(
 	return req, nil
 }
 
-func getOriginAppHeaderValue(applicationName string, applicationVersion string) (string, error) {
-	if applicationName == "" {
-		if applicationVersion != "" {
-			return "", errors.New("applicationName is mandatory when applicationVersion is set.")
-		}
+func getOriginHeaderValue(name string, version string) (string, error) {
+	if name == "" && version == "" {
 		return "", nil
 	}
 	var re = regexp.MustCompile(`(?m)^[\w-]{1,50}$`)
-	if !re.MatchString(applicationName) {
-		return "", errors.New("Invalid applicationName value. Allowed characters: A-Z, a-z, 0-9, '-', '_'. Max length: 50.")
+	if !re.MatchString(name) {
+		return "", errors.New("Invalid name value. Allowed characters: A-Z, a-z, 0-9, '-', '_'. Max length: 50.")
 	}
 
-	if applicationVersion != "" {
-		var reVersion = regexp.MustCompile(`(?m)^\d{1,3}(\.\d{1,3}(\.\d{1,3})?)?$`)
-		if !reVersion.MatchString(applicationVersion) {
-			return "", errors.New("Invalid applicationVersion value. The version should match the xxx[.yyy][.zzz] pattern.")
-		}
-
-		return applicationName + ":" + applicationVersion, nil
+	var reVersion = regexp.MustCompile(`(?m)^\d{1,3}(\.\d{1,3}(\.\d{1,3})?)?$`)
+	if !reVersion.MatchString(version) {
+		return "", errors.New("Invalid version value. The version should match the xxx[.yyy][.zzz] pattern.")
 	}
-	return applicationName, nil
+
+	return name + ":" + version, nil
 }
 
 func (c *Client) prepareProgressiveUploadRequest(
@@ -495,7 +513,7 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 		req.Header.Set("Accept", "application/json")
 		req.Header.Set("Content-Type", "application/json")
 
-		originAppHeaderValue, err := getOriginAppHeaderValue(c.applicationName, c.applicationVersion)
+		originAppHeaderValue, err := getOriginHeaderValue(c.applicationName, c.applicationVersion)
 		if err != nil {
 			return nil, err
 		}
@@ -503,6 +521,16 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 			req.Header.Set("AV-Origin-App", originAppHeaderValue)
 		}
 		req.Header.Set("AV-Origin-Client", "go:1.2.4")
+
+		originSdkHeaderValue, err := getOriginHeaderValue(c.sdkName, c.sdkVersion)
+		if err != nil {
+			return nil, err
+		}
+		if originSdkHeaderValue != "" {
+			req.Header.Set("AV-Origin-Sdk", originSdkHeaderValue)
+		}
+
+		req.Header.Set("AV-Origin-Client", "go:1.2.5")
 
 		resp, err := c.httpClient.Do(req)
 

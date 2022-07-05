@@ -421,26 +421,45 @@ func skipIfNoApiKey(t *testing.T) {
 
 func createRealClient() *Client {
 	return (&Builder{
-		baseURL:         os.Getenv("BASE_URI"),
-		uploadChunkSize: minChunkSize,
-		apiKey:          os.Getenv("API_KEY"),
-		applicationName: "client-integration-tests",
+		baseURL:            os.Getenv("BASE_URI"),
+		uploadChunkSize:    minChunkSize,
+		apiKey:             os.Getenv("API_KEY"),
+		applicationName:    "client-integration-tests",
+		applicationVersion: "0",
 	}).Build()
 }
 
-func TestVideos_BadApplicationName(t *testing.T) {
+func TestVideos_BadApplicationNameOrVersion(t *testing.T) {
 	cl := ClientBuilder("a").ApplicationName("bad application name").Build()
 
 	_, err := cl.Videos.Create(VideoCreationPayload{Title: "Upload stream GO"})
 
-	if err == nil {
+	if err == nil || err.Error() != "Invalid name value. Allowed characters: A-Z, a-z, 0-9, '-', '_'. Max length: 50." {
 		t.Errorf("Application name validation should failed when invalid characters are used")
 	}
 
-	_, err2 := cl.Videos.Create(VideoCreationPayload{Title: "012345678901234567890123456789012345678901234567891"})
+	cl2 := ClientBuilder("a").ApplicationName("applicationname").ApplicationVersion("0 1").Build()
+	_, err2 := cl2.Videos.Create(VideoCreationPayload{Title: "test"})
 
-	if err2 == nil {
-		t.Errorf("Application name validation should failed when too long")
+	if err == nil || err2.Error() != "Invalid version value. The version should match the xxx[.yyy][.zzz] pattern." {
+		t.Errorf("Application version validation should failed when invalid characters are used")
+	}
+}
+
+func TestVideos_BadSdkNameOrVersion(t *testing.T) {
+	cl := ClientBuilder("a").SdkName("bad sdk name").Build()
+
+	_, err := cl.Videos.Create(VideoCreationPayload{Title: "Upload stream GO"})
+
+	if err == nil || err.Error() != "Invalid name value. Allowed characters: A-Z, a-z, 0-9, '-', '_'. Max length: 50." {
+		t.Errorf("Sdk name validation should failed when invalid characters are used")
+	}
+
+	cl2 := ClientBuilder("a").SdkName("applicationname").SdkVersion("0 1").Build()
+	_, err2 := cl2.Videos.Create(VideoCreationPayload{Title: "test"})
+
+	if err == nil || err2.Error() != "Invalid version value. The version should match the xxx[.yyy][.zzz] pattern." {
+		t.Errorf("Sdk version validation should failed when invalid characters are used")
 	}
 }
 
