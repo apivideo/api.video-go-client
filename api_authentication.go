@@ -23,14 +23,14 @@ var (
 
 type AuthenticationServiceI interface {
 	/*
-	 * Authenticate Authenticate
+	 * Authenticate Advanced - Authenticate (1/2)
 	 * @return AuthenticationApiAuthenticateRequest
 	 */
 
 	Authenticate(authenticatePayload AuthenticatePayload) (*AccessToken, error)
 
 	/*
-	 * Authenticate Authenticate
+	 * Authenticate Advanced - Authenticate (1/2)
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return AuthenticationApiAuthenticateRequest
 	 */
@@ -38,14 +38,14 @@ type AuthenticationServiceI interface {
 	AuthenticateWithContext(ctx context.Context, authenticatePayload AuthenticatePayload) (*AccessToken, error)
 
 	/*
-	 * Refresh Refresh token
+	 * Refresh Advanced - Refresh token (2/2)
 	 * @return AuthenticationApiRefreshRequest
 	 */
 
 	Refresh(refreshTokenPayload RefreshTokenPayload) (*AccessToken, error)
 
 	/*
-	 * Refresh Refresh token
+	 * Refresh Advanced - Refresh token (2/2)
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return AuthenticationApiRefreshRequest
 	 */
@@ -60,7 +60,7 @@ type AuthenticationService struct {
 }
 
 /*
- * Authenticate Authenticate
+ * Authenticate Advanced - Authenticate (1/2)
  * To get started, submit your API key in the body of your request. api.video returns an access token that is valid for one hour (3600 seconds). A refresh token is also returned. View a [tutorial](https://api.video/blog/tutorials/authentication-tutorial) on authentication.
 
 All tutorials using the [authentication endpoint](https://api.video/blog/endpoints/authenticate)
@@ -75,7 +75,7 @@ func (s *AuthenticationService) Authenticate(authenticatePayload AuthenticatePay
 }
 
 /*
- * Authenticate Authenticate
+ * Authenticate Advanced - Authenticate (1/2)
  * To get started, submit your API key in the body of your request. api.video returns an access token that is valid for one hour (3600 seconds). A refresh token is also returned. View a [tutorial](https://api.video/blog/tutorials/authentication-tutorial) on authentication.
 
 All tutorials using the [authentication endpoint](https://api.video/blog/endpoints/authenticate)
@@ -110,7 +110,7 @@ func (s *AuthenticationService) AuthenticateWithContext(ctx context.Context, aut
 }
 
 /*
- * Refresh Refresh token
+ * Refresh Advanced - Refresh token (2/2)
  * Use the refresh endpoint with the refresh token you received when you first authenticated using the api-key endpoint. Send the refresh token in the body of your request. The api.video API returns a new access token that is valid for one hour (3600 seconds) and a new refresh token.
 
 
@@ -125,7 +125,7 @@ func (s *AuthenticationService) Refresh(refreshTokenPayload RefreshTokenPayload)
 }
 
 /*
- * Refresh Refresh token
+ * Refresh Advanced - Refresh token (2/2)
  * Use the refresh endpoint with the refresh token you received when you first authenticated using the api-key endpoint. Send the refresh token in the body of your request. The api.video API returns a new access token that is valid for one hour (3600 seconds) and a new refresh token.
 
 

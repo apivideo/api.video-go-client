@@ -4,8 +4,8 @@ All URIs are relative to *https://ws.api.video*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Authenticate**](Authentication.md#Authenticate) | **Post** /auth/api-key | Authenticate
-[**Refresh**](Authentication.md#Refresh) | **Post** /auth/refresh | Refresh token
+[**Authenticate**](Authentication.md#Authenticate) | **Post** /auth/api-key | Advanced - Authenticate (1/2)
+[**Refresh**](Authentication.md#Refresh) | **Post** /auth/refresh | Advanced - Refresh token (2/2)
 
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 > AuthenticateWithContext(ctx context.Context, authenticatePayload AuthenticatePayload) (*AccessToken, error)
 
 
-Authenticate
+Advanced - Authenticate (1/2)
 
 
 
@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 > RefreshWithContext(ctx context.Context, refreshTokenPayload RefreshTokenPayload) (*AccessToken, error)
 
 
-Refresh token
+Advanced - Refresh token (2/2)
 
 
 
