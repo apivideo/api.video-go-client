@@ -50,7 +50,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
-      summary: Authenticate
+      summary: Advanced - Authenticate (1/2)
       tags:
       - Authentication
       x-client-action: authenticate
@@ -125,7 +125,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
-      summary: Refresh token
+      summary: Advanced - Refresh token (2/2)
       tags:
       - Authentication
       x-client-action: refresh
@@ -973,6 +973,7 @@ paths:
       x-client-action: upload
       x-client-chunk-upload: true
       x-readme:
+        explorer-enabled: false
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -1855,6 +1856,7 @@ paths:
           Note: There may be a short delay before the new thumbnail is delivered to our CDN.
       x-client-action: uploadThumbnail
       x-readme:
+        explorer-enabled: false
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -7811,7 +7813,7 @@ paths:
         explode: true
         in: query
         name: period
-        required: false
+        required: true
         schema:
           format: period
           type: string
@@ -8104,7 +8106,7 @@ paths:
         explode: true
         in: query
         name: period
-        required: false
+        required: true
         schema:
           format: period
           type: string
