@@ -90,6 +90,7 @@ func (s *AuthenticationService) AuthenticateWithContext(ctx context.Context, aut
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	// body params
 	localVarPostBody = authenticatePayload
 
@@ -140,6 +141,7 @@ func (s *AuthenticationService) RefreshWithContext(ctx context.Context, refreshT
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	// body params
 	localVarPostBody = refreshTokenPayload
 

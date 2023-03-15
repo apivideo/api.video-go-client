@@ -71,6 +71,7 @@ type CaptionsServiceI interface {
 	 * @return CaptionsApiUploadRequest
 	 */
 	UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Caption, error)
+
 	/*
 	 * Get Retrieve a caption
 	 * @param videoId The unique identifier for the video you want captions for.
@@ -319,6 +320,7 @@ func (s *CaptionsService) UpdateWithContext(ctx context.Context, videoId string,
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	// body params
 	localVarPostBody = captionsUpdatePayload
 
@@ -417,6 +419,7 @@ func (s *CaptionsService) ListWithContext(ctx context.Context, videoId string, r
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	if r.currentPage != nil {
 		localVarQueryParams.Add("currentPage", parameterToString(*r.currentPage, ""))
 	}

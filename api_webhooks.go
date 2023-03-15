@@ -156,6 +156,7 @@ func (s *WebhooksService) CreateWithContext(ctx context.Context, webhooksCreatio
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	// body params
 	localVarPostBody = webhooksCreationPayload
 
@@ -299,6 +300,7 @@ func (s *WebhooksService) ListWithContext(ctx context.Context, r WebhooksApiList
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	if r.events != nil {
 		localVarQueryParams.Add("events", parameterToString(*r.events, ""))
 	}

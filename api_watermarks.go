@@ -73,6 +73,7 @@ type WatermarksServiceI interface {
 	 * @return WatermarksApiUploadRequest
 	 */
 	UploadFileWithContext(ctx context.Context, file *os.File) (*Watermark, error)
+
 	/*
 	 * Delete Delete a watermark
 	 * @param watermarkId The watermark ID for the watermark you want to delete.
@@ -247,6 +248,7 @@ func (s *WatermarksService) ListWithContext(ctx context.Context, r WatermarksApi
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	if r.sortBy != nil {
 		localVarQueryParams.Add("sortBy", parameterToString(*r.sortBy, ""))
 	}

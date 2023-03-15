@@ -139,6 +139,7 @@ type VideosServiceI interface {
 	 * @return VideosApiUploadRequest
 	 */
 	UploadFileWithContext(ctx context.Context, videoId string, file *os.File) (*Video, error)
+
 	/*
 	 * UploadWithUploadToken Upload with an upload token
 	 * @return VideosApiUploadWithUploadTokenRequest
@@ -169,6 +170,32 @@ type VideosServiceI interface {
 	 * @return VideosApiUploadWithUploadTokenRequest
 	 */
 	UploadWithUploadTokenFileWithContext(ctx context.Context, token string, file *os.File) (*Video, error)
+
+	/*
+	 * UploadWithUploadToken Upload with an upload token
+	 * @return VideosApiUploadWithUploadTokenRequest
+	 */
+	UploadWithUploadTokenWithVideoId(videoId *string, token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+
+	/*
+	 * UploadWithUploadToken Upload with an upload token
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return VideosApiUploadWithUploadTokenRequest
+	 */
+	UploadWithUploadTokenWithContextAndVideoId(ctx context.Context, videoId *string, token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
+
+	/*
+	 * UploadWithUploadToken Upload with an upload token
+	 * @return VideosApiUploadWithUploadTokenRequest
+	 */
+	UploadWithUploadTokenFileWithVideoId(videoId *string, token string, file *os.File) (*Video, error)
+
+	/*
+	 * UploadWithUploadToken Upload with an upload token
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return VideosApiUploadWithUploadTokenRequest
+	 */
+	UploadWithUploadTokenFileWithContextAndVideoId(ctx context.Context, videoId *string, token string, file *os.File) (*Video, error)
 	/*
 	 * Get Retrieve a video
 	 * @param videoId The unique identifier for the video you want details about.
@@ -263,6 +290,7 @@ type VideosServiceI interface {
 	 * @return VideosApiUploadThumbnailRequest
 	 */
 	UploadThumbnailFileWithContext(ctx context.Context, videoId string, file *os.File) (*Video, error)
+
 	/*
 	 * PickThumbnail Pick a thumbnail
 	 * @param videoId Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
@@ -363,6 +391,7 @@ func (s *VideosService) CreateWithContext(ctx context.Context, videoCreationPayl
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	// body params
 	localVarPostBody = videoCreationPayload
 
@@ -602,7 +631,7 @@ func (s *VideosService) UploadWithContext(ctx context.Context, videoId string, f
  */
 
 func (s *VideosService) UploadWithUploadTokenFile(token string, file *os.File) (*Video, error) {
-	return s.UploadWithUploadTokenFileWithContext(context.Background(), token, file)
+	return s.UploadWithUploadTokenFileWithContextAndVideoId(context.Background(), nil, token, file)
 }
 
 /*
@@ -616,7 +645,32 @@ func (s *VideosService) UploadWithUploadTokenFileWithContext(ctx context.Context
 	fileInfo, _ := file.Stat()
 	fileSize := fileInfo.Size()
 
-	return s.UploadWithUploadTokenWithContext(ctx, token, file.Name(), io.Reader(file), fileSize)
+	return s.UploadWithUploadTokenWithContextAndVideoId(ctx, nil, token, file.Name(), io.Reader(file), fileSize)
+}
+
+/*
+ * UploadWithUploadToken Upload with an upload token
+ * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
+
+ * @return VideosApiUploadWithUploadTokenRequest
+ */
+
+func (s *VideosService) UploadWithUploadTokenFileWithVideoId(videoId *string, token string, file *os.File) (*Video, error) {
+	return s.UploadWithUploadTokenFileWithContextAndVideoId(context.Background(), videoId, token, file)
+}
+
+/*
+ * UploadWithUploadToken Upload with an upload token
+ * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return VideosApiUploadWithUploadTokenRequest
+ */
+
+func (s *VideosService) UploadWithUploadTokenFileWithContextAndVideoId(ctx context.Context, videoId *string, token string, file *os.File) (*Video, error) {
+	fileInfo, _ := file.Stat()
+	fileSize := fileInfo.Size()
+
+	return s.UploadWithUploadTokenWithContextAndVideoId(ctx, videoId, token, file.Name(), io.Reader(file), fileSize)
 }
 
 // VideosService communicating with the Videos
@@ -713,11 +767,37 @@ func (s *VideosService) UploadWithUploadToken(token string, fileName string, fil
  * @return VideosApiUploadWithUploadTokenRequest
  */
 func (s *VideosService) UploadWithUploadTokenWithContext(ctx context.Context, token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadWithUploadTokenWithContextAndVideoId(ctx, nil, token, fileName, fileReader, fileSize)
+}
+
+/*
+ * UploadWithUploadToken Upload with an upload token
+ * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
+ * @param videoId *string the video id or nil
+ * @return VideosApiUploadWithUploadTokenRequest
+ */
+func (s *VideosService) UploadWithUploadTokenWithVideoId(videoId *string, token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
+	return s.UploadWithUploadTokenWithContextAndVideoId(context.Background(), videoId, token, fileName, fileReader, fileSize)
+}
+
+/*
+ * UploadWithUploadToken Upload with an upload token
+ * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId *string the video id or nil
+ * @return VideosApiUploadWithUploadTokenRequest
+ */
+func (s *VideosService) UploadWithUploadTokenWithContextAndVideoId(ctx context.Context, videoId *string, token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
 	localVarPath := "/upload"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := make(map[string]string)
+
+	if videoId != nil {
+		localVarFormParams["videoId"] = parameterToString(*videoId, "")
+	}
+
 	localVarQueryParams.Add("token", parameterToString(token, ""))
 
 	requests, err := s.client.prepareRangeRequests(ctx, localVarPath, fileName, fileReader, fileSize, localVarHeaderParams, localVarQueryParams, localVarFormParams)
@@ -828,6 +908,7 @@ func (s *VideosService) UpdateWithContext(ctx context.Context, videoId string, v
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	// body params
 	localVarPostBody = videoUpdatePayload
 
@@ -920,6 +1001,7 @@ func (s *VideosService) ListWithContext(ctx context.Context, r VideosApiListRequ
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	if r.title != nil {
 		localVarQueryParams.Add("title", parameterToString(*r.title, ""))
 	}
@@ -1141,6 +1223,7 @@ func (s *VideosService) PickThumbnailWithContext(ctx context.Context, videoId st
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	// body params
 	localVarPostBody = videoThumbnailPickPayload
 
