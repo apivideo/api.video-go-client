@@ -158,6 +158,7 @@ type PlayerThemesServiceI interface {
 	 * @return PlayerThemesApiUploadLogoRequest
 	 */
 	UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link *string) (*PlayerTheme, error)
+
 	/*
 	 * DeleteLogo Delete logo
 	 * @param playerId The unique identifier for the player.
@@ -209,6 +210,7 @@ func (s *PlayerThemesService) CreateWithContext(ctx context.Context, playerTheme
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	// body params
 	localVarPostBody = playerThemeCreationPayload
 
@@ -309,6 +311,7 @@ func (s *PlayerThemesService) UpdateWithContext(ctx context.Context, playerId st
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	// body params
 	localVarPostBody = playerThemeUpdatePayload
 
@@ -405,6 +408,7 @@ func (s *PlayerThemesService) ListWithContext(ctx context.Context, r PlayerTheme
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	if r.sortBy != nil {
 		localVarQueryParams.Add("sortBy", parameterToString(*r.sortBy, ""))
 	}
@@ -483,6 +487,7 @@ func (s *PlayerThemesService) UploadLogoWithContext(ctx context.Context, playerI
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := make(map[string]string)
+
 	if link != nil {
 		localVarFormParams["link"] = parameterToString(*link, "")
 	}

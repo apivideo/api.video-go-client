@@ -167,6 +167,7 @@ func (s *RawStatisticsService) ListLiveStreamSessionsWithContext(ctx context.Con
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	localVarQueryParams.Add("period", parameterToString(*r.period, ""))
 	if r.currentPage != nil {
 		localVarQueryParams.Add("currentPage", parameterToString(*r.currentPage, ""))
@@ -221,6 +222,7 @@ func (s *RawStatisticsService) ListSessionEventsWithContext(ctx context.Context,
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	if r.currentPage != nil {
 		localVarQueryParams.Add("currentPage", parameterToString(*r.currentPage, ""))
 	}
@@ -274,6 +276,7 @@ func (s *RawStatisticsService) ListVideoSessionsWithContext(ctx context.Context,
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	localVarQueryParams.Add("period", parameterToString(*r.period, ""))
 	if r.metadata != nil {
 		if r.metadata != nil && len(*r.metadata) > 0 {

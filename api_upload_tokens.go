@@ -145,6 +145,7 @@ func (s *UploadTokensService) CreateTokenWithContext(ctx context.Context, tokenC
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	// body params
 	localVarPostBody = tokenCreationPayload
 
@@ -288,6 +289,7 @@ func (s *UploadTokensService) ListWithContext(ctx context.Context, r UploadToken
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	if r.sortBy != nil {
 		localVarQueryParams.Add("sortBy", parameterToString(*r.sortBy, ""))
 	}

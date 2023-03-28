@@ -168,6 +168,7 @@ type LiveStreamsServiceI interface {
 	 * @return LiveStreamsApiUploadThumbnailRequest
 	 */
 	UploadThumbnailFileWithContext(ctx context.Context, liveStreamId string, file *os.File) (*LiveStream, error)
+
 	/*
 	 * DeleteThumbnail Delete a thumbnail
 	 * @param liveStreamId The unique identifier of the live stream whose thumbnail you want to delete.
@@ -239,6 +240,7 @@ func (s *LiveStreamsService) CreateWithContext(ctx context.Context, liveStreamCr
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	// body params
 	localVarPostBody = liveStreamCreationPayload
 
@@ -343,6 +345,7 @@ func (s *LiveStreamsService) UpdateWithContext(ctx context.Context, liveStreamId
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	// body params
 	localVarPostBody = liveStreamUpdatePayload
 
@@ -435,6 +438,7 @@ func (s *LiveStreamsService) ListWithContext(ctx context.Context, r LiveStreamsA
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	if r.streamKey != nil {
 		localVarQueryParams.Add("streamKey", parameterToString(*r.streamKey, ""))
 	}

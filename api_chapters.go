@@ -71,6 +71,7 @@ type ChaptersServiceI interface {
 	 * @return ChaptersApiUploadRequest
 	 */
 	UploadFileWithContext(ctx context.Context, videoId string, language string, file *os.File) (*Chapter, error)
+
 	/*
 	 * Get Retrieve a chapter
 	 * @param videoId The unique identifier for the video you want to show a chapter for.
@@ -346,6 +347,7 @@ func (s *ChaptersService) ListWithContext(ctx context.Context, videoId string, r
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
+
 	if r.currentPage != nil {
 		localVarQueryParams.Add("currentPage", parameterToString(*r.currentPage, ""))
 	}
