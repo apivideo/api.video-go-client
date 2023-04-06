@@ -543,10 +543,8 @@ func (s *UploadStream) UploadLastPartWithContextFile(ctx context.Context, file *
 }
 
 /*
- * Upload Upload a video
- * To upload a video to the videoId you created. You can only upload your video to the videoId once.
-
-
+  - Upload Upload a video
+  - To upload a video to the videoId you created. You can only upload your video to the videoId once.
 
 We offer 2 types of upload:
 
@@ -556,26 +554,23 @@ We offer 2 types of upload:
 
 The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
 
-  * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+  - allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
 
-  * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
+  - allow to send a video source "progressively", i.e., before before knowing the total size of the video.
 
-  Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
+    Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
 
+  - @param videoId Enter the videoId you want to use to upload your video.
 
-
- * @param videoId Enter the videoId you want to use to upload your video.
- * @return VideosApiUploadRequest
+  - @return VideosApiUploadRequest
 */
 func (s *VideosService) Upload(videoId string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
 	return s.UploadWithContext(context.Background(), videoId, fileName, fileReader, fileSize)
 }
 
 /*
- * Upload Upload a video
- * To upload a video to the videoId you created. You can only upload your video to the videoId once.
-
-
+  - Upload Upload a video
+  - To upload a video to the videoId you created. You can only upload your video to the videoId once.
 
 We offer 2 types of upload:
 
@@ -585,16 +580,17 @@ We offer 2 types of upload:
 
 The latter allows you to split a video source into X chunks and send those chunks independently (concurrently or sequentially). The 2 main goals for our users are to
 
-  * allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
+  - allow the upload of video sources > 200 MiB (200 MiB = the max. allowed file size for regular upload)
 
-  * allow to send a video source "progressively", i.e., before before knowing the total size of the video.
+  - allow to send a video source "progressively", i.e., before before knowing the total size of the video.
 
-  Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
+    Once all chunks have been sent, they are reaggregated to one source file. The video source is considered as "completely sent" when the "last" chunk is sent (i.e., the chunk that "completes" the upload).
 
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param videoId Enter the videoId you want to use to upload your video.
- * @return VideosApiUploadRequest
+  - @param videoId Enter the videoId you want to use to upload your video.
+
+  - @return VideosApiUploadRequest
 */
 func (s *VideosService) UploadWithContext(ctx context.Context, videoId string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
 	localVarPath := "/videos/{videoId}/source"
@@ -751,10 +747,10 @@ func (s *UploadWithUploadTokenStream) UploadLastPartWithContextFile(ctx context.
 }
 
 /*
- * UploadWithUploadToken Upload with an upload token
- * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
+* UploadWithUploadToken Upload with an upload token
+* This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
 
- * @return VideosApiUploadWithUploadTokenRequest
+* @return VideosApiUploadWithUploadTokenRequest
  */
 func (s *VideosService) UploadWithUploadToken(token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error) {
 	return s.UploadWithUploadTokenWithContext(context.Background(), token, fileName, fileReader, fileSize)
@@ -1107,46 +1103,34 @@ func (s *VideosService) UploadThumbnailFileWithContext(ctx context.Context, vide
 }
 
 /*
- * UploadThumbnail Upload a thumbnail
- * The thumbnail is the poster that appears in the player window before video playback begins.
-
-
+  - UploadThumbnail Upload a thumbnail
+  - The thumbnail is the poster that appears in the player window before video playback begins.
 
 This endpoint allows you to upload an image for the thumbnail.
 
-
-
 To select a still frame from the video using a time stamp, use the [dedicated method](#pickThumbnail) to pick a time in the video.
-
-
 
 Note: There may be a short delay before the new thumbnail is delivered to our CDN.
 
- * @param videoId Unique identifier of the chosen video
- * @return VideosApiUploadThumbnailRequest
+  - @param videoId Unique identifier of the chosen video
+  - @return VideosApiUploadThumbnailRequest
 */
 func (s *VideosService) UploadThumbnail(videoId string, fileName string, fileReader io.Reader) (*Video, error) {
 	return s.UploadThumbnailWithContext(context.Background(), videoId, fileName, fileReader)
 }
 
 /*
- * UploadThumbnail Upload a thumbnail
- * The thumbnail is the poster that appears in the player window before video playback begins.
-
-
+  - UploadThumbnail Upload a thumbnail
+  - The thumbnail is the poster that appears in the player window before video playback begins.
 
 This endpoint allows you to upload an image for the thumbnail.
 
-
-
 To select a still frame from the video using a time stamp, use the [dedicated method](#pickThumbnail) to pick a time in the video.
 
-
-
 Note: There may be a short delay before the new thumbnail is delivered to our CDN.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param videoId Unique identifier of the chosen video
- * @return VideosApiUploadThumbnailRequest
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param videoId Unique identifier of the chosen video
+  - @return VideosApiUploadThumbnailRequest
 */
 func (s *VideosService) UploadThumbnailWithContext(ctx context.Context, videoId string, fileName string, fileReader io.Reader) (*Video, error) {
 	localVarPath := "/videos/{videoId}/thumbnail"

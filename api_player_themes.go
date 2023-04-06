@@ -463,11 +463,11 @@ func (s *PlayerThemesService) UploadLogoFileWithContext(ctx context.Context, pla
 }
 
 /*
- * UploadLogo Upload a logo
- * The uploaded image maximum size should be 200x100 and its weight should be 100KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
+* UploadLogo Upload a logo
+* The uploaded image maximum size should be 200x100 and its weight should be 100KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
 
- * @param playerId The unique identifier for the player.
- * @return PlayerThemesApiUploadLogoRequest
+* @param playerId The unique identifier for the player.
+* @return PlayerThemesApiUploadLogoRequest
  */
 func (s *PlayerThemesService) UploadLogo(playerId string, link *string, fileName string, fileReader io.Reader) (*PlayerTheme, error) {
 	return s.UploadLogoWithContext(context.Background(), playerId, link, fileName, fileReader)

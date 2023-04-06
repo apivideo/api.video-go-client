@@ -165,28 +165,28 @@ func (s *ChaptersService) UploadFileWithContext(ctx context.Context, videoId str
 }
 
 /*
- * Upload Upload a chapter
- * Upload a VTT file to add chapters to your video.
+  - Upload Upload a chapter
+  - Upload a VTT file to add chapters to your video.
 
 Chapters help break the video into sections. Read our [tutorial](https://api.video/blog/tutorials/adding-chapters-to-your-videos) for more details.
 
- * @param videoId The unique identifier for the video you want to upload a chapter for.
- * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
- * @return ChaptersApiUploadRequest
+  - @param videoId The unique identifier for the video you want to upload a chapter for.
+  - @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+  - @return ChaptersApiUploadRequest
 */
 func (s *ChaptersService) Upload(videoId string, language string, fileName string, fileReader io.Reader) (*Chapter, error) {
 	return s.UploadWithContext(context.Background(), videoId, language, fileName, fileReader)
 }
 
 /*
- * Upload Upload a chapter
- * Upload a VTT file to add chapters to your video.
+  - Upload Upload a chapter
+  - Upload a VTT file to add chapters to your video.
 
 Chapters help break the video into sections. Read our [tutorial](https://api.video/blog/tutorials/adding-chapters-to-your-videos) for more details.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param videoId The unique identifier for the video you want to upload a chapter for.
- * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
- * @return ChaptersApiUploadRequest
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param videoId The unique identifier for the video you want to upload a chapter for.
+  - @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
+  - @return ChaptersApiUploadRequest
 */
 func (s *ChaptersService) UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader) (*Chapter, error) {
 	localVarPath := "/videos/{videoId}/chapters/{language}"
