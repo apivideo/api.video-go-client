@@ -136,10 +136,10 @@ func (s *WatermarksService) UploadFileWithContext(ctx context.Context, file *os.
 }
 
 /*
- * Upload Upload a watermark
- * Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
+* Upload Upload a watermark
+* Create a new watermark by uploading a `JPG` or a `PNG` image. A watermark is a static image, directly burnt into a video. After you have created your watermark, you can define its placement and aspect when you [create a video](https://docs.api.video/reference/post-video).
 
- * @return WatermarksApiUploadRequest
+* @return WatermarksApiUploadRequest
  */
 func (s *WatermarksService) Upload(fileName string, fileReader io.Reader) (*Watermark, error) {
 	return s.UploadWithContext(context.Background(), fileName, fileReader)

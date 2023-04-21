@@ -184,28 +184,28 @@ func (s *CaptionsService) UploadFileWithContext(ctx context.Context, videoId str
 }
 
 /*
- * Upload Upload a caption
- * Upload a VTT file to add captions to your video.
+* Upload Upload a caption
+* Upload a VTT file to add captions to your video.
 
- Read our [captioning tutorial](https://api.video/blog/tutorials/adding-captions) for more details.
+Read our [captioning tutorial](https://api.video/blog/tutorials/adding-captions) for more details.
 
- * @param videoId The unique identifier for the video you want to add a caption to.
- * @param language A valid BCP 47 language representation.
- * @return CaptionsApiUploadRequest
+* @param videoId The unique identifier for the video you want to add a caption to.
+* @param language A valid BCP 47 language representation.
+* @return CaptionsApiUploadRequest
 */
 func (s *CaptionsService) Upload(videoId string, language string, fileName string, fileReader io.Reader) (*Caption, error) {
 	return s.UploadWithContext(context.Background(), videoId, language, fileName, fileReader)
 }
 
 /*
- * Upload Upload a caption
- * Upload a VTT file to add captions to your video.
+* Upload Upload a caption
+* Upload a VTT file to add captions to your video.
 
- Read our [captioning tutorial](https://api.video/blog/tutorials/adding-captions) for more details.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param videoId The unique identifier for the video you want to add a caption to.
- * @param language A valid BCP 47 language representation.
- * @return CaptionsApiUploadRequest
+Read our [captioning tutorial](https://api.video/blog/tutorials/adding-captions) for more details.
+* @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+* @param videoId The unique identifier for the video you want to add a caption to.
+* @param language A valid BCP 47 language representation.
+* @return CaptionsApiUploadRequest
 */
 func (s *CaptionsService) UploadWithContext(ctx context.Context, videoId string, language string, fileName string, fileReader io.Reader) (*Caption, error) {
 	localVarPath := "/videos/{videoId}/captions/{language}"

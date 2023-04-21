@@ -499,11 +499,11 @@ func (s *LiveStreamsService) UploadThumbnailFileWithContext(ctx context.Context,
 }
 
 /*
- * UploadThumbnail Upload a thumbnail
- * Upload an image to use as a backdrop for your livestream. Tutorials that [update live stream thumbnails](https://api.video/blog/endpoints/live-upload-a-thumbnail).
+* UploadThumbnail Upload a thumbnail
+* Upload an image to use as a backdrop for your livestream. Tutorials that [update live stream thumbnails](https://api.video/blog/endpoints/live-upload-a-thumbnail).
 
- * @param liveStreamId The unique ID for the live stream you want to upload.
- * @return LiveStreamsApiUploadThumbnailRequest
+* @param liveStreamId The unique ID for the live stream you want to upload.
+* @return LiveStreamsApiUploadThumbnailRequest
  */
 func (s *LiveStreamsService) UploadThumbnail(liveStreamId string, fileName string, fileReader io.Reader) (*LiveStream, error) {
 	return s.UploadThumbnailWithContext(context.Background(), liveStreamId, fileName, fileReader)
