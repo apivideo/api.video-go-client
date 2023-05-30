@@ -4,16 +4,16 @@ All URIs are relative to *https://ws.api.video*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Create**](Videos.md#Create) | **Post** /videos | Create a video
+[**Create**](Videos.md#Create) | **Post** /videos | Create a video object
 [**Upload**](Videos.md#Upload) | **Post** /videos/{videoId}/source | Upload a video
-[**UploadWithUploadToken**](Videos.md#UploadWithUploadToken) | **Post** /upload | Upload with an upload token
-[**Get**](Videos.md#Get) | **Get** /videos/{videoId} | Retrieve a video
-[**Update**](Videos.md#Update) | **Patch** /videos/{videoId} | Update a video
-[**Delete**](Videos.md#Delete) | **Delete** /videos/{videoId} | Delete a video
-[**List**](Videos.md#List) | **Get** /videos | List all videos
+[**UploadWithUploadToken**](Videos.md#UploadWithUploadToken) | **Post** /upload | Upload with an delegated upload token
+[**Get**](Videos.md#Get) | **Get** /videos/{videoId} | Retrieve a video object
+[**Update**](Videos.md#Update) | **Patch** /videos/{videoId} | Update a video object
+[**Delete**](Videos.md#Delete) | **Delete** /videos/{videoId} | Delete a video object
+[**List**](Videos.md#List) | **Get** /videos | List all video objects
 [**UploadThumbnail**](Videos.md#UploadThumbnail) | **Post** /videos/{videoId}/thumbnail | Upload a thumbnail
-[**PickThumbnail**](Videos.md#PickThumbnail) | **Patch** /videos/{videoId}/thumbnail | Pick a thumbnail
-[**GetStatus**](Videos.md#GetStatus) | **Get** /videos/{videoId}/status | Retrieve video status
+[**PickThumbnail**](Videos.md#PickThumbnail) | **Patch** /videos/{videoId}/thumbnail | Set a thumbnail
+[**GetStatus**](Videos.md#GetStatus) | **Get** /videos/{videoId}/status | Retrieve video status and details
 
 
 
@@ -24,7 +24,7 @@ Method | HTTP request | Description
 > CreateWithContext(ctx context.Context, videoCreationPayload VideoCreationPayload) (*Video, error)
 
 
-Create a video
+Create a video object
 
 
 
@@ -182,7 +182,7 @@ Name | Type | Description  | Notes
 > UploadWithUploadTokenFileWithContext(ctx context.Context, token string, file *os.File) (*Video, error)
 > UploadWithUploadTokenWithContext(ctx context.Context, token string, fileName string, fileReader io.Reader, fileSize int64)
 
-Upload with an upload token
+Upload with an delegated upload token
 
 
 
@@ -274,7 +274,7 @@ Name | Type | Description  | Notes
 > GetWithContext(ctx context.Context, videoId string) (*Video, error)
 
 
-Retrieve a video
+Retrieve a video object
 
 
 
@@ -338,7 +338,7 @@ Name | Type | Description  | Notes
 > UpdateWithContext(ctx context.Context, videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error)
 
 
-Update a video
+Update a video object
 
 
 
@@ -378,7 +378,7 @@ func main() {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**videoId** | **string** | The video ID for the video you want to delete. | 
+**videoId** | **string** | The video ID for the video you want to update. | 
 
 ### Other Parameters
 
@@ -404,7 +404,7 @@ Name | Type | Description  | Notes
 > DeleteWithContext(ctx context.Context, videoId string) (error)
 
 
-Delete a video
+Delete a video object
 
 
 
@@ -462,7 +462,7 @@ Name | Type | Description  | Notes
 
 
 
-List all videos
+List all video objects
 
 
 
@@ -609,7 +609,7 @@ Name | Type | Description  | Notes
 > PickThumbnailWithContext(ctx context.Context, videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
 
 
-Pick a thumbnail
+Set a thumbnail
 
 
 
@@ -675,7 +675,7 @@ Name | Type | Description  | Notes
 > GetStatusWithContext(ctx context.Context, videoId string) (*VideoStatus, error)
 
 
-Retrieve video status
+Retrieve video status and details
 
 
 

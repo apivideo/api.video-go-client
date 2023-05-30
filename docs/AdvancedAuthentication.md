@@ -1,11 +1,11 @@
-# \Authentication
+# \AdvancedAuthentication
 
 All URIs are relative to *https://ws.api.video*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Authenticate**](Authentication.md#Authenticate) | **Post** /auth/api-key | Advanced - Authenticate (1/2)
-[**Refresh**](Authentication.md#Refresh) | **Post** /auth/refresh | Advanced - Refresh token (2/2)
+[**Authenticate**](AdvancedAuthentication.md#Authenticate) | **Post** /auth/api-key | Get Bearer Token
+[**Refresh**](AdvancedAuthentication.md#Refresh) | **Post** /auth/refresh | Refresh Bearer Token
 
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 > AuthenticateWithContext(ctx context.Context, authenticatePayload AuthenticatePayload) (*AccessToken, error)
 
 
-Advanced - Authenticate (1/2)
+Get Bearer Token
 
 
 
@@ -40,13 +40,13 @@ func main() {
     authenticatePayload := *apivideosdk.NewAuthenticatePayload("ApiKey_example") // AuthenticatePayload | 
 
     
-    res, err := client.Authentication.Authenticate(authenticatePayload)
+    res, err := client.AdvancedAuthentication.Authenticate(authenticatePayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Authentication.Authenticate``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `AdvancedAuthentication.Authenticate``: %v\n", err)
     }
     // response from `Authenticate`: AccessToken
-    fmt.Fprintf(os.Stdout, "Response from `Authentication.Authenticate`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `AdvancedAuthentication.Authenticate`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 > RefreshWithContext(ctx context.Context, refreshTokenPayload RefreshTokenPayload) (*AccessToken, error)
 
 
-Advanced - Refresh token (2/2)
+Refresh Bearer Token
 
 
 
@@ -101,13 +101,13 @@ func main() {
     refreshTokenPayload := *apivideosdk.NewRefreshTokenPayload("RefreshToken_example") // RefreshTokenPayload | 
 
     
-    res, err := client.Authentication.Refresh(refreshTokenPayload)
+    res, err := client.AdvancedAuthentication.Refresh(refreshTokenPayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Authentication.Refresh``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `AdvancedAuthentication.Refresh``: %v\n", err)
     }
     // response from `Refresh`: AccessToken
-    fmt.Fprintf(os.Stdout, "Response from `Authentication.Refresh`: %v\n", res)
+    fmt.Fprintf(os.Stdout, "Response from `AdvancedAuthentication.Refresh`: %v\n", res)
 }
 ```
 ### Path Parameters

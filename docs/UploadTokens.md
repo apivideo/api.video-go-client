@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**CreateToken**](UploadTokens.md#CreateToken) | **Post** /upload-tokens | Generate an upload token
 [**GetToken**](UploadTokens.md#GetToken) | **Get** /upload-tokens/{uploadToken} | Retrieve upload token
 [**DeleteToken**](UploadTokens.md#DeleteToken) | **Delete** /upload-tokens/{uploadToken} | Delete an upload token
-[**List**](UploadTokens.md#List) | **Get** /upload-tokens | List all active upload tokens.
+[**List**](UploadTokens.md#List) | **Get** /upload-tokens | List all active upload tokens
 
 
 
@@ -207,7 +207,7 @@ Name | Type | Description  | Notes
 
 
 
-List all active upload tokens.
+List all active upload tokens
 
 
 

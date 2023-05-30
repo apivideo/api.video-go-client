@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **Left** | Pointer to **string** | Distance expressed in px or % between the left-border of the video and the watermark-image. | [optional] 
 **Bottom** | Pointer to **string** | Distance expressed in px or % between the bottom-border of the video and the watermark-image. | [optional] 
 **Right** | Pointer to **string** | Distance expressed in px or % between the right-border of the video and the watermark-image. | [optional] 
-**Width** | Pointer to **string** | Width of the watermark-image relative to the video if expressed in %. Otherwise a fixed width. NOTE: To keep intrinsic watermark-image width use initial | [optional] 
-**Height** | Pointer to **string** | Width of the watermark-image relative to the video if expressed in %. Otherwise a fixed height. NOTE: To keep intrinsic watermark-image height use initial | [optional] 
+**Width** | Pointer to **string** | Width of the watermark-image relative to the video if expressed in %. Otherwise a fixed width. NOTE: To keep intrinsic watermark-image width use &#x60;initial&#x60;. | [optional] 
+**Height** | Pointer to **string** | Height of the watermark-image relative to the video if expressed in %. Otherwise a fixed height. NOTE: To keep intrinsic watermark-image height use &#x60;initial&#x60;. | [optional] 
 **Opacity** | Pointer to **string** | Opacity expressed in % only to specify the degree of the watermark-image transparency with the video. | [optional] 
 
 ## Methods

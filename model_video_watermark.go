@@ -26,9 +26,9 @@ type VideoWatermark struct {
 	Bottom *string `json:"bottom,omitempty"`
 	// Distance expressed in px or % between the right-border of the video and the watermark-image.
 	Right *string `json:"right,omitempty"`
-	// Width of the watermark-image relative to the video if expressed in %. Otherwise a fixed width. NOTE: To keep intrinsic watermark-image width use initial
+	// Width of the watermark-image relative to the video if expressed in %. Otherwise a fixed width. NOTE: To keep intrinsic watermark-image width use `initial`.
 	Width *string `json:"width,omitempty"`
-	// Width of the watermark-image relative to the video if expressed in %. Otherwise a fixed height. NOTE: To keep intrinsic watermark-image height use initial
+	// Height of the watermark-image relative to the video if expressed in %. Otherwise a fixed height. NOTE: To keep intrinsic watermark-image height use `initial`.
 	Height *string `json:"height,omitempty"`
 	// Opacity expressed in % only to specify the degree of the watermark-image transparency with the video.
 	Opacity *string `json:"opacity,omitempty"`

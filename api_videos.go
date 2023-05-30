@@ -90,14 +90,14 @@ func (r VideosApiListRequest) PageSize(pageSize int32) VideosApiListRequest {
 
 type VideosServiceI interface {
 	/*
-	 * Create Create a video
+	 * Create Create a video object
 	 * @return VideosApiCreateRequest
 	 */
 
 	Create(videoCreationPayload VideoCreationPayload) (*Video, error)
 
 	/*
-	 * Create Create a video
+	 * Create Create a video object
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return VideosApiCreateRequest
 	 */
@@ -141,63 +141,63 @@ type VideosServiceI interface {
 	UploadFileWithContext(ctx context.Context, videoId string, file *os.File) (*Video, error)
 
 	/*
-	 * UploadWithUploadToken Upload with an upload token
+	 * UploadWithUploadToken Upload with an delegated upload token
 	 * @return VideosApiUploadWithUploadTokenRequest
 	 */
 	UploadWithUploadToken(token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
 	/*
-	 * UploadWithUploadToken Upload with an upload token
+	 * UploadWithUploadToken Upload with an delegated upload token
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return VideosApiUploadWithUploadTokenRequest
 	 */
 	UploadWithUploadTokenWithContext(ctx context.Context, token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
 
 	/*
-	 * UploadWithUploadToken Upload with an upload token
+	 * UploadWithUploadToken Upload with an delegated upload token
 	 * @return IUploadStream
 	 */
 	CreateUploadWithUploadTokenStream(token string, videoId *string) (IUploadStream, error)
 
 	/*
-	 * UploadWithUploadToken Upload with an upload token
+	 * UploadWithUploadToken Upload with an delegated upload token
 	 * @return VideosApiUploadWithUploadTokenRequest
 	 */
 	UploadWithUploadTokenFile(token string, file *os.File) (*Video, error)
 
 	/*
-	 * UploadWithUploadToken Upload with an upload token
+	 * UploadWithUploadToken Upload with an delegated upload token
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return VideosApiUploadWithUploadTokenRequest
 	 */
 	UploadWithUploadTokenFileWithContext(ctx context.Context, token string, file *os.File) (*Video, error)
 
 	/*
-	 * UploadWithUploadToken Upload with an upload token
+	 * UploadWithUploadToken Upload with an delegated upload token
 	 * @return VideosApiUploadWithUploadTokenRequest
 	 */
 	UploadWithUploadTokenWithVideoId(videoId *string, token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
 
 	/*
-	 * UploadWithUploadToken Upload with an upload token
+	 * UploadWithUploadToken Upload with an delegated upload token
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return VideosApiUploadWithUploadTokenRequest
 	 */
 	UploadWithUploadTokenWithContextAndVideoId(ctx context.Context, videoId *string, token string, fileName string, fileReader io.Reader, fileSize int64) (*Video, error)
 
 	/*
-	 * UploadWithUploadToken Upload with an upload token
+	 * UploadWithUploadToken Upload with an delegated upload token
 	 * @return VideosApiUploadWithUploadTokenRequest
 	 */
 	UploadWithUploadTokenFileWithVideoId(videoId *string, token string, file *os.File) (*Video, error)
 
 	/*
-	 * UploadWithUploadToken Upload with an upload token
+	 * UploadWithUploadToken Upload with an delegated upload token
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return VideosApiUploadWithUploadTokenRequest
 	 */
 	UploadWithUploadTokenFileWithContextAndVideoId(ctx context.Context, videoId *string, token string, file *os.File) (*Video, error)
 	/*
-	 * Get Retrieve a video
+	 * Get Retrieve a video object
 	 * @param videoId The unique identifier for the video you want details about.
 	 * @return VideosApiGetRequest
 	 */
@@ -205,7 +205,7 @@ type VideosServiceI interface {
 	Get(videoId string) (*Video, error)
 
 	/*
-	 * Get Retrieve a video
+	 * Get Retrieve a video object
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId The unique identifier for the video you want details about.
 	 * @return VideosApiGetRequest
@@ -214,24 +214,24 @@ type VideosServiceI interface {
 	GetWithContext(ctx context.Context, videoId string) (*Video, error)
 
 	/*
-	 * Update Update a video
-	 * @param videoId The video ID for the video you want to delete.
+	 * Update Update a video object
+	 * @param videoId The video ID for the video you want to update.
 	 * @return VideosApiUpdateRequest
 	 */
 
 	Update(videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error)
 
 	/*
-	 * Update Update a video
+	 * Update Update a video object
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @param videoId The video ID for the video you want to delete.
+	 * @param videoId The video ID for the video you want to update.
 	 * @return VideosApiUpdateRequest
 	 */
 
 	UpdateWithContext(ctx context.Context, videoId string, videoUpdatePayload VideoUpdatePayload) (*Video, error)
 
 	/*
-	 * Delete Delete a video
+	 * Delete Delete a video object
 	 * @param videoId The video ID for the video you want to delete.
 	 * @return VideosApiDeleteRequest
 	 */
@@ -239,7 +239,7 @@ type VideosServiceI interface {
 	Delete(videoId string) error
 
 	/*
-	 * Delete Delete a video
+	 * Delete Delete a video object
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId The video ID for the video you want to delete.
 	 * @return VideosApiDeleteRequest
@@ -248,14 +248,14 @@ type VideosServiceI interface {
 	DeleteWithContext(ctx context.Context, videoId string) error
 
 	/*
-	 * List List all videos
+	 * List List all video objects
 	 * @return VideosApiListRequest
 	 */
 
 	List(r VideosApiListRequest) (*VideosListResponse, error)
 
 	/*
-	 * List List all videos
+	 * List List all video objects
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @return VideosApiListRequest
 	 */
@@ -292,7 +292,7 @@ type VideosServiceI interface {
 	UploadThumbnailFileWithContext(ctx context.Context, videoId string, file *os.File) (*Video, error)
 
 	/*
-	 * PickThumbnail Pick a thumbnail
+	 * PickThumbnail Set a thumbnail
 	 * @param videoId Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
 	 * @return VideosApiPickThumbnailRequest
 	 */
@@ -300,7 +300,7 @@ type VideosServiceI interface {
 	PickThumbnail(videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
 
 	/*
-	 * PickThumbnail Pick a thumbnail
+	 * PickThumbnail Set a thumbnail
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId Unique identifier of the video you want to add a thumbnail to, where you use a section of your video as the thumbnail.
 	 * @return VideosApiPickThumbnailRequest
@@ -309,7 +309,7 @@ type VideosServiceI interface {
 	PickThumbnailWithContext(ctx context.Context, videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
 
 	/*
-	 * GetStatus Retrieve video status
+	 * GetStatus Retrieve video status and details
 	 * @param videoId The unique identifier for the video you want the status for.
 	 * @return VideosApiGetStatusRequest
 	 */
@@ -317,7 +317,7 @@ type VideosServiceI interface {
 	GetStatus(videoId string) (*VideoStatus, error)
 
 	/*
-	 * GetStatus Retrieve video status
+	 * GetStatus Retrieve video status and details
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	 * @param videoId The unique identifier for the video you want the status for.
 	 * @return VideosApiGetStatusRequest
@@ -333,27 +333,13 @@ type VideosService struct {
 }
 
 /*
- * Create Create a video
- * We have tutorials on:
-
-* [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
-
-* [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
-
-* [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
-
-* [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
-
-* [Using Dynamic Metadata](https://api.video/blog/tutorials/dynamic-metadata)
-
-
-
-* Full list of [tutorials](https://api.video/blog/endpoints/video-create) that demonstrate this endpoint.
+ * Create Create a video object
+ * Creates a video object. More information on video objects can be found [here](https://docs.api.video/reference/videos-1).
 
 
 
  * @return VideosApiCreateRequest
-*/
+ */
 
 func (s *VideosService) Create(videoCreationPayload VideoCreationPayload) (*Video, error) {
 
@@ -362,27 +348,13 @@ func (s *VideosService) Create(videoCreationPayload VideoCreationPayload) (*Vide
 }
 
 /*
- * Create Create a video
- * We have tutorials on:
-
-* [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
-
-* [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
-
-* [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
-
-* [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
-
-* [Using Dynamic Metadata](https://api.video/blog/tutorials/dynamic-metadata)
-
-
-
-* Full list of [tutorials](https://api.video/blog/endpoints/video-create) that demonstrate this endpoint.
+ * Create Create a video object
+ * Creates a video object. More information on video objects can be found [here](https://docs.api.video/reference/videos-1).
 
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return VideosApiCreateRequest
-*/
+ */
 
 func (s *VideosService) CreateWithContext(ctx context.Context, videoCreationPayload VideoCreationPayload) (*Video, error) {
 	var localVarPostBody interface{}
@@ -620,7 +592,7 @@ func (s *VideosService) UploadWithContext(ctx context.Context, videoId string, f
 }
 
 /*
- * UploadWithUploadToken Upload with an upload token
+ * UploadWithUploadToken Upload with an delegated upload token
  * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
 
  * @return VideosApiUploadWithUploadTokenRequest
@@ -631,7 +603,7 @@ func (s *VideosService) UploadWithUploadTokenFile(token string, file *os.File) (
 }
 
 /*
- * UploadWithUploadToken Upload with an upload token
+ * UploadWithUploadToken Upload with an delegated upload token
  * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return VideosApiUploadWithUploadTokenRequest
@@ -645,7 +617,7 @@ func (s *VideosService) UploadWithUploadTokenFileWithContext(ctx context.Context
 }
 
 /*
- * UploadWithUploadToken Upload with an upload token
+ * UploadWithUploadToken Upload with an delegated upload token
  * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
 
  * @return VideosApiUploadWithUploadTokenRequest
@@ -656,7 +628,7 @@ func (s *VideosService) UploadWithUploadTokenFileWithVideoId(videoId *string, to
 }
 
 /*
- * UploadWithUploadToken Upload with an upload token
+ * UploadWithUploadToken Upload with an delegated upload token
  * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return VideosApiUploadWithUploadTokenRequest
@@ -747,7 +719,7 @@ func (s *UploadWithUploadTokenStream) UploadLastPartWithContextFile(ctx context.
 }
 
 /*
-* UploadWithUploadToken Upload with an upload token
+* UploadWithUploadToken Upload with an delegated upload token
 * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
 
 * @return VideosApiUploadWithUploadTokenRequest
@@ -757,7 +729,7 @@ func (s *VideosService) UploadWithUploadToken(token string, fileName string, fil
 }
 
 /*
- * UploadWithUploadToken Upload with an upload token
+ * UploadWithUploadToken Upload with an delegated upload token
  * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return VideosApiUploadWithUploadTokenRequest
@@ -767,7 +739,7 @@ func (s *VideosService) UploadWithUploadTokenWithContext(ctx context.Context, to
 }
 
 /*
- * UploadWithUploadToken Upload with an upload token
+ * UploadWithUploadToken Upload with an delegated upload token
  * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
  * @param videoId *string the video id or nil
  * @return VideosApiUploadWithUploadTokenRequest
@@ -777,7 +749,7 @@ func (s *VideosService) UploadWithUploadTokenWithVideoId(videoId *string, token 
 }
 
 /*
- * UploadWithUploadToken Upload with an upload token
+ * UploadWithUploadToken Upload with an delegated upload token
  * This method allows you to send a video using an upload token. Upload tokens are especially useful when the upload is done from the client side. If you want to upload a video from your server-side application, you'd better use the [standard upload method](#upload).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId *string the video id or nil
@@ -816,7 +788,7 @@ func (s *VideosService) UploadWithUploadTokenWithContextAndVideoId(ctx context.C
 }
 
 /*
- * Get Retrieve a video
+ * Get Retrieve a video object
  * This call provides the same information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL.
 
  * @param videoId The unique identifier for the video you want details about.
@@ -830,7 +802,7 @@ func (s *VideosService) Get(videoId string) (*Video, error) {
 }
 
 /*
- * Get Retrieve a video
+ * Get Retrieve a video object
  * This call provides the same information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want details about.
@@ -863,8 +835,8 @@ func (s *VideosService) GetWithContext(ctx context.Context, videoId string) (*Vi
 }
 
 /*
- * Update Update a video
- * Updates the parameters associated with your video. The video you are updating is determined by the video ID you provide.
+ * Update Update a video object
+ * Updates the parameters associated with a video ID. The video object you are updating is determined by the video ID you provide.
 
 
 
@@ -872,7 +844,7 @@ NOTE: If you are updating an array, you must provide the entire array as what yo
 
 
 
- * @param videoId The video ID for the video you want to delete.
+ * @param videoId The video ID for the video you want to update.
  * @return VideosApiUpdateRequest
 */
 
@@ -883,8 +855,8 @@ func (s *VideosService) Update(videoId string, videoUpdatePayload VideoUpdatePay
 }
 
 /*
- * Update Update a video
- * Updates the parameters associated with your video. The video you are updating is determined by the video ID you provide.
+ * Update Update a video object
+ * Updates the parameters associated with a video ID. The video object you are updating is determined by the video ID you provide.
 
 
 
@@ -892,7 +864,7 @@ NOTE: If you are updating an array, you must provide the entire array as what yo
 
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param videoId The video ID for the video you want to delete.
+ * @param videoId The video ID for the video you want to update.
  * @return VideosApiUpdateRequest
 */
 
@@ -925,7 +897,7 @@ func (s *VideosService) UpdateWithContext(ctx context.Context, videoId string, v
 }
 
 /*
- * Delete Delete a video
+ * Delete Delete a video object
  * If you do not need a video any longer, you can send a request to delete it. All you need is the videoId.
 
  * @param videoId The video ID for the video you want to delete.
@@ -939,7 +911,7 @@ func (s *VideosService) Delete(videoId string) error {
 }
 
 /*
- * Delete Delete a video
+ * Delete Delete a video object
  * If you do not need a video any longer, you can send a request to delete it. All you need is the videoId.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The video ID for the video you want to delete.
@@ -971,7 +943,7 @@ func (s *VideosService) DeleteWithContext(ctx context.Context, videoId string) e
 }
 
 /*
- * List List all videos
+ * List List all video objects
  * This method returns a list of your videos (with all their details). With no parameters added, the API returns the first page of all videos. You can filter videos using the parameters described below.
 
  * @return VideosApiListRequest
@@ -984,7 +956,7 @@ func (s *VideosService) List(r VideosApiListRequest) (*VideosListResponse, error
 }
 
 /*
- * List List all videos
+ * List List all video objects
  * This method returns a list of your videos (with all their details). With no parameters added, the API returns the first page of all videos. You can filter videos using the parameters described below.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return VideosApiListRequest
@@ -1158,7 +1130,7 @@ func (s *VideosService) UploadThumbnailWithContext(ctx context.Context, videoId 
 }
 
 /*
- * PickThumbnail Pick a thumbnail
+ * PickThumbnail Set a thumbnail
  * Pick a thumbnail from the given time code.
 
 
@@ -1182,7 +1154,7 @@ func (s *VideosService) PickThumbnail(videoId string, videoThumbnailPickPayload 
 }
 
 /*
- * PickThumbnail Pick a thumbnail
+ * PickThumbnail Set a thumbnail
  * Pick a thumbnail from the given time code.
 
 
@@ -1228,7 +1200,7 @@ func (s *VideosService) PickThumbnailWithContext(ctx context.Context, videoId st
 }
 
 /*
- * GetStatus Retrieve video status
+ * GetStatus Retrieve video status and details
  * This method provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities.
 
  * @param videoId The unique identifier for the video you want the status for.
@@ -1242,7 +1214,7 @@ func (s *VideosService) GetStatus(videoId string) (*VideoStatus, error) {
 }
 
 /*
- * GetStatus Retrieve video status
+ * GetStatus Retrieve video status and details
  * This method provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want the status for.

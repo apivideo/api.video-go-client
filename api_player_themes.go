@@ -232,7 +232,7 @@ func (s *PlayerThemesService) CreateWithContext(ctx context.Context, playerTheme
 
 /*
  * Get Retrieve a player
- * Use a player ID to retrieve details about the player and display it for viewers.
+ * Retreive a player theme by player id.
 
  * @param playerId The unique identifier for the player you want to retrieve.
  * @return PlayerThemesApiGetRequest
@@ -246,7 +246,7 @@ func (s *PlayerThemesService) Get(playerId string) (*PlayerTheme, error) {
 
 /*
  * Get Retrieve a player
- * Use a player ID to retrieve details about the player and display it for viewers.
+ * Retreive a player theme by player id.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param playerId The unique identifier for the player you want to retrieve.
  * @return PlayerThemesApiGetRequest
@@ -381,10 +381,8 @@ func (s *PlayerThemesService) DeleteWithContext(ctx context.Context, playerId st
  * List List all player themes
  * Retrieve a list of all the player themes you created, as well as details about each one.
 
-Tutorials that use the [player endpoint](https://api.video/blog/endpoints/player).
-
  * @return PlayerThemesApiListRequest
-*/
+ */
 
 func (s *PlayerThemesService) List(r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error) {
 
@@ -395,11 +393,9 @@ func (s *PlayerThemesService) List(r PlayerThemesApiListRequest) (*PlayerThemesL
 /*
  * List List all player themes
  * Retrieve a list of all the player themes you created, as well as details about each one.
-
-Tutorials that use the [player endpoint](https://api.video/blog/endpoints/player).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return PlayerThemesApiListRequest
-*/
+ */
 
 func (s *PlayerThemesService) ListWithContext(ctx context.Context, r PlayerThemesApiListRequest) (*PlayerThemesListResponse, error) {
 	var localVarPostBody interface{}
@@ -440,7 +436,7 @@ func (s *PlayerThemesService) ListWithContext(ctx context.Context, r PlayerTheme
 
 /*
  * UploadLogo Upload a logo
- * The uploaded image maximum size should be 200x100 and its weight should be 100KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
+ * Upload an image logo for a player.
 
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUploadLogoRequest
@@ -452,7 +448,7 @@ func (s *PlayerThemesService) UploadLogoFile(playerId string, file *os.File, lin
 
 /*
  * UploadLogo Upload a logo
- * The uploaded image maximum size should be 200x100 and its weight should be 100KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
+ * Upload an image logo for a player.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUploadLogoRequest
@@ -464,7 +460,7 @@ func (s *PlayerThemesService) UploadLogoFileWithContext(ctx context.Context, pla
 
 /*
 * UploadLogo Upload a logo
-* The uploaded image maximum size should be 200x100 and its weight should be 100KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
+* Upload an image logo for a player.
 
 * @param playerId The unique identifier for the player.
 * @return PlayerThemesApiUploadLogoRequest
@@ -475,7 +471,7 @@ func (s *PlayerThemesService) UploadLogo(playerId string, link *string, fileName
 
 /*
  * UploadLogo Upload a logo
- * The uploaded image maximum size should be 200x100 and its weight should be 100KB.  It will be scaled down to 30px height and converted to PNG to be displayed in the player.
+ * Upload an image logo for a player.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUploadLogoRequest
