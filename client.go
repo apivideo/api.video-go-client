@@ -30,16 +30,16 @@ type Client struct {
 	sdkName            string
 	sdkVersion         string
 
-	Authentication AuthenticationServiceI
-	Captions       CaptionsServiceI
-	Chapters       ChaptersServiceI
-	LiveStreams    LiveStreamsServiceI
-	PlayerThemes   PlayerThemesServiceI
-	RawStatistics  RawStatisticsServiceI
-	UploadTokens   UploadTokensServiceI
-	Videos         VideosServiceI
-	Watermarks     WatermarksServiceI
-	Webhooks       WebhooksServiceI
+	AdvancedAuthentication AdvancedAuthenticationServiceI
+	Captions               CaptionsServiceI
+	Chapters               ChaptersServiceI
+	LiveStreams            LiveStreamsServiceI
+	PlayerThemes           PlayerThemesServiceI
+	RawStatistics          RawStatisticsServiceI
+	UploadTokens           UploadTokensServiceI
+	Videos                 VideosServiceI
+	Watermarks             WatermarksServiceI
+	Webhooks               WebhooksServiceI
 }
 
 // Token contains token for connecting to the api.video API
@@ -177,7 +177,7 @@ func (cb *Builder) Build() *Client {
 		sdkVersion:         cb.sdkVersion,
 	}
 
-	c.Authentication = &AuthenticationService{client: c}
+	c.AdvancedAuthentication = &AdvancedAuthenticationService{client: c}
 	c.Captions = &CaptionsService{client: c}
 	c.Chapters = &ChaptersService{client: c}
 	c.LiveStreams = &LiveStreamsService{client: c}

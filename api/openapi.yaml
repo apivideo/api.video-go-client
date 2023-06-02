@@ -14,8 +14,9 @@ paths:
   /auth/api-key:
     post:
       description: |-
-        To get started, submit your API key in the body of your request. api.video returns an access token that is valid for one hour (3600 seconds). A refresh token is also returned. View a [tutorial](https://api.video/blog/tutorials/authentication-tutorial) on authentication.
-        All tutorials using the [authentication endpoint](https://api.video/blog/endpoints/authenticate)
+        Returns a bearer token that can be used to authenticate other endpoint.
+
+        You can find the tutorial on using the disposable bearer token [here](https://docs.api.video/reference/disposable-bearer-token-authentication).
       operationId: POST_auth-api-key
       requestBody:
         content:
@@ -50,9 +51,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
-      summary: Advanced - Authenticate (1/2)
+      summary: Get Bearer Token
       tags:
-      - Authentication
+      - Advanced authentication
       x-client-action: authenticate
       x-client-hidden: true
       x-readme:
@@ -87,10 +88,10 @@ paths:
             // You get to skip this step!
   /auth/refresh:
     post:
-      description: "Use the refresh endpoint with the refresh token you received when\
-        \ you first authenticated using the api-key endpoint. Send the refresh token\
-        \ in the body of your request. The api.video API returns a new access token\
-        \ that is valid for one hour (3600 seconds) and a new refresh token. \n"
+      description: |-
+        Accepts the old bearer token and returns a new bearer token that can be used to authenticate other endpoint.
+
+        You can find the tutorial on using the disposable bearer token [here](https://docs.api.video/reference/disposable-bearer-token-authentication).
       operationId: POST_auth-refresh
       requestBody:
         content:
@@ -125,9 +126,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
-      summary: Advanced - Refresh token (2/2)
+      summary: Refresh Bearer Token
       tags:
-      - Authentication
+      - Advanced authentication
       x-client-action: refresh
       x-client-hidden: true
       x-readme:
@@ -162,11 +163,8 @@ paths:
             // You get to skip this step!
   /videos:
     get:
-      description: Requests to this endpoint return a list of your videos (with all
-        their details). With no parameters added to this query, the API returns all
-        videos. You can filter what videos the API returns using the parameters described
-        below.  We have [several tutorials](https://api.video/blog/endpoints/video-list)
-        that demonstrate this endpoint.
+      description: List all the video objects that are associated with the current
+        workspace.
       operationId: LIST-videos
       parameters:
       - description: The title of a specific video you want to find. The search will
@@ -400,7 +398,7 @@ paths:
           description: Bad Request
       security:
       - apiKey: []
-      summary: List all videos
+      summary: List all video objects
       tags:
       - Videos
       x-client-description:
@@ -484,39 +482,28 @@ paths:
             // list videos that have all the given metadata values (only first results page)
             const videosWithMetadata = await client.videos.list({ metadata: { "key1": "value1", "key2": "value2" } })
         - language: csharp
-          code: |+
+          code: |
             // First add the "ApiVideo" NuGet package to your project
             // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/VideosApi.md#list
-
         - language: go
-          code: |+
+          code: |
             // First install the go client with "go get github.com/apivideo/api.video-go-client"
             // Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/VideosApi.md#list
-
         - language: python
-          code: |+
+          code: |
             # First install the api client with "pip install api.video"
             # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#list
-
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#list
-
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
       x-optional-object: true
     post:
       description: |
-        We have tutorials on:
-        * [Creating and uploading videos](https://api.video/blog/tutorials/video-upload-tutorial)
-        * [Uploading large videos](https://api.video/blog/tutorials/video-upload-tutorial-large-videos)
-        * [Using tags with videos](https://api.video/blog/tutorials/video-tagging-best-practices)
-        * [Private videos](https://api.video/blog/tutorials/tutorial-private-videos)
-        * [Using Dynamic Metadata](https://api.video/blog/tutorials/dynamic-metadata)
-
-        * Full list of [tutorials](https://api.video/blog/endpoints/video-create) that demonstrate this endpoint.
+        Creates a video object. More information on video objects can be found [here](https://docs.api.video/reference/videos-1).
       operationId: POST-video
       requestBody:
         content:
@@ -596,7 +583,7 @@ paths:
           description: Bad Request
       security:
       - apiKey: []
-      summary: Create a video
+      summary: Create a video object
       tags:
       - Videos
       x-client-action: create
@@ -796,27 +783,12 @@ paths:
                 }
             }
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#create
-
   /videos/{videoId}/source:
     post:
-      description: "To upload a video to the videoId you created. Replace {videoId}\
-        \ with the id you'd like to use, {access_token} with your token, and /path/to/video.mp4\
-        \ with the path to the video you'd like to upload. You can only upload your\
-        \ video to the videoId once.\nWe offer 2 types of upload: \n* Regular upload\
-        \ \n* Progressive upload\nThe latter allows you to split a video source into\
-        \ X chunks and send those chunks independently (concurrently or sequentially).\
-        \ The 2 main goals for our users are to\n  * allow the upload of video sources\
-        \ > 200 MiB (200 MiB = the max. allowed file size for regular upload)\n  *\
-        \ allow to send a video source \"progressively\", i.e., before before knowing\
-        \ the total size of the video.\n  Once all chunks have been sent, they are\
-        \ reaggregated to one source file. The video source is considered as \"completely\
-        \ sent\" when the \"last\" chunk is sent (i.e., the chunk that \"completes\"\
-        \ the upload).\n```bash\ncurl https://ws.api.video/videos/{videoId}/source\
-        \ \\\n  -H 'Authorization: Bearer {access_token}' \\\n  -F file=@/path/to/video.mp4\n\
-        \n  ```\nTutorials using [video upload](https://api.video/blog/endpoints/video-upload)."
+      description: Ingest a video from a source or file.
       operationId: POST_videos-videoId-source
       parameters:
       - description: Enter the videoId you want to use to upload your video.
@@ -828,39 +800,7 @@ paths:
         schema:
           type: string
         style: simple
-      - description: "Content-Range can be used if you want to split your file. You\
-          \ can do this by parts, or by chunk.\n* If you split your file by parts\
-          \ (recommended option), the `Content-Range` header value must match the\
-          \ following pattern: `part <part>/<total_parts>`:\n  * `<part>` is a positive\
-          \ integer representing the part number. The first sequential part number\
-          \ is always 1.\n  * `<total_parts>` is a positive integer representing the\
-          \ total parts of the video source. It can also be `*` if or as long as it\
-          \ is unknown. Technically, this value is required only one time and cannot\
-          \ differ in several requests.\n* If you split your file by bytes, bear in\
-          \ mind byte ranges are inclusive, meaning that bytes 0-5242879 represents\
-          \ the first 5,242,880 bytes in a file or object. Also, the Content-Range\
-          \ header value must match the following pattern: `bytes <from_byte>-<to_byte>/<total_bytes>`:\n\
-          \  * `<from_byte>` is a positive integer or 0. It represents the range start\
-          \ (aka lower bound), i.e., the first byte of the chunk compared to the total\
-          \ bytes composing the full video source. The first sequential range always\
-          \ starts at 0.\n  * `<to_byte>` is a positive integer representing the range\
-          \ end (aka upper bound), i.e., the last byte of the chunk compared to the\
-          \ total bytes composing the full video source.\n  * `<total_bytes>` is a\
-          \ positive integer representing the total bytes composing the full video\
-          \ source. It can also be `*` if or as long as it is unknown. Technically,\
-          \ this value is required only one time and cannot differ in several requests.\n\
-          * Ordering and chunk or part size\n  * The order in which the chunks are\
-          \ received on our side does not matter. \n    * Example: `part 3/*` then\
-          \ `part 2/*` then `part 1/3` works.\n  * The chunks can be sent concurrently.\
-          \ We have a lock mechanism to ensure they are still technically processed\
-          \ one by one to ensure the \"completion\" check behaves as expected.\n \
-          \ * The only chunk that can be smaller than our minimum allowed chunk size\
-          \ (5 MiB) is the last sequential one (i.e., the last sequential range for\
-          \ the \"byte-range\" system and the last part for the \"part\" system.\n\
-          \    * For instance, if your video is 10.5 MiB big, your last chunk would\
-          \ be 500 KiB, and that would work. \n    * Another example is if your video\
-          \ is 2 MiB big, then your first and last chunk will be 2MiB and that will\
-          \ work as well.\n"
+      - description: '`part <part>/<total_parts>` ; `bytes <from_byte>-<to_byte>/<total_bytes>`'
         example: bytes 209715200-419430399/524288000 OR part 2/3
         explode: false
         in: header
@@ -1130,15 +1070,12 @@ paths:
                 }
             }
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#upload
-
   /watermarks:
     get:
-      description: List all watermarks. A watermark is a static image, directly burnt
-        into a video. After you have created your watermark, you can define its placement
-        and aspect when you [create a video](https://docs.api.video/reference/post-video).
+      description: List all watermarks associated with your workspace.
       operationId: LIST-watermarks
       parameters:
       - description: 'Allowed: createdAt. You can search by the time watermark were
@@ -1253,20 +1190,17 @@ paths:
             \ by creation date\nconst watermarks2 = await client.watermarks.list({});\n\
             createdAt\n"
         - language: csharp
-          code: |+
+          code: |
             // First add the "ApiVideo" NuGet package to your project
             // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/WatermarksApi.md#list
-
         - language: go
-          code: |+
+          code: |
             // First install the go client with "go get github.com/apivideo/api.video-go-client"
             // Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/WatermarksApi.md#list
-
         - language: java
-          code: |+
+          code: |
             // First add the "video.api:java-api-client" maven dependency to your project
             // Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/WatermarksApi.md#list
-
         - language: php
           code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
             \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WatermarksApi.md#list\n\
@@ -1278,20 +1212,15 @@ paths:
             \ = $client->watermarks()->list(array(\n    'pageSize' => 5,\n    'sortBy'\
             \ => 'createdAt',\n    'sortOrder' => 'asc'\n)); "
         - language: python
-          code: |+
+          code: |
             # First install the api client with "pip install api.video"
             # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WatermarksApi.md#list
-
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WatermarksAPI.md#list
-
     post:
-      description: Create a new watermark by uploading a `JPG` or a `PNG` image. A
-        watermark is a static image, directly burnt into a video. After you have created
-        your watermark, you can define its placement and aspect when you [create a
-        video](https://docs.api.video/reference/post-video).
+      description: Create a new watermark by uploading a `JPG` or a `PNG` image.
       operationId: POST_watermark
       requestBody:
         content:
@@ -1477,14 +1406,12 @@ paths:
                 }
             }
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WatermarksAPI.md#upload
-
   /watermarks/{watermarkId}:
     delete:
-      description: Delete a watermark. A watermark is a static image, directly burnt-into
-        a video.
+      description: Delete a watermark.
       operationId: DELETE_watermark
       parameters:
       - description: The watermark ID for the watermark you want to delete.
@@ -1527,20 +1454,17 @@ paths:
             const watermarkId = 'watermark_1Bji68oeAAwR44dAb5ZhML'; // The watermark\
             \ ID for the watermark you want to delete.\n\nclient.watermarks.delete(watermarkId);"
         - language: csharp
-          code: |+
+          code: |
             // First add the "ApiVideo" NuGet package to your project
             // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/WatermarksApi.md#delete
-
         - language: go
-          code: |+
+          code: |
             // First install the go client with "go get github.com/apivideo/api.video-go-client"
             // Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/WatermarksApi.md#delete
-
         - language: java
-          code: |+
+          code: |
             // First add the "video.api:java-api-client" maven dependency to your project
             // Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/WatermarksApi.md#delete
-
         - language: php
           code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
             \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/WatermarksApi.md#list\n\
@@ -1550,20 +1474,16 @@ paths:
             \ = 'watermark_1Bji68oeAAwR44dAb5ZhML'; // The watermark ID for the watermark\
             \ you want to delete.\n\n$client->watermarks->delete(watermarkId);"
         - language: python
-          code: |+
+          code: |
             # First install the api client with "pip install api.video"
             # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/WatermarksApi.md#delete
-
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WatermarksAPI.md#delete
-
   /videos/{videoId}/thumbnail:
     patch:
-      description: |-
-        Pick a thumbnail from the given time code. If you'd like to upload an image for your thumbnail, use the [Upload a Thumbnail](https://docs.api.video/reference#post_videos-videoid-thumbnail) endpoint. There may be a short delay for the thumbnail to update.
-        Tutorials using [Thumbnail picking](https://api.video/blog/endpoints/video-pick-a-thumbnail).
+      description: Set a thumbnail from a specific time interval within a video.
       operationId: PATCH_videos-videoId-thumbnail
       parameters:
       - description: Unique identifier of the video you want to add a thumbnail to,
@@ -1634,7 +1554,7 @@ paths:
           description: Not Found
       security:
       - apiKey: []
-      summary: Pick a thumbnail
+      summary: Set a thumbnail
       tags:
       - Videos
       x-client-description:
@@ -1670,7 +1590,7 @@ paths:
             \ video as the thumbnail.\nconst videoThumbnailPickPayload = {\n  timecode:\
             \ \"00:01:00.000\",  // Frame in video to be used as a placeholder before\
             \ the video plays. \n}; \n\nconst video = await client.videos.pickThumbnail(videoId,\
-            \ videoThumbnailPickPayload);\n\n"
+            \ videoThumbnailPickPayload);\n"
         - language: python
           code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#pickThumbnail\n\
@@ -1749,17 +1669,11 @@ paths:
             00:01:00.000\")); // Frame in video to be used as a placeholder before\
             \ the video plays. "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#pickThumbnail
-
     post:
-      description: "The thumbnail is the poster that appears in the player window\
-        \ before video playback begins.\nThis endpoint allows you to upload an image\
-        \ for the thumbnail.\nTo select a still frame from the video using a time\
-        \ stamp, use [Pick a Thumbnail](https://docs.api.video/reference#patch_videos-videoid-thumbnail)\
-        \ to pick a time in the video. \nNote: There may be a short delay before the\
-        \ new thumbnail is delivered to our CDN.\nTutorials using [Thumbnail upload](https://api.video/blog/endpoints/videos-upload-a-thumbnail)."
+      description: Upload a thumbnail for a certain video.
       operationId: POST_videos-videoId-thumbnail
       parameters:
       - description: 'Unique identifier of the chosen video '
@@ -1948,14 +1862,12 @@ paths:
             \ to be added as a thumbnail.\n\n$client->videos()->uploadThumbnail($videoId,\
             \ $thumbnail); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#uploadThumbnail
-
   /videos/{videoId}:
     delete:
-      description: If you do not need a video any longer, you can send a request to
-        delete it. All you need is the videoId. Tutorials using [video deletion](https://api.video/blog/endpoints/video-delete).
+      description: Delete a video object by video ID.
       operationId: DELETE-video
       parameters:
       - description: The video ID for the video you want to delete.
@@ -1985,7 +1897,7 @@ paths:
           description: Not Found
       security:
       - apiKey: []
-      summary: Delete a video
+      summary: Delete a video object
       tags:
       - Videos
       x-client-description:
@@ -2074,15 +1986,11 @@ paths:
             \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n$videoId\
             \ = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // the id of the video to delete\n$client->videos()->delete($videoId); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#delete
-
     get:
-      description: This call provides the same JSON information provided on video
-        creation. For private videos, it will generate a unique token url. Use this
-        to retrieve any details you need about a video, or set up a private viewing
-        URL. Tutorials using [video GET](https://api.video/blog/endpoints/video-get).
+      description: Retrieve the video details by video id.
       operationId: GET-video
       parameters:
       - description: The unique identifier for the video you want details about.
@@ -2146,7 +2054,7 @@ paths:
           description: Not Found
       security:
       - apiKey: []
-      summary: Retrieve a video
+      summary: Retrieve a video object
       tags:
       - Videos
       x-client-description:
@@ -2246,20 +2154,14 @@ paths:
             \ you want the status for.\n$videoStatus = $client->videos()->getStatus($videoId);\
             \  "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#get
-
     patch:
-      description: 'Use this endpoint to update the parameters associated with your
-        video. The video you are updating is determined by the video ID you provide
-        in the path. For each parameter you want to update, include the update in
-        the request body. NOTE: If you are updating an array, you must provide the
-        entire array as what you provide here overwrites what is in the system rather
-        than appending to it. Tutorials using [video update](https://api.video/blog/endpoints/video-update).'
+      description: Update the parameters associated with a video ID.
       operationId: PATCH-video
       parameters:
-      - description: The video ID for the video you want to delete.
+      - description: The video ID for the video you want to update.
         example: vi4k0jvEUuaTdRAEjQ4Jfrgz
         explode: false
         in: path
@@ -2350,14 +2252,15 @@ paths:
           description: Not Found
       security:
       - apiKey: []
-      summary: Update a video
+      summary: Update a video object
       tags:
       - Videos
       x-client-description:
-        default: "Updates the parameters associated with your video. The video you\
-          \ are updating is determined by the video ID you provide. \n\nNOTE: If you\
-          \ are updating an array, you must provide the entire array as what you provide\
-          \ here overwrites what is in the system rather than appending to it.\n"
+        default: "Updates the parameters associated with a video ID. The video object\
+          \ you are updating is determined by the video ID you provide. \n\nNOTE:\
+          \ If you are updating an array, you must provide the entire array as what\
+          \ you provide here overwrites what is in the system rather than appending\
+          \ to it.\n"
       x-client-action: update
       x-readme:
         code-samples:
@@ -2399,8 +2302,7 @@ paths:
             \ contains a key value pair that describes the video. As with tags, you\
             \ must send the complete list of metadata you want as whatever you send\
             \ here will overwrite the existing metadata for the video.\n}; \n\n\n\
-            const updatedVideo = await client.videos.update(videoId, videoUpdatePayload);\n\
-            \n"
+            const updatedVideo = await client.videos.update(videoId, videoUpdatePayload);\n"
         - language: python
           code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#update\n\
@@ -2504,16 +2406,14 @@ paths:
             \ \\ApiVideo\\Client\\Model\\Metadata([\"key\" => \"aa2\", 'value' =>\
             \ \"bb2\"])))); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#update
-
   /videos/{videoId}/status:
     get:
-      description: This API provides upload status & encoding status to determine
-        when the video is uploaded or ready to playback. Once encoding is completed,
-        the response also lists the available stream qualities. Tutorials using [video
-        status](https://api.video/blog/endpoints/video-status).
+      description: Retrieve upload status and encoding status to determine when the
+        video is uploaded or ready to playback. Once encoding is completed, the response
+        also lists the available stream qualities.
       operationId: GET-video-status
       parameters:
       - description: The unique identifier for the video you want the status for.
@@ -2586,7 +2486,7 @@ paths:
           description: Not Found
       security:
       - apiKey: []
-      summary: Retrieve video status
+      summary: Retrieve video status and details
       tags:
       - Videos
       x-client-description:
@@ -2707,15 +2607,12 @@ paths:
             \ you want the status for.\n$videoStatus = $client->videos()->getStatus($videoId);\
             \  "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#getStatus
-
   /upload-tokens:
     get:
-      description: |-
-        A delegated token is used to allow secure uploads without exposing your API key. Use this endpoint to retrieve a list of all currently active delegated tokens.
-        Tutorials using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
+      description: Retrieve a list of all currently active delegated tokens.
       operationId: GET_upload-tokens
       parameters:
       - description: 'Allowed: createdAt, ttl. You can use these to sort by when a
@@ -2799,7 +2696,7 @@ paths:
           description: Success
       security:
       - apiKey: []
-      summary: List all active upload tokens.
+      summary: List all active upload tokens
       tags:
       - Upload Tokens
       x-group-parameters: true
@@ -2934,14 +2831,12 @@ paths:
             \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$uploadTokens\
             \ = $client->uploadTokens()->list(); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/UploadTokensAPI.md#list
-
     post:
-      description: Use this endpoint to generate an upload token. You can use this
-        token to authenticate video uploads while keeping your API key safe. Tutorials
-        using [delegated upload](https://api.video/blog/endpoints/delegated-upload).
+      description: Generates an upload token that can be used to replace the API Key.
+        More information can be found [here](https://docs.api.video/reference/upload-tokens)
       operationId: POST_upload-tokens
       requestBody:
         content:
@@ -3064,10 +2959,9 @@ paths:
             \ token you want to delete. Deleting a token will make it so the token\
             \ can no longer be used for authentication.\n$client->uploadTokens()->deleteToken($uploadToken); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/UploadTokensAPI.md#createToken
-
   /upload-tokens/{uploadToken}:
     delete:
       description: Delete an existing upload token. This is especially useful for
@@ -3208,15 +3102,11 @@ paths:
             \ = 'to1tcmSFHeYY5KzyhOqVKMKb'; // The unique identifier for the token\
             \ you want information about.\n$uploadToken = $client->uploadTokens()->getToken($uploadTokenId); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/UploadTokensAPI.md#deleteToken
-
     get:
-      description: You can retrieve details about a specific upload token if you have
-        the unique identifier for the upload token. Add it in the path of the endpoint.
-        Details include time-to-live (ttl), when the token was created, and when it
-        will expire.
+      description: Retrieve details about a specific upload token by id.
       operationId: GET_upload-tokens-uploadToken
       parameters:
       - description: The unique identifier for the token you want information about.
@@ -3365,35 +3255,12 @@ paths:
             \ = 'to1tcmSFHeYY5KzyhOqVKMKb'; // The unique identifier for the token\
             \ you want information about.\n$uploadToken = $client->uploadTokens()->getToken($uploadTokenId); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/UploadTokensAPI.md#getToken
-
   /upload:
     post:
-      description: "When given a token, anyone can upload a file to the URI `https://ws.api.video/upload?token=<tokenId>`.\n\
-        \nExample with cURL:\n\n```curl\n$ curl  --request POST --url 'https://ws.api.video/upload?token=toXXX'\n\
-        \ --header 'content-type: multipart/form-data'\n -F file=@video.mp4\n```\n\
-        \nOr in an HTML form, with a little JavaScript to convert the form into JSON:\n\
-        ```html\n<!--form for user interaction-->\n<form name=\"videoUploadForm\"\
-        \ >\n  <label for=video>Video:</label>\n  <input type=file name=source/><br/>\n\
-        \  <input value=\"Submit\" type=\"submit\">\n</form>\n<div></div>\n<!--JS\
-        \ takes the form data \n    uses FormData to turn the response into JSON.\n\
-        \    then uses POST to upload the video file.\n    Update the token parameter\
-        \ in the url to your upload token.\n    -->\n<script>\n   var form = document.forms.namedItem(\"\
-        videoUploadForm\");\t\n   form.addEventListener('submit', function(ev) {\n\
-        \t ev.preventDefault();\n     var oOutput = document.querySelector(\"div\"\
-        ),\n         oData = new FormData(form);\n     var oReq = new XMLHttpRequest();\n\
-        \t \n     oReq.open(\"POST\", \"https://ws.api.video/upload?token=toXXX\"\
-        , true);\n     oReq.send(oData);\n\t oReq.onload = function(oEvent) {\n  \
-        \     if (oReq.status ==201) {\n         oOutput.innerHTML = \"Your video\
-        \ is uploaded!<br/>\"  + oReq.response;\n       } else {\n         oOutput.innerHTML\
-        \ = \"Error \" + oReq.status + \" occurred when trying to upload your file.<br\
-        \ \\/>\";\n       }\n     };\n   }, false);\t\n</script>\n```\n\n\n### Dealing\
-        \ with large files\n\nYou can upload large files on api.video with <a href='https://docs.api.video/reference/post_videos-videoid-source'>Progressive\
-        \ Upload</a>. Alternatively, if you want to use regular upload, we have created\
-        \ a <a href='https://api.video/blog/tutorials/uploading-large-files-with-javascript'>tutorial</a>\
-        \ to walk through the steps required."
+      description: Uploading a video with the delegated upload token.
       operationId: POST_upload
       parameters:
       - description: The unique identifier for the token you want to use to upload
@@ -3468,7 +3335,7 @@ paths:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
       security: []
-      summary: Upload with an upload token
+      summary: Upload with an delegated upload token
       tags:
       - Videos
       x-client-description:
@@ -3481,10 +3348,9 @@ paths:
       x-readme:
         code-samples:
         - language: go
-          code: |+
+          code: |
             // First install the go client with "go get github.com/apivideo/api.video-go-client"
             // Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
-
         - language: node
           code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
             \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#uploadWithUploadToken\n\
@@ -3497,20 +3363,17 @@ paths:
             \ a new video.\n      \nconst video = await client.videos.uploadWithUploadToken(token,\
             \ file);\n"
         - language: python
-          code: |+
+          code: |
             # First install the api client with "pip install api.video"
             # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
-
         - language: java
-          code: |+
+          code: |
             // First add the "video.api:java-api-client" maven dependency to your project
             // Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
-
         - language: csharp
-          code: |+
+          code: |
             // First add the "ApiVideo" NuGet package to your project
             // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
-
         - language: php
           code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
             \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#pickThumbnail\n\
@@ -3524,14 +3387,12 @@ paths:
             00:01:00.000\")); // Frame in video to be used as a placeholder before\
             \ the video plays. "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/VideosAPI.md#uploadWithUploadToken
-
   /live-streams:
     get:
-      description: With no parameters added to the url, this will return all livestreams.
-        Query by name or key to limit the list.
+      description: Get the list of livestreams on the workspace.
       operationId: GET_live-streams
       parameters:
       - description: The unique stream key that allows you to stream videos.
@@ -3831,19 +3692,11 @@ paths:
             \    'sortBy' => 'name',\n    'sortOrder' => 'desc',\n    'currentPage'\
             \ => 2,\n    'pageSize' => 30\n)); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#list
-
     post:
-      description: "A live stream will give you the 'connection point' to RTMP your\
-        \ video stream to api.video. \nIt will also give you the details for viewers\
-        \ to watch the same livestream.  \nThe public=false 'private livestream' is\
-        \ available as a BETA feature, and should be limited to livestreams of 3,000\
-        \ viewers or fewer. \nSee our [Live Stream Tutorial](https://api.video/blog/tutorials/live-stream-tutorial)\
-        \ for a walkthrough of this API with OBS. \nYour RTMP endpoint for the livestream\
-        \ is rtmp://broadcast.api.video/s/{streamKey}\nTutorials that [create live\
-        \ streams](https://api.video/blog/endpoints/live-create)."
+      description: Creates a livestream object.
       operationId: POST_live-streams
       requestBody:
         content:
@@ -4114,14 +3967,11 @@ paths:
             \ whose thumbnail you want to delete.\n$liveStream = $client->liveStreams()->deleteThumbnail($liveStreamId);\
             \ \n"
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#delete
-
     get:
-      description: Supply a liveStreamId, and you'll get all the details for streaming
-        into, and watching the livestream. Tutorials that use the [show livestream
-        endpoint](https://api.video/blog/endpoints/live-stream-status).
+      description: Get a livestream by id.
       operationId: GET_live-streams-liveStreamId
       parameters:
       - description: The unique ID for the live stream you want to watch.
@@ -4294,16 +4144,11 @@ paths:
             \ = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream you\
             \ want to retrieve.\n$liveStream = $client->liveStreams()->get($liveStreamId);\n"
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#get
-
     patch:
-      description: "Use this endpoint to update the player, or to turn recording on/off\
-        \ (saving a copy of the livestream). \nNOTE: If the livestream is actively\
-        \ streaming, changing the recording status will only affect the NEXT stream.\
-        \    \nThe public=false \"private livestream\" is available as a BETA feature,\
-        \ and should be limited to livestreams of 3,000 viewers or fewer."
+      description: Updates the livestream object.
       operationId: PATCH_live-streams-liveStreamId
       parameters:
       - description: The unique ID for the live stream that you want to update information
@@ -4430,14 +4275,13 @@ paths:
             \ off.\n    LiveStreamUpdatePayload liveStreamUpdatePayload = new LiveStreamUpdatePayload();\
             \ // \n    liveStreamUpdatePayload.setName(\"My Live Stream Video\");\
             \ // The name you want to use for your live stream.\n    liveStreamUpdatePayload.setPublic();\
-            \ // BETA FEATURE Please limit all public &#x3D; false (&quot;private&quot;)\
-            \ livestreams to 3,000 users.\nWhether your video can be viewed by everyone,\
-            \ or requires authentication to see it. A setting of false will require\
-            \ a unique token for each view.\n    liveStreamUpdatePayload.setRecord(true);\
-            \ // Use this to indicate whether you want the recording on or off. On\
-            \ is true, off is false.\n    liveStreamUpdatePayload.setPlayerId(\"pl45KFKdlddgk654dspkze\"\
-            ); // The unique ID for the player associated with a live stream that\
-            \ you want to update.\n\n\n    try {\n      LiveStream result = apiInstance.update(liveStreamId,\
+            \ // Whether your video can be viewed by everyone, or requires authentication\
+            \ to see it. A setting of false will require a unique token for each view.\n\
+            \    liveStreamUpdatePayload.setRecord(true); // Use this to indicate\
+            \ whether you want the recording on or off. On is true, off is false.\n\
+            \    liveStreamUpdatePayload.setPlayerId(\"pl45KFKdlddgk654dspkze\");\
+            \ // The unique ID for the player associated with a live stream that you\
+            \ want to update.\n\n\n    try {\n      LiveStream result = apiInstance.update(liveStreamId,\
             \ liveStreamUpdatePayload);\n      System.out.println(result);\n    }\
             \ catch (ApiException e) {\n      System.err.println(\"Exception when\
             \ calling LiveStreamsApi#update\");\n      System.err.println(\"Status\
@@ -4484,10 +4328,9 @@ paths:
             \ to update.)\n\n\n$liveStream = $client->liveStreams()->update($liveStreamId,\
             \ $liveStreamUpdatePayload); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#update
-
   /live-streams/{liveStreamId}/thumbnail:
     delete:
       description: Send the unique identifier for a live stream to delete its thumbnail.
@@ -4614,13 +4457,11 @@ paths:
             \ = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream you\
             \ want to watch.\n$liveStream = $client->liveStreams()->get(liveStreamId); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#deleteThumbnail
-
     post:
-      description: Upload an image to use as a backdrop for your livestream. Tutorials
-        that [update live stream thumbnails](https://api.video/blog/endpoints/live-upload-a-thumbnail).
+      description: Upload the thumbnail for the livestream.
       operationId: POST_live-streams-liveStreamId-thumbnail
       parameters:
       - description: The unique ID for the live stream you want to upload.
@@ -4698,7 +4539,7 @@ paths:
             \ from `UploadThumbnail`: LiveStream\n    fmt.Fprintf(os.Stdout, \"Response\
             \ from `LiveStreams.UploadThumbnail`: %v\\\n\", res)\n}\n"
         - language: node
-          code: |+
+          code: |
             // First install the "@api.video/nodejs-client" npm package
             // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/LiveStreamsApi.md#uploadThumbnail
 
@@ -4708,7 +4549,6 @@ paths:
             const file = './thumbnail.jpg'; // The image to be added as a thumbnail.
 
             const livestream = await client.liveStreams.uploadThumbnail(liveStreamId, file);
-
         - language: python
           code: |
             # First install the api client with "pip install api.video"
@@ -4803,15 +4643,12 @@ paths:
             \ // The image to be added as a thumbnail.\n\n$livestream = $client->liveStreams()->uploadThumbnail($liveStreamId,\
             \ $file); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#uploadThumbnail
-
   /videos/{videoId}/captions/{language}:
     delete:
-      description: Delete a caption in a specific language by providing the video
-        ID for the video you want to delete the caption from and the language the
-        caption is in.
+      description: Delete a caption in a specific language by by video id.
       operationId: DELETE_videos-videoId-captions-language
       parameters:
       - description: The unique identifier for the video you want to delete a caption
@@ -4961,14 +4798,11 @@ paths:
             \ from.\n$language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers)\
             \ language representation.\n\n$client->captions()->delete($videoId, $language); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#delete
-
     get:
-      description: |-
-        Retrieve a caption for a video in a specific language. If the language is available, the caption is returned. Otherwise, you will get a response indicating the caption was not found.
-        Tutorials that use the [captions endpoint](https://api.video/blog/endpoints/captions).
+      description: Retrieve a caption for a video in a specific language.
       operationId: GET_videos-videoId-captions-language
       parameters:
       - description: The unique identifier for the video you want captions for.
@@ -5139,13 +4973,11 @@ paths:
             \ = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers)\
             \ language representation\n\n$client->captions()->get($videoId, $language); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#get
-
     patch:
-      description: 'To have the captions on automatically, use this PATCH to set default:
-        true.'
+      description: Update caption settings.
       operationId: PATCH_videos-videoId-captions-language
       parameters:
       - description: The unique identifier for the video you want to have automatic
@@ -5326,14 +5158,12 @@ paths:
             Client\\Model\\CaptionsUpdatePayload())\n    ->setDefault(true);\n \n\
             $caption = $client->captions()->update($videoId, $language, $captionsUpdatePayload); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#update
-
     post:
-      description: |-
-        Upload a VTT file to add captions to your video.
-         Read our [captioning tutorial](https://api.video/blog/tutorials/adding-captions) for more details.
+      description: Upload a VTT file to add captions to your video. More information
+        can be found [here](https://docs.api.video/reference/captions)
       operationId: POST_videos-videoId-captions-language
       parameters:
       - description: The unique identifier for the video you want to add a caption
@@ -5518,13 +5348,12 @@ paths:
             \ you want to upload.\n\n$caption = $client->captions()->upload($videoId,\
             \ $language, $file); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#upload
-
   /videos/{videoId}/captions:
     get:
-      description: Retrieve a list of available captions for the videoId you provide.
+      description: Retrieve a list of available captions by video id.
       operationId: GET_videos-videoId-captions
       parameters:
       - description: The unique identifier for the video you want to retrieve a list
@@ -5723,10 +5552,9 @@ paths:
             \ per page. Minimum value: 1)\n    'pageSize' => 30 // Results per page.\
             \ Allowed values 1-100, default is 25.)\n)); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/CaptionsAPI.md#list
-
   /videos/{videoId}/chapters/{language}:
     delete:
       description: Delete a chapter in a specific language by providing the video
@@ -5880,14 +5708,11 @@ paths:
             \ from.\n$language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers)\
             \ language representation.\n\n$client->chapters()->delete($videoId, $language); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/ChaptersAPI.md#delete
-
     get:
-      description: "Retrieve a chapter for a video in a specific language. \nChapters\
-        \ help your viewers find the sections of the video they are most interested\
-        \ in viewing. Tutorials that use the [chapters endpoint](https://api.video/blog/endpoints/chapters)."
+      description: 'Retrieve a chapter for by video id in a specific language. '
       operationId: GET_videos-videoId-chapters-language
       parameters:
       - description: The unique identifier for the video you want to show a chapter
@@ -6052,10 +5877,9 @@ paths:
             \ from.\n$language = 'en'; // A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers)\
             \ language representation.\n\n$client->chapters()->delete($videoId, $language); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/ChaptersAPI.md#get
-
     post:
       description: |-
         Upload a VTT file to add chapters to your video.
@@ -6248,13 +6072,12 @@ paths:
             \ // The VTT file describing the chapters you want to upload.\n\n$chapter\
             \ = $client->chapters()->upload($videoId, $language, $file); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/ChaptersAPI.md#upload
-
   /videos/{videoId}/chapters:
     get:
-      description: Retrieve a list of all chapters for a specified video.
+      description: Retrieve a list of all chapters for by video id.
       operationId: GET_videos-videoId-chapters
       parameters:
       - description: The unique identifier for the video you want to retrieve a list
@@ -6451,15 +6274,13 @@ paths:
             \ per page. Minimum value: 1)\n    'pageSize' => 30 // Results per page.\
             \ Allowed values 1-100, default is 25.)\n)); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/ChaptersAPI.md#list
-
   /players:
     get:
-      description: |-
-        Retrieve a list of all the player themes you created, as well as details about each one.
-        Tutorials that use the [player endpoint](https://api.video/blog/endpoints/player).
+      description: Retrieve a list of all the player themes you created, as well as
+        details about each one.
       operationId: GET_players
       parameters:
       - description: createdAt is the time the player was created. updatedAt is the
@@ -6736,10 +6557,9 @@ paths:
             \ per page. Minimum ->setvalue(1)\n    'pageSize' => 30 // Results per\
             \ page. Allowed values 1-100, default is 25.\n)); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#list
-
     post:
       description: Create a player for your video, and customise it.
       operationId: POST_players
@@ -6931,10 +6751,31 @@ paths:
             \ title. Default: false)\n    ->setForceLoop(true); // enable/disable\
             \ looping. Default: false)\n\n$playerTheme = $client->playerThemes()->create($playerThemeCreationPayload); "
         - language: swift
-          code: |+
-            // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#create
-
+          code: "// First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started\n\
+            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#create\n\
+            \nApiVideoClient.apiKey = \"YOUR_API_KEY\"\n\nlet videoCreationPayload\
+            \ = PlayerThemeCreationPayload(\n  text = \"rgba(255, 0, 0, 1)\", // RGBA\
+            \ color for timer text. Default: rgba(255, 255, 255, 1)\n  link = \"rgba(0,\
+            \ 0, 255, 1)\", // RGBA color for all controls. Default: rgba(255, 255,\
+            \ 255, 1)\n  linkHover = \"rgba(0, 255, 255, 1)\", // RGBA color for all\
+            \ controls when hovered. Default: rgba(255, 255, 255, 1)\n  trackPlayed\
+            \ = \"rgba(255, 0, 255, 1)\", // RGBA color playback bar: played content.\
+            \ Default: rgba(88, 131, 255, .95)\n  trackUnplayed = \"rgba(255, 255,\
+            \ 255, 1)\", // RGBA color playback bar: downloaded but unplayed (buffered)\
+            \ content. Default: rgba(255, 255, 255, .35)\n  trackBackground = \"rgba(255,\
+            \ 255, 255, 1)\", // RGBA color playback bar: background. Default: rgba(255,\
+            \ 255, 255, .2)\n  backgroundTop = \"rgba(0, 255, 255, 1)\", // RGBA color:\
+            \ top 50% of background. Default: rgba(0, 0, 0, .7)\n  backgroundBottom\
+            \ = \"rgba(255, 255, 255, 1)\", // RGBA color: bottom 50% of background.\
+            \ Default: rgba(0, 0, 0, .7)\n  backgroundText = \"rgba(255, 255, 255,\
+            \ 1)\", // RGBA color for title text. Default: rgba(255, 255, 255, 1)\n\
+            \  enableApi = true, // enable/disable player SDK access. Default: true\n\
+            \  enableControls = true, // enable/disable player controls. Default:\
+            \ true\n  forceAutoplay = true, // enable/disable player autoplay. Default:\
+            \ false\n  hideTitle = true, // enable/disable title. Default: false\n\
+            \  forceLoop = true // enable/disable looping. Default: false\n)\n\n\n\
+            PlayerThemesAPI.create(playerThemeCreationPayload: playerThemeCreationPayload)\
+            \ { (response, error) in\n    \n}\n"
   /players/{playerId}:
     delete:
       description: Delete a player if you no longer need it. You can delete any player
@@ -7075,13 +6916,11 @@ paths:
             \ // The unique identifier for the player you want to delete.\n$client->playerThemes()->delete($playerId);\
             \  "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#delete
-
     get:
-      description: Use a player ID to retrieve details about the player and display
-        it for viewers.
+      description: Retreive a player theme by player id.
       operationId: GET_players-playerId
       parameters:
       - description: 'The unique identifier for the player you want to retrieve. '
@@ -7221,10 +7060,9 @@ paths:
             \ // The unique identifier for the player you want to retrieve. \n$playerTheme\
             \ = $client->playerThemes()->get($playerId);  "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#get
-
     patch:
       description: "Use a player ID to update specific details for a player. \nNOTE:\
         \ It may take up to 10 min before the new player configuration is available\
@@ -7452,10 +7290,9 @@ paths:
             \ looping. Default: false)\n\n\n$playerTheme = $client->playerThemes()->update($playerId,\
             \ $playerThemeUpdatePayload); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#update
-
   /players/{playerId}/logo:
     delete:
       description: Delete the logo associated to a player.
@@ -7594,14 +7431,11 @@ paths:
             \ // The unique identifier for the player whose logo you want to delete.\n\
             $client->playerThemes()->deleteLogo($playerId); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#deleteLogo
-
     post:
-      description: The uploaded image maximum size should be 200x100 and its weight
-        should be 100KB.  It will be scaled down to 30px height and converted to PNG
-        to be displayed in the player.
+      description: Upload an image logo for a player.
       operationId: POST_players-playerId-logo
       parameters:
       - description: The unique identifier for the player.
@@ -7787,10 +7621,9 @@ paths:
             \ to this address.\n\n$playerTheme = $client->playerThemes()->uploadLogo($playerId,\
             \ $file, $link); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/PlayerThemesAPI.md#uploadLogo
-
   /analytics/videos/{videoId}:
     get:
       description: Retrieve all available user sessions for a specific video. Tutorials
@@ -8080,10 +7913,9 @@ paths:
             \    'pageSize' => 30 // Results per page. Allowed values 1-100, default\
             \ is 25.\n)); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/RawStatisticsAPI.md#listVideoSessions
-
   /analytics/live-streams/{liveStreamId}:
     get:
       operationId: GET_analytics-live-streams-liveStreamId
@@ -8348,10 +8180,9 @@ paths:
             \ = await client.rawStatistics.listLiveStreamSessions({ liveStreamId,\
             \ period, currentPage, pageSize })\n"
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/RawStatisticsAPI.md#listLiveStreamSessions
-
   /analytics/sessions/{sessionId}/events:
     get:
       description: Useful to track and measure video's engagement.
@@ -8654,15 +8485,12 @@ paths:
             \ to return per page. Minimum ->setvalue(1)\n    'pageSize' => 30 // Results\
             \ per page. Allowed values 1-100, default is 25.\n)); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/RawStatisticsAPI.md#listSessionEvents
-
   /webhooks:
     get:
-      description: Requests to this endpoint return a list of your webhooks (with
-        all their details). You can filter what the webhook list that the API returns
-        using the parameters described below.
+      description: Retrieve a list of all webhooks configured for the current workspace.
       operationId: LIST-webhooks
       parameters:
       - description: The webhook event that you wish to filter on.
@@ -8852,10 +8680,9 @@ paths:
             // WebhooksListResponse\nconst webhooks = await client.webhooks.list({\
             \ events, currentPage, pageSize }); "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#list
-
     post:
       description: "Webhooks can push notifications to your server, rather than polling\
         \ api.video for changes. We currently offer four events: \n* ```video.encoding.quality.completed```\
@@ -8867,8 +8694,7 @@ paths:
         } ```. This request says that the 720p HLS encoding was completed.\n* ```live-stream.broadcast.started```\
         \  When a live stream begins broadcasting, the broadcasting parameter changes\
         \ from false to true, and this webhook fires.\n* ```live-stream.broadcast.ended```\
-        \  This event fires when the live stream has finished broadcasting, and the\
-        \ broadcasting parameter flips from false to true.\n* ```video.source.recorded```\
+        \  This event fires when a live stream has finished broadcasting.\n* ```video.source.recorded```\
         \  This event occurs when a live stream is recorded and submitted for encoding."
       operationId: POST-webhooks
       requestBody:
@@ -9036,10 +8862,12 @@ paths:
             https://example.com/webhooks\"); // The url to which HTTP notifications\
             \ are sent. It could be any http or https URL.)\n\n$webhook = $client->webhooks()->create($webhooksCreationPayload); "
         - language: swift
-          code: |+
-            // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#create
-
+          code: "// First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started\n\
+            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#create\n\
+            \nApiVideoClient.apiKey = \"YOUR_API_KEY\"\n\nlet webhooksCreationPayload\
+            \ = webhooks-creation-payload(events: [\"events_example\"], url: \"url_example\"\
+            )\n\nWebhooksAPI.create(webhooksCreationPayload: webhooksCreationPayload)\
+            \ { (response, error) in\n \n}\n"
   /webhooks/{webhookId}:
     delete:
       description: This endpoint will delete the indicated webhook.
@@ -9178,13 +9006,11 @@ paths:
             \ // The webhook you wish to delete.\n$client->webhooks()->delete($webhookId);\
             \  "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#delete
-
     get:
-      description: This call provides the same JSON information provided on Webhook
-        creation.
+      description: Retrieve webhook details by id.
       operationId: GET-Webhook
       parameters:
       - description: The unique webhook you wish to retreive details on.
@@ -9322,10 +9148,9 @@ paths:
             \ // The unique webhook you wish to retreive details on.\n\n$webhook =\
             \ $client->webhooks()->get($webhookId);  "
         - language: swift
-          code: |+
+          code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#get
-
 components:
   parameters:
     current-page:
@@ -9968,10 +9793,9 @@ components:
           example: true
           type: boolean
         public:
-          description: BETA FEATURE Please limit all public = false ("private") livestreams
-            to 3,000 users. Whether your video can be viewed by everyone, or requires
-            authentication to see it. A setting of false will require a unique token
-            for each view.
+          description: Whether your video can be viewed by everyone, or requires authentication
+            to see it. A setting of false will require a unique token for each view.
+            Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).
           example: true
           type: boolean
         assets:
@@ -10390,9 +10214,8 @@ components:
           type: string
         public:
           default: true
-          description: Whether your video can be viewed by everyone, or requires authentication
-            to see it. A setting of false will require a unique token for each view.
-            Default is true. Tutorials on [private videos](https://api.video/blog/endpoints/private-videos).
+          description: 'Default: True. If set to `false` the video will become private.
+            More information on private videos can be found [here](https://docs.api.video/docs/private-videos)'
           example: true
           type: boolean
         panoramic:
@@ -10689,10 +10512,9 @@ components:
           example: true
           type: boolean
         public:
-          description: BETA FEATURE Please limit all public = false ("private") livestreams
-            to 3,000 users. Whether your video can be viewed by everyone, or requires
-            authentication to see it. A setting of false will require a unique token
-            for each view.
+          description: Whether your video can be viewed by everyone, or requires authentication
+            to see it. A setting of false will require a unique token for each view.
+            Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).
           type: boolean
         playerId:
           description: The unique identifier for the player.
@@ -10709,10 +10531,9 @@ components:
           example: My Live Stream Video
           type: string
         public:
-          description: BETA FEATURE Please limit all public = false ("private") livestreams
-            to 3,000 users. Whether your video can be viewed by everyone, or requires
-            authentication to see it. A setting of false will require a unique token
-            for each view.
+          description: Whether your video can be viewed by everyone, or requires authentication
+            to see it. A setting of false will require a unique token for each view.
+            Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).
           type: boolean
         record:
           description: Use this to indicate whether you want the recording on or off.
@@ -11201,7 +11022,7 @@ components:
             A list of the webhooks that you are subscribing to. There are Currently four webhook options:
             * ```video.encoding.quality.completed```  Occurs when a new video is uploaded into your account, it will be encoded into several different HLS and mp4 qualities. When each version is encoded, your webhook will get a notification.  It will look like ```{ \"type\": \"video.encoding.quality.completed\", \"emittedAt\": \"2021-01-29T16:46:25.217+01:00\", \"videoId\": \"viXXXXXXXX\", \"encoding\": \"hls\", \"quality\": \"720p\"} ```. This request says that the 720p HLS encoding was completed.
             * ```live-stream.broadcast.started```  When a live stream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
-            * ```live-stream.broadcast.ended```  This event fires when the live stream has finished broadcasting, and the broadcasting parameter flips from false to true.
+            * ```live-stream.broadcast.ended```  This event fires when a live stream has finished broadcasting.
             * ```video.source.recorded```  Occurs when a live stream is recorded and submitted for encoding.
           example:
           - video.encoding.quality.completed
@@ -11256,13 +11077,13 @@ components:
         width:
           description: 'Width of the watermark-image relative to the video if expressed
             in %. Otherwise a fixed width. NOTE: To keep intrinsic watermark-image
-            width use initial'
+            width use `initial`.'
           example: initial
           type: string
         height:
-          description: 'Width of the watermark-image relative to the video if expressed
+          description: 'Height of the watermark-image relative to the video if expressed
             in %. Otherwise a fixed height. NOTE: To keep intrinsic watermark-image
-            height use initial'
+            height use `initial`.'
           example: initial
           type: string
         opacity:
@@ -11738,6 +11559,8 @@ components:
     apiKey:
       scheme: basic
       type: http
+x-stoplight:
+  id: ybzk39fiws46g
 x-client-base-paths:
   production: https://ws.api.video
   sandbox: https://sandbox.api.video

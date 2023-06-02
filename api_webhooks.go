@@ -121,7 +121,7 @@ type WebhooksService struct {
 
 * ```live-stream.broadcast.started```  When a live stream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
 
-* ```live-stream.broadcast.ended```  This event fires when the live stream has finished broadcasting, and the broadcasting parameter flips from false to true.
+* ```live-stream.broadcast.ended```  This event fires when a live stream has finished broadcasting.
 
 * ```video.source.recorded```  This event occurs when a live stream is recorded and submitted for encoding.
 
@@ -142,7 +142,7 @@ func (s *WebhooksService) Create(webhooksCreationPayload WebhooksCreationPayload
 
 * ```live-stream.broadcast.started```  When a live stream begins broadcasting, the broadcasting parameter changes from false to true, and this webhook fires.
 
-* ```live-stream.broadcast.ended```  This event fires when the live stream has finished broadcasting, and the broadcasting parameter flips from false to true.
+* ```live-stream.broadcast.ended```  This event fires when a live stream has finished broadcasting.
 
 * ```video.source.recorded```  This event occurs when a live stream is recorded and submitted for encoding.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -178,7 +178,7 @@ func (s *WebhooksService) CreateWithContext(ctx context.Context, webhooksCreatio
 
 /*
  * Get Retrieve Webhook details
- * This call provides the same JSON information provided on Webhook creation.
+ * Retrieve webhook details by id.
 
  * @param webhookId The unique webhook you wish to retreive details on.
  * @return WebhooksApiGetRequest
@@ -192,7 +192,7 @@ func (s *WebhooksService) Get(webhookId string) (*Webhook, error) {
 
 /*
  * Get Retrieve Webhook details
- * This call provides the same JSON information provided on Webhook creation.
+ * Retrieve webhook details by id.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param webhookId The unique webhook you wish to retreive details on.
  * @return WebhooksApiGetRequest

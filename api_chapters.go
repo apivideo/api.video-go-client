@@ -216,14 +216,12 @@ func (s *ChaptersService) UploadWithContext(ctx context.Context, videoId string,
 
 /*
  * Get Retrieve a chapter
- * Retrieve a chapter for a video in a specific language.
-
-Chapters help your viewers find the sections of the video they are most interested in viewing. Tutorials that use the [chapters endpoint](https://api.video/blog/endpoints/chapters).
+ * Retrieve a chapter for by video id in a specific language.
 
  * @param videoId The unique identifier for the video you want to show a chapter for.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
  * @return ChaptersApiGetRequest
-*/
+ */
 
 func (s *ChaptersService) Get(videoId string, language string) (*Chapter, error) {
 
@@ -233,14 +231,12 @@ func (s *ChaptersService) Get(videoId string, language string) (*Chapter, error)
 
 /*
  * Get Retrieve a chapter
- * Retrieve a chapter for a video in a specific language.
-
-Chapters help your viewers find the sections of the video they are most interested in viewing. Tutorials that use the [chapters endpoint](https://api.video/blog/endpoints/chapters).
+ * Retrieve a chapter for by video id in a specific language.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want to show a chapter for.
  * @param language A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
  * @return ChaptersApiGetRequest
-*/
+ */
 
 func (s *ChaptersService) GetWithContext(ctx context.Context, videoId string, language string) (*Chapter, error) {
 	var localVarPostBody interface{}
@@ -319,7 +315,7 @@ func (s *ChaptersService) DeleteWithContext(ctx context.Context, videoId string,
 
 /*
  * List List video chapters
- * Retrieve a list of all chapters for a specified video.
+ * Retrieve a list of all chapters for by video id.
 
  * @param videoId The unique identifier for the video you want to retrieve a list of chapters for.
  * @return ChaptersApiListRequest
@@ -333,7 +329,7 @@ func (s *ChaptersService) List(videoId string, r ChaptersApiListRequest) (*Chapt
 
 /*
  * List List video chapters
- * Retrieve a list of all chapters for a specified video.
+ * Retrieve a list of all chapters for by video id.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want to retrieve a list of chapters for.
  * @return ChaptersApiListRequest
