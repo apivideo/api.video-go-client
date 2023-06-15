@@ -14,8 +14,8 @@ import (
 //"encoding/json"
 )
 
-// BadRequest struct for BadRequest
-type BadRequest struct {
+// AdditionalBadRequestErrors struct for AdditionalBadRequestErrors
+type AdditionalBadRequestErrors struct {
 	// A link to the error documentation.
 	Type *string `json:"type,omitempty"`
 	// A description of the error that occurred.
@@ -24,29 +24,27 @@ type BadRequest struct {
 	Name *string `json:"name,omitempty"`
 	// The HTTP status code.
 	Status *int32 `json:"status,omitempty"`
-	// Returns any additional problems in the request in an array of objects.
-	Problems *[]AdditionalBadRequestErrors `json:"problems,omitempty"`
 }
 
-// NewBadRequest instantiates a new BadRequest object
+// NewAdditionalBadRequestErrors instantiates a new AdditionalBadRequestErrors object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBadRequest() *BadRequest {
-	this := BadRequest{}
+func NewAdditionalBadRequestErrors() *AdditionalBadRequestErrors {
+	this := AdditionalBadRequestErrors{}
 	return &this
 }
 
-// NewBadRequestWithDefaults instantiates a new BadRequest object
+// NewAdditionalBadRequestErrorsWithDefaults instantiates a new AdditionalBadRequestErrors object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBadRequestWithDefaults() *BadRequest {
-	this := BadRequest{}
+func NewAdditionalBadRequestErrorsWithDefaults() *AdditionalBadRequestErrors {
+	this := AdditionalBadRequestErrors{}
 	return &this
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *BadRequest) GetType() string {
+func (o *AdditionalBadRequestErrors) GetType() string {
 	if o == nil || o.Type == nil {
 		var ret string
 		return ret
@@ -56,7 +54,7 @@ func (o *BadRequest) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BadRequest) GetTypeOk() (*string, bool) {
+func (o *AdditionalBadRequestErrors) GetTypeOk() (*string, bool) {
 	if o == nil || o.Type == nil {
 		return nil, false
 	}
@@ -64,7 +62,7 @@ func (o *BadRequest) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *BadRequest) HasType() bool {
+func (o *AdditionalBadRequestErrors) HasType() bool {
 	if o != nil && o.Type != nil {
 		return true
 	}
@@ -73,12 +71,12 @@ func (o *BadRequest) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *BadRequest) SetType(v string) {
+func (o *AdditionalBadRequestErrors) SetType(v string) {
 	o.Type = &v
 }
 
 // GetTitle returns the Title field value if set, zero value otherwise.
-func (o *BadRequest) GetTitle() string {
+func (o *AdditionalBadRequestErrors) GetTitle() string {
 	if o == nil || o.Title == nil {
 		var ret string
 		return ret
@@ -88,7 +86,7 @@ func (o *BadRequest) GetTitle() string {
 
 // GetTitleOk returns a tuple with the Title field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BadRequest) GetTitleOk() (*string, bool) {
+func (o *AdditionalBadRequestErrors) GetTitleOk() (*string, bool) {
 	if o == nil || o.Title == nil {
 		return nil, false
 	}
@@ -96,7 +94,7 @@ func (o *BadRequest) GetTitleOk() (*string, bool) {
 }
 
 // HasTitle returns a boolean if a field has been set.
-func (o *BadRequest) HasTitle() bool {
+func (o *AdditionalBadRequestErrors) HasTitle() bool {
 	if o != nil && o.Title != nil {
 		return true
 	}
@@ -105,12 +103,12 @@ func (o *BadRequest) HasTitle() bool {
 }
 
 // SetTitle gets a reference to the given string and assigns it to the Title field.
-func (o *BadRequest) SetTitle(v string) {
+func (o *AdditionalBadRequestErrors) SetTitle(v string) {
 	o.Title = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *BadRequest) GetName() string {
+func (o *AdditionalBadRequestErrors) GetName() string {
 	if o == nil || o.Name == nil {
 		var ret string
 		return ret
@@ -120,7 +118,7 @@ func (o *BadRequest) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BadRequest) GetNameOk() (*string, bool) {
+func (o *AdditionalBadRequestErrors) GetNameOk() (*string, bool) {
 	if o == nil || o.Name == nil {
 		return nil, false
 	}
@@ -128,7 +126,7 @@ func (o *BadRequest) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *BadRequest) HasName() bool {
+func (o *AdditionalBadRequestErrors) HasName() bool {
 	if o != nil && o.Name != nil {
 		return true
 	}
@@ -137,12 +135,12 @@ func (o *BadRequest) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *BadRequest) SetName(v string) {
+func (o *AdditionalBadRequestErrors) SetName(v string) {
 	o.Name = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *BadRequest) GetStatus() int32 {
+func (o *AdditionalBadRequestErrors) GetStatus() int32 {
 	if o == nil || o.Status == nil {
 		var ret int32
 		return ret
@@ -152,7 +150,7 @@ func (o *BadRequest) GetStatus() int32 {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BadRequest) GetStatusOk() (*int32, bool) {
+func (o *AdditionalBadRequestErrors) GetStatusOk() (*int32, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -160,7 +158,7 @@ func (o *BadRequest) GetStatusOk() (*int32, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *BadRequest) HasStatus() bool {
+func (o *AdditionalBadRequestErrors) HasStatus() bool {
 	if o != nil && o.Status != nil {
 		return true
 	}
@@ -169,65 +167,33 @@ func (o *BadRequest) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given int32 and assigns it to the Status field.
-func (o *BadRequest) SetStatus(v int32) {
+func (o *AdditionalBadRequestErrors) SetStatus(v int32) {
 	o.Status = &v
 }
 
-// GetProblems returns the Problems field value if set, zero value otherwise.
-func (o *BadRequest) GetProblems() []AdditionalBadRequestErrors {
-	if o == nil || o.Problems == nil {
-		var ret []AdditionalBadRequestErrors
-		return ret
-	}
-	return *o.Problems
-}
-
-// GetProblemsOk returns a tuple with the Problems field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BadRequest) GetProblemsOk() (*[]AdditionalBadRequestErrors, bool) {
-	if o == nil || o.Problems == nil {
-		return nil, false
-	}
-	return o.Problems, true
-}
-
-// HasProblems returns a boolean if a field has been set.
-func (o *BadRequest) HasProblems() bool {
-	if o != nil && o.Problems != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetProblems gets a reference to the given []AdditionalBadRequestErrors and assigns it to the Problems field.
-func (o *BadRequest) SetProblems(v []AdditionalBadRequestErrors) {
-	o.Problems = &v
-}
-
-type NullableBadRequest struct {
-	value *BadRequest
+type NullableAdditionalBadRequestErrors struct {
+	value *AdditionalBadRequestErrors
 	isSet bool
 }
 
-func (v NullableBadRequest) Get() *BadRequest {
+func (v NullableAdditionalBadRequestErrors) Get() *AdditionalBadRequestErrors {
 	return v.value
 }
 
-func (v *NullableBadRequest) Set(val *BadRequest) {
+func (v *NullableAdditionalBadRequestErrors) Set(val *AdditionalBadRequestErrors) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBadRequest) IsSet() bool {
+func (v NullableAdditionalBadRequestErrors) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBadRequest) Unset() {
+func (v *NullableAdditionalBadRequestErrors) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBadRequest(val *BadRequest) *NullableBadRequest {
-	return &NullableBadRequest{value: val, isSet: true}
+func NewNullableAdditionalBadRequestErrors(val *AdditionalBadRequestErrors) *NullableAdditionalBadRequestErrors {
+	return &NullableAdditionalBadRequestErrors{value: val, isSet: true}
 }
