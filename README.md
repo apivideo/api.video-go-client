@@ -12,6 +12,7 @@
   - [Code sample](#code-sample)
 - [Documentation](#documentation)
   - [API Endpoints](#api-endpoints)
+    - [Analytics](#analytics)
     - [Captions](#captions)
     - [Chapters](#chapters)
     - [LiveStreams](#livestreams)
@@ -113,6 +114,23 @@ func main() {
 ## API Endpoints
 
 All URIs are relative to *https://ws.api.video*
+
+
+### Analytics
+
+
+#### Retrieve an instance of the Analytics API:
+```golang
+client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
+analyticsApi := client.Analytics
+```
+
+#### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**GetLiveStreamsPlays**](docs/Analytics.md#GetLiveStreamsPlays) | **Get** /analytics/live-streams/plays | Get play events for live stream
+[**GetVideosPlays**](docs/Analytics.md#GetVideosPlays) | **Get** /analytics/videos/plays | Get play events for video
 
 
 ### Captions
@@ -303,6 +321,9 @@ Method | HTTP request | Description
 
  - [AccessToken](docs/AccessToken.md)
  - [AdditionalBadRequestErrors](docs/AdditionalBadRequestErrors.md)
+ - [AnalyticsData](docs/AnalyticsData.md)
+ - [AnalyticsPlays400Error](docs/AnalyticsPlays400Error.md)
+ - [AnalyticsPlaysResponse](docs/AnalyticsPlaysResponse.md)
  - [AuthenticatePayload](docs/AuthenticatePayload.md)
  - [BadRequest](docs/BadRequest.md)
  - [BytesRange](docs/BytesRange.md)

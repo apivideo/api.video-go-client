@@ -31,6 +31,7 @@ type Client struct {
 	sdkVersion         string
 
 	AdvancedAuthentication AdvancedAuthenticationServiceI
+	Analytics              AnalyticsServiceI
 	Captions               CaptionsServiceI
 	Chapters               ChaptersServiceI
 	LiveStreams            LiveStreamsServiceI
@@ -178,6 +179,7 @@ func (cb *Builder) Build() *Client {
 	}
 
 	c.AdvancedAuthentication = &AdvancedAuthenticationService{client: c}
+	c.Analytics = &AnalyticsService{client: c}
 	c.Captions = &CaptionsService{client: c}
 	c.Chapters = &ChaptersService{client: c}
 	c.LiveStreams = &LiveStreamsService{client: c}
@@ -255,7 +257,7 @@ func (c *Client) prepareRequest(
 		req.Header.Set("AV-Origin-Sdk", originSdkHeaderValue)
 	}
 
-	req.Header.Set("AV-Origin-Client", "go:1.2.6")
+	req.Header.Set("AV-Origin-Client", "go:1.3.0")
 
 	for headerName := range headerParams {
 		req.Header.Set(headerName, headerParams[headerName])
@@ -530,7 +532,7 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 			req.Header.Set("AV-Origin-Sdk", originSdkHeaderValue)
 		}
 
-		req.Header.Set("AV-Origin-Client", "go:1.2.6")
+		req.Header.Set("AV-Origin-Client", "go:1.3.0")
 
 		resp, err := c.httpClient.Do(req)
 
