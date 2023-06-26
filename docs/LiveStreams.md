@@ -26,23 +26,33 @@ Create live stream
 
 
 ### Example
+
 ```go
-// instantiate the client 
-client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+package main
 
-liveStreamCreationPayload := apivideosdk.LiveStreamCreationPayload{}
-liveStreamCreationPayload.SetName("My Live Stream Video") // Add a name for your live stream here.
-liveStreamCreationPayload.SetRecord(false) // Whether you are recording or not. True for record, false for not record.
-liveStreamCreationPayload.SetPublic(true) // Whether your video can be viewed by everyone, or requires authentication to see it.
-liveStreamCreationPayload.SetPlayerId("pl4f4ferf5erfr5zed4fsdd") // The unique identifier for the player.
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
 
-res, err := client.LiveStreams.Create(liveStreamCreationPayload)
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+        
+    liveStreamCreationPayload := *apivideosdk.NewLiveStreamCreationPayload("My Live Stream Video") // LiveStreamCreationPayload | 
 
-if err != nil {
-    fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Create``: %v", err)
+    
+    res, err := client.LiveStreams.Create(liveStreamCreationPayload)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Create``: %v\n", err)
+    }
+    // response from `Create`: LiveStream
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Create`: %v\n", res)
 }
-
-fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Create`: %v", res)
 ```
 ### Path Parameters
 
@@ -77,6 +87,7 @@ Retrieve live stream
 
 
 ### Example
+
 ```go
 package main
 
@@ -90,7 +101,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream you want to watch.
 
@@ -98,12 +109,10 @@ func main() {
     res, err := client.LiveStreams.Get(liveStreamId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Get``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Get``: %v\n", err)
     }
     // response from `Get`: LiveStream
-    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Get`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Get`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -141,6 +150,7 @@ Update a live stream
 
 
 ### Example
+
 ```go
 package main
 
@@ -154,7 +164,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
     liveStreamUpdatePayload := *apivideosdk.NewLiveStreamUpdatePayload() // LiveStreamUpdatePayload | 
@@ -163,12 +173,10 @@ func main() {
     res, err := client.LiveStreams.Update(liveStreamId, liveStreamUpdatePayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Update``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Update``: %v\n", err)
     }
     // response from `Update`: LiveStream
-    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Update`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `LiveStreams.Update`: %v\n", res)
 }
 ```
 ### Path Parameters

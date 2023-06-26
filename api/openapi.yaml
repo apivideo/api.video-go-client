@@ -3396,7 +3396,7 @@ paths:
       operationId: GET_live-streams
       parameters:
       - description: The unique stream key that allows you to stream videos.
-        example: 30087931-229e-42cf-b5f9-e91bcc1f7332
+        example: dw-dew8-q6w9-k67w-1ws8
         explode: true
         in: query
         name: streamKey
@@ -3474,6 +3474,13 @@ paths:
                       createdAt: 2020-01-31T10:17:47.000Z
                       updatedAt: 2020-03-09T13:19:43.000Z
                       streamKey: 30087931-229e-42cf-b5f9-e91bcc1f7332
+                      restreams:
+                      - name: YouTube
+                        serverUrl: rtmp://youtube.broadcast.example.com
+                        streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385188
+                      - name: Twitch
+                        serverUrl: rtmp://twitch.broadcast.example.com
+                        streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385188
                       name: Live Stream From the browser
                       public: true
                       record: true
@@ -3489,6 +3496,13 @@ paths:
                       createdAt: 2020-07-29T10:45:35.000Z
                       updatedAt: 2020-07-29T10:45:35.000Z
                       streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+                      restreams:
+                      - name: YouTube
+                        serverUrl: rtmp://youtube.broadcast.example.com
+                        streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+                      - name: Twitch
+                        serverUrl: rtmp://twitch.broadcast.example.com
+                        streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
                       name: Live From New York
                       public: true
                       record: true
@@ -3709,29 +3723,61 @@ paths:
           content:
             application/json:
               examples:
-                response:
-                  value:
-                    liveStreamId: li4pqNqGUkhKfWcBGpZVLRY5
-                    createdAt: 2020-07-29T10:45:35.000Z
-                    updatedAt: 2020-07-29T10:45:35.000Z
-                    streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
-                    name: Live From New York
-                    public: true
-                    record: true
-                    broadcasting: false
-                    assets:
-                      iframe: <iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"
-                        width="100%" height="100%" frameborder="0" scrolling="no"
-                        allowfullscreen=""></iframe>
-                      player: https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5
-                      hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
-                      thumbnail: https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg
+                live-stream-response-example:
+                  $ref: '#/components/examples/live-stream-response-example'
               schema:
                 $ref: '#/components/schemas/live-stream'
           description: Success
         "400":
           content:
             application/json:
+              examples:
+                Empty field in restreams array:
+                  description: This error occurs when a field is empty in the `restreams`
+                    array in your request.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This value should not be blank.
+                    name: restreams[0][name]
+                Missing app name in serverUrl:
+                  description: This error occurs when the rtmp app name is missing
+                    from `serverURL` in the `restreams` array.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: 'Missing app name: rtmp://[host]/[app name].'
+                    name: restreams[0][serverUrl]
+                Incorrect URL in serverUrl:
+                  description: This error occurs when the URL you set in `serverURL`
+                    is not `rtmp`.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: 'RTMP URL should have the following format: rtmp://[host]/[app
+                      name].'
+                    name: restreams[0][serverUrl]
+                Too many restream destinations:
+                  description: This error occurs when you set more than 5 restream
+                    destinations.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This collection should contain 5 elements or less.
+                    name: restreams
+                null field in the restreams array:
+                  description: This error occurs when a field is sent as `null` in
+                    the `restreams` array in your request.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This value should not be null.
+                    name: restreams[0][name]
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
@@ -3741,102 +3787,6 @@ paths:
       tags:
       - Live Streams
       x-client-action: create
-      x-readme:
-        code-samples:
-        - language: go
-          code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
-            \n// Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreamsApi.md#create\n\
-            \n                  \n// instantiate the client \nclient := apivideosdk.ClientBuilder(\"\
-            YOUR_API_KEY\").Build()\n\nliveStreamCreationPayload := apivideosdk.LiveStreamCreationPayload{}\n\
-            liveStreamCreationPayload.SetName(\"My Live Stream Video\") // Add a name\
-            \ for your live stream here.\nliveStreamCreationPayload.SetRecord(false)\
-            \ // Whether you are recording or not. True for record, false for not\
-            \ record.\nliveStreamCreationPayload.SetPublic(true) // Whether your video\
-            \ can be viewed by everyone, or requires authentication to see it.\nliveStreamCreationPayload.SetPlayerId(\"\
-            pl4f4ferf5erfr5zed4fsdd\") // The unique identifier for the player.\n\n\
-            res, err := client.LiveStreams.Create(liveStreamCreationPayload)\n\nif\
-            \ err != nil {\n    fmt.Fprintf(os.Stderr, \"Error when calling `LiveStreams.Create``:\
-            \ %v\", err)\n}\n\nfmt.Fprintf(os.Stdout, \"Response from `LiveStreams.Create`:\
-            \ %v\", res)\n"
-        - language: node
-          code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
-            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/LiveStreamsApi.md#create\n\
-            \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
-            const liveStreamCreationPayload = {\n    record: false, // Whether you\
-            \ are recording or not. True for record, false for not record.\n    name:\
-            \ \"My Live Stream\", // Add a name for your live stream here.\n    _public:\
-            \ true, // Whether your video can be viewed by everyone, or requires authentication\
-            \ to see it. \n    playerId: \"pl4f4ferf5erfr5zed4fsdd\", // The unique\
-            \ identifier for the player.\n}; \n\nconst liveStream = await client.liveStreams.create(liveStreamCreationPayload);\n"
-        - language: python
-          code: "# First install the api client with \"pip install api.video\"\n#\
-            \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#create\n\
-            \nfrom apivideo.api.live_streams_api import LiveStreamsApi\nfrom apivideo.model.live_stream_creation_payload\
-            \ import LiveStreamCreationPayload\nfrom apivideo import AuthenticatedApiClient,\
-            \ ApiException\n\nwith AuthenticatedApiClient(\"YOUR_API_KEY\") as api_client:\n\
-            \    live_stream_creation_payload = LiveStreamCreationPayload(\n     \
-            \   record=False,\n        name=\"My Live Stream Video\",\n        public=True,\n\
-            \        player_id=\"pl4f4ferf5erfr5zed4fsdd\",\n    ) \n\n    try:\n\
-            \        live_stream = LiveStreamsApi(api_client).create(live_stream_creation_payload)\n\
-            \        print(live_stream)\n    except ApiException as e:\n        print(\"\
-            Exception when calling LiveStreamsApi->create: %s\" % e)\n"
-        - language: java
-          code: "// First add the \"video.api:java-api-client\" maven dependency to\
-            \ your project\n// Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/LiveStreamsApi.md#create\n\
-            \n                  \n// instantiate the client \nApiVideoClient client\
-            \ = new ApiVideoClient(\"YOUR_API_KEY\");\n\nLiveStreamCreationPayload\
-            \ liveStreamCreationPayload = new LiveStreamCreationPayload(); \nliveStreamCreationPayload.setRecord(true);\
-            \ // Whether you are recording or not. True for record, false for not\
-            \ record.\nliveStreamCreationPayload.setName(\"My Live Stream Video\"\
-            ); // Add a name for your live stream here.\nliveStreamCreationPayload.setPublic();\
-            \ // Whether your video can be viewed by everyone, or requires authentication\
-            \ to see it.\nliveStreamCreationPayload.setPlayerId(\"pl4f4ferf5erfr5zed4fsdd\"\
-            ); // The unique identifier for the player.\n\n\ntry {\n  LiveStream liveStream\
-            \ = client.liveStreams().create(liveStreamCreationPayload);\n  System.out.println(liveStream);\n\
-            } catch (ApiException e) {\n  e.printStackTrace();\n}\n"
-        - language: csharp
-          code: "// First add the \"ApiVideo\" NuGet package to your project\n// Documentation:\
-            \ https://github.com/apivideo/api.video-csharp-client/blob/main/docs/LiveStreamsApi.md#create\n\
-            \n                  \nvar apiVideoClient = new ApiVideoClient(\"YOUR_API_KEY\"\
-            );\n\nvar liveStreamCreationPayload = new LiveStreamCreationPayload()\n\
-            {\n    record = false,\n    name = \"My Live Stream Video\",\n    _public\
-            \ = true,\n    playerid = \"pl4f4ferf5erfr5zed4fsdd\",\n};\n\ntry\n{\n\
-            \    var liveStream = apiVideoClient.LiveStreams().create(liveStreamCreationPayload);\n\
-            }\ncatch (ApiException e)\n{\n    // Manage create error here\n}\n"
-        - language: php
-          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
-            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#create\n\
-            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
-            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
-            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n$liveStream\
-            \ = $client->liveStreams()->create((new \\ApiVideo\\Client\\Model\\LiveStreamCreationPayload())\n\
-            \    ->setRecord(false) // Whether you are recording or not. True for\
-            \ record, false for not record.\n    ->setName(\"My Live Stream Video\"\
-            ) // Add a name for your live stream here.\n    ->setPublic(true) // Whether\
-            \ your video can be viewed by everyone, or requires authentication to\
-            \ see it. \n    ->setPlayerId(\"pl4f4ferf5erfr5zed4fsdd\")); // The unique\
-            \ identifier for the player. \n"
-        - language: swift
-          code: |
-            // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#create
-
-            ApiVideoClient.apiKey = "YOUR_API_KEY"
-
-            let liveStreamCreationPayload = LiveStreamCreationPayload(
-                name: "My Live Stream Video",
-                record: false,
-                _public: true,
-                playerId: "pl4f4ferf5erfr5zed4fsdd")
-
-            LiveStreamsAPI.create(liveStreamCreationPayload: liveStreamCreationPayload) { liveStream, error in
-               if let liveStream = liveStream  {
-                   // Do something with the livestream
-               }
-               if let error = error {
-                  // Manage create error here
-               }
-            }
   /live-streams/{liveStreamId}:
     delete:
       description: If you do not need a live stream any longer, you can send a request
@@ -3988,23 +3938,8 @@ paths:
           content:
             application/json:
               examples:
-                response:
-                  value:
-                    liveStreamId: li400mYKSgQ6xs7taUeSaEKr
-                    createdAt: 2020-01-31T10:17:47.000Z
-                    updatedAt: 2020-03-09T13:19:43.000Z
-                    streamKey: 30087931-229e-42cf-b5f9-e91bcc1f7332
-                    name: Live Stream From the browser
-                    public: true
-                    record: true
-                    broadcasting: false
-                    assets:
-                      iframe: <iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr"
-                        width="100%" height="100%" frameborder="0" scrolling="no"
-                        allowfullscreen=""></iframe>
-                      player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
-                      hls: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8
-                      thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+                live-stream-response-example:
+                  $ref: '#/components/examples/live-stream-response-example'
               schema:
                 $ref: '#/components/schemas/live-stream'
           description: Success
@@ -4014,139 +3949,6 @@ paths:
       tags:
       - Live Streams
       x-client-action: get
-      x-readme:
-        code-samples:
-        - language: go
-          code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
-            \n// Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreamsApi.md#get\n\
-            \npackage main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\n\
-            \    apivideosdk \"github.com/apivideo/api.video-go-client\"\n)\n\nfunc\
-            \ main() {\n    client := apivideosdk.ClientBuilder(\"YOUR_API_KEY\").Build()\n\
-            \    // if you rather like to use the sandbox environment:\n    // client\
-            \ := apivideosdk.SandboxClientBuilder(\"YOUR_SANDBOX_API_KEY\").Build()\n\
-            \        \n    liveStreamId := \"li400mYKSgQ6xs7taUeSaEKr\" // string\
-            \ | The unique ID for the live stream you want to watch.\n\n    \n   \
-            \ res, err := client.LiveStreams.Get(liveStreamId)\n\n    if err != nil\
-            \ {\n        fmt.Fprintf(os.Stderr, \"Error when calling `LiveStreams.Get``:\
-            \ %v\\\n\", err)\n    }\n    // response from `Get`: LiveStream\n    fmt.Fprintf(os.Stdout,\
-            \ \"Response from `LiveStreams.Get`: %v\\\n\", res)\n}\n"
-        - language: node
-          code: |
-            // First install the "@api.video/nodejs-client" npm package
-            // Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/LiveStreamsApi.md#get
-
-            const client = new ApiVideoClient({ apiKey: "YOUR_API_KEY" });
-
-            const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream you want to retrieve.
-
-            const liveStream = await client.liveStreams.get(liveStreamId);
-        - language: python
-          code: |
-            # First install the api client with "pip install api.video"
-            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#get
-
-            import apivideo
-            from apivideo.api import live_streams_api
-            from apivideo.model.live_stream import LiveStream
-            from pprint import pprint
-
-            # Enter a context with an instance of the API client
-            with apivideo.AuthenticatedApiClient(__API_KEY__) as api_client:
-                # Create an instance of the API class
-                api_instance = live_streams_api.LiveStreamsApi(api_client)
-                live_stream_id = "li400mYKSgQ6xs7taUeSaEKr" # str | The unique ID for the live stream you want to watch.
-
-                # example passing only required values which don't have defaults set
-                try:
-                    # Show live stream
-                    api_response = api_instance.get(live_stream_id)
-                    pprint(api_response)
-                except apivideo.ApiException as e:
-                    print("Exception when calling LiveStreamsApi->get: %s\n" % e)
-        - language: java
-          code: "// First add the \"video.api:java-api-client\" maven dependency to\
-            \ your project\n// Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/LiveStreamsApi.md#get\n\
-            \nimport video.api.client.ApiVideoClient;\nimport video.api.client.api.ApiException;\n\
-            import video.api.client.api.models.*;\nimport video.api.client.api.clients.LiveStreamsApi;\n\
-            import java.util.*;\n\npublic class Example {\n  public static void main(String[]\
-            \ args) {\n    ApiVideoClient client = new ApiVideoClient(\"YOUR_API_KEY\"\
-            );\n    // if you rather like to use the sandbox environment:\n    //\
-            \ ApiVideoClient client = new ApiVideoClient(\"YOUR_SANDBOX_API_KEY\"\
-            , ApiVideoClient.Environment.SANDBOX);\n\n    LiveStreamsApi apiInstance\
-            \ = client.liveStreams();\n    \n    String liveStreamId = \"li400mYKSgQ6xs7taUeSaEKr\"\
-            ; // The unique ID for the live stream you want to watch.\n\n    try {\n\
-            \      LiveStream result = apiInstance.get(liveStreamId);\n      System.out.println(result);\n\
-            \    } catch (ApiException e) {\n      System.err.println(\"Exception\
-            \ when calling LiveStreamsApi#get\");\n      System.err.println(\"Status\
-            \ code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getMessage());\n\
-            \      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n\
-            \      e.printStackTrace();\n    }\n  }\n}\n"
-        - language: csharp
-          code: "// First add the \"ApiVideo\" NuGet package to your project\n// Documentation:\
-            \ https://github.com/apivideo/api.video-csharp-client/blob/main/docs/LiveStreamsApi.md#get\n\
-            \nimport video.api.client.ApiVideoClient;\nimport video.api.client.api.ApiException;\n\
-            import video.api.client.api.models.*;\nimport video.api.client.api.clients.LiveStreamsApi;\n\
-            import java.util.*;\n\npublic class Example {\n  public static void main(String[]\
-            \ args) {\n    ApiVideoClient client = new ApiVideoClient(\"YOUR_API_KEY\"\
-            );\n    // if you rather like to use the sandbox environment:\n    //\
-            \ ApiVideoClient client = new ApiVideoClient(\"YOUR_SANDBOX_API_KEY\"\
-            , ApiVideoClient.Environment.SANDBOX);\n\n    LiveStreamsApi apiInstance\
-            \ = client.liveStreams();\n    \n    String liveStreamId = \"li400mYKSgQ6xs7taUeSaEKr\"\
-            ; // The unique ID for the live stream you want to watch.\n\n    try {\n\
-            \      LiveStream result = apiInstance.get(liveStreamId);\n      System.out.println(result);\n\
-            \    } catch (ApiException e) {\n      System.err.println(\"Exception\
-            \ when calling LiveStreamsApi#get\");\n      System.err.println(\"Status\
-            \ code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getMessage());\n\
-            \      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n\
-            \      e.printStackTrace();\n    }\n  }\n}\n"
-        - language: csharp
-          code: |
-            // First add the "ApiVideo" NuGet package to your project
-            // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/LiveStreamsApi.md#get
-
-            using System.Diagnostics;
-            using ApiVideo.Client;
-
-            namespace Example
-            {
-                public class getExample
-                {
-                    public static void Main()
-                    {
-                        var basePath = ApiVideoClient.Client.Environment.SANDBOX;
-                        var apiKey = "YOUR_API_KEY";
-
-                        var apiInstance = new ApiVideoClient(apiKey,basePath);
-
-                        var liveStreamId = li400mYKSgQ6xs7taUeSaEKr;  // string | The unique ID for the live stream you want to watch.
-                        var apiLiveStreamsInstance = apiInstance.LiveStreams();
-                        try
-                        {
-                            // Show live stream
-                            LiveStream result = apiLiveStreamsInstance.get(liveStreamId);
-                            Debug.WriteLine(result);
-                        }
-                        catch (ApiException  e)
-                        {
-                            Debug.Print("Exception when calling LiveStreamsApi.get: " + e.Message );
-                            Debug.Print("Status Code: "+ e.ErrorCode);
-                            Debug.Print(e.StackTrace);
-                        }
-                    }
-                }
-            }
-        - language: php
-          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
-            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#get\n\
-            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
-            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
-            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$liveStreamId\
-            \ = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream you\
-            \ want to retrieve.\n$liveStream = $client->liveStreams()->get($liveStreamId);\n"
-        - language: swift
-          code: |
-            // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#get
     patch:
       description: Updates the livestream object.
       operationId: PATCH_live-streams-liveStreamId
@@ -4172,29 +3974,61 @@ paths:
           content:
             application/json:
               examples:
-                response:
-                  value:
-                    liveStreamId: li400mYKSgQ6xs7taUeSaEKr
-                    createdAt: 2020-01-31T10:17:47.000Z
-                    updatedAt: 2020-03-09T13:19:43.000Z
-                    streamKey: 30087931-229e-42cf-b5f9-e91bcc1f7332
-                    name: Live Stream From the browser
-                    public: true
-                    record: true
-                    broadcasting: false
-                    assets:
-                      iframe: <iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr"
-                        width="100%" height="100%" frameborder="0" scrolling="no"
-                        allowfullscreen=""></iframe>
-                      player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
-                      hls: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8
-                      thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+                live-stream-response-example:
+                  $ref: '#/components/examples/live-stream-response-example'
               schema:
                 $ref: '#/components/schemas/live-stream'
           description: Success
         "400":
           content:
             application/json:
+              examples:
+                Empty field in restreams array:
+                  description: This error occurs when a field is empty in the `restreams`
+                    array in your request.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This value should not be blank.
+                    name: restreams[0][name]
+                Missing app name in serverUrl:
+                  description: This error occurs when the rtmp app name is missing
+                    from `serverURL` in the `restreams` array.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: 'Missing app name: rtmp://[host]/[app name].'
+                    name: restreams[0][serverUrl]
+                Incorrect URL in serverUrl:
+                  description: This error occurs when the URL you set in `serverURL`
+                    is not `rtmp`.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: 'RTMP URL should have the following format: rtmp://[host]/[app
+                      name].'
+                    name: restreams[0][serverUrl]
+                Too many restream destinations:
+                  description: This error occurs when you set more than 5 restream
+                    destinations.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This collection should contain 5 elements or less.
+                    name: restreams
+                null field in the restreams array:
+                  description: This error occurs when a field is sent as `null` in
+                    the `restreams` array in your request.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This value should not be null.
+                    name: restreams[0][name]
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
@@ -4204,133 +4038,6 @@ paths:
       tags:
       - Live Streams
       x-client-action: update
-      x-readme:
-        code-samples:
-        - language: go
-          code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
-            \n// Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreamsApi.md#update\n\
-            \npackage main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\n\
-            \    apivideosdk \"github.com/apivideo/api.video-go-client\"\n)\n\nfunc\
-            \ main() {\n    client := apivideosdk.ClientBuilder(\"YOUR_API_KEY\").Build()\n\
-            \    // if you rather like to use the sandbox environment:\n    // client\
-            \ := apivideosdk.SandboxClientBuilder(\"YOUR_SANDBOX_API_KEY\").Build()\n\
-            \        \n    liveStreamId := \"li400mYKSgQ6xs7taUeSaEKr\" // string\
-            \ | The unique ID for the live stream that you want to update information\
-            \ for such as player details, or whether you want the recording on or\
-            \ off.\n    liveStreamUpdatePayload := *apivideosdk.NewLiveStreamUpdatePayload()\
-            \ // LiveStreamUpdatePayload | \n\n    \n    res, err := client.LiveStreams.Update(liveStreamId,\
-            \ liveStreamUpdatePayload)\n\n    if err != nil {\n        fmt.Fprintf(os.Stderr,\
-            \ \"Error when calling `LiveStreams.Update``: %v\\\n\", err)\n    }\n\
-            \    // response from `Update`: LiveStream\n    fmt.Fprintf(os.Stdout,\
-            \ \"Response from `LiveStreams.Update`: %v\\\n\", res)\n}\n"
-        - language: node
-          code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
-            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/LiveStreamsApi.md#update\n\
-            \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
-            const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for\
-            \ the live stream that you want to update information for such as player\
-            \ details, or whether you want the recording on or off.\nconst liveStreamUpdatePayload\
-            \ = {\n  name: \"My Live Stream Video\", // The name you want to use for\
-            \ your live stream.\n  _public: true, // Whether your video can be viewed\
-            \ by everyone, or requires authentication to see it. \n  record: true,\
-            \ // Use this to indicate whether you want the recording on or off. On\
-            \ is true, off is false.\n  playerId: \"pl45KFKdlddgk654dspkze\", // The\
-            \ unique ID for the player associated with a live stream that you want\
-            \ to update.\n};\n\nconst liveStream = await client.liveStreams.update(liveStreamId,\
-            \ liveStreamUpdatePayload); \n"
-        - language: python
-          code: "# First install the api client with \"pip install api.video\"\n#\
-            \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#update\n\
-            \nimport apivideo\nfrom apivideo.api import live_streams_api\nfrom apivideo.model.bad_request\
-            \ import BadRequest\nfrom apivideo.model.live_stream_update_payload import\
-            \ LiveStreamUpdatePayload\nfrom apivideo.model.live_stream import LiveStream\n\
-            from pprint import pprint\n\n# Enter a context with an instance of the\
-            \ API client\nwith apivideo.AuthenticatedApiClient(__API_KEY__) as api_client:\n\
-            \    # Create an instance of the API class\n    api_instance = live_streams_api.LiveStreamsApi(api_client)\n\
-            \    live_stream_id = \"li400mYKSgQ6xs7taUeSaEKr\" # str | The unique\
-            \ ID for the live stream that you want to update information for such\
-            \ as player details, or whether you want the recording on or off.\n  \
-            \  live_stream_update_payload = LiveStreamUpdatePayload(\n        name=\"\
-            My Live Stream Video\",\n        public=True,\n        record=True,\n\
-            \        player_id=\"pl45KFKdlddgk654dspkze\",\n    ) # LiveStreamUpdatePayload\
-            \ | \n\n    # example passing only required values which don't have defaults\
-            \ set\n    try:\n        # Update a live stream\n        api_response\
-            \ = api_instance.update(live_stream_id, live_stream_update_payload)\n\
-            \        pprint(api_response)\n    except apivideo.ApiException as e:\n\
-            \        print(\"Exception when calling LiveStreamsApi->update: %s\\\n\
-            \" % e)\n"
-        - language: java
-          code: "// First add the \"video.api:java-api-client\" maven dependency to\
-            \ your project\n// Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/LiveStreamsApi.md#update\n\
-            \nimport video.api.client.ApiVideoClient;\nimport video.api.client.api.ApiException;\n\
-            import video.api.client.api.models.*;\nimport video.api.client.api.clients.LiveStreamsApi;\n\
-            import java.util.*;\n\npublic class Example {\n  public static void main(String[]\
-            \ args) {\n    ApiVideoClient client = new ApiVideoClient(\"YOUR_API_KEY\"\
-            );\n    // if you rather like to use the sandbox environment:\n    //\
-            \ ApiVideoClient client = new ApiVideoClient(\"YOUR_SANDBOX_API_KEY\"\
-            , ApiVideoClient.Environment.SANDBOX);\n\n    LiveStreamsApi apiInstance\
-            \ = client.liveStreams();\n    \n    String liveStreamId = \"li400mYKSgQ6xs7taUeSaEKr\"\
-            ; // The unique ID for the live stream that you want to update information\
-            \ for such as player details, or whether you want the recording on or\
-            \ off.\n    LiveStreamUpdatePayload liveStreamUpdatePayload = new LiveStreamUpdatePayload();\
-            \ // \n    liveStreamUpdatePayload.setName(\"My Live Stream Video\");\
-            \ // The name you want to use for your live stream.\n    liveStreamUpdatePayload.setPublic();\
-            \ // Whether your video can be viewed by everyone, or requires authentication\
-            \ to see it. A setting of false will require a unique token for each view.\n\
-            \    liveStreamUpdatePayload.setRecord(true); // Use this to indicate\
-            \ whether you want the recording on or off. On is true, off is false.\n\
-            \    liveStreamUpdatePayload.setPlayerId(\"pl45KFKdlddgk654dspkze\");\
-            \ // The unique ID for the player associated with a live stream that you\
-            \ want to update.\n\n\n    try {\n      LiveStream result = apiInstance.update(liveStreamId,\
-            \ liveStreamUpdatePayload);\n      System.out.println(result);\n    }\
-            \ catch (ApiException e) {\n      System.err.println(\"Exception when\
-            \ calling LiveStreamsApi#update\");\n      System.err.println(\"Status\
-            \ code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getMessage());\n\
-            \      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n\
-            \      e.printStackTrace();\n    }\n  }\n}\n"
-        - language: csharp
-          code: "// First add the \"ApiVideo\" NuGet package to your project\n// Documentation:\
-            \ https://github.com/apivideo/api.video-csharp-client/blob/main/docs/LiveStreamsApi.md#update\n\
-            \nusing System.Diagnostics;\nusing ApiVideo.Client;\n\nnamespace Example\n\
-            {\n    public class updateExample\n    {\n        public static void Main()\n\
-            \        {\n            var basePath = ApiVideoClient.Client.Environment.SANDBOX;\n\
-            \            var apiKey = \"YOUR_API_KEY\";\n\n            var apiInstance\
-            \ = new ApiVideoClient(apiKey,basePath);\n\n            var liveStreamId\
-            \ = li400mYKSgQ6xs7taUeSaEKr;  // string | The unique ID for the live\
-            \ stream that you want to update information for such as player details,\
-            \ or whether you want the recording on or off.\n            var liveStreamUpdatePayload\
-            \ = new LiveStreamUpdatePayload(); // LiveStreamUpdatePayload | \n   \
-            \         var apiLiveStreamsInstance = apiInstance.LiveStreams();\n  \
-            \          try\n            {\n                // Update a live stream\n\
-            \                LiveStream result = apiLiveStreamsInstance.update(liveStreamId,\
-            \ liveStreamUpdatePayload);\n                Debug.WriteLine(result);\n\
-            \            }\n            catch (ApiException  e)\n            {\n \
-            \               Debug.Print(\"Exception when calling LiveStreamsApi.update:\
-            \ \" + e.Message );\n                Debug.Print(\"Status Code: \"+ e.ErrorCode);\n\
-            \                Debug.Print(e.StackTrace);\n            }\n        }\n\
-            \    }\n}\n"
-        - language: php
-          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
-            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#update\n\
-            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
-            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
-            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$liveStreamId\
-            \ = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream that\
-            \ you want to update information for such as player details, or whether\
-            \ you want the recording on or off.\n\n$liveStreamUpdatePayload = (new\
-            \ \\ApiVideo\\Client\\Model\\LiveStreamUpdatePayload())\n    ->setName(\"\
-            My Live Stream Video\") // The name you want to use for your live stream.)\n\
-            \    ->setPublic(true) // Whether your video can be viewed by everyone,\
-            \ or requires authentication to see it. )\n    ->setRecord(true) // Use\
-            \ this to indicate whether you want the recording on or off. On is true,\
-            \ off is false.)\n    ->setPlayerId(\"pl45KFKdlddgk654dspkze\"); // The\
-            \ unique ID for the player associated with a live stream that you want\
-            \ to update.)\n\n\n$liveStream = $client->liveStreams()->update($liveStreamId,\
-            \ $liveStreamUpdatePayload); "
-        - language: swift
-          code: |
-            // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#update
   /live-streams/{liveStreamId}/thumbnail:
     delete:
       description: Send the unique identifier for a live stream to delete its thumbnail.
@@ -10258,6 +9965,30 @@ paths:
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#get
 components:
+  examples:
+    live-stream-response-example:
+      value:
+        liveStreamId: li4pqNqGUkhKfWcBGpZVLRY5
+        createdAt: 2020-07-29T10:45:35.000Z
+        updatedAt: 2020-07-29T10:45:35.000Z
+        streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        restreams:
+        - name: YouTube
+          serverUrl: rtmp://youtube.broadcast.example.com
+          streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        - name: Twitch
+          serverUrl: rtmp://twitch.broadcast.example.com
+          streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        name: Live From New York
+        public: true
+        record: true
+        broadcasting: false
+        assets:
+          iframe: <iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"
+            width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
+          player: https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5
+          hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
+          thumbnail: https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg
   parameters:
     current-page:
       description: 'Choose the number of search results to return per page. Minimum
@@ -10887,7 +10618,7 @@ components:
       type: object
     live-stream:
       example:
-        streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        streamKey: dw-dew8-q6w9-k67w-1ws8
         createdAt: 2020-01-31T10:17:47Z
         assets:
           thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
@@ -10896,6 +10627,13 @@ components:
           hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
           player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
         public: true
+        restreams:
+        - streamKey: dw-dew8-q6w9-k67w-1ws8
+          serverUrl: rtmp://my.broadcast.example.com
+          name: My RTMP server
+        - streamKey: dw-dew8-q6w9-k67w-1ws8
+          serverUrl: rtmp://my.broadcast.example.com
+          name: My RTMP server
         liveStreamId: li400mYKSgQ6xs7taUeSaEKr
         record: true
         name: My Live Stream
@@ -10914,7 +10652,7 @@ components:
           type: string
         streamKey:
           description: The unique, private stream key that you use to begin streaming.
-          example: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+          example: dw-dew8-q6w9-k67w-1ws8
           type: string
         record:
           description: Whether you are recording or not.
@@ -10938,6 +10676,12 @@ components:
             you are not.
           example: true
           type: boolean
+        restreams:
+          description: Returns the list of RTMP restream destinations.
+          items:
+            $ref: '#/components/schemas/restreams-response-object'
+          nullable: false
+          type: array
         createdAt:
           description: When the player was created, presented in ISO-8601 format.
           example: 2020-01-31T10:17:47Z
@@ -10950,6 +10694,7 @@ components:
           type: string
       required:
       - liveStreamId
+      - restreams
       title: LiveStream
       type: object
     live-stream-session:
@@ -11581,7 +11326,7 @@ components:
               rel: last
               uri: /videos/search?currentPage=6&pageSize=20
         data:
-        - streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        - streamKey: dw-dew8-q6w9-k67w-1ws8
           createdAt: 2020-01-31T10:17:47Z
           assets:
             thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
@@ -11590,13 +11335,20 @@ components:
             hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
             player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
           public: true
+          restreams:
+          - streamKey: dw-dew8-q6w9-k67w-1ws8
+            serverUrl: rtmp://my.broadcast.example.com
+            name: My RTMP server
+          - streamKey: dw-dew8-q6w9-k67w-1ws8
+            serverUrl: rtmp://my.broadcast.example.com
+            name: My RTMP server
           liveStreamId: li400mYKSgQ6xs7taUeSaEKr
           record: true
           name: My Live Stream
           playerId: pl45d5vFFGrfdsdsd156dGhh
           broadcasting: true
           updatedAt: 2020-01-31T10:18:47Z
-        - streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        - streamKey: dw-dew8-q6w9-k67w-1ws8
           createdAt: 2020-01-31T10:17:47Z
           assets:
             thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
@@ -11605,6 +11357,13 @@ components:
             hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
             player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
           public: true
+          restreams:
+          - streamKey: dw-dew8-q6w9-k67w-1ws8
+            serverUrl: rtmp://my.broadcast.example.com
+            name: My RTMP server
+          - streamKey: dw-dew8-q6w9-k67w-1ws8
+            serverUrl: rtmp://my.broadcast.example.com
+            name: My RTMP server
           liveStreamId: li400mYKSgQ6xs7taUeSaEKr
           record: true
           name: My Live Stream
@@ -11628,6 +11387,13 @@ components:
         name: Test live
         record: true
         playerId: pl4f4ferf5erfr5zed4fsdd
+        restreams:
+        - name: YouTube
+          serverUrl: rtmp://youtube.broadcast.example.com
+          streamKey: dw-dew8-q6w9-k67w-1ws8
+        - name: Twitch
+          serverUrl: rtmp://twitch.broadcast.example.com
+          streamKey: dw-dew8-q6w9-k67w-1ws8
       properties:
         name:
           description: Add a name for your live stream here.
@@ -11648,6 +11414,15 @@ components:
           description: The unique identifier for the player.
           example: pl4f4ferf5erfr5zed4fsdd
           type: string
+        restreams:
+          description: Use this parameter to add, edit, or remove RTMP services where
+            you want to restream a live stream. The list can only contain up to 5
+            destinations.
+          items:
+            $ref: '#/components/schemas/restreams-request-object'
+          maxItems: 5
+          nullable: false
+          type: array
       required:
       - name
       title: LiveStreamCreationPayload
@@ -11673,7 +11448,65 @@ components:
             that you want to update.
           example: pl45KFKdlddgk654dspkze
           type: string
+        restreams:
+          description: Use this parameter to add, edit, or remove RTMP services where
+            you want to restream a live stream. The list can only contain up to 5
+            destinations. This operation updates all restream destinations in the
+            same request. If you do not want to modify an existing restream destination,
+            you need to include it in your request, otherwise it is removed.
+          items:
+            $ref: '#/components/schemas/restreams-request-object'
+          maxItems: 5
+          nullable: false
+          type: array
       title: LiveStreamUpdatePayload
+      type: object
+    restreams-request-object:
+      description: Adding restream destinations is optional. However, if you set a
+        restream destination, you must provide all attributes for each destination.
+      properties:
+        name:
+          description: Use this parameter to define a name for the restream destination.
+          example: My RTMP server
+          nullable: false
+          type: string
+        serverUrl:
+          description: Use this parameter to set the RTMP URL of the restream destination.
+          example: rtmp://my.broadcast.example.com
+          nullable: false
+          type: string
+        streamKey:
+          description: Use this parameter to provide the unique key of the live stream
+            that you want to restream.
+          example: dw-dew8-q6w9-k67w-1ws8
+          nullable: false
+          type: string
+      required:
+      - name
+      - serverUrl
+      - streamKey
+      title: Restreams request object
+      type: object
+    restreams-response-object:
+      example:
+        streamKey: dw-dew8-q6w9-k67w-1ws8
+        serverUrl: rtmp://my.broadcast.example.com
+        name: My RTMP server
+      properties:
+        name:
+          description: Returns the name of a restream destination.
+          example: My RTMP server
+          type: string
+        serverUrl:
+          description: Returns the RTMP URL of a restream destination.
+          example: rtmp://my.broadcast.example.com
+          type: string
+        streamKey:
+          description: Returns the unique key of the live stream that is set up for
+            restreaming.
+          example: dw-dew8-q6w9-k67w-1ws8
+          type: string
+      title: Restreams response object
       type: object
     captions-upload-payload:
       properties:

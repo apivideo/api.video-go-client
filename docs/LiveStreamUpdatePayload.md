@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Public** | Pointer to **bool** | Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos). | [optional] 
 **Record** | Pointer to **bool** | Use this to indicate whether you want the recording on or off. On is true, off is false. | [optional] 
 **PlayerId** | Pointer to **string** | The unique ID for the player associated with a live stream that you want to update. | [optional] 
+**Restreams** | Pointer to [**[]RestreamsRequestObject**](RestreamsRequestObject.md) | Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations. This operation updates all restream destinations in the same request. If you do not want to modify an existing restream destination, you need to include it in your request, otherwise it is removed. | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetPlayerId sets PlayerId field to given value.
 `func (o *LiveStreamUpdatePayload) HasPlayerId() bool`
 
 HasPlayerId returns a boolean if a field has been set.
+
+### GetRestreams
+
+`func (o *LiveStreamUpdatePayload) GetRestreams() []RestreamsRequestObject`
+
+GetRestreams returns the Restreams field if non-nil, zero value otherwise.
+
+### GetRestreamsOk
+
+`func (o *LiveStreamUpdatePayload) GetRestreamsOk() (*[]RestreamsRequestObject, bool)`
+
+GetRestreamsOk returns a tuple with the Restreams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestreams
+
+`func (o *LiveStreamUpdatePayload) SetRestreams(v []RestreamsRequestObject)`
+
+SetRestreams sets Restreams field to given value.
+
+### HasRestreams
+
+`func (o *LiveStreamUpdatePayload) HasRestreams() bool`
+
+HasRestreams returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

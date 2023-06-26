@@ -31,6 +31,8 @@ type LiveStream struct {
 	PlayerId *string `json:"playerId,omitempty"`
 	// Whether or not you are broadcasting the live video you recorded for others to see. True means you are broadcasting to viewers, false means you are not.
 	Broadcasting *bool `json:"broadcasting,omitempty"`
+	// Returns the list of RTMP restream destinations.
+	Restreams []RestreamsResponseObject `json:"restreams"`
 	// When the player was created, presented in ISO-8601 format.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// When the player was last updated, presented in ISO-8601 format.
@@ -41,9 +43,10 @@ type LiveStream struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLiveStream(liveStreamId string) *LiveStream {
+func NewLiveStream(liveStreamId string, restreams []RestreamsResponseObject) *LiveStream {
 	this := LiveStream{}
 	this.LiveStreamId = liveStreamId
+	this.Restreams = restreams
 	return &this
 }
 
@@ -301,6 +304,30 @@ func (o *LiveStream) HasBroadcasting() bool {
 // SetBroadcasting gets a reference to the given bool and assigns it to the Broadcasting field.
 func (o *LiveStream) SetBroadcasting(v bool) {
 	o.Broadcasting = &v
+}
+
+// GetRestreams returns the Restreams field value
+func (o *LiveStream) GetRestreams() []RestreamsResponseObject {
+	if o == nil {
+		var ret []RestreamsResponseObject
+		return ret
+	}
+
+	return o.Restreams
+}
+
+// GetRestreamsOk returns a tuple with the Restreams field value
+// and a boolean to check if the value has been set.
+func (o *LiveStream) GetRestreamsOk() (*[]RestreamsResponseObject, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Restreams, true
+}
+
+// SetRestreams sets field value
+func (o *LiveStream) SetRestreams(v []RestreamsResponseObject) {
+	o.Restreams = v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
