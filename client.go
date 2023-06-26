@@ -30,17 +30,18 @@ type Client struct {
 	sdkName            string
 	sdkVersion         string
 
-	AdvancedAuthentication AdvancedAuthenticationServiceI
-	Analytics              AnalyticsServiceI
-	Captions               CaptionsServiceI
-	Chapters               ChaptersServiceI
-	LiveStreams            LiveStreamsServiceI
-	PlayerThemes           PlayerThemesServiceI
-	RawStatistics          RawStatisticsServiceI
-	UploadTokens           UploadTokensServiceI
-	Videos                 VideosServiceI
-	Watermarks             WatermarksServiceI
-	Webhooks               WebhooksServiceI
+	AdvancedAuthentication  AdvancedAuthenticationServiceI
+	AdvancedAuthenticationn AdvancedAuthenticationnServiceI
+	Analytics               AnalyticsServiceI
+	Captions                CaptionsServiceI
+	Chapters                ChaptersServiceI
+	LiveStreams             LiveStreamsServiceI
+	PlayerThemes            PlayerThemesServiceI
+	RawStatistics           RawStatisticsServiceI
+	UploadTokens            UploadTokensServiceI
+	Videos                  VideosServiceI
+	Watermarks              WatermarksServiceI
+	Webhooks                WebhooksServiceI
 }
 
 // Token contains token for connecting to the api.video API
@@ -179,6 +180,7 @@ func (cb *Builder) Build() *Client {
 	}
 
 	c.AdvancedAuthentication = &AdvancedAuthenticationService{client: c}
+	c.AdvancedAuthenticationn = &AdvancedAuthenticationnService{client: c}
 	c.Analytics = &AnalyticsService{client: c}
 	c.Captions = &CaptionsService{client: c}
 	c.Chapters = &ChaptersService{client: c}

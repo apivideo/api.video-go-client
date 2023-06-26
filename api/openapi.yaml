@@ -128,7 +128,7 @@ paths:
           description: Bad Request
       summary: Refresh Bearer Token
       tags:
-      - Advanced authentication
+      - Advanced authenticationn
       x-client-action: refresh
       x-client-hidden: true
       x-readme:

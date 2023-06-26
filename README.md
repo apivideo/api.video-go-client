@@ -12,6 +12,7 @@
   - [Code sample](#code-sample)
 - [Documentation](#documentation)
   - [API Endpoints](#api-endpoints)
+
     - [Analytics](#analytics)
     - [Captions](#captions)
     - [Chapters](#chapters)

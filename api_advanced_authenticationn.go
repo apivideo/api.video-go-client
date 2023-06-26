@@ -21,67 +21,67 @@ var (
 	_ context.Context
 )
 
-type AdvancedAuthenticationServiceI interface {
+type AdvancedAuthenticationnServiceI interface {
 	/*
-	 * Authenticate Get Bearer Token
-	 * @return AdvancedAuthenticationApiAuthenticateRequest
+	 * Refresh Refresh Bearer Token
+	 * @return AdvancedAuthenticationnApiRefreshRequest
 	 */
 
-	Authenticate(authenticatePayload AuthenticatePayload) (*AccessToken, error)
+	Refresh(refreshTokenPayload RefreshTokenPayload) (*AccessToken, error)
 
 	/*
-	 * Authenticate Get Bearer Token
+	 * Refresh Refresh Bearer Token
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @return AdvancedAuthenticationApiAuthenticateRequest
+	 * @return AdvancedAuthenticationnApiRefreshRequest
 	 */
 
-	AuthenticateWithContext(ctx context.Context, authenticatePayload AuthenticatePayload) (*AccessToken, error)
+	RefreshWithContext(ctx context.Context, refreshTokenPayload RefreshTokenPayload) (*AccessToken, error)
 }
 
-// AdvancedAuthenticationService communicating with the AdvancedAuthentication
+// AdvancedAuthenticationnService communicating with the AdvancedAuthenticationn
 // endpoints of the api.video API
-type AdvancedAuthenticationService struct {
+type AdvancedAuthenticationnService struct {
 	client *Client
 }
 
 /*
- * Authenticate Get Bearer Token
- * Returns a bearer token that can be used to authenticate other endpoint.
+ * Refresh Refresh Bearer Token
+ * Accepts the old bearer token and returns a new bearer token that can be used to authenticate other endpoint.
 
 
 
 You can find the tutorial on using the disposable bearer token [here](https://docs.api.video/reference/disposable-bearer-token-authentication).
 
- * @return AdvancedAuthenticationApiAuthenticateRequest
+ * @return AdvancedAuthenticationnApiRefreshRequest
 */
 
-func (s *AdvancedAuthenticationService) Authenticate(authenticatePayload AuthenticatePayload) (*AccessToken, error) {
+func (s *AdvancedAuthenticationnService) Refresh(refreshTokenPayload RefreshTokenPayload) (*AccessToken, error) {
 
-	return s.AuthenticateWithContext(context.Background(), authenticatePayload)
+	return s.RefreshWithContext(context.Background(), refreshTokenPayload)
 
 }
 
 /*
- * Authenticate Get Bearer Token
- * Returns a bearer token that can be used to authenticate other endpoint.
+ * Refresh Refresh Bearer Token
+ * Accepts the old bearer token and returns a new bearer token that can be used to authenticate other endpoint.
 
 
 
 You can find the tutorial on using the disposable bearer token [here](https://docs.api.video/reference/disposable-bearer-token-authentication).
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return AdvancedAuthenticationApiAuthenticateRequest
+ * @return AdvancedAuthenticationnApiRefreshRequest
 */
 
-func (s *AdvancedAuthenticationService) AuthenticateWithContext(ctx context.Context, authenticatePayload AuthenticatePayload) (*AccessToken, error) {
+func (s *AdvancedAuthenticationnService) RefreshWithContext(ctx context.Context, refreshTokenPayload RefreshTokenPayload) (*AccessToken, error) {
 	var localVarPostBody interface{}
 
-	localVarPath := "/auth/api-key"
+	localVarPath := "/auth/refresh"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
 	// body params
-	localVarPostBody = authenticatePayload
+	localVarPostBody = refreshTokenPayload
 
 	req, err := s.client.prepareRequest(ctx, http.MethodPost, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
 	if err != nil {
