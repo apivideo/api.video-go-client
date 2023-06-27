@@ -7856,6 +7856,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/analytics-plays-400-error'
           description: Bad request error
+        "403":
+          content:
+            application/json:
+              examples:
+                Analytics is disabled:
+                  value:
+                    type: https://docs.api.video/reference/authorization-disabled-analytics
+                    title: You cannot get analytics from this project.
+                    status: 403
+              schema:
+                $ref: '#/components/schemas/403-error-schema'
+          description: Forbidden - Disabled Analytics
         "404":
           content:
             application/json:
@@ -8699,6 +8711,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/analytics-plays-400-error'
           description: Bad request error
+        "403":
+          content:
+            application/json:
+              examples:
+                Analytics is disabled:
+                  value:
+                    type: https://docs.api.video/reference/authorization-disabled-analytics
+                    title: You cannot get analytics from this project.
+                    status: 403
+              schema:
+                $ref: '#/components/schemas/403-error-schema'
+          description: Forbidden - Disabled Analytics
         "404":
           content:
             application/json:
@@ -10416,6 +10440,23 @@ components:
         status:
           type: integer
       title: NotFound
+      type: object
+    "403-error-schema":
+      properties:
+        type:
+          description: A link to the error documentation.
+          type: string
+        title:
+          description: A description of the error that occurred.
+          type: string
+        name:
+          description: The name of the parameter that caused the error.
+          nullable: true
+          type: string
+        status:
+          description: The HTTP status code.
+          type: integer
+      title: 403 Forbidden
       type: object
     video:
       example:
