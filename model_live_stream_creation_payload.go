@@ -24,6 +24,8 @@ type LiveStreamCreationPayload struct {
 	Public *bool `json:"public,omitempty"`
 	// The unique identifier for the player.
 	PlayerId *string `json:"playerId,omitempty"`
+	// Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations.
+	Restreams *[]RestreamsRequestObject `json:"restreams,omitempty"`
 }
 
 // NewLiveStreamCreationPayload instantiates a new LiveStreamCreationPayload object
@@ -166,6 +168,38 @@ func (o *LiveStreamCreationPayload) HasPlayerId() bool {
 // SetPlayerId gets a reference to the given string and assigns it to the PlayerId field.
 func (o *LiveStreamCreationPayload) SetPlayerId(v string) {
 	o.PlayerId = &v
+}
+
+// GetRestreams returns the Restreams field value if set, zero value otherwise.
+func (o *LiveStreamCreationPayload) GetRestreams() []RestreamsRequestObject {
+	if o == nil || o.Restreams == nil {
+		var ret []RestreamsRequestObject
+		return ret
+	}
+	return *o.Restreams
+}
+
+// GetRestreamsOk returns a tuple with the Restreams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LiveStreamCreationPayload) GetRestreamsOk() (*[]RestreamsRequestObject, bool) {
+	if o == nil || o.Restreams == nil {
+		return nil, false
+	}
+	return o.Restreams, true
+}
+
+// HasRestreams returns a boolean if a field has been set.
+func (o *LiveStreamCreationPayload) HasRestreams() bool {
+	if o != nil && o.Restreams != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRestreams gets a reference to the given []RestreamsRequestObject and assigns it to the Restreams field.
+func (o *LiveStreamCreationPayload) SetRestreams(v []RestreamsRequestObject) {
+	o.Restreams = &v
 }
 
 type NullableLiveStreamCreationPayload struct {

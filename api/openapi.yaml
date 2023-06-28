@@ -3396,7 +3396,7 @@ paths:
       operationId: GET_live-streams
       parameters:
       - description: The unique stream key that allows you to stream videos.
-        example: 30087931-229e-42cf-b5f9-e91bcc1f7332
+        example: dw-dew8-q6w9-k67w-1ws8
         explode: true
         in: query
         name: streamKey
@@ -3474,6 +3474,13 @@ paths:
                       createdAt: 2020-01-31T10:17:47.000Z
                       updatedAt: 2020-03-09T13:19:43.000Z
                       streamKey: 30087931-229e-42cf-b5f9-e91bcc1f7332
+                      restreams:
+                      - name: YouTube
+                        serverUrl: rtmp://youtube.broadcast.example.com
+                        streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385188
+                      - name: Twitch
+                        serverUrl: rtmp://twitch.broadcast.example.com
+                        streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385188
                       name: Live Stream From the browser
                       public: true
                       record: true
@@ -3489,6 +3496,13 @@ paths:
                       createdAt: 2020-07-29T10:45:35.000Z
                       updatedAt: 2020-07-29T10:45:35.000Z
                       streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+                      restreams:
+                      - name: YouTube
+                        serverUrl: rtmp://youtube.broadcast.example.com
+                        streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+                      - name: Twitch
+                        serverUrl: rtmp://twitch.broadcast.example.com
+                        streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
                       name: Live From New York
                       public: true
                       record: true
@@ -3709,29 +3723,61 @@ paths:
           content:
             application/json:
               examples:
-                response:
-                  value:
-                    liveStreamId: li4pqNqGUkhKfWcBGpZVLRY5
-                    createdAt: 2020-07-29T10:45:35.000Z
-                    updatedAt: 2020-07-29T10:45:35.000Z
-                    streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
-                    name: Live From New York
-                    public: true
-                    record: true
-                    broadcasting: false
-                    assets:
-                      iframe: <iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"
-                        width="100%" height="100%" frameborder="0" scrolling="no"
-                        allowfullscreen=""></iframe>
-                      player: https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5
-                      hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
-                      thumbnail: https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg
+                live-stream-response-example:
+                  $ref: '#/components/examples/live-stream-response-example'
               schema:
                 $ref: '#/components/schemas/live-stream'
           description: Success
         "400":
           content:
             application/json:
+              examples:
+                Empty field in restreams array:
+                  description: This error occurs when a field is empty in the `restreams`
+                    array in your request.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This value should not be blank.
+                    name: restreams[0][name]
+                Missing app name in serverUrl:
+                  description: This error occurs when the rtmp app name is missing
+                    from `serverURL` in the `restreams` array.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: 'Missing app name: rtmp://[host]/[app name].'
+                    name: restreams[0][serverUrl]
+                Incorrect URL in serverUrl:
+                  description: This error occurs when the URL you set in `serverURL`
+                    is not `rtmp`.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: 'RTMP URL should have the following format: rtmp://[host]/[app
+                      name].'
+                    name: restreams[0][serverUrl]
+                Too many restream destinations:
+                  description: This error occurs when you set more than 5 restream
+                    destinations.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This collection should contain 5 elements or less.
+                    name: restreams
+                null field in the restreams array:
+                  description: This error occurs when a field is sent as `null` in
+                    the `restreams` array in your request.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This value should not be null.
+                    name: restreams[0][name]
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
@@ -3753,9 +3799,13 @@ paths:
             \ // Whether you are recording or not. True for record, false for not\
             \ record.\nliveStreamCreationPayload.SetPublic(true) // Whether your video\
             \ can be viewed by everyone, or requires authentication to see it.\nliveStreamCreationPayload.SetPlayerId(\"\
-            pl4f4ferf5erfr5zed4fsdd\") // The unique identifier for the player.\n\n\
-            res, err := client.LiveStreams.Create(liveStreamCreationPayload)\n\nif\
-            \ err != nil {\n    fmt.Fprintf(os.Stderr, \"Error when calling `LiveStreams.Create``:\
+            pl4f4ferf5erfr5zed4fsdd\") // The unique identifier for the player.\n\
+            liveStreamCreatePayload.SetRestreams([]RestreamsRequestObject{{Name: \"\
+            My RTMP server\", ServerUrl: \"rtmp://my.broadcast.example.com/app\",\
+            \ StreamKey: \"dw-dew8-q6w9-k67w-1ws8\"}}) // Use this parameter to add,\
+            \ edit, or remove RTMP services where you want to restream a live stream.\
+            \ The list can only contain up to 5 destinations.\n\nres, err := client.LiveStreams.Create(liveStreamCreationPayload)\n\
+            \nif err != nil {\n    fmt.Fprintf(os.Stderr, \"Error when calling `LiveStreams.Create``:\
             \ %v\", err)\n}\n\nfmt.Fprintf(os.Stdout, \"Response from `LiveStreams.Create`:\
             \ %v\", res)\n"
         - language: node
@@ -3767,7 +3817,12 @@ paths:
             \ \"My Live Stream\", // Add a name for your live stream here.\n    _public:\
             \ true, // Whether your video can be viewed by everyone, or requires authentication\
             \ to see it. \n    playerId: \"pl4f4ferf5erfr5zed4fsdd\", // The unique\
-            \ identifier for the player.\n}; \n\nconst liveStream = await client.liveStreams.create(liveStreamCreationPayload);\n"
+            \ identifier for the player.\n    restreams: [ // Use this parameter to\
+            \ add, edit, or remove RTMP services where you want to restream a live\
+            \ stream. The list can only contain up to 5 destinations.\n      {\n \
+            \       streamKey: \"dw-dew8-q6w9-k67w-1ws8\",\n        serverUrl: \"\
+            rtmp://my.broadcast.example.com/app\",\n        name: \"My RTMP server\"\
+            ,\n      },\n    ],\n}; \n\nconst liveStream = await client.liveStreams.create(liveStreamCreationPayload);\n"
         - language: python
           code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#create\n\
@@ -3776,7 +3831,11 @@ paths:
             \ ApiException\n\nwith AuthenticatedApiClient(\"YOUR_API_KEY\") as api_client:\n\
             \    live_stream_creation_payload = LiveStreamCreationPayload(\n     \
             \   record=False,\n        name=\"My Live Stream Video\",\n        public=True,\n\
-            \        player_id=\"pl4f4ferf5erfr5zed4fsdd\",\n    ) \n\n    try:\n\
+            \        player_id=\"pl4f4ferf5erfr5zed4fsdd\",\n        restreams=[\n\
+            \            RestreamsRequestObject(\n                name=\"My RTMP server\"\
+            ,\n                server_url=\"rtmp://my.broadcast.example.com/app\"\
+            ,\n                stream_key=\"dw-dew8-q6w9-k67w-1ws8\",\n          \
+            \  ),\n        ],\n    ) # LiveStreamCreationPayload | \n\n    try:\n\
             \        live_stream = LiveStreamsApi(api_client).create(live_stream_creation_payload)\n\
             \        print(live_stream)\n    except ApiException as e:\n        print(\"\
             Exception when calling LiveStreamsApi->create: %s\" % e)\n"
@@ -3791,17 +3850,24 @@ paths:
             ); // Add a name for your live stream here.\nliveStreamCreationPayload.setPublic();\
             \ // Whether your video can be viewed by everyone, or requires authentication\
             \ to see it.\nliveStreamCreationPayload.setPlayerId(\"pl4f4ferf5erfr5zed4fsdd\"\
-            ); // The unique identifier for the player.\n\n\ntry {\n  LiveStream liveStream\
-            \ = client.liveStreams().create(liveStreamCreationPayload);\n  System.out.println(liveStream);\n\
-            } catch (ApiException e) {\n  e.printStackTrace();\n}\n"
+            ); // The unique identifier for the player.\nliveStreamCreationPayload.setRestreams(Collections.singletonList(new\
+            \ RestreamsRequestObject() // Use this parameter to add, edit, or remove\
+            \ RTMP services where you want to restream a live stream. The list can\
+            \ only contain up to 5 destinations.\n      .name(\"My RTMP server\")\n\
+            \      .serverUrl(\"rtmp://my.broadcast.example.com/app\")\n      .streamKey(\"\
+            dw-dew8-q6w9-k67w-1ws8\")));\n\n\ntry {\n    LiveStream liveStream = client.liveStreams().create(liveStreamCreationPayload);\n\
+            \    System.out.println(liveStream);\n} catch (ApiException e) {\n   \
+            \ e.printStackTrace();\n}\n"
         - language: csharp
           code: "// First add the \"ApiVideo\" NuGet package to your project\n// Documentation:\
             \ https://github.com/apivideo/api.video-csharp-client/blob/main/docs/LiveStreamsApi.md#create\n\
             \n                  \nvar apiVideoClient = new ApiVideoClient(\"YOUR_API_KEY\"\
             );\n\nvar liveStreamCreationPayload = new LiveStreamCreationPayload()\n\
             {\n    record = false,\n    name = \"My Live Stream Video\",\n    _public\
-            \ = true,\n    playerid = \"pl4f4ferf5erfr5zed4fsdd\",\n};\n\ntry\n{\n\
-            \    var liveStream = apiVideoClient.LiveStreams().create(liveStreamCreationPayload);\n\
+            \ = true,\n    playerid = \"pl4f4ferf5erfr5zed4fsdd\",\n    restreams\
+            \ = new List<RestreamsRequestObject>(){\n        new RestreamsRequestObject(){name=\"\
+            My RTMP server\", streamKey=\"dw-dew8-q6w9-k67w-1ws8\", serverUrl=\"rtmp://my.broadcast.example.com/app\"\
+            \ }\n    }\n};\n\ntry\n{\n    var liveStream = apiVideoClient.LiveStreams().create(liveStreamCreationPayload);\n\
             }\ncatch (ApiException e)\n{\n    // Manage create error here\n}\n"
         - language: php
           code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
@@ -3815,7 +3881,11 @@ paths:
             ) // Add a name for your live stream here.\n    ->setPublic(true) // Whether\
             \ your video can be viewed by everyone, or requires authentication to\
             \ see it. \n    ->setPlayerId(\"pl4f4ferf5erfr5zed4fsdd\")); // The unique\
-            \ identifier for the player. \n"
+            \ identifier for the player.\n    ->setRestreams(array(  // Use this parameter\
+            \ to add, edit, or remove RTMP services where you want to restream a live\
+            \ stream. The list can only contain up to 5 destinations.\n        new\
+            \ RestreamsRequestObject(['name' => 'My RTMP server', 'serverUrl' => 'rtmp://my.broadcast.example.com/app',\
+            \ 'streamKey' => 'dw-dew8-q6w9-k67w-1ws8'])));\n"
         - language: swift
           code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
@@ -3827,7 +3897,13 @@ paths:
                 name: "My Live Stream Video",
                 record: false,
                 _public: true,
-                playerId: "pl4f4ferf5erfr5zed4fsdd")
+                playerId: "pl4f4ferf5erfr5zed4fsdd",
+                restreams: [RestreamsRequestObject(
+                    name: "My RTMP server",
+                    serverUrl: "rtmp://my.broadcast.example.com/app",
+                    streamKey: "dw-dew8-q6w9-k67w-1ws8"
+                )]
+            )
 
             LiveStreamsAPI.create(liveStreamCreationPayload: liveStreamCreationPayload) { liveStream, error in
                if let liveStream = liveStream  {
@@ -3988,23 +4064,8 @@ paths:
           content:
             application/json:
               examples:
-                response:
-                  value:
-                    liveStreamId: li400mYKSgQ6xs7taUeSaEKr
-                    createdAt: 2020-01-31T10:17:47.000Z
-                    updatedAt: 2020-03-09T13:19:43.000Z
-                    streamKey: 30087931-229e-42cf-b5f9-e91bcc1f7332
-                    name: Live Stream From the browser
-                    public: true
-                    record: true
-                    broadcasting: false
-                    assets:
-                      iframe: <iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr"
-                        width="100%" height="100%" frameborder="0" scrolling="no"
-                        allowfullscreen=""></iframe>
-                      player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
-                      hls: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8
-                      thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+                live-stream-response-example:
+                  $ref: '#/components/examples/live-stream-response-example'
               schema:
                 $ref: '#/components/schemas/live-stream'
           description: Success
@@ -4172,29 +4233,61 @@ paths:
           content:
             application/json:
               examples:
-                response:
-                  value:
-                    liveStreamId: li400mYKSgQ6xs7taUeSaEKr
-                    createdAt: 2020-01-31T10:17:47.000Z
-                    updatedAt: 2020-03-09T13:19:43.000Z
-                    streamKey: 30087931-229e-42cf-b5f9-e91bcc1f7332
-                    name: Live Stream From the browser
-                    public: true
-                    record: true
-                    broadcasting: false
-                    assets:
-                      iframe: <iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr"
-                        width="100%" height="100%" frameborder="0" scrolling="no"
-                        allowfullscreen=""></iframe>
-                      player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
-                      hls: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8
-                      thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+                live-stream-response-example:
+                  $ref: '#/components/examples/live-stream-response-example'
               schema:
                 $ref: '#/components/schemas/live-stream'
           description: Success
         "400":
           content:
             application/json:
+              examples:
+                Empty field in restreams array:
+                  description: This error occurs when a field is empty in the `restreams`
+                    array in your request.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This value should not be blank.
+                    name: restreams[0][name]
+                Missing app name in serverUrl:
+                  description: This error occurs when the rtmp app name is missing
+                    from `serverURL` in the `restreams` array.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: 'Missing app name: rtmp://[host]/[app name].'
+                    name: restreams[0][serverUrl]
+                Incorrect URL in serverUrl:
+                  description: This error occurs when the URL you set in `serverURL`
+                    is not `rtmp`.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: 'RTMP URL should have the following format: rtmp://[host]/[app
+                      name].'
+                    name: restreams[0][serverUrl]
+                Too many restream destinations:
+                  description: This error occurs when you set more than 5 restream
+                    destinations.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This collection should contain 5 elements or less.
+                    name: restreams
+                null field in the restreams array:
+                  description: This error occurs when a field is sent as `null` in
+                    the `restreams` array in your request.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: This value should not be null.
+                    name: restreams[0][name]
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
@@ -4217,8 +4310,22 @@ paths:
             \        \n    liveStreamId := \"li400mYKSgQ6xs7taUeSaEKr\" // string\
             \ | The unique ID for the live stream that you want to update information\
             \ for such as player details, or whether you want the recording on or\
-            \ off.\n    liveStreamUpdatePayload := *apivideosdk.NewLiveStreamUpdatePayload()\
-            \ // LiveStreamUpdatePayload | \n\n    \n    res, err := client.LiveStreams.Update(liveStreamId,\
+            \ off.\n    liveStreamUpdatePayload := apivideosdk.LiveStreamUpdatePayload{}\n\
+            \    liveStreamUpdatePayload.SetName(\"My Live Stream Video\") // The\
+            \ name you want to use for your live stream.\n    liveStreamUpdatePayload.SetRecord(false)\
+            \ // Use this to indicate whether you want the recording on or off. On\
+            \ is true, off is false.\n    liveStreamUpdatePayload.SetPublic(true)\
+            \ // Whether your video can be viewed by everyone, or requires authentication\
+            \ to see it.\n    liveStreamUpdatePayload.SetPlayerId(\"pl4f4ferf5erfr5zed4fsdd\"\
+            ) // The unique ID for the player associated with a live stream that you\
+            \ want to update.\n    liveStreamUpdatePayload.SetRestreams([]RestreamsRequestObject{{Name:\
+            \ \"My RTMP server\", ServerUrl: \"rtmp://my.broadcast.example.com/app\"\
+            , StreamKey: \"dw-dew8-q6w9-k67w-1ws8\"}}) // Use this parameter to add,\
+            \ edit, or remove RTMP services where you want to restream a live stream.\
+            \ The list can only contain up to 5 destinations. This operation updates\
+            \ all restream destinations in the same request. If you do not want to\
+            \ modify an existing restream destination, you need to include it in your\
+            \ request, otherwise it is removed.\n\n    res, err := client.LiveStreams.Update(liveStreamId,\
             \ liveStreamUpdatePayload)\n\n    if err != nil {\n        fmt.Fprintf(os.Stderr,\
             \ \"Error when calling `LiveStreams.Update``: %v\\\n\", err)\n    }\n\
             \    // response from `Update`: LiveStream\n    fmt.Fprintf(os.Stdout,\
@@ -4236,7 +4343,11 @@ paths:
             \ // Use this to indicate whether you want the recording on or off. On\
             \ is true, off is false.\n  playerId: \"pl45KFKdlddgk654dspkze\", // The\
             \ unique ID for the player associated with a live stream that you want\
-            \ to update.\n};\n\nconst liveStream = await client.liveStreams.update(liveStreamId,\
+            \ to update.\n  restreams: [ // Use this parameter to add, edit, or remove\
+            \ RTMP services where you want to restream a live stream. The list can\
+            \ only contain up to 5 destinations.\n    {\n      streamKey: \"dw-dew8-q6w9-k67w-1ws8\"\
+            ,\n      serverUrl: \"rtmp://my.broadcast.example.com/app\",\n      name:\
+            \ \"My RTMP server\",\n    },\n  ],\n};\n\nconst liveStream = await client.liveStreams.update(liveStreamId,\
             \ liveStreamUpdatePayload); \n"
         - language: python
           code: "# First install the api client with \"pip install api.video\"\n#\
@@ -4252,13 +4363,16 @@ paths:
             \ as player details, or whether you want the recording on or off.\n  \
             \  live_stream_update_payload = LiveStreamUpdatePayload(\n        name=\"\
             My Live Stream Video\",\n        public=True,\n        record=True,\n\
-            \        player_id=\"pl45KFKdlddgk654dspkze\",\n    ) # LiveStreamUpdatePayload\
-            \ | \n\n    # example passing only required values which don't have defaults\
-            \ set\n    try:\n        # Update a live stream\n        api_response\
-            \ = api_instance.update(live_stream_id, live_stream_update_payload)\n\
-            \        pprint(api_response)\n    except apivideo.ApiException as e:\n\
-            \        print(\"Exception when calling LiveStreamsApi->update: %s\\\n\
-            \" % e)\n"
+            \        player_id=\"pl45KFKdlddgk654dspkze\",\n        restreams=[\n\
+            \            RestreamsRequestObject(\n                name=\"My RTMP server\"\
+            ,\n                server_url=\"rtmp://my.broadcast.example.com\",\n \
+            \               stream_key=\"dw-dew8-q6w9-k67w-1ws8\",\n            ),\n\
+            \        ],\n    ) # LiveStreamUpdatePayload | \n\n    # example passing\
+            \ only required values which don't have defaults set\n    try:\n     \
+            \   # Update a live stream\n        api_response = api_instance.update(live_stream_id,\
+            \ live_stream_update_payload)\n        pprint(api_response)\n    except\
+            \ apivideo.ApiException as e:\n        print(\"Exception when calling\
+            \ LiveStreamsApi->update: %s\\\n\" % e)\n"
         - language: java
           code: "// First add the \"video.api:java-api-client\" maven dependency to\
             \ your project\n// Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/LiveStreamsApi.md#update\n\
@@ -4281,7 +4395,15 @@ paths:
             \ whether you want the recording on or off. On is true, off is false.\n\
             \    liveStreamUpdatePayload.setPlayerId(\"pl45KFKdlddgk654dspkze\");\
             \ // The unique ID for the player associated with a live stream that you\
-            \ want to update.\n\n\n    try {\n      LiveStream result = apiInstance.update(liveStreamId,\
+            \ want to update.\n    liveStreamUpdatePayload.setRestreams(Collections.singletonList(new\
+            \ RestreamsRequestObject() // Use this parameter to add, edit, or remove\
+            \ RTMP services where you want to restream a live stream. The list can\
+            \ only contain up to 5 destinations. This operation updates all restream\
+            \ destinations in the same request. If you do not want to modify an existing\
+            \ restream destination, you need to include it in your request, otherwise\
+            \ it is removed.\n          .name(\"My RTMP server\")\n          .serverUrl(\"\
+            rtmp://my.broadcast.example.com/app\")\n          .streamKey(\"dw-dew8-q6w9-k67w-1ws8\"\
+            )));\n\n\n    try {\n      LiveStream result = apiInstance.update(liveStreamId,\
             \ liveStreamUpdatePayload);\n      System.out.println(result);\n    }\
             \ catch (ApiException e) {\n      System.err.println(\"Exception when\
             \ calling LiveStreamsApi#update\");\n      System.err.println(\"Status\
@@ -4323,14 +4445,40 @@ paths:
             \    ->setPublic(true) // Whether your video can be viewed by everyone,\
             \ or requires authentication to see it. )\n    ->setRecord(true) // Use\
             \ this to indicate whether you want the recording on or off. On is true,\
-            \ off is false.)\n    ->setPlayerId(\"pl45KFKdlddgk654dspkze\"); // The\
+            \ off is false.)\n    ->setPlayerId(\"pl45KFKdlddgk654dspkze\") // The\
             \ unique ID for the player associated with a live stream that you want\
-            \ to update.)\n\n\n$liveStream = $client->liveStreams()->update($liveStreamId,\
+            \ to update.)\n    ->setRestreams(array(\n      new RestreamsRequestObject(['name'\
+            \ => 'My RTMP server', 'serverUrl' => 'rtmp://my.broadcast.example.com/app',\
+            \ 'streamKey' => 'dw-dew8-q6w9-k67w-1ws8'])));\n\n\n$liveStream = $client->liveStreams()->update($liveStreamId,\
             \ $liveStreamUpdatePayload); "
         - language: swift
           code: |
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/LiveStreamsAPI.md#update
+
+            ApiVideoClient.apiKey = "YOUR_API_KEY"
+
+            let liveStreamId = "li400mYKSgQ6xs7taUeSaEKr" // String | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+            let liveStreamUpdatePayload = LiveStreamUpdatePayload(
+                name: "My Live Stream Video",
+                record: false,
+                _public: true,
+                playerId: "pl4f4ferf5erfr5zed4fsdd",
+                restreams: [RestreamsRequestObject(
+                    name: "My RTMP server",
+                    serverUrl: "rtmp://my.broadcast.example.com/app",
+                    streamKey: "dw-dew8-q6w9-k67w-1ws8"
+                )]
+            )
+
+            LiveStreamsAPI.update(liveStreamId: liveStreamId, liveStreamUpdatePayload: liveStreamUpdatePayload) { liveStream, error in
+               if let liveStream = liveStream  {
+                   // Do something with the livestream
+               }
+               if let error = error {
+                  // Manage update error here
+               }
+            }
   /live-streams/{liveStreamId}/thumbnail:
     delete:
       description: Send the unique identifier for a live stream to delete its thumbnail.
@@ -10282,6 +10430,30 @@ paths:
             // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
             // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/WebhooksAPI.md#get
 components:
+  examples:
+    live-stream-response-example:
+      value:
+        liveStreamId: li4pqNqGUkhKfWcBGpZVLRY5
+        createdAt: 2020-07-29T10:45:35.000Z
+        updatedAt: 2020-07-29T10:45:35.000Z
+        streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        restreams:
+        - name: YouTube
+          serverUrl: rtmp://youtube.broadcast.example.com
+          streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        - name: Twitch
+          serverUrl: rtmp://twitch.broadcast.example.com
+          streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        name: Live From New York
+        public: true
+        record: true
+        broadcasting: false
+        assets:
+          iframe: <iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"
+            width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
+          player: https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5
+          hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
+          thumbnail: https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg
   parameters:
     current-page:
       description: 'Choose the number of search results to return per page. Minimum
@@ -10928,7 +11100,7 @@ components:
       type: object
     live-stream:
       example:
-        streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        streamKey: dw-dew8-q6w9-k67w-1ws8
         createdAt: 2020-01-31T10:17:47Z
         assets:
           thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
@@ -10937,6 +11109,13 @@ components:
           hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
           player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
         public: true
+        restreams:
+        - streamKey: dw-dew8-q6w9-k67w-1ws8
+          serverUrl: rtmp://my.broadcast.example.com/app
+          name: My RTMP server
+        - streamKey: dw-dew8-q6w9-k67w-1ws8
+          serverUrl: rtmp://my.broadcast.example.com/app
+          name: My RTMP server
         liveStreamId: li400mYKSgQ6xs7taUeSaEKr
         record: true
         name: My Live Stream
@@ -10955,7 +11134,7 @@ components:
           type: string
         streamKey:
           description: The unique, private stream key that you use to begin streaming.
-          example: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+          example: dw-dew8-q6w9-k67w-1ws8
           type: string
         record:
           description: Whether you are recording or not.
@@ -10979,6 +11158,12 @@ components:
             you are not.
           example: true
           type: boolean
+        restreams:
+          description: Returns the list of RTMP restream destinations.
+          items:
+            $ref: '#/components/schemas/restreams-response-object'
+          nullable: false
+          type: array
         createdAt:
           description: When the player was created, presented in ISO-8601 format.
           example: 2020-01-31T10:17:47Z
@@ -10991,6 +11176,7 @@ components:
           type: string
       required:
       - liveStreamId
+      - restreams
       title: LiveStream
       type: object
     live-stream-session:
@@ -11622,7 +11808,7 @@ components:
               rel: last
               uri: /videos/search?currentPage=6&pageSize=20
         data:
-        - streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        - streamKey: dw-dew8-q6w9-k67w-1ws8
           createdAt: 2020-01-31T10:17:47Z
           assets:
             thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
@@ -11631,13 +11817,20 @@ components:
             hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
             player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
           public: true
+          restreams:
+          - streamKey: dw-dew8-q6w9-k67w-1ws8
+            serverUrl: rtmp://my.broadcast.example.com/app
+            name: My RTMP server
+          - streamKey: dw-dew8-q6w9-k67w-1ws8
+            serverUrl: rtmp://my.broadcast.example.com/app
+            name: My RTMP server
           liveStreamId: li400mYKSgQ6xs7taUeSaEKr
           record: true
           name: My Live Stream
           playerId: pl45d5vFFGrfdsdsd156dGhh
           broadcasting: true
           updatedAt: 2020-01-31T10:18:47Z
-        - streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
+        - streamKey: dw-dew8-q6w9-k67w-1ws8
           createdAt: 2020-01-31T10:17:47Z
           assets:
             thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
@@ -11646,6 +11839,13 @@ components:
             hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
             player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
           public: true
+          restreams:
+          - streamKey: dw-dew8-q6w9-k67w-1ws8
+            serverUrl: rtmp://my.broadcast.example.com/app
+            name: My RTMP server
+          - streamKey: dw-dew8-q6w9-k67w-1ws8
+            serverUrl: rtmp://my.broadcast.example.com/app
+            name: My RTMP server
           liveStreamId: li400mYKSgQ6xs7taUeSaEKr
           record: true
           name: My Live Stream
@@ -11669,6 +11869,13 @@ components:
         name: Test live
         record: true
         playerId: pl4f4ferf5erfr5zed4fsdd
+        restreams:
+        - name: YouTube
+          serverUrl: rtmp://youtube.broadcast.example.com
+          streamKey: dw-dew8-q6w9-k67w-1ws8
+        - name: Twitch
+          serverUrl: rtmp://twitch.broadcast.example.com
+          streamKey: dw-dew8-q6w9-k67w-1ws8
       properties:
         name:
           description: Add a name for your live stream here.
@@ -11689,6 +11896,15 @@ components:
           description: The unique identifier for the player.
           example: pl4f4ferf5erfr5zed4fsdd
           type: string
+        restreams:
+          description: Use this parameter to add, edit, or remove RTMP services where
+            you want to restream a live stream. The list can only contain up to 5
+            destinations.
+          items:
+            $ref: '#/components/schemas/restreams-request-object'
+          maxItems: 5
+          nullable: false
+          type: array
       required:
       - name
       title: LiveStreamCreationPayload
@@ -11714,7 +11930,65 @@ components:
             that you want to update.
           example: pl45KFKdlddgk654dspkze
           type: string
+        restreams:
+          description: Use this parameter to add, edit, or remove RTMP services where
+            you want to restream a live stream. The list can only contain up to 5
+            destinations. This operation updates all restream destinations in the
+            same request. If you do not want to modify an existing restream destination,
+            you need to include it in your request, otherwise it is removed.
+          items:
+            $ref: '#/components/schemas/restreams-request-object'
+          maxItems: 5
+          nullable: false
+          type: array
       title: LiveStreamUpdatePayload
+      type: object
+    restreams-request-object:
+      description: Adding restream destinations is optional. However, if you set a
+        restream destination, you must provide all attributes for each destination.
+      properties:
+        name:
+          description: Use this parameter to define a name for the restream destination.
+          example: My RTMP server
+          nullable: false
+          type: string
+        serverUrl:
+          description: Use this parameter to set the RTMP URL of the restream destination.
+          example: rtmp://my.broadcast.example.com/app
+          nullable: false
+          type: string
+        streamKey:
+          description: Use this parameter to provide the unique key of the live stream
+            that you want to restream.
+          example: dw-dew8-q6w9-k67w-1ws8
+          nullable: false
+          type: string
+      required:
+      - name
+      - serverUrl
+      - streamKey
+      title: Restreams request object
+      type: object
+    restreams-response-object:
+      example:
+        streamKey: dw-dew8-q6w9-k67w-1ws8
+        serverUrl: rtmp://my.broadcast.example.com/app
+        name: My RTMP server
+      properties:
+        name:
+          description: Returns the name of a restream destination.
+          example: My RTMP server
+          type: string
+        serverUrl:
+          description: Returns the RTMP URL of a restream destination.
+          example: rtmp://my.broadcast.example.com/app
+          type: string
+        streamKey:
+          description: Returns the unique key of the live stream that is set up for
+            restreaming.
+          example: dw-dew8-q6w9-k67w-1ws8
+          type: string
+      title: Restreams response object
       type: object
     captions-upload-payload:
       properties:

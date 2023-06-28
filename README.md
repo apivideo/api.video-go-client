@@ -360,6 +360,8 @@ Method | HTTP request | Description
  - [RawStatisticsListPlayerSessionEventsResponse](docs/RawStatisticsListPlayerSessionEventsResponse.md)
  - [RawStatisticsListSessionsResponse](docs/RawStatisticsListSessionsResponse.md)
  - [RefreshTokenPayload](docs/RefreshTokenPayload.md)
+ - [RestreamsRequestObject](docs/RestreamsRequestObject.md)
+ - [RestreamsResponseObject](docs/RestreamsResponseObject.md)
  - [TokenCreationPayload](docs/TokenCreationPayload.md)
  - [TokenListResponse](docs/TokenListResponse.md)
  - [UploadToken](docs/UploadToken.md)

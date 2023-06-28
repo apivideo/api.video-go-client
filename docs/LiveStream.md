@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **Assets** | Pointer to [**LiveStreamAssets**](LiveStreamAssets.md) |  | [optional] 
 **PlayerId** | Pointer to **string** | The unique identifier for the player. | [optional] 
 **Broadcasting** | Pointer to **bool** | Whether or not you are broadcasting the live video you recorded for others to see. True means you are broadcasting to viewers, false means you are not. | [optional] 
+**Restreams** | [**[]RestreamsResponseObject**](RestreamsResponseObject.md) | Returns the list of RTMP restream destinations. | 
 **CreatedAt** | Pointer to **string** | When the player was created, presented in ISO-8601 format. | [optional] 
 **UpdatedAt** | Pointer to **string** | When the player was last updated, presented in ISO-8601 format. | [optional] 
 
@@ -19,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewLiveStream
 
-`func NewLiveStream(liveStreamId string, ) *LiveStream`
+`func NewLiveStream(liveStreamId string, restreams []RestreamsResponseObject, ) *LiveStream`
 
 NewLiveStream instantiates a new LiveStream object
 This constructor will assign default values to properties that have it defined,
@@ -228,6 +229,26 @@ SetBroadcasting sets Broadcasting field to given value.
 `func (o *LiveStream) HasBroadcasting() bool`
 
 HasBroadcasting returns a boolean if a field has been set.
+
+### GetRestreams
+
+`func (o *LiveStream) GetRestreams() []RestreamsResponseObject`
+
+GetRestreams returns the Restreams field if non-nil, zero value otherwise.
+
+### GetRestreamsOk
+
+`func (o *LiveStream) GetRestreamsOk() (*[]RestreamsResponseObject, bool)`
+
+GetRestreamsOk returns a tuple with the Restreams field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRestreams
+
+`func (o *LiveStream) SetRestreams(v []RestreamsResponseObject)`
+
+SetRestreams sets Restreams field to given value.
+
 
 ### GetCreatedAt
 

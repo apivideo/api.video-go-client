@@ -35,6 +35,7 @@ liveStreamCreationPayload.SetName("My Live Stream Video") // Add a name for your
 liveStreamCreationPayload.SetRecord(false) // Whether you are recording or not. True for record, false for not record.
 liveStreamCreationPayload.SetPublic(true) // Whether your video can be viewed by everyone, or requires authentication to see it.
 liveStreamCreationPayload.SetPlayerId("pl4f4ferf5erfr5zed4fsdd") // The unique identifier for the player.
+liveStreamCreatePayload.SetRestreams([]RestreamsRequestObject{{Name: "My RTMP server", ServerUrl: "rtmp://my.broadcast.example.com/app", StreamKey: "dw-dew8-q6w9-k67w-1ws8"}}) // Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations.
 
 res, err := client.LiveStreams.Create(liveStreamCreationPayload)
 
@@ -157,9 +158,13 @@ func main() {
     // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
         
     liveStreamId := "li400mYKSgQ6xs7taUeSaEKr" // string | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
-    liveStreamUpdatePayload := *apivideosdk.NewLiveStreamUpdatePayload() // LiveStreamUpdatePayload | 
+    liveStreamUpdatePayload := apivideosdk.LiveStreamUpdatePayload{}
+    liveStreamUpdatePayload.SetName("My Live Stream Video") // The name you want to use for your live stream.
+    liveStreamUpdatePayload.SetRecord(false) // Use this to indicate whether you want the recording on or off. On is true, off is false.
+    liveStreamUpdatePayload.SetPublic(true) // Whether your video can be viewed by everyone, or requires authentication to see it.
+    liveStreamUpdatePayload.SetPlayerId("pl4f4ferf5erfr5zed4fsdd") // The unique ID for the player associated with a live stream that you want to update.
+    liveStreamUpdatePayload.SetRestreams([]RestreamsRequestObject{{Name: "My RTMP server", ServerUrl: "rtmp://my.broadcast.example.com/app", StreamKey: "dw-dew8-q6w9-k67w-1ws8"}}) // Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations. This operation updates all restream destinations in the same request. If you do not want to modify an existing restream destination, you need to include it in your request, otherwise it is removed.
 
-    
     res, err := client.LiveStreams.Update(liveStreamId, liveStreamUpdatePayload)
 
     if err != nil {

@@ -24,6 +24,8 @@ type LiveStreamUpdatePayload struct {
 	Record *bool `json:"record,omitempty"`
 	// The unique ID for the player associated with a live stream that you want to update.
 	PlayerId *string `json:"playerId,omitempty"`
+	// Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations. This operation updates all restream destinations in the same request. If you do not want to modify an existing restream destination, you need to include it in your request, otherwise it is removed.
+	Restreams *[]RestreamsRequestObject `json:"restreams,omitempty"`
 }
 
 // NewLiveStreamUpdatePayload instantiates a new LiveStreamUpdatePayload object
@@ -169,6 +171,38 @@ func (o *LiveStreamUpdatePayload) HasPlayerId() bool {
 // SetPlayerId gets a reference to the given string and assigns it to the PlayerId field.
 func (o *LiveStreamUpdatePayload) SetPlayerId(v string) {
 	o.PlayerId = &v
+}
+
+// GetRestreams returns the Restreams field value if set, zero value otherwise.
+func (o *LiveStreamUpdatePayload) GetRestreams() []RestreamsRequestObject {
+	if o == nil || o.Restreams == nil {
+		var ret []RestreamsRequestObject
+		return ret
+	}
+	return *o.Restreams
+}
+
+// GetRestreamsOk returns a tuple with the Restreams field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LiveStreamUpdatePayload) GetRestreamsOk() (*[]RestreamsRequestObject, bool) {
+	if o == nil || o.Restreams == nil {
+		return nil, false
+	}
+	return o.Restreams, true
+}
+
+// HasRestreams returns a boolean if a field has been set.
+func (o *LiveStreamUpdatePayload) HasRestreams() bool {
+	if o != nil && o.Restreams != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRestreams gets a reference to the given []RestreamsRequestObject and assigns it to the Restreams field.
+func (o *LiveStreamUpdatePayload) SetRestreams(v []RestreamsRequestObject) {
+	o.Restreams = &v
 }
 
 type NullableLiveStreamUpdatePayload struct {
