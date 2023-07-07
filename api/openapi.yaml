@@ -206,8 +206,7 @@ paths:
           type: object
         style: deepObject
         x-is-deep-object: true
-      - description: If you described a video with a term or sentence, you can add
-          it here to return videos containing this string.
+      - description: Retrieve video objects by `description`.
         example: New Zealand
         explode: true
         in: query
@@ -216,8 +215,8 @@ paths:
         schema:
           type: string
         style: form
-      - description: If you know the ID for a live stream, you can retrieve the stream
-          by adding the ID for it here.
+      - description: Retrieve video objects that were recorded from a live stream
+          by `liveStreamId`.
         example: li400mYKSgQ6xs7taUeSaEKr
         explode: true
         in: query
@@ -226,24 +225,32 @@ paths:
         schema:
           type: string
         style: form
-      - description: 'Allowed: publishedAt, title. You can search by the time videos
-          were published at, or by title.'
+      - description: Use this parameter to sort videos by the their created time,
+          published time, updated time, or by title.
         example: publishedAt
         explode: true
         in: query
         name: sortBy
         required: false
         schema:
+          enum:
+          - title
+          - createdAt
+          - publishedAt
+          - updatedAt
           type: string
         style: form
-      - description: 'Allowed: asc, desc. asc is ascending and sorts from A to Z.
-          desc is descending and sorts from Z to A.'
+      - description: Use this parameter to sort results. `asc` is ascending and sorts
+          from A to Z. `desc` is descending and sorts from Z to A.
         example: asc
         explode: true
         in: query
         name: sortOrder
         required: false
         schema:
+          enum:
+          - asc
+          - desc
           type: string
         style: form
       - description: 'Choose the number of search results to return per page. Minimum

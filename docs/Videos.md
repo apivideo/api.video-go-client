@@ -487,10 +487,10 @@ func main() {
     req.Title("My Video.mp4") // string | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles.
     req.Tags([]string{"Inner_example"}) // []string | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
     req.Metadata(map[string]string{"key": "TODO"}) // map[string]string | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.
-    req.Description("New Zealand") // string | If you described a video with a term or sentence, you can add it here to return videos containing this string.
-    req.LiveStreamId("li400mYKSgQ6xs7taUeSaEKr") // string | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here.
-    req.SortBy("publishedAt") // string | Allowed: publishedAt, title. You can search by the time videos were published at, or by title.
-    req.SortOrder("asc") // string | Allowed: asc, desc. asc is ascending and sorts from A to Z. desc is descending and sorts from Z to A.
+    req.Description("New Zealand") // string | Retrieve video objects by `description`.
+    req.LiveStreamId("li400mYKSgQ6xs7taUeSaEKr") // string | Retrieve video objects that were recorded from a live stream by `liveStreamId`.
+    req.SortBy("publishedAt") // string | Use this parameter to sort videos by the their created time, published time, updated time, or by title.
+    req.SortOrder("asc") // string | Use this parameter to sort results. `asc` is ascending and sorts from A to Z. `desc` is descending and sorts from Z to A.
     req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
     req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
@@ -517,10 +517,10 @@ Name | Type | Description  | Notes
 **title** | **string** | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles. | 
 **tags** | **[]string** | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned. | 
 **metadata** | [**map[string]**](.md) | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair. | 
-**description** | **string** | If you described a video with a term or sentence, you can add it here to return videos containing this string. | 
-**liveStreamId** | **string** | If you know the ID for a live stream, you can retrieve the stream by adding the ID for it here. | 
-**sortBy** | **string** | Allowed: publishedAt, title. You can search by the time videos were published at, or by title. | 
-**sortOrder** | **string** | Allowed: asc, desc. asc is ascending and sorts from A to Z. desc is descending and sorts from Z to A. | 
+**description** | **string** | Retrieve video objects by &#x60;description&#x60;. | 
+**liveStreamId** | **string** | Retrieve video objects that were recorded from a live stream by &#x60;liveStreamId&#x60;. | 
+**sortBy** | **string** | Use this parameter to sort videos by the their created time, published time, updated time, or by title. | 
+**sortOrder** | **string** | Use this parameter to sort results. &#x60;asc&#x60; is ascending and sorts from A to Z. &#x60;desc&#x60; is descending and sorts from Z to A. | 
 **currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
 **pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
 
