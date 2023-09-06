@@ -3806,12 +3806,12 @@ paths:
             \ // Whether you are recording or not. True for record, false for not\
             \ record.\nliveStreamCreationPayload.SetPublic(true) // Whether your video\
             \ can be viewed by everyone, or requires authentication to see it.\nliveStreamCreationPayload.SetPlayerId(\"\
-            pl4f4ferf5erfr5zed4fsdd\") // The unique identifier for the player.\n\
+            pl4f4ferf5erfr5zed4fsdd\") // The unique identifier for the player.\n\n\
             liveStreamCreatePayload.SetRestreams([]RestreamsRequestObject{{Name: \"\
             My RTMP server\", ServerUrl: \"rtmp://my.broadcast.example.com/app\",\
             \ StreamKey: \"dw-dew8-q6w9-k67w-1ws8\"}}) // Use this parameter to add,\
             \ edit, or remove RTMP services where you want to restream a live stream.\
-            \ The list can only contain up to 5 destinations.\n\nres, err := client.LiveStreams.Create(liveStreamCreationPayload)\n\
+            \ The list can only contain up to 5 destinations.\nres, err := client.LiveStreams.Create(liveStreamCreationPayload)\n\
             \nif err != nil {\n    fmt.Fprintf(os.Stderr, \"Error when calling `LiveStreams.Create``:\
             \ %v\", err)\n}\n\nfmt.Fprintf(os.Stdout, \"Response from `LiveStreams.Create`:\
             \ %v\", res)\n"

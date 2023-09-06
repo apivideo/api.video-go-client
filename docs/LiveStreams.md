@@ -35,8 +35,8 @@ liveStreamCreationPayload.SetName("My Live Stream Video") // Add a name for your
 liveStreamCreationPayload.SetRecord(false) // Whether you are recording or not. True for record, false for not record.
 liveStreamCreationPayload.SetPublic(true) // Whether your video can be viewed by everyone, or requires authentication to see it.
 liveStreamCreationPayload.SetPlayerId("pl4f4ferf5erfr5zed4fsdd") // The unique identifier for the player.
-liveStreamCreatePayload.SetRestreams([]RestreamsRequestObject{{Name: "My RTMP server", ServerUrl: "rtmp://my.broadcast.example.com/app", StreamKey: "dw-dew8-q6w9-k67w-1ws8"}}) // Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations.
 
+liveStreamCreatePayload.SetRestreams([]RestreamsRequestObject{{Name: "My RTMP server", ServerUrl: "rtmp://my.broadcast.example.com/app", StreamKey: "dw-dew8-q6w9-k67w-1ws8"}}) // Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations.
 res, err := client.LiveStreams.Create(liveStreamCreationPayload)
 
 if err != nil {
