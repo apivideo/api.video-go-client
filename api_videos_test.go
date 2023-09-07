@@ -527,7 +527,7 @@ func TestVideos_Integration_CreateUploadWithUploadTokenStream(t *testing.T) {
 
 	cl := createRealClient()
 
-	token, err := cl.UploadTokens.CreateToken(TokenCreationPayload{})
+	token, err := cl.UploadTokens.CreateToken(TokenCreationPayload{Ttl: PtrInt32(0)})
 	if err != nil {
 		t.Errorf("Videos.Create error: %v", err)
 	}
