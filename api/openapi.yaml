@@ -56,7 +56,7 @@ paths:
       - Advanced authentication
       x-client-action: authenticate
       x-client-hidden: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: |
@@ -131,7 +131,7 @@ paths:
       - Advanced authentication
       x-client-action: refresh
       x-client-hidden: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: |
@@ -412,7 +412,7 @@ paths:
         default: This method returns a list of your videos (with all their details).
           With no parameters added, the API returns the first page of all videos.
           You can filter videos using the parameters described below.
-      x-readme:
+      x-doctave:
         code-samples:
         - language: php
           code: |
@@ -594,7 +594,7 @@ paths:
       tags:
       - Videos
       x-client-action: create
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -919,7 +919,7 @@ paths:
           \ the chunk that \"completes\" the upload).\n"
       x-client-action: upload
       x-client-chunk-upload: true
-      x-readme:
+      x-doctave:
         explorer-enabled: false
         code-samples:
         - language: go
@@ -1186,7 +1186,7 @@ paths:
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: node
           code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
@@ -1266,7 +1266,7 @@ paths:
       tags:
       - Watermarks
       x-client-action: upload
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -1452,7 +1452,7 @@ paths:
       tags:
       - Watermarks
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
         - language: node
           code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
@@ -1569,7 +1569,7 @@ paths:
           \ upload an image for your thumbnail, use the dedicated [method](#uploadThumbnail).\
           \ \n\nThere may be a short delay for the thumbnail to update.\n"
       x-client-action: pickThumbnail
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -1776,7 +1776,7 @@ paths:
 
           Note: There may be a short delay before the new thumbnail is delivered to our CDN.
       x-client-action: uploadThumbnail
-      x-readme:
+      x-doctave:
         explorer-enabled: false
         code-samples:
         - language: go
@@ -1911,7 +1911,7 @@ paths:
         default: If you do not need a video any longer, you can send a request to
           delete it. All you need is the videoId.
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -2069,7 +2069,7 @@ paths:
           For private videos, it will generate a unique token url. Use this to retrieve
           any details you need about a video, or set up a private viewing URL.
       x-client-action: get
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -2269,7 +2269,7 @@ paths:
           \ you provide here overwrites what is in the system rather than appending\
           \ to it.\n"
       x-client-action: update
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -2501,7 +2501,7 @@ paths:
           when the video is uploaded or ready to playback. Once encoding is completed,
           the response also lists the available stream qualities.
       x-client-action: getStatus
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -2710,7 +2710,7 @@ paths:
       x-client-paginated: true
       x-optional-object: true
       x-client-action: list
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -2877,7 +2877,7 @@ paths:
       tags:
       - Upload Tokens
       x-client-action: createToken
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -3000,7 +3000,7 @@ paths:
       tags:
       - Upload Tokens
       x-client-action: deleteToken
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -3150,7 +3150,7 @@ paths:
       tags:
       - Upload Tokens
       x-client-action: getToken
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -3352,7 +3352,7 @@ paths:
           use the [standard upload method](#upload).
       x-client-action: uploadWithUploadToken
       x-client-chunk-upload: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: |
@@ -3546,7 +3546,7 @@ paths:
       x-group-parameters: true
       x-client-paginated: true
       x-optional-object: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -3794,7 +3794,7 @@ paths:
       tags:
       - Live Streams
       x-client-action: create
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -3944,7 +3944,7 @@ paths:
       tags:
       - Live Streams
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -4082,7 +4082,7 @@ paths:
       tags:
       - Live Streams
       x-client-action: get
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -4304,7 +4304,7 @@ paths:
       tags:
       - Live Streams
       x-client-action: update
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -4527,7 +4527,7 @@ paths:
       tags:
       - Live Streams
       x-client-action: deleteThumbnail
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -4673,7 +4673,7 @@ paths:
       tags:
       - Live Streams
       x-client-action: uploadThumbnail
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -4841,7 +4841,7 @@ paths:
       tags:
       - Captions
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -5009,7 +5009,7 @@ paths:
           Retrieve a caption for a video in a specific language. If the language is available, the caption is returned. Otherwise, you will get a error indicating the caption was not found.
           Tutorials that use the [captions endpoint](https://api.video/blog/endpoints/captions).
       x-client-action: get
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -5212,7 +5212,7 @@ paths:
         default: 'To have the captions on automatically, use this method to set default:
           true.'
       x-client-action: update
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -5378,7 +5378,7 @@ paths:
       tags:
       - Captions
       x-client-action: upload
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -5588,7 +5588,7 @@ paths:
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -5752,7 +5752,7 @@ paths:
       tags:
       - Chapters
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -5915,7 +5915,7 @@ paths:
       tags:
       - Chapters
       x-client-action: get
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -6098,7 +6098,7 @@ paths:
       tags:
       - Chapters
       x-client-action: upload
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -6310,7 +6310,7 @@ paths:
       x-client-action: list
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -6580,7 +6580,7 @@ paths:
       x-group-parameters: true
       x-client-paginated: true
       x-optional-object: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -6758,7 +6758,7 @@ paths:
       tags:
       - Player Themes
       x-client-action: create
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -6968,7 +6968,7 @@ paths:
       tags:
       - Player Themes
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -7134,7 +7134,7 @@ paths:
       tags:
       - Player Themes
       x-client-action: get
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -7286,7 +7286,7 @@ paths:
       tags:
       - Player Themes
       x-client-action: update
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -7484,7 +7484,7 @@ paths:
       tags:
       - Player Themes
       x-client-action: deleteLogo
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -7648,7 +7648,7 @@ paths:
       tags:
       - Player Themes
       x-client-action: uploadLogo
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -8044,7 +8044,7 @@ paths:
       x-client-action: getVideosPlays
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "package main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\
@@ -8474,7 +8474,7 @@ paths:
       x-client-action: listVideoSessions
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -8899,7 +8899,7 @@ paths:
       x-client-action: getLiveStreamsPlays
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "package main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\
@@ -9318,7 +9318,7 @@ paths:
       x-client-action: listLiveStreamSessions
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -9631,7 +9631,7 @@ paths:
       x-client-action: listSessionEvents
       x-group-parameters: true
       x-client-paginated: true
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -9855,7 +9855,7 @@ paths:
       x-client-paginated: true
       x-optional-object: true
       x-client-action: list
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -10032,7 +10032,7 @@ paths:
       tags:
       - Webhooks
       x-client-action: create
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -10190,7 +10190,7 @@ paths:
       x-client-description:
         default: This method will delete the indicated webhook.
       x-client-action: delete
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -10327,7 +10327,7 @@ paths:
       tags:
       - Webhooks
       x-client-action: get
-      x-readme:
+      x-doctave:
         code-samples:
         - language: go
           code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
@@ -13084,7 +13084,7 @@ x-stoplight:
 x-client-base-paths:
   production: https://ws.api.video
   sandbox: https://sandbox.api.video
-x-readme:
+x-doctave:
   explorer-enabled: true
   proxy-enabled: true
   samples-enabled: true

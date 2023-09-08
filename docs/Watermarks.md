@@ -22,6 +22,7 @@ Upload a watermark
 
 
 ### Example
+
 ```go
 package main
 
@@ -35,17 +36,21 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+        
+    file := os.NewFile(1234, "some_file") // *os.File | The `.jpg` or `.png` image to be added as a watermark.
 
-    file, _ := os.Open("./watermark.jpg")
     
     res, err := client.Watermarks.UploadFile(file)
 
+    // you can also use a Reader instead of a File:
+    // client.Watermarks.Upload(fileName, fileReader)
+
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Watermarks.UploadFile``: %v", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Watermarks.Upload``: %v\n", err)
     }
-    // response from `UploadFile`: Watermark
-    fmt.Fprintf(os.Stdout, "Response from `Watermarks.UploadFile`: %v", res)
+    // response from `Upload`: Watermark
+    fmt.Fprintf(os.Stdout, "Response from `Watermarks.Upload`: %v\n", res)
 }
 ```
 ### Path Parameters

@@ -22,6 +22,7 @@ Method | HTTP request | Description
 List live stream player sessions
 
 ### Example
+
 ```go
 package main
 
@@ -35,11 +36,11 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
     req := apivideosdk.RawStatisticsApiListLiveStreamSessionsRequest{}
     
     req.LiveStreamId("vi4k0jvEUuaTdRAEjQ4Jfrgz") // string | The unique identifier for the live stream you want to retrieve analytics for.
-    req.Period("2019-01-01") // string | Period must have one of the following formats:  - For a day : "2018-01-01", - For a week: "2018-W01", - For a month: "2018-01" - For a year: "2018"  For a range period: -  Date range: "2018-01-01/2018-01-15" 
+    req.Period("2019-01-01T00:00:00.000Z") // string | Period must have one of the following formats:  - For a day : \"2018-01-01\", - For a week: \"2018-W01\",  - For a month: \"2018-01\" - For a year: \"2018\" For a range period:  -  Date range: \"2018-01-01/2018-01-15\" 
     req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
     req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
@@ -47,12 +48,10 @@ func main() {
     
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RawStatistics.ListLiveStreamSessions``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `RawStatistics.ListLiveStreamSessions``: %v\n", err)
     }
     // response from `ListLiveStreamSessions`: RawStatisticsListLiveStreamAnalyticsResponse
-    fmt.Fprintf(os.Stdout, "Response from `RawStatistics.ListLiveStreamSessions`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `RawStatistics.ListLiveStreamSessions`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -95,6 +94,7 @@ List player session events
 
 
 ### Example
+
 ```go
 package main
 
@@ -108,7 +108,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
     req := apivideosdk.RawStatisticsApiListSessionEventsRequest{}
     
     req.SessionId("psEmFwGQUAXR2lFHj5nDOpy") // string | A unique identifier you can use to reference and track a session with.
@@ -119,12 +119,10 @@ func main() {
     
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RawStatistics.ListSessionEvents``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `RawStatistics.ListSessionEvents``: %v\n", err)
     }
     // response from `ListSessionEvents`: RawStatisticsListPlayerSessionEventsResponse
-    fmt.Fprintf(os.Stdout, "Response from `RawStatistics.ListSessionEvents`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `RawStatistics.ListSessionEvents`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -166,6 +164,7 @@ List video player sessions
 
 
 ### Example
+
 ```go
 package main
 
@@ -179,12 +178,12 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
     req := apivideosdk.RawStatisticsApiListVideoSessionsRequest{}
     
     req.VideoId("vi4k0jvEUuaTdRAEjQ4Prklg") // string | The unique identifier for the video you want to retrieve session information for.
-    req.Period("period_example") // string | Period must have one of the following formats:  - For a day : 2018-01-01, - For a week: 2018-W01, - For a month: 2018-01 - For a year: 2018  For a range period: -  Date range: 2018-01-01/2018-01-15 
-    req.Metadata(map[string]string{"key": "Inner_example"}) // map[string]string | Metadata and Dynamic Metadata filter. Send an array of key value pairs you want to filter sessios with.
+    req.Period("period_example") // string | Period must have one of the following formats:  - For a day : 2018-01-01, - For a week: 2018-W01,  - For a month: 2018-01 - For a year: 2018 For a range period:  -  Date range: 2018-01-01/2018-01-15 
+    req.Metadata(map[string]string{"key": "TODO"}) // map[string]string | Metadata and [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) filter. Send an array of key value pairs you want to filter sessios with.
     req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
     req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
@@ -192,12 +191,10 @@ func main() {
     
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RawStatistics.ListVideoSessions``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `RawStatistics.ListVideoSessions``: %v\n", err)
     }
     // response from `ListVideoSessions`: RawStatisticsListSessionsResponse
-    fmt.Fprintf(os.Stdout, "Response from `RawStatistics.ListVideoSessions`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `RawStatistics.ListVideoSessions`: %v\n", res)
 }
 ```
 ### Path Parameters

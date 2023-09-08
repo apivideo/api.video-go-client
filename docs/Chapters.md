@@ -23,6 +23,7 @@ Upload a chapter
 
 
 ### Example
+
 ```go
 package main
 
@@ -36,7 +37,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique identifier for the video you want to upload a chapter for.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -49,12 +50,10 @@ func main() {
     // client.Chapters.Upload(videoId, language, fileName, fileReader)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Chapters.Upload``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Chapters.Upload``: %v\n", err)
     }
     // response from `Upload`: Chapter
-    fmt.Fprintf(os.Stdout, "Response from `Chapters.Upload`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `Chapters.Upload`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -94,6 +93,7 @@ Retrieve a chapter
 
 
 ### Example
+
 ```go
 package main
 
@@ -107,7 +107,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique identifier for the video you want to show a chapter for.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -116,12 +116,10 @@ func main() {
     res, err := client.Chapters.Get(videoId, language)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Chapters.Get``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Chapters.Get``: %v\n", err)
     }
     // response from `Get`: Chapter
-    fmt.Fprintf(os.Stdout, "Response from `Chapters.Get`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `Chapters.Get`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -160,6 +158,7 @@ Delete a chapter
 
 
 ### Example
+
 ```go
 package main
 
@@ -173,7 +172,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique identifier for the video you want to delete a chapter from.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -182,8 +181,7 @@ func main() {
     err := client.Chapters.Delete(videoId, language)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Chapters.Delete``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Chapters.Delete``: %v\n", err)
     }
 }
 ```
@@ -225,6 +223,7 @@ List video chapters
 
 
 ### Example
+
 ```go
 package main
 
@@ -238,21 +237,21 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-        
-    videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique identifier for the video you want to show a chapter for.
-    language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
-
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+    req := apivideosdk.ChaptersApiListRequest{}
     
-    res, err := client.Chapters.Get(videoId, language)
+    req.VideoId("vi4k0jvEUuaTdRAEjQ4Jfrgz") // string | The unique identifier for the video you want to retrieve a list of chapters for.
+    req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
+    req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
+
+    res, err := client.Chapters.List(videoId string, req)
+    
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Chapters.Get``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Chapters.List``: %v\n", err)
     }
-    // response from `Get`: Chapter
-    fmt.Fprintf(os.Stdout, "Response from `Chapters.Get`: %v\
-", res)
+    // response from `List`: ChaptersListResponse
+    fmt.Fprintf(os.Stdout, "Response from `Chapters.List`: %v\n", res)
 }
 ```
 ### Path Parameters
