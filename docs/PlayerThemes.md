@@ -26,6 +26,7 @@ Create a player
 
 
 ### Example
+
 ```go
 package main
 
@@ -39,7 +40,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     playerThemeCreationPayload := *apivideosdk.NewPlayerThemeCreationPayload() // PlayerThemeCreationPayload | 
 
@@ -47,12 +48,10 @@ func main() {
     res, err := client.PlayerThemes.Create(playerThemeCreationPayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Create``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Create``: %v\n", err)
     }
     // response from `Create`: PlayerTheme
-    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Create`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Create`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -88,6 +87,7 @@ Retrieve a player
 
 
 ### Example
+
 ```go
 package main
 
@@ -101,7 +101,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     playerId := "pl45d5vFFGrfdsdsd156dGhh" // string | The unique identifier for the player you want to retrieve. 
 
@@ -109,12 +109,10 @@ func main() {
     res, err := client.PlayerThemes.Get(playerId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Get``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Get``: %v\n", err)
     }
     // response from `Get`: PlayerTheme
-    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Get`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Get`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -152,6 +150,7 @@ Update a player
 
 
 ### Example
+
 ```go
 package main
 
@@ -165,7 +164,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     playerId := "pl45d5vFFGrfdsdsd156dGhh" // string | The unique identifier for the player.
     playerThemeUpdatePayload := *apivideosdk.NewPlayerThemeUpdatePayload() // PlayerThemeUpdatePayload | 
@@ -174,12 +173,10 @@ func main() {
     res, err := client.PlayerThemes.Update(playerId, playerThemeUpdatePayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Update``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Update``: %v\n", err)
     }
     // response from `Update`: PlayerTheme
-    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Update`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.Update`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -218,6 +215,7 @@ Delete a player
 
 
 ### Example
+
 ```go
 package main
 
@@ -231,7 +229,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     playerId := "pl45d5vFFGrfdsdsd156dGhh" // string | The unique identifier for the player you want to delete.
 
@@ -239,8 +237,7 @@ func main() {
     err := client.PlayerThemes.Delete(playerId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Delete``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.Delete``: %v\n", err)
     }
 }
 ```
@@ -281,6 +278,7 @@ List all player themes
 
 
 ### Example
+
 ```go
 package main
 
@@ -294,7 +292,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
     req := apivideosdk.PlayerThemesApiListRequest{}
     
     req.SortBy("createdAt") // string | createdAt is the time the player was created. updatedAt is the time the player was last updated. The time is presented in ISO-8601 format.
@@ -306,12 +304,10 @@ func main() {
     
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.List``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.List``: %v\n", err)
     }
     // response from `List`: PlayerThemesListResponse
-    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.List`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.List`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -350,6 +346,7 @@ Upload a logo
 
 
 ### Example
+
 ```go
 package main
 
@@ -363,7 +360,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     playerId := "pl14Db6oMJRH6SRVoOwORacK" // string | The unique identifier for the player.
     file := os.NewFile(1234, "some_file") // *os.File | The name of the file you want to use for your logo.
@@ -376,12 +373,10 @@ func main() {
     // client.PlayerThemes.UploadLogo(playerId, fileName, fileReader)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.UploadLogo``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.UploadLogo``: %v\n", err)
     }
     // response from `UploadLogo`: PlayerTheme
-    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.UploadLogo`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `PlayerThemes.UploadLogo`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -421,6 +416,7 @@ Delete logo
 
 
 ### Example
+
 ```go
 package main
 
@@ -434,7 +430,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     playerId := "pl14Db6oMJRH6SRVoOwORacK" // string | The unique identifier for the player.
 
@@ -442,8 +438,7 @@ func main() {
     err := client.PlayerThemes.DeleteLogo(playerId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.DeleteLogo``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PlayerThemes.DeleteLogo``: %v\n", err)
     }
 }
 ```

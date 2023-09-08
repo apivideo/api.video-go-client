@@ -24,6 +24,7 @@ Upload a caption
 
 
 ### Example
+
 ```go
 package main
 
@@ -37,7 +38,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want to add a caption to.
     language := "en" // string | A valid BCP 47 language representation.
@@ -50,12 +51,10 @@ func main() {
     // client.Captions.Upload(videoId, language, fileName, fileReader)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Upload``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Upload``: %v\n", err)
     }
     // response from `Upload`: Caption
-    fmt.Fprintf(os.Stdout, "Response from `Captions.Upload`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `Captions.Upload`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -95,6 +94,7 @@ Retrieve a caption
 
 
 ### Example
+
 ```go
 package main
 
@@ -108,7 +108,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want captions for.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
@@ -117,12 +117,10 @@ func main() {
     res, err := client.Captions.Get(videoId, language)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Get``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Get``: %v\n", err)
     }
     // response from `Get`: Caption
-    fmt.Fprintf(os.Stdout, "Response from `Captions.Get`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `Captions.Get`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -161,6 +159,7 @@ Update a caption
 
 
 ### Example
+
 ```go
 package main
 
@@ -174,7 +173,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want to have automatic captions for.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -184,12 +183,10 @@ func main() {
     res, err := client.Captions.Update(videoId, language, captionsUpdatePayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Update``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Update``: %v\n", err)
     }
     // response from `Update`: Caption
-    fmt.Fprintf(os.Stdout, "Response from `Captions.Update`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `Captions.Update`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -229,6 +226,7 @@ Delete a caption
 
 
 ### Example
+
 ```go
 package main
 
@@ -242,7 +240,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     videoId := "vi4k0jvEUuaTdRAEjQ4Prklgc" // string | The unique identifier for the video you want to delete a caption from.
     language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation.
@@ -251,8 +249,7 @@ func main() {
     err := client.Captions.Delete(videoId, language)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Delete``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Delete``: %v\n", err)
     }
 }
 ```
@@ -294,6 +291,7 @@ List video captions
 
 
 ### Example
+
 ```go
 package main
 
@@ -307,21 +305,21 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
-        
-    videoId := "vi4k0jvEUuaTdRAEjQ4Prklg" // string | The unique identifier for the video you want captions for.
-    language := "en" // string | A valid [BCP 47](https://github.com/libyal/libfwnt/wiki/Language-Code-identifiers) language representation
-
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+    req := apivideosdk.CaptionsApiListRequest{}
     
-    res, err := client.Captions.Get(videoId, language)
+    req.VideoId("vi4k0jvEUuaTdRAEjQ4Prklg") // string | The unique identifier for the video you want to retrieve a list of captions for.
+    req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
+    req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
+
+    res, err := client.Captions.List(videoId string, req)
+    
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Captions.Get``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Captions.List``: %v\n", err)
     }
-    // response from `Get`: Caption
-    fmt.Fprintf(os.Stdout, "Response from `Captions.Get`: %v\
-", res)
+    // response from `List`: CaptionsListResponse
+    fmt.Fprintf(os.Stdout, "Response from `Captions.List`: %v\n", res)
 }
 ```
 ### Path Parameters

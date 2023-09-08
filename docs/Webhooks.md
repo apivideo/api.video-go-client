@@ -23,6 +23,7 @@ Create Webhook
 
 
 ### Example
+
 ```go
 package main
 
@@ -36,7 +37,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     webhooksCreationPayload := *apivideosdk.NewWebhooksCreationPayload([]string{"Events_example"}, "https://example.com/webhooks") // WebhooksCreationPayload | 
 
@@ -44,12 +45,10 @@ func main() {
     res, err := client.Webhooks.Create(webhooksCreationPayload)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.Create``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.Create``: %v\n", err)
     }
     // response from `Create`: Webhook
-    fmt.Fprintf(os.Stdout, "Response from `Webhooks.Create`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `Webhooks.Create`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -85,6 +84,7 @@ Retrieve Webhook details
 
 
 ### Example
+
 ```go
 package main
 
@@ -98,7 +98,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     webhookId := "webhookId_example" // string | The unique webhook you wish to retreive details on.
 
@@ -106,12 +106,10 @@ func main() {
     res, err := client.Webhooks.Get(webhookId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.Get``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.Get``: %v\n", err)
     }
     // response from `Get`: Webhook
-    fmt.Fprintf(os.Stdout, "Response from `Webhooks.Get`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `Webhooks.Get`: %v\n", res)
 }
 ```
 ### Path Parameters
@@ -149,6 +147,7 @@ Delete a Webhook
 
 
 ### Example
+
 ```go
 package main
 
@@ -162,7 +161,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
         
     webhookId := "webhookId_example" // string | The webhook you wish to delete.
 
@@ -170,8 +169,7 @@ func main() {
     err := client.Webhooks.Delete(webhookId)
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.Delete``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.Delete``: %v\n", err)
     }
 }
 ```
@@ -212,6 +210,7 @@ List all webhooks
 
 
 ### Example
+
 ```go
 package main
 
@@ -225,7 +224,7 @@ import (
 func main() {
     client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
     // if you rather like to use the sandbox environment:
-    // client := apivideosdk.SandboxClientBuilder("YOUR_SANDBOX_API_KEY").Build()
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
     req := apivideosdk.WebhooksApiListRequest{}
     
     req.Events("video.encoding.quality.completed") // string | The webhook event that you wish to filter on.
@@ -236,12 +235,10 @@ func main() {
     
 
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.List``: %v\
-", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `Webhooks.List``: %v\n", err)
     }
     // response from `List`: WebhooksListResponse
-    fmt.Fprintf(os.Stdout, "Response from `Webhooks.List`: %v\
-", res)
+    fmt.Fprintf(os.Stdout, "Response from `Webhooks.List`: %v\n", res)
 }
 ```
 ### Path Parameters

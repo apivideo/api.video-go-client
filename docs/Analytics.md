@@ -23,6 +23,7 @@ Get play events for live stream
 
 
 ### Example
+
 ```go
 package main
 
@@ -39,7 +40,7 @@ func main() {
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
     req := apivideosdk.AnalyticsApiGetLiveStreamsPlaysRequest{}
-
+    
     req.From(time.Now()) // string | Use this query parameter to set the start date for the time period that you want analytics for. - The API returns analytics data including the day you set in `from`. - The date you set must be **within the last 30 days**. - The value you provide must follow the `YYYY-MM-DD` format. 
     req.Dimension("browser") // string | Use this query parameter to define the dimension that you want analytics for. - `liveStreamId`: Returns analytics based on the public live stream identifiers. - `emittedAt`: Returns analytics based on the times of the play events. The API returns data in specific interval groups. When the date period you set in `from` and `to` is less than or equals to 2 days, the response for this dimension is grouped in hourly intervals. Otherwise, it is grouped in daily intervals. - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/). - `deviceType`: Returns analytics based on the type of device used by the viewers during the play event. - `operatingSystem`: Returns analytics based on the operating system used by the viewers during the play event. - `browser`: Returns analytics based on the browser used by the viewers during the play event.
     req.To(time.Now()) // string | Use this optional query parameter to set the end date for the time period that you want analytics for. - If you do not specify a `to` date, the API returns analytics data starting from the `from` date up until today, and excluding today. - The date you set must be **within the last 30 days**. - The value you provide must follow the `YYYY-MM-DD` format. 
@@ -48,7 +49,7 @@ func main() {
     req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
     res, err := client.Analytics.GetLiveStreamsPlays(req)
-
+    
 
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Analytics.GetLiveStreamsPlays``: %v\n", err)
@@ -97,6 +98,7 @@ Get play events for video
 
 
 ### Example
+
 ```go
 package main
 
@@ -113,7 +115,7 @@ func main() {
     // if you rather like to use the sandbox environment:
     // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
     req := apivideosdk.AnalyticsApiGetVideosPlaysRequest{}
-
+    
     req.From(time.Now()) // string | Use this query parameter to set the start date for the time period that you want analytics for. - The API returns analytics data including the day you set in `from`. - The date you set must be **within the last 30 days**. - The value you provide must follow the `YYYY-MM-DD` format. 
     req.Dimension("browser") // string | Use this query parameter to define the dimension that you want analytics for. - `videoId`: Returns analytics based on the public video identifiers. - `emittedAt`: Returns analytics based on the times of the play events. The API returns data in specific interval groups. When the date period you set in `from` and `to` is less than or equals to 2 days, the response for this dimension is grouped in hourly intervals. Otherwise, it is grouped in daily intervals. - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/). - `deviceType`: Returns analytics based on the type of device used by the viewers during the play event. - `operatingSystem`: Returns analytics based on the operating system used by the viewers during the play event. - `browser`: Returns analytics based on the browser used by the viewers during the play event.
     req.To(time.Now()) // string | Use this optional query parameter to set the end date for the time period that you want analytics for. - If you do not specify a `to` date, the API returns analytics data starting from the `from` date up until today, and excluding today. - The date you set must be **within the last 30 days**. - The value you provide must follow the `YYYY-MM-DD` format. 
@@ -122,7 +124,7 @@ func main() {
     req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
 
     res, err := client.Analytics.GetVideosPlays(req)
-
+    
 
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `Analytics.GetVideosPlays``: %v\n", err)
