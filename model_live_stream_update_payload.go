@@ -20,8 +20,6 @@ type LiveStreamUpdatePayload struct {
 	Name *string `json:"name,omitempty"`
 	// Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).
 	Public *bool `json:"public,omitempty"`
-	// Use this to indicate whether you want the recording on or off. On is true, off is false.
-	Record *bool `json:"record,omitempty"`
 	// The unique ID for the player associated with a live stream that you want to update.
 	PlayerId *string `json:"playerId,omitempty"`
 	// Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations. This operation updates all restream destinations in the same request. If you do not want to modify an existing restream destination, you need to include it in your request, otherwise it is removed.
@@ -107,38 +105,6 @@ func (o *LiveStreamUpdatePayload) HasPublic() bool {
 // SetPublic gets a reference to the given bool and assigns it to the Public field.
 func (o *LiveStreamUpdatePayload) SetPublic(v bool) {
 	o.Public = &v
-}
-
-// GetRecord returns the Record field value if set, zero value otherwise.
-func (o *LiveStreamUpdatePayload) GetRecord() bool {
-	if o == nil || o.Record == nil {
-		var ret bool
-		return ret
-	}
-	return *o.Record
-}
-
-// GetRecordOk returns a tuple with the Record field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LiveStreamUpdatePayload) GetRecordOk() (*bool, bool) {
-	if o == nil || o.Record == nil {
-		return nil, false
-	}
-	return o.Record, true
-}
-
-// HasRecord returns a boolean if a field has been set.
-func (o *LiveStreamUpdatePayload) HasRecord() bool {
-	if o != nil && o.Record != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRecord gets a reference to the given bool and assigns it to the Record field.
-func (o *LiveStreamUpdatePayload) SetRecord(v bool) {
-	o.Record = &v
 }
 
 // GetPlayerId returns the PlayerId field value if set, zero value otherwise.

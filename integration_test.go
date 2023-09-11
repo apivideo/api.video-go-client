@@ -26,17 +26,6 @@ func IntegrationUploadTests(t *testing.T) {
 		t.Errorf("Videos.Delete error: %v", err)
 	}
 
-	// list video sessions
-	metadata := map[string]string{"key": "value", "key2": "value2"}
-	listVideoSessionPayload := RawStatisticsApiListVideoSessionsRequest{
-		metadata: &metadata,
-	}
-	_, err = client.RawStatistics.ListVideoSessions(video.VideoId, listVideoSessionPayload)
-
-	if err != nil {
-		t.Errorf("RawStatistics.ListVideoSessions error: %v", err)
-	}
-
 	// delete the video
 	err = client.Videos.Delete(video.VideoId)
 
@@ -62,17 +51,6 @@ func IntegrationUploadWithUploadTokenTests(t *testing.T) {
 
 	if err != nil {
 		t.Errorf("Videos.Delete error: %v", err)
-	}
-
-	// list video sessions
-	metadata := map[string]string{"key": "value", "key2": "value2"}
-	listVideoSessionPayload := RawStatisticsApiListVideoSessionsRequest{
-		metadata: &metadata,
-	}
-	_, err = client.RawStatistics.ListVideoSessions(video.VideoId, listVideoSessionPayload)
-
-	if err != nil {
-		t.Errorf("RawStatistics.ListVideoSessions error: %v", err)
 	}
 
 	// delete the video
@@ -117,17 +95,6 @@ func IntegrationUploadWithUploadTokenWithVideoIdTests(t *testing.T) {
 
 	if err != nil {
 		t.Errorf("Videos.Delete error: %v", err)
-	}
-
-	// list video sessions
-	metadata := map[string]string{"key": "value", "key2": "value2"}
-	listVideoSessionPayload := RawStatisticsApiListVideoSessionsRequest{
-		metadata: &metadata,
-	}
-	_, err = client.RawStatistics.ListVideoSessions(video.VideoId, listVideoSessionPayload)
-
-	if err != nil {
-		t.Errorf("RawStatistics.ListVideoSessions error: %v", err)
 	}
 
 	// delete the video

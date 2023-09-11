@@ -22,8 +22,6 @@ type LiveStream struct {
 	Name *string `json:"name,omitempty"`
 	// The unique, private stream key that you use to begin streaming.
 	StreamKey *string `json:"streamKey,omitempty"`
-	// Whether you are recording or not.
-	Record *bool `json:"record,omitempty"`
 	// Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).
 	Public *bool             `json:"public,omitempty"`
 	Assets *LiveStreamAssets `json:"assets,omitempty"`
@@ -144,38 +142,6 @@ func (o *LiveStream) HasStreamKey() bool {
 // SetStreamKey gets a reference to the given string and assigns it to the StreamKey field.
 func (o *LiveStream) SetStreamKey(v string) {
 	o.StreamKey = &v
-}
-
-// GetRecord returns the Record field value if set, zero value otherwise.
-func (o *LiveStream) GetRecord() bool {
-	if o == nil || o.Record == nil {
-		var ret bool
-		return ret
-	}
-	return *o.Record
-}
-
-// GetRecordOk returns a tuple with the Record field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LiveStream) GetRecordOk() (*bool, bool) {
-	if o == nil || o.Record == nil {
-		return nil, false
-	}
-	return o.Record, true
-}
-
-// HasRecord returns a boolean if a field has been set.
-func (o *LiveStream) HasRecord() bool {
-	if o != nil && o.Record != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRecord gets a reference to the given bool and assigns it to the Record field.
-func (o *LiveStream) SetRecord(v bool) {
-	o.Record = &v
 }
 
 // GetPublic returns the Public field value if set, zero value otherwise.

@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **LiveStreamId** | **string** | The unique identifier for the live stream. Live stream IDs begin with \&quot;li.\&quot; | 
 **Name** | Pointer to **string** | The name of your live stream. | [optional] 
 **StreamKey** | Pointer to **string** | The unique, private stream key that you use to begin streaming. | [optional] 
-**Record** | Pointer to **bool** | Whether you are recording or not. | [optional] 
 **Public** | Pointer to **bool** | Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos). | [optional] 
 **Assets** | Pointer to [**LiveStreamAssets**](LiveStreamAssets.md) |  | [optional] 
 **PlayerId** | Pointer to **string** | The unique identifier for the player. | [optional] 
@@ -104,31 +103,6 @@ SetStreamKey sets StreamKey field to given value.
 `func (o *LiveStream) HasStreamKey() bool`
 
 HasStreamKey returns a boolean if a field has been set.
-
-### GetRecord
-
-`func (o *LiveStream) GetRecord() bool`
-
-GetRecord returns the Record field if non-nil, zero value otherwise.
-
-### GetRecordOk
-
-`func (o *LiveStream) GetRecordOk() (*bool, bool)`
-
-GetRecordOk returns a tuple with the Record field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRecord
-
-`func (o *LiveStream) SetRecord(v bool)`
-
-SetRecord sets Record field to given value.
-
-### HasRecord
-
-`func (o *LiveStream) HasRecord() bool`
-
-HasRecord returns a boolean if a field has been set.
 
 ### GetPublic
 

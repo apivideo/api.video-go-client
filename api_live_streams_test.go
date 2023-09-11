@@ -15,7 +15,6 @@ var liveJSONResponses = []string{
 		"liveStreamId": "li2FgWk8CyBKFIGyDK1SimnL",
 		"streamKey": "bd003ee9-9f71-44fd-a191-14d6a5063181",
 		"name": "My livestream",
-		"record": false,
 		"broadcasting": false,
 		"public": true,
 		"assets": {
@@ -29,7 +28,6 @@ var liveJSONResponses = []string{
 		"liveStreamId": "liXyizQXIaWWenlD8pc3WLS",
 		"streamKey": "ffee715c-72b8-4ed6-ab98-8d4602ced98f",
 		"name": "My livestream 2",
-		"record": false,
 		"broadcasting": false,
 		"public": false,
 		"assets": {
@@ -45,7 +43,6 @@ var liveStructs = []LiveStream{
 		LiveStreamId: "li2FgWk8CyBKFIGyDK1SimnL",
 		Name:         PtrString("My livestream"),
 		StreamKey:    PtrString("bd003ee9-9f71-44fd-a191-14d6a5063181"),
-		Record:       PtrBool(false),
 		Public:       PtrBool(true),
 		Assets: &LiveStreamAssets{
 			Hls:       PtrString("https://live.api.video/li2FgWk8CyBKFIGyDK1SimnL.m3u8"),
@@ -59,7 +56,6 @@ var liveStructs = []LiveStream{
 		LiveStreamId: "liXyizQXIaWWenlD8pc3WLS",
 		Name:         PtrString("My livestream 2"),
 		StreamKey:    PtrString("ffee715c-72b8-4ed6-ab98-8d4602ced98f"),
-		Record:       PtrBool(false),
 		Public:       PtrBool(false),
 		Assets: &LiveStreamAssets{
 			Hls:       PtrString("https://live.api.video/liXyizQXIaWWenlD8pc3WLS.m3u8"),
@@ -73,13 +69,11 @@ var liveStructs = []LiveStream{
 
 var liveStreamCreatePayload = LiveStreamCreationPayload{
 	Name:     "Test live",
-	Record:   PtrBool(true),
 	PlayerId: PtrString("pl4f4ferf5erfr5zed4fsdd"),
 }
 
 var liveStreamUpdatePayload = LiveStreamUpdatePayload{
 	Name:     PtrString("Test live"),
-	Record:   PtrBool(true),
 	PlayerId: PtrString("pl4f4ferf5erfr5zed4fsdd"),
 }
 
@@ -147,7 +141,6 @@ func TestLivestreams_Create(t *testing.T) {
 		testMethod(t, r, http.MethodPost)
 		expectedBody := map[string]interface{}{
 			"name":     "Test live",
-			"record":   true,
 			"playerId": "pl4f4ferf5erfr5zed4fsdd",
 		}
 		var v map[string]interface{}
@@ -180,7 +173,6 @@ func TestLivestreams_Update(t *testing.T) {
 		testMethod(t, r, http.MethodPatch)
 		expectedBody := map[string]interface{}{
 			"name":     "Test live",
-			"record":   true,
 			"playerId": "pl4f4ferf5erfr5zed4fsdd",
 		}
 		var v map[string]interface{}

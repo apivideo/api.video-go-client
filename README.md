@@ -17,7 +17,6 @@
     - [Chapters](#chapters)
     - [LiveStreams](#livestreams)
     - [PlayerThemes](#playerthemes)
-    - [RawStatistics](#rawstatistics)
     - [UploadTokens](#uploadtokens)
     - [Videos](#videos)
     - [Watermarks](#watermarks)
@@ -216,24 +215,6 @@ Method | HTTP request | Description
 [**DeleteLogo**](docs/PlayerThemes.md#DeleteLogo) | **Delete** /players/{playerId}/logo | Delete logo
 
 
-### RawStatistics
-
-
-#### Retrieve an instance of the RawStatistics API:
-```golang
-client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
-rawStatisticsApi := client.RawStatistics
-```
-
-#### Endpoints
-
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**ListLiveStreamSessions**](docs/RawStatistics.md#ListLiveStreamSessions) | **Get** /analytics/live-streams/{liveStreamId} | List live stream player sessions
-[**ListSessionEvents**](docs/RawStatistics.md#ListSessionEvents) | **Get** /analytics/sessions/{sessionId}/events | List player session events
-[**ListVideoSessions**](docs/RawStatistics.md#ListVideoSessions) | **Get** /analytics/videos/{videoId} | List video player sessions
-
-
 ### UploadTokens
 
 
@@ -356,9 +337,6 @@ Method | HTTP request | Description
  - [PlayerThemeUpdatePayload](docs/PlayerThemeUpdatePayload.md)
  - [PlayerThemesListResponse](docs/PlayerThemesListResponse.md)
  - [Quality](docs/Quality.md)
- - [RawStatisticsListLiveStreamAnalyticsResponse](docs/RawStatisticsListLiveStreamAnalyticsResponse.md)
- - [RawStatisticsListPlayerSessionEventsResponse](docs/RawStatisticsListPlayerSessionEventsResponse.md)
- - [RawStatisticsListSessionsResponse](docs/RawStatisticsListSessionsResponse.md)
  - [RefreshTokenPayload](docs/RefreshTokenPayload.md)
  - [RestreamsRequestObject](docs/RestreamsRequestObject.md)
  - [RestreamsResponseObject](docs/RestreamsResponseObject.md)
