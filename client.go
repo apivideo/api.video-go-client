@@ -36,7 +36,6 @@ type Client struct {
 	Chapters               ChaptersServiceI
 	LiveStreams            LiveStreamsServiceI
 	PlayerThemes           PlayerThemesServiceI
-	RawStatistics          RawStatisticsServiceI
 	UploadTokens           UploadTokensServiceI
 	Videos                 VideosServiceI
 	Watermarks             WatermarksServiceI
@@ -184,7 +183,6 @@ func (cb *Builder) Build() *Client {
 	c.Chapters = &ChaptersService{client: c}
 	c.LiveStreams = &LiveStreamsService{client: c}
 	c.PlayerThemes = &PlayerThemesService{client: c}
-	c.RawStatistics = &RawStatisticsService{client: c}
 	c.UploadTokens = &UploadTokensService{client: c}
 	c.Videos = &VideosService{client: c}
 	c.Watermarks = &WatermarksService{client: c}

@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Add a name for your live stream here. | 
-**Record** | Pointer to **bool** | Whether you are recording or not. True for record, false for not record. | [optional] [default to false]
 **Public** | Pointer to **bool** | Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos). | [optional] 
 **PlayerId** | Pointer to **string** | The unique identifier for the player. | [optional] 
 **Restreams** | Pointer to [**[]RestreamsRequestObject**](RestreamsRequestObject.md) | Use this parameter to add, edit, or remove RTMP services where you want to restream a live stream. The list can only contain up to 5 destinations. | [optional] 
@@ -48,31 +47,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-
-### GetRecord
-
-`func (o *LiveStreamCreationPayload) GetRecord() bool`
-
-GetRecord returns the Record field if non-nil, zero value otherwise.
-
-### GetRecordOk
-
-`func (o *LiveStreamCreationPayload) GetRecordOk() (*bool, bool)`
-
-GetRecordOk returns a tuple with the Record field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRecord
-
-`func (o *LiveStreamCreationPayload) SetRecord(v bool)`
-
-SetRecord sets Record field to given value.
-
-### HasRecord
-
-`func (o *LiveStreamCreationPayload) HasRecord() bool`
-
-HasRecord returns a boolean if a field has been set.
 
 ### GetPublic
 

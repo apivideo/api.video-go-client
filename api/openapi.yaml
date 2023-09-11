@@ -3490,7 +3490,6 @@ paths:
                         streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385188
                       name: Live Stream From the browser
                       public: true
-                      record: true
                       broadcasting: false
                       assets:
                         iframe: <iframe src="https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr"
@@ -3512,7 +3511,6 @@ paths:
                         streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
                       name: Live From New York
                       public: true
-                      record: true
                       broadcasting: false
                       assets:
                         iframe: <iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"
@@ -3802,14 +3800,12 @@ paths:
             \n                  \n// instantiate the client \nclient := apivideosdk.ClientBuilder(\"\
             YOUR_API_KEY\").Build()\n\nliveStreamCreationPayload := apivideosdk.LiveStreamCreationPayload{}\n\
             liveStreamCreationPayload.SetName(\"My Live Stream Video\") // Add a name\
-            \ for your live stream here.\nliveStreamCreationPayload.SetRecord(false)\
-            \ // Whether you are recording or not. True for record, false for not\
-            \ record.\nliveStreamCreationPayload.SetPublic(true) // Whether your video\
-            \ can be viewed by everyone, or requires authentication to see it.\nliveStreamCreationPayload.SetPlayerId(\"\
-            pl4f4ferf5erfr5zed4fsdd\") // The unique identifier for the player.\n\
-            liveStreamCreatePayload.SetRestreams([]RestreamsRequestObject{{Name: \"\
-            My RTMP server\", ServerUrl: \"rtmp://my.broadcast.example.com/app\",\
-            \ StreamKey: \"dw-dew8-q6w9-k67w-1ws8\"}}) // Use this parameter to add,\
+            \ for your live stream here.\nliveStreamCreationPayload.SetPublic(true)\
+            \ // Whether your video can be viewed by everyone, or requires authentication\
+            \ to see it.\nliveStreamCreationPayload.SetPlayerId(\"pl4f4ferf5erfr5zed4fsdd\"\
+            ) // The unique identifier for the player.\nliveStreamCreatePayload.SetRestreams([]RestreamsRequestObject{{Name:\
+            \ \"My RTMP server\", ServerUrl: \"rtmp://my.broadcast.example.com/app\"\
+            , StreamKey: \"dw-dew8-q6w9-k67w-1ws8\"}}) // Use this parameter to add,\
             \ edit, or remove RTMP services where you want to restream a live stream.\
             \ The list can only contain up to 5 destinations.\n\nres, err := client.LiveStreams.Create(liveStreamCreationPayload)\n\
             \nif err != nil {\n    fmt.Fprintf(os.Stderr, \"Error when calling `LiveStreams.Create``:\
@@ -3819,17 +3815,16 @@ paths:
           code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
             \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/LiveStreamsApi.md#create\n\
             \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
-            const liveStreamCreationPayload = {\n    record: false, // Whether you\
-            \ are recording or not. True for record, false for not record.\n    name:\
-            \ \"My Live Stream\", // Add a name for your live stream here.\n    _public:\
-            \ true, // Whether your video can be viewed by everyone, or requires authentication\
-            \ to see it. \n    playerId: \"pl4f4ferf5erfr5zed4fsdd\", // The unique\
-            \ identifier for the player.\n    restreams: [ // Use this parameter to\
-            \ add, edit, or remove RTMP services where you want to restream a live\
-            \ stream. The list can only contain up to 5 destinations.\n      {\n \
-            \       streamKey: \"dw-dew8-q6w9-k67w-1ws8\",\n        serverUrl: \"\
-            rtmp://my.broadcast.example.com/app\",\n        name: \"My RTMP server\"\
-            ,\n      },\n    ],\n}; \n\nconst liveStream = await client.liveStreams.create(liveStreamCreationPayload);\n"
+            const liveStreamCreationPayload = {\n    name: \"My Live Stream\", //\
+            \ Add a name for your live stream here.\n    _public: true, // Whether\
+            \ your video can be viewed by everyone, or requires authentication to\
+            \ see it. \n    playerId: \"pl4f4ferf5erfr5zed4fsdd\", // The unique identifier\
+            \ for the player.\n    restreams: [ // Use this parameter to add, edit,\
+            \ or remove RTMP services where you want to restream a live stream. The\
+            \ list can only contain up to 5 destinations.\n      {\n        streamKey:\
+            \ \"dw-dew8-q6w9-k67w-1ws8\",\n        serverUrl: \"rtmp://my.broadcast.example.com/app\"\
+            ,\n        name: \"My RTMP server\",\n      },\n    ],\n}; \n\nconst liveStream\
+            \ = await client.liveStreams.create(liveStreamCreationPayload);\n"
         - language: python
           code: "# First install the api client with \"pip install api.video\"\n#\
             \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/LiveStreamsApi.md#create\n\
@@ -3837,13 +3832,12 @@ paths:
             \ import LiveStreamCreationPayload\nfrom apivideo import AuthenticatedApiClient,\
             \ ApiException\n\nwith AuthenticatedApiClient(\"YOUR_API_KEY\") as api_client:\n\
             \    live_stream_creation_payload = LiveStreamCreationPayload(\n     \
-            \   record=False,\n        name=\"My Live Stream Video\",\n        public=True,\n\
-            \        player_id=\"pl4f4ferf5erfr5zed4fsdd\",\n        restreams=[\n\
-            \            RestreamsRequestObject(\n                name=\"My RTMP server\"\
-            ,\n                server_url=\"rtmp://my.broadcast.example.com/app\"\
-            ,\n                stream_key=\"dw-dew8-q6w9-k67w-1ws8\",\n          \
-            \  ),\n        ],\n    ) # LiveStreamCreationPayload | \n\n    try:\n\
-            \        live_stream = LiveStreamsApi(api_client).create(live_stream_creation_payload)\n\
+            \   name=\"My Live Stream Video\",\n        public=True,\n        player_id=\"\
+            pl4f4ferf5erfr5zed4fsdd\",\n        restreams=[\n            RestreamsRequestObject(\n\
+            \                name=\"My RTMP server\",\n                server_url=\"\
+            rtmp://my.broadcast.example.com/app\",\n                stream_key=\"\
+            dw-dew8-q6w9-k67w-1ws8\",\n            ),\n        ],\n    ) # LiveStreamCreationPayload\
+            \ | \n\n    try:\n        live_stream = LiveStreamsApi(api_client).create(live_stream_creation_payload)\n\
             \        print(live_stream)\n    except ApiException as e:\n        print(\"\
             Exception when calling LiveStreamsApi->create: %s\" % e)\n"
         - language: java
@@ -3851,10 +3845,8 @@ paths:
             \ your project\n// Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/LiveStreamsApi.md#create\n\
             \n                  \n// instantiate the client \nApiVideoClient client\
             \ = new ApiVideoClient(\"YOUR_API_KEY\");\n\nLiveStreamCreationPayload\
-            \ liveStreamCreationPayload = new LiveStreamCreationPayload(); \nliveStreamCreationPayload.setRecord(true);\
-            \ // Whether you are recording or not. True for record, false for not\
-            \ record.\nliveStreamCreationPayload.setName(\"My Live Stream Video\"\
-            ); // Add a name for your live stream here.\nliveStreamCreationPayload.setPublic();\
+            \ liveStreamCreationPayload = new LiveStreamCreationPayload(); \nliveStreamCreationPayload.setName(\"\
+            My Live Stream Video\"); // Add a name for your live stream here.\nliveStreamCreationPayload.setPublic();\
             \ // Whether your video can be viewed by everyone, or requires authentication\
             \ to see it.\nliveStreamCreationPayload.setPlayerId(\"pl4f4ferf5erfr5zed4fsdd\"\
             ); // The unique identifier for the player.\nliveStreamCreationPayload.setRestreams(Collections.singletonList(new\
@@ -3870,10 +3862,10 @@ paths:
             \ https://github.com/apivideo/api.video-csharp-client/blob/main/docs/LiveStreamsApi.md#create\n\
             \n                  \nvar apiVideoClient = new ApiVideoClient(\"YOUR_API_KEY\"\
             );\n\nvar liveStreamCreationPayload = new LiveStreamCreationPayload()\n\
-            {\n    record = false,\n    name = \"My Live Stream Video\",\n    _public\
-            \ = true,\n    playerid = \"pl4f4ferf5erfr5zed4fsdd\",\n    restreams\
-            \ = new List<RestreamsRequestObject>(){\n        new RestreamsRequestObject(){name=\"\
-            My RTMP server\", streamKey=\"dw-dew8-q6w9-k67w-1ws8\", serverUrl=\"rtmp://my.broadcast.example.com/app\"\
+            {\n    name = \"My Live Stream Video\",\n    _public = true,\n    playerid\
+            \ = \"pl4f4ferf5erfr5zed4fsdd\",\n    restreams = new List<RestreamsRequestObject>(){\n\
+            \        new RestreamsRequestObject(){name=\"My RTMP server\", streamKey=\"\
+            dw-dew8-q6w9-k67w-1ws8\", serverUrl=\"rtmp://my.broadcast.example.com/app\"\
             \ }\n    }\n};\n\ntry\n{\n    var liveStream = apiVideoClient.LiveStreams().create(liveStreamCreationPayload);\n\
             }\ncatch (ApiException e)\n{\n    // Manage create error here\n}\n"
         - language: php
@@ -3883,15 +3875,14 @@ paths:
             Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
             \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n$liveStream\
             \ = $client->liveStreams()->create((new \\ApiVideo\\Client\\Model\\LiveStreamCreationPayload())\n\
-            \    ->setRecord(false) // Whether you are recording or not. True for\
-            \ record, false for not record.\n    ->setName(\"My Live Stream Video\"\
-            ) // Add a name for your live stream here.\n    ->setPublic(true) // Whether\
-            \ your video can be viewed by everyone, or requires authentication to\
-            \ see it. \n    ->setPlayerId(\"pl4f4ferf5erfr5zed4fsdd\")); // The unique\
-            \ identifier for the player.\n    ->setRestreams(array(  // Use this parameter\
-            \ to add, edit, or remove RTMP services where you want to restream a live\
-            \ stream. The list can only contain up to 5 destinations.\n        new\
-            \ RestreamsRequestObject(['name' => 'My RTMP server', 'serverUrl' => 'rtmp://my.broadcast.example.com/app',\
+            \    ->setName(\"My Live Stream Video\") // Add a name for your live stream\
+            \ here.\n    ->setPublic(true) // Whether your video can be viewed by\
+            \ everyone, or requires authentication to see it. \n    ->setPlayerId(\"\
+            pl4f4ferf5erfr5zed4fsdd\")); // The unique identifier for the player.\n\
+            \    ->setRestreams(array(  // Use this parameter to add, edit, or remove\
+            \ RTMP services where you want to restream a live stream. The list can\
+            \ only contain up to 5 destinations.\n        new RestreamsRequestObject(['name'\
+            \ => 'My RTMP server', 'serverUrl' => 'rtmp://my.broadcast.example.com/app',\
             \ 'streamKey' => 'dw-dew8-q6w9-k67w-1ws8'])));\n"
         - language: swift
           code: |
@@ -3902,7 +3893,6 @@ paths:
 
             let liveStreamCreationPayload = LiveStreamCreationPayload(
                 name: "My Live Stream Video",
-                record: false,
                 _public: true,
                 playerId: "pl4f4ferf5erfr5zed4fsdd",
                 restreams: [RestreamsRequestObject(
@@ -4220,7 +4210,7 @@ paths:
       operationId: PATCH_live-streams-liveStreamId
       parameters:
       - description: The unique ID for the live stream that you want to update information
-          for such as player details, or whether you want the recording on or off.
+          for such as player details.
         example: li400mYKSgQ6xs7taUeSaEKr
         explode: false
         in: path
@@ -4316,12 +4306,9 @@ paths:
             \ := apivideosdk.SandboxClientBuilder(\"YOUR_SANDBOX_API_KEY\").Build()\n\
             \        \n    liveStreamId := \"li400mYKSgQ6xs7taUeSaEKr\" // string\
             \ | The unique ID for the live stream that you want to update information\
-            \ for such as player details, or whether you want the recording on or\
-            \ off.\n    liveStreamUpdatePayload := apivideosdk.LiveStreamUpdatePayload{}\n\
+            \ for such as player details.\n    liveStreamUpdatePayload := apivideosdk.LiveStreamUpdatePayload{}\n\
             \    liveStreamUpdatePayload.SetName(\"My Live Stream Video\") // The\
-            \ name you want to use for your live stream.\n    liveStreamUpdatePayload.SetRecord(false)\
-            \ // Use this to indicate whether you want the recording on or off. On\
-            \ is true, off is false.\n    liveStreamUpdatePayload.SetPublic(true)\
+            \ name you want to use for your live stream.\n    liveStreamUpdatePayload.SetPublic(true)\
             \ // Whether your video can be viewed by everyone, or requires authentication\
             \ to see it.\n    liveStreamUpdatePayload.SetPlayerId(\"pl4f4ferf5erfr5zed4fsdd\"\
             ) // The unique ID for the player associated with a live stream that you\
@@ -4343,16 +4330,14 @@ paths:
             \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
             const liveStreamId = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for\
             \ the live stream that you want to update information for such as player\
-            \ details, or whether you want the recording on or off.\nconst liveStreamUpdatePayload\
-            \ = {\n  name: \"My Live Stream Video\", // The name you want to use for\
-            \ your live stream.\n  _public: true, // Whether your video can be viewed\
-            \ by everyone, or requires authentication to see it. \n  record: true,\
-            \ // Use this to indicate whether you want the recording on or off. On\
-            \ is true, off is false.\n  playerId: \"pl45KFKdlddgk654dspkze\", // The\
-            \ unique ID for the player associated with a live stream that you want\
-            \ to update.\n  restreams: [ // Use this parameter to add, edit, or remove\
-            \ RTMP services where you want to restream a live stream. The list can\
-            \ only contain up to 5 destinations.\n    {\n      streamKey: \"dw-dew8-q6w9-k67w-1ws8\"\
+            \ details.\nconst liveStreamUpdatePayload = {\n  name: \"My Live Stream\
+            \ Video\", // The name you want to use for your live stream.\n  _public:\
+            \ true, // Whether your video can be viewed by everyone, or requires authentication\
+            \ to see it. \n  playerId: \"pl45KFKdlddgk654dspkze\", // The unique ID\
+            \ for the player associated with a live stream that you want to update.\n\
+            \  restreams: [ // Use this parameter to add, edit, or remove RTMP services\
+            \ where you want to restream a live stream. The list can only contain\
+            \ up to 5 destinations.\n    {\n      streamKey: \"dw-dew8-q6w9-k67w-1ws8\"\
             ,\n      serverUrl: \"rtmp://my.broadcast.example.com/app\",\n      name:\
             \ \"My RTMP server\",\n    },\n  ],\n};\n\nconst liveStream = await client.liveStreams.update(liveStreamId,\
             \ liveStreamUpdatePayload); \n"
@@ -4367,11 +4352,10 @@ paths:
             \    # Create an instance of the API class\n    api_instance = live_streams_api.LiveStreamsApi(api_client)\n\
             \    live_stream_id = \"li400mYKSgQ6xs7taUeSaEKr\" # str | The unique\
             \ ID for the live stream that you want to update information for such\
-            \ as player details, or whether you want the recording on or off.\n  \
-            \  live_stream_update_payload = LiveStreamUpdatePayload(\n        name=\"\
-            My Live Stream Video\",\n        public=True,\n        record=True,\n\
-            \        player_id=\"pl45KFKdlddgk654dspkze\",\n        restreams=[\n\
-            \            RestreamsRequestObject(\n                name=\"My RTMP server\"\
+            \ as player details.\n    live_stream_update_payload = LiveStreamUpdatePayload(\n\
+            \        name=\"My Live Stream Video\",\n        public=True,\n      \
+            \  player_id=\"pl45KFKdlddgk654dspkze\",\n        restreams=[\n      \
+            \      RestreamsRequestObject(\n                name=\"My RTMP server\"\
             ,\n                server_url=\"rtmp://my.broadcast.example.com\",\n \
             \               stream_key=\"dw-dew8-q6w9-k67w-1ws8\",\n            ),\n\
             \        ],\n    ) # LiveStreamUpdatePayload | \n\n    # example passing\
@@ -4392,17 +4376,14 @@ paths:
             , ApiVideoClient.Environment.SANDBOX);\n\n    LiveStreamsApi apiInstance\
             \ = client.liveStreams();\n    \n    String liveStreamId = \"li400mYKSgQ6xs7taUeSaEKr\"\
             ; // The unique ID for the live stream that you want to update information\
-            \ for such as player details, or whether you want the recording on or\
-            \ off.\n    LiveStreamUpdatePayload liveStreamUpdatePayload = new LiveStreamUpdatePayload();\
-            \ // \n    liveStreamUpdatePayload.setName(\"My Live Stream Video\");\
-            \ // The name you want to use for your live stream.\n    liveStreamUpdatePayload.setPublic();\
-            \ // Whether your video can be viewed by everyone, or requires authentication\
-            \ to see it. A setting of false will require a unique token for each view.\n\
-            \    liveStreamUpdatePayload.setRecord(true); // Use this to indicate\
-            \ whether you want the recording on or off. On is true, off is false.\n\
-            \    liveStreamUpdatePayload.setPlayerId(\"pl45KFKdlddgk654dspkze\");\
-            \ // The unique ID for the player associated with a live stream that you\
-            \ want to update.\n    liveStreamUpdatePayload.setRestreams(Collections.singletonList(new\
+            \ for such as player details.\n    LiveStreamUpdatePayload liveStreamUpdatePayload\
+            \ = new LiveStreamUpdatePayload(); // \n    liveStreamUpdatePayload.setName(\"\
+            My Live Stream Video\"); // The name you want to use for your live stream.\n\
+            \    liveStreamUpdatePayload.setPublic(); // Whether your video can be\
+            \ viewed by everyone, or requires authentication to see it. A setting\
+            \ of false will require a unique token for each view.\n    liveStreamUpdatePayload.setPlayerId(\"\
+            pl45KFKdlddgk654dspkze\"); // The unique ID for the player associated\
+            \ with a live stream that you want to update.\n    liveStreamUpdatePayload.setRestreams(Collections.singletonList(new\
             \ RestreamsRequestObject() // Use this parameter to add, edit, or remove\
             \ RTMP services where you want to restream a live stream. The list can\
             \ only contain up to 5 destinations. This operation updates all restream\
@@ -4426,18 +4407,17 @@ paths:
             \            var apiKey = \"YOUR_API_KEY\";\n\n            var apiInstance\
             \ = new ApiVideoClient(apiKey,basePath);\n\n            var liveStreamId\
             \ = li400mYKSgQ6xs7taUeSaEKr;  // string | The unique ID for the live\
-            \ stream that you want to update information for such as player details,\
-            \ or whether you want the recording on or off.\n            var liveStreamUpdatePayload\
-            \ = new LiveStreamUpdatePayload(); // LiveStreamUpdatePayload | \n   \
-            \         var apiLiveStreamsInstance = apiInstance.LiveStreams();\n  \
-            \          try\n            {\n                // Update a live stream\n\
-            \                LiveStream result = apiLiveStreamsInstance.update(liveStreamId,\
-            \ liveStreamUpdatePayload);\n                Debug.WriteLine(result);\n\
-            \            }\n            catch (ApiException  e)\n            {\n \
-            \               Debug.Print(\"Exception when calling LiveStreamsApi.update:\
-            \ \" + e.Message );\n                Debug.Print(\"Status Code: \"+ e.ErrorCode);\n\
-            \                Debug.Print(e.StackTrace);\n            }\n        }\n\
-            \    }\n}\n"
+            \ stream that you want to update information for such as player details.\n\
+            \            var liveStreamUpdatePayload = new LiveStreamUpdatePayload();\
+            \ // LiveStreamUpdatePayload | \n            var apiLiveStreamsInstance\
+            \ = apiInstance.LiveStreams();\n            try\n            {\n     \
+            \           // Update a live stream\n                LiveStream result\
+            \ = apiLiveStreamsInstance.update(liveStreamId, liveStreamUpdatePayload);\n\
+            \                Debug.WriteLine(result);\n            }\n           \
+            \ catch (ApiException  e)\n            {\n                Debug.Print(\"\
+            Exception when calling LiveStreamsApi.update: \" + e.Message );\n    \
+            \            Debug.Print(\"Status Code: \"+ e.ErrorCode);\n          \
+            \      Debug.Print(e.StackTrace);\n            }\n        }\n    }\n}\n"
         - language: php
           code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
             \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/LiveStreamsApi.md#update\n\
@@ -4445,16 +4425,13 @@ paths:
             Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
             \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n); \n\n$liveStreamId\
             \ = 'li400mYKSgQ6xs7taUeSaEKr'; // The unique ID for the live stream that\
-            \ you want to update information for such as player details, or whether\
-            \ you want the recording on or off.\n\n$liveStreamUpdatePayload = (new\
-            \ \\ApiVideo\\Client\\Model\\LiveStreamUpdatePayload())\n    ->setName(\"\
+            \ you want to update information for such as player details.\n\n$liveStreamUpdatePayload\
+            \ = (new \\ApiVideo\\Client\\Model\\LiveStreamUpdatePayload())\n    ->setName(\"\
             My Live Stream Video\") // The name you want to use for your live stream.)\n\
             \    ->setPublic(true) // Whether your video can be viewed by everyone,\
-            \ or requires authentication to see it. )\n    ->setRecord(true) // Use\
-            \ this to indicate whether you want the recording on or off. On is true,\
-            \ off is false.)\n    ->setPlayerId(\"pl45KFKdlddgk654dspkze\") // The\
-            \ unique ID for the player associated with a live stream that you want\
-            \ to update.)\n    ->setRestreams(array(\n      new RestreamsRequestObject(['name'\
+            \ or requires authentication to see it. )\n    ->setPlayerId(\"pl45KFKdlddgk654dspkze\"\
+            ) // The unique ID for the player associated with a live stream that you\
+            \ want to update.)\n    ->setRestreams(array(\n      new RestreamsRequestObject(['name'\
             \ => 'My RTMP server', 'serverUrl' => 'rtmp://my.broadcast.example.com/app',\
             \ 'streamKey' => 'dw-dew8-q6w9-k67w-1ws8'])));\n\n\n$liveStream = $client->liveStreams()->update($liveStreamId,\
             \ $liveStreamUpdatePayload); "
@@ -4465,10 +4442,9 @@ paths:
 
             ApiVideoClient.apiKey = "YOUR_API_KEY"
 
-            let liveStreamId = "li400mYKSgQ6xs7taUeSaEKr" // String | The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+            let liveStreamId = "li400mYKSgQ6xs7taUeSaEKr" // String | The unique ID for the live stream that you want to update information for such as player details.
             let liveStreamUpdatePayload = LiveStreamUpdatePayload(
                 name: "My Live Stream Video",
-                record: false,
                 _public: true,
                 playerId: "pl4f4ferf5erfr5zed4fsdd",
                 restreams: [RestreamsRequestObject(
@@ -8344,298 +8320,6 @@ paths:
             \ { (response, error) in\n    guard error == nil else {\n        print(error)\n\
             \        return\n    }\n\n    if (response) {\n        dump(response)\n\
             \    }\n}\n"
-  /analytics/videos/{videoId}:
-    get:
-      description: Retrieve all available user sessions for a specific video. Tutorials
-        that use the [analytics endpoint](https://api.video/blog/endpoints/analytics).
-      operationId: GET_analytics-videos-videoId
-      parameters:
-      - description: The unique identifier for the video you want to retrieve session
-          information for.
-        example: vi4k0jvEUuaTdRAEjQ4Prklg
-        explode: false
-        in: path
-        name: videoId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: "Period must have one of the following formats: \n- For a day\
-          \ : 2018-01-01,\n- For a week: 2018-W01, \n- For a month: 2018-01\n- For\
-          \ a year: 2018\nFor a range period: \n-  Date range: 2018-01-01/2018-01-15\n"
-        explode: true
-        in: query
-        name: period
-        required: true
-        schema:
-          format: period
-          type: string
-        style: form
-      - description: Metadata and [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata)
-          filter. Send an array of key value pairs you want to filter sessios with.
-        example: metadata[Author]=John Doe&metadata[Format]=Tutorial
-        explode: true
-        in: query
-        name: metadata
-        required: false
-        schema:
-          additionalProperties:
-            type: string
-          type: object
-        style: deepObject
-        x-is-deep-object: true
-      - description: 'Choose the number of search results to return per page. Minimum
-          value: 1'
-        example: 2
-        explode: true
-        in: query
-        name: currentPage
-        required: false
-        schema:
-          default: 1
-          type: integer
-        style: form
-      - description: Results per page. Allowed values 1-100, default is 25.
-        example: 30
-        explode: true
-        in: query
-        name: pageSize
-        required: false
-        schema:
-          default: 25
-          type: integer
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    data:
-                    - session:
-                        sessionId: psEmFwGQUAXR2lFHj5nDOpy
-                        loadedAt: 2019-06-24T11:45:01.109Z
-                        endedAt: 2019-06-24T11:49:19.243Z
-                      location:
-                        country: France
-                        city: Paris
-                      referrer:
-                        url: https://api.video
-                        medium: organic
-                        source: https://google.com
-                        searchTerm: video encoding hosting and delivery
-                      device:
-                        type: desktop
-                        vendor: Dell
-                        model: unknown
-                      os:
-                        name: Microsoft Windows
-                        shortname: W10
-                        version: Windows10
-                      client:
-                        type: browser
-                        name: Firefox
-                        version: "67.0"
-                    pagination:
-                      currentPage: 1
-                      currentPageItems: 1
-                      pageSize: 25
-                      pagesTotal: 1
-                      itemsTotal: 1
-                      links:
-                      - rel: self
-                        uri: /analytics/sessions/psEmFwGQUAXR2lFHj5nDOpy?currentPage=1&pageSize=25
-                      - rel: first
-                        uri: /analytics/sessions/psEmFwGQUAXR2lFHj5nDOpy?currentPage=1&pageSize=25
-                      - rel: last
-                        uri: /analytics/sessions/psEmFwGQUAXR2lFHj5nDOpy?currentPage=1&pageSize=25
-              schema:
-                $ref: '#/components/schemas/raw-statistics-list-sessions-response'
-          description: Success
-        "404":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    type: https://docs.api.video/docs/resourcenot_found
-                    title: The requested resource was not found.
-                    name: videoId
-                    status: 404
-              schema:
-                $ref: '#/components/schemas/not-found'
-          description: Not Found
-      security:
-      - apiKey: []
-      summary: List video player sessions
-      tags:
-      - Raw statistics
-      x-client-action: listVideoSessions
-      x-group-parameters: true
-      x-client-paginated: true
-      x-doctave:
-        code-samples:
-        - language: go
-          code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
-            \n// Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/RawStatisticsApi.md#listVideoSessions\n\
-            \npackage main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\n\
-            \    apivideosdk \"github.com/apivideo/api.video-go-client\"\n)\n\nfunc\
-            \ main() {\n    client := apivideosdk.ClientBuilder(\"YOUR_API_KEY\").Build()\n\
-            \    // if you rather like to use the sandbox environment:\n    // client\
-            \ := apivideosdk.SandboxClientBuilder(\"YOUR_SANDBOX_API_KEY\").Build()\n\
-            \    req := apivideosdk.RawStatisticsApiListVideoSessionsRequest{}\n \
-            \   \n    req.VideoId(\"vi4k0jvEUuaTdRAEjQ4Prklg\") // string | The unique\
-            \ identifier for the video you want to retrieve session information for.\n\
-            \    req.Period(\"period_example\") // string | Period must have one of\
-            \ the following formats:  - For a day : 2018-01-01, - For a week: 2018-W01,\
-            \ - For a month: 2018-01 - For a year: 2018  For a range period: -  Date\
-            \ range: 2018-01-01/2018-01-15 \n    req.Metadata(map[string]string{\"\
-            key\": \"Inner_example\"}) // map[string]string | Metadata and Dynamic\
-            \ Metadata filter. Send an array of key value pairs you want to filter\
-            \ sessios with.\n    req.CurrentPage(int32(2)) // int32 | Choose the number\
-            \ of search results to return per page. Minimum value: 1 (default to 1)\n\
-            \    req.PageSize(int32(30)) // int32 | Results per page. Allowed values\
-            \ 1-100, default is 25. (default to 25)\n\n    res, err := client.RawStatistics.ListVideoSessions(videoId\
-            \ string, req)\n    \n\n    if err != nil {\n        fmt.Fprintf(os.Stderr,\
-            \ \"Error when calling `RawStatistics.ListVideoSessions``: %v\\\n\", err)\n\
-            \    }\n    // response from `ListVideoSessions`: RawStatisticsListSessionsResponse\n\
-            \    fmt.Fprintf(os.Stdout, \"Response from `RawStatistics.ListVideoSessions`:\
-            \ %v\\\n\", res)\n}\n"
-        - language: node
-          code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
-            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/RawStatisticsApi.md#listVideoSessions\n\
-            \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
-            const videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg'; // The unique identifier for\
-            \ the video you want to retrieve session information for.\nconst period\
-            \ = '2018-01'; // Period must have one of the following formats:  - For\
-            \ a day : 2018-01-01, - For a week: 2018-W01, - For a month: 2018-01 -\
-            \ For a year: 2018  For a range period: -  Date range: 2018-01-01/2018-01-15\
-            \ \nconst metadata = { // Metadata and Dynamic Metadata filter. Send an\
-            \ array of key value pairs you want to filter sessios with.\n  metadataKey:\
-            \ \"metadataValue\"\n}; \nconst currentPage = 2; // Choose the number\
-            \ of search results to return per page. Minimum value: 1\nconst pageSize\
-            \ = 30; // Results per page. Allowed values 1-100, default is 25.\n\n\
-            const videoSessions = await client.rawStatistics.listVideoSessions({ videoId,\
-            \ period, metadata, currentPage, pageSize }); "
-        - language: python
-          code: |
-            # First install the api client with "pip install api.video"
-            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/RawStatisticsApi.md#listVideoSessions
-
-            import apivideo
-            from apivideo.api import raw_statistics_api
-            from apivideo.model.not_found import NotFound
-            from apivideo.model.raw_statistics_list_sessions_response import RawStatisticsListSessionsResponse
-            from pprint import pprint
-
-            # Enter a context with an instance of the API client
-            with apivideo.AuthenticatedApiClient(__API_KEY__) as api_client:
-                # Create an instance of the API class
-                api_instance = raw_statistics_api.RawStatisticsApi(api_client)
-                video_id = "vi4k0jvEUuaTdRAEjQ4Prklg" # str | The unique identifier for the video you want to retrieve session information for.
-                period = "period_example" # str | Period must have one of the following formats:  - For a day : 2018-01-01, - For a week: 2018-W01, - For a month: 2018-01 - For a year: 2018  For a range period: -  Date range: 2018-01-01/2018-01-15  (optional)
-                metadata = {
-                    "key": "key_example",
-                } # {str: (str,)} | Metadata and Dynamic Metadata filter. Send an array of key value pairs you want to filter sessios with. (optional)
-                current_page = 2 # int | Choose the number of search results to return per page. Minimum value: 1 (optional) if omitted the server will use the default value of 1
-                page_size = 30 # int | Results per page. Allowed values 1-100, default is 25. (optional) if omitted the server will use the default value of 25
-
-                # example passing only required values which don't have defaults set
-                try:
-                    # List video player sessions
-                    api_response = api_instance.list_video_sessions(video_id)
-                    pprint(api_response)
-                except apivideo.ApiException as e:
-                    print("Exception when calling RawStatisticsApi->list_video_sessions: %s\n" % e)
-
-                # example passing only required values which don't have defaults set
-                # and optional values
-                try:
-                    # List video player sessions
-                    api_response = api_instance.list_video_sessions(video_id, period=period, metadata=metadata, current_page=current_page, page_size=page_size)
-                    pprint(api_response)
-                except apivideo.ApiException as e:
-                    print("Exception when calling RawStatisticsApi->list_video_sessions: %s\n" % e)
-        - language: java
-          code: "// First add the \"video.api:java-api-client\" maven dependency to\
-            \ your project\n// Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/RawStatisticsApi.md#listVideoSessions\n\
-            \nimport video.api.client.ApiVideoClient;\nimport video.api.client.api.ApiException;\n\
-            import video.api.client.api.models.*;\nimport video.api.client.api.clients.RawStatisticsApi;\n\
-            import java.util.*;\n\npublic class Example {\n  public static void main(String[]\
-            \ args) {\n    ApiVideoClient client = new ApiVideoClient(\"YOUR_API_KEY\"\
-            );\n    // if you rather like to use the sandbox environment:\n    //\
-            \ ApiVideoClient client = new ApiVideoClient(\"YOUR_SANDBOX_API_KEY\"\
-            , ApiVideoClient.Environment.SANDBOX);\n\n    RawStatisticsApi apiInstance\
-            \ = client.rawStatistics();\n    \n    String videoId = \"vi4k0jvEUuaTdRAEjQ4Prklg\"\
-            ; // The unique identifier for the video you want to retrieve session\
-            \ information for.\n    String period = \"period_example\"; // Period\
-            \ must have one of the following formats:  - For a day : 2018-01-01, -\
-            \ For a week: 2018-W01, - For a month: 2018-01 - For a year: 2018  For\
-            \ a range period: -  Date range: 2018-01-01/2018-01-15 \n    Map<String,\
-            \ String> metadata = new HashMap(); // Metadata and Dynamic Metadata filter.\
-            \ Send an array of key value pairs you want to filter sessios with.\n\
-            \    Integer currentPage = 1; // Choose the number of search results to\
-            \ return per page. Minimum value: 1\n    Integer pageSize = 25; // Results\
-            \ per page. Allowed values 1-100, default is 25.\n\n    try {\n      Page<VideoSession>\
-            \ result = apiInstance.listVideoSessions(videoId)\n            .period(period)\n\
-            \            .metadata(metadata)\n            .currentPage(currentPage)\n\
-            \            .pageSize(pageSize)\n            .execute();\n      System.out.println(result);\n\
-            \    } catch (ApiException e) {\n      System.err.println(\"Exception\
-            \ when calling RawStatisticsApi#listVideoSessions\");\n      System.err.println(\"\
-            Status code: \" + e.getCode());\n      System.err.println(\"Reason: \"\
-            \ + e.getMessage());\n      System.err.println(\"Response headers: \"\
-            \ + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n\
-            }\n"
-        - language: csharp
-          code: "// First add the \"ApiVideo\" NuGet package to your project\n// Documentation:\
-            \ https://github.com/apivideo/api.video-csharp-client/blob/main/docs/RawStatisticsApi.md#listVideoSessions\n\
-            \nusing System.Diagnostics;\nusing ApiVideo.Client;\n\nnamespace Example\n\
-            {\n    public class listVideoSessionsExample\n    {\n        public static\
-            \ void Main()\n        {\n            var basePath = ApiVideoClient.Client.Environment.SANDBOX;\n\
-            \            var apiKey = \"YOUR_API_KEY\";\n\n            var apiInstance\
-            \ = new ApiVideoClient(apiKey,basePath);\n\n            var videoId =\
-            \ vi4k0jvEUuaTdRAEjQ4Prklg;  // string | The unique identifier for the\
-            \ video you want to retrieve session information for.\n            var\
-            \ period = period_example;  // string | Period must have one of the following\
-            \ formats:  - For a day : 2018-01-01, - For a week: 2018-W01, - For a\
-            \ month: 2018-01 - For a year: 2018  For a range period: -  Date range:\
-            \ 2018-01-01/2018-01-15  (optional) \n            var metadata = new Dictionary<string,\
-            \ string>(); // Dictionary<string, string> | Metadata and Dynamic Metadata\
-            \ filter. Send an array of key value pairs you want to filter sessios\
-            \ with. (optional) \n            var currentPage = 2;  // int? | Choose\
-            \ the number of search results to return per page. Minimum value: 1 (optional)\
-            \  (default to 1)\n            var pageSize = 30;  // int? | Results per\
-            \ page. Allowed values 1-100, default is 25. (optional)  (default to 25)\n\
-            \            var apiRawStatisticsInstance = apiInstance.RawStatistics();\n\
-            \            try\n            {\n                // List video player\
-            \ sessions\n                RawStatisticsListSessionsResponse result =\
-            \ apiRawStatisticsInstance.listVideoSessions(videoId, period, metadata,\
-            \ currentPage, pageSize);\n                Debug.WriteLine(result);\n\
-            \            }\n            catch (ApiException  e)\n            {\n \
-            \               Debug.Print(\"Exception when calling RawStatisticsApi.listVideoSessions:\
-            \ \" + e.Message );\n                Debug.Print(\"Status Code: \"+ e.ErrorCode);\n\
-            \                Debug.Print(e.StackTrace);\n            }\n        }\n\
-            \    }\n}\n"
-        - language: php
-          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
-            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/RawStatisticsApi.md#listVideoSessions\n\
-            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$videoId = 'vi4k0jvEUuaTdRAEjQ4Prklg';\
-            \ // The unique identifier for the video you want to retrieve session\
-            \ information for.\n\n$videoSessions = $client->rawStatistics()->listVideoSessions($videoId,\
-            \ array(\n    'period' => '2018-01', // Period must have one of the following\
-            \ formats: - For a day : 2018-01-01, - For a week: 2018-W01, - For a month:\
-            \ 2018-01 - For a year: 2018  For a range period: -  Date range: 2018-01-01/2018-01-15\
-            \ \n    'metadata' => array( // Metadata and Dynamic Metadata filter.\
-            \ Send an array of key value pairs you want to filter sessions with.\n\
-            \        'key' => 'value'\n    ),\n    'currentPage' => 2, // Choose the\
-            \ number of search results to return per page. Minimum ->setvalue(1)\n\
-            \    'pageSize' => 30 // Results per page. Allowed values 1-100, default\
-            \ is 25.\n)); "
-        - language: swift
-          code: |
-            // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/RawStatisticsAPI.md#listVideoSessions
   /analytics/live-streams/plays:
     get:
       description: Retrieve filtered analytics about the number of plays for your
@@ -9201,578 +8885,6 @@ paths:
             \ pageSize: pageSize) { (response, error) in\n    guard error == nil else\
             \ {\n        print(error)\n        return\n    }\n\n    if (response)\
             \ {\n        dump(response)\n    }\n}\n"
-  /analytics/live-streams/{liveStreamId}:
-    get:
-      operationId: GET_analytics-live-streams-liveStreamId
-      parameters:
-      - description: The unique identifier for the live stream you want to retrieve
-          analytics for.
-        example: vi4k0jvEUuaTdRAEjQ4Jfrgz
-        explode: false
-        in: path
-        name: liveStreamId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: "Period must have one of the following formats: \n- For a day\
-          \ : \"2018-01-01\",\n- For a week: \"2018-W01\", \n- For a month: \"2018-01\"\
-          \n- For a year: \"2018\"\nFor a range period: \n-  Date range: \"2018-01-01/2018-01-15\"\
-          \n"
-        example: 2019-01-01T00:00:00.000Z
-        explode: true
-        in: query
-        name: period
-        required: true
-        schema:
-          format: period
-          type: string
-        style: form
-      - description: 'Choose the number of search results to return per page. Minimum
-          value: 1'
-        example: 2
-        explode: true
-        in: query
-        name: currentPage
-        required: false
-        schema:
-          default: 1
-          type: integer
-        style: form
-      - description: Results per page. Allowed values 1-100, default is 25.
-        example: 30
-        explode: true
-        in: query
-        name: pageSize
-        required: false
-        schema:
-          default: 25
-          type: integer
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    data:
-                    - session:
-                        sessionId: ps4zRWVOv2If2vzKJLMr3jQo
-                        loadedAt: 2018-09-11T13:04:37.890Z
-                        endedAt: 2018-09-11T14:47:22.186Z
-                      location:
-                        country: France
-                        city: Paris
-                      referrer:
-                        url: unknown
-                        medium: unknown
-                        source: unknown
-                        searchTerm: unknown
-                      device:
-                        type: desktop
-                        vendor: unknown
-                        model: unknown
-                      os:
-                        name: unknown
-                        shortname: unknown
-                        version: unknown
-                      client:
-                        type: browser
-                        name: Firefox
-                        version: "61.0"
-                    pagination:
-                      currentPage: 1
-                      currentPageItems: 1
-                      pageSize: 25
-                      pagesTotal: 1
-                      itemsTotal: 1
-                      links:
-                      - rel: self
-                        uri: /analytics/sessions/ps4zRWVOv2If2vzKJLMr3jQo?currentPage=1&pageSize=25
-                      - rel: first
-                        uri: /analytics/sessions/ps4zRWVOv2If2vzKJLMr3jQo?currentPage=1&pageSize=25
-                      - rel: last
-                        uri: /analytics/sessions/ps4zRWVOv2If2vzKJLMr3jQo?currentPage=1&pageSize=25
-              schema:
-                $ref: '#/components/schemas/raw-statistics-list-live-stream-analytics-response'
-          description: Success
-        "404":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    type: https://docs.api.video/docs/resourcenot_found
-                    title: The requested resource was not found.
-                    name: liveStreamId
-                    status: 404
-              schema:
-                $ref: '#/components/schemas/not-found'
-          description: Not Found
-      security:
-      - apiKey: []
-      summary: List live stream player sessions
-      tags:
-      - Raw statistics
-      x-client-action: listLiveStreamSessions
-      x-group-parameters: true
-      x-client-paginated: true
-      x-doctave:
-        code-samples:
-        - language: go
-          code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
-            \n// Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/RawStatisticsApi.md#listLiveStreamSessions\n\
-            \npackage main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\n\
-            \    apivideosdk \"github.com/apivideo/api.video-go-client\"\n)\n\nfunc\
-            \ main() {\n    client := apivideosdk.ClientBuilder(\"YOUR_API_KEY\").Build()\n\
-            \    // if you rather like to use the sandbox environment:\n    // client\
-            \ := apivideosdk.SandboxClientBuilder(\"YOUR_SANDBOX_API_KEY\").Build()\n\
-            \    req := apivideosdk.RawStatisticsApiListLiveStreamSessionsRequest{}\n\
-            \    \n    req.LiveStreamId(\"vi4k0jvEUuaTdRAEjQ4Jfrgz\") // string |\
-            \ The unique identifier for the live stream you want to retrieve analytics\
-            \ for.\n    req.Period(\"2019-01-01\") // string | Period must have one\
-            \ of the following formats:  - For a day : \"2018-01-01\", - For a week:\
-            \ \"2018-W01\", - For a month: \"2018-01\" - For a year: \"2018\"  For\
-            \ a range period: -  Date range: \"2018-01-01/2018-01-15\" \n    req.CurrentPage(int32(2))\
-            \ // int32 | Choose the number of search results to return per page. Minimum\
-            \ value: 1 (default to 1)\n    req.PageSize(int32(30)) // int32 | Results\
-            \ per page. Allowed values 1-100, default is 25. (default to 25)\n\n \
-            \   res, err := client.RawStatistics.ListLiveStreamSessions(liveStreamId\
-            \ string, req)\n    \n\n    if err != nil {\n        fmt.Fprintf(os.Stderr,\
-            \ \"Error when calling `RawStatistics.ListLiveStreamSessions``: %v\\\n\
-            \", err)\n    }\n    // response from `ListLiveStreamSessions`: RawStatisticsListLiveStreamAnalyticsResponse\n\
-            \    fmt.Fprintf(os.Stdout, \"Response from `RawStatistics.ListLiveStreamSessions`:\
-            \ %v\\\n\", res)\n}\n"
-        - language: node
-          code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
-            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/RawStatisticsApi.md#listLiveStreamSessions\n\
-            \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
-            const liveStreamId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier\
-            \ for the live stream you want to retrieve analytics for.\nconst period\
-            \ = '2019-01-01'; // Period must have one of the following formats:  -\
-            \ For a day : \"2018-01-01\", - For a week: \"2018-W01\", - For a month:\
-            \ \"2018-01\" - For a year: \"2018\"  For a range period: -  Date range:\
-            \ \"2018-01-01/2018-01-15\" \nconst currentPage = 2; // Choose the number\
-            \ of search results to return per page. Minimum value: 1\nconst pageSize\
-            \ = 30; // Results per page. Allowed values 1-100, default is 25.\n \n\
-            const liveStreamSessions = await client.rawStatistics.listLiveStreamSessions({\
-            \ liveStreamId, period, currentPage, pageSize })\n"
-        - language: python
-          code: |
-            # First install the api client with "pip install api.video"
-            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/RawStatisticsApi.md#listLiveStreamSessions
-
-            import apivideo
-            from apivideo.api import raw_statistics_api
-            from apivideo.model.raw_statistics_list_live_stream_analytics_response import RawStatisticsListLiveStreamAnalyticsResponse
-            from apivideo.model.not_found import NotFound
-            from pprint import pprint
-
-            # Enter a context with an instance of the API client
-            with apivideo.AuthenticatedApiClient(__API_KEY__) as api_client:
-                # Create an instance of the API class
-                api_instance = raw_statistics_api.RawStatisticsApi(api_client)
-                live_stream_id = "vi4k0jvEUuaTdRAEjQ4Jfrgz" # str | The unique identifier for the live stream you want to retrieve analytics for.
-                period = "2019-01-01" # str | Period must have one of the following formats:  - For a day : "2018-01-01", - For a week: "2018-W01", - For a month: "2018-01" - For a year: "2018"  For a range period: -  Date range: "2018-01-01/2018-01-15"  (optional)
-                current_page = 2 # int | Choose the number of search results to return per page. Minimum value: 1 (optional) if omitted the server will use the default value of 1
-                page_size = 30 # int | Results per page. Allowed values 1-100, default is 25. (optional) if omitted the server will use the default value of 25
-
-                # example passing only required values which don't have defaults set
-                try:
-                    # List live stream player sessions
-                    api_response = api_instance.list_live_stream_sessions(live_stream_id)
-                    pprint(api_response)
-                except apivideo.ApiException as e:
-                    print("Exception when calling RawStatisticsApi->list_live_stream_sessions: %s\n" % e)
-
-                # example passing only required values which don't have defaults set
-                # and optional values
-                try:
-                    # List live stream player sessions
-                    api_response = api_instance.list_live_stream_sessions(live_stream_id, period=period, current_page=current_page, page_size=page_size)
-                    pprint(api_response)
-                except apivideo.ApiException as e:
-                    print("Exception when calling RawStatisticsApi->list_live_stream_sessions: %s\n" % e)
-        - language: java
-          code: "// First add the \"video.api:java-api-client\" maven dependency to\
-            \ your project\n// Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/RawStatisticsApi.md#listLiveStreamSessions\n\
-            \nimport video.api.client.ApiVideoClient;\nimport video.api.client.api.ApiException;\n\
-            import video.api.client.api.models.*;\nimport video.api.client.api.clients.RawStatisticsApi;\n\
-            import java.util.*;\n\npublic class Example {\n  public static void main(String[]\
-            \ args) {\n    ApiVideoClient client = new ApiVideoClient(\"YOUR_API_KEY\"\
-            );\n    // if you rather like to use the sandbox environment:\n    //\
-            \ ApiVideoClient client = new ApiVideoClient(\"YOUR_SANDBOX_API_KEY\"\
-            , ApiVideoClient.Environment.SANDBOX);\n\n    RawStatisticsApi apiInstance\
-            \ = client.rawStatistics();\n    \n    String liveStreamId = \"vi4k0jvEUuaTdRAEjQ4Jfrgz\"\
-            ; // The unique identifier for the live stream you want to retrieve analytics\
-            \ for.\n    String period = \"2019-01-01\"; // Period must have one of\
-            \ the following formats:  - For a day : \"2018-01-01\", - For a week:\
-            \ \"2018-W01\", - For a month: \"2018-01\" - For a year: \"2018\"  For\
-            \ a range period: -  Date range: \"2018-01-01/2018-01-15\" \n    Integer\
-            \ currentPage = 1; // Choose the number of search results to return per\
-            \ page. Minimum value: 1\n    Integer pageSize = 25; // Results per page.\
-            \ Allowed values 1-100, default is 25.\n\n    try {\n      Page<LiveStreamSession>\
-            \ result = apiInstance.listLiveStreamSessions(liveStreamId)\n        \
-            \    .period(period)\n            .currentPage(currentPage)\n        \
-            \    .pageSize(pageSize)\n            .execute();\n      System.out.println(result);\n\
-            \    } catch (ApiException e) {\n      System.err.println(\"Exception\
-            \ when calling RawStatisticsApi#listLiveStreamSessions\");\n      System.err.println(\"\
-            Status code: \" + e.getCode());\n      System.err.println(\"Reason: \"\
-            \ + e.getMessage());\n      System.err.println(\"Response headers: \"\
-            \ + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n\
-            }\n"
-        - language: csharp
-          code: "// First add the \"ApiVideo\" NuGet package to your project\n// Documentation:\
-            \ https://github.com/apivideo/api.video-csharp-client/blob/main/docs/RawStatisticsApi.md#listLiveStreamSessions\n\
-            \nusing System.Diagnostics;\nusing ApiVideo.Client;\n\nnamespace Example\n\
-            {\n    public class listLiveStreamSessionsExample\n    {\n        public\
-            \ static void Main()\n        {\n            var basePath = ApiVideoClient.Client.Environment.SANDBOX;\n\
-            \            var apiKey = \"YOUR_API_KEY\";\n\n            var apiInstance\
-            \ = new ApiVideoClient(apiKey,basePath);\n\n            var liveStreamId\
-            \ = vi4k0jvEUuaTdRAEjQ4Jfrgz;  // string | The unique identifier for the\
-            \ live stream you want to retrieve analytics for.\n            var period\
-            \ = 2019-01-01;  // string | Period must have one of the following formats:\
-            \  - For a day : \"2018-01-01\", - For a week: \"2018-W01\", - For a month:\
-            \ \"2018-01\" - For a year: \"2018\"  For a range period: -  Date range:\
-            \ \"2018-01-01/2018-01-15\"  (optional) \n            var currentPage\
-            \ = 2;  // int? | Choose the number of search results to return per page.\
-            \ Minimum value: 1 (optional)  (default to 1)\n            var pageSize\
-            \ = 30;  // int? | Results per page. Allowed values 1-100, default is\
-            \ 25. (optional)  (default to 25)\n            var apiRawStatisticsInstance\
-            \ = apiInstance.RawStatistics();\n            try\n            {\n   \
-            \             // List live stream player sessions\n                RawStatisticsListLiveStreamAnalyticsResponse\
-            \ result = apiRawStatisticsInstance.listLiveStreamSessions(liveStreamId,\
-            \ period, currentPage, pageSize);\n                Debug.WriteLine(result);\n\
-            \            }\n            catch (ApiException  e)\n            {\n \
-            \               Debug.Print(\"Exception when calling RawStatisticsApi.listLiveStreamSessions:\
-            \ \" + e.Message );\n                Debug.Print(\"Status Code: \"+ e.ErrorCode);\n\
-            \                Debug.Print(e.StackTrace);\n            }\n        }\n\
-            \    }\n}\n"
-        - language: php
-          code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
-            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/RawStatisticsApi.md#listLiveStreamSessions\n\
-            \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
-            const liveStreamId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The unique identifier\
-            \ for the live stream you want to retrieve analytics for.\nconst period\
-            \ = '2019-01-01'; // Period must have one of the following formats:  -\
-            \ For a day : \"2018-01-01\", - For a week: \"2018-W01\", - For a month:\
-            \ \"2018-01\" - For a year: \"2018\"  For a range period: -  Date range:\
-            \ \"2018-01-01/2018-01-15\" \nconst currentPage = 2; // Choose the number\
-            \ of search results to return per page. Minimum value: 1\nconst pageSize\
-            \ = 30; // Results per page. Allowed values 1-100, default is 25.\n\n\
-            // RawStatisticsListLiveStreamAnalyticsResponse\nconst liveStreamSessions\
-            \ = await client.rawStatistics.listLiveStreamSessions({ liveStreamId,\
-            \ period, currentPage, pageSize })\n"
-        - language: swift
-          code: |
-            // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/RawStatisticsAPI.md#listLiveStreamSessions
-  /analytics/sessions/{sessionId}/events:
-    get:
-      description: Useful to track and measure video's engagement.
-      operationId: GET_analytics-sessions-sessionId-events
-      parameters:
-      - description: A unique identifier you can use to reference and track a session
-          with.
-        example: psEmFwGQUAXR2lFHj5nDOpy
-        explode: false
-        in: path
-        name: sessionId
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: 'Choose the number of search results to return per page. Minimum
-          value: 1'
-        example: 2
-        explode: true
-        in: query
-        name: currentPage
-        required: false
-        schema:
-          default: 1
-          type: integer
-        style: form
-      - description: Results per page. Allowed values 1-100, default is 25.
-        example: 30
-        explode: true
-        in: query
-        name: pageSize
-        required: false
-        schema:
-          default: 25
-          type: integer
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    data:
-                    - type: ready
-                      emittedAt: 2020-09-15T09:47:42.000Z
-                      at: 0
-                    - type: play
-                      emittedAt: 2020-09-15T21:35:57.000Z
-                      at: 0
-                    - type: pause
-                      emittedAt: 2020-09-15T21:36:05.000Z
-                      at: 7
-                    - type: resume
-                      emittedAt: 2020-09-15T21:36:19.000Z
-                      at: 21
-                    - type: seek.forward
-                      emittedAt: 2020-09-15T21:36:19.000Z
-                      from: 7
-                      to: 21
-                    - type: end
-                      emittedAt: 2020-09-15T21:36:28.000Z
-                      at: 30
-                    - type: play
-                      emittedAt: 2020-09-15T21:36:29.000Z
-                      at: 0
-                    - type: seek.backward
-                      emittedAt: 2020-09-15T21:36:29.000Z
-                      from: 30
-                      to: 0
-                    - type: pause
-                      emittedAt: 2020-09-15T21:36:29.000Z
-                      at: 21
-                    - type: resume
-                      emittedAt: 2020-09-15T21:36:30.000Z
-                      at: 21
-                    - type: seek.forward
-                      emittedAt: 2020-09-15T21:36:30.000Z
-                      from: 0
-                      to: 21
-                    - type: pause
-                      emittedAt: 2020-09-15T21:36:33.000Z
-                      at: 20
-                    - type: resume
-                      emittedAt: 2020-09-15T21:36:33.000Z
-                      at: 20
-                    - type: seek.backward
-                      emittedAt: 2020-09-15T21:36:33.000Z
-                      from: 24
-                      to: 20
-                    - type: pause
-                      emittedAt: 2020-09-15T21:36:39.000Z
-                      at: 17
-                    - type: resume
-                      emittedAt: 2020-09-15T21:36:39.000Z
-                      at: 17
-                    - type: seek.forward
-                      emittedAt: 2020-09-15T21:36:39.000Z
-                      from: 17
-                      to: 17
-                    - type: pause
-                      emittedAt: 2020-09-15T21:36:41.000Z
-                      at: 19
-                    - type: ready
-                      emittedAt: 2020-09-17T09:20:47.000Z
-                      at: 0
-                    - type: ready
-                      emittedAt: 2020-09-17T09:41:01.000Z
-                      at: 0
-                    - type: ready
-                      emittedAt: 2020-09-17T09:41:08.000Z
-                      at: 0
-                    - type: play
-                      emittedAt: 2020-09-17T09:41:10.000Z
-                      at: 0
-                    - type: pause
-                      emittedAt: 2020-09-17T09:41:12.000Z
-                      at: 1
-                    - type: resume
-                      emittedAt: 2020-09-17T09:41:13.000Z
-                      at: 1
-                    - type: pause
-                      emittedAt: 2020-09-17T09:41:15.000Z
-                      at: 3
-                    pagination:
-                      currentPage: 1
-                      currentPageItems: 25
-                      pageSize: 25
-                      pagesTotal: 2
-                      itemsTotal: 30
-                      links:
-                      - rel: self
-                        uri: /analytics/sessions/ps5ltuhfsTOeh6bP03Tq5OWc/events?currentPage=1&pageSize=25
-                      - rel: first
-                        uri: /analytics/sessions/ps5ltuhfsTOeh6bP03Tq5OWc/events?currentPage=1&pageSize=25
-                      - rel: next
-                        uri: /analytics/sessions/ps5ltuhfsTOeh6bP03Tq5OWc/events?currentPage=2&pageSize=25
-                      - rel: last
-                        uri: /analytics/sessions/ps5ltuhfsTOeh6bP03Tq5OWc/events?currentPage=2&pageSize=25
-              schema:
-                $ref: '#/components/schemas/raw-statistics-list-player-session-events-response'
-          description: Success
-        "404":
-          content:
-            application/json:
-              examples:
-                response:
-                  value:
-                    type: https://docs.api.video/docs/resourcenot_found
-                    title: The requested resource was not found.
-                    name: videoId
-                    status: 404
-              schema:
-                $ref: '#/components/schemas/not-found'
-          description: Not Found
-      security:
-      - apiKey: []
-      summary: List player session events
-      tags:
-      - Raw statistics
-      x-client-action: listSessionEvents
-      x-group-parameters: true
-      x-client-paginated: true
-      x-doctave:
-        code-samples:
-        - language: go
-          code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
-            \n// Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/RawStatisticsApi.md#listSessionEvents\n\
-            \npackage main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\n\
-            \    apivideosdk \"github.com/apivideo/api.video-go-client\"\n)\n\nfunc\
-            \ main() {\n    client := apivideosdk.ClientBuilder(\"YOUR_API_KEY\").Build()\n\
-            \    // if you rather like to use the sandbox environment:\n    // client\
-            \ := apivideosdk.SandboxClientBuilder(\"YOUR_SANDBOX_API_KEY\").Build()\n\
-            \    req := apivideosdk.RawStatisticsApiListSessionEventsRequest{}\n \
-            \   \n    req.SessionId(\"psEmFwGQUAXR2lFHj5nDOpy\") // string | A unique\
-            \ identifier you can use to reference and track a session with.\n    req.CurrentPage(int32(2))\
-            \ // int32 | Choose the number of search results to return per page. Minimum\
-            \ value: 1 (default to 1)\n    req.PageSize(int32(30)) // int32 | Results\
-            \ per page. Allowed values 1-100, default is 25. (default to 25)\n\n \
-            \   res, err := client.RawStatistics.ListSessionEvents(sessionId string,\
-            \ req)\n    \n\n    if err != nil {\n        fmt.Fprintf(os.Stderr, \"\
-            Error when calling `RawStatistics.ListSessionEvents``: %v\\\n\", err)\n\
-            \    }\n    // response from `ListSessionEvents`: RawStatisticsListPlayerSessionEventsResponse\n\
-            \    fmt.Fprintf(os.Stdout, \"Response from `RawStatistics.ListSessionEvents`:\
-            \ %v\\\n\", res)\n}\n"
-        - language: node
-          code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
-            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/RawStatisticsApi.md#listSessionEvents\n\
-            \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
-            const sessionId = 'psEmFwGQUAXR2lFHj5nDOpy'; // A unique identifier you\
-            \ can use to reference and track a session with.\nconst currentPage =\
-            \ 2; // Choose the number of search results to return per page. Minimum\
-            \ value: 1\nconst pageSize = 30; // Results per page. Allowed values 1-100,\
-            \ default is 25.\n\nconst sessionEvents = await client.rawStatistics.listSessionEvents({\
-            \ sessionId, currentPage, pageSize }) "
-        - language: python
-          code: |
-            # First install the api client with "pip install api.video"
-            # Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/RawStatisticsApi.md#listSessionEvents
-
-            import apivideo
-            from apivideo.api import raw_statistics_api
-            from apivideo.model.not_found import NotFound
-            from apivideo.model.raw_statistics_list_player_session_events_response import RawStatisticsListPlayerSessionEventsResponse
-            from pprint import pprint
-
-            # Enter a context with an instance of the API client
-            with apivideo.AuthenticatedApiClient(__API_KEY__) as api_client:
-                # Create an instance of the API class
-                api_instance = raw_statistics_api.RawStatisticsApi(api_client)
-                session_id = "psEmFwGQUAXR2lFHj5nDOpy" # str | A unique identifier you can use to reference and track a session with.
-                current_page = 2 # int | Choose the number of search results to return per page. Minimum value: 1 (optional) if omitted the server will use the default value of 1
-                page_size = 30 # int | Results per page. Allowed values 1-100, default is 25. (optional) if omitted the server will use the default value of 25
-
-                # example passing only required values which don't have defaults set
-                try:
-                    # List player session events
-                    api_response = api_instance.list_session_events(session_id)
-                    pprint(api_response)
-                except apivideo.ApiException as e:
-                    print("Exception when calling RawStatisticsApi->list_session_events: %s\n" % e)
-
-                # example passing only required values which don't have defaults set
-                # and optional values
-                try:
-                    # List player session events
-                    api_response = api_instance.list_session_events(session_id, current_page=current_page, page_size=page_size)
-                    pprint(api_response)
-                except apivideo.ApiException as e:
-                    print("Exception when calling RawStatisticsApi->list_session_events: %s\n" % e)
-        - language: java
-          code: "// First add the \"video.api:java-api-client\" maven dependency to\
-            \ your project\n// Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/RawStatisticsApi.md#listSessionEvents\n\
-            \nimport video.api.client.ApiVideoClient;\nimport video.api.client.api.ApiException;\n\
-            import video.api.client.api.models.*;\nimport video.api.client.api.clients.RawStatisticsApi;\n\
-            import java.util.*;\n\npublic class Example {\n  public static void main(String[]\
-            \ args) {\n    ApiVideoClient client = new ApiVideoClient(\"YOUR_API_KEY\"\
-            );\n    // if you rather like to use the sandbox environment:\n    //\
-            \ ApiVideoClient client = new ApiVideoClient(\"YOUR_SANDBOX_API_KEY\"\
-            , ApiVideoClient.Environment.SANDBOX);\n\n    RawStatisticsApi apiInstance\
-            \ = client.rawStatistics();\n    \n    String sessionId = \"psEmFwGQUAXR2lFHj5nDOpy\"\
-            ; // A unique identifier you can use to reference and track a session\
-            \ with.\n    Integer currentPage = 1; // Choose the number of search results\
-            \ to return per page. Minimum value: 1\n    Integer pageSize = 25; //\
-            \ Results per page. Allowed values 1-100, default is 25.\n\n    try {\n\
-            \      Page<PlayerSessionEvent> result = apiInstance.listSessionEvents(sessionId)\n\
-            \            .currentPage(currentPage)\n            .pageSize(pageSize)\n\
-            \            .execute();\n      System.out.println(result);\n    } catch\
-            \ (ApiException e) {\n      System.err.println(\"Exception when calling\
-            \ RawStatisticsApi#listSessionEvents\");\n      System.err.println(\"\
-            Status code: \" + e.getCode());\n      System.err.println(\"Reason: \"\
-            \ + e.getMessage());\n      System.err.println(\"Response headers: \"\
-            \ + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n\
-            }\n"
-        - language: csharp
-          code: |
-            // First add the "ApiVideo" NuGet package to your project
-            // Documentation: https://github.com/apivideo/api.video-csharp-client/blob/main/docs/RawStatisticsApi.md#listSessionEvents
-
-            using System.Diagnostics;
-            using ApiVideo.Client;
-
-            namespace Example
-            {
-                public class listSessionEventsExample
-                {
-                    public static void Main()
-                    {
-                        var basePath = ApiVideoClient.Client.Environment.SANDBOX;
-                        var apiKey = "YOUR_API_KEY";
-
-                        var apiInstance = new ApiVideoClient(apiKey,basePath);
-
-                        var sessionId = psEmFwGQUAXR2lFHj5nDOpy;  // string | A unique identifier you can use to reference and track a session with.
-                        var currentPage = 2;  // int? | Choose the number of search results to return per page. Minimum value: 1 (optional)  (default to 1)
-                        var pageSize = 30;  // int? | Results per page. Allowed values 1-100, default is 25. (optional)  (default to 25)
-                        var apiRawStatisticsInstance = apiInstance.RawStatistics();
-                        try
-                        {
-                            // List player session events
-                            RawStatisticsListPlayerSessionEventsResponse result = apiRawStatisticsInstance.listSessionEvents(sessionId, currentPage, pageSize);
-                            Debug.WriteLine(result);
-                        }
-                        catch (ApiException  e)
-                        {
-                            Debug.Print("Exception when calling RawStatisticsApi.listSessionEvents: " + e.Message );
-                            Debug.Print("Status Code: "+ e.ErrorCode);
-                            Debug.Print(e.StackTrace);
-                        }
-                    }
-                }
-            }
-        - language: php
-          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
-            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/RawStatisticsApi.md#listSessionEvents\n\
-            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$sessionId = 'psEmFwGQUAXR2lFHj5nDOpy';\
-            \ // A unique identifier you can use to reference and track a session\
-            \ with.\n\n$sessionEvents = $client->rawStatistics()->listSessionEvents($sessionId,\
-            \ array(\n    'currentPage' => 2, // Choose the number of search results\
-            \ to return per page. Minimum ->setvalue(1)\n    'pageSize' => 30 // Results\
-            \ per page. Allowed values 1-100, default is 25.\n)); "
-        - language: swift
-          code: |
-            // First install the api client: https://github.com/apivideo/api.video-ios-client#getting-started
-            // Documentation: https://github.com/apivideo/api.video-ios-client/blob/main/docs/RawStatisticsAPI.md#listSessionEvents
   /webhooks:
     get:
       description: Retrieve a list of all webhooks configured for the current workspace.
@@ -10453,7 +9565,6 @@ components:
           streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
         name: Live From New York
         public: true
-        record: true
         broadcasting: false
         assets:
           iframe: <iframe src="https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5"
@@ -11124,7 +10235,6 @@ components:
           serverUrl: rtmp://my.broadcast.example.com/app
           name: My RTMP server
         liveStreamId: li400mYKSgQ6xs7taUeSaEKr
-        record: true
         name: My Live Stream
         playerId: pl45d5vFFGrfdsdsd156dGhh
         broadcasting: true
@@ -11143,10 +10253,6 @@ components:
           description: The unique, private stream key that you use to begin streaming.
           example: dw-dew8-q6w9-k67w-1ws8
           type: string
-        record:
-          description: Whether you are recording or not.
-          example: true
-          type: boolean
         public:
           description: Whether your video can be viewed by everyone, or requires authentication
             to see it. A setting of false will require a unique token for each view.
@@ -11186,31 +10292,6 @@ components:
       title: LiveStream
       type: object
     live-stream-session:
-      example:
-        referrer:
-          searchTerm: video stream
-          medium: organic
-          source: https://google.com
-          url: https://api.video
-        os:
-          name: Microsoft Windows
-          shortname: W10
-          version: Windows 10
-        session:
-          loadedAt: 2019-06-24T11:45:01.109Z
-          endedAt: 2019-06-24T12:45:01.109Z
-          sessionId: sessionId
-        client:
-          name: Firefox
-          type: browser
-          version: "67.0"
-        location:
-          country: France
-          city: Paris
-        device:
-          vendor: Dell
-          model: unknown
-          type: desktop
       properties:
         session:
           $ref: '#/components/schemas/live-stream-session-session'
@@ -11227,12 +10308,6 @@ components:
       title: LiveStreamSession
       type: object
     player-session-event:
-      example:
-        emittedAt: 2019-06-24T11:45:01.109Z
-        at: 0
-        from: 6
-        to: 1
-        type: play
       properties:
         type:
           description: 'Possible values are: ready, play, pause, resume, seek.backward,
@@ -11831,7 +10906,6 @@ components:
             serverUrl: rtmp://my.broadcast.example.com/app
             name: My RTMP server
           liveStreamId: li400mYKSgQ6xs7taUeSaEKr
-          record: true
           name: My Live Stream
           playerId: pl45d5vFFGrfdsdsd156dGhh
           broadcasting: true
@@ -11853,7 +10927,6 @@ components:
             serverUrl: rtmp://my.broadcast.example.com/app
             name: My RTMP server
           liveStreamId: li400mYKSgQ6xs7taUeSaEKr
-          record: true
           name: My Live Stream
           playerId: pl45d5vFFGrfdsdsd156dGhh
           broadcasting: true
@@ -11873,7 +10946,6 @@ components:
     live-stream-creation-payload:
       example:
         name: Test live
-        record: true
         playerId: pl4f4ferf5erfr5zed4fsdd
         restreams:
         - name: YouTube
@@ -11887,12 +10959,6 @@ components:
           description: Add a name for your live stream here.
           example: My Live Stream Video
           type: string
-        record:
-          default: false
-          description: Whether you are recording or not. True for record, false for
-            not record.
-          example: true
-          type: boolean
         public:
           description: Whether your video can be viewed by everyone, or requires authentication
             to see it. A setting of false will require a unique token for each view.
@@ -11924,11 +10990,6 @@ components:
           description: Whether your video can be viewed by everyone, or requires authentication
             to see it. A setting of false will require a unique token for each view.
             Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).
-          type: boolean
-        record:
-          description: Use this to indicate whether you want the recording on or off.
-            On is true, off is false.
-          example: true
           type: boolean
         playerId:
           description: The unique ID for the player associated with a live stream
@@ -12281,214 +11342,6 @@ components:
           description: The name of the parameter that caused the error.
           type: string
       type: object
-    raw-statistics-list-sessions-response:
-      example:
-        pagination:
-          itemsTotal: 123
-          pagesTotal: 7
-          pageSize: 20
-          currentPage: 3
-          currentPageItems: 20
-          links:
-            first:
-              rel: first
-              uri: /videos/search?currentPage=1&pageSize=20
-            previous:
-              rel: previous
-              uri: /videos/search?currentPage=2&pageSize=20
-            next:
-              rel: next
-              uri: /videos/search?currentPage=4&pageSize=20
-            last:
-              rel: last
-              uri: /videos/search?currentPage=6&pageSize=20
-        data:
-        - session:
-            sessionId: psEmFwGQUAXR2lFHj5nDOpy
-            loadedAt: 2019-06-24T11:45:01.109Z
-            endedAt: 2019-06-24T11:49:19.243Z
-          location:
-            country: France
-            city: Paris
-          referrer:
-            url: https://api.video
-            medium: organic
-            source: https://google.com
-            searchTerm: video encoding hosting and delivery
-          device:
-            type: desktop
-            vendor: Dell
-            model: unknown
-          os:
-            name: Microsoft Windows
-            shortname: W10
-            version: Windows10
-          client:
-            type: browser
-            name: Firefox
-            version: "67.0"
-        - session:
-            sessionId: psEmFwGQUAXR2lFHj5nDOpy
-            loadedAt: 2019-06-24T11:45:01.109Z
-            endedAt: 2019-06-24T11:49:19.243Z
-          location:
-            country: France
-            city: Paris
-          referrer:
-            url: https://api.video
-            medium: organic
-            source: https://google.com
-            searchTerm: video encoding hosting and delivery
-          device:
-            type: desktop
-            vendor: Dell
-            model: unknown
-          os:
-            name: Microsoft Windows
-            shortname: W10
-            version: Windows10
-          client:
-            type: browser
-            name: Firefox
-            version: "67.0"
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/video-session'
-          type: array
-        pagination:
-          $ref: '#/components/schemas/pagination'
-      required:
-      - data
-      - pagination
-      title: VideoSessions
-      type: object
-    raw-statistics-list-live-stream-analytics-response:
-      example:
-        pagination:
-          itemsTotal: 123
-          pagesTotal: 7
-          pageSize: 20
-          currentPage: 3
-          currentPageItems: 20
-          links:
-            first:
-              rel: first
-              uri: /videos/search?currentPage=1&pageSize=20
-            previous:
-              rel: previous
-              uri: /videos/search?currentPage=2&pageSize=20
-            next:
-              rel: next
-              uri: /videos/search?currentPage=4&pageSize=20
-            last:
-              rel: last
-              uri: /videos/search?currentPage=6&pageSize=20
-        data:
-        - referrer:
-            searchTerm: video stream
-            medium: organic
-            source: https://google.com
-            url: https://api.video
-          os:
-            name: Microsoft Windows
-            shortname: W10
-            version: Windows 10
-          session:
-            loadedAt: 2019-06-24T11:45:01.109Z
-            endedAt: 2019-06-24T12:45:01.109Z
-            sessionId: sessionId
-          client:
-            name: Firefox
-            type: browser
-            version: "67.0"
-          location:
-            country: France
-            city: Paris
-          device:
-            vendor: Dell
-            model: unknown
-            type: desktop
-        - referrer:
-            searchTerm: video stream
-            medium: organic
-            source: https://google.com
-            url: https://api.video
-          os:
-            name: Microsoft Windows
-            shortname: W10
-            version: Windows 10
-          session:
-            loadedAt: 2019-06-24T11:45:01.109Z
-            endedAt: 2019-06-24T12:45:01.109Z
-            sessionId: sessionId
-          client:
-            name: Firefox
-            type: browser
-            version: "67.0"
-          location:
-            country: France
-            city: Paris
-          device:
-            vendor: Dell
-            model: unknown
-            type: desktop
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/live-stream-session'
-          type: array
-        pagination:
-          $ref: '#/components/schemas/pagination'
-      required:
-      - data
-      - pagination
-      title: LiveStreamSessions
-      type: object
-    raw-statistics-list-player-session-events-response:
-      example:
-        pagination:
-          itemsTotal: 123
-          pagesTotal: 7
-          pageSize: 20
-          currentPage: 3
-          currentPageItems: 20
-          links:
-            first:
-              rel: first
-              uri: /videos/search?currentPage=1&pageSize=20
-            previous:
-              rel: previous
-              uri: /videos/search?currentPage=2&pageSize=20
-            next:
-              rel: next
-              uri: /videos/search?currentPage=4&pageSize=20
-            last:
-              rel: last
-              uri: /videos/search?currentPage=6&pageSize=20
-        data:
-        - emittedAt: 2019-06-24T11:45:01.109Z
-          at: 0
-          from: 6
-          to: 1
-          type: play
-        - emittedAt: 2019-06-24T11:45:01.109Z
-          at: 0
-          from: 6
-          to: 1
-          type: play
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/player-session-event'
-          type: array
-        pagination:
-          $ref: '#/components/schemas/pagination'
-      required:
-      - data
-      - pagination
-      title: PlayerSessionEvents
-      type: object
     webhooks-list-response:
       example:
         pagination:
@@ -12771,10 +11624,6 @@ components:
       type: object
     video-session-os:
       description: The operating system the viewer is on.
-      example:
-        name: Microsoft Windows
-        shortname: W10
-        version: Windows 10
       properties:
         name:
           description: The name of the operating system.
@@ -12839,10 +11688,6 @@ components:
       title: LiveStreamAssets
       type: object
     live-stream-session-session:
-      example:
-        loadedAt: 2019-06-24T11:45:01.109Z
-        endedAt: 2019-06-24T12:45:01.109Z
-        sessionId: sessionId
       properties:
         sessionId:
           description: A unique identifier for your session. You can use this to track
@@ -12864,9 +11709,6 @@ components:
       type: object
     live-stream-session-location:
       description: The location of the viewer of the live stream.
-      example:
-        country: France
-        city: Paris
       properties:
         country:
           description: The country of the viewer of the live stream.
@@ -12879,11 +11721,6 @@ components:
       title: LiveStreamSessionLocation
       type: object
     live-stream-session-referrer:
-      example:
-        searchTerm: video stream
-        medium: organic
-        source: https://google.com
-        url: https://api.video
       properties:
         url:
           description: The website the viewer of the live stream was referred to in
@@ -12909,10 +11746,6 @@ components:
       type: object
     live-stream-session-device:
       description: What type of device the user is on when in the live stream session.
-      example:
-        vendor: Dell
-        model: unknown
-        type: desktop
       properties:
         type:
           description: What the type is like desktop, laptop, mobile.
@@ -12931,10 +11764,6 @@ components:
       type: object
     live-stream-session-client:
       description: What kind of browser the viewer is using for the live stream session.
-      example:
-        name: Firefox
-        type: browser
-        version: "67.0"
       properties:
         name:
           description: The name of the browser used to view the live stream session.

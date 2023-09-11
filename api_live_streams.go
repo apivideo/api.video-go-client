@@ -93,7 +93,7 @@ type LiveStreamsServiceI interface {
 
 	/*
 	 * Update Update a live stream
-	 * @param liveStreamId The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+	 * @param liveStreamId The unique ID for the live stream that you want to update information for such as player details.
 	 * @return LiveStreamsApiUpdateRequest
 	 */
 
@@ -102,7 +102,7 @@ type LiveStreamsServiceI interface {
 	/*
 	 * Update Update a live stream
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @param liveStreamId The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+	 * @param liveStreamId The unique ID for the live stream that you want to update information for such as player details.
 	 * @return LiveStreamsApiUpdateRequest
 	 */
 
@@ -291,7 +291,7 @@ func (s *LiveStreamsService) GetWithContext(ctx context.Context, liveStreamId st
  * Update Update a live stream
  * Updates the livestream object.
 
- * @param liveStreamId The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+ * @param liveStreamId The unique ID for the live stream that you want to update information for such as player details.
  * @return LiveStreamsApiUpdateRequest
  */
 
@@ -305,7 +305,7 @@ func (s *LiveStreamsService) Update(liveStreamId string, liveStreamUpdatePayload
  * Update Update a live stream
  * Updates the livestream object.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param liveStreamId The unique ID for the live stream that you want to update information for such as player details, or whether you want the recording on or off.
+ * @param liveStreamId The unique ID for the live stream that you want to update information for such as player details.
  * @return LiveStreamsApiUpdateRequest
  */
 
