@@ -436,11 +436,19 @@ func (s *PlayerThemesService) ListWithContext(ctx context.Context, r PlayerTheme
 
 /*
  * UploadLogo Upload a logo
- * Upload an image logo for a player.
+ * Upload an image file as a logo for your player. The image should fit within these constraints:
+
+- The image mime type must be `image/jpeg` or `image/png`. api.video recommends using `png` images with transparent background.
+
+- The image size should be a maximum of 200px width x 100px.
+
+- The file size should be a maximum of 100 KiB.
+
+
 
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUploadLogoRequest
- */
+*/
 
 func (s *PlayerThemesService) UploadLogoFile(playerId string, file *os.File, link *string) (*PlayerTheme, error) {
 	return s.UploadLogoFileWithContext(context.Background(), playerId, file, link)
@@ -448,34 +456,55 @@ func (s *PlayerThemesService) UploadLogoFile(playerId string, file *os.File, lin
 
 /*
  * UploadLogo Upload a logo
- * Upload an image logo for a player.
+ * Upload an image file as a logo for your player. The image should fit within these constraints:
+
+- The image mime type must be `image/jpeg` or `image/png`. api.video recommends using `png` images with transparent background.
+
+- The image size should be a maximum of 200px width x 100px.
+
+- The file size should be a maximum of 100 KiB.
+
+
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param playerId The unique identifier for the player.
  * @return PlayerThemesApiUploadLogoRequest
- */
+*/
 
 func (s *PlayerThemesService) UploadLogoFileWithContext(ctx context.Context, playerId string, file *os.File, link *string) (*PlayerTheme, error) {
 	return s.UploadLogoWithContext(ctx, playerId, link, file.Name(), io.Reader(file))
 }
 
 /*
-* UploadLogo Upload a logo
-* Upload an image logo for a player.
+  - UploadLogo Upload a logo
+  - Upload an image file as a logo for your player. The image should fit within these constraints:
 
-* @param playerId The unique identifier for the player.
-* @return PlayerThemesApiUploadLogoRequest
- */
+- The image mime type must be `image/jpeg` or `image/png`. api.video recommends using `png` images with transparent background.
+
+- The image size should be a maximum of 200px width x 100px.
+
+- The file size should be a maximum of 100 KiB.
+
+  - @param playerId The unique identifier for the player.
+  - @return PlayerThemesApiUploadLogoRequest
+*/
 func (s *PlayerThemesService) UploadLogo(playerId string, link *string, fileName string, fileReader io.Reader) (*PlayerTheme, error) {
 	return s.UploadLogoWithContext(context.Background(), playerId, link, fileName, fileReader)
 }
 
 /*
- * UploadLogo Upload a logo
- * Upload an image logo for a player.
- * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param playerId The unique identifier for the player.
- * @return PlayerThemesApiUploadLogoRequest
- */
+  - UploadLogo Upload a logo
+  - Upload an image file as a logo for your player. The image should fit within these constraints:
+
+- The image mime type must be `image/jpeg` or `image/png`. api.video recommends using `png` images with transparent background.
+
+- The image size should be a maximum of 200px width x 100px.
+
+- The file size should be a maximum of 100 KiB.
+
+  - @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+  - @param playerId The unique identifier for the player.
+  - @return PlayerThemesApiUploadLogoRequest
+*/
 func (s *PlayerThemesService) UploadLogoWithContext(ctx context.Context, playerId string, link *string, fileName string, fileReader io.Reader) (*PlayerTheme, error) {
 	localVarPath := "/players/{playerId}/logo"
 	localVarPath = strings.Replace(localVarPath, "{"+"playerId"+"}", url.PathEscape(parameterToString(playerId, "")), -1)
