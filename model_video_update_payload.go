@@ -22,7 +22,7 @@ type VideoUpdatePayload struct {
 	Title *string `json:"title,omitempty"`
 	// A brief description of the video.
 	Description *string `json:"description,omitempty"`
-	// Whether the video is publicly available or not. False means it is set to private. Default is true. Tutorials on [private videos](https://api.video/blog/endpoints/private-videos).
+	// Whether the video is publicly available or not. False means it is set to private. Default is true. Tutorials on [private videos](https://api.video/blog/endpoints/private-videos/).
 	Public *bool `json:"public,omitempty"`
 	// Whether the video is a 360 degree or immersive video.
 	Panoramic *bool `json:"panoramic,omitempty"`
@@ -30,7 +30,7 @@ type VideoUpdatePayload struct {
 	Mp4Support *bool `json:"mp4Support,omitempty"`
 	// A list of terms or words you want to tag the video with. Make sure the list includes all the tags you want as whatever you send in this list will overwrite the existing list for the video.
 	Tags *[]string `json:"tags,omitempty"`
-	// A list (array) of dictionaries where each dictionary contains a key value pair that describes the video. As with tags, you must send the complete list of metadata you want as whatever you send here will overwrite the existing metadata for the video. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.
+	// A list (array) of dictionaries where each dictionary contains a key value pair that describes the video. As with tags, you must send the complete list of metadata you want as whatever you send here will overwrite the existing metadata for the video. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata/) allows you to define a key that allows any value pair.
 	Metadata *[]Metadata `json:"metadata,omitempty"`
 }
 

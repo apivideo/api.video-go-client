@@ -155,7 +155,7 @@ type CaptionsService struct {
 
 /*
  * Upload Upload a caption
- * Upload a VTT file to add captions to your video. More information can be found [here](https://docs.api.video/reference/captions)
+ * Upload a VTT file to add captions to your video. More information can be found [here](https://docs.api.video/vod/add-captions)
 
  * @param videoId The unique identifier for the video you want to add a caption to.
  * @param language A valid BCP 47 language representation.
@@ -168,7 +168,7 @@ func (s *CaptionsService) UploadFile(videoId string, language string, file *os.F
 
 /*
  * Upload Upload a caption
- * Upload a VTT file to add captions to your video. More information can be found [here](https://docs.api.video/reference/captions)
+ * Upload a VTT file to add captions to your video. More information can be found [here](https://docs.api.video/vod/add-captions)
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want to add a caption to.
  * @param language A valid BCP 47 language representation.
@@ -181,7 +181,7 @@ func (s *CaptionsService) UploadFileWithContext(ctx context.Context, videoId str
 
 /*
 * Upload Upload a caption
-* Upload a VTT file to add captions to your video. More information can be found [here](https://docs.api.video/reference/captions)
+* Upload a VTT file to add captions to your video. More information can be found [here](https://docs.api.video/vod/add-captions)
 
 * @param videoId The unique identifier for the video you want to add a caption to.
 * @param language A valid BCP 47 language representation.
@@ -193,7 +193,7 @@ func (s *CaptionsService) Upload(videoId string, language string, fileName strin
 
 /*
  * Upload Upload a caption
- * Upload a VTT file to add captions to your video. More information can be found [here](https://docs.api.video/reference/captions)
+ * Upload a VTT file to add captions to your video. More information can be found [here](https://docs.api.video/vod/add-captions)
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The unique identifier for the video you want to add a caption to.
  * @param language A valid BCP 47 language representation.
