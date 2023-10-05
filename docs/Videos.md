@@ -484,7 +484,7 @@ func main() {
     
     req.Title("My Video.mp4") // string | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles.
     req.Tags([]string{"Inner_example"}) // []string | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
-    req.Metadata(map[string]string{"key": "TODO"}) // map[string]string | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair.
+    req.Metadata(map[string]string{"key": "TODO"}) // map[string]string | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata/) allows you to define a key that allows any value pair.
     req.Description("New Zealand") // string | Retrieve video objects by `description`.
     req.LiveStreamId("li400mYKSgQ6xs7taUeSaEKr") // string | Retrieve video objects that were recorded from a live stream by `liveStreamId`.
     req.SortBy("publishedAt") // string | Use this parameter to sort videos by the their created time, published time, updated time, or by title.
@@ -514,7 +514,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **title** | **string** | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles. | 
 **tags** | **[]string** | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned. | 
-**metadata** | [**map[string]**](.md) | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata) allows you to define a key that allows any value pair. | 
+**metadata** | [**map[string]**](.md) | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata/) allows you to define a key that allows any value pair. | 
 **description** | **string** | Retrieve video objects by &#x60;description&#x60;. | 
 **liveStreamId** | **string** | Retrieve video objects that were recorded from a live stream by &#x60;liveStreamId&#x60;. | 
 **sortBy** | **string** | Use this parameter to sort videos by the their created time, published time, updated time, or by title. | 

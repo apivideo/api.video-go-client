@@ -334,7 +334,7 @@ type VideosService struct {
 
 /*
  * Create Create a video object
- * Creates a video object. More information on video objects can be found [here](https://docs.api.video/reference/videos-1).
+ * Creates a video object. More information on video objects can be found [here](https://docs.api.video/reference/api/Videos).
 
 
 
@@ -349,7 +349,7 @@ func (s *VideosService) Create(videoCreationPayload VideoCreationPayload) (*Vide
 
 /*
  * Create Create a video object
- * Creates a video object. More information on video objects can be found [here](https://docs.api.video/reference/videos-1).
+ * Creates a video object. More information on video objects can be found [here](https://docs.api.video/reference/api/Videos).
 
 
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

@@ -120,7 +120,7 @@ type UploadTokensService struct {
 
 /*
  * CreateToken Generate an upload token
- * Generates an upload token that can be used to replace the API Key. More information can be found [here](https://docs.api.video/reference/upload-tokens)
+ * Generates an upload token that can be used to replace the API Key. More information can be found [here](https://docs.api.video/vod/delegated-upload-tokens)
 
  * @return UploadTokensApiCreateTokenRequest
  */
@@ -133,7 +133,7 @@ func (s *UploadTokensService) CreateToken(tokenCreationPayload TokenCreationPayl
 
 /*
  * CreateToken Generate an upload token
- * Generates an upload token that can be used to replace the API Key. More information can be found [here](https://docs.api.video/reference/upload-tokens)
+ * Generates an upload token that can be used to replace the API Key. More information can be found [here](https://docs.api.video/vod/delegated-upload-tokens)
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return UploadTokensApiCreateTokenRequest
  */

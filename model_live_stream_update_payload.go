@@ -18,7 +18,7 @@ import (
 type LiveStreamUpdatePayload struct {
 	// The name you want to use for your live stream.
 	Name *string `json:"name,omitempty"`
-	// Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).
+	// Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/delivery-analytics/video-privacy-access-management).
 	Public *bool `json:"public,omitempty"`
 	// The unique ID for the player associated with a live stream that you want to update.
 	PlayerId *string `json:"playerId,omitempty"`

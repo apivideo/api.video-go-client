@@ -22,7 +22,7 @@ type LiveStream struct {
 	Name *string `json:"name,omitempty"`
 	// The unique, private stream key that you use to begin streaming.
 	StreamKey *string `json:"streamKey,omitempty"`
-	// Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/docs/private-videos).
+	// Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/delivery-analytics/video-privacy-access-management).
 	Public *bool             `json:"public,omitempty"`
 	Assets *LiveStreamAssets `json:"assets,omitempty"`
 	// The unique identifier for the player.
