@@ -3497,7 +3497,7 @@ paths:
                           allowfullscreen=""></iframe>
                         player: https://embed.api.video/live/li400mYKSgQ6xs7taUeSaEKr
                         hls: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8
-                        thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+                        thumbnail: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
                     - liveStreamId: li4pqNqGUkhKfWcBGpZVLRY5
                       createdAt: 2020-07-29T10:45:35.000Z
                       updatedAt: 2020-07-29T10:45:35.000Z
@@ -3518,7 +3518,7 @@ paths:
                           allowfullscreen=""></iframe>
                         player: https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5
                         hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
-                        thumbnail: https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg
+                        thumbnail: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg
                     pagination:
                       currentPage: 1
                       currentPageItems: 19
@@ -9575,7 +9575,7 @@ components:
             width="100%" height="100%" frameborder="0" scrolling="no" allowfullscreen=""></iframe>
           player: https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5
           hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
-          thumbnail: https://cdn.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg
+          thumbnail: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5/thumbnail.jpg
   parameters:
     current-page:
       description: 'Choose the number of search results to return per page. Minimum
@@ -10225,7 +10225,7 @@ components:
         streamKey: dw-dew8-q6w9-k67w-1ws8
         createdAt: 2020-01-31T10:17:47Z
         assets:
-          thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+          thumbnail: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
           iframe: <iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\"
             width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>
           hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
@@ -10896,7 +10896,7 @@ components:
         - streamKey: dw-dew8-q6w9-k67w-1ws8
           createdAt: 2020-01-31T10:17:47Z
           assets:
-            thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+            thumbnail: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
             iframe: <iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\"
               width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>
             hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
@@ -10917,7 +10917,7 @@ components:
         - streamKey: dw-dew8-q6w9-k67w-1ws8
           createdAt: 2020-01-31T10:17:47Z
           assets:
-            thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+            thumbnail: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
             iframe: <iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\"
               width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>
             hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
@@ -11663,7 +11663,7 @@ components:
       type: object
     live-stream-assets:
       example:
-        thumbnail: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+        thumbnail: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
         iframe: <iframe src=\"https://embed.api.video/live/li4pqNqGUkhKfWcBGpZVLRY5\"
           width=\"100%\" height=\"100%\" frameborder=\"0\" scrolling=\"no\" allowfullscreen=\"\"></iframe>
         hls: https://live.api.video/li4pqNqGUkhKfWcBGpZVLRY5.m3u8
@@ -11686,7 +11686,7 @@ components:
           type: string
         thumbnail:
           description: A link to the thumbnail for your video.
-          example: https://cdn.api.video/live/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
+          example: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
           format: uri
           type: string
       title: LiveStreamAssets
