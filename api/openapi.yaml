@@ -11470,11 +11470,23 @@ components:
           type: string
       type: object
     video-clip:
+      description: "Use this object to create a smaller clip from a video you upload.\
+        \ \n- You can only create video clips in the same request where you create\
+        \ the video container.\n- You cannot update the starting or ending timestamps\
+        \ of a video clip after you created the video container.\n- When you upload\
+        \ a video file into a container where you defined a starting and ending timestamp,\
+        \ the API trims the video according to those timestamps to create a clip."
       properties:
         startTimecode:
+          description: The timestamp that defines the beginning of the video clip
+            you want to create. The value must follow the `HH:MM:SS` format.
+          example: 00:01:15
           pattern: ^(?:\d{2,3}:[0-5]\d:[0-5]\d(?:\.\d{1,3}|\:\d{1,2})?|\d{1,7})$
           type: string
         endTimecode:
+          description: The timestamp that defines the end of the video clip you want
+            to create. The value must follow the `HH:MM:SS` format.
+          example: 00:02:33
           pattern: ^(?:\d{2,3}:[0-5]\d:[0-5]\d(?:\.\d{1,3}|\:\d{1,2})?|\d{1,7})$
           type: string
       type: object
