@@ -1039,6 +1039,21 @@ paths:
                 }
               }
             }
+        - language: android
+          code: |
+            // First add the "video.api:android-api-client" maven dependency to your project
+            // Documentation: https://github.com/apivideo/api.video-android-client/blob/main/docs/VideosApi.md#upload
+
+            VideosApiStore.initialize("YOUR_API_KEY")
+            // if you rather like to use the sandbox environment:
+            // VideosApiStore.initialize("YOUR_SANDBOX_API_KEY", Environment.SANDBOX)
+
+            val workManager = WorkManager.getInstance(context) // WorkManager comes from package "androidx.work:work-runtime"
+
+            val videoId = "vi4k0jvEUuaTdRAEjQ4Jfrgz" // The videoId you want to use to upload your video.
+            val file = File("/path/to/file") // The path to the video you want to upload.
+
+            workManager.upload(videoId, file) // Dispatch the upload with the WorkManager
         - language: csharp
           code: |
             // First add the "ApiVideo" NuGet package to your project
@@ -3377,6 +3392,17 @@ paths:
           code: |
             // First add the "video.api:java-api-client" maven dependency to your project
             // Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
+        - language: android
+          code: |
+            // First add the "video.api:android-api-client" maven dependency to your project
+            // Documentation: https://github.com/apivideo/api.video-android-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
+
+            val workManager = WorkManager.getInstance(context) // WorkManager comes from package "androidx.work:work-runtime"
+
+            val token = "to1tcmSFHeYY5KzyhOqVKMKb" // The unique identifier for the token you want to use to upload a video.
+            val file = File("/path/to/file") // The path to the video you want to upload.
+
+            workManager.uploadWithUploadToken(token, file) // Dispatch the upload with the WorkManager
         - language: csharp
           code: |
             // First add the "ApiVideo" NuGet package to your project
