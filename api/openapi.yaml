@@ -3397,6 +3397,8 @@ paths:
             // First add the "video.api:android-api-client" maven dependency to your project
             // Documentation: https://github.com/apivideo/api.video-android-client/blob/main/docs/VideosApi.md#uploadWithUploadToken
 
+            VideosApiStore.initialize()
+
             val workManager = WorkManager.getInstance(context) // WorkManager comes from package "androidx.work:work-runtime"
 
             val token = "to1tcmSFHeYY5KzyhOqVKMKb" // The unique identifier for the token you want to use to upload a video.
