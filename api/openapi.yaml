@@ -7826,9 +7826,9 @@ paths:
           - `videoId`: Returns analytics based on the public video identifiers.
           - `emittedAt`: Returns analytics based on the times of the play events. The API returns data in specific interval groups. When the date period you set in `from` and `to` is less than or equals to 2 days, the response for this dimension is grouped in hourly intervals. Otherwise, it is grouped in daily intervals.
           - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/).
-          - `deviceType`: Returns analytics based on the type of device used by the viewers during the play event.
-          - `operatingSystem`: Returns analytics based on the operating system used by the viewers during the play event.
-          - `browser`: Returns analytics based on the browser used by the viewers during the play event.
+          - `deviceType`: Returns analytics based on the type of device used by the viewers during the play event. Possible response values are: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`.
+          - `operatingSystem`: Returns analytics based on the operating system used by the viewers during the play event. Response values include `windows`, `mac osx`, `android`, `ios`, `linux`.
+          - `browser`: Returns analytics based on the browser used by the viewers during the play event. Response values include `chrome`, `firefox`, `edge`, `opera`.
         example: browser
         explode: false
         in: query
@@ -8391,9 +8391,9 @@ paths:
           - `liveStreamId`: Returns analytics based on the public live stream identifiers.
           - `emittedAt`: Returns analytics based on the times of the play events. The API returns data in specific interval groups. When the date period you set in `from` and `to` is less than or equals to 2 days, the response for this dimension is grouped in hourly intervals. Otherwise, it is grouped in daily intervals.
           - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/).
-          - `deviceType`: Returns analytics based on the type of device used by the viewers during the play event.
-          - `operatingSystem`: Returns analytics based on the operating system used by the viewers during the play event.
-          - `browser`: Returns analytics based on the browser used by the viewers during the play event.
+          - `deviceType`: Returns analytics based on the type of device used by the viewers during the play event. Possible response values are: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`.
+          - `operatingSystem`: Returns analytics based on the operating system used by the viewers during the play event. Response values include `windows`, `mac osx`, `android`, `ios`, `linux`.
+          - `browser`: Returns analytics based on the browser used by the viewers during the play event. Response values include `chrome`, `firefox`, `edge`, `opera`.
         example: browser
         explode: false
         in: query
