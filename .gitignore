@@ -25,4 +25,3 @@ _testmain.go
 .openapi-generator
 .openapi-generator-ignore
 post-generate.sh
-documentation.md
