@@ -16,9 +16,14 @@ import (
 
 // Caption struct for Caption
 type Caption struct {
-	Uri     *string `json:"uri,omitempty"`
-	Src     *string `json:"src,omitempty"`
+	// The unique resource identifier of the uploaded caption.
+	Uri *string `json:"uri,omitempty"`
+	// A direct URL to the uploaded caption file.
+	Src *string `json:"src,omitempty"`
+	// Indicates the language of the uploaded caption file using IETF language tags.
 	Srclang *string `json:"srclang,omitempty"`
+	// Returns the native name of the caption language in UTF-8 encoding.
+	LanguageName *string `json:"languageName,omitempty"`
 	// Whether you will have subtitles or not. True for yes you will have subtitles, false for no you will not have subtitles.
 	Default *bool `json:"default,omitempty"`
 }
@@ -138,6 +143,38 @@ func (o *Caption) HasSrclang() bool {
 // SetSrclang gets a reference to the given string and assigns it to the Srclang field.
 func (o *Caption) SetSrclang(v string) {
 	o.Srclang = &v
+}
+
+// GetLanguageName returns the LanguageName field value if set, zero value otherwise.
+func (o *Caption) GetLanguageName() string {
+	if o == nil || o.LanguageName == nil {
+		var ret string
+		return ret
+	}
+	return *o.LanguageName
+}
+
+// GetLanguageNameOk returns a tuple with the LanguageName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Caption) GetLanguageNameOk() (*string, bool) {
+	if o == nil || o.LanguageName == nil {
+		return nil, false
+	}
+	return o.LanguageName, true
+}
+
+// HasLanguageName returns a boolean if a field has been set.
+func (o *Caption) HasLanguageName() bool {
+	if o != nil && o.LanguageName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLanguageName gets a reference to the given string and assigns it to the LanguageName field.
+func (o *Caption) SetLanguageName(v string) {
+	o.LanguageName = &v
 }
 
 // GetDefault returns the Default field value if set, zero value otherwise.
