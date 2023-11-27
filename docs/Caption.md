@@ -4,9 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Uri** | Pointer to **string** |  | [optional] 
-**Src** | Pointer to **string** |  | [optional] 
-**Srclang** | Pointer to **string** |  | [optional] 
+**Uri** | Pointer to **string** | The unique resource identifier of the uploaded caption. | [optional] 
+**Src** | Pointer to **string** | A direct URL to the uploaded caption file. | [optional] 
+**Srclang** | Pointer to **string** | Indicates the language of the uploaded caption file using IETF language tags. | [optional] 
+**LanguageName** | Pointer to **string** | Returns the native name of the caption language in UTF-8 encoding. | [optional] 
 **Default** | Pointer to **bool** | Whether you will have subtitles or not. True for yes you will have subtitles, false for no you will not have subtitles. | [optional] [default to false]
 
 ## Methods
@@ -102,6 +103,31 @@ SetSrclang sets Srclang field to given value.
 `func (o *Caption) HasSrclang() bool`
 
 HasSrclang returns a boolean if a field has been set.
+
+### GetLanguageName
+
+`func (o *Caption) GetLanguageName() string`
+
+GetLanguageName returns the LanguageName field if non-nil, zero value otherwise.
+
+### GetLanguageNameOk
+
+`func (o *Caption) GetLanguageNameOk() (*string, bool)`
+
+GetLanguageNameOk returns a tuple with the LanguageName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLanguageName
+
+`func (o *Caption) SetLanguageName(v string)`
+
+SetLanguageName sets LanguageName field to given value.
+
+### HasLanguageName
+
+`func (o *Caption) HasLanguageName() bool`
+
+HasLanguageName returns a boolean if a field has been set.
 
 ### GetDefault
 
