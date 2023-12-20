@@ -3449,17 +3449,23 @@ paths:
         schema:
           type: string
         style: form
-      - description: 'Allowed: createdAt, publishedAt, name. createdAt - the time
-          a livestream was created using the specified streamKey. publishedAt - the
-          time a livestream was published using the specified streamKey. name - the
-          name of the livestream. If you choose one of the time based options, the
-          time is presented in ISO-8601 format.'
+      - description: |
+          Enables you to sort live stream results. Allowed attributes: `name`, `createdAt`, `updatedAt`.
+          `name` - the name of the live stream.
+          `createdAt` - the time a live stream was created.
+          `updatedAt` - the time a live stream was last updated.
+
+          When using `createdAt` or `updatedAt`, the API sorts the results based on the ISO-8601 time format.
         example: createdAt
         explode: true
         in: query
         name: sortBy
         required: false
         schema:
+          enum:
+          - name
+          - createdAt
+          - updatedAt
           type: string
         style: form
       - description: 'Allowed: asc, desc. Ascending for date and time means that earlier
