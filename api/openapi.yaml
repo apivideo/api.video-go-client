@@ -3593,16 +3593,13 @@ paths:
             ) // string | The unique stream key that allows you to stream videos.\n\
             \      req.Name(\"My Video\") // string | You can filter live streams\
             \ by their name or a part of their name.\n      req.SortBy(\"createdAt\"\
-            ) // string | Allowed: createdAt, publishedAt, name. createdAt - the time\
-            \ a livestream was created using the specified streamKey. publishedAt\
-            \ - the time a livestream was published using the specified streamKey.\
-            \ name - the name of the livestream. If you choose one of the time based\
-            \ options, the time is presented in ISO-8601 format.\n      req.SortOrder(\"\
-            desc\") // string | Allowed: asc, desc. Ascending for date and time means\
-            \ that earlier values precede later ones. Descending means that later\
-            \ values preced earlier ones. For title, it is 0-9 and A-Z ascending and\
-            \ Z-A, 9-0 descending.\n      req.CurrentPage(int32(2)) // int32 | Choose\
-            \ the number of search results to return per page. Minimum value: 1 (default\
+            ) // string | Enables you to sort live stream results. Allowed attributes:\
+            \ `name`, `createdAt`, `updatedAt`.\n      req.SortOrder(\"desc\") //\
+            \ string | Allowed: asc, desc. Ascending for date and time means that\
+            \ earlier values precede later ones. Descending means that later values\
+            \ preced earlier ones. For title, it is 0-9 and A-Z ascending and Z-A,\
+            \ 9-0 descending.\n      req.CurrentPage(int32(2)) // int32 | Choose the\
+            \ number of search results to return per page. Minimum value: 1 (default\
             \ to 1)\n      req.PageSize(int32(30)) // int32 | Results per page. Allowed\
             \ values 1-100, default is 25. (default to 25)\n  \n      res, err :=\
             \ client.LiveStreams.List(req)\n      \n  \n      if err != nil {\n  \
@@ -3673,21 +3670,18 @@ paths:
             \ = client.liveStreams();\n    \n    String streamKey = \"30087931-229e-42cf-b5f9-e91bcc1f7332\"\
             ; // The unique stream key that allows you to stream videos.\n    String\
             \ name = \"My Video\"; // You can filter live streams by their name or\
-            \ a part of their name.\n    String sortBy = \"createdAt\"; // Allowed:\
-            \ createdAt, publishedAt, name. createdAt - the time a livestream was\
-            \ created using the specified streamKey. publishedAt - the time a livestream\
-            \ was published using the specified streamKey. name - the name of the\
-            \ livestream. If you choose one of the time based options, the time is\
-            \ presented in ISO-8601 format.\n    String sortOrder = \"desc\"; // Allowed:\
-            \ asc, desc. Ascending for date and time means that earlier values precede\
-            \ later ones. Descending means that later values preced earlier ones.\
-            \ For title, it is 0-9 and A-Z ascending and Z-A, 9-0 descending.\n  \
-            \  Integer currentPage = 1; // Choose the number of search results to\
-            \ return per page. Minimum value: 1\n    Integer pageSize = 25; // Results\
-            \ per page. Allowed values 1-100, default is 25.\n\n    try {\n      Page<LiveStream>\
-            \ result = apiInstance.list()\n            .streamKey(streamKey)\n   \
-            \         .name(name)\n            .sortBy(sortBy)\n            .sortOrder(sortOrder)\n\
-            \            .currentPage(currentPage)\n            .pageSize(pageSize)\n\
+            \ a part of their name.\n    String sortBy = \"createdAt\"; // Enables\
+            \ you to sort live stream results. Allowed attributes: `name`, `createdAt`,\
+            \ `updatedAt`.\n    String sortOrder = \"desc\"; // Allowed: asc, desc.\
+            \ Ascending for date and time means that earlier values precede later\
+            \ ones. Descending means that later values preced earlier ones. For title,\
+            \ it is 0-9 and A-Z ascending and Z-A, 9-0 descending.\n    Integer currentPage\
+            \ = 1; // Choose the number of search results to return per page. Minimum\
+            \ value: 1\n    Integer pageSize = 25; // Results per page. Allowed values\
+            \ 1-100, default is 25.\n\n    try {\n      Page<LiveStream> result =\
+            \ apiInstance.list()\n            .streamKey(streamKey)\n            .name(name)\n\
+            \            .sortBy(sortBy)\n            .sortOrder(sortOrder)\n    \
+            \        .currentPage(currentPage)\n            .pageSize(pageSize)\n\
             \            .execute();\n      System.out.println(result);\n    } catch\
             \ (ApiException e) {\n      System.err.println(\"Exception when calling\
             \ LiveStreamsApi#list\");\n      System.err.println(\"Status code: \"\
