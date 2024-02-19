@@ -11987,14 +11987,17 @@ components:
         video for use immediately or in the future.
       properties:
         status:
-          description: There are three possible ingest statuses. missing - you are
-            missing information required to ingest the video. uploading - the video
-            is in the process of being uploaded. uploaded - the video is ready for
-            use.
+          description: |
+            There are four possible statuses depending on how you provide a video file:
+            - `uploading` - the API is gathering the video source file from an upload.
+            - `uploaded` - the video file is fully uploaded.
+            - `ingesting` - the API is gathering the video source file from either a URL, or from cloning.
+            - `ingested` - the video file is fully stored.
           enum:
-          - missing
           - uploading
           - uploaded
+          - ingesting
+          - ingested
           example: uploaded
           type: string
         filesize:
