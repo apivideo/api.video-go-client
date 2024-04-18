@@ -355,6 +355,7 @@ Method | HTTP request | Description
  - [RestreamsResponseObject](https://github.com/apivideo/api.video-go-client/blob/main/docs/RestreamsResponseObject.md)
  - [TokenCreationPayload](https://github.com/apivideo/api.video-go-client/blob/main/docs/TokenCreationPayload.md)
  - [TokenListResponse](https://github.com/apivideo/api.video-go-client/blob/main/docs/TokenListResponse.md)
+ - [TooManyRequests](https://github.com/apivideo/api.video-go-client/blob/main/docs/TooManyRequests.md)
  - [UploadToken](https://github.com/apivideo/api.video-go-client/blob/main/docs/UploadToken.md)
  - [Video](https://github.com/apivideo/api.video-go-client/blob/main/docs/Video.md)
  - [VideoAssets](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoAssets.md)
