@@ -141,8 +141,8 @@ analyticsApi := client.Analytics
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetLiveStreamsPlays**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Analytics.md#GetLiveStreamsPlays) | **Get** /analytics/live-streams/plays | Get play events for live stream
-[**GetVideosPlays**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Analytics.md#GetVideosPlays) | **Get** /analytics/videos/plays | Get play events for video
+[**GetLiveStreamsPlays**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Analytics.md#GetLiveStreamsPlays) | **Get** `/analytics/live-streams/plays` | Get play events for live stream
+[**GetVideosPlays**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Analytics.md#GetVideosPlays) | **Get** `/analytics/videos/plays` | Get play events for video
 
 
 #### Captions
@@ -158,11 +158,11 @@ captionsApi := client.Captions
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Upload**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Captions.md#Upload) | **Post** /videos/{videoId}/captions/{language} | Upload a caption
-[**Get**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Captions.md#Get) | **Get** /videos/{videoId}/captions/{language} | Retrieve a caption
-[**Update**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Captions.md#Update) | **Patch** /videos/{videoId}/captions/{language} | Update a caption
-[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Captions.md#Delete) | **Delete** /videos/{videoId}/captions/{language} | Delete a caption
-[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Captions.md#List) | **Get** /videos/{videoId}/captions | List video captions
+[**Upload**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Captions.md#Upload) | **Post** `/videos/{videoId}/captions/{language}` | Upload a caption
+[**Get**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Captions.md#Get) | **Get** `/videos/{videoId}/captions/{language}` | Retrieve a caption
+[**Update**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Captions.md#Update) | **Patch** `/videos/{videoId}/captions/{language}` | Update a caption
+[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Captions.md#Delete) | **Delete** `/videos/{videoId}/captions/{language}` | Delete a caption
+[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Captions.md#List) | **Get** `/videos/{videoId}/captions` | List video captions
 
 
 #### Chapters
@@ -178,10 +178,10 @@ chaptersApi := client.Chapters
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Upload**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Chapters.md#Upload) | **Post** /videos/{videoId}/chapters/{language} | Upload a chapter
-[**Get**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Chapters.md#Get) | **Get** /videos/{videoId}/chapters/{language} | Retrieve a chapter
-[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Chapters.md#Delete) | **Delete** /videos/{videoId}/chapters/{language} | Delete a chapter
-[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Chapters.md#List) | **Get** /videos/{videoId}/chapters | List video chapters
+[**Upload**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Chapters.md#Upload) | **Post** `/videos/{videoId}/chapters/{language}` | Upload a chapter
+[**Get**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Chapters.md#Get) | **Get** `/videos/{videoId}/chapters/{language}` | Retrieve a chapter
+[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Chapters.md#Delete) | **Delete** `/videos/{videoId}/chapters/{language}` | Delete a chapter
+[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Chapters.md#List) | **Get** `/videos/{videoId}/chapters` | List video chapters
 
 
 #### LiveStreams
@@ -197,13 +197,13 @@ liveStreamsApi := client.LiveStreams
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Create**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#Create) | **Post** /live-streams | Create live stream
-[**Get**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#Get) | **Get** /live-streams/{liveStreamId} | Retrieve live stream
-[**Update**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#Update) | **Patch** /live-streams/{liveStreamId} | Update a live stream
-[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#Delete) | **Delete** /live-streams/{liveStreamId} | Delete a live stream
-[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#List) | **Get** /live-streams | List all live streams
-[**UploadThumbnail**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#UploadThumbnail) | **Post** /live-streams/{liveStreamId}/thumbnail | Upload a thumbnail
-[**DeleteThumbnail**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#DeleteThumbnail) | **Delete** /live-streams/{liveStreamId}/thumbnail | Delete a thumbnail
+[**Create**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#Create) | **Post** `/live-streams` | Create live stream
+[**Get**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#Get) | **Get** `/live-streams/{liveStreamId}` | Retrieve live stream
+[**Update**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#Update) | **Patch** `/live-streams/{liveStreamId}` | Update a live stream
+[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#Delete) | **Delete** `/live-streams/{liveStreamId}` | Delete a live stream
+[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#List) | **Get** `/live-streams` | List all live streams
+[**UploadThumbnail**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#UploadThumbnail) | **Post** `/live-streams/{liveStreamId}/thumbnail` | Upload a thumbnail
+[**DeleteThumbnail**](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreams.md#DeleteThumbnail) | **Delete** `/live-streams/{liveStreamId}/thumbnail` | Delete a thumbnail
 
 
 #### PlayerThemes
@@ -219,13 +219,13 @@ playerThemesApi := client.PlayerThemes
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Create**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#Create) | **Post** /players | Create a player
-[**Get**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#Get) | **Get** /players/{playerId} | Retrieve a player
-[**Update**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#Update) | **Patch** /players/{playerId} | Update a player
-[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#Delete) | **Delete** /players/{playerId} | Delete a player
-[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#List) | **Get** /players | List all player themes
-[**UploadLogo**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#UploadLogo) | **Post** /players/{playerId}/logo | Upload a logo
-[**DeleteLogo**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#DeleteLogo) | **Delete** /players/{playerId}/logo | Delete logo
+[**Create**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#Create) | **Post** `/players` | Create a player
+[**Get**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#Get) | **Get** `/players/{playerId}` | Retrieve a player
+[**Update**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#Update) | **Patch** `/players/{playerId}` | Update a player
+[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#Delete) | **Delete** `/players/{playerId}` | Delete a player
+[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#List) | **Get** `/players` | List all player themes
+[**UploadLogo**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#UploadLogo) | **Post** `/players/{playerId}/logo` | Upload a logo
+[**DeleteLogo**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#DeleteLogo) | **Delete** `/players/{playerId}/logo` | Delete logo
 
 
 #### UploadTokens
@@ -241,10 +241,10 @@ uploadTokensApi := client.UploadTokens
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateToken**](https://github.com/apivideo/api.video-go-client/blob/main/docs/UploadTokens.md#CreateToken) | **Post** /upload-tokens | Generate an upload token
-[**GetToken**](https://github.com/apivideo/api.video-go-client/blob/main/docs/UploadTokens.md#GetToken) | **Get** /upload-tokens/{uploadToken} | Retrieve upload token
-[**DeleteToken**](https://github.com/apivideo/api.video-go-client/blob/main/docs/UploadTokens.md#DeleteToken) | **Delete** /upload-tokens/{uploadToken} | Delete an upload token
-[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/UploadTokens.md#List) | **Get** /upload-tokens | List all active upload tokens
+[**CreateToken**](https://github.com/apivideo/api.video-go-client/blob/main/docs/UploadTokens.md#CreateToken) | **Post** `/upload-tokens` | Generate an upload token
+[**GetToken**](https://github.com/apivideo/api.video-go-client/blob/main/docs/UploadTokens.md#GetToken) | **Get** `/upload-tokens/{uploadToken}` | Retrieve upload token
+[**DeleteToken**](https://github.com/apivideo/api.video-go-client/blob/main/docs/UploadTokens.md#DeleteToken) | **Delete** `/upload-tokens/{uploadToken}` | Delete an upload token
+[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/UploadTokens.md#List) | **Get** `/upload-tokens` | List all active upload tokens
 
 
 #### Videos
@@ -260,16 +260,16 @@ videosApi := client.Videos
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Create**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#Create) | **Post** /videos | Create a video object
-[**Upload**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#Upload) | **Post** /videos/{videoId}/source | Upload a video
-[**UploadWithUploadToken**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#UploadWithUploadToken) | **Post** /upload | Upload with an delegated upload token
-[**Get**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#Get) | **Get** /videos/{videoId} | Retrieve a video object
-[**Update**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#Update) | **Patch** /videos/{videoId} | Update a video object
-[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#Delete) | **Delete** /videos/{videoId} | Delete a video object
-[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#List) | **Get** /videos | List all video objects
-[**UploadThumbnail**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#UploadThumbnail) | **Post** /videos/{videoId}/thumbnail | Upload a thumbnail
-[**PickThumbnail**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#PickThumbnail) | **Patch** /videos/{videoId}/thumbnail | Set a thumbnail
-[**GetStatus**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#GetStatus) | **Get** /videos/{videoId}/status | Retrieve video status and details
+[**Create**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#Create) | **Post** `/videos` | Create a video object
+[**Upload**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#Upload) | **Post** `/videos/{videoId}/source` | Upload a video
+[**UploadWithUploadToken**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#UploadWithUploadToken) | **Post** `/upload` | Upload with an delegated upload token
+[**Get**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#Get) | **Get** `/videos/{videoId}` | Retrieve a video object
+[**Update**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#Update) | **Patch** `/videos/{videoId}` | Update a video object
+[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#Delete) | **Delete** `/videos/{videoId}` | Delete a video object
+[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#List) | **Get** `/videos` | List all video objects
+[**UploadThumbnail**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#UploadThumbnail) | **Post** `/videos/{videoId}/thumbnail` | Upload a thumbnail
+[**PickThumbnail**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#PickThumbnail) | **Patch** `/videos/{videoId}/thumbnail` | Set a thumbnail
+[**GetStatus**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#GetStatus) | **Get** `/videos/{videoId}/status` | Retrieve video status and details
 
 
 #### Watermarks
@@ -285,9 +285,9 @@ watermarksApi := client.Watermarks
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Upload**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Watermarks.md#Upload) | **Post** /watermarks | Upload a watermark
-[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Watermarks.md#Delete) | **Delete** /watermarks/{watermarkId} | Delete a watermark
-[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Watermarks.md#List) | **Get** /watermarks | List all watermarks
+[**Upload**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Watermarks.md#Upload) | **Post** `/watermarks` | Upload a watermark
+[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Watermarks.md#Delete) | **Delete** `/watermarks/{watermarkId}` | Delete a watermark
+[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Watermarks.md#List) | **Get** `/watermarks` | List all watermarks
 
 
 #### Webhooks
@@ -303,10 +303,10 @@ webhooksApi := client.Webhooks
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Create**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Webhooks.md#Create) | **Post** /webhooks | Create Webhook
-[**Get**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Webhooks.md#Get) | **Get** /webhooks/{webhookId} | Retrieve Webhook details
-[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Webhooks.md#Delete) | **Delete** /webhooks/{webhookId} | Delete a Webhook
-[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Webhooks.md#List) | **Get** /webhooks | List all webhooks
+[**Create**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Webhooks.md#Create) | **Post** `/webhooks` | Create Webhook
+[**Get**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Webhooks.md#Get) | **Get** `/webhooks/{webhookId}` | Retrieve Webhook details
+[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Webhooks.md#Delete) | **Delete** `/webhooks/{webhookId}` | Delete a Webhook
+[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Webhooks.md#List) | **Get** `/webhooks` | List all webhooks
 
 
 
