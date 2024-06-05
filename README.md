@@ -141,8 +141,8 @@ analyticsApi := client.Analytics
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetLiveStreamsPlays**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Analytics.md#GetLiveStreamsPlays) | **Get** `/analytics/live-streams/plays` | Get play events for live stream
-[**GetVideosPlays**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Analytics.md#GetVideosPlays) | **Get** `/analytics/videos/plays` | Get play events for video
+**(deprecated)** [**GetLiveStreamsPlays**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Analytics.md#GetLiveStreamsPlays) | **Get** `/analytics/live-streams/plays` | Get play events for live stream
+**(deprecated)** [**GetVideosPlays**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Analytics.md#GetVideosPlays) | **Get** `/analytics/videos/plays` | Get play events for video
 
 
 #### Captions
@@ -331,12 +331,6 @@ Method | HTTP request | Description
  - [LiveStreamAssets](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreamAssets.md)
  - [LiveStreamCreationPayload](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreamCreationPayload.md)
  - [LiveStreamListResponse](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreamListResponse.md)
- - [LiveStreamSession](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreamSession.md)
- - [LiveStreamSessionClient](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreamSessionClient.md)
- - [LiveStreamSessionDevice](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreamSessionDevice.md)
- - [LiveStreamSessionLocation](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreamSessionLocation.md)
- - [LiveStreamSessionReferrer](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreamSessionReferrer.md)
- - [LiveStreamSessionSession](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreamSessionSession.md)
  - [LiveStreamUpdatePayload](https://github.com/apivideo/api.video-go-client/blob/main/docs/LiveStreamUpdatePayload.md)
  - [Metadata](https://github.com/apivideo/api.video-go-client/blob/main/docs/Metadata.md)
  - [Model403ErrorSchema](https://github.com/apivideo/api.video-go-client/blob/main/docs/Model403ErrorSchema.md)
@@ -356,18 +350,12 @@ Method | HTTP request | Description
  - [TokenCreationPayload](https://github.com/apivideo/api.video-go-client/blob/main/docs/TokenCreationPayload.md)
  - [TokenListResponse](https://github.com/apivideo/api.video-go-client/blob/main/docs/TokenListResponse.md)
  - [TooManyRequests](https://github.com/apivideo/api.video-go-client/blob/main/docs/TooManyRequests.md)
+ - [UnrecognizedRequestUrl](https://github.com/apivideo/api.video-go-client/blob/main/docs/UnrecognizedRequestUrl.md)
  - [UploadToken](https://github.com/apivideo/api.video-go-client/blob/main/docs/UploadToken.md)
  - [Video](https://github.com/apivideo/api.video-go-client/blob/main/docs/Video.md)
  - [VideoAssets](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoAssets.md)
  - [VideoClip](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoClip.md)
  - [VideoCreationPayload](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoCreationPayload.md)
- - [VideoSession](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoSession.md)
- - [VideoSessionClient](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoSessionClient.md)
- - [VideoSessionDevice](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoSessionDevice.md)
- - [VideoSessionLocation](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoSessionLocation.md)
- - [VideoSessionOs](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoSessionOs.md)
- - [VideoSessionReferrer](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoSessionReferrer.md)
- - [VideoSessionSession](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoSessionSession.md)
  - [VideoSource](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoSource.md)
  - [VideoSourceLiveStream](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoSourceLiveStream.md)
  - [VideoSourceLiveStreamLink](https://github.com/apivideo/api.video-go-client/blob/main/docs/VideoSourceLiveStreamLink.md)

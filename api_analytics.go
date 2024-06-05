@@ -131,8 +131,14 @@ type AnalyticsService struct {
  * GetLiveStreamsPlays Get play events for live stream
  * Retrieve filtered analytics about the number of plays for your live streams in a project.
 
+
+
+This endpoint will be deprecated with the release of Analytics v2.0.
+
+
+
  * @return AnalyticsApiGetLiveStreamsPlaysRequest
- */
+*/
 
 func (s *AnalyticsService) GetLiveStreamsPlays(r AnalyticsApiGetLiveStreamsPlaysRequest) (*AnalyticsPlaysResponse, error) {
 
@@ -143,9 +149,15 @@ func (s *AnalyticsService) GetLiveStreamsPlays(r AnalyticsApiGetLiveStreamsPlays
 /*
  * GetLiveStreamsPlays Get play events for live stream
  * Retrieve filtered analytics about the number of plays for your live streams in a project.
+
+
+
+This endpoint will be deprecated with the release of Analytics v2.0.
+
+
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return AnalyticsApiGetLiveStreamsPlaysRequest
- */
+*/
 
 func (s *AnalyticsService) GetLiveStreamsPlaysWithContext(ctx context.Context, r AnalyticsApiGetLiveStreamsPlaysRequest) (*AnalyticsPlaysResponse, error) {
 	var localVarPostBody interface{}
@@ -190,8 +202,14 @@ func (s *AnalyticsService) GetLiveStreamsPlaysWithContext(ctx context.Context, r
  * GetVideosPlays Get play events for video
  * Retrieve filtered analytics about the number of plays for your videos in a project.
 
+
+
+This endpoint will be deprecated with the release of Analytics v2.0.
+
+
+
  * @return AnalyticsApiGetVideosPlaysRequest
- */
+*/
 
 func (s *AnalyticsService) GetVideosPlays(r AnalyticsApiGetVideosPlaysRequest) (*AnalyticsPlaysResponse, error) {
 
@@ -202,9 +220,15 @@ func (s *AnalyticsService) GetVideosPlays(r AnalyticsApiGetVideosPlaysRequest) (
 /*
  * GetVideosPlays Get play events for video
  * Retrieve filtered analytics about the number of plays for your videos in a project.
+
+
+
+This endpoint will be deprecated with the release of Analytics v2.0.
+
+
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return AnalyticsApiGetVideosPlaysRequest
- */
+*/
 
 func (s *AnalyticsService) GetVideosPlaysWithContext(ctx context.Context, r AnalyticsApiGetVideosPlaysRequest) (*AnalyticsPlaysResponse, error) {
 	var localVarPostBody interface{}
