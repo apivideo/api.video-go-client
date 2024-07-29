@@ -185,6 +185,23 @@ type LiveStreamsServiceI interface {
 	 */
 
 	DeleteThumbnailWithContext(ctx context.Context, liveStreamId string) (*LiveStream, error)
+
+	/*
+	 * Complete Complete a live stream
+	 * @param liveStreamId The unique ID for the live stream you want to complete.
+	 * @return LiveStreamsApiCompleteRequest
+	 */
+
+	Complete(liveStreamId string) error
+
+	/*
+	 * Complete Complete a live stream
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param liveStreamId The unique ID for the live stream you want to complete.
+	 * @return LiveStreamsApiCompleteRequest
+	 */
+
+	CompleteWithContext(ctx context.Context, liveStreamId string) error
 }
 
 // LiveStreamsService communicating with the LiveStreams
@@ -557,5 +574,63 @@ func (s *LiveStreamsService) DeleteThumbnailWithContext(ctx context.Context, liv
 	}
 
 	return res, nil
+
+}
+
+/*
+ * Complete Complete a live stream
+ * Request the completion of a live stream that is currently running. This operation is asynchronous and the live stream will stop after a few seconds.
+
+
+
+The API adds the `EXT-X-ENDLIST` tag to the live stream's HLS manifest. This stops the live stream on the player and also stops the recording of the live stream. The API keeps the incoming connection from the streamer open for at most 1 minute, which can be used to terminate the stream.
+
+
+
+ * @param liveStreamId The unique ID for the live stream you want to complete.
+ * @return LiveStreamsApiCompleteRequest
+*/
+
+func (s *LiveStreamsService) Complete(liveStreamId string) error {
+
+	return s.CompleteWithContext(context.Background(), liveStreamId)
+
+}
+
+/*
+ * Complete Complete a live stream
+ * Request the completion of a live stream that is currently running. This operation is asynchronous and the live stream will stop after a few seconds.
+
+
+
+The API adds the `EXT-X-ENDLIST` tag to the live stream's HLS manifest. This stops the live stream on the player and also stops the recording of the live stream. The API keeps the incoming connection from the streamer open for at most 1 minute, which can be used to terminate the stream.
+
+
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param liveStreamId The unique ID for the live stream you want to complete.
+ * @return LiveStreamsApiCompleteRequest
+*/
+
+func (s *LiveStreamsService) CompleteWithContext(ctx context.Context, liveStreamId string) error {
+	var localVarPostBody interface{}
+
+	localVarPath := "/live-streams/{liveStreamId}/complete"
+	localVarPath = strings.Replace(localVarPath, "{"+"liveStreamId"+"}", url.PathEscape(parameterToString(liveStreamId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+
+	req, err := s.client.prepareRequest(ctx, http.MethodPut, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	if err != nil {
+		return err
+	}
+
+	_, err = s.client.do(req, nil)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 
 }

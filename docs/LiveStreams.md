@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**List**](LiveStreams.md#List) | **Get** /live-streams | List all live streams
 [**UploadThumbnail**](LiveStreams.md#UploadThumbnail) | **Post** /live-streams/{liveStreamId}/thumbnail | Upload a thumbnail
 [**DeleteThumbnail**](LiveStreams.md#DeleteThumbnail) | **Delete** /live-streams/{liveStreamId}/thumbnail | Delete a thumbnail
+[**Complete**](LiveStreams.md#Complete) | **Put** /live-streams/{liveStreamId}/complete | Complete a live stream
 
 
 
@@ -463,6 +464,67 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**LiveStream**](LiveStream.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Complete
+
+> Complete(liveStreamId string) (error)
+
+> CompleteWithContext(ctx context.Context, liveStreamId string) (error)
+
+
+Complete a live stream
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+        
+    liveStreamId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The unique ID for the live stream you want to complete.
+
+    
+    err := client.LiveStreams.Complete(liveStreamId)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `LiveStreams.Complete``: %v\n", err)
+    }
+}
+```
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**liveStreamId** | **string** | The unique ID for the live stream you want to complete. | 
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+### Return type
+
+ (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -22,14 +22,14 @@ type LiveStream struct {
 	Name *string `json:"name,omitempty"`
 	// The unique, private stream key that you use to begin streaming.
 	StreamKey *string `json:"streamKey,omitempty"`
-	// Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/delivery-analytics/video-privacy-access-management).
+	// Whether your video can be viewed by everyone, or requires authentication to see it. A setting of false will require a unique token for each view. Learn more about the Private Video feature [here](https://docs.api.video/delivery/video-privacy-access-management).
 	Public *bool             `json:"public,omitempty"`
 	Assets *LiveStreamAssets `json:"assets,omitempty"`
 	// The unique identifier for the player.
 	PlayerId *string `json:"playerId,omitempty"`
 	// Whether or not you are broadcasting the live video you recorded for others to see. True means you are broadcasting to viewers, false means you are not.
 	Broadcasting *bool `json:"broadcasting,omitempty"`
-	// Returns the list of RTMP restream destinations.
+	// Returns the list of restream destinations.
 	Restreams []RestreamsResponseObject `json:"restreams"`
 	// When the player was created, presented in ISO-8601 format.
 	CreatedAt *string `json:"createdAt,omitempty"`

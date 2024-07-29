@@ -18,7 +18,7 @@ import (
 type RestreamsRequestObject struct {
 	// Use this parameter to define a name for the restream destination.
 	Name string `json:"name"`
-	// Use this parameter to set the RTMP URL of the restream destination.
+	// Use this parameter to set the `RTMPS` or `RTMP` server URL of the restream destination.
 	ServerUrl string `json:"serverUrl"`
 	// Use this parameter to provide the unique key of the live stream that you want to restream.
 	StreamKey string `json:"streamKey"`
