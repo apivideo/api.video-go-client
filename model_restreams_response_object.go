@@ -18,7 +18,7 @@ import (
 type RestreamsResponseObject struct {
 	// Returns the name of a restream destination.
 	Name *string `json:"name,omitempty"`
-	// Returns the RTMP URL of a restream destination.
+	// Returns the server URL of a restream destination.
 	ServerUrl *string `json:"serverUrl,omitempty"`
 	// Returns the unique key of the live stream that is set up for restreaming.
 	StreamKey *string `json:"streamKey,omitempty"`

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | Returns the name of a restream destination. | [optional] 
-**ServerUrl** | Pointer to **string** | Returns the RTMP URL of a restream destination. | [optional] 
+**ServerUrl** | Pointer to **string** | Returns the server URL of a restream destination. | [optional] 
 **StreamKey** | Pointer to **string** | Returns the unique key of the live stream that is set up for restreaming. | [optional] 
 
 ## Methods

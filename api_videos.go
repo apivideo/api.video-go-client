@@ -12,7 +12,6 @@ package apivideosdk
 
 import (
 	"context"
-	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -985,11 +984,7 @@ func (s *VideosService) ListWithContext(ctx context.Context, r VideosApiListRequ
 		}
 	}
 	if r.metadata != nil {
-		if r.metadata != nil && len(*r.metadata) > 0 {
-			for k, v := range *r.metadata {
-				localVarQueryParams.Add(fmt.Sprintf("metadata[%s]", k), v)
-			}
-		}
+		addDeepQueryParams(r.metadata, "metadata", localVarQueryParams)
 	}
 	if r.description != nil {
 		localVarQueryParams.Add("description", parameterToString(*r.description, ""))

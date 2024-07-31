@@ -255,7 +255,7 @@ func (c *Client) prepareRequest(
 		req.Header.Set("AV-Origin-Sdk", originSdkHeaderValue)
 	}
 
-	req.Header.Set("AV-Origin-Client", "go:1.3.1")
+	req.Header.Set("AV-Origin-Client", "go:1.4.0")
 
 	for headerName := range headerParams {
 		req.Header.Set(headerName, headerParams[headerName])
@@ -530,7 +530,7 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 			req.Header.Set("AV-Origin-Sdk", originSdkHeaderValue)
 		}
 
-		req.Header.Set("AV-Origin-Client", "go:1.3.1")
+		req.Header.Set("AV-Origin-Client", "go:1.4.0")
 
 		resp, err := c.httpClient.Do(req)
 
@@ -595,4 +595,44 @@ func parameterToString(obj interface{}, collectionFormat string) string {
 	}
 
 	return fmt.Sprintf("%v", obj)
+}
+
+func addDeepQueryParams(filter interface{}, prefix string, queryParams url.Values) {
+	v := reflect.ValueOf(filter)
+	if v.Kind() == reflect.Ptr && !v.IsNil() {
+		v = v.Elem()
+	}
+	switch v.Kind() {
+	case reflect.Struct:
+		t := v.Type()
+
+		for i := 0; i < v.NumField(); i++ {
+			field := v.Field(i)
+			fieldType := t.Field(i)
+
+			if field.Kind() == reflect.Ptr && !field.IsNil() {
+				field = field.Elem()
+			}
+
+			lowercaseFirstChar := strings.ToLower(string(fieldType.Name[0]))
+			restOfString := fieldType.Name[1:]
+			lowercaseName := lowercaseFirstChar + restOfString
+
+			if field.Kind() == reflect.Slice {
+				for j := 0; j < field.Len(); j++ {
+					item := field.Index(j)
+					queryParams.Add(fmt.Sprintf("%s[%s][%d]", prefix, lowercaseName, j), item.String())
+				}
+			} else if field.Kind() == reflect.String {
+				queryParams.Add(fmt.Sprintf("%s[%s]", prefix, lowercaseName), field.String())
+			}
+		}
+	case reflect.Map:
+		for _, key := range v.MapKeys() {
+			val := v.MapIndex(key)
+			queryParams.Add(fmt.Sprintf("%s[%s]", prefix, key.String()), fmt.Sprintf("%v", val))
+		}
+	default:
+		fmt.Println("Unsupported type")
+	}
 }

@@ -14,6 +14,8 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"strings"
+	"time"
 )
 
 // Linger please
@@ -21,104 +23,143 @@ var (
 	_ context.Context
 )
 
-type AnalyticsApiGetLiveStreamsPlaysRequest struct {
-	from        *string
-	dimension   *string
-	to          *string
-	filter      *string
+type AnalyticsApiGetAggregatedMetricsRequest struct {
+	from     *time.Time
+	to       *time.Time
+	filterBy *FilterBy2
+}
+
+func (r AnalyticsApiGetAggregatedMetricsRequest) From(from time.Time) AnalyticsApiGetAggregatedMetricsRequest {
+	r.from = &from
+	return r
+}
+func (r AnalyticsApiGetAggregatedMetricsRequest) To(to time.Time) AnalyticsApiGetAggregatedMetricsRequest {
+	r.to = &to
+	return r
+}
+func (r AnalyticsApiGetAggregatedMetricsRequest) FilterBy(filterBy FilterBy2) AnalyticsApiGetAggregatedMetricsRequest {
+	r.filterBy = &filterBy
+	return r
+}
+
+type AnalyticsApiGetMetricsBreakdownRequest struct {
+	from        *time.Time
+	to          *time.Time
+	filterBy    *FilterBy2
 	currentPage *int32
 	pageSize    *int32
 }
 
-func (r AnalyticsApiGetLiveStreamsPlaysRequest) From(from string) AnalyticsApiGetLiveStreamsPlaysRequest {
+func (r AnalyticsApiGetMetricsBreakdownRequest) From(from time.Time) AnalyticsApiGetMetricsBreakdownRequest {
 	r.from = &from
 	return r
 }
-func (r AnalyticsApiGetLiveStreamsPlaysRequest) Dimension(dimension string) AnalyticsApiGetLiveStreamsPlaysRequest {
-	r.dimension = &dimension
-	return r
-}
-func (r AnalyticsApiGetLiveStreamsPlaysRequest) To(to string) AnalyticsApiGetLiveStreamsPlaysRequest {
+func (r AnalyticsApiGetMetricsBreakdownRequest) To(to time.Time) AnalyticsApiGetMetricsBreakdownRequest {
 	r.to = &to
 	return r
 }
-func (r AnalyticsApiGetLiveStreamsPlaysRequest) Filter(filter string) AnalyticsApiGetLiveStreamsPlaysRequest {
-	r.filter = &filter
+func (r AnalyticsApiGetMetricsBreakdownRequest) FilterBy(filterBy FilterBy2) AnalyticsApiGetMetricsBreakdownRequest {
+	r.filterBy = &filterBy
 	return r
 }
-func (r AnalyticsApiGetLiveStreamsPlaysRequest) CurrentPage(currentPage int32) AnalyticsApiGetLiveStreamsPlaysRequest {
+func (r AnalyticsApiGetMetricsBreakdownRequest) CurrentPage(currentPage int32) AnalyticsApiGetMetricsBreakdownRequest {
 	r.currentPage = &currentPage
 	return r
 }
-func (r AnalyticsApiGetLiveStreamsPlaysRequest) PageSize(pageSize int32) AnalyticsApiGetLiveStreamsPlaysRequest {
+func (r AnalyticsApiGetMetricsBreakdownRequest) PageSize(pageSize int32) AnalyticsApiGetMetricsBreakdownRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-type AnalyticsApiGetVideosPlaysRequest struct {
-	from        *string
-	dimension   *string
-	to          *string
-	filter      *string
+type AnalyticsApiGetMetricsOverTimeRequest struct {
+	from        *time.Time
+	to          *time.Time
+	interval    *string
+	filterBy    *FilterBy2
 	currentPage *int32
 	pageSize    *int32
 }
 
-func (r AnalyticsApiGetVideosPlaysRequest) From(from string) AnalyticsApiGetVideosPlaysRequest {
+func (r AnalyticsApiGetMetricsOverTimeRequest) From(from time.Time) AnalyticsApiGetMetricsOverTimeRequest {
 	r.from = &from
 	return r
 }
-func (r AnalyticsApiGetVideosPlaysRequest) Dimension(dimension string) AnalyticsApiGetVideosPlaysRequest {
-	r.dimension = &dimension
-	return r
-}
-func (r AnalyticsApiGetVideosPlaysRequest) To(to string) AnalyticsApiGetVideosPlaysRequest {
+func (r AnalyticsApiGetMetricsOverTimeRequest) To(to time.Time) AnalyticsApiGetMetricsOverTimeRequest {
 	r.to = &to
 	return r
 }
-func (r AnalyticsApiGetVideosPlaysRequest) Filter(filter string) AnalyticsApiGetVideosPlaysRequest {
-	r.filter = &filter
+func (r AnalyticsApiGetMetricsOverTimeRequest) Interval(interval string) AnalyticsApiGetMetricsOverTimeRequest {
+	r.interval = &interval
 	return r
 }
-func (r AnalyticsApiGetVideosPlaysRequest) CurrentPage(currentPage int32) AnalyticsApiGetVideosPlaysRequest {
+func (r AnalyticsApiGetMetricsOverTimeRequest) FilterBy(filterBy FilterBy2) AnalyticsApiGetMetricsOverTimeRequest {
+	r.filterBy = &filterBy
+	return r
+}
+func (r AnalyticsApiGetMetricsOverTimeRequest) CurrentPage(currentPage int32) AnalyticsApiGetMetricsOverTimeRequest {
 	r.currentPage = &currentPage
 	return r
 }
-func (r AnalyticsApiGetVideosPlaysRequest) PageSize(pageSize int32) AnalyticsApiGetVideosPlaysRequest {
+func (r AnalyticsApiGetMetricsOverTimeRequest) PageSize(pageSize int32) AnalyticsApiGetMetricsOverTimeRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 type AnalyticsServiceI interface {
 	/*
-	 * GetLiveStreamsPlays Get play events for live stream
-	 * @return AnalyticsApiGetLiveStreamsPlaysRequest
+	 * GetAggregatedMetrics Retrieve aggregated metrics
+	 * @param metric Use this path parameter to select a metric that you want analytics for.  - `play` is the number of times your content has been played. You can use the aggregations `count`, `rate`, and `total` with the `play` metric. - `start` is the number of times playback was started. You can use the aggregation `count` with this metric. - `end` is the number of times playback has ended with the content watch until the end. You can use the aggregation `count` with this metric. - `impression` is the number of times your content has been loaded and was ready for playback. You can use the aggregation `count` with this metric. - `impression-time` is the time in milliseconds that your content was loading for until the first video frame is displayed. You can use the aggregations `average` and `sum` with this metric. - `watch-time` is the cumulative time in seconds that the user has spent watching your content. You can use the aggregations `average` and `sum` with this metric.
+	 * @param aggregation Use this path parameter to define a way of collecting data for the metric that you want analytics for.  - `count` returns the overall number of events for the `play` metric. - `rate` returns the ratio that calculates the number of plays your content receives divided by its impressions. This aggregation can be used only with the `play` metric. - `total` calculates the total number of events for the `play` metric.  - `average` calculates an average value for the selected metric. - `sum` adds up the total value of the select metric.
+	 * @return AnalyticsApiGetAggregatedMetricsRequest
 	 */
 
-	GetLiveStreamsPlays(r AnalyticsApiGetLiveStreamsPlaysRequest) (*AnalyticsPlaysResponse, error)
+	GetAggregatedMetrics(metric string, aggregation string, r AnalyticsApiGetAggregatedMetricsRequest) (*AnalyticsAggregatedMetricsResponse, error)
 
 	/*
-	 * GetLiveStreamsPlays Get play events for live stream
+	 * GetAggregatedMetrics Retrieve aggregated metrics
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @return AnalyticsApiGetLiveStreamsPlaysRequest
+	 * @param metric Use this path parameter to select a metric that you want analytics for.  - `play` is the number of times your content has been played. You can use the aggregations `count`, `rate`, and `total` with the `play` metric. - `start` is the number of times playback was started. You can use the aggregation `count` with this metric. - `end` is the number of times playback has ended with the content watch until the end. You can use the aggregation `count` with this metric. - `impression` is the number of times your content has been loaded and was ready for playback. You can use the aggregation `count` with this metric. - `impression-time` is the time in milliseconds that your content was loading for until the first video frame is displayed. You can use the aggregations `average` and `sum` with this metric. - `watch-time` is the cumulative time in seconds that the user has spent watching your content. You can use the aggregations `average` and `sum` with this metric.
+	 * @param aggregation Use this path parameter to define a way of collecting data for the metric that you want analytics for.  - `count` returns the overall number of events for the `play` metric. - `rate` returns the ratio that calculates the number of plays your content receives divided by its impressions. This aggregation can be used only with the `play` metric. - `total` calculates the total number of events for the `play` metric.  - `average` calculates an average value for the selected metric. - `sum` adds up the total value of the select metric.
+	 * @return AnalyticsApiGetAggregatedMetricsRequest
 	 */
 
-	GetLiveStreamsPlaysWithContext(ctx context.Context, r AnalyticsApiGetLiveStreamsPlaysRequest) (*AnalyticsPlaysResponse, error)
+	GetAggregatedMetricsWithContext(ctx context.Context, metric string, aggregation string, r AnalyticsApiGetAggregatedMetricsRequest) (*AnalyticsAggregatedMetricsResponse, error)
 
 	/*
-	 * GetVideosPlays Get play events for video
-	 * @return AnalyticsApiGetVideosPlaysRequest
+	 * GetMetricsBreakdown Retrieve metrics in a breakdown of dimensions
+	 * @param metric Use this path parameter to select a metric that you want analytics for.  - `play` is the number of times your content has been played. - `play-rate` is the ratio that calculates the number of plays your content receives divided by its impressions. - `play-total` is the total number of times a specific content has been played. You can only use the `media-id` breakdown with this metric. - `start` is the number of times playback was started. - `end` is the number of times playback has ended with the content watch until the end. - `impression` is the number of times your content has been loaded and was ready for playback.
+	 * @param breakdown Use this path parameter to define a dimension for segmenting analytics data. You must use `kebab-case` for path parameters.  These are the available dimensions:  - `media-id`: Returns analytics based on the unique identifiers of a video or a live stream. - `media-type`: Returns analytics based on the type of content. Possible values: `video` and `live-stream`.  - `continent`: Returns analytics based on the viewers' continent. The list of supported continents names are based on the [GeoNames public database](https://www.geonames.org/countries/). Possible values are: `AS`, `AF`, `NA`, `SA`, `AN`, `EU`, `AZ`.  - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/). - `device-type`: Returns analytics based on the type of device used by the viewers. Response values can include: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`. - `operating-system`: Returns analytics based on the operating system used by the viewers. Response values can include `windows`, `mac osx`, `android`, `ios`, `linux`. - `browser`: Returns analytics based on the browser used by the viewers. Response values can include `chrome`, `firefox`, `edge`, `opera`.
+	 * @return AnalyticsApiGetMetricsBreakdownRequest
 	 */
 
-	GetVideosPlays(r AnalyticsApiGetVideosPlaysRequest) (*AnalyticsPlaysResponse, error)
+	GetMetricsBreakdown(metric string, breakdown string, r AnalyticsApiGetMetricsBreakdownRequest) (*AnalyticsMetricsBreakdownResponse, error)
 
 	/*
-	 * GetVideosPlays Get play events for video
+	 * GetMetricsBreakdown Retrieve metrics in a breakdown of dimensions
 	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	 * @return AnalyticsApiGetVideosPlaysRequest
+	 * @param metric Use this path parameter to select a metric that you want analytics for.  - `play` is the number of times your content has been played. - `play-rate` is the ratio that calculates the number of plays your content receives divided by its impressions. - `play-total` is the total number of times a specific content has been played. You can only use the `media-id` breakdown with this metric. - `start` is the number of times playback was started. - `end` is the number of times playback has ended with the content watch until the end. - `impression` is the number of times your content has been loaded and was ready for playback.
+	 * @param breakdown Use this path parameter to define a dimension for segmenting analytics data. You must use `kebab-case` for path parameters.  These are the available dimensions:  - `media-id`: Returns analytics based on the unique identifiers of a video or a live stream. - `media-type`: Returns analytics based on the type of content. Possible values: `video` and `live-stream`.  - `continent`: Returns analytics based on the viewers' continent. The list of supported continents names are based on the [GeoNames public database](https://www.geonames.org/countries/). Possible values are: `AS`, `AF`, `NA`, `SA`, `AN`, `EU`, `AZ`.  - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/). - `device-type`: Returns analytics based on the type of device used by the viewers. Response values can include: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`. - `operating-system`: Returns analytics based on the operating system used by the viewers. Response values can include `windows`, `mac osx`, `android`, `ios`, `linux`. - `browser`: Returns analytics based on the browser used by the viewers. Response values can include `chrome`, `firefox`, `edge`, `opera`.
+	 * @return AnalyticsApiGetMetricsBreakdownRequest
 	 */
 
-	GetVideosPlaysWithContext(ctx context.Context, r AnalyticsApiGetVideosPlaysRequest) (*AnalyticsPlaysResponse, error)
+	GetMetricsBreakdownWithContext(ctx context.Context, metric string, breakdown string, r AnalyticsApiGetMetricsBreakdownRequest) (*AnalyticsMetricsBreakdownResponse, error)
+
+	/*
+	 * GetMetricsOverTime Retrieve metrics over time
+	 * @param metric Use this path parameter to select a metric that you want analytics for.  - `play` is the number of times your content has been played. - `play-rate` is the ratio that calculates the number of plays your content receives divided by its impressions. - `start` is the number of times playback was started. - `end` is the number of times playback has ended with the content watch until the end. - `impression` is the number of times your content has been loaded and was ready for playback.
+	 * @return AnalyticsApiGetMetricsOverTimeRequest
+	 */
+
+	GetMetricsOverTime(metric string, r AnalyticsApiGetMetricsOverTimeRequest) (*AnalyticsMetricsOverTimeResponse, error)
+
+	/*
+	 * GetMetricsOverTime Retrieve metrics over time
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param metric Use this path parameter to select a metric that you want analytics for.  - `play` is the number of times your content has been played. - `play-rate` is the ratio that calculates the number of plays your content receives divided by its impressions. - `start` is the number of times playback was started. - `end` is the number of times playback has ended with the content watch until the end. - `impression` is the number of times your content has been loaded and was ready for playback.
+	 * @return AnalyticsApiGetMetricsOverTimeRequest
+	 */
+
+	GetMetricsOverTimeWithContext(ctx context.Context, metric string, r AnalyticsApiGetMetricsOverTimeRequest) (*AnalyticsMetricsOverTimeResponse, error)
 }
 
 // AnalyticsService communicating with the Analytics
@@ -128,46 +169,47 @@ type AnalyticsService struct {
 }
 
 /*
- * GetLiveStreamsPlays Get play events for live stream
- * Retrieve filtered analytics about the number of plays for your live streams in a project.
+ * GetAggregatedMetrics Retrieve aggregated metrics
+ * Retrieve time-based and countable metrics like average watch time or the number of impressions over a certain period of time.
 
- * @return AnalyticsApiGetLiveStreamsPlaysRequest
+ * @param metric Use this path parameter to select a metric that you want analytics for.  - `play` is the number of times your content has been played. You can use the aggregations `count`, `rate`, and `total` with the `play` metric. - `start` is the number of times playback was started. You can use the aggregation `count` with this metric. - `end` is the number of times playback has ended with the content watch until the end. You can use the aggregation `count` with this metric. - `impression` is the number of times your content has been loaded and was ready for playback. You can use the aggregation `count` with this metric. - `impression-time` is the time in milliseconds that your content was loading for until the first video frame is displayed. You can use the aggregations `average` and `sum` with this metric. - `watch-time` is the cumulative time in seconds that the user has spent watching your content. You can use the aggregations `average` and `sum` with this metric.
+ * @param aggregation Use this path parameter to define a way of collecting data for the metric that you want analytics for.  - `count` returns the overall number of events for the `play` metric. - `rate` returns the ratio that calculates the number of plays your content receives divided by its impressions. This aggregation can be used only with the `play` metric. - `total` calculates the total number of events for the `play` metric.  - `average` calculates an average value for the selected metric. - `sum` adds up the total value of the select metric.
+ * @return AnalyticsApiGetAggregatedMetricsRequest
  */
 
-func (s *AnalyticsService) GetLiveStreamsPlays(r AnalyticsApiGetLiveStreamsPlaysRequest) (*AnalyticsPlaysResponse, error) {
+func (s *AnalyticsService) GetAggregatedMetrics(metric string, aggregation string, r AnalyticsApiGetAggregatedMetricsRequest) (*AnalyticsAggregatedMetricsResponse, error) {
 
-	return s.GetLiveStreamsPlaysWithContext(context.Background(), r)
+	return s.GetAggregatedMetricsWithContext(context.Background(), metric, aggregation, r)
 
 }
 
 /*
- * GetLiveStreamsPlays Get play events for live stream
- * Retrieve filtered analytics about the number of plays for your live streams in a project.
+ * GetAggregatedMetrics Retrieve aggregated metrics
+ * Retrieve time-based and countable metrics like average watch time or the number of impressions over a certain period of time.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return AnalyticsApiGetLiveStreamsPlaysRequest
+ * @param metric Use this path parameter to select a metric that you want analytics for.  - `play` is the number of times your content has been played. You can use the aggregations `count`, `rate`, and `total` with the `play` metric. - `start` is the number of times playback was started. You can use the aggregation `count` with this metric. - `end` is the number of times playback has ended with the content watch until the end. You can use the aggregation `count` with this metric. - `impression` is the number of times your content has been loaded and was ready for playback. You can use the aggregation `count` with this metric. - `impression-time` is the time in milliseconds that your content was loading for until the first video frame is displayed. You can use the aggregations `average` and `sum` with this metric. - `watch-time` is the cumulative time in seconds that the user has spent watching your content. You can use the aggregations `average` and `sum` with this metric.
+ * @param aggregation Use this path parameter to define a way of collecting data for the metric that you want analytics for.  - `count` returns the overall number of events for the `play` metric. - `rate` returns the ratio that calculates the number of plays your content receives divided by its impressions. This aggregation can be used only with the `play` metric. - `total` calculates the total number of events for the `play` metric.  - `average` calculates an average value for the selected metric. - `sum` adds up the total value of the select metric.
+ * @return AnalyticsApiGetAggregatedMetricsRequest
  */
 
-func (s *AnalyticsService) GetLiveStreamsPlaysWithContext(ctx context.Context, r AnalyticsApiGetLiveStreamsPlaysRequest) (*AnalyticsPlaysResponse, error) {
+func (s *AnalyticsService) GetAggregatedMetricsWithContext(ctx context.Context, metric string, aggregation string, r AnalyticsApiGetAggregatedMetricsRequest) (*AnalyticsAggregatedMetricsResponse, error) {
 	var localVarPostBody interface{}
 
-	localVarPath := "/analytics/live-streams/plays"
+	localVarPath := "/data/metrics/{metric}/{aggregation}"
+	localVarPath = strings.Replace(localVarPath, "{"+"metric"+"}", url.PathEscape(parameterToString(metric, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"aggregation"+"}", url.PathEscape(parameterToString(aggregation, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	localVarQueryParams.Add("from", parameterToString(*r.from, ""))
+	if r.from != nil {
+		localVarQueryParams.Add("from", parameterToString(*r.from, ""))
+	}
 	if r.to != nil {
 		localVarQueryParams.Add("to", parameterToString(*r.to, ""))
 	}
-	localVarQueryParams.Add("dimension", parameterToString(*r.dimension, ""))
-	if r.filter != nil {
-		localVarQueryParams.Add("filter", parameterToString(*r.filter, ""))
-	}
-	if r.currentPage != nil {
-		localVarQueryParams.Add("currentPage", parameterToString(*r.currentPage, ""))
-	}
-	if r.pageSize != nil {
-		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
+	if r.filterBy != nil {
+		addDeepQueryParams(r.filterBy, "filterBy", localVarQueryParams)
 	}
 
 	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
@@ -175,7 +217,7 @@ func (s *AnalyticsService) GetLiveStreamsPlaysWithContext(ctx context.Context, r
 		return nil, err
 	}
 
-	res := new(AnalyticsPlaysResponse)
+	res := new(AnalyticsAggregatedMetricsResponse)
 	_, err = s.client.do(req, res)
 
 	if err != nil {
@@ -187,40 +229,47 @@ func (s *AnalyticsService) GetLiveStreamsPlaysWithContext(ctx context.Context, r
 }
 
 /*
- * GetVideosPlays Get play events for video
- * Retrieve filtered analytics about the number of plays for your videos in a project.
+ * GetMetricsBreakdown Retrieve metrics in a breakdown of dimensions
+ * Retrieve detailed analytics play-rate and number of impressions segmented by dimensions like country or device type.
 
- * @return AnalyticsApiGetVideosPlaysRequest
+ * @param metric Use this path parameter to select a metric that you want analytics for.  - `play` is the number of times your content has been played. - `play-rate` is the ratio that calculates the number of plays your content receives divided by its impressions. - `play-total` is the total number of times a specific content has been played. You can only use the `media-id` breakdown with this metric. - `start` is the number of times playback was started. - `end` is the number of times playback has ended with the content watch until the end. - `impression` is the number of times your content has been loaded and was ready for playback.
+ * @param breakdown Use this path parameter to define a dimension for segmenting analytics data. You must use `kebab-case` for path parameters.  These are the available dimensions:  - `media-id`: Returns analytics based on the unique identifiers of a video or a live stream. - `media-type`: Returns analytics based on the type of content. Possible values: `video` and `live-stream`.  - `continent`: Returns analytics based on the viewers' continent. The list of supported continents names are based on the [GeoNames public database](https://www.geonames.org/countries/). Possible values are: `AS`, `AF`, `NA`, `SA`, `AN`, `EU`, `AZ`.  - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/). - `device-type`: Returns analytics based on the type of device used by the viewers. Response values can include: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`. - `operating-system`: Returns analytics based on the operating system used by the viewers. Response values can include `windows`, `mac osx`, `android`, `ios`, `linux`. - `browser`: Returns analytics based on the browser used by the viewers. Response values can include `chrome`, `firefox`, `edge`, `opera`.
+ * @return AnalyticsApiGetMetricsBreakdownRequest
  */
 
-func (s *AnalyticsService) GetVideosPlays(r AnalyticsApiGetVideosPlaysRequest) (*AnalyticsPlaysResponse, error) {
+func (s *AnalyticsService) GetMetricsBreakdown(metric string, breakdown string, r AnalyticsApiGetMetricsBreakdownRequest) (*AnalyticsMetricsBreakdownResponse, error) {
 
-	return s.GetVideosPlaysWithContext(context.Background(), r)
+	return s.GetMetricsBreakdownWithContext(context.Background(), metric, breakdown, r)
 
 }
 
 /*
- * GetVideosPlays Get play events for video
- * Retrieve filtered analytics about the number of plays for your videos in a project.
+ * GetMetricsBreakdown Retrieve metrics in a breakdown of dimensions
+ * Retrieve detailed analytics play-rate and number of impressions segmented by dimensions like country or device type.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return AnalyticsApiGetVideosPlaysRequest
+ * @param metric Use this path parameter to select a metric that you want analytics for.  - `play` is the number of times your content has been played. - `play-rate` is the ratio that calculates the number of plays your content receives divided by its impressions. - `play-total` is the total number of times a specific content has been played. You can only use the `media-id` breakdown with this metric. - `start` is the number of times playback was started. - `end` is the number of times playback has ended with the content watch until the end. - `impression` is the number of times your content has been loaded and was ready for playback.
+ * @param breakdown Use this path parameter to define a dimension for segmenting analytics data. You must use `kebab-case` for path parameters.  These are the available dimensions:  - `media-id`: Returns analytics based on the unique identifiers of a video or a live stream. - `media-type`: Returns analytics based on the type of content. Possible values: `video` and `live-stream`.  - `continent`: Returns analytics based on the viewers' continent. The list of supported continents names are based on the [GeoNames public database](https://www.geonames.org/countries/). Possible values are: `AS`, `AF`, `NA`, `SA`, `AN`, `EU`, `AZ`.  - `country`: Returns analytics based on the viewers' country. The list of supported country names are based on the [GeoNames public database](https://www.geonames.org/countries/). - `device-type`: Returns analytics based on the type of device used by the viewers. Response values can include: `computer`, `phone`, `tablet`, `tv`, `console`, `wearable`, `unknown`. - `operating-system`: Returns analytics based on the operating system used by the viewers. Response values can include `windows`, `mac osx`, `android`, `ios`, `linux`. - `browser`: Returns analytics based on the browser used by the viewers. Response values can include `chrome`, `firefox`, `edge`, `opera`.
+ * @return AnalyticsApiGetMetricsBreakdownRequest
  */
 
-func (s *AnalyticsService) GetVideosPlaysWithContext(ctx context.Context, r AnalyticsApiGetVideosPlaysRequest) (*AnalyticsPlaysResponse, error) {
+func (s *AnalyticsService) GetMetricsBreakdownWithContext(ctx context.Context, metric string, breakdown string, r AnalyticsApiGetMetricsBreakdownRequest) (*AnalyticsMetricsBreakdownResponse, error) {
 	var localVarPostBody interface{}
 
-	localVarPath := "/analytics/videos/plays"
+	localVarPath := "/data/buckets/{metric}/{breakdown}"
+	localVarPath = strings.Replace(localVarPath, "{"+"metric"+"}", url.PathEscape(parameterToString(metric, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"breakdown"+"}", url.PathEscape(parameterToString(breakdown, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 
-	localVarQueryParams.Add("from", parameterToString(*r.from, ""))
+	if r.from != nil {
+		localVarQueryParams.Add("from", parameterToString(*r.from, ""))
+	}
 	if r.to != nil {
 		localVarQueryParams.Add("to", parameterToString(*r.to, ""))
 	}
-	localVarQueryParams.Add("dimension", parameterToString(*r.dimension, ""))
-	if r.filter != nil {
-		localVarQueryParams.Add("filter", parameterToString(*r.filter, ""))
+	if r.filterBy != nil {
+		addDeepQueryParams(r.filterBy, "filterBy", localVarQueryParams)
 	}
 	if r.currentPage != nil {
 		localVarQueryParams.Add("currentPage", parameterToString(*r.currentPage, ""))
@@ -234,7 +283,73 @@ func (s *AnalyticsService) GetVideosPlaysWithContext(ctx context.Context, r Anal
 		return nil, err
 	}
 
-	res := new(AnalyticsPlaysResponse)
+	res := new(AnalyticsMetricsBreakdownResponse)
+	_, err = s.client.do(req, res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+
+}
+
+/*
+ * GetMetricsOverTime Retrieve metrics over time
+ * Retrieve countable metrics like the number of plays or impressions, grouped by the time at which they occurred
+
+ * @param metric Use this path parameter to select a metric that you want analytics for.  - `play` is the number of times your content has been played. - `play-rate` is the ratio that calculates the number of plays your content receives divided by its impressions. - `start` is the number of times playback was started. - `end` is the number of times playback has ended with the content watch until the end. - `impression` is the number of times your content has been loaded and was ready for playback.
+ * @return AnalyticsApiGetMetricsOverTimeRequest
+ */
+
+func (s *AnalyticsService) GetMetricsOverTime(metric string, r AnalyticsApiGetMetricsOverTimeRequest) (*AnalyticsMetricsOverTimeResponse, error) {
+
+	return s.GetMetricsOverTimeWithContext(context.Background(), metric, r)
+
+}
+
+/*
+ * GetMetricsOverTime Retrieve metrics over time
+ * Retrieve countable metrics like the number of plays or impressions, grouped by the time at which they occurred
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param metric Use this path parameter to select a metric that you want analytics for.  - `play` is the number of times your content has been played. - `play-rate` is the ratio that calculates the number of plays your content receives divided by its impressions. - `start` is the number of times playback was started. - `end` is the number of times playback has ended with the content watch until the end. - `impression` is the number of times your content has been loaded and was ready for playback.
+ * @return AnalyticsApiGetMetricsOverTimeRequest
+ */
+
+func (s *AnalyticsService) GetMetricsOverTimeWithContext(ctx context.Context, metric string, r AnalyticsApiGetMetricsOverTimeRequest) (*AnalyticsMetricsOverTimeResponse, error) {
+	var localVarPostBody interface{}
+
+	localVarPath := "/data/timeseries/{metric}"
+	localVarPath = strings.Replace(localVarPath, "{"+"metric"+"}", url.PathEscape(parameterToString(metric, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+
+	if r.from != nil {
+		localVarQueryParams.Add("from", parameterToString(*r.from, ""))
+	}
+	if r.to != nil {
+		localVarQueryParams.Add("to", parameterToString(*r.to, ""))
+	}
+	if r.interval != nil {
+		localVarQueryParams.Add("interval", parameterToString(*r.interval, ""))
+	}
+	if r.filterBy != nil {
+		addDeepQueryParams(r.filterBy, "filterBy", localVarQueryParams)
+	}
+	if r.currentPage != nil {
+		localVarQueryParams.Add("currentPage", parameterToString(*r.currentPage, ""))
+	}
+	if r.pageSize != nil {
+		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
+	}
+
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	if err != nil {
+		return nil, err
+	}
+
+	res := new(AnalyticsMetricsOverTimeResponse)
 	_, err = s.client.do(req, res)
 
 	if err != nil {
