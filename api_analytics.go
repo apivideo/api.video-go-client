@@ -45,6 +45,8 @@ func (r AnalyticsApiGetAggregatedMetricsRequest) FilterBy(filterBy FilterBy2) An
 type AnalyticsApiGetMetricsBreakdownRequest struct {
 	from        *time.Time
 	to          *time.Time
+	sortBy      *string
+	sortOrder   *string
 	filterBy    *FilterBy2
 	currentPage *int32
 	pageSize    *int32
@@ -56,6 +58,14 @@ func (r AnalyticsApiGetMetricsBreakdownRequest) From(from time.Time) AnalyticsAp
 }
 func (r AnalyticsApiGetMetricsBreakdownRequest) To(to time.Time) AnalyticsApiGetMetricsBreakdownRequest {
 	r.to = &to
+	return r
+}
+func (r AnalyticsApiGetMetricsBreakdownRequest) SortBy(sortBy string) AnalyticsApiGetMetricsBreakdownRequest {
+	r.sortBy = &sortBy
+	return r
+}
+func (r AnalyticsApiGetMetricsBreakdownRequest) SortOrder(sortOrder string) AnalyticsApiGetMetricsBreakdownRequest {
+	r.sortOrder = &sortOrder
 	return r
 }
 func (r AnalyticsApiGetMetricsBreakdownRequest) FilterBy(filterBy FilterBy2) AnalyticsApiGetMetricsBreakdownRequest {
@@ -75,6 +85,8 @@ type AnalyticsApiGetMetricsOverTimeRequest struct {
 	from        *time.Time
 	to          *time.Time
 	interval    *string
+	sortBy      *string
+	sortOrder   *string
 	filterBy    *FilterBy2
 	currentPage *int32
 	pageSize    *int32
@@ -90,6 +102,14 @@ func (r AnalyticsApiGetMetricsOverTimeRequest) To(to time.Time) AnalyticsApiGetM
 }
 func (r AnalyticsApiGetMetricsOverTimeRequest) Interval(interval string) AnalyticsApiGetMetricsOverTimeRequest {
 	r.interval = &interval
+	return r
+}
+func (r AnalyticsApiGetMetricsOverTimeRequest) SortBy(sortBy string) AnalyticsApiGetMetricsOverTimeRequest {
+	r.sortBy = &sortBy
+	return r
+}
+func (r AnalyticsApiGetMetricsOverTimeRequest) SortOrder(sortOrder string) AnalyticsApiGetMetricsOverTimeRequest {
+	r.sortOrder = &sortOrder
 	return r
 }
 func (r AnalyticsApiGetMetricsOverTimeRequest) FilterBy(filterBy FilterBy2) AnalyticsApiGetMetricsOverTimeRequest {
@@ -268,6 +288,12 @@ func (s *AnalyticsService) GetMetricsBreakdownWithContext(ctx context.Context, m
 	if r.to != nil {
 		localVarQueryParams.Add("to", parameterToString(*r.to, ""))
 	}
+	if r.sortBy != nil {
+		localVarQueryParams.Add("sortBy", parameterToString(*r.sortBy, ""))
+	}
+	if r.sortOrder != nil {
+		localVarQueryParams.Add("sortOrder", parameterToString(*r.sortOrder, ""))
+	}
 	if r.filterBy != nil {
 		addDeepQueryParams(r.filterBy, "filterBy", localVarQueryParams)
 	}
@@ -333,6 +359,12 @@ func (s *AnalyticsService) GetMetricsOverTimeWithContext(ctx context.Context, me
 	}
 	if r.interval != nil {
 		localVarQueryParams.Add("interval", parameterToString(*r.interval, ""))
+	}
+	if r.sortBy != nil {
+		localVarQueryParams.Add("sortBy", parameterToString(*r.sortBy, ""))
+	}
+	if r.sortOrder != nil {
+		localVarQueryParams.Add("sortOrder", parameterToString(*r.sortOrder, ""))
 	}
 	if r.filterBy != nil {
 		addDeepQueryParams(r.filterBy, "filterBy", localVarQueryParams)

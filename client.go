@@ -255,7 +255,7 @@ func (c *Client) prepareRequest(
 		req.Header.Set("AV-Origin-Sdk", originSdkHeaderValue)
 	}
 
-	req.Header.Set("AV-Origin-Client", "go:1.4.0")
+	req.Header.Set("AV-Origin-Client", "go:1.4.1")
 
 	for headerName := range headerParams {
 		req.Header.Set(headerName, headerParams[headerName])
@@ -530,7 +530,7 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 			req.Header.Set("AV-Origin-Sdk", originSdkHeaderValue)
 		}
 
-		req.Header.Set("AV-Origin-Client", "go:1.4.0")
+		req.Header.Set("AV-Origin-Client", "go:1.4.1")
 
 		resp, err := c.httpClient.Do(req)
 
