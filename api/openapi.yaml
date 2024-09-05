@@ -11682,6 +11682,42 @@ paths:
           format: date-time
           type: string
         style: form
+      - description: |
+          Use this parameter to choose which field the API will use to sort the analytics data.
+
+          These are the available fields to sort by:
+
+          - `metricValue`: Sorts the results based on the **metric** you selected in your request.
+          - `dimensionValue`: Sorts the results based on the **dimension** you selected in your request.
+        example: metricValue
+        explode: false
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          enum:
+          - metricValue
+          - dimensionValue
+          type: string
+        style: form
+      - description: |
+          Use this parameter to define the sort order of results.
+
+          These are the available sort orders:
+
+          - `asc`: Sorts the results in ascending order: `A to Z` and `0 to 9`.
+          - `desc`: Sorts the results in descending order: `Z to A` and `9 to 0`.
+        example: asc
+        explode: false
+        in: query
+        name: sortOrder
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+        style: form
       - $ref: '#/components/parameters/filterBy_2'
         description: "Use this parameter to filter the API's response based on different\
           \ data dimensions. You can serialize filters in your query to receive more\
@@ -12122,6 +12158,42 @@ paths:
           enum:
           - hour
           - day
+          type: string
+        style: form
+      - description: |
+          Use this parameter to choose which field the API will use to sort the analytics data.
+
+          These are the available fields to sort by:
+
+          - `metricValue`: Sorts the results based on the **metric** you selected in your request.
+          - `emittedAt`: Sorts the results based on the **timestamp** of the event in ATOM date-time format.
+        example: metricValue
+        explode: false
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          enum:
+          - metricValue
+          - emittedAt
+          type: string
+        style: form
+      - description: |
+          Use this parameter to define the sort order of results.
+
+          These are the available sort orders:
+
+          - `asc`: Sorts the results in ascending order: `A to Z` and `0 to 9`.
+          - `desc`: Sorts the results in descending order: `Z to A` and `9 to 0`.
+        example: asc
+        explode: false
+        in: query
+        name: sortOrder
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
           type: string
         style: form
       - $ref: '#/components/parameters/filterBy_2'
