@@ -193,8 +193,6 @@ paths:
         style: form
       - description: Videos can be tagged with metadata tags in key:value pairs. You
           can search for videos with specific key value pairs using this parameter.
-          [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata/) allows
-          you to define a key that allows any value pair.
         example: metadata[Author]=John Doe&metadata[Format]=Tutorial
         explode: true
         in: query
@@ -298,8 +296,11 @@ paths:
                         value: John Doe
                       - key: Format
                         value: Tutorial
-                      publishedAt: 2019-12-16T08:25:51.000Z
-                      updatedAt: 2019-12-16T08:48:49.000Z
+                      publishedAt: 2019-12-16T08:25:51+00:00
+                      updatedAt: 2019-12-16T08:48:49+00:00
+                      discarded: false
+                      discardedAt: null
+                      deletesAt: null
                       source:
                         uri: /videos/c188ed58-3403-46a2-b91b-44603d10b2c9/source
                       assets:
@@ -326,8 +327,11 @@ paths:
                         value: Cyberpunk
                       - key: Technology
                         value: Computers
-                      publishedAt: 2019-12-16T08:25:51.000Z
-                      updatedAt: 2019-12-16T08:48:49.000Z
+                      publishedAt: 2019-12-16T08:25:51+00:00
+                      updatedAt: 2019-12-16T08:48:49+00:00
+                      discarded: false
+                      discardedAt: null
+                      deletesAt: null
                       source:
                         uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                       assets:
@@ -351,8 +355,11 @@ paths:
                       metadata:
                       - key: Length
                         value: Short
-                      publishedAt: 2019-12-16T08:25:51.000Z
-                      updatedAt: 2019-12-16T08:48:49.000Z
+                      publishedAt: 2019-12-16T08:25:51+00:00
+                      updatedAt: 2019-12-16T08:48:49+00:00
+                      discarded: false
+                      discardedAt: null
+                      deletesAt: null
                       source:
                         uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                       assets:
@@ -617,7 +624,10 @@ paths:
                       value: John Doe
                     - key: Format
                       value: Tutorial
-                    publishedAt: 4665-07-14T23:36:18.598Z
+                    publishedAt: 2024-07-14T23:36:07+00:00
+                    discarded: false
+                    discardedAt: null
+                    deletesAt: null
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
@@ -694,7 +704,7 @@ paths:
                       title: This attribute is required.
                       name: title
                     - type: https://docs.api.video/reference/invalid-attribute
-                      title: This attribute must be a ISO8601 date.
+                      title: This attribute must be a ISO-8601 date.
                       name: scheduledAt
                     - type: https://docs.api.video/reference/invalid-attribute
                       title: This attribute must be an array.
@@ -1018,7 +1028,10 @@ paths:
                       value: John Doe
                     - key: Format
                       value: Tutorial
-                    publishedAt: 4665-07-14T23:36:18.598Z
+                    publishedAt: 2024-07-14T23:36:07+00:00
+                    discarded: false
+                    discardedAt: null
+                    deletesAt: null
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
@@ -1417,9 +1430,9 @@ paths:
                   value:
                     data:
                     - watermarkId: watermark_1BWr2L5MTQwxGkuxKjzh6i
-                      createdAt: 2019-12-16T08:25:51.000Z
+                      createdAt: 2019-12-16T08:25:51+00:00
                     - watermarkId: watermark_3BWC2L5MTQwxGkuxKjzh7g
-                      createdAt: 2019-12-16T08:25:51.000Z
+                      createdAt: 2019-12-16T08:25:51+00:00
                     pagination:
                       currentPage: 1
                       pageSize: 25
@@ -1600,7 +1613,7 @@ paths:
                 response:
                   value:
                     watermarkId: watermark_1BWr2L5MTQwxGkuxKjzh6i
-                    createdAt: 2020-03-03T12:52:03.085Z
+                    createdAt: 2020-03-03T12:52:03+00:00
               schema:
                 $ref: '#/components/schemas/watermark'
           description: Success
@@ -2039,7 +2052,10 @@ paths:
                       value: John Doe
                     - key: Format
                       value: Tutorial
-                    publishedAt: 4665-07-14T23:36:18.598Z
+                    publishedAt: 2024-07-14T23:36:07+00:00
+                    discarded: false
+                    discardedAt: null
+                    deletesAt: null
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
@@ -2302,8 +2318,11 @@ paths:
                       value: John Doe
                     - key: Format
                       value: Tutorial
-                    createdAt: 2020-03-03T12:52:03.085Z
-                    publishedAt: 2020-07-14T23:36:18.598Z
+                    createdAt: 2020-03-03T12:52:03+00:00
+                    publishedAt: 2020-07-14T23:36:07+00:00
+                    discarded: false
+                    discardedAt: null
+                    deletesAt: null
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
@@ -2552,7 +2571,12 @@ paths:
             // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#uploadThumbnail
   /videos/{videoId}:
     delete:
-      description: Delete a video object by video ID.
+      description: "Delete a video object by video ID. \n\nBy default, deleted videos\
+        \ cannot be recovered. If you have the Video Restore feature enabled, this\
+        \ operation will discard the video instead of permanently deleting it. Make\
+        \ sure you subscribe to the Video Restore feature if you want to be able to\
+        \ restore deleted videos! \n\nThe Video Restore feature retains videos for\
+        \ 90 days, after which the videos are permanently deleted.       \n"
       operationId: DELETE-video
       parameters:
       - description: The video ID for the video you want to delete.
@@ -2662,7 +2686,12 @@ paths:
       - Videos
       x-client-description:
         default: If you do not need a video any longer, you can send a request to
-          delete it. All you need is the videoId.
+          delete it. All you need is the videoId. By default, deleted videos cannot
+          be recovered. If you have the Video Restore feature enabled, this operation
+          will discard the video instead of permanently deleting it. Make sure you
+          subscribe to the Video Restore feature if you want to be able to restore
+          deleted videos! The Video Restore feature retains videos for 90 days, after
+          which the videos are permanently deleted
       x-client-action: delete
       x-doctave:
         code-samples:
@@ -2784,8 +2813,11 @@ paths:
                       value: John Doe
                     - key: Format
                       value: Tutorial
-                    publishedAt: 2019-12-16T08:25:51.000Z
-                    updatedAt: 2019-12-16T08:48:49.000Z
+                    publishedAt: 2019-12-16T08:25:51+00:00
+                    updatedAt: 2019-12-16T08:48:49+00:00
+                    discarded: false
+                    discardedAt: null
+                    deletesAt: null
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
@@ -3034,8 +3066,11 @@ paths:
                       value: John Doe
                     - key: Format
                       value: Tutorial
-                    publishedAt: 2019-12-16T08:25:51.000Z
-                    updatedAt: 2019-12-16T08:48:49.000Z
+                    publishedAt: 2019-12-16T08:25:51+00:00
+                    updatedAt: 2019-12-16T08:48:49+00:00
+                    discarded: false
+                    discardedAt: null
+                    deletesAt: null
                     source:
                       uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
                     assets:
@@ -3193,6 +3228,801 @@ paths:
           \ you provide here overwrites what is in the system rather than appending\
           \ to it.\n"
       x-client-action: update
+      x-doctave:
+        code-samples:
+        - language: go
+          code: "// First install the go client with \"go get github.com/apivideo/api.video-go-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-go-client/blob/main/docs/VideosApi.md#update\n\
+            \npackage main\n\nimport (\n    \"context\"\n    \"fmt\"\n    \"os\"\n\
+            \    apivideosdk \"github.com/apivideo/api.video-go-client\"\n)\n\nfunc\
+            \ main() {\n    client := apivideosdk.ClientBuilder(\"YOUR_API_KEY\").Build()\n\
+            \    // if you rather like to use the sandbox environment:\n    // client\
+            \ := apivideosdk.SandboxClientBuilder(\"YOUR_SANDBOX_API_KEY\").Build()\n\
+            \        \n    videoId := \"vi4k0jvEUuaTdRAEjQ4Jfrgz\" // string | The\
+            \ video ID for the video you want to delete.\n    videoUpdatePayload :=\
+            \ *apivideosdk.NewVideoUpdatePayload() // VideoUpdatePayload | \n\n  \
+            \  \n    res, err := client.Videos.Update(videoId, videoUpdatePayload)\n\
+            \n    if err != nil {\n        fmt.Fprintf(os.Stderr, \"Error when calling\
+            \ `Videos.Update``: %v\\\n\", err)\n    }\n    // response from `Update`:\
+            \ Video\n    fmt.Fprintf(os.Stdout, \"Response from `Videos.Update`: %v\\\
+            \n\", res)\n}\n"
+        - language: node
+          code: "// First install the \"@api.video/nodejs-client\" npm package\n//\
+            \ Documentation: https://github.com/apivideo/api.video-nodejs-client/blob/main/doc/api/VideosApi.md#update\n\
+            \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
+            const videoId = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The video ID for the video\
+            \ you want to update.\n\n// define the value you want to update\nconst\
+            \ videoUpdatePayload = {\n    playerId: \"pl4k0jvEUuaTdRAEjQ4Jfrgz\",\
+            \ // The unique ID for the player you want to associate with your video.\n\
+            \    title: \"title_example\", // The title you want to use for your video.\n\
+            \    description: \"A film about good books.\", // A brief description\
+            \ of the video.\n    _public: true, // Whether the video is publicly available\
+            \ or not. False means it is set to private.\n    panoramic: false, //\
+            \ Whether the video is a 360 degree or immersive video.\n    mp4Support:\
+            \ true, // Whether the player supports the mp4 format.\n    tags: [\"\
+            maths\", \"string theory\", \"video\"], // A list of terms or words you\
+            \ want to tag the video with. Make sure the list includes all the tags\
+            \ you want as whatever you send in this list will overwrite the existing\
+            \ list for the video.\n    metadata: [{\"key\": \"Author\", \"value\"\
+            : \"John Doe\"}], // A list (array) of dictionaries where each dictionary\
+            \ contains a key value pair that describes the video. As with tags, you\
+            \ must send the complete list of metadata you want as whatever you send\
+            \ here will overwrite the existing metadata for the video.\n}; \n\n\n\
+            const updatedVideo = await client.videos.update(videoId, videoUpdatePayload);\n"
+        - language: python
+          code: "# First install the api client with \"pip install api.video\"\n#\
+            \ Documentation: https://github.com/apivideo/api.video-python-client/blob/main/docs/VideosApi.md#update\n\
+            \nimport apivideo\nfrom apivideo.api import videos_api\nfrom apivideo.model.video_update_payload\
+            \ import VideoUpdatePayload\nfrom apivideo.model.bad_request import BadRequest\n\
+            from apivideo.model.not_found import NotFound\nfrom apivideo.model.video\
+            \ import Video\nfrom pprint import pprint\n\n# Enter a context with an\
+            \ instance of the API client\nwith apivideo.AuthenticatedApiClient(__API_KEY__)\
+            \ as api_client:\n    # Create an instance of the API class\n    api_instance\
+            \ = videos_api.VideosApi(api_client)\n    video_id = \"vi4k0jvEUuaTdRAEjQ4Jfrgz\"\
+            \ # str | The video ID for the video you want to delete.\n    video_update_payload\
+            \ = VideoUpdatePayload(\n        player_id=\"pl4k0jvEUuaTdRAEjQ4Jfrgz\"\
+            ,\n        title=\"title_example\",\n        description=\"A film about\
+            \ good books.\",\n        public=True,\n        panoramic=False,\n   \
+            \     mp4_support=True,\n        tags=[\"maths\", \"string theory\", \"\
+            video\"],\n        metadata=[\n            Metadata(\n               \
+            \ key=\"Color\",\n                value=\"Green\",\n            ),\n \
+            \       ],\n    ) # VideoUpdatePayload | \n\n    # example passing only\
+            \ required values which don't have defaults set\n    try:\n        # Update\
+            \ a video\n        api_response = api_instance.update(video_id, video_update_payload)\n\
+            \        pprint(api_response)\n    except apivideo.ApiException as e:\n\
+            \        print(\"Exception when calling VideosApi->update: %s\\\n\" %\
+            \ e)              \n"
+        - language: java
+          code: "// First add the \"video.api:java-api-client\" maven dependency to\
+            \ your project\n// Documentation: https://github.com/apivideo/api.video-java-client/blob/main/docs/VideosApi.md#update\n\
+            \nimport video.api.client.ApiVideoClient;\nimport video.api.client.api.ApiException;\n\
+            import video.api.client.api.models.*;\nimport video.api.client.api.clients.VideosApi;\n\
+            import java.util.*;\n\npublic class Example {\n  public static void main(String[]\
+            \ args) {\n    ApiVideoClient client = new ApiVideoClient(\"YOUR_API_KEY\"\
+            );\n    // if you rather like to use the sandbox environment:\n    //\
+            \ ApiVideoClient client = new ApiVideoClient(\"YOUR_SANDBOX_API_KEY\"\
+            , ApiVideoClient.Environment.SANDBOX);\n\n    VideosApi apiInstance =\
+            \ client.videos();\n    \n    String videoId = \"vi4k0jvEUuaTdRAEjQ4Jfrgz\"\
+            ; // The video ID for the video you want to delete.\n    VideoUpdatePayload\
+            \ videoUpdatePayload = new VideoUpdatePayload(); // \n    videoUpdatePayload.setPlayerId(\"\
+            pl4k0jvEUuaTdRAEjQ4Jfrgz\"); // The unique ID for the player you want\
+            \ to associate with your video.\n    videoUpdatePayload.setTitle(\"null\"\
+            ); // The title you want to use for your video.\n    videoUpdatePayload.setDescription(\"\
+            A film about good books.\"); // A brief description of the video.\n  \
+            \  videoUpdatePayload.setPublic(true); // Whether the video is publicly\
+            \ available or not. False means it is set to private.\n    videoUpdatePayload.setPanoramic(false);\
+            \ // Whether the video is a 360 degree or immersive video.\n    videoUpdatePayload.setMp4Support(true);\
+            \ // Whether the player supports the mp4 format.\n    videoUpdatePayload.setTags(Arrays.asList(\"\
+            maths\", \"string theory\", \"video\")); // A list of terms or words you\
+            \ want to tag the video with. Make sure the list includes all the tags\
+            \ you want as whatever you send in this list will overwrite the existing\
+            \ list for the video.\n    videoUpdatePayload.setMetadata(Collections.<Metadata>emptyList());\
+            \ // A list (array) of dictionaries where each dictionary contains a key\
+            \ value pair that describes the video. As with tags, you must send the\
+            \ complete list of metadata you want as whatever you send here will overwrite\
+            \ the existing metadata for the video.\n\n\n    try {\n      Video result\
+            \ = apiInstance.update(videoId, videoUpdatePayload);\n      System.out.println(result);\n\
+            \    } catch (ApiException e) {\n      System.err.println(\"Exception\
+            \ when calling VideosApi#update\");\n      System.err.println(\"Status\
+            \ code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getMessage());\n\
+            \      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n\
+            \      e.printStackTrace();\n    }\n  }\n}\n"
+        - language: csharp
+          code: "// First add the \"ApiVideo\" NuGet package to your project\n// Documentation:\
+            \ https://github.com/apivideo/api.video-csharp-client/blob/main/docs/VideosApi.md#update\n\
+            \nusing System.Diagnostics;\nusing ApiVideo.Client;\n\nnamespace Example\n\
+            {\n    public class updateExample\n    {\n        public static void Main()\n\
+            \        {\n            var basePath = ApiVideoClient.Client.Environment.SANDBOX;\n\
+            \            var apiKey = \"YOUR_API_KEY\";\n\n            var apiInstance\
+            \ = new ApiVideoClient(apiKey,basePath);\n\n            var videoId =\
+            \ vi4k0jvEUuaTdRAEjQ4Jfrgz;  // string | The video ID for the video you\
+            \ want to delete.\n            var videoUpdatePayload = new VideoUpdatePayload();\
+            \ // VideoUpdatePayload | \n            var apiVideosInstance = apiInstance.Videos();\n\
+            \            try\n            {\n                // Update a video\n \
+            \               Video result = apiVideosInstance.update(videoId, videoUpdatePayload);\n\
+            \                Debug.WriteLine(result);\n            }\n           \
+            \ catch (ApiException  e)\n            {\n                Debug.Print(\"\
+            Exception when calling VideosApi.update: \" + e.Message );\n         \
+            \       Debug.Print(\"Status Code: \"+ e.ErrorCode);\n               \
+            \ Debug.Print(e.StackTrace);\n            }\n        }\n    }\n}\n"
+        - language: php
+          code: "<?php\n// First install the api client: \"composer require api-video/php-api-client\"\
+            \n// Documentation: https://github.com/apivideo/api.video-php-client/blob/main/docs/Api/VideosApi.md#update\n\
+            \nrequire __DIR__ . '/vendor/autoload.php';\n\n$client = new \\ApiVideo\\\
+            Client\\Client(\n    'https://ws.api.video',\n    'YOUR_API_KEY',\n  \
+            \  new \\Symfony\\Component\\HttpClient\\Psr18Client()\n);\n\n$videoId\
+            \ = 'vi4k0jvEUuaTdRAEjQ4Jfrgz'; // The video ID for the video you want\
+            \ to update.\n\n$client->videos()->update($videoId, (new \\ApiVideo\\\
+            Client\\Model\\VideoUpdatePayload())\n    ->setPlayerId(\"pl4k0jvEUuaTdRAEjQ4Jfrgz\"\
+            ) // The unique ID for the player you want to associate with your video.\n\
+            \    ->setTitle(\"The new title\") // The title you want to use for your\
+            \ video.\n    ->setDescription(\"A new description\") // A brief description\
+            \ of the video.\n    ->setPublic(false) // Whether the video is publicly\
+            \ available or not. False means it is set to private.\n    ->setPanoramic(false)\
+            \ // Whether the video is a 360 degree or immersive video.\n    ->setMp4Support(true)\
+            \ // Whether the player supports the mp4 format.\n    ->setTags([\"tag1\"\
+            , \"tag2\"]) // A list of terms or words you want to tag the video with.\
+            \ Make sure the list includes all the tags you want as whatever you send\
+            \ in this list will overwrite the existing list for the video.\n    ->setMetadata(array(\
+            \ // A list (array) of dictionaries where each dictionary contains a key\
+            \ value pair that describes the video. As with tags, you must send the\
+            \ complete list of metadata you want as whatever you send here will overwrite\
+            \ the existing metadata for the video.\n        new \\ApiVideo\\Client\\\
+            Model\\Metadata([\"key\" => \"aa\", 'value' => \"bb\"]),\n        new\
+            \ \\ApiVideo\\Client\\Model\\Metadata([\"key\" => \"aa2\", 'value' =>\
+            \ \"bb2\"])))); "
+        - language: swift
+          code: "// First install the api client: https://github.com/apivideo/api.video-swift-client#getting-started\n\
+            // Documentation: https://github.com/apivideo/api.video-swift-client/blob/main/docs/VideosAPI.md#update\
+            \  \n"
+  /discarded/videos:
+    get:
+      description: List all the video objects that are associated with the current
+        workspace.
+      operationId: LIST-discarded-videos
+      parameters:
+      - description: The title of a specific video you want to find. The search will
+          match exactly to what term you provide and return any videos that contain
+          the same term as part of their titles.
+        example: My Video.mp4
+        explode: true
+        in: query
+        name: title
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: A tag is a category you create and apply to videos. You can search
+          for videos with particular tags by listing one or more here. Only videos
+          that have all the tags you list will be returned.
+        example: '["captions", "dialogue"]'
+        explode: true
+        in: query
+        name: tags[]
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      - description: Videos can be tagged with metadata tags in key:value pairs. You
+          can search for videos with specific key value pairs using this parameter.
+        example: metadata[Author]=John Doe&metadata[Format]=Tutorial
+        explode: true
+        in: query
+        name: metadata
+        required: false
+        schema:
+          additionalProperties:
+            type: string
+          type: object
+        style: deepObject
+        x-is-deep-object: true
+      - description: Retrieve video objects by `description`.
+        example: New Zealand
+        explode: true
+        in: query
+        name: description
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Retrieve video objects that were recorded from a live stream
+          by `liveStreamId`.
+        example: li400mYKSgQ6xs7taUeSaEKr
+        explode: true
+        in: query
+        name: liveStreamId
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Use this parameter to sort videos by the their created time,
+          published time, updated time, or by title.
+        example: publishedAt
+        explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          enum:
+          - title
+          - createdAt
+          - publishedAt
+          - updatedAt
+          type: string
+        style: form
+      - description: Use this parameter to sort results. `asc` is ascending and sorts
+          from A to Z. `desc` is descending and sorts from Z to A.
+        example: asc
+        explode: true
+        in: query
+        name: sortOrder
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+        style: form
+      - description: 'Choose the number of search results to return per page. Minimum
+          value: 1'
+        example: 2
+        explode: true
+        in: query
+        name: currentPage
+        required: false
+        schema:
+          default: 1
+          type: integer
+        style: form
+      - description: Results per page. Allowed values 1-100, default is 25.
+        example: 30
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 25
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    data:
+                    - videoId: vi4blUQJFrYWbaG44NChkH27
+                      playerId: pl45KFKdlddgk654dspkze
+                      title: Maths video
+                      description: An amazing video explaining the string theory
+                      public: false
+                      panoramic: false
+                      mp4Support: true
+                      tags:
+                      - maths
+                      - string theory
+                      - video
+                      metadata:
+                      - key: Author
+                        value: John Doe
+                      - key: Format
+                        value: Tutorial
+                      publishedAt: 2019-12-16T08:25:51+00:00
+                      updatedAt: 2019-12-16T08:48:49+00:00
+                      discarded: true
+                      discardedAt: 2024-10-16T08:48:49+00:00
+                      deletesAt: 2024-11-16T08:48:49+00:00
+                      source:
+                        uri: /videos/c188ed58-3403-46a2-b91b-44603d10b2c9/source
+                      assets: null
+                    - videoId: vi4blUQJFrYWbaG44NChkH27
+                      title: Video Title
+                      description: A description for your video.
+                      public: false
+                      panoramic: false
+                      mp4Support: true
+                      tags:
+                      - books
+                      - short stories
+                      metadata:
+                      - key: Author
+                        value: John Doe
+                      - key: Science Fiction
+                        value: Cyberpunk
+                      - key: Technology
+                        value: Computers
+                      publishedAt: 2019-12-16T08:25:51+00:00
+                      updatedAt: 2019-12-16T08:48:49+00:00
+                      discarded: true
+                      discardedAt: 2024-10-16T08:48:49+00:00
+                      deletesAt: 2024-11-16T08:48:49+00:00
+                      source:
+                        uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
+                      assets: null
+                    - videoId: vi4blUQJFrYWbaG44NChkH27
+                      playerId: pl45KFKdlddgk654dspkze
+                      title: My Video Title
+                      description: A brief description of the video.
+                      public: false
+                      panoramic: false
+                      mp4Support: true
+                      tags:
+                      - General
+                      - Videos
+                      metadata:
+                      - key: Length
+                        value: Short
+                      publishedAt: 2019-12-16T08:25:51+00:00
+                      updatedAt: 2019-12-16T08:48:49+00:00
+                      discarded: true
+                      discardedAt: 2024-10-16T08:48:49+00:00
+                      deletesAt: 2024-11-16T08:48:49+00:00
+                      source:
+                        uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
+                      assets: null
+                    pagination:
+                      currentPage: 1
+                      pageSize: 25
+                      pagesTotal: 1
+                      itemsTotal: 11
+                      currentPageItems: 11
+                      links:
+                      - rel: self
+                        uri: https://ws.api.video/videos?currentPage=1
+                      - rel: first
+                        uri: https://ws.api.video/videos?currentPage=1
+                      - rel: last
+                        uri: https://ws.api.video/videos?currentPage=1
+              schema:
+                $ref: '#/components/schemas/videos-list-response'
+          description: Success
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    title: This parameter is out of the allowed range of values.
+                    name: page
+                    status: 400
+                    range:
+                      min: 1
+                    problems:
+                    - title: This parameter is out of the allowed range of values.
+                      name: page
+                      range:
+                        min: 1
+                    - title: This parameter is out of the allowed range of values.
+                      name: pageSize
+                      range:
+                        min: 10
+                        max: 100
+              schema:
+                $ref: '#/components/schemas/bad-request'
+          description: Bad Request
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "429":
+          content:
+            application/json:
+              examples:
+                Too many requests:
+                  value:
+                    type: https://docs.api.video/reference/too-many-requests
+                    title: Too many requests.
+                    status: 429
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+          description: Too Many Requests
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+      security:
+      - apiKey: []
+      summary: List all discarded video objects
+      tags:
+      - Videos
+      x-client-description:
+        default: This method returns a list of your discarded videos (with all their
+          details). With no parameters added, the API returns the first page of all
+          discarded videos. You can filter discarded videos using the parameters described
+          below.
+      x-client-action: listDiscarded
+      x-group-parameters: true
+      x-client-paginated: true
+      x-optional-object: true
+  /discarded/videos/{videoId}:
+    get:
+      description: Retrieve the video details of a discarded video object by video
+        id.
+      operationId: GET-discarded-video
+      parameters:
+      - description: The unique identifier for the video you want details about.
+        explode: false
+        in: path
+        name: videoId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    videoId: vi4blUQJFrYWbaG44NChkH27
+                    playerId: pl45KFKdlddgk654dspkze
+                    title: Maths video
+                    description: An amazing video explaining string theory
+                    public: false
+                    panoramic: false
+                    mp4Support: true
+                    tags:
+                    - maths
+                    - string theory
+                    - video
+                    metadata:
+                    - key: Author
+                      value: John Doe
+                    - key: Format
+                      value: Tutorial
+                    publishedAt: 2019-12-16T08:25:51+00:00
+                    updatedAt: 2019-12-16T08:48:49+00:00
+                    discarded: true
+                    discardedAt: 2024-10-16T08:48:49+00:00
+                    deletesAt: 2024-11-16T08:48:49+00:00
+                    source:
+                      uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
+                    assets: null
+              schema:
+                $ref: '#/components/schemas/video'
+          description: Success
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "404":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    type: https://docs.api.video/reference/resource-not-found
+                    title: The requested resource was not found.
+                    name: videoId
+                    status: 404
+              schema:
+                $ref: '#/components/schemas/not-found'
+          description: Not Found
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "429":
+          content:
+            application/json:
+              examples:
+                Too many requests:
+                  value:
+                    type: https://docs.api.video/reference/too-many-requests
+                    title: Too many requests.
+                    status: 429
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+          description: Too Many Requests
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+      security:
+      - apiKey: []
+      summary: Retrieve a discarded video object
+      tags:
+      - Videos
+      x-client-description:
+        default: This call provides the same information provided on video creation.
+          For private videos, it will generate a unique token url. Use this to retrieve
+          any details you need about a video, or set up a private viewing URL.
+      x-client-action: getDiscarded
+    patch:
+      description: Restore a discarded video
+      operationId: PATCH-discarded-video
+      parameters:
+      - description: The video ID for the video you want to restore.
+        example: vi4k0jvEUuaTdRAEjQ4Jfrgz
+        explode: false
+        in: path
+        name: videoId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/discarded-video-update-payload'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    videoId: vi4blUQJFrYWbaG44NChkH27
+                    playerId: pl45KFKdlddgk654dspkze
+                    title: Maths video
+                    description: An amazing video explaining the string theory
+                    public: false
+                    panoramic: false
+                    mp4Support: true
+                    tags:
+                    - maths
+                    - string theory
+                    - video
+                    metadata:
+                    - key: Author
+                      value: John Doe
+                    - key: Format
+                      value: Tutorial
+                    publishedAt: 2019-12-16T08:25:51+00:00
+                    updatedAt: 2019-12-16T08:48:49+00:00
+                    discarded: true
+                    discardedAt: 2024-10-16T08:48:49+00:00
+                    deletesAt: 2024-11-16T08:48:49+00:00
+                    source:
+                      uri: /videos/vi4blUQJFrYWbaG44NChkH27/source
+                    assets: null
+              schema:
+                $ref: '#/components/schemas/video'
+          description: Success
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "400":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    detail: Value must be false.
+                    name: discarded
+                    status: 400
+              schema:
+                $ref: '#/components/schemas/bad-request'
+          description: Bad Request
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "404":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    type: https://docs.api.video/reference/resource-not-found
+                    title: The requested resource was not found.
+                    name: videoId
+                    status: 404
+              schema:
+                $ref: '#/components/schemas/not-found'
+          description: Not Found
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        "429":
+          content:
+            application/json:
+              examples:
+                Too many requests:
+                  value:
+                    type: https://docs.api.video/reference/too-many-requests
+                    title: Too many requests.
+                    status: 429
+              schema:
+                $ref: '#/components/schemas/too-many-requests'
+          description: Too Many Requests
+          headers:
+            X-RateLimit-Limit:
+              description: The request limit per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: The number of available requests left for the current time
+                window.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Retry-After:
+              description: The number of seconds left until the current rate limit
+                window resets.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+      security:
+      - apiKey: []
+      summary: Update a discarded video object
+      tags:
+      - Videos
+      x-client-description:
+        default: |
+          Use this endpoint to restore a discarded video when you have the Video Restore feature enabled.
+      x-client-action: updateDiscarded
       x-doctave:
         code-samples:
         - language: go
@@ -3623,7 +4453,7 @@ paths:
       parameters:
       - description: 'Allowed: createdAt, ttl. You can use these to sort by when a
           token was created, or how much longer the token will be active (ttl - time
-          to live). Date and time is presented in ISO-8601 format.'
+          to live). Date and time is presented in ATOM UTC format.'
         example: ttl
         explode: true
         in: query
@@ -3679,11 +4509,11 @@ paths:
                     data:
                     - token: to37YfoPDRR2pcDKa6LsUE0M
                       ttl: 3600
-                      createdAt: 2020-12-02T10:26:46.000Z
-                      expiresAt: 2020-12-02T11:26:46.000Z
+                      createdAt: 2020-12-02T10:26:46+00:00
+                      expiresAt: 2020-12-02T11:26:46+00:00
                     - token: to1W3ZS9PdUBZWzzTEZr1B79
                       ttl: 0
-                      createdAt: 2020-12-02T10:26:28.000Z
+                      createdAt: 2020-12-02T10:26:28+00:00
                     pagination:
                       currentPage: 1
                       currentPageItems: 2
@@ -3913,8 +4743,8 @@ paths:
                   value:
                     token: to1tcmSFHeYY5KzyhOqVKMKb
                     ttl: 3600
-                    createdAt: 2020-12-02T10:13:19.000Z
-                    expiresAt: 2020-12-02T11:13:19.000Z
+                    createdAt: 2020-12-02T10:13:19+00:00
+                    expiresAt: 2020-12-02T11:13:19+00:00
               schema:
                 $ref: '#/components/schemas/upload-token'
           description: Success
@@ -4337,7 +5167,7 @@ paths:
                   value:
                     token: to1tcmSFHeYY5KzyhOqVKMKb
                     ttl: 0
-                    createdAt: 2020-12-02T10:13:19.000Z
+                    createdAt: 2020-12-02T10:13:19+00:00
               schema:
                 $ref: '#/components/schemas/upload-token'
           description: Success
@@ -4599,7 +5429,10 @@ paths:
                       value: John Doe
                     - key: Format
                       value: Tutorial
-                    publishedAt: 4665-07-14T23:36:18.598Z
+                    publishedAt: 2024-07-14T23:36:07+00:00
+                    discarded: false
+                    discardedAt: null
+                    deletesAt: null
                     source:
                       uri: /videos/vi4k0jvEUuaTdRAEjQ4Jfrgz/source
                     assets:
@@ -4793,7 +5626,7 @@ paths:
           `createdAt` - the time a live stream was created.
           `updatedAt` - the time a live stream was last updated.
 
-          When using `createdAt` or `updatedAt`, the API sorts the results based on the ISO-8601 time format.
+          When using `createdAt` or `updatedAt`, the API sorts the results based on the ATOM UTC time format.
         example: createdAt
         explode: true
         in: query
@@ -4850,8 +5683,8 @@ paths:
                   value:
                     data:
                     - liveStreamId: li400mYKSgQ6xs7taUeSaEKr
-                      createdAt: 2020-01-31T10:17:47.000Z
-                      updatedAt: 2020-03-09T13:19:43.000Z
+                      createdAt: 2020-01-31T10:17:47+00:00
+                      updatedAt: 2020-03-09T13:19:43+00:00
                       streamKey: 30087931-229e-42cf-b5f9-e91bcc1f7332
                       restreams:
                       - name: YouTube
@@ -4871,8 +5704,8 @@ paths:
                         hls: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr.m3u8
                         thumbnail: https://live.api.video/li400mYKSgQ6xs7taUeSaEKr/thumbnail.jpg
                     - liveStreamId: li4pqNqGUkhKfWcBGpZVLRY5
-                      createdAt: 2020-07-29T10:45:35.000Z
-                      updatedAt: 2020-07-29T10:45:35.000Z
+                      createdAt: 2020-07-29T10:45:35+00:00
+                      updatedAt: 2020-07-29T10:45:35+00:00
                       streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
                       restreams:
                       - name: YouTube
@@ -9306,7 +10139,7 @@ paths:
       operationId: GET_players
       parameters:
       - description: createdAt is the time the player was created. updatedAt is the
-          time the player was last updated. The time is presented in ISO-8601 format.
+          time the player was last updated. The time is presented in ATOM UTC format.
         example: createdAt
         explode: true
         in: query
@@ -9535,7 +10368,7 @@ paths:
             \    req := apivideosdk.PlayerThemesApiListRequest{}\n    \n    req.SortBy(\"\
             createdAt\") // string | createdAt is the time the player was created.\
             \ updatedAt is the time the player was last updated. The time is presented\
-            \ in ISO-8601 format.\n    req.SortOrder(\"asc\") // string | Allowed:\
+            \ in ATOM UTC format.\n    req.SortOrder(\"asc\") // string | Allowed:\
             \ asc, desc. Ascending for date and time means that earlier values precede\
             \ later ones. Descending means that later values preced earlier ones.\n\
             \    req.CurrentPage(int32(2)) // int32 | Choose the number of search\
@@ -9552,7 +10385,7 @@ paths:
             \nconst client = new ApiVideoClient({ apiKey: \"YOUR_API_KEY\" });\n\n\
             const sortBy = 'createdAt'; // createdAt is the time the player was created.\
             \ updatedAt is the time the player was last updated. The time is presented\
-            \ in ISO-8601 format.\nconst sortOrder = 'asc'; // Allowed: asc, desc.\
+            \ in ATOM UTC format.\nconst sortOrder = 'asc'; // Allowed: asc, desc.\
             \ Ascending for date and time means that earlier values precede later\
             \ ones. Descending means that later values preced earlier ones.\nconst\
             \ currentPage = 2; // Choose the number of search results to return per\
@@ -9575,7 +10408,7 @@ paths:
             with apivideo.AuthenticatedApiClient(__API_KEY__) as api_client:
                 # Create an instance of the API class
                 api_instance = player_themes_api.PlayerThemesApi(api_client)
-                sort_by = "createdAt" # str | createdAt is the time the player was created. updatedAt is the time the player was last updated. The time is presented in ISO-8601 format. (optional)
+                sort_by = "createdAt" # str | createdAt is the time the player was created. updatedAt is the time the player was last updated. The time is presented in ATOM UTC format. (optional)
                 sort_order = "asc" # str | Allowed: asc, desc. Ascending for date and time means that earlier values precede later ones. Descending means that later values preced earlier ones. (optional)
                 current_page = 2 # int | Choose the number of search results to return per page. Minimum value: 1 (optional) if omitted the server will use the default value of 1
                 page_size = 30 # int | Results per page. Allowed values 1-100, default is 25. (optional) if omitted the server will use the default value of 25
@@ -9600,7 +10433,7 @@ paths:
             , ApiVideoClient.Environment.SANDBOX);\n\n    PlayerThemesApi apiInstance\
             \ = client.playerThemes();\n    \n    String sortBy = \"createdAt\"; //\
             \ createdAt is the time the player was created. updatedAt is the time\
-            \ the player was last updated. The time is presented in ISO-8601 format.\n\
+            \ the player was last updated. The time is presented in ATOM UTC format.\n\
             \    String sortOrder = \"asc\"; // Allowed: asc, desc. Ascending for\
             \ date and time means that earlier values precede later ones. Descending\
             \ means that later values preced earlier ones.\n    Integer currentPage\
@@ -9624,15 +10457,15 @@ paths:
             \            var apiKey = \"YOUR_API_KEY\";\n\n            var apiInstance\
             \ = new ApiVideoClient(apiKey,basePath);\n\n            var sortBy = createdAt;\
             \  // string | createdAt is the time the player was created. updatedAt\
-            \ is the time the player was last updated. The time is presented in ISO-8601\
-            \ format. (optional) \n            var sortOrder = asc;  // string | Allowed:\
-            \ asc, desc. Ascending for date and time means that earlier values precede\
-            \ later ones. Descending means that later values preced earlier ones.\
-            \ (optional) \n            var currentPage = 2;  // int? | Choose the\
-            \ number of search results to return per page. Minimum value: 1 (optional)\
-            \  (default to 1)\n            var pageSize = 30;  // int? | Results per\
-            \ page. Allowed values 1-100, default is 25. (optional)  (default to 25)\n\
-            \            var apiPlayerThemesInstance = apiInstance.PlayerThemes();\n\
+            \ is the time the player was last updated. The time is presented in ATOM\
+            \ UTC format. (optional) \n            var sortOrder = asc;  // string\
+            \ | Allowed: asc, desc. Ascending for date and time means that earlier\
+            \ values precede later ones. Descending means that later values preced\
+            \ earlier ones. (optional) \n            var currentPage = 2;  // int?\
+            \ | Choose the number of search results to return per page. Minimum value:\
+            \ 1 (optional)  (default to 1)\n            var pageSize = 30;  // int?\
+            \ | Results per page. Allowed values 1-100, default is 25. (optional)\
+            \  (default to 25)\n            var apiPlayerThemesInstance = apiInstance.PlayerThemes();\n\
             \            try\n            {\n                // List all players\n\
             \                PlayerThemesListResponse result = apiPlayerThemesInstance.list(sortBy,\
             \ sortOrder, currentPage, pageSize);\n                Debug.WriteLine(result);\n\
@@ -9647,7 +10480,7 @@ paths:
             \nrequire __DIR__ . '/vendor/autoload.php';\n\n$playerThemes = $client->playerThemes()->list(array(\n\
             \    'sortBy' => 'createdAt', // createdAt is the time the player was\
             \ created. updatedAt is the time the player was last updated. The time\
-            \ is presented in ISO-8601 format.\n    'sortOrder' => 'asc', // ->setAllowed(asc,\
+            \ is presented in ATOM UTC format.\n    'sortOrder' => 'asc', // ->setAllowed(asc,\
             \ desc. Ascending for date and time means that earlier values precede\
             \ later ones. Descending means that later values preced earlier ones.)\n\
             \    'currentPage' => 2, // Choose the number of search results to return\
@@ -12343,11 +13176,11 @@ paths:
                         from: 2024-05-28T11:08:39+00:00
                         to: 2024-05-29T11:08:39+00:00
                     data:
-                    - emittedAt: 2024-05-29T07:00:00+00:00
+                    - emittedAt: 2024-05-29T07+00:00:00:00
                       metricValue: 2
-                    - emittedAt: 2024-05-29T08:00:00+00:00
+                    - emittedAt: 2024-05-29T08+00:00:00:00
                       metricValue: 1
-                    - emittedAt: 2024-05-29T09:00:00+00:00
+                    - emittedAt: 2024-05-29T09+00:00:00:00
                       metricValue: 1
                     pagination:
                       currentPage: 1
@@ -12613,12 +13446,12 @@ paths:
                   value:
                     data:
                     - webhookId: webhook_XXXXXXXXXXXXXXX
-                      createdAt: 2021-01-08T14:12:18.000Z
+                      createdAt: 2021-01-08T14:12:18+00:00
                       events:
                       - video.encoding.quality.completed
                       url: http://clientnotificationserver.com/notif?myquery=query
                     - webhookId: webhook_XXXXXXXXXYYYYYY
-                      createdAt: 2021-01-12T12:12:12.000Z
+                      createdAt: 2021-01-12T12:12:12+00:00
                       events:
                       - video.encoding.quality.completed
                       url: http://clientnotificationserver.com/notif?myquery=query2
@@ -12846,7 +13679,7 @@ paths:
                 response:
                   value:
                     webhookId: webhook_XXXXXXXXXXXXXXX
-                    createdAt: 2021-01-08T14:12:18.000Z
+                    createdAt: 2021-01-08T14:12:18+00:00
                     events:
                     - video.encoding.quality.completed
                     url: http://clientnotificationserver.com/notif?myquery=query
@@ -13314,7 +14147,7 @@ paths:
                 response:
                   value:
                     webhookId: webhook_XXXXXXXXXXXXXXX
-                    createdAt: 2021-01-08T14:12:18.000Z
+                    createdAt: 2021-01-08T14:12:18+00:00
                     events:
                     - video.encoding.quality.completed
                     url: http://clientnotificationserver.com/notif?myquery=query
@@ -13495,8 +14328,8 @@ components:
     live-stream-response-example:
       value:
         liveStreamId: li4pqNqGUkhKfWcBGpZVLRY5
-        createdAt: 2020-07-29T10:45:35.000Z
-        updatedAt: 2020-07-29T10:45:35.000Z
+        createdAt: 2020-07-29T10:45:35+00:00
+        updatedAt: 2020-07-29T10:45:35+00:00
         streamKey: cc1b4df0-d1c5-4064-a8f9-9f0368385135
         restreams:
         - name: YouTube
@@ -13828,8 +14661,11 @@ components:
           value: John Doe
         - key: Format
           value: Tutorial
-        createdAt: 4251-03-03T12:52:03.085Z
-        publishedAt: 4665-07-14T23:36:18.598Z
+        createdAt: 2024-03-03T12:52:03+00:00
+        publishedAt: 2024-07-14T23:36:07+00:00
+        discarded: false
+        discardedAt: null
+        deletesAt: null
         actions:
         - video_delete
         - video_download
@@ -13840,7 +14676,8 @@ components:
           example: vi4k0jvEUuaTdRAEjQ4Prklg
           type: string
         createdAt:
-          description: When a video was created, presented in ISO-8601 format.
+          description: When a video was created, presented in ATOM UTC format.
+          example: 2024-05-28T11:15:07Z
           format: date-time
           type: string
         title:
@@ -13855,16 +14692,37 @@ components:
           type: string
         publishedAt:
           description: The date and time the API created the video. Date and time
-            are provided using ISO-8601 UTC format.
-          example: 2019-12-16T08:25:51Z
+            are provided using ATOM UTC format.
+          example: 2024-05-28T11:15:07Z
           format: date-time
           type: string
         updatedAt:
           description: The date and time the video was updated. Date and time are
-            provided using ISO-8601 UTC format.
-          example: 2019-12-16T08:15:51Z
+            provided using ATOM UTC format.
+          example: 2024-05-28T11:15:07Z
           format: date-time
           type: string
+        discardedAt:
+          description: The date and time the video was discarded. The API populates
+            this field only if you have the Video Restore feature enabled and discard
+            a video. Date and time are provided using ATOM UTC format.
+          example: 2024-05-28T11:15:07Z
+          format: date-time
+          nullable: true
+          type: string
+        deletesAt:
+          description: The date and time the video will be permanently deleted. The
+            API populates this field only if you have the Video Restore feature enabled
+            and discard a video. Discarded videos are pemanently deleted after 90
+            days. Date and time are provided using ATOM UTC format.
+          example: 2024-05-28T11:15:07Z
+          format: date-time
+          nullable: true
+          type: string
+        discarded:
+          description: Returns `true` for videos you discarded when you have the Video
+            Restore feature enabled. Returns `false` for every other video.
+          type: boolean
         tags:
           description: "One array of tags (each tag is a string) in order to categorize\
             \ a video. Tags may include spaces. \n"
@@ -13874,7 +14732,7 @@ components:
           type: array
         metadata:
           description: |
-            Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata/) allows you to define a key that allows any value pair.
+            Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.
           example: '[{"key":"Author", "value":"John Doe"}, {"key":"Format", "value":"Tutorial"}]'
           items:
             $ref: '#/components/schemas/metadata'
@@ -13910,14 +14768,15 @@ components:
     watermark:
       example:
         watermarkId: watermark_1BWr2L5MTQwxGkuxKjzh6i
-        createdAt: 2000-01-23T04:56:07.000+00:00
+        createdAt: 2019-06-24T11:45:01Z
       properties:
         watermarkId:
           description: The unique identifier of the watermark.
           example: watermark_1BWr2L5MTQwxGkuxKjzh6i
           type: string
         createdAt:
-          description: When the watermark was created, presented in ISO-8601 format.
+          description: When the watermark was created, presented in ATOM UTC format.
+          example: 2019-06-24T11:45:01Z
           format: date-time
           type: string
       title: Watermark
@@ -13945,9 +14804,9 @@ components:
               uri: /videos/search?currentPage=6&pageSize=20
         data:
         - watermarkId: watermark_1BWr2L5MTQwxGkuxKjzh6i
-          createdAt: 2000-01-23T04:56:07.000+00:00
+          createdAt: 2019-06-24T11:45:01Z
         - watermarkId: watermark_1BWr2L5MTQwxGkuxKjzh6i
-          createdAt: 2000-01-23T04:56:07.000+00:00
+          createdAt: 2019-06-24T11:45:01Z
       properties:
         data:
           items:
@@ -14054,12 +14913,12 @@ components:
           example: pl45KFKdlddgk654dspkze
           type: string
         createdAt:
-          description: When the player was created, presented in ISO-8601 format.
+          description: When the player was created, presented in ATOM UTC format.
           example: 2020-01-31T10:17:47Z
           format: date-time
           type: string
         updatedAt:
-          description: When the player was last updated, presented in ISO-8601 format.
+          description: When the player was last updated, presented in ATOM UTC format.
           example: 2020-01-31T10:18:47Z
           format: date-time
           type: string
@@ -14314,12 +15173,12 @@ components:
             $ref: '#/components/schemas/restreams-response-object'
           type: array
         createdAt:
-          description: When the player was created, presented in ISO-8601 format.
+          description: When the player was created, presented in ATOM UTC format.
           example: 2020-01-31T10:17:47Z
           format: date-time
           type: string
         updatedAt:
-          description: When the player was last updated, presented in ISO-8601 format.
+          description: When the player was last updated, presented in ATOM UTC format.
           example: 2020-01-31T10:18:47Z
           format: date-time
           type: string
@@ -14336,8 +15195,8 @@ components:
           example: play
           type: string
         emittedAt:
-          description: When an event occurred, presented in ISO-8601 format.
-          example: 2019-06-24T11:45:01.109Z
+          description: When an event occurred, presented in ATOM UTC format.
+          example: 2019-06-24T11:45:01Z
           format: date-time
           type: string
         at:
@@ -14350,7 +15209,7 @@ components:
       type: object
     webhook:
       example:
-        createdAt: 2019-06-24T11:45:01.109Z
+        createdAt: 2019-06-24T11:45:01Z
         webhookId: webhook_XXXXXXXXXXXXXXX
         events: '["video.encoding.quality.completed"]'
         url: http://clientnotificationserver.com/notif?myquery=query
@@ -14360,8 +15219,8 @@ components:
           example: webhook_XXXXXXXXXXXXXXX
           type: string
         createdAt:
-          description: When an webhook was created, presented in ISO-8601 format.
-          example: 2019-06-24T11:45:01.109Z
+          description: When an webhook was created, presented in ATOM UTC format.
+          example: 2019-06-24T11:45:01Z
           format: date-time
           type: string
         events:
@@ -14509,12 +15368,12 @@ components:
           minimum: 0
           type: integer
         createdAt:
-          description: When the token was created, displayed in ISO-8601 format.
+          description: When the token was created, displayed in ATOM UTC format.
           example: 2019-12-16T08:25:51Z
           format: date-time
           type: string
         expiresAt:
-          description: When the token expires, displayed in ISO-8601 format.
+          description: When the token expires, displayed in ATOM UTC format.
           example: 2019-12-16T09:25:51Z
           format: date-time
           nullable: true
@@ -14579,8 +15438,11 @@ components:
             value: John Doe
           - key: Format
             value: Tutorial
-          createdAt: 4251-03-03T12:52:03.085Z
-          publishedAt: 4665-07-14T23:36:18.598Z
+          createdAt: 2024-03-03T12:52:03+00:00
+          publishedAt: 2024-07-14T23:36:07+00:00
+          discarded: false
+          discardedAt: null
+          deletesAt: null
           actions:
           - video_delete
           - video_download
@@ -14597,8 +15459,11 @@ components:
             value: John Doe
           - key: Format
             value: Tutorial
-          createdAt: 4251-03-03T12:52:03.085Z
-          publishedAt: 4665-07-14T23:36:18.598Z
+          createdAt: 2024-03-03T12:52:03+00:00
+          publishedAt: 2024-07-14T23:36:07+00:00
+          discarded: false
+          discardedAt: null
+          deletesAt: null
           actions:
           - video_delete
           - video_download
@@ -14697,8 +15562,7 @@ components:
           type: array
         metadata:
           description: A list of key value pairs that you use to provide metadata
-            for your video. These pairs can be made dynamic, allowing you to segment
-            your audience. Read more on [dynamic metadata](https://api.video/blog/endpoints/dynamic-metadata/).
+            for your video.
           example: '[{"key": "Author", "value": "John Doe"}]'
           items:
             $ref: '#/components/schemas/metadata'
@@ -14807,12 +15671,22 @@ components:
           description: A list (array) of dictionaries where each dictionary contains
             a key value pair that describes the video. As with tags, you must send
             the complete list of metadata you want as whatever you send here will
-            overwrite the existing metadata for the video. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata/)
-            allows you to define a key that allows any value pair.
+            overwrite the existing metadata for the video.
           items:
             $ref: '#/components/schemas/metadata'
           type: array
       title: VideoUpdatePayload
+      type: object
+    discarded-video-update-payload:
+      example:
+        discarded: false
+      properties:
+        discarded:
+          description: Use this parameter to restore a discarded video when you have
+            the Video Restore feature enabled. This parameter only accepts `false`
+            as a value!
+          type: boolean
+      title: DiscardedVideoUpdatePayload
       type: object
     token-list-response:
       example:
@@ -15490,11 +16364,11 @@ components:
               rel: last
               uri: /videos/search?currentPage=6&pageSize=20
         data:
-        - createdAt: 2019-06-24T11:45:01.109Z
+        - createdAt: 2019-06-24T11:45:01Z
           webhookId: webhook_XXXXXXXXXXXXXXX
           events: '["video.encoding.quality.completed"]'
           url: http://clientnotificationserver.com/notif?myquery=query
-        - createdAt: 2019-06-24T11:45:01.109Z
+        - createdAt: 2019-06-24T11:45:01Z
           webhookId: webhook_XXXXXXXXXXXXXXX
           events: '["video.encoding.quality.completed"]'
           url: http://clientnotificationserver.com/notif?myquery=query

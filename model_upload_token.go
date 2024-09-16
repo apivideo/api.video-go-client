@@ -20,9 +20,9 @@ type UploadToken struct {
 	Token *string `json:"token,omitempty"`
 	// Time-to-live - how long the upload token is valid for.
 	Ttl *int32 `json:"ttl,omitempty"`
-	// When the token was created, displayed in ISO-8601 format.
+	// When the token was created, displayed in ATOM UTC format.
 	CreatedAt *string `json:"createdAt,omitempty"`
-	// When the token expires, displayed in ISO-8601 format.
+	// When the token expires, displayed in ATOM UTC format.
 	ExpiresAt *NullableString `json:"expiresAt,omitempty"`
 }
 

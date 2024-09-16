@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **WatermarkId** | Pointer to **string** | The unique identifier of the watermark. | [optional] 
-**CreatedAt** | Pointer to **string** | When the watermark was created, presented in ISO-8601 format. | [optional] 
+**CreatedAt** | Pointer to **string** | When the watermark was created, presented in ATOM UTC format. | [optional] 
 
 ## Methods
 

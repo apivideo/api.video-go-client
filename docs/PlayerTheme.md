@@ -21,8 +21,8 @@ Name | Type | Description | Notes
 **HideTitle** | Pointer to **bool** | enable/disable title. Default: false | [optional] 
 **ForceLoop** | Pointer to **bool** | enable/disable looping. Default: false | [optional] 
 **PlayerId** | **string** |  | 
-**CreatedAt** | Pointer to **string** | When the player was created, presented in ISO-8601 format. | [optional] 
-**UpdatedAt** | Pointer to **string** | When the player was last updated, presented in ISO-8601 format. | [optional] 
+**CreatedAt** | Pointer to **string** | When the player was created, presented in ATOM UTC format. | [optional] 
+**UpdatedAt** | Pointer to **string** | When the player was last updated, presented in ATOM UTC format. | [optional] 
 **Assets** | Pointer to [**PlayerThemeAssets**](PlayerThemeAssets.md) |  | [optional] 
 
 ## Methods

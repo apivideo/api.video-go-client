@@ -32,7 +32,7 @@ type VideoCreationPayload struct {
 	PlayerId *string `json:"playerId,omitempty"`
 	// A list of tags you want to use to describe your video.
 	Tags *[]string `json:"tags,omitempty"`
-	// A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. Read more on [dynamic metadata](https://api.video/blog/endpoints/dynamic-metadata/).
+	// A list of key value pairs that you use to provide metadata for your video.
 	Metadata  *[]Metadata     `json:"metadata,omitempty"`
 	Clip      *VideoClip      `json:"clip,omitempty"`
 	Watermark *VideoWatermark `json:"watermark,omitempty"`

@@ -5,13 +5,16 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **VideoId** | **string** | The unique identifier of the video object. | 
-**CreatedAt** | Pointer to **string** | When a video was created, presented in ISO-8601 format. | [optional] 
+**CreatedAt** | Pointer to **string** | When a video was created, presented in ATOM UTC format. | [optional] 
 **Title** | Pointer to **string** | The title of the video content.  | [optional] 
 **Description** | Pointer to **string** | A description for the video content.  | [optional] 
-**PublishedAt** | Pointer to **string** | The date and time the API created the video. Date and time are provided using ISO-8601 UTC format. | [optional] 
-**UpdatedAt** | Pointer to **string** | The date and time the video was updated. Date and time are provided using ISO-8601 UTC format. | [optional] 
+**PublishedAt** | Pointer to **string** | The date and time the API created the video. Date and time are provided using ATOM UTC format. | [optional] 
+**UpdatedAt** | Pointer to **string** | The date and time the video was updated. Date and time are provided using ATOM UTC format. | [optional] 
+**DiscardedAt** | Pointer to **NullableString** | The date and time the video was discarded. The API populates this field only if you have the Video Restore feature enabled and discard a video. Date and time are provided using ATOM UTC format. | [optional] 
+**DeletesAt** | Pointer to **NullableString** | The date and time the video will be permanently deleted. The API populates this field only if you have the Video Restore feature enabled and discard a video. Discarded videos are pemanently deleted after 90 days. Date and time are provided using ATOM UTC format. | [optional] 
+**Discarded** | Pointer to **bool** | Returns &#x60;true&#x60; for videos you discarded when you have the Video Restore feature enabled. Returns &#x60;false&#x60; for every other video. | [optional] 
 **Tags** | Pointer to **[]string** | One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.   | [optional] 
-**Metadata** | Pointer to [**[]Metadata**](Metadata.md) | Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata/) allows you to define a key that allows any value pair.  | [optional] 
+**Metadata** | Pointer to [**[]Metadata**](Metadata.md) | Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.  | [optional] 
 **Source** | Pointer to [**VideoSource**](VideoSource.md) |  | [optional] 
 **Assets** | Pointer to [**VideoAssets**](VideoAssets.md) |  | [optional] 
 **PlayerId** | Pointer to **string** | The id of the player that will be applied on the video.  | [optional] 
@@ -182,6 +185,101 @@ SetUpdatedAt sets UpdatedAt field to given value.
 `func (o *Video) HasUpdatedAt() bool`
 
 HasUpdatedAt returns a boolean if a field has been set.
+
+### GetDiscardedAt
+
+`func (o *Video) GetDiscardedAt() string`
+
+GetDiscardedAt returns the DiscardedAt field if non-nil, zero value otherwise.
+
+### GetDiscardedAtOk
+
+`func (o *Video) GetDiscardedAtOk() (*string, bool)`
+
+GetDiscardedAtOk returns a tuple with the DiscardedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDiscardedAt
+
+`func (o *Video) SetDiscardedAt(v string)`
+
+SetDiscardedAt sets DiscardedAt field to given value.
+
+### HasDiscardedAt
+
+`func (o *Video) HasDiscardedAt() bool`
+
+HasDiscardedAt returns a boolean if a field has been set.
+
+### SetDiscardedAtNil
+
+`func (o *Video) SetDiscardedAtNil(b bool)`
+
+ SetDiscardedAtNil sets the value for DiscardedAt to be an explicit nil
+
+### UnsetDiscardedAt
+`func (o *Video) UnsetDiscardedAt()`
+
+UnsetDiscardedAt ensures that no value is present for DiscardedAt, not even an explicit nil
+### GetDeletesAt
+
+`func (o *Video) GetDeletesAt() string`
+
+GetDeletesAt returns the DeletesAt field if non-nil, zero value otherwise.
+
+### GetDeletesAtOk
+
+`func (o *Video) GetDeletesAtOk() (*string, bool)`
+
+GetDeletesAtOk returns a tuple with the DeletesAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeletesAt
+
+`func (o *Video) SetDeletesAt(v string)`
+
+SetDeletesAt sets DeletesAt field to given value.
+
+### HasDeletesAt
+
+`func (o *Video) HasDeletesAt() bool`
+
+HasDeletesAt returns a boolean if a field has been set.
+
+### SetDeletesAtNil
+
+`func (o *Video) SetDeletesAtNil(b bool)`
+
+ SetDeletesAtNil sets the value for DeletesAt to be an explicit nil
+
+### UnsetDeletesAt
+`func (o *Video) UnsetDeletesAt()`
+
+UnsetDeletesAt ensures that no value is present for DeletesAt, not even an explicit nil
+### GetDiscarded
+
+`func (o *Video) GetDiscarded() bool`
+
+GetDiscarded returns the Discarded field if non-nil, zero value otherwise.
+
+### GetDiscardedOk
+
+`func (o *Video) GetDiscardedOk() (*bool, bool)`
+
+GetDiscardedOk returns a tuple with the Discarded field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDiscarded
+
+`func (o *Video) SetDiscarded(v bool)`
+
+SetDiscarded sets Discarded field to given value.
+
+### HasDiscarded
+
+`func (o *Video) HasDiscarded() bool`
+
+HasDiscarded returns a boolean if a field has been set.
 
 ### GetTags
 

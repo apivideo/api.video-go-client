@@ -271,7 +271,10 @@ Method | HTTP request | Description
 [**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#List) | **Get** `/videos` | List all video objects
 [**UploadThumbnail**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#UploadThumbnail) | **Post** `/videos/{videoId}/thumbnail` | Upload a thumbnail
 [**PickThumbnail**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#PickThumbnail) | **Patch** `/videos/{videoId}/thumbnail` | Set a thumbnail
+[**GetDiscarded**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#GetDiscarded) | **Get** `/discarded/videos/{videoId}` | Retrieve a discarded video object
 [**GetStatus**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#GetStatus) | **Get** `/videos/{videoId}/status` | Retrieve video status and details
+[**ListDiscarded**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#ListDiscarded) | **Get** `/discarded/videos` | List all discarded video objects
+[**UpdateDiscarded**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Videos.md#UpdateDiscarded) | **Patch** `/discarded/videos/{videoId}` | Update a discarded video object
 
 
 #### Watermarks
@@ -337,6 +340,7 @@ Method | HTTP request | Description
  - [CaptionsUpdatePayload](https://github.com/apivideo/api.video-go-client/blob/main/docs/CaptionsUpdatePayload.md)
  - [Chapter](https://github.com/apivideo/api.video-go-client/blob/main/docs/Chapter.md)
  - [ChaptersListResponse](https://github.com/apivideo/api.video-go-client/blob/main/docs/ChaptersListResponse.md)
+ - [DiscardedVideoUpdatePayload](https://github.com/apivideo/api.video-go-client/blob/main/docs/DiscardedVideoUpdatePayload.md)
  - [FilterBy](https://github.com/apivideo/api.video-go-client/blob/main/docs/FilterBy.md)
  - [FilterBy1](https://github.com/apivideo/api.video-go-client/blob/main/docs/FilterBy1.md)
  - [FilterBy2](https://github.com/apivideo/api.video-go-client/blob/main/docs/FilterBy2.md)

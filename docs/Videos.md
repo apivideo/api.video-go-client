@@ -13,7 +13,10 @@ Method | HTTP request | Description
 [**List**](Videos.md#List) | **Get** /videos | List all video objects
 [**UploadThumbnail**](Videos.md#UploadThumbnail) | **Post** /videos/{videoId}/thumbnail | Upload a thumbnail
 [**PickThumbnail**](Videos.md#PickThumbnail) | **Patch** /videos/{videoId}/thumbnail | Set a thumbnail
+[**GetDiscarded**](Videos.md#GetDiscarded) | **Get** /discarded/videos/{videoId} | Retrieve a discarded video object
 [**GetStatus**](Videos.md#GetStatus) | **Get** /videos/{videoId}/status | Retrieve video status and details
+[**ListDiscarded**](Videos.md#ListDiscarded) | **Get** /discarded/videos | List all discarded video objects
+[**UpdateDiscarded**](Videos.md#UpdateDiscarded) | **Patch** /discarded/videos/{videoId} | Update a discarded video object
 
 
 
@@ -484,7 +487,7 @@ func main() {
     
     req.Title("My Video.mp4") // string | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles.
     req.Tags([]string{"Inner_example"}) // []string | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
-    req.Metadata(map[string]string{"key": "TODO"}) // map[string]string | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata/) allows you to define a key that allows any value pair.
+    req.Metadata(map[string]string{"key": "TODO"}) // map[string]string | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter.
     req.Description("New Zealand") // string | Retrieve video objects by `description`.
     req.LiveStreamId("li400mYKSgQ6xs7taUeSaEKr") // string | Retrieve video objects that were recorded from a live stream by `liveStreamId`.
     req.SortBy("publishedAt") // string | Use this parameter to sort videos by the their created time, published time, updated time, or by title.
@@ -514,7 +517,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **title** | **string** | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles. | 
 **tags** | **[]string** | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned. | 
-**metadata** | [**map[string]**](.md) | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata/) allows you to define a key that allows any value pair. | 
+**metadata** | [**map[string]**](.md) | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. | 
 **description** | **string** | Retrieve video objects by &#x60;description&#x60;. | 
 **liveStreamId** | **string** | Retrieve video objects that were recorded from a live stream by &#x60;liveStreamId&#x60;. | 
 **sortBy** | **string** | Use this parameter to sort videos by the their created time, published time, updated time, or by title. | 
@@ -664,6 +667,69 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetDiscarded
+
+> GetDiscarded(videoId string) (*Video, error)
+
+> GetDiscardedWithContext(ctx context.Context, videoId string) (*Video, error)
+
+
+Retrieve a discarded video object
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+        
+    videoId := "videoId_example" // string | The unique identifier for the video you want details about.
+
+    
+    res, err := client.Videos.GetDiscarded(videoId)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.GetDiscarded``: %v\n", err)
+    }
+    // response from `GetDiscarded`: Video
+    fmt.Fprintf(os.Stdout, "Response from `Videos.GetDiscarded`: %v\n", res)
+}
+```
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**videoId** | **string** | The unique identifier for the video you want details about. | 
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+### Return type
+
+[**Video**](Video.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetStatus
 
 > GetStatus(videoId string) (*VideoStatus, error)
@@ -721,6 +787,151 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**VideoStatus**](VideoStatus.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListDiscarded
+
+> ListDiscarded(r VideosApiListDiscardedRequest) (*VideosListResponse, error)
+
+
+> ListDiscardedWithContext(ctx context.Context, r VideosApiListDiscardedRequest) (*VideosListResponse, error)
+
+
+
+List all discarded video objects
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+    req := apivideosdk.VideosApiListDiscardedRequest{}
+    
+    req.Title("My Video.mp4") // string | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles.
+    req.Tags([]string{"Inner_example"}) // []string | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned.
+    req.Metadata(map[string]string{"key": "TODO"}) // map[string]string | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter.
+    req.Description("New Zealand") // string | Retrieve video objects by `description`.
+    req.LiveStreamId("li400mYKSgQ6xs7taUeSaEKr") // string | Retrieve video objects that were recorded from a live stream by `liveStreamId`.
+    req.SortBy("publishedAt") // string | Use this parameter to sort videos by the their created time, published time, updated time, or by title.
+    req.SortOrder("asc") // string | Use this parameter to sort results. `asc` is ascending and sorts from A to Z. `desc` is descending and sorts from Z to A.
+    req.CurrentPage(int32(2)) // int32 | Choose the number of search results to return per page. Minimum value: 1 (default to 1)
+    req.PageSize(int32(30)) // int32 | Results per page. Allowed values 1-100, default is 25. (default to 25)
+
+    res, err := client.Videos.ListDiscarded(req)
+    
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.ListDiscarded``: %v\n", err)
+    }
+    // response from `ListDiscarded`: VideosListResponse
+    fmt.Fprintf(os.Stdout, "Response from `Videos.ListDiscarded`: %v\n", res)
+}
+```
+### Path Parameters
+
+
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**title** | **string** | The title of a specific video you want to find. The search will match exactly to what term you provide and return any videos that contain the same term as part of their titles. | 
+**tags** | **[]string** | A tag is a category you create and apply to videos. You can search for videos with particular tags by listing one or more here. Only videos that have all the tags you list will be returned. | 
+**metadata** | [**map[string]**](.md) | Videos can be tagged with metadata tags in key:value pairs. You can search for videos with specific key value pairs using this parameter. | 
+**description** | **string** | Retrieve video objects by &#x60;description&#x60;. | 
+**liveStreamId** | **string** | Retrieve video objects that were recorded from a live stream by &#x60;liveStreamId&#x60;. | 
+**sortBy** | **string** | Use this parameter to sort videos by the their created time, published time, updated time, or by title. | 
+**sortOrder** | **string** | Use this parameter to sort results. &#x60;asc&#x60; is ascending and sorts from A to Z. &#x60;desc&#x60; is descending and sorts from Z to A. | 
+**currentPage** | **int32** | Choose the number of search results to return per page. Minimum value: 1 | [default to 1]
+**pageSize** | **int32** | Results per page. Allowed values 1-100, default is 25. | [default to 25]
+
+### Return type
+
+[**VideosListResponse**](VideosListResponse.md)
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateDiscarded
+
+> UpdateDiscarded(videoId string, discardedVideoUpdatePayload DiscardedVideoUpdatePayload) (*Video, error)
+
+> UpdateDiscardedWithContext(ctx context.Context, videoId string, discardedVideoUpdatePayload DiscardedVideoUpdatePayload) (*Video, error)
+
+
+Update a discarded video object
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    apivideosdk "github.com/apivideo/api.video-go-client"
+)
+
+func main() {
+    client := apivideosdk.ClientBuilder("YOUR_API_KEY").Build()
+    // if you rather like to use the sandbox environment:
+    // client := apivideosdk.SandboxClientBuilder("YOU_SANDBOX_API_KEY").Build()
+        
+    videoId := "vi4k0jvEUuaTdRAEjQ4Jfrgz" // string | The video ID for the video you want to restore.
+    discardedVideoUpdatePayload := *apivideosdk.NewDiscardedVideoUpdatePayload() // DiscardedVideoUpdatePayload | 
+
+    
+    res, err := client.Videos.UpdateDiscarded(videoId, discardedVideoUpdatePayload)
+
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `Videos.UpdateDiscarded``: %v\n", err)
+    }
+    // response from `UpdateDiscarded`: Video
+    fmt.Fprintf(os.Stdout, "Response from `Videos.UpdateDiscarded`: %v\n", res)
+}
+```
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**videoId** | **string** | The video ID for the video you want to restore. | 
+
+### Other Parameters
+
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**discardedVideoUpdatePayload** | [**DiscardedVideoUpdatePayload**](DiscardedVideoUpdatePayload.md) |  | 
+
+### Return type
+
+[**Video**](Video.md)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -18,7 +18,7 @@ import (
 type Watermark struct {
 	// The unique identifier of the watermark.
 	WatermarkId *string `json:"watermarkId,omitempty"`
-	// When the watermark was created, presented in ISO-8601 format.
+	// When the watermark was created, presented in ATOM UTC format.
 	CreatedAt *string `json:"createdAt,omitempty"`
 }
 

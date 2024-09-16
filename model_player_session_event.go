@@ -18,7 +18,7 @@ import (
 type PlayerSessionEvent struct {
 	// Possible values are: ready, play, pause, resume, seek.backward, seek.forward, end
 	Type *string `json:"type,omitempty"`
-	// When an event occurred, presented in ISO-8601 format.
+	// When an event occurred, presented in ATOM UTC format.
 	EmittedAt *string `json:"emittedAt,omitempty"`
 	At        *int32  `json:"at,omitempty"`
 	From      *int32  `json:"from,omitempty"`
