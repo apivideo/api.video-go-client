@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **WebhookId** | Pointer to **string** | Unique identifier of the webhook | [optional] 
-**CreatedAt** | Pointer to **string** | When an webhook was created, presented in ISO-8601 format. | [optional] 
+**CreatedAt** | Pointer to **string** | When an webhook was created, presented in ATOM UTC format. | [optional] 
 **Events** | Pointer to **[]string** | A list of events that will trigger the webhook. | [optional] 
 **Url** | Pointer to **string** | URL of the webhook | [optional] 
 

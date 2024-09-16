@@ -18,19 +18,25 @@ import (
 type Video struct {
 	// The unique identifier of the video object.
 	VideoId string `json:"videoId"`
-	// When a video was created, presented in ISO-8601 format.
+	// When a video was created, presented in ATOM UTC format.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// The title of the video content.
 	Title *string `json:"title,omitempty"`
 	// A description for the video content.
 	Description *string `json:"description,omitempty"`
-	// The date and time the API created the video. Date and time are provided using ISO-8601 UTC format.
+	// The date and time the API created the video. Date and time are provided using ATOM UTC format.
 	PublishedAt *string `json:"publishedAt,omitempty"`
-	// The date and time the video was updated. Date and time are provided using ISO-8601 UTC format.
+	// The date and time the video was updated. Date and time are provided using ATOM UTC format.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
+	// The date and time the video was discarded. The API populates this field only if you have the Video Restore feature enabled and discard a video. Date and time are provided using ATOM UTC format.
+	DiscardedAt *NullableString `json:"discardedAt,omitempty"`
+	// The date and time the video will be permanently deleted. The API populates this field only if you have the Video Restore feature enabled and discard a video. Discarded videos are pemanently deleted after 90 days. Date and time are provided using ATOM UTC format.
+	DeletesAt *NullableString `json:"deletesAt,omitempty"`
+	// Returns `true` for videos you discarded when you have the Video Restore feature enabled. Returns `false` for every other video.
+	Discarded *bool `json:"discarded,omitempty"`
 	// One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.
 	Tags *[]string `json:"tags,omitempty"`
-	// Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video. [Dynamic Metadata](https://api.video/blog/endpoints/dynamic-metadata/) allows you to define a key that allows any value pair.
+	// Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.
 	Metadata *[]Metadata  `json:"metadata,omitempty"`
 	Source   *VideoSource `json:"source,omitempty"`
 	Assets   *VideoAssets `json:"assets,omitempty"`
@@ -244,6 +250,124 @@ func (o *Video) HasUpdatedAt() bool {
 // SetUpdatedAt gets a reference to the given string and assigns it to the UpdatedAt field.
 func (o *Video) SetUpdatedAt(v string) {
 	o.UpdatedAt = &v
+}
+
+// GetDiscardedAt returns the DiscardedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Video) GetDiscardedAt() string {
+	if o == nil || o.DiscardedAt.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.DiscardedAt.Get()
+}
+
+// GetDiscardedAtOk returns a tuple with the DiscardedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Video) GetDiscardedAtOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DiscardedAt.Get(), o.DiscardedAt.IsSet()
+}
+
+// HasDiscardedAt returns a boolean if a field has been set.
+func (o *Video) HasDiscardedAt() bool {
+	if o != nil && o.DiscardedAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDiscardedAt gets a reference to the given NullableString and assigns it to the DiscardedAt field.
+func (o *Video) SetDiscardedAt(v string) {
+	o.DiscardedAt.Set(&v)
+}
+
+// SetDiscardedAtNil sets the value for DiscardedAt to be an explicit nil
+func (o *Video) SetDiscardedAtNil() {
+	o.DiscardedAt.Set(nil)
+}
+
+// UnsetDiscardedAt ensures that no value is present for DiscardedAt, not even an explicit nil
+func (o *Video) UnsetDiscardedAt() {
+	o.DiscardedAt.Unset()
+}
+
+// GetDeletesAt returns the DeletesAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Video) GetDeletesAt() string {
+	if o == nil || o.DeletesAt.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.DeletesAt.Get()
+}
+
+// GetDeletesAtOk returns a tuple with the DeletesAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Video) GetDeletesAtOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.DeletesAt.Get(), o.DeletesAt.IsSet()
+}
+
+// HasDeletesAt returns a boolean if a field has been set.
+func (o *Video) HasDeletesAt() bool {
+	if o != nil && o.DeletesAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDeletesAt gets a reference to the given NullableString and assigns it to the DeletesAt field.
+func (o *Video) SetDeletesAt(v string) {
+	o.DeletesAt.Set(&v)
+}
+
+// SetDeletesAtNil sets the value for DeletesAt to be an explicit nil
+func (o *Video) SetDeletesAtNil() {
+	o.DeletesAt.Set(nil)
+}
+
+// UnsetDeletesAt ensures that no value is present for DeletesAt, not even an explicit nil
+func (o *Video) UnsetDeletesAt() {
+	o.DeletesAt.Unset()
+}
+
+// GetDiscarded returns the Discarded field value if set, zero value otherwise.
+func (o *Video) GetDiscarded() bool {
+	if o == nil || o.Discarded == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Discarded
+}
+
+// GetDiscardedOk returns a tuple with the Discarded field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Video) GetDiscardedOk() (*bool, bool) {
+	if o == nil || o.Discarded == nil {
+		return nil, false
+	}
+	return o.Discarded, true
+}
+
+// HasDiscarded returns a boolean if a field has been set.
+func (o *Video) HasDiscarded() bool {
+	if o != nil && o.Discarded != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDiscarded gets a reference to the given bool and assigns it to the Discarded field.
+func (o *Video) SetDiscarded(v bool) {
+	o.Discarded = &v
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.

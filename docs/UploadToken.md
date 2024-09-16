@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Token** | Pointer to **string** | The unique identifier for the token you will use to authenticate an upload. | [optional] 
 **Ttl** | Pointer to **int32** | Time-to-live - how long the upload token is valid for. | [optional] 
-**CreatedAt** | Pointer to **string** | When the token was created, displayed in ISO-8601 format. | [optional] 
-**ExpiresAt** | Pointer to **NullableString** | When the token expires, displayed in ISO-8601 format. | [optional] 
+**CreatedAt** | Pointer to **string** | When the token was created, displayed in ATOM UTC format. | [optional] 
+**ExpiresAt** | Pointer to **NullableString** | When the token expires, displayed in ATOM UTC format. | [optional] 
 
 ## Methods
 

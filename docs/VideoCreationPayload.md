@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Mp4Support** | Pointer to **bool** | Enables mp4 version in addition to streamed version. | [optional] [default to true]
 **PlayerId** | Pointer to **string** | The unique identification number for your video player. | [optional] 
 **Tags** | Pointer to **[]string** | A list of tags you want to use to describe your video. | [optional] 
-**Metadata** | Pointer to [**[]Metadata**](Metadata.md) | A list of key value pairs that you use to provide metadata for your video. These pairs can be made dynamic, allowing you to segment your audience. Read more on [dynamic metadata](https://api.video/blog/endpoints/dynamic-metadata/). | [optional] 
+**Metadata** | Pointer to [**[]Metadata**](Metadata.md) | A list of key value pairs that you use to provide metadata for your video. | [optional] 
 **Clip** | Pointer to [**VideoClip**](VideoClip.md) |  | [optional] 
 **Watermark** | Pointer to [**VideoWatermark**](VideoWatermark.md) |  | [optional] 
 

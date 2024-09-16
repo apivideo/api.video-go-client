@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **PlayerId** | Pointer to **string** | The unique identifier for the player. | [optional] 
 **Broadcasting** | Pointer to **bool** | Whether or not you are broadcasting the live video you recorded for others to see. True means you are broadcasting to viewers, false means you are not. | [optional] 
 **Restreams** | [**[]RestreamsResponseObject**](RestreamsResponseObject.md) | Returns the list of restream destinations. | 
-**CreatedAt** | Pointer to **string** | When the player was created, presented in ISO-8601 format. | [optional] 
-**UpdatedAt** | Pointer to **string** | When the player was last updated, presented in ISO-8601 format. | [optional] 
+**CreatedAt** | Pointer to **string** | When the player was created, presented in ATOM UTC format. | [optional] 
+**UpdatedAt** | Pointer to **string** | When the player was last updated, presented in ATOM UTC format. | [optional] 
 
 ## Methods
 

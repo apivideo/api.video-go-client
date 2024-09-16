@@ -87,6 +87,55 @@ func (r VideosApiListRequest) PageSize(pageSize int32) VideosApiListRequest {
 	return r
 }
 
+type VideosApiListDiscardedRequest struct {
+	title        *string
+	tags         *[]string
+	metadata     *map[string]string
+	description  *string
+	liveStreamId *string
+	sortBy       *string
+	sortOrder    *string
+	currentPage  *int32
+	pageSize     *int32
+}
+
+func (r VideosApiListDiscardedRequest) Title(title string) VideosApiListDiscardedRequest {
+	r.title = &title
+	return r
+}
+func (r VideosApiListDiscardedRequest) Tags(tags []string) VideosApiListDiscardedRequest {
+	r.tags = &tags
+	return r
+}
+func (r VideosApiListDiscardedRequest) Metadata(metadata map[string]string) VideosApiListDiscardedRequest {
+	r.metadata = &metadata
+	return r
+}
+func (r VideosApiListDiscardedRequest) Description(description string) VideosApiListDiscardedRequest {
+	r.description = &description
+	return r
+}
+func (r VideosApiListDiscardedRequest) LiveStreamId(liveStreamId string) VideosApiListDiscardedRequest {
+	r.liveStreamId = &liveStreamId
+	return r
+}
+func (r VideosApiListDiscardedRequest) SortBy(sortBy string) VideosApiListDiscardedRequest {
+	r.sortBy = &sortBy
+	return r
+}
+func (r VideosApiListDiscardedRequest) SortOrder(sortOrder string) VideosApiListDiscardedRequest {
+	r.sortOrder = &sortOrder
+	return r
+}
+func (r VideosApiListDiscardedRequest) CurrentPage(currentPage int32) VideosApiListDiscardedRequest {
+	r.currentPage = &currentPage
+	return r
+}
+func (r VideosApiListDiscardedRequest) PageSize(pageSize int32) VideosApiListDiscardedRequest {
+	r.pageSize = &pageSize
+	return r
+}
+
 type VideosServiceI interface {
 	/*
 	 * Create Create a video object
@@ -308,6 +357,23 @@ type VideosServiceI interface {
 	PickThumbnailWithContext(ctx context.Context, videoId string, videoThumbnailPickPayload VideoThumbnailPickPayload) (*Video, error)
 
 	/*
+	 * GetDiscarded Retrieve a discarded video object
+	 * @param videoId The unique identifier for the video you want details about.
+	 * @return VideosApiGetDiscardedRequest
+	 */
+
+	GetDiscarded(videoId string) (*Video, error)
+
+	/*
+	 * GetDiscarded Retrieve a discarded video object
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param videoId The unique identifier for the video you want details about.
+	 * @return VideosApiGetDiscardedRequest
+	 */
+
+	GetDiscardedWithContext(ctx context.Context, videoId string) (*Video, error)
+
+	/*
 	 * GetStatus Retrieve video status and details
 	 * @param videoId The unique identifier for the video you want the status for.
 	 * @return VideosApiGetStatusRequest
@@ -323,6 +389,38 @@ type VideosServiceI interface {
 	 */
 
 	GetStatusWithContext(ctx context.Context, videoId string) (*VideoStatus, error)
+
+	/*
+	 * ListDiscarded List all discarded video objects
+	 * @return VideosApiListDiscardedRequest
+	 */
+
+	ListDiscarded(r VideosApiListDiscardedRequest) (*VideosListResponse, error)
+
+	/*
+	 * ListDiscarded List all discarded video objects
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @return VideosApiListDiscardedRequest
+	 */
+
+	ListDiscardedWithContext(ctx context.Context, r VideosApiListDiscardedRequest) (*VideosListResponse, error)
+
+	/*
+	 * UpdateDiscarded Update a discarded video object
+	 * @param videoId The video ID for the video you want to restore.
+	 * @return VideosApiUpdateDiscardedRequest
+	 */
+
+	UpdateDiscarded(videoId string, discardedVideoUpdatePayload DiscardedVideoUpdatePayload) (*Video, error)
+
+	/*
+	 * UpdateDiscarded Update a discarded video object
+	 * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	 * @param videoId The video ID for the video you want to restore.
+	 * @return VideosApiUpdateDiscardedRequest
+	 */
+
+	UpdateDiscardedWithContext(ctx context.Context, videoId string, discardedVideoUpdatePayload DiscardedVideoUpdatePayload) (*Video, error)
 }
 
 // VideosService communicating with the Videos
@@ -897,7 +995,7 @@ func (s *VideosService) UpdateWithContext(ctx context.Context, videoId string, v
 
 /*
  * Delete Delete a video object
- * If you do not need a video any longer, you can send a request to delete it. All you need is the videoId.
+ * If you do not need a video any longer, you can send a request to delete it. All you need is the videoId. By default, deleted videos cannot be recovered. If you have the Video Restore feature enabled, this operation will discard the video instead of permanently deleting it. Make sure you subscribe to the Video Restore feature if you want to be able to restore deleted videos! The Video Restore feature retains videos for 90 days, after which the videos are permanently deleted
 
  * @param videoId The video ID for the video you want to delete.
  * @return VideosApiDeleteRequest
@@ -911,7 +1009,7 @@ func (s *VideosService) Delete(videoId string) error {
 
 /*
  * Delete Delete a video object
- * If you do not need a video any longer, you can send a request to delete it. All you need is the videoId.
+ * If you do not need a video any longer, you can send a request to delete it. All you need is the videoId. By default, deleted videos cannot be recovered. If you have the Video Restore feature enabled, this operation will discard the video instead of permanently deleting it. Make sure you subscribe to the Video Restore feature if you want to be able to restore deleted videos! The Video Restore feature retains videos for 90 days, after which the videos are permanently deleted
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param videoId The video ID for the video you want to delete.
  * @return VideosApiDeleteRequest
@@ -1195,6 +1293,53 @@ func (s *VideosService) PickThumbnailWithContext(ctx context.Context, videoId st
 }
 
 /*
+ * GetDiscarded Retrieve a discarded video object
+ * This call provides the same information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL.
+
+ * @param videoId The unique identifier for the video you want details about.
+ * @return VideosApiGetDiscardedRequest
+ */
+
+func (s *VideosService) GetDiscarded(videoId string) (*Video, error) {
+
+	return s.GetDiscardedWithContext(context.Background(), videoId)
+
+}
+
+/*
+ * GetDiscarded Retrieve a discarded video object
+ * This call provides the same information provided on video creation. For private videos, it will generate a unique token url. Use this to retrieve any details you need about a video, or set up a private viewing URL.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId The unique identifier for the video you want details about.
+ * @return VideosApiGetDiscardedRequest
+ */
+
+func (s *VideosService) GetDiscardedWithContext(ctx context.Context, videoId string) (*Video, error) {
+	var localVarPostBody interface{}
+
+	localVarPath := "/discarded/videos/{videoId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"videoId"+"}", url.PathEscape(parameterToString(videoId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	if err != nil {
+		return nil, err
+	}
+
+	res := new(Video)
+	_, err = s.client.do(req, res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+
+}
+
+/*
  * GetStatus Retrieve video status and details
  * This method provides upload status & encoding status to determine when the video is uploaded or ready to playback. Once encoding is completed, the response also lists the available stream qualities.
 
@@ -1231,6 +1376,140 @@ func (s *VideosService) GetStatusWithContext(ctx context.Context, videoId string
 	}
 
 	res := new(VideoStatus)
+	_, err = s.client.do(req, res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+
+}
+
+/*
+ * ListDiscarded List all discarded video objects
+ * This method returns a list of your discarded videos (with all their details). With no parameters added, the API returns the first page of all discarded videos. You can filter discarded videos using the parameters described below.
+
+ * @return VideosApiListDiscardedRequest
+ */
+
+func (s *VideosService) ListDiscarded(r VideosApiListDiscardedRequest) (*VideosListResponse, error) {
+
+	return s.ListDiscardedWithContext(context.Background(), r)
+
+}
+
+/*
+ * ListDiscarded List all discarded video objects
+ * This method returns a list of your discarded videos (with all their details). With no parameters added, the API returns the first page of all discarded videos. You can filter discarded videos using the parameters described below.
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return VideosApiListDiscardedRequest
+ */
+
+func (s *VideosService) ListDiscardedWithContext(ctx context.Context, r VideosApiListDiscardedRequest) (*VideosListResponse, error) {
+	var localVarPostBody interface{}
+
+	localVarPath := "/discarded/videos"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+
+	if r.title != nil {
+		localVarQueryParams.Add("title", parameterToString(*r.title, ""))
+	}
+	if r.tags != nil {
+		t := *r.tags
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("tags[]", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("tags[]", parameterToString(t, "multi"))
+		}
+	}
+	if r.metadata != nil {
+		addDeepQueryParams(r.metadata, "metadata", localVarQueryParams)
+	}
+	if r.description != nil {
+		localVarQueryParams.Add("description", parameterToString(*r.description, ""))
+	}
+	if r.liveStreamId != nil {
+		localVarQueryParams.Add("liveStreamId", parameterToString(*r.liveStreamId, ""))
+	}
+	if r.sortBy != nil {
+		localVarQueryParams.Add("sortBy", parameterToString(*r.sortBy, ""))
+	}
+	if r.sortOrder != nil {
+		localVarQueryParams.Add("sortOrder", parameterToString(*r.sortOrder, ""))
+	}
+	if r.currentPage != nil {
+		localVarQueryParams.Add("currentPage", parameterToString(*r.currentPage, ""))
+	}
+	if r.pageSize != nil {
+		localVarQueryParams.Add("pageSize", parameterToString(*r.pageSize, ""))
+	}
+
+	req, err := s.client.prepareRequest(ctx, http.MethodGet, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	if err != nil {
+		return nil, err
+	}
+
+	res := new(VideosListResponse)
+	_, err = s.client.do(req, res)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+
+}
+
+/*
+ * UpdateDiscarded Update a discarded video object
+ * Use this endpoint to restore a discarded video when you have the Video Restore feature enabled.
+
+
+
+ * @param videoId The video ID for the video you want to restore.
+ * @return VideosApiUpdateDiscardedRequest
+ */
+
+func (s *VideosService) UpdateDiscarded(videoId string, discardedVideoUpdatePayload DiscardedVideoUpdatePayload) (*Video, error) {
+
+	return s.UpdateDiscardedWithContext(context.Background(), videoId, discardedVideoUpdatePayload)
+
+}
+
+/*
+ * UpdateDiscarded Update a discarded video object
+ * Use this endpoint to restore a discarded video when you have the Video Restore feature enabled.
+
+
+ * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param videoId The video ID for the video you want to restore.
+ * @return VideosApiUpdateDiscardedRequest
+ */
+
+func (s *VideosService) UpdateDiscardedWithContext(ctx context.Context, videoId string, discardedVideoUpdatePayload DiscardedVideoUpdatePayload) (*Video, error) {
+	var localVarPostBody interface{}
+
+	localVarPath := "/discarded/videos/{videoId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"videoId"+"}", url.PathEscape(parameterToString(videoId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+
+	// body params
+	localVarPostBody = discardedVideoUpdatePayload
+
+	req, err := s.client.prepareRequest(ctx, http.MethodPatch, localVarPath, localVarPostBody, localVarHeaderParams, localVarQueryParams)
+	if err != nil {
+		return nil, err
+	}
+
+	res := new(Video)
 	_, err = s.client.do(req, res)
 
 	if err != nil {

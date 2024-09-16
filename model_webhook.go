@@ -18,7 +18,7 @@ import (
 type Webhook struct {
 	// Unique identifier of the webhook
 	WebhookId *string `json:"webhookId,omitempty"`
-	// When an webhook was created, presented in ISO-8601 format.
+	// When an webhook was created, presented in ATOM UTC format.
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// A list of events that will trigger the webhook.
 	Events *[]string `json:"events,omitempty"`

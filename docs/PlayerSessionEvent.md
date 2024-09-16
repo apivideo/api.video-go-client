@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | Possible values are: ready, play, pause, resume, seek.backward, seek.forward, end | [optional] 
-**EmittedAt** | Pointer to **string** | When an event occurred, presented in ISO-8601 format. | [optional] 
+**EmittedAt** | Pointer to **string** | When an event occurred, presented in ATOM UTC format. | [optional] 
 **At** | Pointer to **int32** |  | [optional] 
 **From** | Pointer to **int32** |  | [optional] 
 **To** | Pointer to **int32** |  | [optional] 

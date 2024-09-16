@@ -49,9 +49,9 @@ type PlayerTheme struct {
 	// enable/disable looping. Default: false
 	ForceLoop *bool  `json:"forceLoop,omitempty"`
 	PlayerId  string `json:"playerId"`
-	// When the player was created, presented in ISO-8601 format.
+	// When the player was created, presented in ATOM UTC format.
 	CreatedAt *string `json:"createdAt,omitempty"`
-	// When the player was last updated, presented in ISO-8601 format.
+	// When the player was last updated, presented in ATOM UTC format.
 	UpdatedAt *string            `json:"updatedAt,omitempty"`
 	Assets    *PlayerThemeAssets `json:"assets,omitempty"`
 }

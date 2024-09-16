@@ -31,9 +31,9 @@ type LiveStream struct {
 	Broadcasting *bool `json:"broadcasting,omitempty"`
 	// Returns the list of restream destinations.
 	Restreams []RestreamsResponseObject `json:"restreams"`
-	// When the player was created, presented in ISO-8601 format.
+	// When the player was created, presented in ATOM UTC format.
 	CreatedAt *string `json:"createdAt,omitempty"`
-	// When the player was last updated, presented in ISO-8601 format.
+	// When the player was last updated, presented in ATOM UTC format.
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
