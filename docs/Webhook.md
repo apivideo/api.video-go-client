@@ -4,10 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**WebhookId** | Pointer to **string** | Unique identifier of the webhook | [optional] 
-**CreatedAt** | Pointer to **string** | When an webhook was created, presented in ATOM UTC format. | [optional] 
-**Events** | Pointer to **[]string** | A list of events that will trigger the webhook. | [optional] 
-**Url** | Pointer to **string** | URL of the webhook | [optional] 
+**WebhookId** | Pointer to **string** | A unique identifier of the webhook you subscribed to. | [optional] 
+**CreatedAt** | Pointer to **string** | The time and date when you created this webhook subscription, in ATOM UTC format. | [optional] 
+**Events** | Pointer to **[]string** | A list of events that you subscribed to. When these events occur, the API triggers a webhook call to the URL you provided. | [optional] 
+**Url** | Pointer to **string** | The URL where the API sends the webhook. | [optional] 
+**SignatureSecret** | Pointer to **string** | A secret key for the webhook you subscribed to. You can use it to verify the origin of the webhook call that you receive. | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetUrl sets Url field to given value.
 `func (o *Webhook) HasUrl() bool`
 
 HasUrl returns a boolean if a field has been set.
+
+### GetSignatureSecret
+
+`func (o *Webhook) GetSignatureSecret() string`
+
+GetSignatureSecret returns the SignatureSecret field if non-nil, zero value otherwise.
+
+### GetSignatureSecretOk
+
+`func (o *Webhook) GetSignatureSecretOk() (*string, bool)`
+
+GetSignatureSecretOk returns a tuple with the SignatureSecret field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSignatureSecret
+
+`func (o *Webhook) SetSignatureSecret(v string)`
+
+SetSignatureSecret sets SignatureSecret field to given value.
+
+### HasSignatureSecret
+
+`func (o *Webhook) HasSignatureSecret() bool`
+
+HasSignatureSecret returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

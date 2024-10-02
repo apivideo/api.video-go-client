@@ -36,6 +36,7 @@ type Client struct {
 	Chapters               ChaptersServiceI
 	LiveStreams            LiveStreamsServiceI
 	PlayerThemes           PlayerThemesServiceI
+	Tags                   TagsServiceI
 	UploadTokens           UploadTokensServiceI
 	Videos                 VideosServiceI
 	Watermarks             WatermarksServiceI
@@ -183,6 +184,7 @@ func (cb *Builder) Build() *Client {
 	c.Chapters = &ChaptersService{client: c}
 	c.LiveStreams = &LiveStreamsService{client: c}
 	c.PlayerThemes = &PlayerThemesService{client: c}
+	c.Tags = &TagsService{client: c}
 	c.UploadTokens = &UploadTokensService{client: c}
 	c.Videos = &VideosService{client: c}
 	c.Watermarks = &WatermarksService{client: c}
@@ -255,7 +257,7 @@ func (c *Client) prepareRequest(
 		req.Header.Set("AV-Origin-Sdk", originSdkHeaderValue)
 	}
 
-	req.Header.Set("AV-Origin-Client", "go:1.4.2")
+	req.Header.Set("AV-Origin-Client", "go:1.4.3")
 
 	for headerName := range headerParams {
 		req.Header.Set(headerName, headerParams[headerName])
@@ -530,7 +532,7 @@ func (c *Client) auth(req *http.Request) (*http.Request, error) {
 			req.Header.Set("AV-Origin-Sdk", originSdkHeaderValue)
 		}
 
-		req.Header.Set("AV-Origin-Client", "go:1.4.2")
+		req.Header.Set("AV-Origin-Client", "go:1.4.3")
 
 		resp, err := c.httpClient.Do(req)
 
