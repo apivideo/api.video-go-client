@@ -16,14 +16,16 @@ import (
 
 // Webhook struct for Webhook
 type Webhook struct {
-	// Unique identifier of the webhook
+	// A unique identifier of the webhook you subscribed to.
 	WebhookId *string `json:"webhookId,omitempty"`
-	// When an webhook was created, presented in ATOM UTC format.
+	// The time and date when you created this webhook subscription, in ATOM UTC format.
 	CreatedAt *string `json:"createdAt,omitempty"`
-	// A list of events that will trigger the webhook.
+	// A list of events that you subscribed to. When these events occur, the API triggers a webhook call to the URL you provided.
 	Events *[]string `json:"events,omitempty"`
-	// URL of the webhook
+	// The URL where the API sends the webhook.
 	Url *string `json:"url,omitempty"`
+	// A secret key for the webhook you subscribed to. You can use it to verify the origin of the webhook call that you receive.
+	SignatureSecret *string `json:"signatureSecret,omitempty"`
 }
 
 // NewWebhook instantiates a new Webhook object
@@ -169,6 +171,38 @@ func (o *Webhook) HasUrl() bool {
 // SetUrl gets a reference to the given string and assigns it to the Url field.
 func (o *Webhook) SetUrl(v string) {
 	o.Url = &v
+}
+
+// GetSignatureSecret returns the SignatureSecret field value if set, zero value otherwise.
+func (o *Webhook) GetSignatureSecret() string {
+	if o == nil || o.SignatureSecret == nil {
+		var ret string
+		return ret
+	}
+	return *o.SignatureSecret
+}
+
+// GetSignatureSecretOk returns a tuple with the SignatureSecret field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Webhook) GetSignatureSecretOk() (*string, bool) {
+	if o == nil || o.SignatureSecret == nil {
+		return nil, false
+	}
+	return o.SignatureSecret, true
+}
+
+// HasSignatureSecret returns a boolean if a field has been set.
+func (o *Webhook) HasSignatureSecret() bool {
+	if o != nil && o.SignatureSecret != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSignatureSecret gets a reference to the given string and assigns it to the SignatureSecret field.
+func (o *Webhook) SetSignatureSecret(v string) {
+	o.SignatureSecret = &v
 }
 
 type NullableWebhook struct {
