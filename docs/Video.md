@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **DiscardedAt** | Pointer to **NullableString** | The date and time the video was discarded. The API populates this field only if you have the Video Restore feature enabled and discard a video. Date and time are provided using ATOM UTC format. | [optional] 
 **DeletesAt** | Pointer to **NullableString** | The date and time the video will be permanently deleted. The API populates this field only if you have the Video Restore feature enabled and discard a video. Discarded videos are pemanently deleted after 90 days. Date and time are provided using ATOM UTC format. | [optional] 
 **Discarded** | Pointer to **bool** | Returns &#x60;true&#x60; for videos you discarded when you have the Video Restore feature enabled. Returns &#x60;false&#x60; for every other video. | [optional] 
+**Language** | Pointer to **string** | Returns the language of a video in [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) format. You can set the language during video creation via the API, otherwise it is detected automatically. | [optional] 
+**LanguageOrigin** | Pointer to **NullableString** | Returns the origin of the last update on the video&#39;s &#x60;language&#x60; attribute.  - &#x60;api&#x60; means that the last update was requested from the API. - &#x60;auto&#x60; means that the last update was done automatically by the API. | [optional] 
 **Tags** | Pointer to **[]string** | One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.   | [optional] 
 **Metadata** | Pointer to [**[]Metadata**](Metadata.md) | Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.  | [optional] 
 **Source** | Pointer to [**VideoSource**](VideoSource.md) |  | [optional] 
@@ -281,6 +283,66 @@ SetDiscarded sets Discarded field to given value.
 
 HasDiscarded returns a boolean if a field has been set.
 
+### GetLanguage
+
+`func (o *Video) GetLanguage() string`
+
+GetLanguage returns the Language field if non-nil, zero value otherwise.
+
+### GetLanguageOk
+
+`func (o *Video) GetLanguageOk() (*string, bool)`
+
+GetLanguageOk returns a tuple with the Language field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLanguage
+
+`func (o *Video) SetLanguage(v string)`
+
+SetLanguage sets Language field to given value.
+
+### HasLanguage
+
+`func (o *Video) HasLanguage() bool`
+
+HasLanguage returns a boolean if a field has been set.
+
+### GetLanguageOrigin
+
+`func (o *Video) GetLanguageOrigin() string`
+
+GetLanguageOrigin returns the LanguageOrigin field if non-nil, zero value otherwise.
+
+### GetLanguageOriginOk
+
+`func (o *Video) GetLanguageOriginOk() (*string, bool)`
+
+GetLanguageOriginOk returns a tuple with the LanguageOrigin field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLanguageOrigin
+
+`func (o *Video) SetLanguageOrigin(v string)`
+
+SetLanguageOrigin sets LanguageOrigin field to given value.
+
+### HasLanguageOrigin
+
+`func (o *Video) HasLanguageOrigin() bool`
+
+HasLanguageOrigin returns a boolean if a field has been set.
+
+### SetLanguageOriginNil
+
+`func (o *Video) SetLanguageOriginNil(b bool)`
+
+ SetLanguageOriginNil sets the value for LanguageOrigin to be an explicit nil
+
+### UnsetLanguageOrigin
+`func (o *Video) UnsetLanguageOrigin()`
+
+UnsetLanguageOrigin ensures that no value is present for LanguageOrigin, not even an explicit nil
 ### GetTags
 
 `func (o *Video) GetTags() []string`

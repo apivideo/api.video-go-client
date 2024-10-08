@@ -34,6 +34,10 @@ type Video struct {
 	DeletesAt *NullableString `json:"deletesAt,omitempty"`
 	// Returns `true` for videos you discarded when you have the Video Restore feature enabled. Returns `false` for every other video.
 	Discarded *bool `json:"discarded,omitempty"`
+	// Returns the language of a video in [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) format. You can set the language during video creation via the API, otherwise it is detected automatically.
+	Language *string `json:"language,omitempty"`
+	// Returns the origin of the last update on the video's `language` attribute.  - `api` means that the last update was requested from the API. - `auto` means that the last update was done automatically by the API.
+	LanguageOrigin *NullableString `json:"languageOrigin,omitempty"`
 	// One array of tags (each tag is a string) in order to categorize a video. Tags may include spaces.
 	Tags *[]string `json:"tags,omitempty"`
 	// Metadata you can use to categorise and filter videos. Metadata is a list of dictionaries, where each dictionary represents a key value pair for categorising a video.
@@ -368,6 +372,81 @@ func (o *Video) HasDiscarded() bool {
 // SetDiscarded gets a reference to the given bool and assigns it to the Discarded field.
 func (o *Video) SetDiscarded(v bool) {
 	o.Discarded = &v
+}
+
+// GetLanguage returns the Language field value if set, zero value otherwise.
+func (o *Video) GetLanguage() string {
+	if o == nil || o.Language == nil {
+		var ret string
+		return ret
+	}
+	return *o.Language
+}
+
+// GetLanguageOk returns a tuple with the Language field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Video) GetLanguageOk() (*string, bool) {
+	if o == nil || o.Language == nil {
+		return nil, false
+	}
+	return o.Language, true
+}
+
+// HasLanguage returns a boolean if a field has been set.
+func (o *Video) HasLanguage() bool {
+	if o != nil && o.Language != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLanguage gets a reference to the given string and assigns it to the Language field.
+func (o *Video) SetLanguage(v string) {
+	o.Language = &v
+}
+
+// GetLanguageOrigin returns the LanguageOrigin field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Video) GetLanguageOrigin() string {
+	if o == nil || o.LanguageOrigin.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.LanguageOrigin.Get()
+}
+
+// GetLanguageOriginOk returns a tuple with the LanguageOrigin field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Video) GetLanguageOriginOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.LanguageOrigin.Get(), o.LanguageOrigin.IsSet()
+}
+
+// HasLanguageOrigin returns a boolean if a field has been set.
+func (o *Video) HasLanguageOrigin() bool {
+	if o != nil && o.LanguageOrigin.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLanguageOrigin gets a reference to the given NullableString and assigns it to the LanguageOrigin field.
+func (o *Video) SetLanguageOrigin(v string) {
+	o.LanguageOrigin.Set(&v)
+}
+
+// SetLanguageOriginNil sets the value for LanguageOrigin to be an explicit nil
+func (o *Video) SetLanguageOriginNil() {
+	o.LanguageOrigin.Set(nil)
+}
+
+// UnsetLanguageOrigin ensures that no value is present for LanguageOrigin, not even an explicit nil
+func (o *Video) UnsetLanguageOrigin() {
+	o.LanguageOrigin.Unset()
 }
 
 // GetTags returns the Tags field value if set, zero value otherwise.

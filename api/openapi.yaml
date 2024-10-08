@@ -284,6 +284,8 @@ paths:
                       playerId: pl45KFKdlddgk654dspkze
                       title: Maths video
                       description: An amazing video explaining the string theory
+                      language: en
+                      languageOrigin: api
                       public: false
                       panoramic: false
                       mp4Support: true
@@ -314,6 +316,8 @@ paths:
                     - videoId: vi4blUQJFrYWbaG44NChkH27
                       title: Video Title
                       description: A description for your video.
+                      language: en
+                      languageOrigin: api
                       public: false
                       panoramic: false
                       mp4Support: true
@@ -346,6 +350,8 @@ paths:
                       playerId: pl45KFKdlddgk654dspkze
                       title: My Video Title
                       description: A brief description of the video.
+                      language: fr
+                      languageOrigin: api
                       public: false
                       panoramic: false
                       mp4Support: true
@@ -611,6 +617,8 @@ paths:
                     videoId: vi4blUQJFrYWbaG44NChkH27
                     title: Maths video
                     description: An amazing video explaining the string theory
+                    language: en
+                    languageOrigin: api
                     public: false
                     panoramic: false
                     mp4Support: true
@@ -693,7 +701,7 @@ paths:
           content:
             application/json:
               examples:
-                response:
+                Arttribute required:
                   value:
                     type: https://docs.api.video/reference/attribute-required
                     title: This attribute is required.
@@ -712,6 +720,25 @@ paths:
                     - type: https://docs.api.video/reference/invalid-attribute
                       title: This attribute must be an array.
                       name: metadata
+                Invalid language formatting:
+                  description: This error occurs when the language tag you provided
+                    contains characters other than letters and dashes.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: The "language" attribute must contain only letters and
+                      dashes (for example "fr", "fr-BE").
+                    name: language
+                Invalid language:
+                  description: This error occurs when the language tag you provided
+                    does not match any supported language.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: The "language" attribute is not valid.
+                    name: language
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
@@ -2958,6 +2985,8 @@ paths:
                     playerId: pl45KFKdlddgk654dspkze
                     title: Maths video
                     description: An amazing video explaining string theory
+                    language: en
+                    languageOrigin: api
                     public: false
                     panoramic: false
                     mp4Support: true
@@ -3211,6 +3240,8 @@ paths:
                     playerId: pl45KFKdlddgk654dspkze
                     title: Maths video
                     description: An amazing video explaining the string theory
+                    language: en
+                    languageOrigin: api
                     public: false
                     panoramic: false
                     mp4Support: true
@@ -3266,7 +3297,7 @@ paths:
           content:
             application/json:
               examples:
-                response:
+                Invalid attribute:
                   value:
                     type: https://docs.api.video/reference/invalid-attribute
                     title: This attribute must be a ISO-8601 date.
@@ -3282,6 +3313,25 @@ paths:
                     - type: https://docs.api.video/reference/invalid-attribute
                       title: This attribute must be an array.
                       name: metadata
+                Invalid language formatting:
+                  description: This error occurs when the language tag you provided
+                    contains characters other than letters and dashes.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: The "language" attribute must contain only letters and
+                      dashes (for example "fr", "fr-BE").
+                    name: language
+                Invalid language:
+                  description: This error occurs when the language tag you provided
+                    does not match any supported language.
+                  value:
+                    type: https://docs.api.video/reference/invalid-attribute
+                    title: An attribute is invalid.
+                    status: 400
+                    detail: The "language" attribute is not valid.
+                    name: language
               schema:
                 $ref: '#/components/schemas/bad-request'
           description: Bad Request
@@ -5575,6 +5625,7 @@ paths:
                     playerId: pl45KFKdlddgk654dspkze
                     title: Maths video
                     description: An amazing video explaining the string theory
+                    language: en
                     public: false
                     panoramic: false
                     tags:
@@ -14811,6 +14862,8 @@ components:
         videoId: vi4k0jvEUuaTdRAEjQ4Jfrgz
         title: Maths video
         description: An amazing video explaining the string theory
+        language: en
+        languageOrigin: api
         tags:
         - maths
         - string theory
@@ -14882,6 +14935,22 @@ components:
           description: Returns `true` for videos you discarded when you have the Video
             Restore feature enabled. Returns `false` for every other video.
           type: boolean
+        language:
+          description: Returns the language of a video in [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag)
+            format. You can set the language during video creation via the API, otherwise
+            it is detected automatically.
+          type: string
+        languageOrigin:
+          description: |-
+            Returns the origin of the last update on the video's `language` attribute.
+
+            - `api` means that the last update was requested from the API.
+            - `auto` means that the last update was done automatically by the API.
+          enum:
+          - api
+          - auto
+          nullable: true
+          type: string
         tags:
           description: "One array of tags (each tag is a string) in order to categorize\
             \ a video. Tags may include spaces. \n"
@@ -15630,6 +15699,8 @@ components:
         - videoId: vi4k0jvEUuaTdRAEjQ4Jfrgz
           title: Maths video
           description: An amazing video explaining the string theory
+          language: en
+          languageOrigin: api
           tags:
           - maths
           - string theory
@@ -15651,6 +15722,8 @@ components:
         - videoId: vi4k0jvEUuaTdRAEjQ4Jfrgz
           title: Maths video
           description: An amazing video explaining the string theory
+          language: en
+          languageOrigin: api
           tags:
           - maths
           - string theory
@@ -15702,6 +15775,8 @@ components:
         panoramic: false
         mp4Support: true
         playerId: pl45KFKdlddgk654dspkze
+        language: en
+        transcript: true
         tags:
         - maths
         - string theory
@@ -15772,6 +15847,55 @@ components:
           $ref: '#/components/schemas/video-clip'
         watermark:
           $ref: '#/components/schemas/video-watermark'
+        language:
+          description: |-
+            Use this parameter to set the language of the video. When this parameter is set, the API creates a transcript of the video using the language you specify. You must use the [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) format.
+
+            `language` is a permanent attribute of the video. You can update it to another language using the [`PATCH /videos/{videoId}`](https://docs.api.video/reference/api/Videos#update-a-video-object) operation. This triggers the API to generate a new transcript using a different language.
+          enum:
+          - ar
+          - ca
+          - cs
+          - da
+          - de
+          - el
+          - en
+          - es
+          - fa
+          - fi
+          - fr
+          - he
+          - hi
+          - hr
+          - hu
+          - it
+          - ja
+          - ko
+          - ml
+          - nl
+          - nn
+          - "false"
+          - pl
+          - pt
+          - ru
+          - sk
+          - sl
+          - te
+          - tr
+          - uk
+          - ur
+          - vi
+          - zh
+          example: fr
+          type: string
+        transcript:
+          description: "Use this parameter to enable transcription. \n\n- When `true`,\
+            \ the API generates a transcript for the video.\n- The default value is\
+            \ `false`.\n- If you define a video language using the `language` parameter,\
+            \ the API uses that language to transcribe the video. If you do not define\
+            \ a language, the API detects it based on the video. \n- When the API\
+            \ generates a transcript, it will be available as a caption for the video."
+          type: boolean
       required:
       - title
       title: VideoCreationPayload
@@ -15822,6 +15946,8 @@ components:
         title: String theory
         description: An amazing video explaining the string theory
         public: false
+        language: en
+        transcript: true
         panoramic: false
         mp4Support: true
         tags:
@@ -15876,6 +16002,55 @@ components:
           items:
             $ref: '#/components/schemas/metadata'
           type: array
+        language:
+          description: |-
+            Use this parameter to set the language of the video. When this parameter is set, the API creates a transcript of the video using the language you specify. You must use the [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) format.
+
+            `language` is a permanent attribute of the video. You can update it to another language using the [`PATCH /videos/{videoId}`](https://docs.api.video/reference/api/Videos#update-a-video-object) operation. This triggers the API to generate a new transcript using a different language.
+          enum:
+          - ar
+          - ca
+          - cs
+          - da
+          - de
+          - el
+          - en
+          - es
+          - fa
+          - fi
+          - fr
+          - he
+          - hi
+          - hr
+          - hu
+          - it
+          - ja
+          - ko
+          - ml
+          - nl
+          - nn
+          - "false"
+          - pl
+          - pt
+          - ru
+          - sk
+          - sl
+          - te
+          - tr
+          - uk
+          - ur
+          - vi
+          - zh
+          example: fr
+          type: string
+        transcript:
+          description: "Use this parameter to enable transcription. \n\n- When `true`,\
+            \ the API generates a transcript for the video.\n- The default value is\
+            \ `false`.\n- If you define a video language using the `language` parameter,\
+            \ the API uses that language to transcribe the video. If you do not define\
+            \ a language, the API detects it based on the video. \n- When the API\
+            \ generates a transcript, it will be available as a caption for the video."
+          type: boolean
       title: VideoUpdatePayload
       type: object
     discarded-video-update-payload:
