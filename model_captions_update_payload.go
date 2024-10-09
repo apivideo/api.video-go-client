@@ -16,6 +16,7 @@ import (
 
 // CaptionsUpdatePayload struct for CaptionsUpdatePayload
 type CaptionsUpdatePayload struct {
+	// Set this parameter to `true` to define a caption as the default for a video.
 	Default *bool `json:"default,omitempty"`
 }
 

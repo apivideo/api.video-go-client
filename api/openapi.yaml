@@ -16348,6 +16348,8 @@ components:
     captions-update-payload:
       properties:
         default:
+          description: Set this parameter to `true` to define a caption as the default
+            for a video.
           type: boolean
       title: CaptionsUpdatePayload
       type: object
