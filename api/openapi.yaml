@@ -15887,6 +15887,7 @@ components:
           - vi
           - zh
           example: fr
+          nullable: true
           type: string
         transcript:
           description: "Use this parameter to enable transcription. \n\n- When `true`,\
@@ -16042,6 +16043,7 @@ components:
           - vi
           - zh
           example: fr
+          nullable: true
           type: string
         transcript:
           description: "Use this parameter to enable transcription. \n\n- When `true`,\

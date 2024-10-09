@@ -37,7 +37,7 @@ type VideoCreationPayload struct {
 	Clip      *VideoClip      `json:"clip,omitempty"`
 	Watermark *VideoWatermark `json:"watermark,omitempty"`
 	// Use this parameter to set the language of the video. When this parameter is set, the API creates a transcript of the video using the language you specify. You must use the [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) format.  `language` is a permanent attribute of the video. You can update it to another language using the [`PATCH /videos/{videoId}`](https://docs.api.video/reference/api/Videos#update-a-video-object) operation. This triggers the API to generate a new transcript using a different language.
-	Language *string `json:"language,omitempty"`
+	Language *NullableString `json:"language,omitempty"`
 	// Use this parameter to enable transcription.   - When `true`, the API generates a transcript for the video. - The default value is `false`. - If you define a video language using the `language` parameter, the API uses that language to transcribe the video. If you do not define a language, the API detects it based on the video.  - When the API generates a transcript, it will be available as a caption for the video.
 	Transcript *bool `json:"transcript,omitempty"`
 }
@@ -416,36 +416,47 @@ func (o *VideoCreationPayload) SetWatermark(v VideoWatermark) {
 	o.Watermark = &v
 }
 
-// GetLanguage returns the Language field value if set, zero value otherwise.
+// GetLanguage returns the Language field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *VideoCreationPayload) GetLanguage() string {
-	if o == nil || o.Language == nil {
+	if o == nil || o.Language.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Language
+	return *o.Language.Get()
 }
 
 // GetLanguageOk returns a tuple with the Language field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *VideoCreationPayload) GetLanguageOk() (*string, bool) {
-	if o == nil || o.Language == nil {
+	if o == nil {
 		return nil, false
 	}
-	return o.Language, true
+	return o.Language.Get(), o.Language.IsSet()
 }
 
 // HasLanguage returns a boolean if a field has been set.
 func (o *VideoCreationPayload) HasLanguage() bool {
-	if o != nil && o.Language != nil {
+	if o != nil && o.Language.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLanguage gets a reference to the given string and assigns it to the Language field.
+// SetLanguage gets a reference to the given NullableString and assigns it to the Language field.
 func (o *VideoCreationPayload) SetLanguage(v string) {
-	o.Language = &v
+	o.Language.Set(&v)
+}
+
+// SetLanguageNil sets the value for Language to be an explicit nil
+func (o *VideoCreationPayload) SetLanguageNil() {
+	o.Language.Set(nil)
+}
+
+// UnsetLanguage ensures that no value is present for Language, not even an explicit nil
+func (o *VideoCreationPayload) UnsetLanguage() {
+	o.Language.Unset()
 }
 
 // GetTranscript returns the Transcript field value if set, zero value otherwise.
