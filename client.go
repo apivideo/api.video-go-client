@@ -36,6 +36,7 @@ type Client struct {
 	Chapters               ChaptersServiceI
 	LiveStreams            LiveStreamsServiceI
 	PlayerThemes           PlayerThemesServiceI
+	Summaries              SummariesServiceI
 	Tags                   TagsServiceI
 	UploadTokens           UploadTokensServiceI
 	Videos                 VideosServiceI
@@ -184,6 +185,7 @@ func (cb *Builder) Build() *Client {
 	c.Chapters = &ChaptersService{client: c}
 	c.LiveStreams = &LiveStreamsService{client: c}
 	c.PlayerThemes = &PlayerThemesService{client: c}
+	c.Summaries = &SummariesService{client: c}
 	c.Tags = &TagsService{client: c}
 	c.UploadTokens = &UploadTokensService{client: c}
 	c.Videos = &VideosService{client: c}

@@ -1,4 +1,4 @@
-# NotFound
+# ConflictError
 
 ## Properties
 
@@ -8,125 +8,151 @@ Name | Type | Description | Notes
 **Title** | Pointer to **string** | A description of the error that occurred. | [optional] 
 **Name** | Pointer to **string** | The name of the parameter that caused the error. | [optional] 
 **Status** | Pointer to **int32** | The HTTP status code. | [optional] 
+**Detail** | Pointer to **string** | A solution for the error. | [optional] 
 
 ## Methods
 
-### NewNotFound
+### NewConflictError
 
-`func NewNotFound() *NotFound`
+`func NewConflictError() *ConflictError`
 
-NewNotFound instantiates a new NotFound object
+NewConflictError instantiates a new ConflictError object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewNotFoundWithDefaults
+### NewConflictErrorWithDefaults
 
-`func NewNotFoundWithDefaults() *NotFound`
+`func NewConflictErrorWithDefaults() *ConflictError`
 
-NewNotFoundWithDefaults instantiates a new NotFound object
+NewConflictErrorWithDefaults instantiates a new ConflictError object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetType
 
-`func (o *NotFound) GetType() string`
+`func (o *ConflictError) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *NotFound) GetTypeOk() (*string, bool)`
+`func (o *ConflictError) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *NotFound) SetType(v string)`
+`func (o *ConflictError) SetType(v string)`
 
 SetType sets Type field to given value.
 
 ### HasType
 
-`func (o *NotFound) HasType() bool`
+`func (o *ConflictError) HasType() bool`
 
 HasType returns a boolean if a field has been set.
 
 ### GetTitle
 
-`func (o *NotFound) GetTitle() string`
+`func (o *ConflictError) GetTitle() string`
 
 GetTitle returns the Title field if non-nil, zero value otherwise.
 
 ### GetTitleOk
 
-`func (o *NotFound) GetTitleOk() (*string, bool)`
+`func (o *ConflictError) GetTitleOk() (*string, bool)`
 
 GetTitleOk returns a tuple with the Title field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTitle
 
-`func (o *NotFound) SetTitle(v string)`
+`func (o *ConflictError) SetTitle(v string)`
 
 SetTitle sets Title field to given value.
 
 ### HasTitle
 
-`func (o *NotFound) HasTitle() bool`
+`func (o *ConflictError) HasTitle() bool`
 
 HasTitle returns a boolean if a field has been set.
 
 ### GetName
 
-`func (o *NotFound) GetName() string`
+`func (o *ConflictError) GetName() string`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *NotFound) GetNameOk() (*string, bool)`
+`func (o *ConflictError) GetNameOk() (*string, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *NotFound) SetName(v string)`
+`func (o *ConflictError) SetName(v string)`
 
 SetName sets Name field to given value.
 
 ### HasName
 
-`func (o *NotFound) HasName() bool`
+`func (o *ConflictError) HasName() bool`
 
 HasName returns a boolean if a field has been set.
 
 ### GetStatus
 
-`func (o *NotFound) GetStatus() int32`
+`func (o *ConflictError) GetStatus() int32`
 
 GetStatus returns the Status field if non-nil, zero value otherwise.
 
 ### GetStatusOk
 
-`func (o *NotFound) GetStatusOk() (*int32, bool)`
+`func (o *ConflictError) GetStatusOk() (*int32, bool)`
 
 GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetStatus
 
-`func (o *NotFound) SetStatus(v int32)`
+`func (o *ConflictError) SetStatus(v int32)`
 
 SetStatus sets Status field to given value.
 
 ### HasStatus
 
-`func (o *NotFound) HasStatus() bool`
+`func (o *ConflictError) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetDetail
+
+`func (o *ConflictError) GetDetail() string`
+
+GetDetail returns the Detail field if non-nil, zero value otherwise.
+
+### GetDetailOk
+
+`func (o *ConflictError) GetDetailOk() (*string, bool)`
+
+GetDetailOk returns a tuple with the Detail field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetail
+
+`func (o *ConflictError) SetDetail(v string)`
+
+SetDetail sets Detail field to given value.
+
+### HasDetail
+
+`func (o *ConflictError) HasDetail() bool`
+
+HasDetail returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
