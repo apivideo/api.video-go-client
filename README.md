@@ -18,6 +18,7 @@
     - [Chapters](#chapters)
     - [LiveStreams](#livestreams)
     - [PlayerThemes](#playerthemes)
+    - [Summaries](#summaries)
     - [Tags](#tags)
     - [UploadTokens](#uploadtokens)
     - [Videos](#videos)
@@ -231,6 +232,26 @@ Method | HTTP request | Description
 [**DeleteLogo**](https://github.com/apivideo/api.video-go-client/blob/main/docs/PlayerThemes.md#DeleteLogo) | **Delete** `/players/{playerId}/logo` | Delete logo
 
 
+#### Summaries
+
+
+##### Retrieve an instance of the Summaries API:
+```golang
+client := apivideosdk.ClientBuilder("API_VIDEO_KEY").Build()
+summariesApi := client.Summaries
+```
+
+##### Endpoints
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**Create**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Summaries.md#Create) | **Post** `/summaries` | Generate video summary
+[**Update**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Summaries.md#Update) | **Patch** `/summaries/{summaryId}/source` | Update summary details
+[**Delete**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Summaries.md#Delete) | **Delete** `/summaries/{summaryId}` | Delete video summary
+[**List**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Summaries.md#List) | **Get** `/summaries` | List summaries
+[**GetSummarySource**](https://github.com/apivideo/api.video-go-client/blob/main/docs/Summaries.md#GetSummarySource) | **Get** `/summaries/{summaryId}/source` | Get summary details
+
+
 #### Tags
 
 
@@ -357,6 +378,7 @@ Method | HTTP request | Description
  - [CaptionsUpdatePayload](https://github.com/apivideo/api.video-go-client/blob/main/docs/CaptionsUpdatePayload.md)
  - [Chapter](https://github.com/apivideo/api.video-go-client/blob/main/docs/Chapter.md)
  - [ChaptersListResponse](https://github.com/apivideo/api.video-go-client/blob/main/docs/ChaptersListResponse.md)
+ - [ConflictError](https://github.com/apivideo/api.video-go-client/blob/main/docs/ConflictError.md)
  - [DiscardedVideoUpdatePayload](https://github.com/apivideo/api.video-go-client/blob/main/docs/DiscardedVideoUpdatePayload.md)
  - [FilterBy](https://github.com/apivideo/api.video-go-client/blob/main/docs/FilterBy.md)
  - [FilterBy1](https://github.com/apivideo/api.video-go-client/blob/main/docs/FilterBy1.md)
@@ -384,6 +406,11 @@ Method | HTTP request | Description
  - [RefreshTokenPayload](https://github.com/apivideo/api.video-go-client/blob/main/docs/RefreshTokenPayload.md)
  - [RestreamsRequestObject](https://github.com/apivideo/api.video-go-client/blob/main/docs/RestreamsRequestObject.md)
  - [RestreamsResponseObject](https://github.com/apivideo/api.video-go-client/blob/main/docs/RestreamsResponseObject.md)
+ - [SummariesListResponse](https://github.com/apivideo/api.video-go-client/blob/main/docs/SummariesListResponse.md)
+ - [Summary](https://github.com/apivideo/api.video-go-client/blob/main/docs/Summary.md)
+ - [SummaryCreationPayload](https://github.com/apivideo/api.video-go-client/blob/main/docs/SummaryCreationPayload.md)
+ - [SummarySource](https://github.com/apivideo/api.video-go-client/blob/main/docs/SummarySource.md)
+ - [SummaryUpdatePayload](https://github.com/apivideo/api.video-go-client/blob/main/docs/SummaryUpdatePayload.md)
  - [TokenCreationPayload](https://github.com/apivideo/api.video-go-client/blob/main/docs/TokenCreationPayload.md)
  - [TokenListResponse](https://github.com/apivideo/api.video-go-client/blob/main/docs/TokenListResponse.md)
  - [TooManyRequests](https://github.com/apivideo/api.video-go-client/blob/main/docs/TooManyRequests.md)

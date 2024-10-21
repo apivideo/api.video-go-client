@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to [**[]Metadata**](Metadata.md) | A list (array) of dictionaries where each dictionary contains a key value pair that describes the video. As with tags, you must send the complete list of metadata you want as whatever you send here will overwrite the existing metadata for the video. | [optional] 
 **Language** | Pointer to **NullableString** | Use this parameter to set the language of the video. When this parameter is set, the API creates a transcript of the video using the language you specify. You must use the [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) format.  &#x60;language&#x60; is a permanent attribute of the video. You can update it to another language using the [&#x60;PATCH /videos/{videoId}&#x60;](https://docs.api.video/reference/api/Videos#update-a-video-object) operation. This triggers the API to generate a new transcript using a different language. | [optional] 
 **Transcript** | Pointer to **bool** | Use this parameter to enable transcription.   - When &#x60;true&#x60;, the API generates a transcript for the video. - The default value is &#x60;false&#x60;. - If you define a video language using the &#x60;language&#x60; parameter, the API uses that language to transcribe the video. If you do not define a language, the API detects it based on the video.  - When the API generates a transcript, it will be available as a caption for the video. | [optional] 
+**TranscriptSummary** | Pointer to **bool** | Use this parameter to enable summarization.   - When &#x60;true&#x60;, the API generates a summary for the video, based on the transcription. - The default value is &#x60;false&#x60;. - If you define a video language using the &#x60;language&#x60; parameter, the API uses that language to summarize the video. If you do not define a language, the API detects it based on the video. | [optional] 
 
 ## Methods
 
@@ -303,6 +304,31 @@ SetTranscript sets Transcript field to given value.
 `func (o *VideoUpdatePayload) HasTranscript() bool`
 
 HasTranscript returns a boolean if a field has been set.
+
+### GetTranscriptSummary
+
+`func (o *VideoUpdatePayload) GetTranscriptSummary() bool`
+
+GetTranscriptSummary returns the TranscriptSummary field if non-nil, zero value otherwise.
+
+### GetTranscriptSummaryOk
+
+`func (o *VideoUpdatePayload) GetTranscriptSummaryOk() (*bool, bool)`
+
+GetTranscriptSummaryOk returns a tuple with the TranscriptSummary field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTranscriptSummary
+
+`func (o *VideoUpdatePayload) SetTranscriptSummary(v bool)`
+
+SetTranscriptSummary sets TranscriptSummary field to given value.
+
+### HasTranscriptSummary
+
+`func (o *VideoUpdatePayload) HasTranscriptSummary() bool`
+
+HasTranscriptSummary returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

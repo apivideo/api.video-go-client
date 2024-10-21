@@ -40,6 +40,8 @@ type VideoCreationPayload struct {
 	Language *NullableString `json:"language,omitempty"`
 	// Use this parameter to enable transcription.   - When `true`, the API generates a transcript for the video. - The default value is `false`. - If you define a video language using the `language` parameter, the API uses that language to transcribe the video. If you do not define a language, the API detects it based on the video.  - When the API generates a transcript, it will be available as a caption for the video.
 	Transcript *bool `json:"transcript,omitempty"`
+	// Use this parameter to enable summarization. We recommend using this parameter together with `transcript: true`.  - When `true`, the API generates a summary for the video, based on the transcription. - The default value is `false`. - If you define a video language using the `language` parameter, the API uses that language to summarize the video. If you do not define a language, the API detects it based on the video.
+	TranscriptSummary *bool `json:"transcriptSummary,omitempty"`
 }
 
 // NewVideoCreationPayload instantiates a new VideoCreationPayload object
@@ -489,6 +491,38 @@ func (o *VideoCreationPayload) HasTranscript() bool {
 // SetTranscript gets a reference to the given bool and assigns it to the Transcript field.
 func (o *VideoCreationPayload) SetTranscript(v bool) {
 	o.Transcript = &v
+}
+
+// GetTranscriptSummary returns the TranscriptSummary field value if set, zero value otherwise.
+func (o *VideoCreationPayload) GetTranscriptSummary() bool {
+	if o == nil || o.TranscriptSummary == nil {
+		var ret bool
+		return ret
+	}
+	return *o.TranscriptSummary
+}
+
+// GetTranscriptSummaryOk returns a tuple with the TranscriptSummary field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VideoCreationPayload) GetTranscriptSummaryOk() (*bool, bool) {
+	if o == nil || o.TranscriptSummary == nil {
+		return nil, false
+	}
+	return o.TranscriptSummary, true
+}
+
+// HasTranscriptSummary returns a boolean if a field has been set.
+func (o *VideoCreationPayload) HasTranscriptSummary() bool {
+	if o != nil && o.TranscriptSummary != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTranscriptSummary gets a reference to the given bool and assigns it to the TranscriptSummary field.
+func (o *VideoCreationPayload) SetTranscriptSummary(v bool) {
+	o.TranscriptSummary = &v
 }
 
 type NullableVideoCreationPayload struct {

@@ -14,8 +14,8 @@ import (
 //"encoding/json"
 )
 
-// NotFound struct for NotFound
-type NotFound struct {
+// ConflictError struct for ConflictError
+type ConflictError struct {
 	// A link to the error documentation.
 	Type *string `json:"type,omitempty"`
 	// A description of the error that occurred.
@@ -24,27 +24,29 @@ type NotFound struct {
 	Name *string `json:"name,omitempty"`
 	// The HTTP status code.
 	Status *int32 `json:"status,omitempty"`
+	// A solution for the error.
+	Detail *string `json:"detail,omitempty"`
 }
 
-// NewNotFound instantiates a new NotFound object
+// NewConflictError instantiates a new ConflictError object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewNotFound() *NotFound {
-	this := NotFound{}
+func NewConflictError() *ConflictError {
+	this := ConflictError{}
 	return &this
 }
 
-// NewNotFoundWithDefaults instantiates a new NotFound object
+// NewConflictErrorWithDefaults instantiates a new ConflictError object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewNotFoundWithDefaults() *NotFound {
-	this := NotFound{}
+func NewConflictErrorWithDefaults() *ConflictError {
+	this := ConflictError{}
 	return &this
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *NotFound) GetType() string {
+func (o *ConflictError) GetType() string {
 	if o == nil || o.Type == nil {
 		var ret string
 		return ret
@@ -54,7 +56,7 @@ func (o *NotFound) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NotFound) GetTypeOk() (*string, bool) {
+func (o *ConflictError) GetTypeOk() (*string, bool) {
 	if o == nil || o.Type == nil {
 		return nil, false
 	}
@@ -62,7 +64,7 @@ func (o *NotFound) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *NotFound) HasType() bool {
+func (o *ConflictError) HasType() bool {
 	if o != nil && o.Type != nil {
 		return true
 	}
@@ -71,12 +73,12 @@ func (o *NotFound) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *NotFound) SetType(v string) {
+func (o *ConflictError) SetType(v string) {
 	o.Type = &v
 }
 
 // GetTitle returns the Title field value if set, zero value otherwise.
-func (o *NotFound) GetTitle() string {
+func (o *ConflictError) GetTitle() string {
 	if o == nil || o.Title == nil {
 		var ret string
 		return ret
@@ -86,7 +88,7 @@ func (o *NotFound) GetTitle() string {
 
 // GetTitleOk returns a tuple with the Title field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NotFound) GetTitleOk() (*string, bool) {
+func (o *ConflictError) GetTitleOk() (*string, bool) {
 	if o == nil || o.Title == nil {
 		return nil, false
 	}
@@ -94,7 +96,7 @@ func (o *NotFound) GetTitleOk() (*string, bool) {
 }
 
 // HasTitle returns a boolean if a field has been set.
-func (o *NotFound) HasTitle() bool {
+func (o *ConflictError) HasTitle() bool {
 	if o != nil && o.Title != nil {
 		return true
 	}
@@ -103,12 +105,12 @@ func (o *NotFound) HasTitle() bool {
 }
 
 // SetTitle gets a reference to the given string and assigns it to the Title field.
-func (o *NotFound) SetTitle(v string) {
+func (o *ConflictError) SetTitle(v string) {
 	o.Title = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *NotFound) GetName() string {
+func (o *ConflictError) GetName() string {
 	if o == nil || o.Name == nil {
 		var ret string
 		return ret
@@ -118,7 +120,7 @@ func (o *NotFound) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NotFound) GetNameOk() (*string, bool) {
+func (o *ConflictError) GetNameOk() (*string, bool) {
 	if o == nil || o.Name == nil {
 		return nil, false
 	}
@@ -126,7 +128,7 @@ func (o *NotFound) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *NotFound) HasName() bool {
+func (o *ConflictError) HasName() bool {
 	if o != nil && o.Name != nil {
 		return true
 	}
@@ -135,12 +137,12 @@ func (o *NotFound) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *NotFound) SetName(v string) {
+func (o *ConflictError) SetName(v string) {
 	o.Name = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *NotFound) GetStatus() int32 {
+func (o *ConflictError) GetStatus() int32 {
 	if o == nil || o.Status == nil {
 		var ret int32
 		return ret
@@ -150,7 +152,7 @@ func (o *NotFound) GetStatus() int32 {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NotFound) GetStatusOk() (*int32, bool) {
+func (o *ConflictError) GetStatusOk() (*int32, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -158,7 +160,7 @@ func (o *NotFound) GetStatusOk() (*int32, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *NotFound) HasStatus() bool {
+func (o *ConflictError) HasStatus() bool {
 	if o != nil && o.Status != nil {
 		return true
 	}
@@ -167,33 +169,65 @@ func (o *NotFound) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given int32 and assigns it to the Status field.
-func (o *NotFound) SetStatus(v int32) {
+func (o *ConflictError) SetStatus(v int32) {
 	o.Status = &v
 }
 
-type NullableNotFound struct {
-	value *NotFound
+// GetDetail returns the Detail field value if set, zero value otherwise.
+func (o *ConflictError) GetDetail() string {
+	if o == nil || o.Detail == nil {
+		var ret string
+		return ret
+	}
+	return *o.Detail
+}
+
+// GetDetailOk returns a tuple with the Detail field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConflictError) GetDetailOk() (*string, bool) {
+	if o == nil || o.Detail == nil {
+		return nil, false
+	}
+	return o.Detail, true
+}
+
+// HasDetail returns a boolean if a field has been set.
+func (o *ConflictError) HasDetail() bool {
+	if o != nil && o.Detail != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDetail gets a reference to the given string and assigns it to the Detail field.
+func (o *ConflictError) SetDetail(v string) {
+	o.Detail = &v
+}
+
+type NullableConflictError struct {
+	value *ConflictError
 	isSet bool
 }
 
-func (v NullableNotFound) Get() *NotFound {
+func (v NullableConflictError) Get() *ConflictError {
 	return v.value
 }
 
-func (v *NullableNotFound) Set(val *NotFound) {
+func (v *NullableConflictError) Set(val *ConflictError) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableNotFound) IsSet() bool {
+func (v NullableConflictError) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableNotFound) Unset() {
+func (v *NullableConflictError) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableNotFound(val *NotFound) *NullableNotFound {
-	return &NullableNotFound{value: val, isSet: true}
+func NewNullableConflictError(val *ConflictError) *NullableConflictError {
+	return &NullableConflictError{value: val, isSet: true}
 }
