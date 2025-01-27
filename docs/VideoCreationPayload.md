@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Title** | **string** | The title of your new video. | 
+**Subtitle** | Pointer to **string** | A subtitle of your video. | [optional] 
 **Description** | Pointer to **string** | A brief description of your video. | [optional] 
 **Source** | Pointer to **string** | You can either add a video already on the web, by entering the URL of the video, or you can also enter the &#x60;videoId&#x60; of one of the videos you already have on your api.video acccount, and this will generate a copy of your video. Creating a copy of a video can be especially useful if you want to keep your original video and trim or apply a watermark onto the copy you would create. | [optional] 
 **Public** | Pointer to **bool** | Default: True. If set to &#x60;false&#x60; the video will become private. More information on private videos can be found [here](https://docs.api.video/delivery/video-privacy-access-management) | [optional] [default to true]
@@ -58,6 +59,31 @@ and a boolean to check if the value has been set.
 
 SetTitle sets Title field to given value.
 
+
+### GetSubtitle
+
+`func (o *VideoCreationPayload) GetSubtitle() string`
+
+GetSubtitle returns the Subtitle field if non-nil, zero value otherwise.
+
+### GetSubtitleOk
+
+`func (o *VideoCreationPayload) GetSubtitleOk() (*string, bool)`
+
+GetSubtitleOk returns a tuple with the Subtitle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubtitle
+
+`func (o *VideoCreationPayload) SetSubtitle(v string)`
+
+SetSubtitle sets Subtitle field to given value.
+
+### HasSubtitle
+
+`func (o *VideoCreationPayload) HasSubtitle() bool`
+
+HasSubtitle returns a boolean if a field has been set.
 
 ### GetDescription
 
