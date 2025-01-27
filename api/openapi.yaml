@@ -16598,6 +16598,10 @@ components:
           description: The title of your new video.
           example: Maths video
           type: string
+        subtitle:
+          description: A subtitle for your video.
+          example: A great subtitle.
+          type: string
         description:
           description: A brief description of your video.
           example: A video about string theory.
