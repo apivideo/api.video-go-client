@@ -18,6 +18,8 @@ import (
 type VideoCreationPayload struct {
 	// The title of your new video.
 	Title string `json:"title"`
+	// A subtitle of your video.
+	Subtitle *string `json:"subtitle,omitempty"`
 	// A brief description of your video.
 	Description *string `json:"description,omitempty"`
 	// You can either add a video already on the web, by entering the URL of the video, or you can also enter the `videoId` of one of the videos you already have on your api.video acccount, and this will generate a copy of your video. Creating a copy of a video can be especially useful if you want to keep your original video and trim or apply a watermark onto the copy you would create.
@@ -98,6 +100,38 @@ func (o *VideoCreationPayload) GetTitleOk() (*string, bool) {
 // SetTitle sets field value
 func (o *VideoCreationPayload) SetTitle(v string) {
 	o.Title = v
+}
+
+// GetSubtitle returns the Subtitle field value if set, zero value otherwise.
+func (o *VideoCreationPayload) GetSubtitle() string {
+	if o == nil || o.Subtitle == nil {
+		var ret string
+		return ret
+	}
+	return *o.Subtitle
+}
+
+// GetSubtitleOk returns a tuple with the Subtitle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VideoCreationPayload) GetSubtitleOk() (*string, bool) {
+	if o == nil || o.Subtitle == nil {
+		return nil, false
+	}
+	return o.Subtitle, true
+}
+
+// HasSubtitle returns a boolean if a field has been set.
+func (o *VideoCreationPayload) HasSubtitle() bool {
+	if o != nil && o.Subtitle != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSubtitle gets a reference to the given string and assigns it to the Subtitle field.
+func (o *VideoCreationPayload) SetSubtitle(v string) {
+	o.Subtitle = &v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
